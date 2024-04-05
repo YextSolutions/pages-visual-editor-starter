@@ -1,0 +1,22 @@
+buildConfiguration:
+  buildCommand: npm run build
+  installDependenciesStep:
+    command: npm install
+    requiredFiles:
+      - package.json
+      - package-lock.json
+      - .npmrc
+livePreviewConfiguration:
+  setupCommand: ":"
+authentication:
+  policyName: auth-policy
+  includePaths:
+    - /edit
+siteStream:
+  id: site-stream
+  entityId: site
+  fields: 
+    - c_templateVisualConfiguration
+  localization:
+    locales:
+      - en
