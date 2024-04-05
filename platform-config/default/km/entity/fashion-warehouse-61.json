@@ -1,0 +1,23 @@
+{
+  "$id": "fashion-warehouse-61",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "address": {
+      "city": "New York",
+      "countryCode": "US",
+      "line1": "61 9th Avenue",
+      "postalCode": "10014",
+      "region": "NY"
+    },
+    "addressHidden": false,
+    "categoryIds": [
+      "1477"
+    ],
+    "name": "Fashion Warehouse - 61 9th Avenue",
+    "slug": "fashion-warehouse-61",
+    "timezone": "America/New_York"
+  },
+  "entityType": "location",
+  "labels": []
+}

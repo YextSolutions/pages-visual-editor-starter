@@ -1,0 +1,10 @@
+{
+  "$id": "auth-policy",
+  "$schema": "https://schema.yext.com/config/pages/authentication-policy/v1",
+  "name": "auth-policy",
+  "authentication": {
+    "password": {
+      "passwordValue": ""
+    }
+  }
+}

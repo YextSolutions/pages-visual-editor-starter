@@ -1,0 +1,25 @@
+{
+  "$id": "affably-nearby-lionfish-67af4",
+  "$schema": "https://schema.yext.com/config/pages/yextsite-config/v1",
+  "siteName": "Visual Editor Starter",
+  "repoConfig": "viciously-infinite-cat-2d17c",
+  "placeholderDomain": "vainly-small-ant.pgsdemo.com",
+  "siteSettings": {
+    "autoDeploy": true,
+    "autoStage": true,
+    "autoPublish": false,
+    "pullRequestsEnabled": false,
+    "stagingCredentials": {
+      "password": "",
+      "username": ""
+    }
+  },
+  "branches": [
+    {
+      "name": "main",
+      "envVars": [],
+      "isProductionBranch": true,
+      "isStagingBranch": false
+    }
+  ]
+}
