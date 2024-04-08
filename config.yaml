@@ -8,10 +8,6 @@ buildConfiguration:
       - .npmrc
 livePreviewConfiguration:
   setupCommand: ":"
-authentication:
-  policyName: auth-policy
-  includePaths:
-    - /edit
 siteStream:
   id: site-stream
   entityId: site
@@ -20,3 +16,7 @@ siteStream:
   localization:
     locales:
       - en
+# authentication:
+#   policyName: auth-policy
+#   includePaths:
+#     - /edit

@@ -1,7 +1,5 @@
 # PAGES-VISUAL-EDITOR-STARTER
 
-## Getting Started
-
 ### Prerequisites
 
 1. Have the Yext CLI installed: https://hitchhikers.yext.com/guides/cli-getting-started-resources/01-install-cli/
@@ -15,8 +13,8 @@
 ### Clone this repo and install dependencies
 
 ```shell
-git clone https://github.com/yext/pages-starter-react-locations
-cd pages-starter-react-locations
+git clone https://github.com/YextSolutions/pages-visual-editor-starter
+cd pages-visual-editor-starter
 npm install
 ```
 
@@ -35,7 +33,7 @@ NOTE: Whenever you make changes to your stream definitions, you must re-run `npm
 _Before committing_ your code, we recommend running the following command:
 
 ```
-npm run build:serve
+npm run prod
 ```
 
 This command will generate a production build of your site, so you can ensure there are no build errors or unexpected behavior. This build step replicates the production build environment used in the Yext system, and serves your data at `localhost:8000`.
@@ -48,50 +46,6 @@ In practice, development builds (via `npm run dev`) and production builds compil
 
 `yext pages generate-test-data` - pull an example set of `localData` from your account. This command is packaged within `npm run dev'.
 
-`npm run build` - Runs a production build against your `localData`: part one of `npm run build:serve`
+### Setting up authentification policies 
 
-`npm run serve` - Runs a local server against your production-built files: part two of `npm run build:serve`
-
-`npm run fmt` - Automatically formats all code
-
-`npm run lint` - Run ESLint to check for errors and warnings
-
-### localData
-
-Contains example stream documents that are used while local developing. By default this repo contains example files that work with the provided example templates. You can generate real stream documents specific to your Yext account via `yext pages generate-test-data`.
-
-NOTE: You normally wouldn't want to check in the localData folder as it's only used for local dev. It is gitignored by default.
-
-### src
-
-#### components
-
-This is where all of your custom components _may_ live. This folder is not required and you can set up your own custom folder structure for your own components in any way you'd like, as long as it lives in the `src` directory.
-
-#### templates
-
-Required. This is where your actual templates live. There are effectively two types of components:
-
-1. stream-based templates: those that have an exported `config`
-1. static templates: those that don't have an exported `config`.
-
-#### types
-
-Here you can define any custom TypeScript types you need.
-
-#### index.css
-
-Not required. In this example this sets up Tailwind CSS.
-
-### vite.config.js
-
-Vite is now a first class member of the starter! This file defines any custom Vite configuration you want, giving you full control over your setup. Specifically, it will allows users to pass additional configuration options to the vite-plugin-yext-sites-ssg plugin when they become more widely available.
-
-### Everything else
-
-The rest of the files are basic config setup common to many other React projects. In this example we've enabled:
-
-1. Tailwind CSS (which leverages PostCSS) - used for easy styling
-1. ESLint - catches errors in your code
-1. Prettier - formats your code (you can add .prettierrc to override any default settings)
-1. TypeScript - adds typing to Javascript for a better developer experience
+We recommend adding a Page-Level Authentication for the /edit page. Detailed instructions here: https://hitchhikers.yext.com/guides/set-up-yext-auth-protected-site/
