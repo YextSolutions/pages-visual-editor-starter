@@ -46,6 +46,6 @@ In practice, development builds (via `npm run dev`) and production builds compil
 
 `yext pages generate-test-data` - pull an example set of `localData` from your account. This command is packaged within `npm run dev'.
 
-### Setting up authentification policies 
+### Setting up Authentication Policies 
 
 We recommend adding a Page-Level Authentication for the /edit page. Detailed instructions here: https://hitchhikers.yext.com/guides/set-up-yext-auth-protected-site/
