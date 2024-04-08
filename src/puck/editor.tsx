@@ -7,10 +7,10 @@ import config from "./puck.config";
 const initialData = {
   content: [
     {
-      type:"Banner",
+      type:"Toggle",
       props: {
-        name:"Banner",
-        id:"Banner-1694032984497"
+        textAlign: "left",
+        id:"Toggle-1694032984497"
       }
     }
   ],

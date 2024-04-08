@@ -1,0 +1,11 @@
+{
+  "$id": "site",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_templateVisualConfiguration": "{\"content\":[{\"type\":\"Banner\",\"props\":{\"name\":\"Banner\",\"id\":\"Banner-1694032984497\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "name": "Site"
+  },
+  "entityType": "ce_site",
+  "labels": []
+}

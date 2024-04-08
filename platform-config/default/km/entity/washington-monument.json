@@ -1,0 +1,23 @@
+{
+  "$id": "washington-monument",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "address": {
+      "city": "Washington",
+      "countryCode": "US",
+      "line1": "2 15th St NW",
+      "postalCode": "20024",
+      "region": "DC"
+    },
+    "addressHidden": false,
+    "categoryIds": [
+      "2189"
+    ],
+    "name": "Washington Monument",
+    "slug": "washington-monument",
+    "timezone": "America/New_York"
+  },
+  "entityType": "location",
+  "labels": []
+}
