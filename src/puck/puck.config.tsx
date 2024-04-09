@@ -5,6 +5,7 @@ type Props = {
   Toggle: ToggleProps;
 };
 
+// All the avaliable components
 export const config: Config<Props> = {
   components: {
     Toggle,

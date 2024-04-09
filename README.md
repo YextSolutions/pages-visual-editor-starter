@@ -18,6 +18,8 @@ cd pages-visual-editor-starter
 npm install
 ```
 
+Add a YEXT_PUBLIC_API_KEY into the .env.local file. This can be generated via the Developer Console.
+
 ### Recommended Development Flow
 
 While _developing locally_, run the following command:
