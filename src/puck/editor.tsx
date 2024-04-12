@@ -53,7 +53,7 @@ const handleUpdateEntity = (error: Error | null) => {
 };
 
 const handleClick = () => {
-  window.location.href = '/cafe';
+  window.open('/cafe', '_blank');
 };
 
 const customHeaderActions = (children: any) => {
