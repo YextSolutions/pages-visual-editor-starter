@@ -18,6 +18,6 @@ export const Toggle: ComponentConfig<ToggleProps> = {
     textAlign: "left",
   },
   render: ({ textAlign }) => {
-    return <p style={{ textAlign }}>Toggle me</p>;
+    return <p className="font-bold text-lg" style={{ textAlign }}>Toggle me</p>;
   },
 }
