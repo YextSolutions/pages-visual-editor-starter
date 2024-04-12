@@ -17,10 +17,27 @@ export const Hero: ComponentConfig<HeroProps> = {
     },
   },
   render: ({ imageMode }) => {
+    const backgroundImageUrl =
+      "https://a.mktgcdn.com/p/lK-HACtTA9s5mquAA0ss11xo5JxvkCWh2ls8gHCuw2U/1100x619.jpg?timestamp=1712936649233";
     return (
-      <div className="relative">
+      <div
+        className={`relative ${imageMode === "background" ? "bg-gray-900" : ""}`}
+      >
+        {imageMode === "background" && (
+          <>
+            <img
+              className="absolute inset-0 h-full w-full object-cover"
+              src={backgroundImageUrl}
+              alt=""
+            />
+            <div className="absolute inset-0 bg-gray-800 bg-opacity-70"></div>
+          </>
+        )}
+
         <div className="mx-auto max-w-7xl">
-          <div className="relative z-10 pt-14 lg:w-full lg:max-w-2xl">
+          <div
+            className={`relative z-10 pt-14 lg:w-full lg:max-w-2xl ${imageMode === "background" ? "text-white" : ""}`}
+          >
             {imageMode === "inline-fancy" && (
               <svg
                 className="absolute inset-y-0 right-8 hidden h-full w-80 translate-x-1/2 transform fill-white lg:block"
@@ -39,10 +56,10 @@ export const Hero: ComponentConfig<HeroProps> = {
                   src="https://a.mktgcdn.com/p/7VJD1Cq6Hm_CVQM8ejzL5PKXZPechztCKS4gOKucv1Q/800x800.png?timestamp=1712936686883"
                   alt="Your Company"
                 />
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:mt-32 lg:mt-16 sm:text-6xl">
+                <h1 className="text-4xl font-bold tracking-tight sm:mt-32 lg:mt-16 sm:text-6xl">
                   Location Page
                 </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
+                <p className="mt-6 text-lg leading-8">
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
                   qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
                   occaecat fugiat aliqua.
@@ -59,13 +76,15 @@ export const Hero: ComponentConfig<HeroProps> = {
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <img
-            className="aspect-[3/2] object-cover lg:aspect-auto lg:h-full lg:w-full"
-            src="https://a.mktgcdn.com/p/lK-HACtTA9s5mquAA0ss11xo5JxvkCWh2ls8gHCuw2U/1100x619.jpg?timestamp=1712936649233"
-            alt=""
-          />
-        </div>
+        {imageMode !== "background" && (
+          <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+            <img
+              className="aspect-[3/2] object-cover lg:aspect-auto lg:h-full lg:w-full"
+              src={backgroundImageUrl}
+              alt=""
+            />
+          </div>
+        )}
       </div>
     );
   },
