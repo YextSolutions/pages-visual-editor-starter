@@ -2,7 +2,7 @@ import { Button, Puck, Data, Config } from "@measured/puck";
 import "@measured/puck/puck.css";
 import config from "./puck.config";
 import useEntity from "../hooks/useEntity";
-import useUpdateEntity from "../hooks/useUpdateEntity";
+import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 
 const siteEntityId = "site";
 
@@ -13,7 +13,7 @@ export interface EditorProps {
 
 // Render Puck editor 
 export const Editor = ({isLoading}: EditorProps) => {
-  const updateEntityMutation = useUpdateEntity({
+  const updateEntityMutation = useUpdateEntityMutation({
     handleComplete: handleUpdateEntity,
   });
   

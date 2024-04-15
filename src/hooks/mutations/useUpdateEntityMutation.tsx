@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { updateEntity } from "../utils/api";
+import { updateEntity } from "../../utils/api";
 
 type Update = {
   handleComplete: (error: Error | null) => void;

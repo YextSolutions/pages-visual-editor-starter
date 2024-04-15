@@ -12,7 +12,6 @@ export default async function entityDocument(
   // optional params
   const suggestionIds = pathParams.suggestionIds;
   const locale = pathParams.locale;
-  const deploymentId = pathParams.deploymentId;
 
   if (!templateId) {
     return { body: "Missing stream id", headers: {}, statusCode: 400 };
@@ -30,9 +29,6 @@ export default async function entityDocument(
         }
         if (locale) {
           requestPath += `&locale=${locale}`;
-        }
-        if (deploymentId) {
-          requestPath += `&deploymentId=${deploymentId}`;
         }
         const response = await fetch(requestPath);
         const body = await response.json();

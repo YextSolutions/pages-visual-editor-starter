@@ -8,7 +8,7 @@ import {
 } from "@yext/pages";
 import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
-import useEntityDocument from "../hooks/useEntityDocument";
+import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -21,7 +21,7 @@ export const getPath: GetPath<TemplateProps> = () => {
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
-  const { entityDocument } = useEntityDocument({ templateId: "location", entityId: "cafe" });
+  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: "cafe" });
   return (
     <DocumentProvider value={entityDocument?.response.document}>
       <Editor isLoading={!entityDocument}/>
