@@ -7,7 +7,7 @@ type DocumentProviderProps<T> = {
   children: ReactNode;
 };
 
-function DocumentProvider<T>({ value, children }: DocumentProviderProps<T>) {
+const DocumentProvider = <T,>({ value, children }: DocumentProviderProps<T>) => {  
   return (
     <DocumentContext.Provider value={value}>
       {children}
@@ -15,7 +15,7 @@ function DocumentProvider<T>({ value, children }: DocumentProviderProps<T>) {
   );
 }
 
-function useDocument<T>(selector?: (state: T) => any): T {
+const useDocument = <T,>(selector?: (state: T) => any): T => {
   const context = useContext(DocumentContext);
   if (!context) {
     throw new Error(
