@@ -31,6 +31,9 @@ export default async function entityDocument(
           requestPath += `&locale=${locale}`;
         }
         const response = await fetch(requestPath);
+        if (response.status != 200) {
+          throw new Error('Bad Request');
+        }
         const body = await response.json();
         return {
           body: JSON.stringify(body),
@@ -40,7 +43,7 @@ export default async function entityDocument(
       } catch (error) {
         console.error(error);
         return {
-          body: "Server error",
+          body: JSON.stringify({ error: "Server error" }),
           headers: {},
           statusCode: 500,
         };
