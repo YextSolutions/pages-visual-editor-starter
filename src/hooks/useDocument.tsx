@@ -26,7 +26,7 @@ const useDocument = <T,>(selector?: (state: T) => any): T | any => {
   if (selector) {
     return selector(context);
   }
-          
+
   return context as T;
 }
 

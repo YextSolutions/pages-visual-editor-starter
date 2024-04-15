@@ -33,14 +33,11 @@ export default async function entityDocument(
           requestPath += `&locale=${locale}`;
         }
         const response = await fetch(requestPath);
-        if (response.status != 200) {
-          throw new Error('Bad Request');
-        }
         const body = await response.json();
         return {
           body: JSON.stringify(body),
           headers: {},
-          statusCode: 200,
+          statusCode: response.status,
         };
       } catch (error) {
         console.error(error);
