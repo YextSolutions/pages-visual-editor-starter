@@ -15,13 +15,18 @@ function DocumentProvider<T>({ value, children }: DocumentProviderProps<T>) {
   );
 }
 
-function useDocument<T>(): T {
+function useDocument<T>(selector?: (state: T) => any): T {
   const context = useContext(DocumentContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error(
       "useLocationDocument must be used within a DocumentProvider"
     );
   }
+  
+  if (selector) {
+    return selector(context);
+  }
+  
   return context as T;
 }
 
