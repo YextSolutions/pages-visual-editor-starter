@@ -7,11 +7,12 @@ import useUpdateEntity from "../hooks/useUpdateEntity";
 const siteEntityId = "site";
 
 export interface EditorProps {
+  isLoading?: boolean;
   entityType?: string;
 }
 
 // Render Puck editor 
-export const Editor = (props: EditorProps) => {
+export const Editor = ({isLoading}: EditorProps) => {
   const updateEntityMutation = useUpdateEntity({
     handleComplete: handleUpdateEntity,
   });
@@ -31,7 +32,7 @@ export const Editor = (props: EditorProps) => {
 
   return (
     <>
-      {entity?.c_templateVisualConfiguration ? 
+      {entity?.c_templateVisualConfiguration && !isLoading ? 
       <Puck config={config as Config} 
         data={JSON.parse(entity?.c_templateVisualConfiguration)} 
         onPublish={save}

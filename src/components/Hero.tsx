@@ -1,4 +1,6 @@
 import { ComponentConfig } from "@measured/puck";
+import { LocationStream } from "../types/autogen";
+import { useDocument } from "../hooks/useDocument";
 
 export type HeroProps = {
   imageMode: "inline" | "inline-fancy" | "background";
@@ -17,13 +19,13 @@ export const Hero: ComponentConfig<HeroProps> = {
     },
   },
   render: ({ imageMode }) => {
-    const backgroundImageUrl =
-      "https://a.mktgcdn.com/p/lK-HACtTA9s5mquAA0ss11xo5JxvkCWh2ls8gHCuw2U/1100x619.jpg?timestamp=1712936649233";
+    const hero = useDocument<LocationStream>(document => document.c_hero);
+    const backgroundImageUrl = hero?.image.image.url;
     return (
       <div
         className={`relative ${imageMode === "background" ? "bg-gray-900" : ""}`}
       >
-        {imageMode === "background" && (
+        {hero?.image && imageMode === "background" && (
           <>
             <img
               className="absolute inset-0 h-full w-full object-cover"
@@ -57,7 +59,7 @@ export const Hero: ComponentConfig<HeroProps> = {
                   alt="Your Company"
                 />
                 <h1 className="text-4xl font-bold tracking-tight sm:mt-32 lg:mt-16 sm:text-6xl">
-                  Location Page
+                  {hero?.title ?? "Location Page"}
                 </h1>
                 <p className="mt-6 text-lg leading-8">
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
@@ -76,7 +78,7 @@ export const Hero: ComponentConfig<HeroProps> = {
             </div>
           </div>
         </div>
-        {imageMode !== "background" && (
+        {hero?.image && imageMode !== "background" && (
           <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
             <img
               className="aspect-[3/2] object-cover lg:aspect-auto lg:h-full lg:w-full"
