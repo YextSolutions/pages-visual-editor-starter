@@ -29,7 +29,7 @@ export const Editor = ({isLoading}: EditorProps) => {
       })
     } else if (mutation.isSuccess) {
       toast({
-        title: 'Save success',
+        title: 'Save completed.',
         status: 'success',
         duration: 2000,
         isClosable: true,
