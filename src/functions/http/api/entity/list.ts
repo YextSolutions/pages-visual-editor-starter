@@ -15,7 +15,6 @@ export default async function getEntities(
     if (entityTypes) {
         mgmtApiReq += `&entityTypes=${entityTypes}`
     }
-    console.log('here2');
   
     const mgmtApiResp = await fetch(mgmtApiReq);
     const resp = await mgmtApiResp.json();
