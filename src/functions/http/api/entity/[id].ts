@@ -1,5 +1,7 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
 
+const vparam = 20240401;
+
 export default async function entity(
   request: PagesHttpRequest
 ): Promise<PagesHttpResponse> {
@@ -28,31 +30,15 @@ const getEntity = async (entityId?: string): Promise<PagesHttpResponse> => {
   }
 
   const mgmtApiResp = await fetch(
-    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=20240401`
+    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`
   );
 
   const resp = await mgmtApiResp.json();
-
-  if (mgmtApiResp.status !== 200) {
-    console.error("Error fetching entity:", resp);
-    return {
-      body: JSON.stringify(resp),
-      headers: {},
-      statusCode: mgmtApiResp.status,
-    };
-  } else {
-    const { response } = resp;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { c_template, slug, meta, ...rest } = response;
-
-    // excluding c_template and slug from the response and pulling id out of meta
-    const updatedResp = { id: meta.id, ...rest };
-    return {
-      body: JSON.stringify(updatedResp),
-      headers: {},
-      statusCode: 200,
-    };
-  }
+  return {
+    body: resp,
+    headers: {},
+    statusCode: mgmtApiResp.status,
+  };
 };
 
 const updateEntity = async (
@@ -66,7 +52,7 @@ const updateEntity = async (
   }
 
   const mgmtApiResp = await fetch(
-    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=20230901`,
+    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`,
     {
       method: "PUT",
       headers: {
@@ -77,19 +63,9 @@ const updateEntity = async (
   );
 
   const resp = await mgmtApiResp.json();
-
-  if (mgmtApiResp.status !== 200) {
-    console.error("Error updating entity:", resp);
-    return {
-      body: JSON.stringify(resp),
-      headers: {},
-      statusCode: mgmtApiResp.status,
-    };
-  } else {
-    return {
-      body: JSON.stringify(resp),
-      headers: {},
-      statusCode: 200,
-    };
-  }
+  return {
+    body: resp,
+    headers: {},
+    statusCode: mgmtApiResp.status,
+  };
 };
