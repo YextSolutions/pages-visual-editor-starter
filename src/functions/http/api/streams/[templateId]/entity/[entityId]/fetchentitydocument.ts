@@ -41,7 +41,7 @@ export default async function entityDocument(
         };
       } catch (error) {
         return {
-          body: JSON.stringify({ error: `Server error: ${error}` }),
+          body: JSON.stringify(error),
           headers: {},
           statusCode: 500,
         };
