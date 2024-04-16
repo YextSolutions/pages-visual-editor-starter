@@ -35,7 +35,7 @@ const getEntity = async (entityId?: string): Promise<PagesHttpResponse> => {
 
   const resp = await mgmtApiResp.json();
   return {
-    body: resp,
+    body: JSON.stringify(resp),
     headers: {},
     statusCode: mgmtApiResp.status,
   };
@@ -64,7 +64,7 @@ const updateEntity = async (
 
   const resp = await mgmtApiResp.json();
   return {
-    body: resp,
+    body: JSON.stringify(resp),
     headers: {},
     statusCode: mgmtApiResp.status,
   };

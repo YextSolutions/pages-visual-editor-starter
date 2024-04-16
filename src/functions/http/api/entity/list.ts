@@ -20,7 +20,7 @@ export default async function getEntities(
     try {
         const resp = await mgmtApiResp.json();
         return {
-            body: resp,
+            body: JSON.stringify(resp),
             headers: {},
             statusCode: mgmtApiResp.status,
         };
