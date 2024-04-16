@@ -34,9 +34,8 @@ const getEntity = async (entityId?: string): Promise<PagesHttpResponse> => {
   const resp = await mgmtApiResp.json();
 
   if (mgmtApiResp.status !== 200) {
-    console.error("Error fetching entity:", resp);
     return {
-      body: JSON.stringify(resp),
+      body: JSON.stringify({error: `Error fetching entity: ${resp}`}),
       headers: {},
       statusCode: mgmtApiResp.status,
     };
@@ -77,11 +76,9 @@ const updateEntity = async (
   );
 
   const resp = await mgmtApiResp.json();
-
   if (mgmtApiResp.status !== 200) {
-    console.error("Error updating entity:", resp);
     return {
-      body: JSON.stringify(resp),
+      body: JSON.stringify({error: `Error updating entity: ${resp}`}),
       headers: {},
       statusCode: mgmtApiResp.status,
     };
