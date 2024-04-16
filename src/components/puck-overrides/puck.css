@@ -26,3 +26,15 @@
     justify-content: flex-end;
   }
 }
+
+.entity-picker {
+  .dropdown-button {
+    background-color: #181818;
+    color: #FFFFFF;
+    padding: 7px 19px;
+    font-size: 14px;
+    font-weight: 400;
+    gap: 8px;
+    font-family: InterVariable, sans-serif;
+  }
+}
