@@ -1,9 +1,9 @@
-import { Button, Puck, Data, Config } from "@measured/puck";
+import { Puck, Data, Config } from "@measured/puck";
 import "@measured/puck/puck.css";
 import config from "./puck.config";
 import useEntity from "../hooks/useEntity";
-import "./puck.css";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
+import { customHeader, customHeaderActions } from "../components/puck-overrides/Header";
 
 const siteEntityId = "site";
 
@@ -54,28 +54,3 @@ const handleUpdateEntity = (error: Error | null) => {
     console.log("Save completed.")
   }
 };
-
-const handleClick = () => {
-  window.open('/cafe', '_blank');
-};
-
-const customHeaderActions = (children: any) => {
-  return (
-    <>
-      {children}
-      <Button onClick={handleClick}>Live Preview</Button>
-    </>
-  );
-};
-
-const customHeader = (actions: any) => {
-  return (
-    <header className="header">
-      <div className="header-center"> 
-        <span className="title">Location Editor</span>
-        <span> editor ... </span>
-      </div>
-      <div className="actions">{actions}</div>
-    </header>
-  )
-}
