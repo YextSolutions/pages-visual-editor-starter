@@ -15,7 +15,7 @@ const DocumentProvider = <T,>({ value, children }: DocumentProviderProps<T>) => 
   );
 }
 
-const useDocument = <T,>(selector?: (state: T) => any): T => {
+const useDocument = <T,>(selector?: (state: T) => any): T | any => {
   const context = useContext(DocumentContext);
   if (!context) {
     throw new Error(
@@ -26,7 +26,7 @@ const useDocument = <T,>(selector?: (state: T) => any): T => {
   if (selector) {
     return selector(context);
   }
-  
+
   return context as T;
 }
 
