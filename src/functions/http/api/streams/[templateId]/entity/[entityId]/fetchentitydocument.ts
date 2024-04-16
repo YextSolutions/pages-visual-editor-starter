@@ -40,9 +40,8 @@ export default async function entityDocument(
           statusCode: response.status,
         };
       } catch (error) {
-        console.error(error);
         return {
-          body: JSON.stringify({ error: "Server error" }),
+          body: JSON.stringify(error),
           headers: {},
           statusCode: 500,
         };
