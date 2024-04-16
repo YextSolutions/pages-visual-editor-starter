@@ -3,6 +3,7 @@ import "@measured/puck/puck.css";
 import config from "./puck.config";
 import useEntity from "../hooks/useEntity";
 import useUpdateEntity from "../hooks/useUpdateEntity";
+import "./puck.css";
 
 const siteEntityId = "site";
 
@@ -37,6 +38,7 @@ export const Editor = (props: EditorProps) => {
         onPublish={save}
         overrides={{
           headerActions: ({ children }) => customHeaderActions(children),
+          header: ({ actions }) => customHeader(actions),
         }}
       /> : 
       <>Loading...</>}   
@@ -64,3 +66,15 @@ const customHeaderActions = (children: any) => {
     </>
   );
 };
+
+const customHeader = (actions: any) => {
+  return (
+    <header className="header">
+      <div className="header-center"> 
+        <span className="title">Location Editor</span>
+        <span> editor ... </span>
+      </div>
+      <div className="actions">{actions}</div>
+    </header>
+  )
+}
