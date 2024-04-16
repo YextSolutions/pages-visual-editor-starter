@@ -20,12 +20,11 @@ export default async function getEntities(
     try {
         const resp = await mgmtApiResp.json();
         return {
-            body: JSON.stringify(resp),
+            body: resp,
             headers: {},
             statusCode: mgmtApiResp.status,
         };
     } catch (error) {
-        console.log("Failed to fetch entities: " + error)
         return {
             body: JSON.stringify(mgmtApiResp),
             headers: {},
