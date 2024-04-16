@@ -32,9 +32,9 @@ export const Editor = ({isLoading}: EditorProps) => {
 
   return (
     <>
-      {entity?.c_templateVisualConfiguration && !isLoading ? 
+      {entity?.response?.c_templateVisualConfiguration && !isLoading ? 
       <Puck config={config as Config} 
-        data={JSON.parse(entity?.c_templateVisualConfiguration)} 
+        data={JSON.parse(entity?.response?.c_templateVisualConfiguration)} 
         onPublish={save}
         overrides={{
           headerActions: ({ children }) => customHeaderActions(children),
