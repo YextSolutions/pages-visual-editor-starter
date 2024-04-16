@@ -2,18 +2,19 @@ import { Button, Puck, Data, Config } from "@measured/puck";
 import "@measured/puck/puck.css";
 import config from "./puck.config";
 import useEntity from "../hooks/useEntity";
-import useUpdateEntity from "../hooks/useUpdateEntity";
 import "./puck.css";
+import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 
 const siteEntityId = "site";
 
 export interface EditorProps {
+  isLoading?: boolean;
   entityType?: string;
 }
 
 // Render Puck editor 
-export const Editor = (props: EditorProps) => {
-  const updateEntityMutation = useUpdateEntity({
+export const Editor = ({isLoading}: EditorProps) => {
+  const updateEntityMutation = useUpdateEntityMutation({
     handleComplete: handleUpdateEntity,
   });
   
@@ -32,7 +33,7 @@ export const Editor = (props: EditorProps) => {
 
   return (
     <>
-      {entity?.c_templateVisualConfiguration ? 
+      {entity?.c_templateVisualConfiguration && !isLoading ? 
       <Puck config={config as Config} 
         data={JSON.parse(entity?.c_templateVisualConfiguration)} 
         onPublish={save}

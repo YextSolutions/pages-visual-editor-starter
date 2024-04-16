@@ -10,6 +10,7 @@ import {
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
 import { config as puckConfig } from "../puck/puck.config";
+import { DocumentProvider } from "../hooks/useDocument";
 
 export const config: TemplateConfig = {
   stream: {
@@ -24,6 +25,8 @@ export const config: TemplateConfig = {
       "name",
       "address",
       "slug",
+      // component fields
+      "c_hero",
     ],
     localization: {
       locales: ["en"],
@@ -78,7 +81,11 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
   const { visualTemplate } = document;
-  return <Render config={puckConfig as Config} data={visualTemplate}/>;
+  return (
+    <DocumentProvider value={document}>
+      <Render config={puckConfig as Config} data={visualTemplate}/>
+    </DocumentProvider>
+  );
 };
 
 export default Location;
