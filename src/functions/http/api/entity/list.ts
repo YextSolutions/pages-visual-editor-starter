@@ -26,7 +26,7 @@ export default async function getEntities(
         };
     } catch (error) {
         return {
-            body: JSON.stringify(mgmtApiResp),
+            body: JSON.stringify(error),
             headers: {},
             statusCode: mgmtApiResp.status,
         };

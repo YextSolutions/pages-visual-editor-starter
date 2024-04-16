@@ -33,12 +33,20 @@ const getEntity = async (entityId?: string): Promise<PagesHttpResponse> => {
     `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`
   );
 
-  const resp = await mgmtApiResp.json();
-  return {
-    body: JSON.stringify(resp),
-    headers: {},
-    statusCode: mgmtApiResp.status,
-  };
+  try {
+    const resp = await mgmtApiResp.json();
+    return {
+        body: JSON.stringify(resp),
+        headers: {},
+        statusCode: mgmtApiResp.status,
+    };
+  } catch (error) {
+      return {
+          body: JSON.stringify(error),
+          headers: {},
+          statusCode: mgmtApiResp.status,
+      };
+  }
 };
 
 const updateEntity = async (
@@ -62,10 +70,18 @@ const updateEntity = async (
     }
   );
 
-  const resp = await mgmtApiResp.json();
-  return {
-    body: JSON.stringify(resp),
-    headers: {},
-    statusCode: mgmtApiResp.status,
-  };
+  try {
+    const resp = await mgmtApiResp.json();
+    return {
+        body: JSON.stringify(resp),
+        headers: {},
+        statusCode: mgmtApiResp.status,
+    };
+  } catch (error) {
+      return {
+          body: JSON.stringify(error),
+          headers: {},
+          statusCode: mgmtApiResp.status,
+      };
+  }
 };
