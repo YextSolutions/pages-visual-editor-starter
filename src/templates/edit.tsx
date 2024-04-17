@@ -20,9 +20,21 @@ export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
 };
 
+const getEntityId = (): string => {
+  if (typeof document !== "undefined") {
+    let params = new URL(document.location.toString()).searchParams;
+    let entityId = params.get("entityId")
+    if (entityId) {
+      return entityId
+    }
+  }
+
+  return "cafe"
+} 
+
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
-  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: "cafe" });
+  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: getEntityId()});
   return (
     <ChakraProvider>
       <DocumentProvider value={entityDocument?.response.document}>

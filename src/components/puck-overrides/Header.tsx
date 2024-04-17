@@ -3,7 +3,9 @@ import { EntityPicker } from "./EntityPicker";
 import "./puck.css"
 
 const handleClick = () => {
-  window.open('/cafe', '_blank');
+  let params = new URL(document.location.toString()).searchParams;
+  let entityId = params.get("entityId")
+  window.open(`/${entityId}`, '_blank');
 };
 
 export const customHeaderActions = (children: any) => {
