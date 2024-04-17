@@ -17,8 +17,8 @@ export type Entity = {
   internalId: number,
 }
 
-export const urlFromEntity = (entity: Entity) => {
-  return `edit?entityId=${entity.internalId}`;
+export const urlFromEntity = (entity?: Entity) => {
+  return entity ? `edit?entityId=${entity.internalId}` : "edit";
 }
 
 export function EntityPicker() {

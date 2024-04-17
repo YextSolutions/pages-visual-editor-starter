@@ -27,16 +27,19 @@ export function ConfirmationModal(props: ConfirmationModalProps) {
             <ModalHeader>Confirm navigation to {entity?.name}</ModalHeader>
             <ModalCloseButton/>
             <ModalBody>
-              <div>Any unsaved changes will be lost.</div>
+              <p className='content-line'>
+                Any unsaved changes will be lost.
+              </p>
+              <p className='content-line'>
+                Are you sure you wish to continue?
+              </p>
             </ModalBody>
             <ModalFooter className={'footer'}>
               <Button onClick={onClose} className="close-button button">
                 Close
               </Button>
               <Button disabled={!entity} onClick={() => {
-                if (entity) {
-                  window.location.href = urlFromEntity(entity);
-                }
+                window.location.href = urlFromEntity(entity);
               }} className="primary-button button">Continue</Button>
             </ModalFooter>
           </ModalContent>

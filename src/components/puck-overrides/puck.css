@@ -44,6 +44,14 @@
 }
 
 .entity-confirmation-modal {
+  [aria-label='Close'] {
+    display: none;
+  }
+
+  .content-line {
+    margin-bottom: 3px;
+  }
+
   .close-button {
     background-color: #DCDCDC;
   }
