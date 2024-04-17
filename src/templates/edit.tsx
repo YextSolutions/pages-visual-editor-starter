@@ -29,7 +29,7 @@ const getEntityId = (): string => {
     }
   }
 
-  return "cafe"
+  return ""
 } 
 
 // Render the editor
