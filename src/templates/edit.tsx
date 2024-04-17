@@ -9,6 +9,7 @@ import {
 import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
+import { ChakraProvider } from '@chakra-ui/react'
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -23,9 +24,11 @@ export const getPath: GetPath<TemplateProps> = () => {
 const Edit: Template<TemplateRenderProps> = () => {
   const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: "cafe" });
   return (
-    <DocumentProvider value={entityDocument?.response.document}>
-      <Editor isLoading={!entityDocument}/>
-    </DocumentProvider> 
+    <ChakraProvider>
+      <DocumentProvider value={entityDocument?.response.document}>
+        <Editor isLoading={!entityDocument}/>
+      </DocumentProvider> 
+    </ChakraProvider>
   );
 };
 
