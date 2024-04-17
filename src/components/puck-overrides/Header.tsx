@@ -20,7 +20,7 @@ export const customHeader = (actions: any) => {
     <header className="header">
       <div className="header-left"/>
       <div className="header-center"> 
-        <EntityPicker></EntityPicker>
+        <EntityPicker/>
       </div>
       <div className="actions">{actions}</div>
     </header>
