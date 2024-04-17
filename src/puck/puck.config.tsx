@@ -13,6 +13,9 @@ export const config: Config<Props> = {
     Toggle,
     Hero,
   },
+  root: {
+    fields: {}
+  }
 };
 
 export default config;
