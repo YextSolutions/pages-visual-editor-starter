@@ -17,7 +17,7 @@ type Entity = {
 }
 
 const urlFromEntity = (entity: Entity) => {
-  return `edit?entityId=${entity.internalId}`;
+  return `edit?entityId=${entity.externalId}`;
 }
 
 export function EntityPicker() {
@@ -40,7 +40,7 @@ export function EntityPicker() {
         }
       } else {
         fetched.forEach(e => {
-          if (e.internalId == entityId) {
+          if (e.externalId == entityId) {
             setEntity(e);
           }
         })
