@@ -1,11 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateEntity } from "../../utils/api";
 
-type Update = {
-  handleComplete: (error: Error | null) => void;
-};
-
-const useUpdateEntity = ({ handleComplete }: Update) => {
+const useUpdateEntity = () => {
   const updateEntityMutation = useMutation({
     mutationFn: async ({
       entityId,
@@ -20,9 +16,6 @@ const useUpdateEntity = ({ handleComplete }: Update) => {
       await updateEntity(entityId, body);
     },
     mutationKey: ["updateEntity"],
-    onSettled: (data, error) => {
-      handleComplete(error);
-    },
   });
 
   return updateEntityMutation;
