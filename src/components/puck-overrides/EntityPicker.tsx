@@ -9,14 +9,15 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { fetchEntities } from "./Ajax";
 import { useEffect, useState } from "react";
+import { ConfirmationModal } from "./ConfirmationModal";
 
-type Entity = {
+export type Entity = {
   name: string,
   externalId: string,
   internalId: number,
 }
 
-const urlFromEntity = (entity: Entity) => {
+export const urlFromEntity = (entity: Entity) => {
   return `edit?entityId=${entity.internalId}`;
 }
 
@@ -24,6 +25,8 @@ export function EntityPicker() {
   const [entity, setEntity] = useState<Entity>();
   const [entities, setEntities] = useState<Entity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalEntity, setModalEntity] = useState<Entity>();
 
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
@@ -39,8 +42,8 @@ export function EntityPicker() {
           window.location.href = targetUrl;
         }
       } else {
-        fetched.forEach(e => {
-          if (e.internalId == entityId) {
+        fetched.forEach((e: Entity) => {
+          if (e.internalId?.toString() == entityId) {
             setEntity(e);
           }
         })
@@ -48,13 +51,16 @@ export function EntityPicker() {
     });
   }, []);
 
-  const list = entities.map((e: Entity) => <MenuItem as={Button} key={e.internalId} onClick={() => {
-    setEntity(e);
-    window.location.href = urlFromEntity(e);
-  }}>{e.name}</MenuItem>);
+  const list = entities.map((listEntity: Entity) => <MenuItem className={entity?.internalId == listEntity.internalId ? "current-entity-item" : undefined} as={Button} key={listEntity.internalId} onClick={() => {
+    if (listEntity.internalId != entity?.internalId) {
+      setModalOpen(true);
+      setModalEntity(listEntity);
+    }
+  }}>{listEntity.name}</MenuItem>);
 
   return (
       <ChakraProvider>
+        <ConfirmationModal isOpen={modalOpen} entity={modalEntity} onClose={() => setModalOpen(false)}/>
         <div className='entity-picker'>
           <Menu>
             <MenuButton as={Button} className="dropdown-button" variant={entity ? "solid" : "ghost"} isActive={!!entity} isLoading={loading}>
