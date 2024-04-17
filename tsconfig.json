@@ -7,7 +7,6 @@
     "jsx": "react-jsx",
     "outDir": "./dist",
     "module": "esnext",
-    "allowJs": true,
   },
   "include": ["src", "global.d.ts"]
 }
