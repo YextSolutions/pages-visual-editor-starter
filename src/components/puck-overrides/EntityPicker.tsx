@@ -47,7 +47,7 @@ export function EntityPicker() {
         }
       } else {
         fetched.forEach((e) => {
-          if (e.internalId == entityId) {
+          if (e.externalId == entityId) {
             setEntity(e);
           }
         });
