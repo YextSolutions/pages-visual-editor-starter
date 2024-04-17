@@ -1,4 +1,5 @@
 import { Button } from "@measured/puck";
+import { EntityPicker } from "./EntityPicker";
 import "./puck.css"
 
 const handleClick = () => {
@@ -19,7 +20,7 @@ export const customHeader = (actions: any) => {
     <header className="header">
       <div className="header-left"/>
       <div className="header-center"> 
-        <span> replace me </span>
+        <EntityPicker/>
       </div>
       <div className="actions">{actions}</div>
     </header>
