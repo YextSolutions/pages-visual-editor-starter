@@ -4,6 +4,8 @@ import config from "./puck.config";
 import useEntity from "../hooks/useEntity";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 import { customHeader, customHeaderActions } from "../components/puck-overrides/Header";
+import { useToast } from '@chakra-ui/react'
+import { useEffect } from "react";
 
 const siteEntityId = "site";
 
@@ -14,15 +16,38 @@ export interface EditorProps {
 
 // Render Puck editor 
 export const Editor = ({isLoading}: EditorProps) => {
-  const updateEntityMutation = useUpdateEntityMutation({
-    handleComplete: handleUpdateEntity,
-  });
+  const mutation = useUpdateEntityMutation();
+  const toast = useToast()
+
+  useEffect(() => {
+    if (mutation.isPending) {
+      toast({
+        title: 'Save in progress...',
+        status: 'info',
+        duration: 1000,
+        isClosable: true,
+      })
+    } else if (mutation.isSuccess) {
+      toast({
+        title: 'Save completed.',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      })
+    } else if (mutation.isError) {
+      toast({
+        title: `Error occured: ${mutation.error.message}`,
+        status: 'error',
+        isClosable: true,
+      })
+    } 
+  }, [mutation])
+
   
   // Save the data to our site entity
   const save = async (data: Data) => {
     const c_templateVisualConfiguration = JSON.stringify(data)
-    console.log("Save in progess...")
-    updateEntityMutation.mutate({
+    mutation.mutate({
       entityId: siteEntityId,
       body: { c_templateVisualConfiguration },
     });
@@ -46,11 +71,3 @@ export const Editor = ({isLoading}: EditorProps) => {
     </>
   );
 }
-
-const handleUpdateEntity = (error: Error | null) => {
-  if (error) {
-    console.log("Error occured: " + error.message)
-  } else {
-    console.log("Save completed.")
-  }
-};
