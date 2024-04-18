@@ -17,8 +17,8 @@ export type Entity = {
   internalId: number;
 };
 
-export const urlFromEntity = (entity?: Entity) => {
-  return entity ? `edit?entityId=${entity.internalId}` : "edit";
+export const urlFromEntity = (selectedEntity?: Entity) => {
+  return selectedEntity ? `edit?entityId=${selectedEntity.internalId}` : "edit";
 };
 
 export function EntityPicker() {
@@ -32,18 +32,18 @@ export function EntityPicker() {
   const entityId = urlParams.get("entityId");
 
   useEffect(() => {
-    fetchEntities().then((fetched) => {
+    fetchEntities().then((fetchedEntities) => {
       setLoading(false);
-      setEntities(fetched);
-      if (fetched.length == 1) {
-        setEntity(fetched[0]);
-        const targetUrl = urlFromEntity(fetched[0]);
+      setEntities(fetchedEntities);
+      if (fetchedEntities.length == 1) {
+        setEntity(fetchedEntities[0]);
+        const targetUrl = urlFromEntity(fetchedEntities[0]);
         if (!window.location.href.includes(targetUrl)) {
           window.location.href = targetUrl;
         }
       } else {
-        fetched.forEach((e: Entity) => {
-          if (e.internalId?.toString() == entityId) {
+        fetchedEntities.forEach((e: Entity) => {
+          if (e.internalId?.toString() === entityId) {
             setEntity(e);
           }
         });
