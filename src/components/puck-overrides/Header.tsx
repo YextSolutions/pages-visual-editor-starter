@@ -8,7 +8,7 @@ const handleClick = (slug: string) => {
 };
 
 export const customHeaderActions = (children: any) => {
-  let entityDocument = useDocument()
+  const entityDocument = useDocument()
   return (
     <>
       {children}

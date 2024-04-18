@@ -10,6 +10,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { fetchEntities } from "./Ajax";
 import { useEffect, useState } from "react";
 import { useToast } from '@chakra-ui/react'
+import { useDocument } from "../../hooks/useDocument";
+
 
 type Entity = {
   name: string,
@@ -29,29 +31,26 @@ export function EntityPicker() {
 
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
+  const entityDocument = useDocument()
 
   useEffect(() => {
-    fetchEntities().then((fetched) => {
+    fetchEntities().then((entities) => {
       setLoading(false);
-      setEntities(fetched);
-      if (fetched.length == 0) {
+      setEntities(entities);
+      if (entities.length == 0) {
           toast({
           title: `No entities associated with template`,
           status: 'info',
           isClosable: true,
         })
       } else if (entityId) {
-          fetched.forEach(e => {
+        entities.forEach(e => {
             if (e.externalId == entityId) {
               setEntity(e);
             }
         })
       } else {
-          setEntity(fetched[0]);
-          const targetUrl = urlFromEntity(fetched[0]);
-          if (!window.location.href.includes(targetUrl)) {
-            window.location.href = targetUrl;
-          }
+        setEntity(entityDocument);
       }
     });
   }, []);

@@ -10,6 +10,14 @@ import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { ChakraProvider } from '@chakra-ui/react'
+import { useEffect, useState } from "react";
+import { fetchEntities } from "../components/puck-overrides/Ajax";
+
+type Entity = {
+  name: string,
+  externalId: string,
+  internalId: number,
+}
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -34,7 +42,20 @@ const getEntityId = (): string => {
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
-  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: getEntityId()});
+  const [entities, setEntities] = useState<Entity[]>([]);
+  useEffect(() => {
+    fetchEntities().then((entities) => {
+      setEntities(entities);
+    })}, []);
+
+    let entityId = "";
+
+    if (entities.length > 0) {
+      entityId = entities[0].externalId
+    }
+
+
+  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: getEntityId() ? getEntityId() : entityId});
   return (
     <ChakraProvider>
       <DocumentProvider value={entityDocument?.response.document}>
