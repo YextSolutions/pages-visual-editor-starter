@@ -9,6 +9,7 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { fetchEntities } from "./Ajax";
 import { useEffect, useState } from "react";
+import { useToast } from '@chakra-ui/react'
 
 type Entity = {
   name: string,
@@ -24,6 +25,7 @@ export function EntityPicker() {
   const [entity, setEntity] = useState<Entity>();
   const [entities, setEntities] = useState<Entity[]>([]);
   const [loading, setLoading] = useState(true);
+  const toast = useToast()
 
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
@@ -32,18 +34,24 @@ export function EntityPicker() {
     fetchEntities().then((fetched) => {
       setLoading(false);
       setEntities(fetched);
-      if (fetched.length == 1) {
-        setEntity(fetched[0]);
-        const targetUrl = urlFromEntity(fetched[0]);
-        if (!window.location.href.includes(targetUrl)) {
-          window.location.href = targetUrl;
-        }
-      } else {
-        fetched.forEach(e => {
-          if (e.externalId == entityId) {
-            setEntity(e);
-          }
+      if (fetched.length == 0) {
+          toast({
+          title: `No entities associated with template`,
+          status: 'info',
+          isClosable: true,
         })
+      } else if (entityId) {
+          fetched.forEach(e => {
+            if (e.externalId == entityId) {
+              setEntity(e);
+            }
+        })
+      } else {
+          setEntity(fetched[0]);
+          const targetUrl = urlFromEntity(fetched[0]);
+          if (!window.location.href.includes(targetUrl)) {
+            window.location.href = targetUrl;
+          }
       }
     });
   }, []);
