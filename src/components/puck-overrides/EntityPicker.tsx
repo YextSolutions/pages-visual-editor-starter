@@ -9,6 +9,7 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import { fetchEntities } from "../../utils/api";
+import { useToast } from '@chakra-ui/react'
 
 type Entity = {
   name: string;
@@ -31,29 +32,32 @@ export function EntityPicker() {
   const [entity, setEntity] = useState<Entity>();
   const [entities, setEntities] = useState<Entity[]>([]);
   const [loading, setLoading] = useState(true);
+  const toast = useToast()
 
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
 
   useEffect(() => {
-    fetchEntities().then((fetched) => {
+    fetchEntities().then((entities) => {
       setLoading(false);
-      setEntities(fetched);
-      if (fetched.length == 1) {
-        setEntity(fetched[0]);
-        const targetUrl = urlFromEntity(fetched[0]);
-        if (!window.location.href.includes(targetUrl)) {
-          window.location.href = targetUrl;
-        }
-      } else {
-        fetched.forEach((e) => {
-          if (e.externalId == entityId) {
-            setEntity(e);
+      setEntities(entities);
+      if (entities.length === 0) {
+        toast({
+          title: `No entities associated with template`,
+          status: 'info',
+          isClosable: true,
+        })
+      } else if (entityId) {
+        entities.forEach(entity => {
+          if (entity.externalId === entityId) {
+            setEntity(entity);
           }
-        });
+        })
+      } else {
+        setEntity(entities[0]);
       }
-    });
-  }, []);
+    })
+  })
 
   const list = entities.map((e: Entity) => (
     <MenuItem
