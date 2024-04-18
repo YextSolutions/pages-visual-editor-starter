@@ -7,8 +7,8 @@ import {
   ChakraProvider,
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { fetchEntities } from "./Ajax";
 import { useEffect, useState } from "react";
+import { fetchEntities } from '../../utils/api';
 
 type Entity = {
   name: string,
@@ -17,7 +17,13 @@ type Entity = {
 }
 
 const urlFromEntity = (entity: Entity) => {
-  return `edit?entityId=${entity.internalId}`;
+  const currentPath = window.location.href;
+  if (currentPath.includes('entityId=')) {
+    return currentPath.split('entityId=')[0] + `entityId=${entity.externalId}`;
+  } else if (currentPath.includes('templateId=')) {
+    return currentPath + `&entityId=${entity.externalId}`
+  }
+  return currentPath + `?entityId=${entity.externalId}`
 }
 
 export function EntityPicker() {
@@ -68,4 +74,43 @@ export function EntityPicker() {
         </div>
       </ChakraProvider>
   )
+}
+
+type Template = {
+  name: string,
+  externalId: string,
+}
+
+const urlFromTemplate = (template: Template) => {
+  return `edit?templateId=${template.externalId}`
+}
+
+export function TemplatePicker() {
+  const [template, setTemplate] = useState<Template>();
+  const [loading, setLoading] = useState(false);
+  
+  const templates: Template[] = [
+    { name: "location", externalId: "location" },
+  ];
+
+  const list = templates.map((t: Template) => <MenuItem as={Button} key={t.externalId} onClick={() => {
+    setTemplate(t);
+    window.location.href = urlFromTemplate(t);
+  }}>{t.name}</MenuItem>);
+
+  return (
+    <ChakraProvider>
+      <div className='entity-picker'>
+        <Menu>
+          <MenuButton as={Button} className="dropdown-button" variant={template ? "solid" : "ghost"} isActive={!!template} isLoading={loading}>
+            {template ? template.name : "Template"}
+            <ChevronDownIcon/>
+          </MenuButton>
+          <MenuList>
+            {list}
+          </MenuList>
+        </Menu>
+      </div>
+    </ChakraProvider>
+) 
 }
