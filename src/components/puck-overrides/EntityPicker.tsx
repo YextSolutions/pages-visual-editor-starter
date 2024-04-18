@@ -10,6 +10,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import { fetchEntities } from "../../utils/api";
 import { useToast } from '@chakra-ui/react'
+import { useDocument } from "../../hooks/useDocument";
+
 
 type Entity = {
   name: string;
@@ -36,6 +38,7 @@ export function EntityPicker() {
 
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
+  const entityDocument = useDocument()
 
   useEffect(() => {
     fetchEntities().then((entities) => {
