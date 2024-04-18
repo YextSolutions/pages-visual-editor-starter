@@ -37,7 +37,7 @@ export function EntityPicker() {
     fetchEntities().then((entities) => {
       setLoading(false);
       setEntities(entities);
-      if (entities.length == 0) {
+      if (entities.length === 0) {
           toast({
           title: `No entities associated with template`,
           status: 'info',
@@ -45,7 +45,7 @@ export function EntityPicker() {
         })
       } else if (entityId) {
         entities.forEach(e => {
-            if (e.externalId == entityId) {
+            if (e.externalId === entityId) {
               setEntity(e);
             }
         })
