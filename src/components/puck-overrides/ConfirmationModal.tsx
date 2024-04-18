@@ -8,8 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-
-import {Entity, urlFromEntity} from "./EntityPicker";
+import { Entity, urlFromEntity } from "./EntityPicker";
 
 export type ConfirmationModalProps = {
   isOpen: boolean,
