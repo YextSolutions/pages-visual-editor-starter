@@ -5,20 +5,27 @@ import {
   MenuItem,
   Button,
   ChakraProvider,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { fetchEntities } from "./Ajax";
 import { useEffect, useState } from "react";
+import { fetchEntities } from "../../utils/api";
 
 type Entity = {
-  name: string,
-  externalId: string,
-  internalId: number,
-}
+  name: string;
+  externalId: string;
+  internalId: number;
+};
 
 const urlFromEntity = (entity: Entity) => {
-  return `edit?entityId=${entity.internalId}`;
-}
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.has("entityId")) {
+    urlParams.set("entityId", entity.externalId)
+  } else {
+    urlParams.append("entityId", entity.externalId)
+  }
+  return `${window.location.pathname}?${urlParams.toString()}`;
+};
 
 export function EntityPicker() {
   const [entity, setEntity] = useState<Entity>();
@@ -39,33 +46,45 @@ export function EntityPicker() {
           window.location.href = targetUrl;
         }
       } else {
-        fetched.forEach(e => {
+        fetched.forEach((e) => {
           if (e.internalId == entityId) {
             setEntity(e);
           }
-        })
+        });
       }
     });
   }, []);
 
-  const list = entities.map((e: Entity) => <MenuItem as={Button} key={e.internalId} onClick={() => {
-    setEntity(e);
-    window.location.href = urlFromEntity(e);
-  }}>{e.name}</MenuItem>);
+  const list = entities.map((e: Entity) => (
+    <MenuItem
+      as={Button}
+      key={e.internalId}
+      onClick={() => {
+        setEntity(e);
+        window.location.href = urlFromEntity(e);
+      }}
+    >
+      {e.name}
+    </MenuItem>
+  ));
 
   return (
-      <ChakraProvider>
-        <div className='entity-picker'>
-          <Menu>
-            <MenuButton as={Button} className="dropdown-button" variant={entity ? "solid" : "ghost"} isActive={!!entity} isLoading={loading}>
-              {entity ? entity.name : "Entity"}
-              <ChevronDownIcon/>
-            </MenuButton>
-            <MenuList>
-              {list}
-            </MenuList>
-          </Menu>
-        </div>
-      </ChakraProvider>
-  )
+    <ChakraProvider>
+      <div className="entity-picker">
+        <Menu>
+          <MenuButton
+            as={Button}
+            className="dropdown-button"
+            variant={entity ? "solid" : "ghost"}
+            isActive={!!entity}
+            isLoading={loading}
+          >
+            {entity ? entity.name : "Entity"}
+            <ChevronDownIcon />
+          </MenuButton>
+          <MenuList>{list}</MenuList>
+        </Menu>
+      </div>
+    </ChakraProvider>
+  );
 }

@@ -12,6 +12,7 @@
   }
 
   .header-center {
+    gap: 16px;
     flex: 1;
     text-align: center;
     display: flex;
