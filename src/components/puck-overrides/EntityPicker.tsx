@@ -7,9 +7,9 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { fetchEntities } from "./Ajax";
 import { useEffect, useState } from "react";
 import { ConfirmationModal } from "./ConfirmationModal";
+import { fetchEntities } from "../../utils/api";
 
 export type Entity = {
   name: string;
@@ -17,8 +17,15 @@ export type Entity = {
   internalId: number;
 };
 
-export const urlFromEntity = (selectedEntity?: Entity) => {
-  return selectedEntity ? `edit?entityId=${selectedEntity.internalId}` : "edit";
+export const urlFromEntity = (entity: Entity) => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.has("entityId")) {
+    urlParams.set("entityId", entity.externalId)
+  } else {
+    urlParams.append("entityId", entity.externalId)
+  }
+  return `${window.location.pathname}?${urlParams.toString()}`;
 };
 
 export function EntityPicker() {
@@ -43,7 +50,7 @@ export function EntityPicker() {
         }
       } else {
         fetchedEntities.forEach((e: Entity) => {
-          if (e.internalId?.toString() === entityId) {
+          if (e.externalId?.toString() === entityId) {
             setEntity(e);
           }
         });
@@ -54,7 +61,7 @@ export function EntityPicker() {
   const entityMenuItems = entities.map((listEntity: Entity) => (
     <MenuItem
       className={
-        entity?.internalId == listEntity.internalId
+        entity?.internalId === listEntity.internalId
           ? "current-entity-item"
           : undefined
       }
