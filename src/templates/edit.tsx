@@ -38,29 +38,30 @@ const getEntityId = (): string => {
   }
 
   return ""
-} 
+}
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
-  const [entities, setEntities] = useState<Entity[]>([]);
-  useEffect(() => {
-    fetchEntities().then((entities) => {
-      setEntities(entities);
-    })}, []);
+  const [entity, setEntity] = useState(getEntityId());
+  if (!entity) {
+    useEffect(() => {
+      async function getEntities() {
+        let entities = await fetchEntities();
+        if (entities.length > 0) {
+          setEntity(entities[0].externalId);
+        }
+      }
 
-    let entityId = "";
+      getEntities();
+    }, []);
+  }
 
-    if (entities.length > 0) {
-      entityId = entities[0].externalId
-    }
-
-
-  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: getEntityId() ? getEntityId() : entityId});
+  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: entity });
   return (
     <ChakraProvider>
       <DocumentProvider value={entityDocument?.response.document}>
-        <Editor isLoading={!entityDocument}/>
-      </DocumentProvider> 
+        <Editor isLoading={!entityDocument} />
+      </DocumentProvider>
     </ChakraProvider>
   );
 };

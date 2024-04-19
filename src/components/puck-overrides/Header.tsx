@@ -9,7 +9,7 @@ const handleClick = (slug: string) => {
 };
 
 export const customHeaderActions = (children: any) => {
-  const entityDocument = useDocument()
+  const entityDocument = useDocument();
   return (
     <>
       {children}
