@@ -62,7 +62,7 @@ export function TemplatePicker() {
     }
   }, []);
 
-  const list = templates.map((t: Template) => (
+  const templateMenuItems = templates.map((t: Template) => (
     <MenuItem
       as={Button}
       key={t.externalId}
@@ -99,7 +99,7 @@ export function TemplatePicker() {
             {template ? template.name : "Template"}
             <ChevronDownIcon />
           </MenuButton>
-          <MenuList>{list}</MenuList>
+          <MenuList>{templateMenuItems}</MenuList>
         </Menu>
       </div>
     </ChakraProvider>
