@@ -42,11 +42,11 @@ export function EntityPicker() {
     fetchEntities().then((fetchedEntities) => {
       setLoading(false);
       setEntities(fetchedEntities);
-      if (fetchedEntities.length == 1) {
+      if (fetchedEntities.length === 1) {
         setEntity(fetchedEntities[0]);
-        const targetUrl = urlFromEntity(fetchedEntities[0]);
-        if (!window.location.href.includes(targetUrl)) {
-          window.location.href = targetUrl;
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!urlParams.has("entityId") || urlParams.get("entityId") !== fetchedEntities[0].externalId) {
+          window.location.href = urlFromEntity(fetchedEntities[0]);
         }
       } else {
         fetchedEntities.forEach((e: Entity) => {
