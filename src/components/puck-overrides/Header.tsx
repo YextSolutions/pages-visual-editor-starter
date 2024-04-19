@@ -1,6 +1,7 @@
 import { Button } from "@measured/puck";
-import { EntityPicker, TemplatePicker } from "./Picker";
+import { EntityPicker } from "./EntityPicker";
 import "./puck.css"
+import { TemplatePicker } from "./TemplatePicker";
 
 const handleClick = () => {
   window.open('/cafe', '_blank');
