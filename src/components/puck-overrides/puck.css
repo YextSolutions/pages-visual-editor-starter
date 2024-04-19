@@ -31,7 +31,7 @@
 .entity-picker {
   .dropdown-button {
     background-color: #181818;
-    color: #FFFFFF;
+    color: #ffffff;
     padding: 7px 19px;
     font-size: 14px;
     font-weight: 400;
@@ -40,12 +40,12 @@
   }
 
   .current-entity-item {
-    background-color: #CBD5E0;
+    background-color: #cbd5e0;
   }
 }
 
 .entity-confirmation-modal {
-  [aria-label='Close'] {
+  [aria-label="Close"] {
     display: none;
   }
 
@@ -54,12 +54,12 @@
   }
 
   .close-button {
-    background-color: #DCDCDC;
+    background-color: #dcdcdc;
   }
 
   .primary-button {
-    color: #FFFFFF;
-    background-color: #0158AD;
+    color: #ffffff;
+    background-color: #0158ad;
   }
 
   .footer {

@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
-import { ConfirmationModal } from "./ConfirmationModal";
+import { ConfirmationModal, SelectionType } from "./ConfirmationModal";
 import { fetchEntities } from "../../utils/api";
 
 export type Entity = {
@@ -21,9 +21,9 @@ export const urlFromEntity = (entity: Entity) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   if (urlParams.has("entityId")) {
-    urlParams.set("entityId", entity.externalId)
+    urlParams.set("entityId", entity.externalId);
   } else {
-    urlParams.append("entityId", entity.externalId)
+    urlParams.append("entityId", entity.externalId);
   }
   return `${window.location.pathname}?${urlParams.toString()}`;
 };
@@ -45,7 +45,10 @@ export function EntityPicker() {
       if (fetchedEntities.length === 1) {
         setEntity(fetchedEntities[0]);
         const urlParams = new URLSearchParams(window.location.search);
-        if (!urlParams.has("entityId") || urlParams.get("entityId") !== fetchedEntities[0].externalId) {
+        if (
+          !urlParams.has("entityId") ||
+          urlParams.get("entityId") !== fetchedEntities[0].externalId
+        ) {
           window.location.href = urlFromEntity(fetchedEntities[0]);
         }
       } else {
@@ -82,7 +85,9 @@ export function EntityPicker() {
     <ChakraProvider>
       <ConfirmationModal
         isOpen={modalOpen}
-        entity={modalEntity}
+        selectionType={SelectionType.Entity}
+        destinationName={modalEntity?.name || ""}
+        destinationUrl={modalEntity ? urlFromEntity(modalEntity) : ""}
         onClose={() => setModalOpen(false)}
       />
       <div className="entity-picker">

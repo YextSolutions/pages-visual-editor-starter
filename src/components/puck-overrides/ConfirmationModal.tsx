@@ -8,21 +8,32 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { Entity, urlFromEntity } from "./EntityPicker";
+
+export enum SelectionType {
+  Entity,
+  Template,
+}
 
 export type ConfirmationModalProps = {
   isOpen: boolean;
-  entity?: Entity;
+  selectionType: SelectionType;
+  destinationName: string;
+  destinationUrl: string;
   onClose: () => void;
 };
 
 export function ConfirmationModal(props: ConfirmationModalProps) {
-  const { isOpen, entity, onClose } = props;
+  const { isOpen, selectionType, destinationName, destinationUrl, onClose } =
+    props;
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent className="entity-confirmation-modal">
-        <ModalHeader>Confirm navigation to {entity?.name}</ModalHeader>
+        <ModalHeader>
+          {selectionType === SelectionType.Entity
+            ? `Confirm navigation to ${destinationName}`
+            : `Load template ${destinationName}`}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <p className="content-line">Any unsaved changes will be lost.</p>
@@ -33,9 +44,9 @@ export function ConfirmationModal(props: ConfirmationModalProps) {
             Close
           </Button>
           <Button
-            disabled={!entity}
+            disabled={!destinationUrl}
             onClick={() => {
-              window.location.href = urlFromEntity(entity);
+              window.location.href = destinationUrl;
             }}
             className="primary-button"
           >
