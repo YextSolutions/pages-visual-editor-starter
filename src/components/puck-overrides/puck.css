@@ -38,4 +38,31 @@
     gap: 8px;
     font-family: InterVariable, sans-serif;
   }
+
+  .current-entity-item {
+    background-color: #CBD5E0;
+  }
+}
+
+.entity-confirmation-modal {
+  [aria-label='Close'] {
+    display: none;
+  }
+
+  .content-line {
+    margin-bottom: 3px;
+  }
+
+  .close-button {
+    background-color: #DCDCDC;
+  }
+
+  .primary-button {
+    color: #FFFFFF;
+    background-color: #0158AD;
+  }
+
+  .footer {
+    justify-content: space-between;
+  }
 }
