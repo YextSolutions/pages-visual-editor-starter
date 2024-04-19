@@ -2,16 +2,18 @@ import { Button } from "@measured/puck";
 import { EntityPicker } from "./EntityPicker";
 import "./puck.css"
 import { TemplatePicker } from "./TemplatePicker";
+import { useDocument } from "../../hooks/useDocument";
 
-const handleClick = () => {
-  window.open('/cafe', '_blank');
+const handleClick = (slug: string) => {
+  window.open(`/${slug}`, '_blank');
 };
 
 export const customHeaderActions = (children: any) => {
+  const entityDocument = useDocument();
   return (
     <>
       {children}
-      <Button onClick={handleClick}>Live Preview</Button>
+      <Button onClick={() => handleClick(entityDocument.slug)}>Live Preview</Button>
     </>
   );
 };

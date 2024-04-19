@@ -15,7 +15,7 @@ export interface EditorProps {
 }
 
 // Render Puck editor 
-export const Editor = ({isLoading}: EditorProps) => {
+export const Editor = ({ isLoading }: EditorProps) => {
   const mutation = useUpdateEntityMutation();
   const toast = useToast()
 
@@ -40,10 +40,10 @@ export const Editor = ({isLoading}: EditorProps) => {
         status: 'error',
         isClosable: true,
       })
-    } 
+    }
   }, [mutation])
 
-  
+
   // Save the data to our site entity
   const save = async (data: Data) => {
     const c_templateVisualConfiguration = JSON.stringify(data)
@@ -58,16 +58,16 @@ export const Editor = ({isLoading}: EditorProps) => {
 
   return (
     <>
-      {entity?.response?.c_templateVisualConfiguration && !isLoading ? 
-      <Puck config={config as Config} 
-        data={JSON.parse(entity?.response?.c_templateVisualConfiguration)} 
-        onPublish={save}
-        overrides={{
-          headerActions: ({ children }) => customHeaderActions(children),
-          header: ({ actions }) => customHeader(actions),
-        }}
-      /> : 
-      <>Loading...</>}   
+      {entity?.response?.c_templateVisualConfiguration && !isLoading ?
+        <Puck config={config as Config}
+          data={JSON.parse(entity?.response?.c_templateVisualConfiguration)}
+          onPublish={save}
+          overrides={{
+            headerActions: ({ children }) => customHeaderActions(children),
+            header: ({ actions }) => customHeader(actions),
+          }}
+        /> :
+        <>Loading...</>}
     </>
   );
 }
