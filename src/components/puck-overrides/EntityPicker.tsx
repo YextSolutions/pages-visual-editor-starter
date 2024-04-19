@@ -8,15 +8,16 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
+import { ConfirmationModal } from "./ConfirmationModal";
 import { fetchEntities } from "../../utils/api";
 
-type Entity = {
+export type Entity = {
   name: string;
   externalId: string;
   internalId: number;
 };
 
-const urlFromEntity = (entity: Entity) => {
+export const urlFromEntity = (entity: Entity) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   if (urlParams.has("entityId")) {
@@ -31,23 +32,25 @@ export function EntityPicker() {
   const [entity, setEntity] = useState<Entity>();
   const [entities, setEntities] = useState<Entity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalEntity, setModalEntity] = useState<Entity>();
 
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
 
   useEffect(() => {
-    fetchEntities().then((fetched) => {
+    fetchEntities().then((fetchedEntities) => {
       setLoading(false);
-      setEntities(fetched);
-      if (fetched.length == 1) {
-        setEntity(fetched[0]);
-        const targetUrl = urlFromEntity(fetched[0]);
-        if (!window.location.href.includes(targetUrl)) {
-          window.location.href = targetUrl;
+      setEntities(fetchedEntities);
+      if (fetchedEntities.length === 1) {
+        setEntity(fetchedEntities[0]);
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!urlParams.has("entityId") || urlParams.get("entityId") !== fetchedEntities[0].externalId) {
+          window.location.href = urlFromEntity(fetchedEntities[0]);
         }
       } else {
-        fetched.forEach((e) => {
-          if (e.internalId == entityId) {
+        fetchedEntities.forEach((e: Entity) => {
+          if (e.externalId?.toString() === entityId) {
             setEntity(e);
           }
         });
@@ -55,21 +58,33 @@ export function EntityPicker() {
     });
   }, []);
 
-  const list = entities.map((e: Entity) => (
+  const entityMenuItems = entities.map((listEntity: Entity) => (
     <MenuItem
+      className={
+        entity?.internalId === listEntity.internalId
+          ? "current-entity-item"
+          : undefined
+      }
       as={Button}
-      key={e.internalId}
+      key={listEntity.internalId}
       onClick={() => {
-        setEntity(e);
-        window.location.href = urlFromEntity(e);
+        if (listEntity.internalId !== entity?.internalId) {
+          setModalOpen(true);
+          setModalEntity(listEntity);
+        }
       }}
     >
-      {e.name}
+      {listEntity.name}
     </MenuItem>
   ));
 
   return (
     <ChakraProvider>
+      <ConfirmationModal
+        isOpen={modalOpen}
+        entity={modalEntity}
+        onClose={() => setModalOpen(false)}
+      />
       <div className="entity-picker">
         <Menu>
           <MenuButton
@@ -82,7 +97,7 @@ export function EntityPicker() {
             {entity ? entity.name : "Entity"}
             <ChevronDownIcon />
           </MenuButton>
-          <MenuList>{list}</MenuList>
+          <MenuList>{entityMenuItems}</MenuList>
         </Menu>
       </div>
     </ChakraProvider>
