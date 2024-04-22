@@ -9,14 +9,9 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import { ConfirmationModal, SelectionType } from "./ConfirmationModal";
+import { fetchTemplates } from "../../utils/api";
 
-// Hardcoded, to be replaced
-const templates: Template[] = [
-  { name: "Location", externalId: "location" },
-  { name: "Office", externalId: "office" },
-];
-
-type Template = {
+export type Template = {
   name: string;
   externalId: string;
 };
@@ -34,6 +29,7 @@ export const urlFromTemplate = (template: Template) => {
 
 export function TemplatePicker() {
   const [template, setTemplate] = useState<Template>();
+  const [templates, setTemplates] = useState<Template[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTemplate, setModalTemplate] = useState<Template>();
@@ -42,24 +38,26 @@ export function TemplatePicker() {
   const templateId = urlParams.get("templateId");
 
   useEffect(() => {
-    // TODO get real templates here
-    setLoading(false);
-    if (templates.length === 1) {
-      setTemplate(templates[0]);
-      const urlParams = new URLSearchParams(window.location.search);
-      if (
-        !urlParams.has("templateId") ||
-        urlParams.get("templateId") !== templates[0].externalId
-      ) {
-        window.location.href = urlFromTemplate(templates[0]);
-      }
-    } else {
-      templates.forEach((t: Template) => {
-        if (t.externalId?.toString() === templateId) {
-          setTemplate(t);
+    fetchTemplates().then((fetchedTemplates) => {
+      setLoading(false);
+      setTemplates(fetchedTemplates);
+      if (fetchedTemplates.length === 1) {
+        setTemplate(fetchedTemplates[0]);
+        const urlParams = new URLSearchParams(window.location.search);
+        if (
+          !urlParams.has("templateId") ||
+          urlParams.get("templateId") !== fetchedTemplates[0].externalId
+        ) {
+          window.location.href = urlFromTemplate(fetchedTemplates[0]);
         }
-      });
-    }
+      } else {
+        fetchedTemplates.forEach((t: Template) => {
+          if (t.externalId?.toString() === templateId) {
+            setTemplate(t);
+          }
+        });
+      }
+    });
   }, []);
 
   const templateMenuItems = templates.map((t: Template) => (
@@ -70,7 +68,6 @@ export function TemplatePicker() {
         if (t.externalId !== template?.externalId) {
           setModalTemplate(t);
           setModalOpen(true);
-          setTemplate(t); // this should be set when we load a template, but just call here for now
         }
       }}
     >

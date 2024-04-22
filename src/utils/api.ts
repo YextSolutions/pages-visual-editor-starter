@@ -1,4 +1,6 @@
 import { EntityContent, YextResponse } from "../types/api";
+import { Template } from "../components/puck-overrides/TemplatePicker";
+import { Entity } from "../components/puck-overrides/EntityPicker";
 
 export const fetchEntity = async (entityId: string): Promise<any> => {
   const response = await fetch(`/api/entity/${entityId}`);
@@ -8,7 +10,7 @@ export const fetchEntity = async (entityId: string): Promise<any> => {
 
 export const updateEntity = async (
   entityId: string,
-  body: any
+  body: any,
 ): Promise<void> => {
   const response = await fetch(`/api/entity/${entityId}`, {
     method: "PUT",
@@ -23,13 +25,29 @@ export const updateEntity = async (
   }
 };
 
+export const fetchTemplates = async (): Promise<Template[]> => {
+  try {
+    const res = await fetch("api/template/list");
+    const json = await res.json();
+    const templates = json.templates;
+    return templates.map((template) => {
+      return {
+        name: template.name,
+        externalId: template.externalId,
+      };
+    });
+  } catch (e) {
+    throw new Error("Failed to fetch templates: " + e.message);
+  }
+};
+
 export const fetchEntityDocument = async (
   templateId: string,
-  entityId: string
+  entityId: string,
 ): Promise<YextResponse<EntityContent>> => {
   try {
     const response = await fetch(
-      `/api/streams/${templateId}/entity/${entityId}/fetchentitydocument`
+      `/api/streams/${templateId}/entity/${entityId}/fetchentitydocument`,
     );
     const body = await response.json();
     return body;
@@ -43,19 +61,19 @@ export const fetchEntityDocument = async (
  * Fetches entities using the getEntities() function and parses the response.
  * @return {Promise<Entity[]>}
  */
-export async function fetchEntities() {
+export async function fetchEntities(): Promise<Entity[]> {
   try {
     const res = await fetch("api/entity/list");
     const json = await res.json();
     const entities = json.response.entities;
-    return entities.map(entity => {
+    return entities.map((entity) => {
       return {
         name: entity.name,
         externalId: entity.meta.id,
         internalId: entity.meta.uid,
-      }
+      };
     });
   } catch (e) {
-    throw new Error("Failed to fetch entities: " + e.message)
+    throw new Error("Failed to fetch entities: " + e.message);
   }
 }
