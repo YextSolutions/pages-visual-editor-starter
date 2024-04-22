@@ -9,31 +9,20 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-export enum SelectionType {
-  Entity,
-  Template,
-}
-
 export type ConfirmationModalProps = {
   isOpen: boolean;
-  selectionType: SelectionType;
   destinationName: string;
   destinationUrl: string;
   onClose: () => void;
 };
 
-export function ConfirmationModal(props: ConfirmationModalProps) {
-  const { isOpen, selectionType, destinationName, destinationUrl, onClose } =
-    props;
+export function EntityConfirmationModal(props: ConfirmationModalProps) {
+  const { isOpen, destinationName, destinationUrl, onClose } = props;
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent className="entity-confirmation-modal">
-        <ModalHeader>
-          {selectionType === SelectionType.Entity
-            ? `Confirm navigation to ${destinationName}`
-            : `Load template ${destinationName}`}
-        </ModalHeader>
+      <ModalContent className="confirmation-modal">
+        <ModalHeader>Confirm navigation to {destinationName}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <p className="content-line">Any unsaved changes will be lost.</p>

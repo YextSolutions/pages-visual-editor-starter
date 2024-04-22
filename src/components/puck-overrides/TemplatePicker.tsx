@@ -8,8 +8,8 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
-import { ConfirmationModal, SelectionType } from "./ConfirmationModal";
 import { fetchTemplates } from "../../utils/api";
+import { TemplateConfirmationModal } from "./TemplateConfirmationModal";
 
 export type Template = {
   name: string;
@@ -77,9 +77,8 @@ export function TemplatePicker() {
 
   return (
     <ChakraProvider>
-      <ConfirmationModal
+      <TemplateConfirmationModal
         isOpen={modalOpen}
-        selectionType={SelectionType.Template}
         destinationName={modalTemplate?.name || ""}
         destinationUrl={modalTemplate ? urlFromTemplate(modalTemplate) : ""}
         onClose={() => setModalOpen(false)}

@@ -44,7 +44,7 @@
   }
 }
 
-.entity-confirmation-modal {
+.confirmation-modal {
   [aria-label="Close"] {
     display: none;
   }

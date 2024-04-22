@@ -5,7 +5,7 @@ import { TemplatePicker } from "./TemplatePicker";
 import { useDocument } from "../../hooks/useDocument";
 
 const handleClick = (slug: string) => {
-  window.open(`/${slug}`, '_blank');
+  window.open(`/${slug}`, "_blank");
 };
 
 export const customHeaderActions = (children: any) => {
@@ -13,7 +13,9 @@ export const customHeaderActions = (children: any) => {
   return (
     <>
       {children}
-      <Button onClick={() => handleClick(entityDocument.slug)}>Live Preview</Button>
+      <Button onClick={() => handleClick(entityDocument.slug)}>
+        Live Preview
+      </Button>
     </>
   );
 };
