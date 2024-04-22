@@ -10,6 +10,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import { ConfirmationModal, SelectionType } from "./ConfirmationModal";
 import { fetchEntities } from "../../utils/api";
+import { useToast } from '@chakra-ui/react'
 
 export type Entity = {
   name: string;
@@ -32,6 +33,7 @@ export function EntityPicker() {
   const [entity, setEntity] = useState<Entity>();
   const [entities, setEntities] = useState<Entity[]>([]);
   const [loading, setLoading] = useState(true);
+  const toast = useToast()
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEntity, setModalEntity] = useState<Entity>();
 
@@ -39,27 +41,26 @@ export function EntityPicker() {
   const entityId = urlParams.get("entityId");
 
   useEffect(() => {
-    fetchEntities().then((fetchedEntities) => {
+    fetchEntities().then((entities) => {
       setLoading(false);
-      setEntities(fetchedEntities);
-      if (fetchedEntities.length === 1) {
-        setEntity(fetchedEntities[0]);
-        const urlParams = new URLSearchParams(window.location.search);
-        if (
-          !urlParams.has("entityId") ||
-          urlParams.get("entityId") !== fetchedEntities[0].externalId
-        ) {
-          window.location.href = urlFromEntity(fetchedEntities[0]);
-        }
-      } else {
-        fetchedEntities.forEach((e: Entity) => {
-          if (e.externalId?.toString() === entityId) {
-            setEntity(e);
+      setEntities(entities);
+      if (entities.length === 0) {
+        toast({
+          title: `No entities associated with template`,
+          status: 'info',
+          isClosable: true,
+        })
+      } else if (entityId) {
+        entities.forEach(entity => {
+          if (entity.externalId === entityId) {
+            setEntity(entity);
           }
-        });
+        })
+      } else {
+        setEntity(entities[0]);
       }
-    });
-  }, []);
+    })
+  })
 
   const entityMenuItems = entities.map((listEntity: Entity) => (
     <MenuItem
