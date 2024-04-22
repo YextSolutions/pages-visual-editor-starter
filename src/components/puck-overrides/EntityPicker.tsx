@@ -41,23 +41,23 @@ export function EntityPicker() {
   const entityId = urlParams.get("entityId");
 
   useEffect(() => {
-    fetchEntities().then((entities) => {
+    fetchEntities().then((fetchedEntities) => {
       setLoading(false);
-      setEntities(entities);
-      if (entities.length === 0) {
+      setEntities(fetchedEntities);
+      if (fetchedEntities.length === 0) {
         toast({
           title: `No entities associated with template`,
           status: "info",
           isClosable: true,
         });
       } else if (entityId) {
-        entities.forEach((entity) => {
-          if (entity.externalId === entityId) {
-            setEntity(entity);
+        fetchedEntities.forEach((fetchedEntity) => {
+          if (fetchedEntity.externalId === entityId) {
+            setEntity(fetchedEntity);
           }
         });
       } else {
-        setEntity(entities[0]);
+        setEntity(fetchedEntities[0]);
       }
     });
   });

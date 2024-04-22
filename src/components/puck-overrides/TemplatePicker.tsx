@@ -47,7 +47,7 @@ export function TemplatePicker() {
       setTemplates(fetchedTemplates);
       if (fetchedTemplates.length === 0) {
         toast({
-          title: `No entities associated with template`,
+          title: `No templates available`,
           status: "info",
           isClosable: true,
         });
