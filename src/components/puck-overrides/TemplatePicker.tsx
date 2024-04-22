@@ -10,10 +10,13 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import { fetchTemplates } from "../../utils/api";
 import { TemplateConfirmationModal } from "./TemplateConfirmationModal";
+import { useToast } from "@chakra-ui/react";
+import type { Config } from "@measured/puck";
 
 export type Template = {
   name: string;
   externalId: string;
+  templateConfig: Config;
 };
 
 export const urlFromTemplate = (template: Template) => {
@@ -34,6 +37,7 @@ export function TemplatePicker() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTemplate, setModalTemplate] = useState<Template>();
 
+  const toast = useToast();
   const urlParams = new URLSearchParams(window.location.search);
   const templateId = urlParams.get("templateId");
 
@@ -41,21 +45,20 @@ export function TemplatePicker() {
     fetchTemplates().then((fetchedTemplates) => {
       setLoading(false);
       setTemplates(fetchedTemplates);
-      if (fetchedTemplates.length === 1) {
-        setTemplate(fetchedTemplates[0]);
-        const urlParams = new URLSearchParams(window.location.search);
-        if (
-          !urlParams.has("templateId") ||
-          urlParams.get("templateId") !== fetchedTemplates[0].externalId
-        ) {
-          window.location.href = urlFromTemplate(fetchedTemplates[0]);
-        }
-      } else {
-        fetchedTemplates.forEach((t: Template) => {
-          if (t.externalId?.toString() === templateId) {
-            setTemplate(t);
+      if (fetchedTemplates.length === 0) {
+        toast({
+          title: `No entities associated with template`,
+          status: "info",
+          isClosable: true,
+        });
+      } else if (templateId) {
+        fetchedTemplates.forEach((fetchedTemplate) => {
+          if (fetchedTemplate.externalId === templateId) {
+            setTemplate(fetchedTemplate);
           }
         });
+      } else {
+        setTemplate(fetchedTemplates[0]);
       }
     });
   }, []);

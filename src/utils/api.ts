@@ -34,6 +34,7 @@ export const fetchTemplates = async (): Promise<Template[]> => {
       return {
         name: template.name,
         externalId: template.externalId,
+        templateConfig: template.templateConfig,
       };
     });
   } catch (e) {

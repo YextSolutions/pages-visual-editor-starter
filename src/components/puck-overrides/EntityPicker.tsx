@@ -33,10 +33,10 @@ export function EntityPicker() {
   const [entity, setEntity] = useState<Entity>();
   const [entities, setEntities] = useState<Entity[]>([]);
   const [loading, setLoading] = useState(true);
-  const toast = useToast();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEntity, setModalEntity] = useState<Entity>();
 
+  const toast = useToast();
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
 

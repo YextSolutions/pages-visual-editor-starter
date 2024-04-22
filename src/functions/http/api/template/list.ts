@@ -12,8 +12,8 @@ export default async function fetchTemplates(
     // TODO make http request here to get real templates
     const response = {
       templates: [
-        { name: "Location", externalId: "location" },
-        { name: "Office", externalId: "office" },
+        { name: "Location", externalId: "location", templateConfig: {} },
+        { name: "Office", externalId: "office", templateConfig: {} },
       ],
     };
     return {
