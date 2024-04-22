@@ -10,7 +10,7 @@ export const render = async (pageContext: PageContext<any>) => {
   return ReactDOMServer.renderToString(
     <QueryClientProvider client={queryClient}>
       <Page {...pageProps} />
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 };
 

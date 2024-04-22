@@ -12,6 +12,6 @@ const render = async (pageContext: PageContext<any>) => {
     document.getElementById("reactele"),
     <QueryClientProvider client={queryClient}>
       <Page {...pageProps} />
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 };

@@ -3,8 +3,11 @@ import "@measured/puck/puck.css";
 import config from "./puck.config";
 import useEntity from "../hooks/useEntity";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
-import { customHeader, customHeaderActions } from "../components/puck-overrides/Header";
-import { useToast } from '@chakra-ui/react'
+import {
+  customHeader,
+  customHeaderActions,
+} from "../components/puck-overrides/Header";
+import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 const siteEntityId = "site";
@@ -14,39 +17,38 @@ export interface EditorProps {
   entityType?: string;
 }
 
-// Render Puck editor 
+// Render Puck editor
 export const Editor = ({ isLoading }: EditorProps) => {
   const mutation = useUpdateEntityMutation();
-  const toast = useToast()
+  const toast = useToast();
 
   useEffect(() => {
     if (mutation.isPending) {
       toast({
-        title: 'Save in progress...',
-        status: 'info',
+        title: "Save in progress...",
+        status: "info",
         duration: 1000,
         isClosable: true,
-      })
+      });
     } else if (mutation.isSuccess) {
       toast({
-        title: 'Save completed.',
-        status: 'success',
+        title: "Save completed.",
+        status: "success",
         duration: 2000,
         isClosable: true,
-      })
+      });
     } else if (mutation.isError) {
       toast({
         title: `Error occured: ${mutation.error.message}`,
-        status: 'error',
+        status: "error",
         isClosable: true,
-      })
+      });
     }
-  }, [mutation])
-
+  }, [mutation]);
 
   // Save the data to our site entity
   const save = async (data: Data) => {
-    const c_templateVisualConfiguration = JSON.stringify(data)
+    const c_templateVisualConfiguration = JSON.stringify(data);
     mutation.mutate({
       entityId: siteEntityId,
       body: { c_templateVisualConfiguration },
@@ -58,16 +60,19 @@ export const Editor = ({ isLoading }: EditorProps) => {
 
   return (
     <>
-      {entity?.response?.c_templateVisualConfiguration && !isLoading ?
-        <Puck config={config as Config}
+      {entity?.response?.c_templateVisualConfiguration && !isLoading ? (
+        <Puck
+          config={config as Config}
           data={JSON.parse(entity?.response?.c_templateVisualConfiguration)}
           onPublish={save}
           overrides={{
             headerActions: ({ children }) => customHeaderActions(children),
             header: ({ actions }) => customHeader(actions),
           }}
-        /> :
-        <>Loading...</>}
+        />
+      ) : (
+        <>Loading...</>
+      )}
     </>
   );
-}
+};

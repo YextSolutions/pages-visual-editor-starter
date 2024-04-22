@@ -14,8 +14,8 @@ export const config: Config<Props> = {
     Hero,
   },
   root: {
-    fields: {}
-  }
+    fields: {},
+  },
 };
 
 export default config;

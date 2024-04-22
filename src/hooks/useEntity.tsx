@@ -10,8 +10,8 @@ const useEntity = (entityId: string) => {
       return entity;
     },
     enabled: !!entityId,
-  })
-  return { entity, status }
-}
+  });
+  return { entity, status };
+};
 
 export default useEntity;

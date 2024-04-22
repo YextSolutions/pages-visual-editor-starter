@@ -3,7 +3,7 @@ import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
 const vparam = 20240401;
 
 export default async function entity(
-  request: PagesHttpRequest
+  request: PagesHttpRequest,
 ): Promise<PagesHttpResponse> {
   const { method, pathParams, body } = request;
   const entityId = pathParams.id;
@@ -30,28 +30,28 @@ const getEntity = async (entityId?: string): Promise<PagesHttpResponse> => {
   }
 
   const mgmtApiResp = await fetch(
-    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`
+    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`,
   );
 
   try {
     const resp = await mgmtApiResp.json();
     return {
-        body: JSON.stringify(resp),
-        headers: {},
-        statusCode: mgmtApiResp.status,
+      body: JSON.stringify(resp),
+      headers: {},
+      statusCode: mgmtApiResp.status,
     };
   } catch (error) {
-      return {
-          body: JSON.stringify(error),
-          headers: {},
-          statusCode: mgmtApiResp.status,
-      };
+    return {
+      body: JSON.stringify(error),
+      headers: {},
+      statusCode: mgmtApiResp.status,
+    };
   }
 };
 
 const updateEntity = async (
   entityId?: string,
-  entityBody?: Record<string, any>
+  entityBody?: Record<string, any>,
 ): Promise<PagesHttpResponse> => {
   if (!entityId) {
     return { body: "Missing entity id", headers: {}, statusCode: 400 };
@@ -67,21 +67,21 @@ const updateEntity = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify(entityBody),
-    }
+    },
   );
 
   try {
     const resp = await mgmtApiResp.json();
     return {
-        body: JSON.stringify(resp),
-        headers: {},
-        statusCode: mgmtApiResp.status,
+      body: JSON.stringify(resp),
+      headers: {},
+      statusCode: mgmtApiResp.status,
     };
   } catch (error) {
-      return {
-          body: JSON.stringify(error),
-          headers: {},
-          statusCode: mgmtApiResp.status,
-      };
+    return {
+      body: JSON.stringify(error),
+      headers: {},
+      statusCode: mgmtApiResp.status,
+    };
   }
 };
