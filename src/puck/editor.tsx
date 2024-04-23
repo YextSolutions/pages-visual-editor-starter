@@ -1,6 +1,5 @@
 import { Puck, Data, Config } from "@measured/puck";
 import "@measured/puck/puck.css";
-import config from "./puck.config";
 import useEntity from "../hooks/useEntity";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 import { customHeader, customHeaderActions } from "../components/puck-overrides/Header";
@@ -12,10 +11,11 @@ const siteEntityId = "site";
 export interface EditorProps {
   isLoading?: boolean;
   entityType?: string;
+  templateConfig: Config;
 }
 
 // Render Puck editor 
-export const Editor = ({ isLoading }: EditorProps) => {
+export const Editor = ({ isLoading, templateConfig }: EditorProps) => {
   const mutation = useUpdateEntityMutation();
   const toast = useToast()
 
@@ -46,7 +46,7 @@ export const Editor = ({ isLoading }: EditorProps) => {
 
   // Save the data to our site entity
   const save = async (data: Data) => {
-    const c_templateVisualConfiguration = JSON.stringify(data)
+    const c_templateVisualConfiguration = JSON.stringify(data);
     mutation.mutate({
       entityId: siteEntityId,
       body: { c_templateVisualConfiguration },
@@ -55,11 +55,10 @@ export const Editor = ({ isLoading }: EditorProps) => {
 
   // Fetch the data from our site entity
   const { entity } = useEntity(siteEntityId);
-
   return (
     <>
       {entity?.response?.c_templateVisualConfiguration && !isLoading ?
-        <Puck config={config as Config}
+        <Puck config={templateConfig as Config}
           data={JSON.parse(entity?.response?.c_templateVisualConfiguration)}
           onPublish={save}
           overrides={{

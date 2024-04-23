@@ -1,5 +1,5 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import config from "../../../../puck/puck.config";
+import { locationConfig, officeConfig } from "../../../../puck/puck.config";
 
 export default async function fetchTemplates(
   request: PagesHttpRequest,
@@ -13,8 +13,8 @@ export default async function fetchTemplates(
     // TODO make http request here to get real templates
     const response = {
       templates: [
-        { name: "Location", externalId: "location", templateConfig: config },
-        { name: "Office", externalId: "office", templateConfig: config },
+        { name: "Location", externalId: "location", templateConfig: locationConfig },
+        { name: "Office", externalId: "office", templateConfig: officeConfig },
       ],
     };
     return {

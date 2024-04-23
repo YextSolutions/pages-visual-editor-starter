@@ -1,6 +1,6 @@
-import { EntityContent, YextResponse } from "../types/api";
-import { Template } from "../components/puck-overrides/TemplatePicker";
-import { Entity } from "../components/puck-overrides/EntityPicker";
+import {EntityContent, YextResponse} from "../types/api";
+import {Template} from "../components/puck-overrides/TemplatePicker";
+import {Entity} from "../components/puck-overrides/EntityPicker";
 
 export const fetchEntity = async (entityId: string): Promise<any> => {
   const response = await fetch(`/api/entity/${entityId}`);
@@ -50,8 +50,7 @@ export const fetchEntityDocument = async (
     const response = await fetch(
       `/api/streams/${templateId}/entity/${entityId}/fetchentitydocument`,
     );
-    const body = await response.json();
-    return body;
+    return await response.json();
   } catch (error) {
     console.error(error);
     throw error;

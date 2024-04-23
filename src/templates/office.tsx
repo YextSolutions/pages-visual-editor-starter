@@ -9,24 +9,21 @@ import {
   HeadConfig,
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
-import { locationConfig } from "../puck/puck.config";
+import { officeConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
 
 export const config: TemplateConfig = {
   stream: {
-    $id: "location-stream",
+    $id: "office-stream",
     filter: {
-      entityTypes: ["location"],
+      entityTypes: ["ce_office"],
     },
     fields: [
       "id",
       "uid",
-      "meta",
       "name",
       "address",
       "slug",
-      // component fields
-      "c_hero",
     ],
     localization: {
       locales: ["en"],
@@ -79,13 +76,13 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
       }-${document.id.toString()}`;
 };
 
-const Location: Template<TemplateRenderProps> = ({ document }) => {
+const Office: Template<TemplateRenderProps> = ({ document }) => {
   const { visualTemplate } = document;
   return (
     <DocumentProvider value={document}>
-      <Render config={locationConfig as Config} data={visualTemplate}/>
+      <Render config={officeConfig as Config} data={visualTemplate}/>
     </DocumentProvider>
   );
 };
 
-export default Location;
+export default Office;
