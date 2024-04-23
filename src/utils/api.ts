@@ -2,10 +2,22 @@ import {EntityContent, YextResponse} from "../types/api";
 import {Template} from "../components/puck-overrides/TemplatePicker";
 import {Entity} from "../components/puck-overrides/EntityPicker";
 
-export const fetchEntity = async (entityId: string): Promise<any> => {
+export const fetchEntity = async (entityId: string): Promise<Entity> => {
   const response = await fetch(`/api/entity/${entityId}`);
-  const body = await response.json();
-  return body;
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error("Failed to fetch entity: " + JSON.stringify(json));
+  }
+  return await json as Entity;
+};
+
+export const fetchTemplate = async (templateId: string): Promise<Template> => {
+  const response = await fetch(`/api/template/${templateId}`);
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error("Failed to fetch template: " + JSON.stringify(json));
+  }
+  return await json as Template;
 };
 
 export const updateEntity = async (
@@ -29,8 +41,7 @@ export const fetchTemplates = async (): Promise<Template[]> => {
   try {
     const res = await fetch("api/template/list");
     const json = await res.json();
-    const templates = json.templates;
-    return templates.map((template) => {
+    return json.map((template) => {
       return {
         name: template.name,
         externalId: template.externalId,
@@ -61,9 +72,13 @@ export const fetchEntityDocument = async (
  * Fetches entities using the getEntities() function and parses the response.
  * @return {Promise<Entity[]>}
  */
-export async function fetchEntities(): Promise<Entity[]> {
+export async function fetchEntities(entityTypes?: string[]): Promise<Entity[]> {
   try {
-    const res = await fetch("api/entity/list");
+    let reqUrl = "api/entity/list"
+    if (entityTypes) {
+      reqUrl += `?entityTypes=${entityTypes}`;
+    }
+    const res = await fetch(reqUrl);
     const json = await res.json();
     const entities = json.response.entities;
     return entities.map((entity) => {

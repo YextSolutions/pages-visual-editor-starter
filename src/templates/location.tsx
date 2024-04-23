@@ -38,19 +38,21 @@ export const config: TemplateConfig = {
 export const transformProps = async (data) => {
   const { document } = data;
   try {
-    const visualTemplate = JSON.parse(document?._site?.c_templateVisualConfiguration);
+    const visualTemplate = JSON.parse(
+      document?._site?.c_templateVisualConfiguration,
+    );
     return {
       ...data,
       document: {
         ...document,
         visualTemplate,
       },
-    }
+    };
   } catch (error) {
     console.error("Failed to parse visualTemplate: " + error);
     return data;
   }
-}
+};
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
@@ -83,7 +85,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
   const { visualTemplate } = document;
   return (
     <DocumentProvider value={document}>
-      <Render config={locationConfig as Config} data={visualTemplate}/>
+      <Render config={locationConfig as Config} data={visualTemplate} />
     </DocumentProvider>
   );
 };

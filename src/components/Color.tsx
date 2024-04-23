@@ -27,8 +27,15 @@ export const Color: ComponentConfig<ColorProps> = {
     buttonColor: "blue",
   },
   render: ({ buttonColor }) => {
-    return <Button colorScheme={buttonColor} onClick={() => {
-      console.log("Hello world!");
-    }}>Color me!</Button>
+    return (
+      <Button
+        colorScheme={buttonColor}
+        onClick={() => {
+          console.log("Hello world!");
+        }}
+      >
+        Color me!
+      </Button>
+    );
   },
-}
+};

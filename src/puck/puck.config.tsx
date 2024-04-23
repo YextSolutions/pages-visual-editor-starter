@@ -6,31 +6,33 @@ import { Color, ColorProps } from "../components/Color";
 type LocationProps = {
   Toggle: ToggleProps;
   Hero: HeroProps;
+  Color: ColorProps;
 };
 
-type OfficeProps = {
+type ProductProps = {
   Toggle: ToggleProps;
   Color: ColorProps;
-}
+};
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
     Toggle,
     Hero,
+    Color: Color,
   },
   root: {
-    fields: {}
-  }
+    fields: {},
+  },
 };
 
-// All the available components for offices
-export const officeConfig: Config<OfficeProps> = {
+// All the available components for products
+export const productConfig: Config<ProductProps> = {
   components: {
     Toggle,
-    Color,
+    Color: Color,
   },
   root: {
-    fields: {}
-  }
+    fields: {},
+  },
 };
