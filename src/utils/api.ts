@@ -1,5 +1,4 @@
 import { EntityContent, YextResponse } from "../types/api";
-import { Template } from "../components/puck-overrides/TemplatePicker";
 import { Entity } from "../components/puck-overrides/EntityPicker";
 
 export const fetchEntity = async (entityId: string): Promise<any> => {
