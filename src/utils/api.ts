@@ -25,23 +25,6 @@ export const updateEntity = async (
   }
 };
 
-export const fetchTemplates = async (): Promise<Template[]> => {
-  try {
-    const res = await fetch("api/template/list");
-    const json = await res.json();
-    const templates = json.templates;
-    return templates.map((template) => {
-      return {
-        name: template.name,
-        externalId: template.externalId,
-        templateConfig: template.templateConfig,
-      };
-    });
-  } catch (e) {
-    throw new Error("Failed to fetch templates: " + e.message);
-  }
-};
-
 export const fetchEntityDocument = async (
   templateId: string,
   entityId: string,
