@@ -11,14 +11,11 @@ import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { ChakraProvider } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
-import { fetchEntities, fetchTemplates } from "../utils/api";
-import { Config } from "@measured/puck";
-import { locationConfig } from "../puck/puck.config";
+import { fetchEntities } from "../utils/api";
 
 export const config: TemplateConfig = {
   name: "edit",
 };
-
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
@@ -32,27 +29,12 @@ const getEntityId = (): string => {
       return entityId
     }
   }
-
-  return ""
-}
-
-const getTemplateId = (): string => {
-  if (typeof document !== "undefined") {
-    const params = new URL(document.location.toString()).searchParams;
-    const templateId = params.get("templateId")
-    if (templateId) {
-      return templateId
-    }
-  }
-
   return ""
 }
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
-  const [entityId, setEntityId] = useState<string>(getEntityId());
-  const [templateId, setTemplateId] = useState<string>(getTemplateId());
-  const [templateConfig, setTemplateConfig ] = useState<Config>(locationConfig);
+  const [entityId, setEntityId] = useState(getEntityId());
   useEffect(() => {
     async function getEntities() {
       const entities = await fetchEntities();
@@ -61,30 +43,18 @@ const Edit: Template<TemplateRenderProps> = () => {
       }
     }
 
-    async function getTemplates() {
-      const templates = await fetchTemplates();
-      if (templates.length > 0) {
-        setTemplateId(templates[0].externalId);
-        setTemplateConfig(templates[0].templateConfig);
-      }
-    }
-
     if (!entityId) {
       getEntities();
     }
-    if (!templateId) {
-      getTemplates();
-    }
   }, []);
 
-  const { entityDocument } = useEntityDocumentQuery({ templateId: templateId, entityId: entityId });
+  const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: entityId });
   return (
-    <ChakraProvider>
-      <DocumentProvider value={entityDocument?.response.document}>
-        <Editor isLoading={!entityDocument} templateConfig={locationConfig}/>
-      </DocumentProvider>
-    </ChakraProvider>
+      <ChakraProvider>
+        <DocumentProvider value={entityDocument?.response.document}>
+          <Editor isLoading={!entityDocument} />
+        </DocumentProvider>
+      </ChakraProvider>
   );
 };
-
 export default Edit;
