@@ -1,21 +1,38 @@
 import type { Config } from "@measured/puck";
 import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
+import { Color, ColorProps } from "../components/Color";
 
-type Props = {
+type LocationProps = {
   Toggle: ToggleProps;
   Hero: HeroProps;
+  Color: ColorProps;
 };
 
-// All the avaliable components
-export const config: Config<Props> = {
+type ProductProps = {
+  Toggle: ToggleProps;
+  Color: ColorProps;
+}
+
+// All the available components for locations
+export const locationConfig: Config<LocationProps> = {
   components: {
     Toggle,
     Hero,
+    Color,
   },
   root: {
     fields: {}
   }
 };
 
-export default config;
+// All the available components for products
+export const productConfig: Config<ProductProps> = {
+  components: {
+    Toggle,
+    Color,
+  },
+  root: {
+    fields: {}
+  }
+};

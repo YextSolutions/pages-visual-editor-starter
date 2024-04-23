@@ -9,24 +9,20 @@ import {
   HeadConfig,
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
-import { locationConfig } from "../puck/puck.config";
+import { productConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
 
 export const config: TemplateConfig = {
   stream: {
-    $id: "location-stream",
+    $id: "product-stream",
     filter: {
-      entityTypes: ["location"],
+      entityTypes: ["product"],
     },
     fields: [
       "id",
-      "uid",
-      "meta",
       "name",
-      "address",
+      "price",
       "slug",
-      // component fields
-      "c_hero",
     ],
     localization: {
       locales: ["en"],
@@ -34,7 +30,7 @@ export const config: TemplateConfig = {
   },
 };
 
-// Right now location entity data isn't used
+// Right now product entity data isn't used
 export const transformProps = async (data) => {
   const { document } = data;
   try {
@@ -72,20 +68,17 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return document.slug
-    ? document.slug
-    : `${document.locale}/${document.address.region}/${document.address.city}/${
-        document.address.line1
-      }-${document.id.toString()}`;
+  return `product/${document.slug || document.name || document.id}`;
 };
 
-const Location: Template<TemplateRenderProps> = ({ document }) => {
-  const { visualTemplate } = document;
+const Product: Template<TemplateRenderProps> = ({ document }) => {
+  const { visualTemplate, price } = document;
   return (
     <DocumentProvider value={document}>
-      <Render config={locationConfig as Config} data={visualTemplate}/>
+      <div>This is the page for a ${Number.parseFloat(price.value).toFixed(2)} {document.name}</div>
+      <Render config={productConfig as Config} data={visualTemplate}/>
     </DocumentProvider>
   );
 };
 
-export default Location;
+export default Product;
