@@ -13,16 +13,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
 import { fetchEntities } from "../utils/api";
 
-type Entity = {
-  name: string,
-  externalId: string,
-  internalId: number,
-}
-
 export const config: TemplateConfig = {
   name: "edit",
 };
-
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
@@ -30,13 +23,12 @@ export const getPath: GetPath<TemplateProps> = () => {
 
 const getEntityId = (): string => {
   if (typeof document !== "undefined") {
-    let params = new URL(document.location.toString()).searchParams;
-    let entityId = params.get("entityId")
+    const params = new URL(document.location.toString()).searchParams;
+    const entityId = params.get("entityId")
     if (entityId) {
       return entityId
     }
   }
-
   return ""
 }
 
@@ -45,7 +37,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [entityId, setEntityId] = useState(getEntityId());
   useEffect(() => {
     async function getEntities() {
-      let entities = await fetchEntities();
+      const entities = await fetchEntities();
       if (entities.length > 0) {
         setEntityId(entities[0].externalId);
       }
@@ -58,12 +50,11 @@ const Edit: Template<TemplateRenderProps> = () => {
 
   const { entityDocument } = useEntityDocumentQuery({ templateId: "location", entityId: entityId });
   return (
-    <ChakraProvider>
-      <DocumentProvider value={entityDocument?.response.document}>
-        <Editor isLoading={!entityDocument} />
-      </DocumentProvider>
-    </ChakraProvider>
+      <ChakraProvider>
+        <DocumentProvider value={entityDocument?.response.document}>
+          <Editor isLoading={!entityDocument} />
+        </DocumentProvider>
+      </ChakraProvider>
   );
 };
-
 export default Edit;
