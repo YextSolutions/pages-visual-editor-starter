@@ -1,6 +1,6 @@
-import {EntityContent, YextResponse} from "../types/api";
-import {Template} from "../components/puck-overrides/TemplatePicker";
-import {Entity} from "../components/puck-overrides/EntityPicker";
+import { EntityContent, YextResponse } from "../types/api";
+import { Template } from "../components/puck-overrides/TemplatePicker";
+import { Entity } from "../components/puck-overrides/EntityPicker";
 
 export const fetchEntity = async (entityId: string): Promise<Entity> => {
   const response = await fetch(`/api/entity/${entityId}`);
@@ -8,7 +8,7 @@ export const fetchEntity = async (entityId: string): Promise<Entity> => {
   if (!response.ok) {
     throw new Error("Failed to fetch entity: " + JSON.stringify(json));
   }
-  return await json as Entity;
+  return (await json) as Entity;
 };
 
 export const fetchTemplate = async (templateId: string): Promise<Template> => {
@@ -17,7 +17,7 @@ export const fetchTemplate = async (templateId: string): Promise<Template> => {
   if (!response.ok) {
     throw new Error("Failed to fetch template: " + JSON.stringify(json));
   }
-  return await json as Template;
+  return (await json) as Template;
 };
 
 export const updateEntity = async (
@@ -75,7 +75,7 @@ export const fetchEntityDocument = async (
  */
 export async function fetchEntities(entityTypes?: string[]): Promise<Entity[]> {
   try {
-    let reqUrl = "api/entity/list"
+    let reqUrl = "api/entity/list";
     if (entityTypes) {
       reqUrl += `?entityTypes=${entityTypes}`;
     }

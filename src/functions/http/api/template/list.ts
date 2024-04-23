@@ -1,6 +1,6 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
 import { locationConfig, productConfig } from "../../../../puck/puck.config";
-import {Template} from "../../../../components/puck-overrides/TemplatePicker";
+import { Template } from "../../../../components/puck-overrides/TemplatePicker";
 
 export const templates: Template[] = [
   {
@@ -12,8 +12,8 @@ export const templates: Template[] = [
     name: "Product",
     externalId: "product",
     templateConfig: productConfig,
-  }
-]
+  },
+];
 
 export default async function fetchTemplates(
   request: PagesHttpRequest,

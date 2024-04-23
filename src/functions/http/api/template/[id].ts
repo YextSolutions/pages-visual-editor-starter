@@ -1,9 +1,9 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import {Template} from "../../../../components/puck-overrides/TemplatePicker";
-import {templates} from "./list";
+import { Template } from "../../../../components/puck-overrides/TemplatePicker";
+import { templates } from "./list";
 
 export default async function getTemplate(
-    request: PagesHttpRequest,
+  request: PagesHttpRequest,
 ): Promise<PagesHttpResponse> {
   const { method, pathParams } = request;
   if (method !== "GET") {
@@ -25,10 +25,12 @@ export default async function getTemplate(
 
     if (!targetTemplate) {
       return {
-        body: JSON.stringify(new Error(`Could not find template for id: ${templateId}`)),
+        body: JSON.stringify(
+          new Error(`Could not find template for id: ${templateId}`),
+        ),
         headers: {},
         statusCode: 404,
-      }
+      };
     }
 
     return {

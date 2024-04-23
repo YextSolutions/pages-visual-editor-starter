@@ -11,7 +11,7 @@ import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { ChakraProvider } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { fetchEntities, fetchTemplate, fetchTemplates} from "../utils/api";
+import { fetchEntities, fetchTemplate, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
 
 export const config: TemplateConfig = {
@@ -91,9 +91,11 @@ const Edit: Template<TemplateRenderProps> = () => {
   return (
     <ChakraProvider>
       <DocumentProvider value={entityDocument?.response.document}>
-        {!isLoading ?
-            <Editor templateConfig={templateConfig}/>
-            : <div>Loading configuration...</div>}
+        {!isLoading ? (
+          <Editor templateConfig={templateConfig} />
+        ) : (
+          <div>Loading configuration...</div>
+        )}
       </DocumentProvider>
     </ChakraProvider>
   );

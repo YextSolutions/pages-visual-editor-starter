@@ -1,5 +1,5 @@
-import {useQuery} from "@tanstack/react-query";
-import {fetchEntityDocument} from "../../utils/api";
+import { useQuery } from "@tanstack/react-query";
+import { fetchEntityDocument } from "../../utils/api";
 
 type EntityDocument = {
   templateId?: string;
