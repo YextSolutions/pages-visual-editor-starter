@@ -19,7 +19,7 @@ export const locationConfig: Config<LocationProps> = {
   components: {
     Toggle,
     Hero,
-    Color: Color,
+    Color,
   },
   root: {
     fields: {},

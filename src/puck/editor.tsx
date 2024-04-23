@@ -8,7 +8,6 @@ import {
 } from "../components/puck-overrides/Header";
 import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
-
 const siteEntityId = "site";
 
 export interface EditorProps {

@@ -70,6 +70,7 @@ export const fetchEntityDocument = async (
 
 /**
  * Fetches entities using the getEntities() function and parses the response.
+ * @param entityTypes {string[] | undefined} entityTypes to filter by
  * @return {Promise<Entity[]>}
  */
 export async function fetchEntities(entityTypes?: string[]): Promise<Entity[]> {
