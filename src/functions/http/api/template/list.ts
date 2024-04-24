@@ -1,17 +1,14 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import { locationConfig, productConfig } from "../../../../puck/puck.config";
 import { Template } from "../../../../components/puck-overrides/TemplatePicker";
 
 export const templates: Template[] = [
   {
     name: "Location",
     externalId: "location",
-    templateConfig: locationConfig,
   },
   {
     name: "Product",
     externalId: "product",
-    templateConfig: productConfig,
   },
 ];
 

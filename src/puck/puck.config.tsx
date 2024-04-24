@@ -30,9 +30,14 @@ export const locationConfig: Config<LocationProps> = {
 export const productConfig: Config<ProductProps> = {
   components: {
     Toggle,
-    Color: Color,
+    Color,
   },
   root: {
     fields: {},
   },
 };
+
+const configs = new Map<string, Config>();
+configs.set("location", locationConfig);
+configs.set("product", productConfig);
+export const puckConfigs = configs;

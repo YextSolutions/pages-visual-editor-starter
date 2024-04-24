@@ -11,8 +11,9 @@ import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { ChakraProvider } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { fetchEntities, fetchTemplate, fetchTemplates } from "../utils/api";
+import { fetchEntities, fetchTemplate, fetchTemplates} from "../utils/api";
 import { Config } from "@measured/puck";
+import {locationConfig, puckConfigs} from "../puck/puck.config";
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -45,6 +46,21 @@ const getTemplateId = (): string => {
   return "";
 };
 
+export const generateUrl = (entityId: string, templateId: string) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has("entityId")) {
+    urlParams.set("entityId", entityId);
+  } else {
+    urlParams.append("entityId", entityId);
+  }
+  if (urlParams.has("templateId")) {
+    urlParams.set("templateId", templateId);
+  } else {
+    urlParams.append("templateId", templateId);
+  }
+  return `${window.location.pathname}?${urlParams.toString()}`;
+};
+
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
   const [entityId, setEntityId] = useState<string>(getEntityId());
@@ -58,18 +74,23 @@ const Edit: Template<TemplateRenderProps> = () => {
       }
     }
 
+    function getConfigFromId(templateId: string) {
+      return puckConfigs.get(templateId);
+    }
+
     async function getTemplates() {
       const templates = await fetchTemplates();
       if (templates.length > 0) {
         setTemplateId(templates[0].externalId);
-        setTemplateConfig(templates[0].templateConfig);
+        setTemplateConfig(puckConfigs.get(templates[0].externalId));
         await getEntities([templates[0].externalId]);
       }
     }
 
     async function getTemplateConfig(templateId: string) {
       const template = await fetchTemplate(templateId);
-      setTemplateConfig(template.templateConfig);
+      console.log("template: ", template);
+      setTemplateConfig(getConfigFromId(template.externalId));
     }
 
     if (!templateId) {
@@ -81,7 +102,17 @@ const Edit: Template<TemplateRenderProps> = () => {
     if (templateId && !templateConfig) {
       getTemplateConfig(templateId);
     }
+
+    if ((!getTemplateId() || !getEntityId()) && (templateConfig && entityId && templateId)) {
+      console.log("updating th href");
+      window.location.href = generateUrl(entityId, templateId);
+    }
   }, []);
+
+  if (templateConfig) {
+    console.log("templateConfig", templateConfig);
+    console.log("locationConfig", locationConfig);
+  }
 
   const { entityDocument } = useEntityDocumentQuery({
     templateId: templateId,
@@ -92,7 +123,7 @@ const Edit: Template<TemplateRenderProps> = () => {
     <ChakraProvider>
       <DocumentProvider value={entityDocument?.response.document}>
         {!isLoading ? (
-          <Editor templateConfig={templateConfig} />
+          <Editor entityType={templateId} templateConfig={templateConfig} />
         ) : (
           <div>Loading configuration...</div>
         )}

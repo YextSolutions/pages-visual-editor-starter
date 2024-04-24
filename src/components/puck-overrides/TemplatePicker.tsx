@@ -11,21 +11,27 @@ import { useEffect, useState } from "react";
 import { fetchTemplates } from "../../utils/api";
 import { TemplateConfirmationModal } from "./TemplateConfirmationModal";
 import { useToast } from "@chakra-ui/react";
-import type { Config } from "@measured/puck";
 
 export type Template = {
   name: string;
   externalId: string;
-  templateConfig: Config;
 };
 
 export const urlFromTemplate = (template: Template) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
+  let updatedTemplateId = false;
   if (urlParams.has("templateId")) {
-    urlParams.set("templateId", template.externalId);
+    if (urlParams.get("templateId") !== template.externalId) {
+      urlParams.set("templateId", template.externalId);
+      updatedTemplateId = true;
+    }
   } else {
     urlParams.append("templateId", template.externalId);
+    updatedTemplateId = true;
+  }
+  if (updatedTemplateId) {
+    urlParams.delete("entityId");
   }
   return `${window.location.pathname}?${urlParams.toString()}`;
 };

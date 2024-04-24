@@ -59,7 +59,7 @@ export const Editor = ({ templateConfig }: EditorProps) => {
     <>
       {entity?.response?.c_templateVisualConfiguration ? (
         <Puck
-          config={templateConfig as Config}
+          config={templateConfig}
           data={JSON.parse(entity?.response?.c_templateVisualConfiguration)}
           onPublish={save}
           overrides={{

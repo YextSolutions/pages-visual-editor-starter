@@ -39,9 +39,10 @@ export function EntityPicker() {
   const toast = useToast();
   const urlParams = new URLSearchParams(window.location.search);
   const entityId = urlParams.get("entityId");
+  const templateId = urlParams.get("templateId");
 
   useEffect(() => {
-    fetchEntities().then((fetchedEntities) => {
+    fetchEntities([templateId || ""]).then((fetchedEntities) => {
       setLoading(false);
       setEntities(fetchedEntities);
       if (fetchedEntities.length === 0) {
