@@ -18,6 +18,11 @@ export type Entity = {
   internalId: number;
 };
 
+export interface EntityPickerProps {
+  entityId: string;
+  templateId: string;
+}
+
 export const urlFromEntity = (entity: Entity) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -29,20 +34,16 @@ export const urlFromEntity = (entity: Entity) => {
   return `${window.location.pathname}?${urlParams.toString()}`;
 };
 
-export function EntityPicker() {
+export function EntityPicker({ entityId, templateId }: EntityPickerProps) {
   const [entity, setEntity] = useState<Entity>();
   const [entities, setEntities] = useState<Entity[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEntity, setModalEntity] = useState<Entity>();
-
   const toast = useToast();
-  const urlParams = new URLSearchParams(window.location.search);
-  const entityId = urlParams.get("entityId");
-  const templateId = urlParams.get("templateId");
 
   useEffect(() => {
-    fetchEntities([templateId || ""]).then((fetchedEntities) => {
+    fetchEntities([templateId]).then((fetchedEntities) => {
       setLoading(false);
       setEntities(fetchedEntities);
       if (fetchedEntities.length === 0) {
@@ -61,7 +62,7 @@ export function EntityPicker() {
         setEntity(fetchedEntities[0]);
       }
     });
-  });
+  }, []);
 
   const entityMenuItems = entities.map((listEntity: Entity) => (
     <MenuItem

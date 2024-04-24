@@ -17,6 +17,10 @@ export type Template = {
   externalId: string;
 };
 
+export interface TemplatePickerProps {
+  templateId: string;
+}
+
 export const urlFromTemplate = (template: Template) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -36,7 +40,7 @@ export const urlFromTemplate = (template: Template) => {
   return `${window.location.pathname}?${urlParams.toString()}`;
 };
 
-export function TemplatePicker() {
+export function TemplatePicker({ templateId }: TemplatePickerProps) {
   const [template, setTemplate] = useState<Template>();
   const [templates, setTemplates] = useState<Template[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,8 +48,6 @@ export function TemplatePicker() {
   const [modalTemplate, setModalTemplate] = useState<Template>();
 
   const toast = useToast();
-  const urlParams = new URLSearchParams(window.location.search);
-  const templateId = urlParams.get("templateId");
 
   useEffect(() => {
     fetchTemplates().then((fetchedTemplates) => {

@@ -11,12 +11,13 @@ import { useEffect } from "react";
 const siteEntityId = "site";
 
 export interface EditorProps {
-  entityType?: string;
+  templateId: string;
+  entityId: string;
   templateConfig: Config;
 }
 
 // Render Puck editor
-export const Editor = ({ templateConfig }: EditorProps) => {
+export const Editor = ({ templateId, entityId, templateConfig }: EditorProps) => {
   const mutation = useUpdateEntityMutation();
   const toast = useToast();
 
@@ -64,7 +65,11 @@ export const Editor = ({ templateConfig }: EditorProps) => {
           onPublish={save}
           overrides={{
             headerActions: ({ children }) => customHeaderActions(children),
-            header: ({ actions }) => customHeader(actions),
+            header: ({ actions }) => customHeader({
+              actions: actions,
+              entityId: entityId,
+              templateId: templateId,
+            }),
           }}
         />
       ) : (

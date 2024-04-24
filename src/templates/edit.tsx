@@ -46,21 +46,6 @@ const getTemplateId = (): string => {
   return "";
 };
 
-export const generateUrl = (entityId: string, templateId: string) => {
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has("entityId")) {
-    urlParams.set("entityId", entityId);
-  } else {
-    urlParams.append("entityId", entityId);
-  }
-  if (urlParams.has("templateId")) {
-    urlParams.set("templateId", templateId);
-  } else {
-    urlParams.append("templateId", templateId);
-  }
-  return `${window.location.pathname}?${urlParams.toString()}`;
-};
-
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
   const [entityId, setEntityId] = useState<string>(getEntityId());
@@ -74,10 +59,6 @@ const Edit: Template<TemplateRenderProps> = () => {
       }
     }
 
-    function getConfigFromId(templateId: string) {
-      return puckConfigs.get(templateId);
-    }
-
     async function getTemplates() {
       const templates = await fetchTemplates();
       if (templates.length > 0) {
@@ -89,8 +70,7 @@ const Edit: Template<TemplateRenderProps> = () => {
 
     async function getTemplateConfig(templateId: string) {
       const template = await fetchTemplate(templateId);
-      console.log("template: ", template);
-      setTemplateConfig(getConfigFromId(template.externalId));
+      setTemplateConfig(puckConfigs.get(template.externalId));
     }
 
     if (!templateId) {
@@ -102,17 +82,7 @@ const Edit: Template<TemplateRenderProps> = () => {
     if (templateId && !templateConfig) {
       getTemplateConfig(templateId);
     }
-
-    if ((!getTemplateId() || !getEntityId()) && (templateConfig && entityId && templateId)) {
-      console.log("updating th href");
-      window.location.href = generateUrl(entityId, templateId);
-    }
   }, []);
-
-  if (templateConfig) {
-    console.log("templateConfig", templateConfig);
-    console.log("locationConfig", locationConfig);
-  }
 
   const { entityDocument } = useEntityDocumentQuery({
     templateId: templateId,
@@ -123,7 +93,7 @@ const Edit: Template<TemplateRenderProps> = () => {
     <ChakraProvider>
       <DocumentProvider value={entityDocument?.response.document}>
         {!isLoading ? (
-          <Editor entityType={templateId} templateConfig={templateConfig} />
+          <Editor templateId={templateId} entityId={entityId} templateConfig={templateConfig} />
         ) : (
           <div>Loading configuration...</div>
         )}
