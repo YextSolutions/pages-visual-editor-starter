@@ -9,13 +9,23 @@ import {
 import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
-import { ChakraProvider, useToast } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  useToast,
+  Progress,
+  Spinner,
+  Center,
+  Flex,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
+import useEntity from "../hooks/useEntity";
+
+const siteEntityId = "site";
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -54,7 +64,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [template, setTemplate] = useState<TemplateDefinition>();
   const [entities, setEntities] = useState<EntityDefinition[]>();
   const [entity, setEntity] = useState<EntityDefinition>();
-  const [templateConfig, setTemplateConfig] = useState<Config>();
+  const [puckConfig, setPuckConfig] = useState<Config>();
 
   const toast = useToast();
 
@@ -82,6 +92,8 @@ const Edit: Template<TemplateRenderProps> = () => {
           });
         }
       }
+      setTemplates(fetchedTemplates);
+      setTemplate(targetTemplate);
       // get entities
       const fetchedEntities = await fetchEntities(targetTemplate.entityTypes);
       let targetEntity: EntityDefinition = fetchedEntities[0];
@@ -104,14 +116,11 @@ const Edit: Template<TemplateRenderProps> = () => {
           });
         }
       }
-      // get puckConfig from hardcoded map
-      const puckConfig = puckConfigs.get(targetTemplate.id);
-
-      setTemplates(fetchedTemplates);
-      setTemplate(targetTemplate);
       setEntities(fetchedEntities);
       setEntity(targetEntity);
-      setTemplateConfig(puckConfig);
+      // get puckConfig from hardcoded map
+      const puckConfig = puckConfigs.get(targetTemplate.id);
+      setPuckConfig(puckConfig);
       window.history.replaceState(
         null,
         "",
@@ -121,30 +130,72 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
+  // fetch the puck data from our site entity
+  const { entity: siteEntity } = useEntity(siteEntityId);
+  const puckData = template ? siteEntity?.response?.[template.dataField] : "";
+
+  // get the document
   const { entityDocument } = useEntityDocumentQuery({
     templateId: template?.id,
     entityId: entity?.externalId,
   });
+  const document = entityDocument?.response.document;
+
+  const loadingMessage = !templates
+    ? "Loading templates.."
+    : !entities
+      ? "Loading entities.."
+      : !puckConfig
+        ? "Loading configuration.."
+        : !puckData
+          ? "Loading data.."
+          : !document
+            ? "Loading document.."
+            : "";
+
   const isLoading =
-    !entityDocument?.response.document ||
-    !templateConfig ||
+    !document ||
+    !puckData ||
+    !puckConfig ||
     !template ||
     !templates ||
     !entity ||
     !entities;
+
+  const progress: number =
+    (100 *
+      (!!templates + !!entities + !!puckConfig + !!puckData + !!document)) /
+    5;
+
   return (
     <ChakraProvider>
-      <DocumentProvider value={entityDocument?.response.document}>
+      <DocumentProvider value={document}>
         {!isLoading ? (
           <Editor
             selectedEntity={entity}
             entities={entities}
             selectedTemplate={template}
             templates={templates}
-            templateConfig={templateConfig}
+            siteEntityId={siteEntityId}
+            puckConfig={puckConfig}
+            puckData={puckData}
           />
         ) : (
-          <div>Loading configuration...</div>
+          <div>
+            <Progress value={progress} />
+            <Center>
+              <Flex>
+                <div>{loadingMessage}</div>
+                <Spinner
+                  size="xl"
+                  color="blue.500"
+                  emptyColor="gray.200"
+                  thickness="4px"
+                  speed="0.7s"
+                />
+              </Flex>
+            </Center>
+          </div>
         )}
       </DocumentProvider>
     </ChakraProvider>
