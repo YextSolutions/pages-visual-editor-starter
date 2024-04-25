@@ -6,7 +6,7 @@
   "localization": "PRIMARY_ONLY",
   "type": {
     "stringType": {
-      "stereotype": "MULTILINE",
+      "stereotype": "SIMPLE",
       "maxLength": 100000
     }
   },

@@ -1,12 +1,12 @@
 {
   "$id": "c_financialProfessionalVisualConfiguration",
   "$schema": "https://schema.yext.com/config/km/field/v1",
-  "displayName": "Financial Professional Template Visual Configuration",
+  "displayName": "Financial Professional Visual Configuration",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
   "type": {
     "stringType": {
-      "stereotype": "MULTILINE",
+      "stereotype": "SIMPLE",
       "maxLength": 100000
     }
   },

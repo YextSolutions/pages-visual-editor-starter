@@ -25,11 +25,11 @@
           "visibleOnAdd": true
         },
         {
-          "id": "c_productVisualConfiguration",
+          "id": "c_financialProfessionalVisualConfiguration",
           "visibleOnAdd": true
         },
         {
-          "id": "c_financialProfessionalVisualConfiguration",
+          "id": "c_productVisualConfiguration",
           "visibleOnAdd": true
         }
       ]

@@ -1,0 +1,22 @@
+{
+  "$id": "colonelSanders",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "address": {
+      "city": "Chicken City",
+      "countryCode": "US",
+      "line1": "54 Kentucky Way",
+      "line2": "99",
+      "postalCode": "13337",
+      "region": "KY"
+    },
+    "addressHidden": false,
+    "name": "Colonel Sanders",
+    "slug": "colonelsanders",
+    "timezone": "America/New_York"
+  },
+  "entityType": "financialProfessional",
+  "folder": "yext/root",
+  "labels": []
+}

@@ -1,0 +1,18 @@
+{
+  "$id": "milkshake",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "name": "Milkshake",
+    "price": {
+      "currencyCode": "USD",
+      "value": "9"
+    },
+    "sku": "555555",
+    "slug": "milkshake",
+    "stockStatus": "OUT_OF_STOCK"
+  },
+  "entityType": "product",
+  "folder": "yext/root",
+  "labels": []
+}
