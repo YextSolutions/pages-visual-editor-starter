@@ -112,7 +112,11 @@ const Edit: Template<TemplateRenderProps> = () => {
       setEntities(fetchedEntities);
       setEntity(targetEntity);
       setTemplateConfig(puckConfig);
-      window.history.replaceState(null, "", `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`)
+      window.history.replaceState(
+        null,
+        "",
+        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`,
+      );
     }
     getData();
   }, []);
