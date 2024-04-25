@@ -21,7 +21,15 @@
           "visibleOnAdd": true
         },
         {
-          "id": "c_templateVisualConfiguration",
+          "id": "c_locationVisualConfiguration",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "c_productVisualConfiguration",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "c_financialProfessionalVisualConfiguration",
           "visibleOnAdd": true
         }
       ]
