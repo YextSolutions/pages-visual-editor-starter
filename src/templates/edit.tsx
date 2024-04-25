@@ -75,7 +75,7 @@ const Edit: Template<TemplateRenderProps> = () => {
         if (!found) {
           toast({
             status: "error",
-            duration: 15000,
+            duration: 5000,
             colorScheme: "red",
             position: "top",
             description: `Could not find template with id '${urlTemplateId}'`,
@@ -97,7 +97,7 @@ const Edit: Template<TemplateRenderProps> = () => {
         if (!found) {
           toast({
             status: "error",
-            duration: 15000,
+            duration: 5000,
             colorScheme: "red",
             position: "top",
             description: `Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`,
@@ -106,12 +106,6 @@ const Edit: Template<TemplateRenderProps> = () => {
       }
       // get puckConfig from hardcoded map
       const puckConfig = puckConfigs.get(targetTemplate.id);
-
-      console.log("FetchedTemplates: ", fetchedTemplates);
-      console.log("FetchedEntities: ", fetchedTemplates);
-      console.log("TargetEntity: ", targetEntity);
-      console.log("TargetTemplate: ", targetTemplate);
-      console.log("PuckConfig: ", puckConfig);
 
       setTemplates(fetchedTemplates);
       setTemplate(targetTemplate);
@@ -138,9 +132,9 @@ const Edit: Template<TemplateRenderProps> = () => {
       <DocumentProvider value={entityDocument?.response.document}>
         {!isLoading ? (
           <Editor
-            entity={entity}
-            template={template}
+            selectedEntity={entity}
             entities={entities}
+            selectedTemplate={template}
             templates={templates}
             templateConfig={templateConfig}
           />

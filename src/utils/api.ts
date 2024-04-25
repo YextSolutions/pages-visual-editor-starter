@@ -2,15 +2,13 @@ import { EntityContent, YextResponse } from "../types/api";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 
-export const fetchEntity = async (
-  entityId: string,
-): Promise<EntityDefinition> => {
+export const fetchEntity = async (entityId: string): Promise<any> => {
   const response = await fetch(`/api/entity/${entityId}`);
   const json = await response.json();
   if (!response.ok) {
     throw new Error("Failed to fetch entity: " + JSON.stringify(json));
   }
-  return (await json) as EntityDefinition;
+  return await json;
 };
 
 export const fetchTemplate = async (
@@ -45,7 +43,7 @@ export const fetchTemplates = async (): Promise<TemplateDefinition[]> => {
   try {
     const res = await fetch("api/template/list");
     const json = await res.json();
-    return json.map((template) => {
+    return json.map((template: TemplateDefinition) => {
       const templateDef: TemplateDefinition = {
         name: template.name,
         id: template.id,
@@ -90,7 +88,7 @@ export async function fetchEntities(
     const res = await fetch(reqUrl);
     const json = await res.json();
     const entities = json.response.entities;
-    return entities.map((entity) => {
+    return entities.map((entity: any) => {
       return {
         name: entity.name,
         externalId: entity.meta.id,

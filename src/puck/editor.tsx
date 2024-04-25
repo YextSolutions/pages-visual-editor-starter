@@ -13,18 +13,18 @@ import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker"
 const siteEntityId = "site";
 
 export interface EditorProps {
-  entity: EntityDefinition;
-  template: TemplateDefinition;
+  selectedEntity: EntityDefinition;
   entities: EntityDefinition[];
+  selectedTemplate: TemplateDefinition;
   templates: TemplateDefinition[];
   templateConfig: Config;
 }
 
 // Render Puck editor
 export const Editor = ({
-  entity,
-  template,
+  selectedEntity,
   entities,
+  selectedTemplate,
   templates,
   templateConfig,
 }: EditorProps) => {
@@ -60,7 +60,7 @@ export const Editor = ({
     const templateData = JSON.stringify(data);
     mutation.mutate({
       entityId: siteEntityId,
-      body: { [template.dataField]: templateData },
+      body: { [selectedTemplate.dataField]: templateData },
     });
   };
 
@@ -68,18 +68,18 @@ export const Editor = ({
   const { entity: siteEntity } = useEntity(siteEntityId);
   return (
     <>
-      {siteEntity?.response?.[template.dataField] ? (
+      {siteEntity?.response?.[selectedTemplate.dataField] ? (
         <Puck
           config={templateConfig}
-          data={JSON.parse(siteEntity?.response?.[template.dataField])}
+          data={JSON.parse(siteEntity?.response?.[selectedTemplate.dataField])}
           onPublish={save}
           overrides={{
             headerActions: ({ children }) => customHeaderActions(children),
             header: ({ actions }) =>
               customHeader({
                 actions: actions,
-                entity: entity,
-                template: template,
+                entity: selectedEntity,
+                template: selectedTemplate,
                 entities: entities,
                 templates: templates,
               }),

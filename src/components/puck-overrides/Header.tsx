@@ -39,8 +39,8 @@ export const customHeader = ({
     <header className="header">
       <div className="header-left" />
       <div className="header-center">
-        <TemplatePicker template={template} templates={templates} />
-        <EntityPicker entity={entity} entities={entities} />
+        <TemplatePicker selectedTemplate={template} templates={templates} />
+        <EntityPicker selectedEntity={entity} entities={entities} />
       </div>
       <div className="actions">{actions}</div>
     </header>

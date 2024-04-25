@@ -18,7 +18,7 @@ export type TemplateDefinition = {
 };
 
 export interface TemplatePickerProps {
-  template: TemplateDefinition;
+  selectedTemplate: TemplateDefinition;
   templates: TemplateDefinition[];
 }
 
@@ -35,28 +35,33 @@ export const urlFromTemplate = (template: TemplateDefinition) => {
     urlParams.append("templateId", template.id);
     updatedTemplateId = true;
   }
+  // when we change the templateId, we need to clear the entityId since the entity may not
+  // belong to the new template
   if (updatedTemplateId) {
     urlParams.delete("entityId");
   }
   return `${window.location.pathname}?${urlParams.toString()}`;
 };
 
-export function TemplatePicker({ template, templates }: TemplatePickerProps) {
+export function TemplatePicker({
+  selectedTemplate,
+  templates,
+}: TemplatePickerProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTemplate, setModalTemplate] = useState<TemplateDefinition>();
 
-  const templateMenuItems = templates.map((t: TemplateDefinition) => (
+  const templateMenuItems = templates.map((template: TemplateDefinition) => (
     <MenuItem
       as={Button}
-      key={t.id}
+      key={template.id}
       onClick={() => {
-        if (t.id !== template?.id) {
-          setModalTemplate(t);
+        if (template.id !== selectedTemplate?.id) {
+          setModalTemplate(template);
           setModalOpen(true);
         }
       }}
     >
-      {t.name}
+      {template.name}
     </MenuItem>
   ));
 
@@ -73,10 +78,10 @@ export function TemplatePicker({ template, templates }: TemplatePickerProps) {
           <MenuButton
             as={Button}
             className="dropdown-button"
-            variant={template ? "solid" : "ghost"}
-            isActive={!!template}
+            variant={selectedTemplate ? "solid" : "ghost"}
+            isActive={!!selectedTemplate}
           >
-            {template ? template.name : "Template"}
+            {selectedTemplate ? selectedTemplate.name : "Template"}
             <ChevronDownIcon />
           </MenuButton>
           <MenuList>{templateMenuItems}</MenuList>

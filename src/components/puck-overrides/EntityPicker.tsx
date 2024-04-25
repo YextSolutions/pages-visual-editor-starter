@@ -17,7 +17,7 @@ export type EntityDefinition = {
 };
 
 export interface EntityPickerProps {
-  entity: EntityDefinition;
+  selectedEntity: EntityDefinition;
   entities: EntityDefinition[];
 }
 
@@ -32,27 +32,27 @@ export const urlFromEntity = (entity: EntityDefinition) => {
   return `${window.location.pathname}?${urlParams.toString()}`;
 };
 
-export function EntityPicker({ entity, entities }: EntityPickerProps) {
+export function EntityPicker({ selectedEntity, entities }: EntityPickerProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEntity, setModalEntity] = useState<EntityDefinition>();
 
-  const entityMenuItems = entities.map((listEntity: EntityDefinition) => (
+  const entityMenuItems = entities.map((entity: EntityDefinition) => (
     <MenuItem
       className={
-        entity?.internalId === listEntity.internalId
+        selectedEntity?.internalId === entity.internalId
           ? "current-entity-item"
           : undefined
       }
       as={Button}
-      key={listEntity.internalId}
+      key={entity.internalId}
       onClick={() => {
-        if (listEntity.internalId !== entity?.internalId) {
+        if (entity.internalId !== selectedEntity?.internalId) {
           setModalOpen(true);
-          setModalEntity(listEntity);
+          setModalEntity(entity);
         }
       }}
     >
-      {listEntity.name}
+      {entity.name}
     </MenuItem>
   ));
 
@@ -69,10 +69,10 @@ export function EntityPicker({ entity, entities }: EntityPickerProps) {
           <MenuButton
             as={Button}
             className="dropdown-button"
-            variant={entity ? "solid" : "ghost"}
-            isActive={!!entity}
+            variant={selectedEntity ? "solid" : "ghost"}
+            isActive={!!selectedEntity}
           >
-            {entity ? entity.name : "Entity"}
+            {selectedEntity ? selectedEntity.name : "Entity"}
             <ChevronDownIcon />
           </MenuButton>
           <MenuList>{entityMenuItems}</MenuList>

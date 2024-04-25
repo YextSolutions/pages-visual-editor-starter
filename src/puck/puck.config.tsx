@@ -53,8 +53,8 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   },
 };
 
-const configs = new Map<string, Config>();
-configs.set("location", locationConfig);
-configs.set("product", productConfig);
-configs.set("financialProfessional", financialProfessionalConfig);
-export const puckConfigs = configs;
+export const puckConfigs = new Map<string, Config>([
+  ["location", locationConfig],
+  ["product", productConfig],
+  ["financialProfessional", financialProfessionalConfig],
+]);
