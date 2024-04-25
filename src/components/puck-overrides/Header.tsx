@@ -1,11 +1,11 @@
 import { Button } from "@measured/puck";
-import { EntityPicker } from "./EntityPicker";
-import "./puck.css"
-import { TemplatePicker } from "./TemplatePicker";
+import { EntityDefinition, EntityPicker } from "./EntityPicker";
+import "./puck.css";
+import { TemplateDefinition, TemplatePicker } from "./TemplatePicker";
 import { useDocument } from "../../hooks/useDocument";
 
 const handleClick = (slug: string) => {
-  window.open(`/${slug}`, '_blank');
+  window.open(`/${slug}`, "_blank");
 };
 
 export const customHeaderActions = (children: any) => {
@@ -13,20 +13,36 @@ export const customHeaderActions = (children: any) => {
   return (
     <>
       {children}
-      <Button onClick={() => handleClick(entityDocument.slug)}>Live Preview</Button>
+      <Button onClick={() => handleClick(entityDocument.slug)}>
+        Live Preview
+      </Button>
     </>
   );
 };
 
-export const customHeader = (actions: any) => {
+export interface customHeaderProps {
+  actions: any;
+  entity: EntityDefinition;
+  template: TemplateDefinition;
+  entities: EntityDefinition[];
+  templates: TemplateDefinition[];
+}
+
+export const customHeader = ({
+  actions,
+  entity,
+  template,
+  entities,
+  templates,
+}: customHeaderProps) => {
   return (
     <header className="header">
-      <div className="header-left"/>
-      <div className="header-center"> 
-        <TemplatePicker/> 
-        <EntityPicker/>
+      <div className="header-left" />
+      <div className="header-center">
+        <TemplatePicker selectedTemplate={template} templates={templates} />
+        <EntityPicker selectedEntity={entity} entities={entities} />
       </div>
       <div className="actions">{actions}</div>
     </header>
-  )
-}
+  );
+};

@@ -7,27 +7,30 @@ type DocumentProviderProps<T> = {
   children: ReactNode;
 };
 
-const DocumentProvider = <T,>({ value, children }: DocumentProviderProps<T>) => {  
+const DocumentProvider = <T,>({
+  value,
+  children,
+}: DocumentProviderProps<T>) => {
   return (
     <DocumentContext.Provider value={value}>
       {children}
     </DocumentContext.Provider>
   );
-}
+};
 
 const useDocument = <T,>(selector?: (state: T) => any): T | any => {
   const context = useContext(DocumentContext);
   if (!context) {
     throw new Error(
-      "useLocationDocument must be used within a DocumentProvider"
+      "useLocationDocument must be used within a DocumentProvider",
     );
   }
-  
+
   if (selector) {
     return selector(context);
   }
 
   return context as T;
-}
+};
 
 export { DocumentProvider, useDocument };

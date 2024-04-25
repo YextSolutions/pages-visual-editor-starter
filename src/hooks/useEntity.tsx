@@ -6,12 +6,11 @@ const useEntity = (entityId: string) => {
     queryKey: ["entity", entityId],
     queryFn: async () => {
       if (!entityId) return null;
-      const entity = await fetchEntity(entityId);
-      return entity;
+      return await fetchEntity(entityId);
     },
     enabled: !!entityId,
-  })
-  return { entity, status }
-}
+  });
+  return { entity, status };
+};
 
 export default useEntity;

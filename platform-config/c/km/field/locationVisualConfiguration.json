@@ -1,12 +1,12 @@
 {
   "$id": "c_locationVisualConfiguration",
   "$schema": "https://schema.yext.com/config/km/field/v1",
-  "displayName": "Location Visual Configuration",
+  "displayName": "Location Template Visual Configuration",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
   "type": {
     "stringType": {
-      "stereotype": "MULTILINE",
+      "stereotype": "SIMPLE",
       "maxLength": 100000
     }
   },

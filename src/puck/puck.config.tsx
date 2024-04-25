@@ -12,12 +12,12 @@ type LocationProps = {
 type ProductProps = {
   Toggle: ToggleProps;
   Color: ColorProps;
-}
+};
 
 type FinancialProfessionalProps = {
   Toggle: ToggleProps;
   Color: ColorProps;
-}
+};
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
@@ -27,8 +27,8 @@ export const locationConfig: Config<LocationProps> = {
     Color,
   },
   root: {
-    fields: {}
-  }
+    fields: {},
+  },
 };
 
 // All the available components for products
@@ -38,8 +38,8 @@ export const productConfig: Config<ProductProps> = {
     Color,
   },
   root: {
-    fields: {}
-  }
+    fields: {},
+  },
 };
 
 // All the available components for financial professionals
@@ -49,6 +49,12 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     Color,
   },
   root: {
-    fields: {}
-  }
+    fields: {},
+  },
 };
+
+export const puckConfigs = new Map<string, Config>([
+  ["location", locationConfig],
+  ["product", productConfig],
+  ["financialProfessional", financialProfessionalConfig],
+]);

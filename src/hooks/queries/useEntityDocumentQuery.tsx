@@ -13,8 +13,7 @@ const useEntityDocumentQuery = ({ templateId, entityId }: EntityDocument) => {
       if (!entityId || !templateId) {
         return null;
       }
-      const entityDocument = await fetchEntityDocument(templateId, entityId);
-      return entityDocument;
+      return await fetchEntityDocument(templateId, entityId);
     },
     enabled: !!entityId && !!templateId,
   });

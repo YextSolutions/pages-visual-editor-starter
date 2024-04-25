@@ -7,89 +7,61 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
-import { ConfirmationModal } from "./ConfirmationModal";
-import { fetchEntities } from "../../utils/api";
-import { useToast } from '@chakra-ui/react'
-import { useDocument } from "../../hooks/useDocument";
+import { EntityConfirmationModal } from "./EntityConfirmationModal";
+import { useState } from "react";
 
-
-export type Entity = {
+export type EntityDefinition = {
   name: string;
   externalId: string;
   internalId: number;
 };
 
-export const urlFromEntity = (entity: Entity) => {
+export interface EntityPickerProps {
+  selectedEntity: EntityDefinition;
+  entities: EntityDefinition[];
+}
+
+export const urlFromEntity = (entity: EntityDefinition) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   if (urlParams.has("entityId")) {
-    urlParams.set("entityId", entity.externalId)
+    urlParams.set("entityId", entity.externalId);
   } else {
-    urlParams.append("entityId", entity.externalId)
+    urlParams.append("entityId", entity.externalId);
   }
   return `${window.location.pathname}?${urlParams.toString()}`;
 };
 
-export function EntityPicker() {
-  const [entity, setEntity] = useState<Entity>();
-  const [entities, setEntities] = useState<Entity[]>([]);
-  const [loading, setLoading] = useState(true);
-  const toast = useToast()
+export function EntityPicker({ selectedEntity, entities }: EntityPickerProps) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalEntity, setModalEntity] = useState<Entity>();
+  const [modalEntity, setModalEntity] = useState<EntityDefinition>();
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const entityId = urlParams.get("entityId");
-  const entityDocument = useDocument()
-
-  useEffect(() => {
-    fetchEntities().then((entities) => {
-      setLoading(false);
-      setEntities(entities);
-      if (entities.length === 0) {
-        toast({
-          title: `No entities associated with template`,
-          status: 'info',
-          isClosable: true,
-        })
-      } else if (entityId) {
-        entities.forEach(entity => {
-          if (entity.externalId === entityId) {
-            setEntity(entity);
-          }
-        })
-      } else {
-        setEntity(entities[0]);
-      }
-    })
-  })
-
-  const entityMenuItems = entities.map((listEntity: Entity) => (
+  const entityMenuItems = entities.map((entity: EntityDefinition) => (
     <MenuItem
       className={
-        entity?.internalId === listEntity.internalId
+        selectedEntity?.internalId === entity.internalId
           ? "current-entity-item"
           : undefined
       }
       as={Button}
-      key={listEntity.internalId}
+      key={entity.internalId}
       onClick={() => {
-        if (listEntity.internalId !== entity?.internalId) {
+        if (entity.internalId !== selectedEntity?.internalId) {
           setModalOpen(true);
-          setModalEntity(listEntity);
+          setModalEntity(entity);
         }
       }}
     >
-      {listEntity.name}
+      {entity.name}
     </MenuItem>
   ));
 
   return (
     <ChakraProvider>
-      <ConfirmationModal
+      <EntityConfirmationModal
         isOpen={modalOpen}
-        entity={modalEntity}
+        destinationName={modalEntity?.name || ""}
+        destinationUrl={modalEntity ? urlFromEntity(modalEntity) : ""}
         onClose={() => setModalOpen(false)}
       />
       <div className="entity-picker">
@@ -97,11 +69,10 @@ export function EntityPicker() {
           <MenuButton
             as={Button}
             className="dropdown-button"
-            variant={entity ? "solid" : "ghost"}
-            isActive={!!entity}
-            isLoading={loading}
+            variant={selectedEntity ? "solid" : "ghost"}
+            isActive={!!selectedEntity}
           >
-            {entity ? entity.name : "Entity"}
+            {selectedEntity ? selectedEntity.name : "Entity"}
             <ChevronDownIcon />
           </MenuButton>
           <MenuList>{entityMenuItems}</MenuList>

@@ -1,10 +1,25 @@
 import { EntityContent, YextResponse } from "../types/api";
-import { Entity } from "../components/puck-overrides/EntityPicker";
+import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
+import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 
 export const fetchEntity = async (entityId: string): Promise<any> => {
   const response = await fetch(`/api/entity/${entityId}`);
-  const body = await response.json();
-  return body;
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error("Failed to fetch entity: " + JSON.stringify(json));
+  }
+  return await json;
+};
+
+export const fetchTemplate = async (
+  templateId: string,
+): Promise<TemplateDefinition> => {
+  const response = await fetch(`/api/template/${templateId}`);
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error("Failed to fetch template: " + JSON.stringify(json));
+  }
+  return (await json) as TemplateDefinition;
 };
 
 export const updateEntity = async (
@@ -21,6 +36,24 @@ export const updateEntity = async (
 
   if (!response.ok) {
     throw new Error(response.statusText);
+  }
+};
+
+export const fetchTemplates = async (): Promise<TemplateDefinition[]> => {
+  try {
+    const res = await fetch("api/template/list");
+    const json = await res.json();
+    return json.map((template: TemplateDefinition) => {
+      const templateDef: TemplateDefinition = {
+        name: template.name,
+        id: template.id,
+        entityTypes: template.entityTypes,
+        dataField: template.dataField,
+      };
+      return templateDef;
+    });
+  } catch (e) {
+    throw new Error("Failed to fetch templates: " + e.message);
   }
 };
 
@@ -41,14 +74,21 @@ export const fetchEntityDocument = async (
 
 /**
  * Fetches entities using the getEntities() function and parses the response.
- * @return {Promise<Entity[]>}
+ * @param entityTypes {string[] | undefined} entityTypes to filter by
+ * @return {Promise<EntityDefinition[]>}
  */
-export async function fetchEntities(): Promise<Entity[]> {
+export async function fetchEntities(
+  entityTypes?: string[],
+): Promise<EntityDefinition[]> {
   try {
-    const res = await fetch("api/entity/list");
+    let reqUrl = "api/entity/list";
+    if (entityTypes) {
+      reqUrl += `?entityTypes=${entityTypes}`;
+    }
+    const res = await fetch(reqUrl);
     const json = await res.json();
     const entities = json.response.entities;
-    return entities.map((entity) => {
+    return entities.map((entity: any) => {
       return {
         name: entity.name,
         externalId: entity.meta.id,

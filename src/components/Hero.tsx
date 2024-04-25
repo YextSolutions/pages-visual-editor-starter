@@ -19,7 +19,7 @@ export const Hero: ComponentConfig<HeroProps> = {
     },
   },
   render: ({ imageMode }) => {
-    const hero = useDocument<LocationStream>(document => document.c_hero);
+    const hero = useDocument<LocationStream>((document) => document.c_hero);
     const backgroundImageUrl = hero?.image.image.url;
     return (
       <div
