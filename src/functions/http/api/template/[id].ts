@@ -1,5 +1,5 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import { Template } from "../../../../components/puck-overrides/TemplatePicker";
+import { TemplateDefinition } from "../../../../components/puck-overrides/TemplatePicker";
 import { templates } from "./list";
 
 export default async function getTemplate(
@@ -16,9 +16,9 @@ export default async function getTemplate(
 
   try {
     // TODO make http request here to get real template
-    let targetTemplate: Template | undefined;
-    templates.forEach((template: Template) => {
-      if (template.externalId === templateId) {
+    let targetTemplate: TemplateDefinition | undefined;
+    templates.forEach((template: TemplateDefinition) => {
+      if (template.id === templateId) {
         targetTemplate = template;
       }
     });

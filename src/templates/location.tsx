@@ -39,7 +39,7 @@ export const transformProps = async (data) => {
   const { document } = data;
   try {
     const visualTemplate = JSON.parse(
-      document?._site?.c_templateVisualConfiguration,
+      document?._site?.c_locationVisualConfiguration,
     );
     return {
       ...data,

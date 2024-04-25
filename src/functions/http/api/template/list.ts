@@ -1,14 +1,24 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import { Template } from "../../../../components/puck-overrides/TemplatePicker";
+import { TemplateDefinition } from "../../../../components/puck-overrides/TemplatePicker";
 
-export const templates: Template[] = [
+export const templates: TemplateDefinition[] = [
   {
     name: "Location",
-    externalId: "location",
+    id: "location",
+    entityTypes: ["location"],
+    dataField: "c_locationVisualConfiguration",
   },
   {
     name: "Product",
-    externalId: "product",
+    id: "product",
+    entityTypes: ["product"],
+    dataField: "c_productVisualConfiguration",
+  },
+  {
+    name: "Financial Professional",
+    id: "financialProfessional",
+    entityTypes: ["financialProfessional"],
+    dataField: "c_financialProfessionalVisualConfiguration",
   },
 ];
 

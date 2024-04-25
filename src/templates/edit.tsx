@@ -9,11 +9,13 @@ import {
 import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
-import { ChakraProvider } from "@chakra-ui/react";
+import {ChakraProvider, useToast} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { fetchEntities, fetchTemplate, fetchTemplates} from "../utils/api";
+import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
-import {locationConfig, puckConfigs} from "../puck/puck.config";
+import { puckConfigs } from "../puck/puck.config";
+import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
+import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -23,7 +25,7 @@ export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
 };
 
-const getEntityId = (): string => {
+const getUrlEntityId = (): string => {
   if (typeof document !== "undefined") {
     const params = new URL(document.location.toString()).searchParams;
     const entityId = params.get("entityId");
@@ -34,7 +36,7 @@ const getEntityId = (): string => {
   return "";
 };
 
-const getTemplateId = (): string => {
+const getUrlTemplateId = (): string => {
   if (typeof document !== "undefined") {
     const params = new URL(document.location.toString()).searchParams;
     const templateId = params.get("templateId");
@@ -48,52 +50,99 @@ const getTemplateId = (): string => {
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
-  const [entityId, setEntityId] = useState<string>(getEntityId());
-  const [templateId, setTemplateId] = useState<string>(getTemplateId());
+  const [templates, setTemplates] = useState<TemplateDefinition[]>();
+  const [template, setTemplate] = useState<TemplateDefinition>();
+  const [entities, setEntities] = useState<EntityDefinition[]>();
+  const [entity, setEntity] = useState<EntityDefinition>();
   const [templateConfig, setTemplateConfig] = useState<Config>();
+
+  const toast = useToast();
+
   useEffect(() => {
-    async function getEntities(entityTypes: string[]) {
-      const entities = await fetchEntities(entityTypes);
-      if (entities.length > 0) {
-        setEntityId(entities[0].externalId);
+    async function getData() {
+      // get templates
+      const fetchedTemplates = await fetchTemplates();
+      let targetTemplate: TemplateDefinition = fetchedTemplates[0];
+      const urlTemplateId = getUrlTemplateId();
+      if (urlTemplateId) {
+        let found = false;
+        fetchedTemplates.forEach((fetchedTemplate: TemplateDefinition) => {
+          if (fetchedTemplate.id === urlTemplateId) {
+            targetTemplate = fetchedTemplate;
+            found = true;
+          }
+        });
+        if (!found) {
+          useToast({
+            status: "error",
+            duration: 5000,
+            colorScheme: "red",
+            description: `Could not find template with id ${urlTemplateId}`
+          });
+        }
       }
-    }
-
-    async function getTemplates() {
-      const templates = await fetchTemplates();
-      if (templates.length > 0) {
-        setTemplateId(templates[0].externalId);
-        setTemplateConfig(puckConfigs.get(templates[0].externalId));
-        await getEntities([templates[0].externalId]);
+      // get entities
+      const fetchedEntities = await fetchEntities(targetTemplate.entityTypes);
+      let targetEntity: EntityDefinition = fetchedEntities[0];
+      const urlEntityId = getUrlEntityId();
+      if (urlEntityId) {
+        let found = false;
+        fetchedEntities.forEach((fetchedEntity: EntityDefinition) => {
+          if (fetchedEntity.externalId === urlEntityId) {
+            targetEntity = fetchedEntity;
+            found = true;
+          }
+        });
+        if (!found) {
+          useToast({
+            status: "error",
+            duration: 5000,
+            colorScheme: "red",
+            description: `Could not find entity with id ${urlEntityId} belonging to template ${targetTemplate.id}`
+          });
+        }
       }
-    }
+      // get puckConfig from hardcoded map
+      const puckConfig = puckConfigs.get(targetTemplate.id);
 
-    async function getTemplateConfig(templateId: string) {
-      const template = await fetchTemplate(templateId);
-      setTemplateConfig(puckConfigs.get(template.externalId));
-    }
+      console.log("FetchedTemplates: ", fetchedTemplates);
+      console.log("FetchedEntities: ", fetchedTemplates);
+      console.log("TargetEntity: ", targetEntity);
+      console.log("TargetTemplate: ", targetTemplate);
+      console.log("PuckConfig: ", puckConfig);
 
-    if (!templateId) {
-      getTemplates();
+
+      setTemplates(fetchedTemplates);
+      setTemplate(targetTemplate);
+      setEntities(fetchedEntities);
+      setEntity(targetEntity);
+      setTemplateConfig(puckConfig);
     }
-    if (templateId && !entityId) {
-      getEntities([templateId]);
-    }
-    if (templateId && !templateConfig) {
-      getTemplateConfig(templateId);
-    }
+    getData();
   }, []);
 
   const { entityDocument } = useEntityDocumentQuery({
-    templateId: templateId,
-    entityId: entityId,
+    templateId: template?.id,
+    entityId: entity?.externalId,
   });
-  const isLoading = !entityDocument?.response.document || !templateConfig;
+  const isLoading =
+    !entityDocument?.response.document ||
+    !templateConfig ||
+    !template ||
+    !templates ||
+    !entity ||
+    !entities;
   return (
     <ChakraProvider>
       <DocumentProvider value={entityDocument?.response.document}>
         {!isLoading ? (
-          <Editor templateId={templateId} entityId={entityId} templateConfig={templateConfig} />
+          <Editor
+            entity={entity}
+            template={template}
+            entities={entities}
+            templates={templates}
+            templateConfig={templateConfig}
+          />
         ) : (
           <div>Loading configuration...</div>
         )}

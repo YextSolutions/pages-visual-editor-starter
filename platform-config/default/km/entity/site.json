@@ -3,7 +3,9 @@
   "$schema": "https://schema.yext.com/config/km/entity/v1",
   "primaryLocale": "en",
   "content": {
-    "c_templateVisualConfiguration": "{\"content\":[{\"type\":\"Banner\",\"props\":{\"name\":\"Banner\",\"id\":\"Banner-1694032984497\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"Banner\",\"props\":{\"name\":\"Banner\",\"id\":\"Banner-1694032984497\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_productVisualConfiguration": "{\"content\":[{\"type\":\"Banner\",\"props\":{\"name\":\"Banner\",\"id\":\"Banner-1694032984497\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_financialProfessionalVisualConfiguration": "{\"content\":[{\"type\":\"Banner\",\"props\":{\"name\":\"Banner\",\"id\":\"Banner-1694032984497\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
     "name": "Site"
   },
   "entityType": "ce_site",

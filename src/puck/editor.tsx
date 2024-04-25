@@ -8,16 +8,26 @@ import {
 } from "../components/puck-overrides/Header";
 import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
+import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 const siteEntityId = "site";
 
 export interface EditorProps {
-  templateId: string;
-  entityId: string;
+  entity: EntityDefinition;
+  template: TemplateDefinition;
+  entities: EntityDefinition[];
+  templates: TemplateDefinition[];
   templateConfig: Config;
 }
 
 // Render Puck editor
-export const Editor = ({ templateId, entityId, templateConfig }: EditorProps) => {
+export const Editor = ({
+  entity,
+  template,
+  entities,
+  templates,
+  templateConfig,
+}: EditorProps) => {
   const mutation = useUpdateEntityMutation();
   const toast = useToast();
 
@@ -47,29 +57,32 @@ export const Editor = ({ templateId, entityId, templateConfig }: EditorProps) =>
 
   // Save the data to our site entity
   const save = async (data: Data) => {
-    const c_templateVisualConfiguration = JSON.stringify(data);
+    const templateData = JSON.stringify(data);
     mutation.mutate({
       entityId: siteEntityId,
-      body: { c_templateVisualConfiguration },
+      body: { [template.dataField]: templateData },
     });
   };
 
   // Fetch the data from our site entity
-  const { entity } = useEntity(siteEntityId);
+  const { entity: siteEntity } = useEntity(siteEntityId);
   return (
     <>
-      {entity?.response?.c_templateVisualConfiguration ? (
+      {siteEntity?.response?.[template.dataField] ? (
         <Puck
           config={templateConfig}
-          data={JSON.parse(entity?.response?.c_templateVisualConfiguration)}
+          data={JSON.parse(siteEntity?.response?.[template.dataField])}
           onPublish={save}
           overrides={{
             headerActions: ({ children }) => customHeaderActions(children),
-            header: ({ actions }) => customHeader({
-              actions: actions,
-              entityId: entityId,
-              templateId: templateId,
-            }),
+            header: ({ actions }) =>
+              customHeader({
+                actions: actions,
+                entity: entity,
+                template: template,
+                entities: entities,
+                templates: templates,
+              }),
           }}
         />
       ) : (

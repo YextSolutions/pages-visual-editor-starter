@@ -9,28 +9,28 @@ import {
   HeadConfig,
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
-import { productConfig } from "../puck/puck.config";
+import { financialProfessionalConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
 
 export const config: TemplateConfig = {
   stream: {
-    $id: "product-stream",
+    $id: "financialProfessional-stream",
     filter: {
-      entityTypes: ["product"],
+      entityTypes: ["financialProfessional"],
     },
-    fields: ["id", "name", "price", "slug"],
+    fields: ["id", "name", "slug"],
     localization: {
       locales: ["en"],
     },
   },
 };
 
-// Right now product entity data isn't used
+// Right now financial professional entity data isn't used
 export const transformProps = async (data) => {
   const { document } = data;
   try {
     const visualTemplate = JSON.parse(
-      document?._site?.c_productVisualConfiguration,
+      document?._site?.c_financialProfessionalVisualConfiguration,
     );
     return {
       ...data,
@@ -65,20 +65,20 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `product/${document.slug || document.name || document.id}`;
+  return `financialProfessional/${document.slug || document.name || document.id}`;
 };
 
-const Product: Template<TemplateRenderProps> = ({ document }) => {
-  const { visualTemplate, price } = document;
+const FinancialProfessional: Template<TemplateRenderProps> = ({ document }) => {
+  const { visualTemplate, name } = document;
   return (
     <DocumentProvider value={document}>
-      <div>
-        This is the page for a ${Number.parseFloat(price.value).toFixed(2)}{" "}
-        {document.name}
-      </div>
-      <Render config={productConfig as Config} data={visualTemplate} />
+      <div>Welcome to the professional page for {name}!</div>
+      <Render
+        config={financialProfessionalConfig as Config}
+        data={visualTemplate}
+      />
     </DocumentProvider>
   );
 };
 
-export default Product;
+export default FinancialProfessional;

@@ -1,7 +1,7 @@
 import { Button } from "@measured/puck";
-import {EntityPicker, EntityPickerProps} from "./EntityPicker";
+import { EntityDefinition, EntityPicker } from "./EntityPicker";
 import "./puck.css";
-import { TemplatePicker } from "./TemplatePicker";
+import { TemplateDefinition, TemplatePicker } from "./TemplatePicker";
 import { useDocument } from "../../hooks/useDocument";
 
 const handleClick = (slug: string) => {
@@ -22,17 +22,25 @@ export const customHeaderActions = (children: any) => {
 
 export interface customHeaderProps {
   actions: any;
-  entityId: string;
-  templateId: string;
+  entity: EntityDefinition;
+  template: TemplateDefinition;
+  entities: EntityDefinition[];
+  templates: TemplateDefinition[];
 }
 
-export const customHeader = ({ actions, entityId, templateId }: customHeaderProps) => {
+export const customHeader = ({
+  actions,
+  entity,
+  template,
+  entities,
+  templates,
+}: customHeaderProps) => {
   return (
     <header className="header">
       <div className="header-left" />
       <div className="header-center">
-        <TemplatePicker />
-        <EntityPicker entityId={entityId} templateId={templateId}/>
+        <TemplatePicker template={template} templates={templates} />
+        <EntityPicker entity={entity} entities={entities} />
       </div>
       <div className="actions">{actions}</div>
     </header>

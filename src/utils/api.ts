@@ -1,23 +1,27 @@
 import { EntityContent, YextResponse } from "../types/api";
-import { Template } from "../components/puck-overrides/TemplatePicker";
-import { Entity } from "../components/puck-overrides/EntityPicker";
+import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
+import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 
-export const fetchEntity = async (entityId: string): Promise<Entity> => {
+export const fetchEntity = async (
+  entityId: string,
+): Promise<EntityDefinition> => {
   const response = await fetch(`/api/entity/${entityId}`);
   const json = await response.json();
   if (!response.ok) {
     throw new Error("Failed to fetch entity: " + JSON.stringify(json));
   }
-  return (await json) as Entity;
+  return (await json) as EntityDefinition;
 };
 
-export const fetchTemplate = async (templateId: string): Promise<Template> => {
+export const fetchTemplate = async (
+  templateId: string,
+): Promise<TemplateDefinition> => {
   const response = await fetch(`/api/template/${templateId}`);
   const json = await response.json();
   if (!response.ok) {
     throw new Error("Failed to fetch template: " + JSON.stringify(json));
   }
-  return (await json) as Template;
+  return (await json) as TemplateDefinition;
 };
 
 export const updateEntity = async (
@@ -37,16 +41,18 @@ export const updateEntity = async (
   }
 };
 
-export const fetchTemplates = async (): Promise<Template[]> => {
+export const fetchTemplates = async (): Promise<TemplateDefinition[]> => {
   try {
     const res = await fetch("api/template/list");
     const json = await res.json();
     return json.map((template) => {
-      return {
+      const templateDef: TemplateDefinition = {
         name: template.name,
-        externalId: template.externalId,
-        templateConfig: template.templateConfig,
+        id: template.id,
+        entityTypes: template.entityTypes,
+        dataField: template.dataField,
       };
+      return templateDef;
     });
   } catch (e) {
     throw new Error("Failed to fetch templates: " + e.message);
@@ -71,9 +77,11 @@ export const fetchEntityDocument = async (
 /**
  * Fetches entities using the getEntities() function and parses the response.
  * @param entityTypes {string[] | undefined} entityTypes to filter by
- * @return {Promise<Entity[]>}
+ * @return {Promise<EntityDefinition[]>}
  */
-export async function fetchEntities(entityTypes?: string[]): Promise<Entity[]> {
+export async function fetchEntities(
+  entityTypes?: string[],
+): Promise<EntityDefinition[]> {
   try {
     let reqUrl = "api/entity/list";
     if (entityTypes) {

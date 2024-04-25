@@ -12,7 +12,9 @@ siteStream:
   id: site-stream
   entityId: site
   fields: 
-    - c_templateVisualConfiguration
+    - c_locationVisualConfiguration
+    - c_productVisualConfiguration
+    - c_financialProfessionalVisualConfiguration
   localization:
     locales:
       - en

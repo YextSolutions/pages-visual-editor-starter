@@ -7,23 +7,21 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
-import { fetchEntities } from "../../utils/api";
-import { useToast } from "@chakra-ui/react";
 import { EntityConfirmationModal } from "./EntityConfirmationModal";
+import { useState } from "react";
 
-export type Entity = {
+export type EntityDefinition = {
   name: string;
   externalId: string;
   internalId: number;
 };
 
 export interface EntityPickerProps {
-  entityId: string;
-  templateId: string;
+  entity: EntityDefinition;
+  entities: EntityDefinition[];
 }
 
-export const urlFromEntity = (entity: Entity) => {
+export const urlFromEntity = (entity: EntityDefinition) => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   if (urlParams.has("entityId")) {
@@ -34,37 +32,11 @@ export const urlFromEntity = (entity: Entity) => {
   return `${window.location.pathname}?${urlParams.toString()}`;
 };
 
-export function EntityPicker({ entityId, templateId }: EntityPickerProps) {
-  const [entity, setEntity] = useState<Entity>();
-  const [entities, setEntities] = useState<Entity[]>([]);
-  const [loading, setLoading] = useState(true);
+export function EntityPicker({ entity, entities }: EntityPickerProps) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalEntity, setModalEntity] = useState<Entity>();
-  const toast = useToast();
+  const [modalEntity, setModalEntity] = useState<EntityDefinition>();
 
-  useEffect(() => {
-    fetchEntities([templateId]).then((fetchedEntities) => {
-      setLoading(false);
-      setEntities(fetchedEntities);
-      if (fetchedEntities.length === 0) {
-        toast({
-          title: `No entities associated with template`,
-          status: "info",
-          isClosable: true,
-        });
-      } else if (entityId) {
-        fetchedEntities.forEach((fetchedEntity) => {
-          if (fetchedEntity.externalId === entityId) {
-            setEntity(fetchedEntity);
-          }
-        });
-      } else {
-        setEntity(fetchedEntities[0]);
-      }
-    });
-  }, []);
-
-  const entityMenuItems = entities.map((listEntity: Entity) => (
+  const entityMenuItems = entities.map((listEntity: EntityDefinition) => (
     <MenuItem
       className={
         entity?.internalId === listEntity.internalId
@@ -99,7 +71,6 @@ export function EntityPicker({ entityId, templateId }: EntityPickerProps) {
             className="dropdown-button"
             variant={entity ? "solid" : "ghost"}
             isActive={!!entity}
-            isLoading={loading}
           >
             {entity ? entity.name : "Entity"}
             <ChevronDownIcon />
