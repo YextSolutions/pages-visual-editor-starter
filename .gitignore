@@ -10,6 +10,6 @@ dist/
 sites-config/features.json
 functions/functionMetadata.json
 *.local
-.idea
+.idea/*
 
 .DS_Store

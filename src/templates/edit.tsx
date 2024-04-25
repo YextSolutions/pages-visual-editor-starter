@@ -9,7 +9,7 @@ import {
 import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
-import {ChakraProvider, useToast} from "@chakra-ui/react";
+import { ChakraProvider, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
@@ -73,11 +73,12 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          useToast({
+          toast({
             status: "error",
-            duration: 5000,
+            duration: 15000,
             colorScheme: "red",
-            description: `Could not find template with id ${urlTemplateId}`
+            position: "top",
+            description: `Could not find template with id '${urlTemplateId}'`,
           });
         }
       }
@@ -94,11 +95,12 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          useToast({
+          toast({
             status: "error",
-            duration: 5000,
+            duration: 15000,
             colorScheme: "red",
-            description: `Could not find entity with id ${urlEntityId} belonging to template ${targetTemplate.id}`
+            position: "top",
+            description: `Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`,
           });
         }
       }
@@ -110,7 +112,6 @@ const Edit: Template<TemplateRenderProps> = () => {
       console.log("TargetEntity: ", targetEntity);
       console.log("TargetTemplate: ", targetTemplate);
       console.log("PuckConfig: ", puckConfig);
-
 
       setTemplates(fetchedTemplates);
       setTemplate(targetTemplate);
