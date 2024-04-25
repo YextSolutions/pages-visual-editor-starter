@@ -1,7 +1,7 @@
 {
   "$id": "c_locationVisualConfiguration",
   "$schema": "https://schema.yext.com/config/km/field/v1",
-  "displayName": "Location Template Visual Configuration",
+  "displayName": "Location Visual Configuration",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
   "type": {

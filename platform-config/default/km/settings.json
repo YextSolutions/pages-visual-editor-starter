@@ -8,6 +8,7 @@
     },
     {
       "entityType": "location",
+      "defaultFieldEligibilityGroup": "location.default",
       "disabled": false
     },
     {
@@ -57,11 +58,11 @@
     },
     {
       "entityType": "product",
-      "disabled": true
+      "disabled": false
     },
     {
       "entityType": "financialProfessional",
-      "disabled": true
+      "disabled": false
     }
   ]
 }

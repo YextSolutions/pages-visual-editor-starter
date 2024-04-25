@@ -47,5 +47,7 @@ export interface LocationStream {
 }
 
 export interface SiteStream {
-  c_templateVisualConfiguration: string,
+  c_locationVisualConfiguration: string,
+  c_productVisualConfiguration: string,
+  c_financialProfessionalVisualConfiguration: string,
 }

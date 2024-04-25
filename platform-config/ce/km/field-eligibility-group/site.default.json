@@ -4,7 +4,9 @@
   "name": "Site-default",
   "entityType": "ce_site",
   "fields": [
-    "c_templateVisualConfiguration"
+    "c_financialProfessionalVisualConfiguration",
+    "c_locationVisualConfiguration",
+    "c_productVisualConfiguration"
   ],
   "required": []
 }
