@@ -14,6 +14,11 @@ type ProductProps = {
   Color: ColorProps;
 }
 
+type FinancialProfessionalProps = {
+  Toggle: ToggleProps;
+  Color: ColorProps;
+}
+
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
@@ -28,6 +33,17 @@ export const locationConfig: Config<LocationProps> = {
 
 // All the available components for products
 export const productConfig: Config<ProductProps> = {
+  components: {
+    Toggle,
+    Color,
+  },
+  root: {
+    fields: {}
+  }
+};
+
+// All the available components for financial professionals
+export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   components: {
     Toggle,
     Color,

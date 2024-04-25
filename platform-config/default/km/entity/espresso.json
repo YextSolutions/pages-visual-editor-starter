@@ -1,0 +1,18 @@
+{
+  "$id": "espresso",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "name": "Espresso",
+    "price": {
+      "currencyCode": "USD",
+      "value": "4"
+    },
+    "sku": "345254",
+    "slug": "espresso",
+    "stockStatus": "IN_STOCK"
+  },
+  "entityType": "product",
+  "folder": "yext/root",
+  "labels": []
+}

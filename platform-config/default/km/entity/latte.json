@@ -1,0 +1,18 @@
+{
+  "$id": "latte",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "name": "Latte",
+    "price": {
+      "currencyCode": "USD",
+      "value": "6.50"
+    },
+    "sku": "454644",
+    "slug": "latte",
+    "stockStatus": "IN_STOCK"
+  },
+  "entityType": "product",
+  "folder": "yext/root",
+  "labels": []
+}
