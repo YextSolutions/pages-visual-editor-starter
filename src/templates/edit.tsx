@@ -9,14 +9,7 @@ import {
 import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
-import {
-  ChakraProvider,
-  useToast,
-  Progress,
-  Spinner,
-  Center,
-  Flex,
-} from "@chakra-ui/react";
+import { ChakraProvider, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
@@ -24,6 +17,7 @@ import { puckConfigs } from "../puck/puck.config";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import useEntity from "../hooks/useEntity";
+import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 
 const siteEntityId = "site";
 
@@ -181,21 +175,7 @@ const Edit: Template<TemplateRenderProps> = () => {
             puckData={puckData}
           />
         ) : (
-          <div>
-            <Progress value={progress} />
-            <Center>
-              <Flex>
-                <div>{loadingMessage}</div>
-                <Spinner
-                  size="xl"
-                  color="blue.500"
-                  emptyColor="gray.200"
-                  thickness="4px"
-                  speed="0.7s"
-                />
-              </Flex>
-            </Center>
-          </div>
+          <LoadingScreen progress={progress} message={loadingMessage} />
         )}
       </DocumentProvider>
     </ChakraProvider>
