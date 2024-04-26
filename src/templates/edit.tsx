@@ -11,7 +11,7 @@ import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { ChakraProvider, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { fetchEntities, fetchTemplates } from "../utils/api";
+import { fetchEntities, fetchTemplates } from "../lib/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
@@ -118,7 +118,7 @@ const Edit: Template<TemplateRenderProps> = () => {
       window.history.replaceState(
         null,
         "",
-        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`,
+        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`
       );
     }
     getData();

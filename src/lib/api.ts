@@ -1,4 +1,4 @@
-import { EntityContent, YextResponse } from "../types/api";
+import { ApiError, EntityContent, YextResponse } from "../types/api";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 
@@ -12,7 +12,7 @@ export const fetchEntity = async (entityId: string): Promise<any> => {
 };
 
 export const fetchTemplate = async (
-  templateId: string,
+  templateId: string
 ): Promise<TemplateDefinition> => {
   const response = await fetch(`/api/template/${templateId}`);
   const json = await response.json();
@@ -24,7 +24,7 @@ export const fetchTemplate = async (
 
 export const updateEntity = async (
   entityId: string,
-  body: any,
+  body: any
 ): Promise<void> => {
   const response = await fetch(`/api/entity/${entityId}`, {
     method: "PUT",
@@ -35,7 +35,9 @@ export const updateEntity = async (
   });
 
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new ApiError("Failed to update entity", {
+      status: response.status,
+    });
   }
 };
 
@@ -59,11 +61,11 @@ export const fetchTemplates = async (): Promise<TemplateDefinition[]> => {
 
 export const fetchEntityDocument = async (
   templateId: string,
-  entityId: string,
+  entityId: string
 ): Promise<YextResponse<EntityContent>> => {
   try {
     const response = await fetch(
-      `/api/streams/${templateId}/entity/${entityId}/fetchentitydocument`,
+      `/api/streams/${templateId}/entity/${entityId}/fetchentitydocument`
     );
     return await response.json();
   } catch (error) {
@@ -78,7 +80,7 @@ export const fetchEntityDocument = async (
  * @return {Promise<EntityDefinition[]>}
  */
 export async function fetchEntities(
-  entityTypes?: string[],
+  entityTypes?: string[]
 ): Promise<EntityDefinition[]> {
   try {
     let reqUrl = "api/entity/list";

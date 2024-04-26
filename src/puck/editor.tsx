@@ -1,12 +1,11 @@
 import { Puck, Data, Config } from "@measured/puck";
 import "@measured/puck/puck.css";
-import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
+import useEntity from "../hooks/useEntity";
+import { useUpdateEntity } from "../hooks/mutations/useUpdateEntity";
 import {
   customHeader,
   customHeaderActions,
 } from "../components/puck-overrides/Header";
-import { useToast } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 
@@ -30,37 +29,12 @@ export const Editor = ({
   puckConfig,
   puckData,
 }: EditorProps) => {
-  const mutation = useUpdateEntityMutation();
-  const toast = useToast();
-
-  useEffect(() => {
-    if (mutation.isPending) {
-      toast({
-        title: "Save in progress...",
-        status: "info",
-        duration: 1000,
-        isClosable: true,
-      });
-    } else if (mutation.isSuccess) {
-      toast({
-        title: "Save completed.",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-    } else if (mutation.isError) {
-      toast({
-        title: `Error occured: ${mutation.error.message}`,
-        status: "error",
-        isClosable: true,
-      });
-    }
-  }, [mutation]);
+  const { handleUpdateEntity } = useUpdateEntity();
 
   // Save the data to our site entity
   const save = async (data: Data) => {
     const templateData = JSON.stringify(data);
-    mutation.mutate({
+    handleUpdateEntity({
       entityId: siteEntityId,
       body: { [selectedTemplate.dataField]: templateData },
     });

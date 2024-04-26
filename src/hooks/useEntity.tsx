@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchEntity } from "../utils/api";
+import { fetchEntity } from "../lib/api";
 
 const useEntity = (entityId: string) => {
   const { data: entity, status: status } = useQuery({
