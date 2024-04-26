@@ -66,3 +66,15 @@
     justify-content: space-between;
   }
 }
+
+.loading-screen {
+  .wrapper {
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+  }
+
+  .progress {
+    width: 30%;
+  }
+}

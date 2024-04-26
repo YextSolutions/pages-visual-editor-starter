@@ -1,6 +1,5 @@
 import { Puck, Data, Config } from "@measured/puck";
 import "@measured/puck/puck.css";
-import useEntity from "../hooks/useEntity";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 import {
   customHeader,
@@ -10,14 +9,15 @@ import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
-const siteEntityId = "site";
 
 export interface EditorProps {
   selectedEntity: EntityDefinition;
   entities: EntityDefinition[];
   selectedTemplate: TemplateDefinition;
   templates: TemplateDefinition[];
-  templateConfig: Config;
+  siteEntityId: string;
+  puckConfig: Config;
+  puckData: string;
 }
 
 // Render Puck editor
@@ -26,7 +26,9 @@ export const Editor = ({
   entities,
   selectedTemplate,
   templates,
-  templateConfig,
+  siteEntityId,
+  puckConfig,
+  puckData,
 }: EditorProps) => {
   const mutation = useUpdateEntityMutation();
   const toast = useToast();
@@ -64,30 +66,22 @@ export const Editor = ({
     });
   };
 
-  // Fetch the data from our site entity
-  const { entity: siteEntity } = useEntity(siteEntityId);
   return (
-    <>
-      {siteEntity?.response?.[selectedTemplate.dataField] ? (
-        <Puck
-          config={templateConfig}
-          data={JSON.parse(siteEntity?.response?.[selectedTemplate.dataField])}
-          onPublish={save}
-          overrides={{
-            headerActions: ({ children }) => customHeaderActions(children),
-            header: ({ actions }) =>
-              customHeader({
-                actions: actions,
-                entity: selectedEntity,
-                template: selectedTemplate,
-                entities: entities,
-                templates: templates,
-              }),
-          }}
-        />
-      ) : (
-        <>Loading document...</>
-      )}
-    </>
+    <Puck
+      config={puckConfig}
+      data={JSON.parse(puckData)}
+      onPublish={save}
+      overrides={{
+        headerActions: ({ children }) => customHeaderActions(children),
+        header: ({ actions }) =>
+          customHeader({
+            actions: actions,
+            entity: selectedEntity,
+            template: selectedTemplate,
+            entities: entities,
+            templates: templates,
+          }),
+      }}
+    />
   );
 };
