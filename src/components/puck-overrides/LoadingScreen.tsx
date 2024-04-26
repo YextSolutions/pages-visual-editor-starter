@@ -11,7 +11,11 @@ export function LoadingScreen({ message, progress }: LoadingScreenProps) {
       <Flex className={"wrapper"}>
         <Center className={"wrapper"}>
           <VStack className={"wrapper"}>
-            <Progress className="progress" value={progress}></Progress>
+            <Progress
+              className="progress"
+              value={progress}
+              hasStripe
+            ></Progress>
             <div>{message}</div>
           </VStack>
         </Center>
