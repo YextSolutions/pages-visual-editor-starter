@@ -163,26 +163,26 @@ const Edit: Template<TemplateRenderProps> = () => {
       (!!templates + !!entities + !!puckConfig + !!puckData + !!document)) /
     5;
 
+  if (!mounted || typeof navigator === "undefined") {
+    return <></>;
+  }
+
   return (
     <ChakraProvider>
       <DocumentProvider value={document}>
-        {
-          mounted ? (
-            !isLoading ? (
-              <Editor
-                selectedEntity={entity}
-                entities={entities}
-                selectedTemplate={template}
-                templates={templates}
-                siteEntityId={siteEntityId}
-                puckConfig={puckConfig}
-                puckData={puckData}
-              />
-            ) : (
-              <LoadingScreen progress={progress} message={loadingMessage} />
-            )
-          ) : null // show nothing if the component hasn't loaded
-        }
+        {!isLoading ? (
+          <Editor
+            selectedEntity={entity}
+            entities={entities}
+            selectedTemplate={template}
+            templates={templates}
+            siteEntityId={siteEntityId}
+            puckConfig={puckConfig}
+            puckData={puckData}
+          />
+        ) : (
+          <LoadingScreen progress={progress} message={loadingMessage} />
+        )}
       </DocumentProvider>
     </ChakraProvider>
   );
