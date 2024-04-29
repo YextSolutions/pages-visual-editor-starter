@@ -18,7 +18,14 @@ export const config: TemplateConfig = {
     filter: {
       entityTypes: ["financialProfessional"],
     },
-    fields: ["id", "name", "slug"],
+    fields: [
+      "id",
+      "name",
+      "slug",
+      "c_hero",
+      "c_primaryCallout",
+      "c_primaryHighlights",
+    ],
     localization: {
       locales: ["en"],
     },
@@ -30,7 +37,7 @@ export const transformProps = async (data) => {
   const { document } = data;
   try {
     const visualTemplate = JSON.parse(
-      document?._site?.c_financialProfessionalVisualConfiguration,
+      document?._site?.c_financialProfessionalVisualConfiguration
     );
     return {
       ...data,
@@ -70,9 +77,9 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 const FinancialProfessional: Template<TemplateRenderProps> = ({ document }) => {
   const { visualTemplate, name } = document;
+  console.log(document);
   return (
     <DocumentProvider value={document}>
-      <div>Welcome to the professional page for {name}!</div>
       <Render
         config={financialProfessionalConfig as Config}
         data={visualTemplate}
