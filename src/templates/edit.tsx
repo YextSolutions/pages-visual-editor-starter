@@ -59,6 +59,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [entities, setEntities] = useState<EntityDefinition[]>();
   const [entity, setEntity] = useState<EntityDefinition>();
   const [puckConfig, setPuckConfig] = useState<Config>();
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const toast = useToast();
 
@@ -121,6 +122,7 @@ const Edit: Template<TemplateRenderProps> = () => {
         `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`,
       );
     }
+    setMounted(true);
     getData();
   }, []);
 
@@ -160,6 +162,10 @@ const Edit: Template<TemplateRenderProps> = () => {
     (100 *
       (!!templates + !!entities + !!puckConfig + !!puckData + !!document)) /
     5;
+
+  if (!mounted || typeof navigator === "undefined") {
+    return <></>;
+  }
 
   return (
     <ChakraProvider>

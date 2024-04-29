@@ -14,7 +14,6 @@ export function LoadingScreen({ message, progress }: LoadingScreenProps) {
             <Progress
               className="progress"
               value={progress}
-              hasStripe
             ></Progress>
             <div>{message}</div>
           </VStack>
