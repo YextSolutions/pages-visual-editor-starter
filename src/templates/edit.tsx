@@ -59,6 +59,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [entities, setEntities] = useState<EntityDefinition[]>();
   const [entity, setEntity] = useState<EntityDefinition>();
   const [puckConfig, setPuckConfig] = useState<Config>();
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const toast = useToast();
 
@@ -121,6 +122,7 @@ const Edit: Template<TemplateRenderProps> = () => {
         `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`,
       );
     }
+    setMounted(true);
     getData();
   }, []);
 
@@ -164,19 +166,23 @@ const Edit: Template<TemplateRenderProps> = () => {
   return (
     <ChakraProvider>
       <DocumentProvider value={document}>
-        {!isLoading ? (
-          <Editor
-            selectedEntity={entity}
-            entities={entities}
-            selectedTemplate={template}
-            templates={templates}
-            siteEntityId={siteEntityId}
-            puckConfig={puckConfig}
-            puckData={puckData}
-          />
-        ) : (
-          <LoadingScreen progress={progress} message={loadingMessage} />
-        )}
+        {
+          mounted ? (
+            !isLoading ? (
+              <Editor
+                selectedEntity={entity}
+                entities={entities}
+                selectedTemplate={template}
+                templates={templates}
+                siteEntityId={siteEntityId}
+                puckConfig={puckConfig}
+                puckData={puckData}
+              />
+            ) : (
+              <LoadingScreen progress={progress} message={loadingMessage} />
+            )
+          ) : null // show nothing if the component hasn't loaded
+        }
       </DocumentProvider>
     </ChakraProvider>
   );
