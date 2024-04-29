@@ -1,6 +1,9 @@
 import { ComponentConfig } from "@measured/puck";
 // import { cn } from "../../utils/cn";
 import { Image } from "@yext/pages-components";
+import { useDocument } from "../hooks/useDocument";
+import { FinancialProfessionalStream } from "../types/autogen";
+import useScreenSizes from "../hooks/useScreenSizes";
 
 export type AdvisorHeroProps = {};
 
@@ -8,7 +11,11 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
   fields: {},
   defaultProps: {},
   render: ({}) => {
-    // const hero = useDocument<LocationStream>((document) => document.c_hero);
+    const hero = useDocument<FinancialProfessionalStream>(
+      (document) => document.c_hero
+    );
+
+    const { isMediumDevice } = useScreenSizes();
 
     return (
       <div className="h-[900px] relative bg-white">
@@ -18,7 +25,7 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
             <div className="flex flex-grow justify-center items-center pl-[110px] pr-[70px]">
               <div className="flex-grow space-y-8">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Investment Advisor of RBC Dominion Securities
+                  {hero?.title}
                 </h1>
                 <div className="w-[109px] h-0.5  bg-sky-900" />
                 <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -36,9 +43,19 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
             </div>
             <div className="h-[272px] hidden w-full bg-slate-200 self-end md:block" />
           </div>
-          <div className="w-full flex flex-col md:w-[53.33%]">
-            <div className="flex flex-grow"></div>
-            <div className="h-[136px] w-full bg-sky-900 self-end" />
+          <div className="w-full mt-8 flex flex-col md:w-[53.33%] md:mt-0">
+            {hero.image && (
+              // <div className="flex">
+              <Image
+                image={hero.image}
+                // height={isMediumDevice ? 639 : 344}
+                // width={isMediumDevice ? 768 : 428}
+                // layout="fixed"
+                className="h-[344px] w-full object-contain md:h-full"
+              />
+              // </div>
+            )}
+            <div className="h-[50px] md:h-[136px] w-full bg-sky-900 self-end" />
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
 import { Color, ColorProps } from "../components/Color";
 import { AdvisorHero, AdvisorHeroProps } from "../components/AdvisorHero";
+import { Callout, CalloutProps } from "../components/Callout";
 
 type LocationProps = {
   Toggle: ToggleProps;
@@ -19,6 +20,7 @@ type FinancialProfessionalProps = {
   Toggle: ToggleProps;
   Color: ColorProps;
   AdvisorHero: AdvisorHeroProps;
+  Callout: CalloutProps;
 };
 
 // All the available components for locations
@@ -50,6 +52,7 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     Toggle,
     Color,
     AdvisorHero,
+    Callout,
   },
   root: {
     fields: {},
