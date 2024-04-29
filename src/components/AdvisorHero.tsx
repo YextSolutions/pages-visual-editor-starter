@@ -17,6 +17,8 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
 
     const { isMediumDevice } = useScreenSizes();
 
+    if (!hero) return <></>;
+
     return (
       <div className="h-[900px] relative bg-white">
         <div className="w-10 hidden h-full left-0 top-0 absolute bg-sky-900 md:block" />
@@ -25,7 +27,7 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
             <div className="flex flex-grow justify-center items-center pl-[110px] pr-[70px]">
               <div className="flex-grow space-y-8">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  {hero?.title}
+                  {hero.title}
                 </h1>
                 <div className="w-[109px] h-0.5  bg-sky-900" />
                 <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -44,7 +46,7 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
             <div className="h-[272px] hidden w-full bg-slate-200 self-end md:block" />
           </div>
           <div className="w-full mt-8 flex flex-col md:w-[53.33%] md:mt-0">
-            {hero.image && (
+            {hero?.image && (
               // <div className="flex">
               <Image
                 image={hero.image}
