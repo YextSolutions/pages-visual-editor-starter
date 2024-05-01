@@ -5,6 +5,11 @@ import { Color, ColorProps } from "../components/Color";
 import { AdvisorHero, AdvisorHeroProps } from "../components/AdvisorHero";
 import { Callout, CalloutProps } from "../components/Callout";
 import { Highlights, HighlightsProps } from "../components/Highlights";
+import { AdvisorBio, AdvisorBioProps } from "../components/AdvisorBio";
+import {
+  ContentCarouselProps,
+  ContentCarousel,
+} from "../components/ContentCarousel";
 
 type LocationProps = {
   Toggle: ToggleProps;
@@ -23,6 +28,8 @@ type FinancialProfessionalProps = {
   AdvisorHero: AdvisorHeroProps;
   Callout: CalloutProps;
   Highlights: HighlightsProps;
+  AdvisorBio: AdvisorBioProps;
+  ContentCarousel: ContentCarouselProps;
 };
 
 // All the available components for locations
@@ -56,6 +63,8 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     AdvisorHero,
     Callout,
     Highlights,
+    AdvisorBio,
+    ContentCarousel,
   },
   root: {
     fields: {},
