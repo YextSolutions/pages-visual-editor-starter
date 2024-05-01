@@ -24,6 +24,7 @@ export const Role = {
   INDIV: "individual"
 }
 const siteEntityId = "site";
+const role = Role.GLOBAL;
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -130,7 +131,7 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  const puckData = getPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, Role.GLOBAL)
+  const puckData = getPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, role)
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -178,7 +179,7 @@ const Edit: Template<TemplateRenderProps> = () => {
             entities={entities}
             selectedTemplate={template}
             templates={templates}
-            entityId={entity?.externalId}
+            entityId={role === Role.INDIV ? entity?.externalId : siteEntityId}
             puckConfig={puckConfig}
             puckData={puckData}
           />
