@@ -3,7 +3,7 @@ import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
 const vparam = 20240401;
 
 export default async function entityDocument(
-  request: PagesHttpRequest,
+  request: PagesHttpRequest
 ): Promise<PagesHttpResponse> {
   const { method, pathParams } = request;
 
