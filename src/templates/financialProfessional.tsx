@@ -18,7 +18,21 @@ export const config: TemplateConfig = {
     filter: {
       entityTypes: ["financialProfessional"],
     },
-    fields: ["id", "name", "slug", "c_hero", "c_advisorBio"],
+    fields: [
+      "id",
+      "name",
+      "slug",
+      "c_hero",
+      "c_advisorBio",
+      "c_contentCarousel.services.id",
+      "c_contentCarousel.services.name",
+      "c_contentCarousel.services.c_description",
+      "c_contentCarousel.services.c_icon",
+      "c_contentCarousel.events.id",
+      "c_contentCarousel.events.name",
+      "c_contentCarousel.events.c_description",
+      "c_contentCarousel.services.c_coverPhoto",
+    ],
     localization: {
       locales: ["en"],
     },
