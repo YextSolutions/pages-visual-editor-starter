@@ -28,21 +28,16 @@ export interface ComplexImage {
 export interface C_hero {
 	title?: string,
 	image?: ComplexImage,
+	email?: string,
+	phoneNumber?: string,
 }
 
-export interface C_primaryCallout {
-	title?: string,
-	description?: string,
-}
-
-export interface Highlights {
-	image?: ComplexImage,
-	title?: string,
-	description?: string,
-}
-
-export interface C_primaryHighlights {
-	highlights?: Highlights[],
+export interface C_advisorBio {
+	headshot?: ComplexImage,
+	name?: string,
+	role?: string,
+	email?: string,
+	bio?: string,
 }
 
 export interface FinancialProfessionalStream {
@@ -50,8 +45,7 @@ export interface FinancialProfessionalStream {
 	name: string,
 	slug: string,
 	c_hero: C_hero,
-	c_primaryCallout: C_primaryCallout,
-	c_primaryHighlights: C_primaryHighlights,
+	c_advisorBio: C_advisorBio,
 }
 
 export interface Address {

@@ -16,7 +16,7 @@ export const config: TemplateConfig = {
   stream: {
     $id: "financialProfessional-stream",
     filter: {
-      entityTypes: ["financialProfessional"],
+      savedFilterIds: ["1384352191"],
     },
     fields: [
       "id",
@@ -28,7 +28,7 @@ export const config: TemplateConfig = {
       // "c_contentCarousel.services.entityType",
       "c_contentCarousel.services.name",
       "c_contentCarousel.services.c_description",
-      "c_contentCarousel.services.c_icon",
+      "c_contentCarousel.services.c_iconName",
       "c_contentCarousel.events.id",
       // "c_contentCarousel.events.entityType",
       "c_contentCarousel.events.name",
