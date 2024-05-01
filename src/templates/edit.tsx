@@ -16,9 +16,13 @@ import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
-import useEntity from "../hooks/useEntity";
+import { getPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 
+export const Role = {
+  GLOBAL: "global",
+  INDIV: "individual"
+}
 const siteEntityId = "site";
 
 export const config: TemplateConfig = {
@@ -126,9 +130,7 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  // fetch the puck data from our site entity
-  const { entity: siteEntity } = useEntity(siteEntityId);
-  const puckData = template ? siteEntity?.response?.[template.dataField] : "";
+  const puckData = getPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, Role.GLOBAL)
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -176,7 +178,7 @@ const Edit: Template<TemplateRenderProps> = () => {
             entities={entities}
             selectedTemplate={template}
             templates={templates}
-            siteEntityId={siteEntityId}
+            entityId={entity?.externalId}
             puckConfig={puckConfig}
             puckData={puckData}
           />
