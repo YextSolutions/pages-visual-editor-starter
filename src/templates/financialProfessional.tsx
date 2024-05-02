@@ -34,6 +34,12 @@ export const config: TemplateConfig = {
       "c_contentCarousel.events.name",
       "c_contentCarousel.events.c_description",
       "c_contentCarousel.events.c_coverPhoto",
+      "c_contentGrid",
+      "c_contentGrid.financialProfessionals.id",
+      "c_contentGrid.financialProfessionals.name",
+      "c_contentGrid.financialProfessionals.mainPhone",
+      "c_contentGrid.financialProfessionals.emails",
+      "c_contentGrid.financialProfessionals.c_role",
     ],
     localization: {
       locales: ["en"],
