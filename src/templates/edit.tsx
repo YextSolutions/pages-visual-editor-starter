@@ -21,7 +21,7 @@ import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 
 export const Role = {
   GLOBAL: "global",
-  INDIV: "individual"
+  INDIVIDUAL: "individual"
 }
 const siteEntityId = "site";
 const role = Role.GLOBAL;
@@ -179,7 +179,7 @@ const Edit: Template<TemplateRenderProps> = () => {
             entities={entities}
             selectedTemplate={template}
             templates={templates}
-            entityId={role === Role.INDIV ? entity?.externalId : siteEntityId}
+            entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
             puckConfig={puckConfig}
             puckData={puckData}
           />
