@@ -15,8 +15,8 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "./ui/carousel";
-import { ServiceCard } from "./ServiceCard";
-import { EventCard } from "./EventCard";
+import { ServiceCard } from "./cards/ServiceCard";
+import { EventCard } from "./cards/EventCard";
 
 export type ContentCarouselProps = {
   content: "services" | "events";
@@ -51,6 +51,8 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
     const services = contentCarousel?.services || [];
     const events = contentCarousel?.events || [];
 
+    console.log(contentCarousel);
+
     console.log(services);
 
     console.log(content);
@@ -58,6 +60,10 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
     // TODO: add placeholder for null content value
     return (
       <Section>
+        {/* TODO: move to a prop on the section */}
+        <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
+          {contentCarousel?.title}
+        </h2>
         <Carousel>
           <CarouselContent>
             {content === "services"

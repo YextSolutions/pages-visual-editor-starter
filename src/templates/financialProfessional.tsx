@@ -24,6 +24,7 @@ export const config: TemplateConfig = {
       "slug",
       "c_hero",
       "c_advisorBio",
+      "c_contentCarousel.title",
       "c_contentCarousel.services.id",
       // "c_contentCarousel.services.entityType",
       "c_contentCarousel.services.name",
@@ -40,6 +41,7 @@ export const config: TemplateConfig = {
       "c_contentGrid.financialProfessionals.mainPhone",
       "c_contentGrid.financialProfessionals.emails",
       "c_contentGrid.financialProfessionals.c_role",
+      "c_contentGrid.financialProfessionals.photoGallery",
     ],
     localization: {
       locales: ["en"],

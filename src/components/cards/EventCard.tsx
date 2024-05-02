@@ -1,4 +1,4 @@
-import { LinkedEvent } from "../types/autogen";
+import { LinkedEvent } from "../../types/autogen";
 import {
   Card,
   CardContent,
@@ -6,7 +6,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 
 interface EventCardProps {
   event: LinkedEvent;

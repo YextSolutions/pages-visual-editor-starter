@@ -241,17 +241,32 @@ export interface LinkedEvent {
   name: string;
 }
 
+export interface LinkedFinancialProfessional {
+  id: string;
+  name: string;
+  c_role?: string;
+  c_headshot?: ComplexImage;
+  emails?: string[];
+  mainPhone?: string;
+}
+
 export interface ContentCarousel {
   title?: string;
   services?: LinkedService[];
   events?: LinkedEvent[];
 }
 
+export interface ContentGrid {
+  title?: string;
+  financialProfessionals?: LinkedFinancialProfessional[];
+}
+
 export interface FinancialProfessionalStream {
   id: string;
   name: string;
   slug: string;
-  c_hero?: C_hero;
-  c_advisorBio?: C_advisorBio;
-  c_contentCarousel?: ContentCarousel;
+  c_hero: C_hero;
+  c_advisorBio: C_advisorBio;
+  c_contentCarousel: ContentCarousel;
+  c_contentGrid: ContentGrid;
 }

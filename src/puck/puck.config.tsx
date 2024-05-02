@@ -10,6 +10,8 @@ import {
   ContentCarouselProps,
   ContentCarousel,
 } from "../components/ContentCarousel";
+import { ContentGrid, ContentGridProps } from "../components/ContentGrid";
+import { FeaturedBlogs, FeaturedBlogsProps } from "../components/FeaturedBlogs";
 
 type LocationProps = {
   Toggle: ToggleProps;
@@ -30,6 +32,8 @@ type FinancialProfessionalProps = {
   Highlights: HighlightsProps;
   AdvisorBio: AdvisorBioProps;
   ContentCarousel: ContentCarouselProps;
+  ContentGrid: ContentGridProps;
+  FeaturedBlog: FeaturedBlogsProps;
 };
 
 // All the available components for locations
@@ -65,6 +69,8 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     Highlights,
     AdvisorBio,
     ContentCarousel,
+    ContentGrid,
+    FeaturedBlogs,
   },
   root: {
     fields: {},

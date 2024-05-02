@@ -1,5 +1,5 @@
 import { ComponentType, ReactElement } from "react";
-import { LinkedService } from "../types/autogen";
+import { LinkedService } from "../../types/autogen";
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 import {
   HeartHandshake,
   Landmark,
