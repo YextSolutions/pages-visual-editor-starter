@@ -42,6 +42,12 @@ export const config: TemplateConfig = {
       "c_contentGrid.financialProfessionals.emails",
       "c_contentGrid.financialProfessionals.c_role",
       "c_contentGrid.financialProfessionals.photoGallery",
+      "c_insights.featuredBlogs.name",
+      "c_insights.featuredBlogs.c_category",
+      "c_insights.featuredBlogs.c_description",
+      "c_insights.featuredBlogs.datePosted",
+      "c_insights.featuredBlogs.landingPageUrl",
+      "c_insights.featuredBlogs.photoGallery",
     ],
     localization: {
       locales: ["en"],
