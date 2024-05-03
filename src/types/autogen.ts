@@ -250,6 +250,15 @@ export interface LinkedFinancialProfessional {
   mainPhone?: string;
 }
 
+export interface LinkedBlog {
+  name: string;
+  datePosted?: string;
+  c_description?: string;
+  landingPageUrl?: string;
+  c_category?: string[];
+  photoGallery?: ComplexImage[];
+}
+
 export interface ContentCarousel {
   title?: string;
   services?: LinkedService[];
@@ -261,6 +270,10 @@ export interface ContentGrid {
   financialProfessionals?: LinkedFinancialProfessional[];
 }
 
+export interface FeaturedBlogs {
+  blogs: LinkedBlog[];
+}
+
 export interface FinancialProfessionalStream {
   id: string;
   name: string;
@@ -269,4 +282,5 @@ export interface FinancialProfessionalStream {
   c_advisorBio: C_advisorBio;
   c_contentCarousel: ContentCarousel;
   c_contentGrid: ContentGrid;
+  c_insights: FeaturedBlogs[];
 }

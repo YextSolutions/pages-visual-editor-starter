@@ -48,6 +48,7 @@ export const config: TemplateConfig = {
       "c_insights.blogs.datePosted",
       "c_insights.blogs.landingPageUrl",
       "c_insights.blogs.photoGallery",
+      "c_locator",
     ],
     localization: {
       locales: ["en"],

@@ -18,6 +18,7 @@
     "@chakra-ui/react": "^2.8.2",
     "@headlessui/react": "^1.7.12",
     "@heroicons/react": "^2.0.14",
+    "@mantine/hooks": "^7.9.0",
     "@measured/puck": "^0.14.1",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-query": "^5.8.2",

@@ -3,20 +3,31 @@ import { Image } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
 import { C_advisorBio, FinancialProfessionalStream } from "../types/autogen";
 import { Section } from "./Section";
+import { backgroundColors } from "../puck/theme";
 
-export type AdvisorBioProps = {};
+export type AdvisorBioProps = {
+  backgroundColor: string;
+};
 
 export const AdvisorBio: ComponentConfig<AdvisorBioProps> = {
-  fields: {},
-  defaultProps: {},
-  render: ({}) => {
+  fields: {
+    backgroundColor: {
+      label: "Background Color",
+      type: "select",
+      options: backgroundColors,
+    },
+  },
+  defaultProps: {
+    backgroundColor: "bg-white",
+  },
+  render: ({ backgroundColor }) => {
     // TODO: ask team about types
     const bio: C_advisorBio = useDocument<FinancialProfessionalStream>(
       (document) => document.c_advisorBio
     );
 
     return (
-      <Section>
+      <Section className={backgroundColor}>
         <div className="flex flex-col gap-x-8 md:flex-row">
           {bio?.headshot && (
             <div className="aspect-[4/3] md:w-60  w-96 flex-none  md:rounded-lg object-cover">

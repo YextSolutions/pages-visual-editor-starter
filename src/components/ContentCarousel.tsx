@@ -1,6 +1,4 @@
 import { ComponentConfig } from "@measured/puck";
-// import { cn } from "../../utils/cn";
-import { Image } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
 import {
   FinancialProfessionalStream,
@@ -17,9 +15,11 @@ import {
 } from "./ui/carousel";
 import { ServiceCard } from "./cards/ServiceCard";
 import { EventCard } from "./cards/EventCard";
+import { backgroundColors } from "../puck/theme";
 
 export type ContentCarouselProps = {
   content: "services" | "events";
+  backgroundColor: string;
 };
 
 const contentOptions = [
@@ -34,11 +34,17 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
       type: "select",
       options: contentOptions,
     },
+    backgroundColor: {
+      label: "Background Color",
+      type: "select",
+      options: backgroundColors,
+    },
   },
   defaultProps: {
     content: "services",
+    backgroundColor: "bg-white",
   },
-  render: ({ content }) => {
+  render: ({ content, backgroundColor }) => {
     // TODO: ask team about types
     // const bio: C_con = useDocument<FinancialProfessionalStream>(
     //   (document) => document.
@@ -51,15 +57,9 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
     const services = contentCarousel?.services || [];
     const events = contentCarousel?.events || [];
 
-    console.log(contentCarousel);
-
-    console.log(services);
-
-    console.log(content);
-
     // TODO: add placeholder for null content value
     return (
-      <Section>
+      <Section className={backgroundColor}>
         {/* TODO: move to a prop on the section */}
         <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
           {contentCarousel?.title}

@@ -4,6 +4,7 @@ import { Image } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
 import { C_hero, FinancialProfessionalStream } from "../types/autogen";
 import { Button } from "./ui/button";
+import { Mail, Phone } from "lucide-react";
 
 export type AdvisorHeroProps = {};
 
@@ -43,7 +44,17 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
             New York City, NY 11202
           </div>
           <div className="justify-start items-center gap-4 inline-flex">
-            {/* Your icons and text elements here */}
+            <Phone className="w-5 h-5 text-white" />
+            <div className="text-white text-base font-normal  leading-normal">
+              (339) 291-5039
+            </div>
+            <div className="h-5 w-0.5 bg-white"></div>
+            <div className="justify-start items-center gap-2 flex">
+              <Mail className="text-white text-base font-normal leading-normal" />
+              <div className="text-white text-base font-normal underline leading-normal">
+                capital-nyc@capital.com
+              </div>
+            </div>
           </div>
           <Button variant="secondary">Button</Button>
         </div>

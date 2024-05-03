@@ -46,8 +46,6 @@ interface ServiceCardProps {
 }
 
 export const ServiceCard = ({ service }: ServiceCardProps) => {
-  console.log(service);
-
   const Icon = isIconKey(service.c_iconName)
     ? icons[service.c_iconName]
     : CircleHelp;
