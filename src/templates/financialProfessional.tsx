@@ -22,7 +22,7 @@ export const config: TemplateConfig = {
       "id", 
       "name", 
       "slug", 
-      "c_locationVisualConfiguration",
+      "c_financialProfessionalVisualConfiguration",
     ],
     localization: {
       locales: ["en"],
