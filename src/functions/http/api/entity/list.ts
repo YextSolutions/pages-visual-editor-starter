@@ -3,7 +3,7 @@ import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
 const vparam = 20240401;
 
 export default async function getEntities(
-  request: PagesHttpRequest,
+  request: PagesHttpRequest
 ): Promise<PagesHttpResponse> {
   const { method, queryParams, body } = request;
   if (method !== "GET") {
@@ -12,9 +12,11 @@ export default async function getEntities(
 
   let mgmtApiReq = `https://api.yextapis.com/v2/accounts/me/entities?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`;
   const entityTypes = queryParams.entityTypes;
-  if (entityTypes) {
-    mgmtApiReq += `&entityTypes=${entityTypes}`;
-  }
+  // if (entityTypes) {
+  //   mgmtApiReq += `&entityTypes=${entityTypes}`;
+  // }
+
+  mgmtApiReq += `&searchIds=256409`;
 
   const mgmtApiResp = await fetch(mgmtApiReq);
   try {
