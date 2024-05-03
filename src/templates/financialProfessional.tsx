@@ -18,7 +18,12 @@ export const config: TemplateConfig = {
     filter: {
       entityTypes: ["financialProfessional"],
     },
-    fields: ["id", "name", "slug"],
+    fields: [
+      "id", 
+      "name", 
+      "slug", 
+      "c_locationVisualConfiguration",
+    ],
     localization: {
       locales: ["en"],
     },
@@ -29,9 +34,9 @@ export const config: TemplateConfig = {
 export const transformProps = async (data) => {
   const { document } = data;
   try {
-    const visualTemplate = JSON.parse(
-      document?._site?.c_financialProfessionalVisualConfiguration,
-    );
+    const visualTemplate = document.c_financialProfessionalVisualConfiguration 
+      ? JSON.parse(document.c_financialProfessionalVisualConfiguration) 
+      : JSON.parse(document._site?.c_financialProfessionalVisualConfiguration);
     return {
       ...data,
       document: {
