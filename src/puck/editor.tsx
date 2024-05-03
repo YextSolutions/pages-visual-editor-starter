@@ -15,7 +15,7 @@ export interface EditorProps {
   entities: EntityDefinition[];
   selectedTemplate: TemplateDefinition;
   templates: TemplateDefinition[];
-  siteEntityId: string;
+  entityId: string;
   puckConfig: Config;
   puckData: string;
 }
@@ -26,7 +26,7 @@ export const Editor = ({
   entities,
   selectedTemplate,
   templates,
-  siteEntityId,
+  entityId,
   puckConfig,
   puckData,
 }: EditorProps) => {
@@ -61,7 +61,7 @@ export const Editor = ({
   const save = async (data: Data) => {
     const templateData = JSON.stringify(data);
     mutation.mutate({
-      entityId: siteEntityId,
+      entityId: entityId,
       body: { [selectedTemplate.dataField]: templateData },
     });
   };
