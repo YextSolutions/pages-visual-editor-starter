@@ -11,6 +11,8 @@ import { useDocument } from "../hooks/useDocument";
 import { Image } from "@yext/pages-components";
 import useScreenSizes from "../hooks/useScreenSizes";
 import { backgroundColors } from "../puck/theme";
+import { Skeleton } from "./ui/skeleton";
+import useEnvironment from "../hooks/useEnvironment";
 
 export type FeaturedBlogsProps = {
   sectionTitle: string;
@@ -45,8 +47,19 @@ export const FeaturedBlogs: ComponentConfig<FeaturedBlogsProps> = {
 
     const { isMediumDevice } = useScreenSizes();
 
-    if (!featuredBlog) {
-      return <></>;
+    const isEditor = useEnvironment();
+
+    if (!insights) {
+      if (isEditor) {
+        return (
+          <FeaturedBlogsSkeleton
+            backgroundColor={backgroundColor}
+            sectionTitle={sectionTitle}
+          />
+        );
+      } else {
+        return <></>;
+      }
     }
 
     // TODO: add placeholder for null content value
@@ -145,4 +158,53 @@ export const FeaturedBlogs: ComponentConfig<FeaturedBlogsProps> = {
       </Section>
     );
   },
+};
+
+interface FeaturedBlogsSkeletonProps {
+  sectionTitle: string;
+  backgroundColor: string;
+}
+
+const FeaturedBlogsSkeleton = ({
+  sectionTitle,
+  backgroundColor,
+}: FeaturedBlogsSkeletonProps) => {
+  return (
+    <Section className={backgroundColor}>
+      <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
+        {sectionTitle}
+      </h2>
+      <div className="bg-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 px-6 sm:gap-y-16 lg:grid-cols-2 lg:px-8">
+          <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
+            <Skeleton className="w-full h-[200px]" />
+            <div className="flex mt-6">
+              <Skeleton className="w-24 h-4" />
+              <div className="mx-2 w-4 h-4 border-r border-zinc-800" />{" "}
+              <Skeleton className="w-24 h-4" />
+            </div>
+            <Skeleton className="mt-4 h-8" />
+            <Skeleton className="mt-2 h-6" />
+          </article>
+          <div className="mx-auto w-full max-w-2xl border-t border-gray-900/10 pt-12 sm:pt-16 lg:mx-0 lg:max-w-none lg:border-t-0 lg:pt-0">
+            <div className="-my-12 divide-y divide-gray-900/10">
+              {Array.from({ length: 3 }).map((_, idx) => (
+                <article key={idx} className="py-8">
+                  <div className="group relative max-w-xl">
+                    <div className="flex">
+                      <Skeleton className="w-24 h-4" />{" "}
+                      <div className="mx-2 w-4 h-4 border-r border-zinc-800" />{" "}
+                      <Skeleton className="w-24 h-4" />{" "}
+                    </div>
+                    <Skeleton className="mt-2 h-8" />{" "}
+                    <Skeleton className="mt-4 h-6" />{" "}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
 };

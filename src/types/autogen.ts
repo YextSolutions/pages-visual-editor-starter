@@ -274,6 +274,18 @@ export interface FeaturedBlogs {
   blogs: LinkedBlog[];
 }
 
+export interface Coordinates {
+  latitude?: string;
+  longitude?: string;
+}
+
+export interface C_locator {
+  description?: string;
+  phoneNumber?: string;
+  email?: string;
+  coordinates?: Coordinates;
+}
+
 export interface FinancialProfessionalStream {
   id: string;
   name: string;
@@ -283,4 +295,5 @@ export interface FinancialProfessionalStream {
   c_contentCarousel: ContentCarousel;
   c_contentGrid: ContentGrid;
   c_insights: FeaturedBlogs[];
+  c_locator: C_locator;
 }

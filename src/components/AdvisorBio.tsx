@@ -4,6 +4,8 @@ import { useDocument } from "../hooks/useDocument";
 import { C_advisorBio, FinancialProfessionalStream } from "../types/autogen";
 import { Section } from "./Section";
 import { backgroundColors } from "../puck/theme";
+import { Skeleton } from "./ui/skeleton";
+import useEnvironment from "../hooks/useEnvironment";
 
 export type AdvisorBioProps = {
   backgroundColor: string;
@@ -26,16 +28,22 @@ export const AdvisorBio: ComponentConfig<AdvisorBioProps> = {
       (document) => document.c_advisorBio
     );
 
+    const isEditor = useEnvironment();
+
+    if (!bio) {
+      if (isEditor) {
+        return <AdvisorBioSkeleton backgroundColor={backgroundColor} />;
+      } else {
+        return <></>;
+      }
+    }
+
     return (
       <Section className={backgroundColor}>
         <div className="flex flex-col gap-x-8 md:flex-row">
           {bio?.headshot && (
             <div className="aspect-[4/3] md:w-60  w-96 flex-none  md:rounded-lg object-cover">
-              <Image
-                className="object-cover"
-                // aspectRatio={4 / 3}
-                image={bio.headshot}
-              ></Image>
+              <Image className="object-cover" image={bio.headshot}></Image>
             </div>
           )}
 
@@ -53,4 +61,26 @@ export const AdvisorBio: ComponentConfig<AdvisorBioProps> = {
       </Section>
     );
   },
+};
+
+interface AdvisorBioSkeletonProps {
+  backgroundColor: string;
+}
+
+const AdvisorBioSkeleton = ({ backgroundColor }: AdvisorBioSkeletonProps) => {
+  return (
+    <Section className={backgroundColor}>
+      <div className="flex flex-col gap-x-8 md:flex-row">
+        <Skeleton className="aspect-[4/3] md:w-60 w-96 flex-none rounded-lg" />{" "}
+        {/* Placeholder for the headshot */}
+        <div className="flex flex-col gap-y-6">
+          <Skeleton className="h-8 w-48" /> {/* Placeholder for the name */}
+          <Skeleton className="h-6 w-40" /> {/* Placeholder for the role */}
+          <Skeleton className="h-6 w-56" /> {/* Placeholder for the email */}
+          <Skeleton className="h-24 w-full" />{" "}
+          {/* Placeholder for the bio text */}
+        </div>
+      </div>
+    </Section>
+  );
 };

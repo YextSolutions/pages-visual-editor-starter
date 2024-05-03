@@ -1,18 +1,8 @@
-import { ComponentType, ReactElement } from "react";
-import {
-  LinkedFinancialProfessional,
-  LinkedService,
-} from "../../types/autogen";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { LinkedFinancialProfessional } from "../../types/autogen";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { ChevronUp, CircleUserRound } from "lucide-react";
 import { Phone, Mail } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 interface AdvisorCardProps {
   advisor: LinkedFinancialProfessional;
@@ -57,3 +47,33 @@ export const AdvisorCard = ({ advisor }: AdvisorCardProps) => {
     </Card>
   );
 };
+
+const AdvisorCardSkeleton = () => {
+  return (
+    <div className="h-full gap-y-4 rounded-lg border border-zinc-200">
+      <div className="flex flex-row gap-x-6 border-b border-zinc-200">
+        <Skeleton className="w-24 h-24 rounded-full" />
+        <div className="flex flex-col ">
+          <Skeleton className="w-48 h-8 mb-2" />
+          <Skeleton className="w-32 h-6" />
+        </div>
+      </div>
+      <div className="flex flex-col gap-y-4 py-8">
+        <div>
+          <Skeleton className="inline-block w-4 h-4" />
+          <Skeleton className="ml-2 w-24 h-6" />
+        </div>
+        <div>
+          <Skeleton className="inline-block w-4 h-4" />
+          <Skeleton className="ml-2 w-24 h-6" />
+        </div>
+        <div className="flex">
+          <Skeleton className="w-24 h-6" />
+          <Skeleton className="w-6 h-6" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export { AdvisorCardSkeleton };
