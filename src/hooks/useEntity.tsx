@@ -6,7 +6,7 @@ import { Role } from "../templates/edit";
  * If the role is "individual" and the entity's config data is populated, 
  * returns the entityId's config data. Else returns the site entity's config data. 
  */
-export const getPuckData = (
+export const GetPuckData = (
   siteEntityId: string,
   field: string,
   entityId?: string,
