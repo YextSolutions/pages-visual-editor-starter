@@ -16,7 +16,7 @@ import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
-import { getPuckData } from "../hooks/useEntity";
+import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 
 export const Role = {
@@ -24,7 +24,6 @@ export const Role = {
   INDIVIDUAL: "individual"
 }
 const siteEntityId = "site";
-const role = Role.GLOBAL;
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -131,7 +130,8 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  const puckData = getPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, role)
+  const role = Role.GLOBAL;
+  const puckData = GetPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, role)
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -173,7 +173,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   return (
     <ChakraProvider>
       <DocumentProvider value={document}>
-        {!isLoading ? (
+        {!isLoading && !!puckData ? (
           <Editor
             selectedEntity={entity}
             entities={entities}
