@@ -18,7 +18,13 @@ export const config: TemplateConfig = {
     filter: {
       entityTypes: ["product"],
     },
-    fields: ["id", "name", "price", "slug"],
+    fields: [
+      "id", 
+      "name", 
+      "price", 
+      "slug",
+      "c_productVisualConfiguration"
+    ],
     localization: {
       locales: ["en"],
     },
@@ -29,9 +35,9 @@ export const config: TemplateConfig = {
 export const transformProps = async (data) => {
   const { document } = data;
   try {
-    const visualTemplate = JSON.parse(
-      document?._site?.c_productVisualConfiguration,
-    );
+    const visualTemplate = document.c_productVisualConfiguration 
+      ? JSON.parse(document.c_productVisualConfiguration) 
+      : JSON.parse(document._site?.c_productVisualConfiguration);
     return {
       ...data,
       document: {
