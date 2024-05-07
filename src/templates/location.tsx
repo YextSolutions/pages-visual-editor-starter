@@ -26,7 +26,9 @@ export const config: TemplateConfig = {
       "address",
       "slug",
       "c_hero",
-      "c_locationVisualConfiguration"
+      "c_locationVisualConfiguration",
+      "c_locationHero",
+      "c_locationCore",
     ],
     localization: {
       locales: ["en"],
