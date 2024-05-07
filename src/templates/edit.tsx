@@ -162,17 +162,15 @@ const Edit: Template<TemplateRenderProps> = () => {
     <>
       <DocumentProvider value={document}>
         {!isLoading && !!puckData ? (
-          <>
-            <Editor
-              selectedEntity={entity}
-              entities={entities}
-              selectedTemplate={template}
-              templates={templates}
-              entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
-              puckConfig={puckConfig}
-              puckData={puckData}
-            />
-          </>
+          <Editor
+            selectedEntity={entity}
+            entities={entities}
+            selectedTemplate={template}
+            templates={templates}
+            entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
+            puckConfig={puckConfig}
+            puckData={puckData}
+          />
         ) : (
           <LoadingScreen progress={progress} message={loadingMessage} />
         )}
