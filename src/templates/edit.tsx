@@ -9,7 +9,6 @@ import {
 import { Editor } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
-import { ChakraProvider, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
@@ -18,6 +17,8 @@ import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker"
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
+import { useToast } from "../components/ui/useToast"
+import { Toaster } from "../components/ui/Toaster";
 
 export const Role = {
   GLOBAL: "global",
@@ -28,6 +29,7 @@ const siteEntityId = "site";
 export const config: TemplateConfig = {
   name: "edit",
 };
+
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
@@ -65,7 +67,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
 
-  const toast = useToast();
+  const { toast } = useToast();
 
   useEffect(() => {
     async function getData() {
@@ -171,23 +173,22 @@ const Edit: Template<TemplateRenderProps> = () => {
   }
 
   return (
-    <ChakraProvider>
-      <DocumentProvider value={document}>
-        {!isLoading && !!puckData ? (
-          <Editor
-            selectedEntity={entity}
-            entities={entities}
-            selectedTemplate={template}
-            templates={templates}
-            entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
-            puckConfig={puckConfig}
-            puckData={puckData}
-          />
-        ) : (
-          <LoadingScreen progress={progress} message={loadingMessage} />
-        )}
-      </DocumentProvider>
-    </ChakraProvider>
+    <DocumentProvider value={document}>
+      {!isLoading && !!puckData ? (
+        <Editor
+          selectedEntity={entity}
+          entities={entities}
+          selectedTemplate={template}
+          templates={templates}
+          entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
+          puckConfig={puckConfig}
+          puckData={puckData}
+        />
+      ) : (
+        <LoadingScreen progress={progress} message={loadingMessage} />
+      )}
+    <Toaster />
+    </DocumentProvider>
   );
 };
 export default Edit;

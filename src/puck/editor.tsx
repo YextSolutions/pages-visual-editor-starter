@@ -5,7 +5,7 @@ import {
   customHeader,
   customHeaderActions,
 } from "../components/puck-overrides/Header";
-import { useToast } from "@chakra-ui/react";
+import { useToast } from "../components/ui/useToast"
 import { useEffect } from "react";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
@@ -31,7 +31,7 @@ export const Editor = ({
   puckData,
 }: EditorProps) => {
   const mutation = useUpdateEntityMutation();
-  const toast = useToast();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (mutation.isPending) {

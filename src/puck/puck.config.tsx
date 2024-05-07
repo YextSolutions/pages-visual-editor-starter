@@ -1,22 +1,18 @@
 import type { Config } from "@measured/puck";
 import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
-import { Color, ColorProps } from "../components/Color";
 
 type LocationProps = {
   Toggle: ToggleProps;
   Hero: HeroProps;
-  Color: ColorProps;
 };
 
 type ProductProps = {
   Toggle: ToggleProps;
-  Color: ColorProps;
 };
 
 type FinancialProfessionalProps = {
   Toggle: ToggleProps;
-  Color: ColorProps;
 };
 
 // All the available components for locations
@@ -24,7 +20,6 @@ export const locationConfig: Config<LocationProps> = {
   components: {
     Toggle,
     Hero,
-    Color,
   },
   root: {
     fields: {},
@@ -35,7 +30,6 @@ export const locationConfig: Config<LocationProps> = {
 export const productConfig: Config<ProductProps> = {
   components: {
     Toggle,
-    Color,
   },
   root: {
     fields: {},
@@ -46,7 +40,6 @@ export const productConfig: Config<ProductProps> = {
 export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   components: {
     Toggle,
-    Color,
   },
   root: {
     fields: {},
