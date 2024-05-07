@@ -17,7 +17,7 @@ import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker"
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
-import { useToast } from "../components/ui/useToast"
+import { toast } from "sonner"
 import { Toaster } from "../components/ui/Toaster";
 
 export const Role = {
@@ -67,8 +67,6 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
 
-  const { toast } = useToast();
-
   useEffect(() => {
     async function getData() {
       // get templates
@@ -84,13 +82,7 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          toast({
-            status: "error",
-            duration: 5000,
-            colorScheme: "red",
-            position: "top",
-            description: `Could not find template with id '${urlTemplateId}'`,
-          });
+          toast.error(`Could not find template with id '${urlTemplateId}'`)
         }
       }
       setTemplates(fetchedTemplates);
@@ -108,13 +100,7 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          toast({
-            status: "error",
-            duration: 5000,
-            colorScheme: "red",
-            position: "top",
-            description: `Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`,
-          });
+          toast.error(`Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`)
         }
       }
       setEntities(fetchedEntities);
@@ -173,22 +159,26 @@ const Edit: Template<TemplateRenderProps> = () => {
   }
 
   return (
-    <DocumentProvider value={document}>
-      {!isLoading && !!puckData ? (
-        <Editor
-          selectedEntity={entity}
-          entities={entities}
-          selectedTemplate={template}
-          templates={templates}
-          entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
-          puckConfig={puckConfig}
-          puckData={puckData}
-        />
-      ) : (
-        <LoadingScreen progress={progress} message={loadingMessage} />
-      )}
-    <Toaster />
-    </DocumentProvider>
+    <>
+      <DocumentProvider value={document}>
+        {!isLoading && !!puckData ? (
+          <>
+            <Editor
+              selectedEntity={entity}
+              entities={entities}
+              selectedTemplate={template}
+              templates={templates}
+              entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
+              puckConfig={puckConfig}
+              puckData={puckData}
+            />
+          </>
+        ) : (
+          <LoadingScreen progress={progress} message={loadingMessage} />
+        )}
+      </DocumentProvider>
+      <Toaster closeButton richColors/>
+    </>
   );
 };
 export default Edit;
