@@ -17,13 +17,13 @@ import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker"
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { Toaster } from "../components/ui/Toaster";
 
 export const Role = {
   GLOBAL: "global",
-  INDIVIDUAL: "individual"
-}
+  INDIVIDUAL: "individual",
+};
 const siteEntityId = "site";
 
 export const config: TemplateConfig = {
@@ -82,7 +82,7 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          toast.error(`Could not find template with id '${urlTemplateId}'`)
+          toast.error(`Could not find template with id '${urlTemplateId}'`);
         }
       }
       setTemplates(fetchedTemplates);
@@ -100,7 +100,9 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          toast.error(`Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`)
+          toast.error(
+            `Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`
+          );
         }
       }
       setEntities(fetchedEntities);
@@ -111,7 +113,7 @@ const Edit: Template<TemplateRenderProps> = () => {
       window.history.replaceState(
         null,
         "",
-        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`,
+        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`
       );
     }
     setMounted(true);
@@ -119,7 +121,12 @@ const Edit: Template<TemplateRenderProps> = () => {
   }, []);
 
   const role = Role.GLOBAL;
-  const puckData = GetPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, role)
+  const puckData = GetPuckData(
+    siteEntityId,
+    template?.dataField ?? "",
+    entity?.externalId,
+    role
+  );
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -168,7 +175,9 @@ const Edit: Template<TemplateRenderProps> = () => {
               entities={entities}
               selectedTemplate={template}
               templates={templates}
-              entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
+              entityId={
+                role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId
+              }
               puckConfig={puckConfig}
               puckData={puckData}
             />
@@ -177,7 +186,7 @@ const Edit: Template<TemplateRenderProps> = () => {
           <LoadingScreen progress={progress} message={loadingMessage} />
         )}
       </DocumentProvider>
-      <Toaster closeButton richColors/>
+      <Toaster closeButton richColors />
     </>
   );
 };

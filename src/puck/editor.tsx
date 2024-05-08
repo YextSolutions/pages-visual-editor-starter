@@ -5,7 +5,7 @@ import {
   customHeader,
   customHeaderActions,
 } from "../components/puck-overrides/Header";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { useEffect } from "react";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
@@ -30,7 +30,7 @@ export const Editor = ({
   puckConfig,
   puckData,
 }: EditorProps) => {
-  const toastId = "toast"
+  const toastId = "toast";
   const mutation = useUpdateEntityMutation();
 
   useEffect(() => {
@@ -41,11 +41,11 @@ export const Editor = ({
     } else if (mutation.isSuccess) {
       toast.success("Save completed.", {
         id: toastId,
-      })
+      });
     } else if (mutation.isError) {
       toast.error(`Error occured: ${mutation.error.message}`, {
         id: toastId,
-      })
+      });
     }
   }, [mutation]);
 

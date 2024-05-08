@@ -1,7 +1,6 @@
 import type { Config } from "@measured/puck";
 import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
-import { Color, ColorProps } from "../components/Color";
 import { AdvisorHero, AdvisorHeroProps } from "../components/AdvisorHero";
 import { AdvisorBio, AdvisorBioProps } from "../components/AdvisorBio";
 import {
@@ -23,7 +22,6 @@ type ProductProps = {
 
 type FinancialProfessionalProps = {
   Toggle: ToggleProps;
-  Color: ColorProps;
   AdvisorHero: AdvisorHeroProps;
   AdvisorBio: AdvisorBioProps;
   ContentCarousel: ContentCarouselProps;
@@ -57,7 +55,6 @@ export const productConfig: Config<ProductProps> = {
 export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   components: {
     Toggle,
-    Color,
     AdvisorHero,
     AdvisorBio,
     ContentCarousel,

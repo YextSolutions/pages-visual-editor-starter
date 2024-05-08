@@ -3,8 +3,8 @@ import { ComponentConfig } from "@measured/puck";
 import { Image } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
 import { C_hero, FinancialProfessionalStream } from "../types/autogen";
-import { Button } from "./ui/button";
 import { Mail, Phone } from "lucide-react";
+import { Button } from "./ui/Button";
 
 export type AdvisorHeroProps = {};
 

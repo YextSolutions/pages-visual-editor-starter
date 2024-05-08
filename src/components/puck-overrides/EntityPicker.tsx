@@ -1,5 +1,4 @@
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { Button } from "../ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +7,7 @@ import {
 } from "../ui/Dropdown";
 import { EntityConfirmationModal } from "./EntityConfirmationModal";
 import { useState } from "react";
+import { Button } from "../ui/Button";
 
 export type EntityDefinition = {
   name: string;
@@ -63,9 +63,7 @@ export function EntityPicker({ selectedEntity, entities }: EntityPickerProps) {
       <div className="entity-picker">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant={selectedEntity ? "default" : "ghost"}
-            >
+            <Button variant={selectedEntity ? "default" : "ghost"}>
               {selectedEntity ? selectedEntity.name : "Entity"}
               <ChevronDownIcon />
             </Button>
