@@ -1,12 +1,11 @@
+import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { Button } from "../ui/Button";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button,
-  ChakraProvider,
-} from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/Dropdown";
 import { EntityConfirmationModal } from "./EntityConfirmationModal";
 import { useState } from "react";
 
@@ -37,27 +36,24 @@ export function EntityPicker({ selectedEntity, entities }: EntityPickerProps) {
   const [modalEntity, setModalEntity] = useState<EntityDefinition>();
 
   const entityMenuItems = entities.map((entity: EntityDefinition) => (
-    <MenuItem
-      className={
-        selectedEntity?.internalId === entity.internalId
-          ? "current-entity-item"
-          : undefined
-      }
-      as={Button}
-      key={entity.internalId}
-      onClick={() => {
-        if (entity.internalId !== selectedEntity?.internalId) {
-          setModalOpen(true);
-          setModalEntity(entity);
-        }
-      }}
-    >
-      {entity.name}
-    </MenuItem>
+    <DropdownMenuItem key={entity.internalId}>
+      <Button
+        variant="ghost"
+        key={entity.internalId}
+        onClick={() => {
+          if (entity.internalId !== selectedEntity?.internalId) {
+            setModalOpen(true);
+            setModalEntity(entity);
+          }
+        }}
+      >
+        {entity.name}
+      </Button>
+    </DropdownMenuItem>
   ));
 
   return (
-    <ChakraProvider>
+    <>
       <EntityConfirmationModal
         isOpen={modalOpen}
         destinationName={modalEntity?.name || ""}
@@ -65,19 +61,18 @@ export function EntityPicker({ selectedEntity, entities }: EntityPickerProps) {
         onClose={() => setModalOpen(false)}
       />
       <div className="entity-picker">
-        <Menu>
-          <MenuButton
-            as={Button}
-            className="dropdown-button"
-            variant={selectedEntity ? "solid" : "ghost"}
-            isActive={!!selectedEntity}
-          >
-            {selectedEntity ? selectedEntity.name : "Entity"}
-            <ChevronDownIcon />
-          </MenuButton>
-          <MenuList>{entityMenuItems}</MenuList>
-        </Menu>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant={selectedEntity ? "default" : "ghost"}
+            >
+              {selectedEntity ? selectedEntity.name : "Entity"}
+              <ChevronDownIcon />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>{entityMenuItems}</DropdownMenuContent>
+        </DropdownMenu>
       </div>
-    </ChakraProvider>
+    </>
   );
 }

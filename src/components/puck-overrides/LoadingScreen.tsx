@@ -1,4 +1,4 @@
-import { Center, Flex, Progress, VStack } from "@chakra-ui/react";
+import { Progress } from "../ui/Progress";
 
 export interface LoadingScreenProps {
   message: string;
@@ -8,17 +8,11 @@ export interface LoadingScreenProps {
 export function LoadingScreen({ message, progress }: LoadingScreenProps) {
   return (
     <div className="loading-screen">
-      <Flex className={"wrapper"}>
-        <Center className={"wrapper"}>
-          <VStack className={"wrapper"}>
-            <Progress
-              className="progress"
-              value={progress}
-            ></Progress>
-            <div>{message}</div>
-          </VStack>
-        </Center>
-      </Flex>
+      <Progress
+        className="progress"
+        value={progress}
+      ></Progress>
+      <div>{message}</div>
     </div>
   );
 }
