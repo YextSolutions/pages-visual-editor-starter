@@ -15,12 +15,10 @@ import { Locator, LocatorProps } from "../components/Locator";
 type LocationProps = {
   Toggle: ToggleProps;
   Hero: HeroProps;
-  Color: ColorProps;
 };
 
 type ProductProps = {
   Toggle: ToggleProps;
-  Color: ColorProps;
 };
 
 type FinancialProfessionalProps = {
@@ -39,7 +37,6 @@ export const locationConfig: Config<LocationProps> = {
   components: {
     Toggle,
     Hero,
-    Color,
   },
   root: {
     fields: {},
@@ -50,7 +47,6 @@ export const locationConfig: Config<LocationProps> = {
 export const productConfig: Config<ProductProps> = {
   components: {
     Toggle,
-    Color,
   },
   root: {
     fields: {},

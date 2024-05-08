@@ -1,12 +1,11 @@
+import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { Button } from "../ui/Button";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button,
-  ChakraProvider,
-} from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/Dropdown";
 import { useState } from "react";
 import { TemplateConfirmationModal } from "./TemplateConfirmationModal";
 
@@ -51,42 +50,43 @@ export function TemplatePicker({
   const [modalTemplate, setModalTemplate] = useState<TemplateDefinition>();
 
   const templateMenuItems = templates.map((template: TemplateDefinition) => (
-    <MenuItem
-      as={Button}
-      key={template.id}
-      onClick={() => {
-        if (template.id !== selectedTemplate?.id) {
-          setModalTemplate(template);
-          setModalOpen(true);
-        }
-      }}
-    >
-      {template.name}
-    </MenuItem>
+    <DropdownMenuItem key={template.id}>
+      <Button
+        variant="ghost"
+        key={template.id}
+        onClick={() => {
+          if (template.id !== selectedTemplate?.id) {
+            setModalOpen(true);
+            setModalTemplate(template);
+          }
+        }}
+      >
+        {template.name}
+      </Button>
+    </DropdownMenuItem>
   ));
 
   return (
-    <ChakraProvider>
-      <TemplateConfirmationModal
-        isOpen={modalOpen}
-        destinationName={modalTemplate?.name || ""}
-        destinationUrl={modalTemplate ? urlFromTemplate(modalTemplate) : ""}
-        onClose={() => setModalOpen(false)}
-      />
-      <div className="entity-picker">
-        <Menu>
-          <MenuButton
-            as={Button}
-            className="dropdown-button"
-            variant={selectedTemplate ? "solid" : "ghost"}
-            isActive={!!selectedTemplate}
+    <>
+    <TemplateConfirmationModal
+      isOpen={modalOpen}
+      destinationName={modalTemplate?.name || ""}
+      destinationUrl={modalTemplate ? urlFromTemplate(modalTemplate) : ""}
+      onClose={() => setModalOpen(false)}
+    />
+    <div className="entity-picker">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant={selectedTemplate ? "default" : "ghost"}
           >
             {selectedTemplate ? selectedTemplate.name : "Template"}
             <ChevronDownIcon />
-          </MenuButton>
-          <MenuList>{templateMenuItems}</MenuList>
-        </Menu>
-      </div>
-    </ChakraProvider>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>{templateMenuItems}</DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+    </>
   );
 }

@@ -25,8 +25,10 @@ export const config: TemplateConfig = {
       "name",
       "address",
       "slug",
-      // component fields
       "c_hero",
+      "c_locationVisualConfiguration",
+      "c_locationHero",
+      "c_locationCore",
     ],
     localization: {
       locales: ["en"],
@@ -34,13 +36,12 @@ export const config: TemplateConfig = {
   },
 };
 
-// Right now location entity data isn't used
 export const transformProps = async (data) => {
   const { document } = data;
   try {
-    const visualTemplate = JSON.parse(
-      document?._site?.c_locationVisualConfiguration,
-    );
+    const visualTemplate = document.c_locationVisualConfiguration 
+      ? JSON.parse(document.c_locationVisualConfiguration) 
+      : JSON.parse(document._site?.c_locationVisualConfiguration);
     return {
       ...data,
       document: {

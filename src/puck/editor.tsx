@@ -5,7 +5,7 @@ import {
   customHeader,
   customHeaderActions,
 } from "../components/puck-overrides/Header";
-import { useToast } from "@chakra-ui/react";
+import { toast } from "sonner"
 import { useEffect } from "react";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
@@ -15,7 +15,7 @@ export interface EditorProps {
   entities: EntityDefinition[];
   selectedTemplate: TemplateDefinition;
   templates: TemplateDefinition[];
-  siteEntityId: string;
+  entityId: string;
   puckConfig: Config;
   puckData: string;
 }
@@ -26,34 +26,26 @@ export const Editor = ({
   entities,
   selectedTemplate,
   templates,
-  siteEntityId,
+  entityId,
   puckConfig,
   puckData,
 }: EditorProps) => {
+  const toastId = "toast"
   const mutation = useUpdateEntityMutation();
-  const toast = useToast();
 
   useEffect(() => {
     if (mutation.isPending) {
-      toast({
-        title: "Save in progress...",
-        status: "info",
-        duration: 1000,
-        isClosable: true,
+      toast("Save in progress...", {
+        id: toastId,
       });
     } else if (mutation.isSuccess) {
-      toast({
-        title: "Save completed.",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
+      toast.success("Save completed.", {
+        id: toastId,
+      })
     } else if (mutation.isError) {
-      toast({
-        title: `Error occured: ${mutation.error.message}`,
-        status: "error",
-        isClosable: true,
-      });
+      toast.error(`Error occured: ${mutation.error.message}`, {
+        id: toastId,
+      })
     }
   }, [mutation]);
 
@@ -61,7 +53,7 @@ export const Editor = ({
   const save = async (data: Data) => {
     const templateData = JSON.stringify(data);
     mutation.mutate({
-      entityId: siteEntityId,
+      entityId: entityId,
       body: { [selectedTemplate.dataField]: templateData },
     });
   };
