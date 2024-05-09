@@ -34,23 +34,22 @@ type HeroLayoutProps = {
 const HeroLayout = (props: HeroLayoutProps) => {
   return (
     <div className="location-hero container">
-        <div className="">
+        <div className="hero-left">
           <h1 className="heading">{props.name}</h1>
           <div className="heading heading-lead">
             {props.address.line1}
           </div>
           {props.hours && (
-            <div className="">
+            <div className="hours">
               <HoursStatus
                 hours={props.hours}
                 separatorTemplate={() => <span className="bullet" />}
                 dayOfWeekTemplate={() => null}
-                className=""
               />
             </div>
           )}
           {props.rating && (
-            <div className="">
+            <div className="rating">
               <span> {props.rating} out of 5 </span>
               <span>({props.numReviews} reviews)</span>
             </div>
@@ -67,9 +66,9 @@ const HeroLayout = (props: HeroLayoutProps) => {
           )}
         </div>
         {props.background && (
-          <div className="">
+          <div className="background">
             <Image
-              className=""
+              className="image"
               image={props.background}
             />
           </div>

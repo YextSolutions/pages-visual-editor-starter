@@ -36,7 +36,7 @@ export const customHeader = ({
   templates,
 }: customHeaderProps) => {
   return (
-    <header className="header">
+    <header className="puck-header">
       <div className="header-left" />
       <div className="header-center">
         <TemplatePicker selectedTemplate={template} templates={templates} />

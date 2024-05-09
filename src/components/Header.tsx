@@ -51,7 +51,6 @@ const HeaderLinks = (props: { links: CTA[] }) => {
         {props.links.map((item: CTA, idx) => (
           <li key={item.label}>
             <Link
-              className=""
               cta={item}
               eventName={`link${idx}`}
             />

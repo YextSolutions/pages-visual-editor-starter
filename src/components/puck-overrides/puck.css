@@ -1,8 +1,9 @@
-.header {
+.puck-header {
   grid-area: header;
   display: flex;
   align-items: center;
   padding: var(--puck-space-px);
+  width: 100%;
   border-bottom: 1px solid var(--puck-color-grey-09);
 
   .header-left {

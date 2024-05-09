@@ -4,7 +4,6 @@
 
 .header {
   display: flex;
-  grid-area: header;
   padding: 16px 0;
   margin-left: auto;
   margin-right: auto;
@@ -21,6 +20,8 @@
     flex: 1;
     gap: 16px;
     justify-content: flex-end;
+    align-content: center;
+    flex-wrap: wrap;
 
     .link {
       display: flex;
@@ -111,6 +112,27 @@
   padding: 16px 0;
   margin-left: auto;
   margin-right: auto;
+  @apply flex flex-col lg:flex-row;
+
+  .hero-left {
+    @apply w-full lg:w-1/2 lg:mt-8 mb-6 lg:mb-0 lg:mr-8;
+  }
+
+  .hours {
+    @apply mb-4 h-6;
+  }
+
+  .rating {
+    @apply mb-6 lg:mb-8;
+  }
+
+  .background {
+    @apply w-full lg:w-1/2;
+
+    .image {
+      @apply w-full h-full object-cover;
+    }
+  }
 
   .cta {
     @apply flex flex-col lg:flex-row mb-4 gap-4;
@@ -178,4 +200,15 @@
   display: flex;
   flex-direction: column;
   flex: 0 0 256px;
+}
+
+.bullet {
+  content: "\a";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #000;
+  margin: 0 .75rem;
+  vertical-align: middle
 }
