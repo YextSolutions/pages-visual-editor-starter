@@ -1,6 +1,8 @@
 import type { Config } from "@measured/puck";
 import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 type LocationProps = {
   Toggle: ToggleProps;
@@ -22,6 +24,15 @@ export const locationConfig: Config<LocationProps> = {
     Hero,
   },
   root: {
+    render: ({ children }) => {
+      return (
+      <>
+        <Header/>
+          {children}
+        <Footer/>
+      </>
+      );
+    },
     fields: {},
   },
 };
