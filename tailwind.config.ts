@@ -5,6 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        text: "black",
+        "brand-primary": "#1B78D0",
+        "brand-secondary": "#073866",
+        "brand-gray": {
+          100: "#F7F7F7",
+          200: "#EDEDED",
+          300: "#CCC",
+          400: "#767676",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -57,6 +66,15 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          sm: "2rem",
+          lg: "4rem",
+          xl: "5rem",
+        },
       },
     },
   },
