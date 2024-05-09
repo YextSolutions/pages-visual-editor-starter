@@ -1,10 +1,19 @@
 import { Link, Image, HoursStatus } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
-import { C_locationHero, LocationStream, Cta, Address, ComplexImage, Hours } from '../types/autogen';
+import {
+  C_locationHero,
+  LocationStream,
+  Cta,
+  Address,
+  ComplexImage,
+  Hours,
+} from "../types/autogen";
 import { ComponentConfig } from "@measured/puck";
 
 const Hero = () => {
-  const hero: C_locationHero = useDocument<LocationStream>((document) => document.c_locationHero);  
+  const hero: C_locationHero = useDocument<LocationStream>(
+    (document) => document.c_locationHero
+  );
 
   return (
     <HeroLayout
@@ -34,53 +43,45 @@ type HeroLayoutProps = {
 const HeroLayout = (props: HeroLayoutProps) => {
   return (
     <div className="location-hero container">
-        <div className="hero-left">
-          <h1 className="heading">{props.name}</h1>
-          <div className="heading heading-lead">
-            {props.address.line1}
-          </div>
-          {props.hours && (
-            <div className="hours">
-              <HoursStatus
-                hours={props.hours}
-                separatorTemplate={() => <span className="bullet" />}
-                dayOfWeekTemplate={() => null}
-              />
-            </div>
-          )}
-          {props.rating && (
-            <div className="rating">
-              <span> {props.rating} out of 5 </span>
-              <span>({props.numReviews} reviews)</span>
-            </div>
-          )}
-          {(props.cta1 || props.cta2) && (
-            <div className="cta">
-              {props.cta1 && (
-                <Link className="button button-primary" cta={props.cta1} />
-              )}
-              {props.cta2 && (
-                <Link className="button button-secondary" cta={props.cta2} />
-              )}
-            </div>
-          )}
-        </div>
-        {props.background && (
-          <div className="background">
-            <Image
-              className="image"
-              image={props.background}
+      <div className="hero-left">
+        <h1 className="heading">{props.name}</h1>
+        <div className="heading heading-lead">{props.address.line1}</div>
+        {props.hours && (
+          <div className="hours">
+            <HoursStatus
+              hours={props.hours}
+              separatorTemplate={() => <span className="bullet" />}
+              dayOfWeekTemplate={() => null}
             />
           </div>
         )}
+        {props.rating && (
+          <div className="rating">
+            <span> {props.rating} out of 5 </span>
+            <span>({props.numReviews} reviews)</span>
+          </div>
+        )}
+        {(props.cta1 || props.cta2) && (
+          <div className="cta">
+            {props.cta1 && (
+              <Link className="button button-primary" cta={props.cta1} />
+            )}
+            {props.cta2 && (
+              <Link className="button button-secondary" cta={props.cta2} />
+            )}
+          </div>
+        )}
+      </div>
+      {props.background && (
+        <div className="background">
+          <Image className="image" image={props.background} />
+        </div>
+      )}
     </div>
   );
 };
 
 export const LocationHero: ComponentConfig = {
-  fields: {
-  },
-  render: () => (
-    <Hero/>
-  )
+  fields: {},
+  render: () => <Hero />,
 };

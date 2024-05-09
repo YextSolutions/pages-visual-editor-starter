@@ -8,21 +8,21 @@ import {
 } from "react-icons/fa";
 
 const navigation: CTA[] = [
-  {link: "/", label: "Link 1"},
-  {link: "/", label: "Link 2"},
+  { link: "/", label: "Link 1" },
+  { link: "/", label: "Link 2" },
 ];
 
 const Footer = () => {
   return (
-      <FooterLayout
-        copyrightMessage={"© 2024. All Rights Reserved."}
-        youtube="https://www.youtube.com/"
-        twitter="https://twitter.com/"
-        linkedIn="https://www.linkedin.com/"
-        facebook="https://www.facebook.com/"
-        instagram="https://www.instagram.com/"
-        footerLinks={navigation}
-      />
+    <FooterLayout
+      copyrightMessage={"© 2024. All Rights Reserved."}
+      youtube="https://www.youtube.com/"
+      twitter="https://twitter.com/"
+      linkedIn="https://www.linkedin.com/"
+      facebook="https://www.facebook.com/"
+      instagram="https://www.instagram.com/"
+      footerLinks={navigation}
+    />
   );
 };
 
@@ -74,31 +74,20 @@ const FooterLayout = (props: FooterLayoutProps) => {
       <div className="footer-top">
         <div className="links">
           {footerLinks.map((link, i) => (
-            <Link
-              className="link"
-              key={i}
-              cta={link}
-              eventName={`link${i}`}
-            />
+            <Link className="link" key={i} cta={link} eventName={`link${i}`} />
           ))}
         </div>
         <div className="social-links">
           {socialLinks.map((socialLink, i) =>
             socialLink.link ? (
-              <Link
-                key={i}
-                href={socialLink.link}
-                eventName={socialLink.name}
-              >
+              <Link key={i} href={socialLink.link} eventName={socialLink.name}>
                 {socialLink.label}
               </Link>
             ) : null
           )}
         </div>
       </div>
-        <div className="copyright-msg">
-          {copyrightMessage}
-        </div>
+      <div className="copyright-msg">{copyrightMessage}</div>
     </footer>
   );
 };

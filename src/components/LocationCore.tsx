@@ -1,22 +1,17 @@
 import { ReactNode } from "react";
-import {
-  Link,
-  Address,
-  AddressType,
-  HoursTable,
-} from "@yext/pages-components";
+import { Link, Address, AddressType, HoursTable } from "@yext/pages-components";
 import { FaPhone, FaEnvelope } from "react-icons/fa";
 import { C_locationCore, LocationStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
 import { ComponentConfig } from "@measured/puck";
 
 const Core = () => {
-  const profile = useDocument<LocationStream>((document) => document.c_locationCore);  
+  const profile = useDocument<LocationStream>(
+    (document) => document.c_locationCore
+  );
 
   if (profile) {
-    return (
-      <CoreLayout profile={profile} />
-    );
+    return <CoreLayout profile={profile} />;
   }
 };
 
@@ -65,7 +60,7 @@ const CoreLayout = (props: CoreLayoutProps) => {
           </div>
         )}
       </CoreSection>
-      {(profile.hours) && (
+      {profile.hours && (
         <CoreSection>
           <CoreHeading>Hours</CoreHeading>
           {profile.hours && (
@@ -91,7 +86,5 @@ const CoreLayout = (props: CoreLayoutProps) => {
 
 export const LocationCore: ComponentConfig = {
   fields: {},
-  render: () => (
-    <Core/>
-  )
+  render: () => <Core />,
 };

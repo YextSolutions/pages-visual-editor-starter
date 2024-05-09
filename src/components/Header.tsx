@@ -3,18 +3,17 @@ import { MaybeLink } from "./MaybeLink";
 import "./index.css";
 
 const navigation: CTA[] = [
-  {link: "/", label: "Home"},
-  {link: "/", label: "About"},
+  { link: "/", label: "Home" },
+  { link: "/", label: "About" },
 ];
-const logo: ImageType = {url: "https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc", width: 10, height: 10};
+const logo: ImageType = {
+  url: "https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc",
+  width: 10,
+  height: 10,
+};
 
 const Header = () => {
-  return (
-      <HeaderLayout
-        links={navigation}
-        logo={logo}
-      />
-  );
+  return <HeaderLayout links={navigation} logo={logo} />;
 };
 
 type HeaderLayoutProps = {
@@ -50,10 +49,7 @@ const HeaderLinks = (props: { links: CTA[] }) => {
       <ul className="link">
         {props.links.map((item: CTA, idx) => (
           <li key={item.label}>
-            <Link
-              cta={item}
-              eventName={`link${idx}`}
-            />
+            <Link cta={item} eventName={`link${idx}`} />
           </li>
         ))}
       </ul>
