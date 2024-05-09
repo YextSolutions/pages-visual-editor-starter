@@ -3,10 +3,12 @@ import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { PuckCore as Core } from "../components/Core";
 
 type LocationProps = {
   Toggle: ToggleProps;
   Hero: HeroProps;
+  Core: any;
 };
 
 type ProductProps = {
@@ -22,6 +24,7 @@ export const locationConfig: Config<LocationProps> = {
   components: {
     Toggle,
     Hero,
+    Core,
   },
   root: {
     render: ({ children }) => {

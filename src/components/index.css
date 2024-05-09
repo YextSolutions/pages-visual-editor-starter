@@ -65,3 +65,64 @@
     margin-left: 16px;
   }
 }
+
+.core {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16px;
+
+  .phone-section {
+    padding-top: 8px;
+    display: flex;
+    align-items: center;
+
+    .phone {
+      margin-right: 8px;
+      font-weight: bold;
+    }
+  }
+
+  .icon {
+    @apply text-blue-500;
+    margin-right: 8px;
+  }
+
+  .email {
+    padding-top: 16px;
+    align-items: center;
+  }
+
+  .link {
+    @apply text-blue-500;  
+  }
+
+  .section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .heading {
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+}
+
+html {
+  --yxt-hoursTable-col1-width: 128px;
+  --yxt-hoursTable-col2-width: 256px;
+}
+
+.HoursTable-row {
+  display: flex;
+}
+
+.HoursTable-day {
+  flex: 0 0 var(--yxt-hoursTable-col1-width);
+}
+
+.HoursTable-intervals {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--yxt-hoursTable-col2-width);
+}
