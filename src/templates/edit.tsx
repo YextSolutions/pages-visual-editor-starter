@@ -58,6 +58,17 @@ const getUrlTemplateId = (): string => {
   return "";
 };
 
+const getPuckRole = (): string =>  {
+  if (typeof document !== "undefined") {
+    const params = new URL(document.location.toString()).searchParams;
+    const roleValue = params.get('role');
+    if (roleValue === "individual") {
+      return Role.INDIVIDUAL;
+    }
+  }
+  return Role.GLOBAL;
+};
+
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
   const [templates, setTemplates] = useState<TemplateDefinition[]>();
@@ -111,15 +122,14 @@ const Edit: Template<TemplateRenderProps> = () => {
       window.history.replaceState(
         null,
         "",
-        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`,
+        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}&role=${getPuckRole()}`,
       );
     }
     setMounted(true);
     getData();
   }, []);
 
-  const role = Role.GLOBAL;
-  const puckData = GetPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, role)
+  const puckData = GetPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, getPuckRole())
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -168,7 +178,7 @@ const Edit: Template<TemplateRenderProps> = () => {
               entities={entities}
               selectedTemplate={template}
               templates={templates}
-              entityId={role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
+              entityId={getPuckRole() === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
               puckConfig={puckConfig}
               puckData={puckData}
             />
