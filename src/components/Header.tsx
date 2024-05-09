@@ -27,7 +27,7 @@ const HeaderLayout = (props: HeaderLayoutProps) => {
   const { logo, logoLink, links } = props;
 
   return (
-    <header className="header">
+    <header className="header container">
       {logo && <HeaderLogo logo={logo} logoLink={logoLink} />}
       <HeaderLinks links={links} />
     </header>

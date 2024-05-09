@@ -70,7 +70,7 @@ const FooterLayout = (props: FooterLayoutProps) => {
   const footerLinks = props.footerLinks || [];
 
   return (
-    <footer className="footer">
+    <footer className="footer container">
       <div className="footer-top">
         <div className="links">
           {footerLinks.map((link, i) => (

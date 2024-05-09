@@ -85,13 +85,7 @@ export enum LinkType {
   EMAIL = "Email",
 }
 
-export interface Cta1 {
-  label?: string;
-  linkType?: LinkType;
-  link?: string;
-}
-
-export interface Cta2 {
+export interface Cta {
   label?: string;
   linkType?: LinkType;
   link?: string;
@@ -104,8 +98,8 @@ export interface C_locationHero {
   hours?: Hours;
   rating?: number;
   numberOfReviews?: number;
-  cta1?: Cta1;
-  cta2?: Cta2;
+  cta1?: Cta;
+  cta2?: Cta;
 }
 
 export interface C_locationCore {

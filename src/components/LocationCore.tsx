@@ -36,7 +36,7 @@ const CoreLayout = (props: CoreLayoutProps) => {
   const { profile } = props;
 
   return (
-    <div className="core">
+    <div className="core container">
       <CoreSection>
         <CoreHeading>Information</CoreHeading>
         <Address address={profile.address as AddressType} />
@@ -89,9 +89,8 @@ const CoreLayout = (props: CoreLayoutProps) => {
   );
 };
 
-export const PuckCore: ComponentConfig = {
-  fields: {
-  },
+export const LocationCore: ComponentConfig = {
+  fields: {},
   render: () => (
     <Core/>
   )
