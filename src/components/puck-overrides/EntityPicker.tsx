@@ -36,19 +36,16 @@ export function EntityPicker({ selectedEntity, entities }: EntityPickerProps) {
   const [modalEntity, setModalEntity] = useState<EntityDefinition>();
 
   const entityMenuItems = entities.map((entity: EntityDefinition) => (
-    <DropdownMenuItem key={entity.internalId}>
-      <Button
-        variant="ghost"
-        key={entity.internalId}
-        onClick={() => {
-          if (entity.internalId !== selectedEntity?.internalId) {
-            setModalOpen(true);
-            setModalEntity(entity);
-          }
-        }}
-      >
-        {entity.name}
-      </Button>
+    <DropdownMenuItem
+      key={entity.internalId}
+      onClick={() => {
+        if (entity.internalId !== selectedEntity?.internalId) {
+          setModalOpen(true);
+          setModalEntity(entity);
+        }
+      }}
+    >
+      {entity.name}
     </DropdownMenuItem>
   ));
 
@@ -63,9 +60,7 @@ export function EntityPicker({ selectedEntity, entities }: EntityPickerProps) {
       <div className="entity-picker">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant={selectedEntity ? "default" : "ghost"}
-            >
+            <Button variant={selectedEntity ? "default" : "ghost"}>
               {selectedEntity ? selectedEntity.name : "Entity"}
               <ChevronDownIcon />
             </Button>

@@ -50,43 +50,38 @@ export function TemplatePicker({
   const [modalTemplate, setModalTemplate] = useState<TemplateDefinition>();
 
   const templateMenuItems = templates.map((template: TemplateDefinition) => (
-    <DropdownMenuItem key={template.id}>
-      <Button
-        variant="ghost"
-        key={template.id}
-        onClick={() => {
-          if (template.id !== selectedTemplate?.id) {
-            setModalOpen(true);
-            setModalTemplate(template);
-          }
-        }}
-      >
-        {template.name}
-      </Button>
+    <DropdownMenuItem
+      key={template.id}
+      onClick={() => {
+        if (template.id !== selectedTemplate?.id) {
+          setModalOpen(true);
+          setModalTemplate(template);
+        }
+      }}
+    >
+      {template.name}
     </DropdownMenuItem>
   ));
 
   return (
     <>
-    <TemplateConfirmationModal
-      isOpen={modalOpen}
-      destinationName={modalTemplate?.name || ""}
-      destinationUrl={modalTemplate ? urlFromTemplate(modalTemplate) : ""}
-      onClose={() => setModalOpen(false)}
-    />
-    <div className="entity-picker">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant={selectedTemplate ? "default" : "ghost"}
-          >
-            {selectedTemplate ? selectedTemplate.name : "Template"}
-            <ChevronDownIcon />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>{templateMenuItems}</DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+      <TemplateConfirmationModal
+        isOpen={modalOpen}
+        destinationName={modalTemplate?.name || ""}
+        destinationUrl={modalTemplate ? urlFromTemplate(modalTemplate) : ""}
+        onClose={() => setModalOpen(false)}
+      />
+      <div className="entity-picker">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant={selectedTemplate ? "default" : "ghost"}>
+              {selectedTemplate ? selectedTemplate.name : "Template"}
+              <ChevronDownIcon />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>{templateMenuItems}</DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </>
   );
 }
