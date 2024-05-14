@@ -58,10 +58,12 @@
     },
     {
       "entityType": "product",
+      "defaultFieldEligibilityGroup": "product.default",
       "disabled": false
     },
     {
       "entityType": "financialProfessional",
+      "defaultFieldEligibilityGroup": "financialProfessional.default",
       "disabled": false
     }
   ]

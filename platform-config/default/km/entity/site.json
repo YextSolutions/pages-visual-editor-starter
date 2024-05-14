@@ -3,9 +3,9 @@
   "$schema": "https://schema.yext.com/config/km/entity/v1",
   "primaryLocale": "en",
   "content": {
-    "c_financialProfessionalVisualConfiguration": "{\"content\":[{\"type\":\"Color\",\"props\":{\"buttonColor\":\"yellow\",\"id\":\"Color-b7535eb8-7cb7-4909-9b0e-90ec10296d5e\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
-    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"Color\",\"props\":{\"buttonColor\":\"green\",\"id\":\"Color-b7535eb8-7cb7-4909-9b0e-90ec10296d5e\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
-    "c_productVisualConfiguration": "{\"content\":[{\"type\":\"Color\",\"props\":{\"buttonColor\":\"purple\",\"id\":\"Color-b7535eb8-7cb7-4909-9b0e-90ec10296d5e\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}},{\"type\":\"Color\",\"props\":{\"buttonColor\":\"red\",\"id\":\"Color-ff59d3aa-fce7-4234-8e7f-c7cb92cdd2b7\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_financialProfessionalVisualConfiguration": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"LocationHero\",\"props\":{\"id\":\"LocationHero-f36fd860-9cc0-4c4d-b102-35d1c64b4de2\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_productVisualConfiguration": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
     "name": "Site"
   },
   "entityType": "ce_site",

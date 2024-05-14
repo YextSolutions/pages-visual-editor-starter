@@ -1,0 +1,65 @@
+{
+  "$id": "c_highlightsSection",
+  "$schema": "https://schema.yext.com/config/km/field-type/v1",
+  "displayName": "Highlights Section",
+  "type": {
+    "structType": {
+      "property": [
+        {
+          "name": "highlights",
+          "displayName": "highlights",
+          "isRequired": false,
+          "typeId": "list",
+          "type": {
+            "listType": {
+              "typeId": "struct",
+              "maxLength": 5000,
+              "type": {
+                "structType": {
+                  "property": [
+                    {
+                      "displayName": "Image",
+                      "isRequired": false,
+                      "name": "image",
+                      "type": {
+                        "imageType": {
+                          "isSimpleImage": false,
+                          "unconstrainedAspectRatioAllowed": true
+                        }
+                      },
+                      "typeId": "image"
+                    },
+                    {
+                      "displayName": "Title",
+                      "isRequired": false,
+                      "name": "title",
+                      "type": {
+                        "stringType": {
+                          "maxLength": 100000,
+                          "stereotype": "SIMPLE"
+                        }
+                      },
+                      "typeId": "string"
+                    },
+                    {
+                      "displayName": "Description",
+                      "isRequired": false,
+                      "name": "description",
+                      "type": {
+                        "stringType": {
+                          "maxLength": 100000,
+                          "stereotype": "MULTILINE"
+                        }
+                      },
+                      "typeId": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

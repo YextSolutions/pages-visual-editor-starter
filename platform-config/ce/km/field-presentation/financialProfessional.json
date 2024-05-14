@@ -1,0 +1,392 @@
+{
+  "$id": "ce_financialProfessional",
+  "$schema": "https://schema.yext.com/config/km/field-presentation/v1",
+  "entityType": "financialProfessional",
+  "displayName": "Financial Professional",
+  "presentationEntries": [
+    {
+      "displayName": "Content",
+      "entryType": "DIVIDER"
+    },
+    {
+      "displayName": "Core Information",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "name",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "categories",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "address",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "addressHidden"
+        },
+        {
+          "id": "mainPhone",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "entityId",
+          "visibleOnAdd": true
+        }
+      ]
+    },
+    {
+      "displayName": "Components",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "c_hero"
+        },
+        {
+          "id": "c_intro"
+        },
+        {
+          "id": "c_primaryHighlights"
+        },
+        {
+          "id": "c_secondaryHero"
+        },
+        {
+          "id": "c_financialProfessionalVisualConfiguration"
+        }
+      ]
+    },
+    {
+      "displayName": "Business Details",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "description"
+        },
+        {
+          "id": "hours"
+        },
+        {
+          "id": "additionalHoursText"
+        },
+        {
+          "id": "paymentOptions"
+        },
+        {
+          "id": "geomodifier"
+        },
+        {
+          "id": "neighborhood"
+        },
+        {
+          "id": "what3WordsAddress"
+        },
+        {
+          "id": "appointmentOnly"
+        },
+        {
+          "id": "featuredMessage"
+        }
+      ]
+    },
+    {
+      "displayName": "Contact, Websites, and Apps",
+      "displayNameTranslations": [
+        {
+          "localeCode": "en",
+          "value": "Contact, Websites and Apps"
+        }
+      ],
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "emails"
+        },
+        {
+          "id": "menuUrl"
+        },
+        {
+          "id": "orderUrl"
+        },
+        {
+          "id": "reservationUrl"
+        },
+        {
+          "id": "websiteUrl"
+        },
+        {
+          "id": "localPhone"
+        },
+        {
+          "id": "alternatePhone"
+        },
+        {
+          "id": "tollFreePhone"
+        },
+        {
+          "id": "mobilePhone"
+        },
+        {
+          "id": "fax"
+        },
+        {
+          "id": "ttyPhone"
+        },
+        {
+          "id": "iosAppUrl"
+        },
+        {
+          "id": "androidAppUrl"
+        }
+      ]
+    },
+    {
+      "displayName": "Qualifications",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "certifications"
+        },
+        {
+          "id": "yearsOfExperience"
+        }
+      ]
+    },
+    {
+      "displayName": "Personal",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "interests"
+        },
+        {
+          "id": "hobbies"
+        }
+      ]
+    },
+    {
+      "displayName": "Media",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "headshot"
+        },
+        {
+          "id": "logo"
+        },
+        {
+          "id": "photoGallery"
+        },
+        {
+          "id": "videos"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Social Media",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "twitterHandle"
+        },
+        {
+          "id": "facebookPageUrl"
+        },
+        {
+          "id": "instagramHandle"
+        },
+        {
+          "id": "linkedInUrl"
+        },
+        {
+          "id": "pinterestUrl"
+        },
+        {
+          "id": "tikTokUrl"
+        },
+        {
+          "id": "youTubeChannelUrl"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Enhanced Content Lists",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "productLists"
+        },
+        {
+          "id": "bios"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Additional Hours Information",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "onlineServiceHours"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Additional Attributes",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "nmlsNumber"
+        },
+        {
+          "id": "teamName"
+        },
+        {
+          "id": "awards"
+        },
+        {
+          "id": "disclosureLink"
+        },
+        {
+          "id": "products"
+        },
+        {
+          "id": "services"
+        },
+        {
+          "id": "specialities"
+        },
+        {
+          "id": "associations"
+        },
+        {
+          "id": "brands"
+        },
+        {
+          "id": "languages"
+        },
+        {
+          "id": "keywords"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Landing Pages",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "landingPageUrl"
+        }
+      ]
+    },
+    {
+      "displayName": "Publisher Specific",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Google Business Profile Fields",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "googleWebsiteOverride"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Apple Fields",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "appleCompanyId"
+        },
+        {
+          "id": "appleCompanyIdDqe"
+        },
+        {
+          "id": "appleBusinessId"
+        },
+        {
+          "id": "appleBusinessIdDqe"
+        },
+        {
+          "id": "appleBusinessDescription"
+        },
+        {
+          "id": "appleCoverPhoto"
+        },
+        {
+          "id": "appleActionLinks"
+        }
+      ]
+    },
+    {
+      "displayName": "Other",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Internal Use Only",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "closed"
+        },
+        {
+          "id": "folder"
+        },
+        {
+          "id": "labels"
+        },
+        {
+          "id": "bingRelationshipType"
+        },
+        {
+          "id": "bingParentLocation"
+        },
+        {
+          "id": "isoRegionCode"
+        },
+        {
+          "id": "deliverListingsWithoutGeocode"
+        },
+        {
+          "id": "timezone"
+        },
+        {
+          "id": "slug"
+        }
+      ]
+    },
+    {
+      "displayName": "Settings",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Knowledge Assistant",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "primaryConversationContact"
+        },
+        {
+          "id": "holidayHoursConversationEnabled"
+        },
+        {
+          "id": "reviewResponseConversationEnabled"
+        },
+        {
+          "id": "nudgeEnabled"
+        }
+      ]
+    }
+  ]
+}
