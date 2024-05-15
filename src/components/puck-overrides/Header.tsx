@@ -1,5 +1,7 @@
 import { Button } from "@measured/puck";
+import { EntityDefinition, EntityPicker } from "./EntityPicker";
 import "./puck.css";
+import { TemplateDefinition, TemplatePicker } from "./TemplatePicker";
 import { useDocument } from "../../hooks/useDocument";
 import { usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
@@ -35,10 +37,18 @@ export const customHeaderActions = (children: any) => {
 
 export interface customHeaderProps {
   actions: any;
+  entity: EntityDefinition;
+  template: TemplateDefinition;
+  entities: EntityDefinition[];
+  templates: TemplateDefinition[];
 }
 
 export const customHeader = ({
-  actions
+  actions,
+  entity,
+  template,
+  entities,
+  templates,
 }: customHeaderProps) => {
   return (
     <header className="puck-header">
@@ -46,6 +56,8 @@ export const customHeader = ({
         <ToggleUIButtons/>
       </div>
       <div className="header-center">
+        <TemplatePicker selectedTemplate={template} templates={templates} />
+        <EntityPicker selectedEntity={entity} entities={entities} />
       </div>
       <div className="actions">{actions}</div>
     </header>
