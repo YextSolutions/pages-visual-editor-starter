@@ -1,0 +1,77 @@
+{
+  "$id": "c_locationHero",
+  "$schema": "https://schema.yext.com/config/km/field-type/v1",
+  "displayName": "Location Hero",
+  "type": {
+    "structType": {
+      "property": [
+        {
+          "name": "address",
+          "displayName": "Address",
+          "isRequired": false,
+          "typeId": "c_address"
+        },
+        {
+          "name": "image",
+          "displayName": "Image",
+          "isRequired": false,
+          "typeId": "image",
+          "type": {
+            "imageType": {
+              "isSimpleImage": false,
+              "unconstrainedAspectRatioAllowed": true
+            }
+          }
+        },
+        {
+          "name": "name",
+          "displayName": "Name",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "SIMPLE",
+              "maxLength": 100000
+            }
+          }
+        },
+        {
+          "name": "hours",
+          "displayName": "Hours",
+          "isRequired": false,
+          "typeId": "hours"
+        },
+        {
+          "name": "rating",
+          "displayName": "Rating",
+          "isRequired": false,
+          "typeId": "decimal",
+          "type": {
+            "decimalType": {}
+          }
+        },
+        {
+          "name": "numberOfReviews",
+          "displayName": "Number of Reviews",
+          "isRequired": false,
+          "typeId": "decimal",
+          "type": {
+            "decimalType": {}
+          }
+        },
+        {
+          "name": "cta1",
+          "displayName": "cta1",
+          "isRequired": false,
+          "typeId": "cta"
+        },
+        {
+          "name": "cta2",
+          "displayName": "cta2",
+          "isRequired": false,
+          "typeId": "cta"
+        }
+      ]
+    }
+  }
+}

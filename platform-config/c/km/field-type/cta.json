@@ -1,0 +1,35 @@
+{
+  "$id": "c_cta",
+  "$schema": "https://schema.yext.com/config/km/field-type/v1",
+  "displayName": "CTA",
+  "type": {
+    "structType": {
+      "property": [
+        {
+          "name": "name",
+          "displayName": "Name",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "SIMPLE",
+              "maxLength": 100000
+            }
+          }
+        },
+        {
+          "name": "link",
+          "displayName": "Link",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "URL",
+              "maxLength": 2000
+            }
+          }
+        }
+      ]
+    }
+  }
+}
