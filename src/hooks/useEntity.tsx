@@ -5,6 +5,7 @@ import { Role } from "../templates/edit";
 /**
  * If the role is "individual" and the entity's config data is populated, 
  * returns the entityId's config data. Else returns the site entity's config data. 
+ * If the role is "individual" then keep loading until the entityId is not null.
  */
 export const GetPuckData = (
   siteEntityId: string,
@@ -13,16 +14,11 @@ export const GetPuckData = (
   role?: string
 ): string => {
   const { entity, status } = useEntity(role === Role.INDIVIDUAL && entityId ? entityId : siteEntityId);
-  const { entity: siteEntity, status: siteEntityStatus } = useEntity(siteEntityId);
-  if (status === "success" && entity.response?.[field]) {
+  if (role === Role.INDIVIDUAL && !entityId) {
+    return "";
+  } else if (status === "success" && entity.response?.[field]) {
     return entity?.response?.[field] ?? "";
-  } else if (
-    role === Role.INDIVIDUAL &&
-    siteEntityStatus === "success" &&
-    siteEntity.response?.[field]
-  ) {
-    return siteEntity?.response?.[field] ?? "";
-  }
+  } 
   return "";
 };
 
