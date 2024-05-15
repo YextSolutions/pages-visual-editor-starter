@@ -1,0 +1,179 @@
+{
+  "$id": "investment-advisor",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "address": {
+      "city": "Smalltown",
+      "countryCode": "US",
+      "line1": "54321 Smalltown St",
+      "postalCode": "10020",
+      "region": "VA"
+    },
+    "addressHidden": false,
+    "c_hero": {
+      "image": {
+        "image": {
+          "height": 1161,
+          "sourceUrl": "https://s3-alpha-sig.figma.com/img/4f01/1e5d/756c968b1d953f1286b7399d6490b17b?Expires\u003d1715558400\u0026Key-Pair-Id\u003dAPKAQ4GOSFWCVNEHN3O4\u0026Signature\u003dQyOlQ9kPIO2bJmneYcA5vzxMVBC1nNDjBvBZWL9N8f1sbFfDjtiKYBmSP8O1rmnuws7c00QpFATLYA5EYEJDA8BboTqTYqG0btizQsDITsAduEHvnYcWICUxmrx7gcMUY58fgzk8hDkrgoTxetGroo2gqqNl~ypg8SRleLFkEKar54ozTZLq4LMT2woRZmRvnLZ4PYG4VJs2OIAgkR4rxgQaEVaJo7UHOZgpIevmls8lFUh5heLkdt-DoE1I7SOLOnxupBle8zGxXABSkcL1~RNe9Nyw2FRUOiipJ3lnwzujGgNVqqVqxH8oGzHdP8Yhh94qs2ewJ2FXc0CE-ECdzA__",
+          "thumbnails": [
+            {
+              "height": 1161,
+              "url": "https://a.mktgcdn.com/p/VzWIPAev3lt_rQ4GurasYuGD15sdQEeb2njyzWmZYxY/774x1161.png",
+              "width": 774
+            },
+            {
+              "height": 929,
+              "url": "https://a.mktgcdn.com/p/VzWIPAev3lt_rQ4GurasYuGD15sdQEeb2njyzWmZYxY/619x929.png",
+              "width": 619
+            },
+            {
+              "height": 450,
+              "url": "https://a.mktgcdn.com/p/VzWIPAev3lt_rQ4GurasYuGD15sdQEeb2njyzWmZYxY/300x450.png",
+              "width": 300
+            },
+            {
+              "height": 294,
+              "url": "https://a.mktgcdn.com/p/VzWIPAev3lt_rQ4GurasYuGD15sdQEeb2njyzWmZYxY/196x294.png",
+              "width": 196
+            }
+          ],
+          "url": "https://a.mktgcdn.com/p/VzWIPAev3lt_rQ4GurasYuGD15sdQEeb2njyzWmZYxY/774x1161.png",
+          "width": 774
+        }
+      },
+      "title": "[[name]]"
+    },
+    "c_intro": {
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla posuere sollicitudin aliquam ultrices sagittis orci. Amet porttitor eget dolor morbi non arcu risus quis varius. Pulvinar mattis nunc sed blandit libero. Leo vel fringilla est ullamcorper eget nulla facilisi.",
+      "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    "c_primaryHighlights": {
+      "highlights": [
+        {
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "image": {
+            "image": {
+              "height": 1780,
+              "sourceUrl": "https://images.unsplash.com/photo-1582653291997-079a1c04e5a1?q\u003d80\u0026w\u003d2670\u0026auto\u003dformat\u0026fit\u003dcrop\u0026ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "thumbnails": [
+                {
+                  "height": 1780,
+                  "url": "https://a.mktgcdn.com/p/_KPXA_EJFgh-o7geugaVWo0YurW4VCO8kVaAz0cidm4/2670x1780.jpg",
+                  "width": 2670
+                },
+                {
+                  "height": 1267,
+                  "url": "https://a.mktgcdn.com/p/_KPXA_EJFgh-o7geugaVWo0YurW4VCO8kVaAz0cidm4/1900x1267.jpg",
+                  "width": 1900
+                },
+                {
+                  "height": 413,
+                  "url": "https://a.mktgcdn.com/p/_KPXA_EJFgh-o7geugaVWo0YurW4VCO8kVaAz0cidm4/619x413.jpg",
+                  "width": 619
+                },
+                {
+                  "height": 400,
+                  "url": "https://a.mktgcdn.com/p/_KPXA_EJFgh-o7geugaVWo0YurW4VCO8kVaAz0cidm4/600x400.jpg",
+                  "width": 600
+                },
+                {
+                  "height": 131,
+                  "url": "https://a.mktgcdn.com/p/_KPXA_EJFgh-o7geugaVWo0YurW4VCO8kVaAz0cidm4/196x131.jpg",
+                  "width": 196
+                }
+              ],
+              "url": "https://a.mktgcdn.com/p/_KPXA_EJFgh-o7geugaVWo0YurW4VCO8kVaAz0cidm4/2670x1780.jpg",
+              "width": 2670
+            }
+          },
+          "title": "Our Team"
+        },
+        {
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "image": {
+            "image": {
+              "height": 1782,
+              "sourceUrl": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q\u003d80\u0026w\u003d2670\u0026auto\u003dformat\u0026fit\u003dcrop\u0026ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "thumbnails": [
+                {
+                  "height": 1782,
+                  "url": "https://a.mktgcdn.com/p/tddVN-rANiLxEoH1B21Dhxfi06PX-kD4KnJOS1x_CQM/2670x1782.jpg",
+                  "width": 2670
+                },
+                {
+                  "height": 1268,
+                  "url": "https://a.mktgcdn.com/p/tddVN-rANiLxEoH1B21Dhxfi06PX-kD4KnJOS1x_CQM/1900x1268.jpg",
+                  "width": 1900
+                },
+                {
+                  "height": 413,
+                  "url": "https://a.mktgcdn.com/p/tddVN-rANiLxEoH1B21Dhxfi06PX-kD4KnJOS1x_CQM/619x413.jpg",
+                  "width": 619
+                },
+                {
+                  "height": 400,
+                  "url": "https://a.mktgcdn.com/p/tddVN-rANiLxEoH1B21Dhxfi06PX-kD4KnJOS1x_CQM/600x400.jpg",
+                  "width": 600
+                },
+                {
+                  "height": 131,
+                  "url": "https://a.mktgcdn.com/p/tddVN-rANiLxEoH1B21Dhxfi06PX-kD4KnJOS1x_CQM/196x131.jpg",
+                  "width": 196
+                }
+              ],
+              "url": "https://a.mktgcdn.com/p/tddVN-rANiLxEoH1B21Dhxfi06PX-kD4KnJOS1x_CQM/2670x1782.jpg",
+              "width": 2670
+            }
+          },
+          "title": "Our approach"
+        },
+        {
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "image": {
+            "image": {
+              "height": 1782,
+              "sourceUrl": "https://images.unsplash.com/photo-1551632811-561732d1e306?q\u003d80\u0026w\u003d2670\u0026auto\u003dformat\u0026fit\u003dcrop\u0026ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "thumbnails": [
+                {
+                  "height": 1782,
+                  "url": "https://a.mktgcdn.com/p/fQSp34B_0kwd172PjR4MZTGIJ0nBjFkmRvpp5_3BMAQ/2670x1782.jpg",
+                  "width": 2670
+                },
+                {
+                  "height": 1268,
+                  "url": "https://a.mktgcdn.com/p/fQSp34B_0kwd172PjR4MZTGIJ0nBjFkmRvpp5_3BMAQ/1900x1268.jpg",
+                  "width": 1900
+                },
+                {
+                  "height": 413,
+                  "url": "https://a.mktgcdn.com/p/fQSp34B_0kwd172PjR4MZTGIJ0nBjFkmRvpp5_3BMAQ/619x413.jpg",
+                  "width": 619
+                },
+                {
+                  "height": 400,
+                  "url": "https://a.mktgcdn.com/p/fQSp34B_0kwd172PjR4MZTGIJ0nBjFkmRvpp5_3BMAQ/600x400.jpg",
+                  "width": 600
+                },
+                {
+                  "height": 131,
+                  "url": "https://a.mktgcdn.com/p/fQSp34B_0kwd172PjR4MZTGIJ0nBjFkmRvpp5_3BMAQ/196x131.jpg",
+                  "width": 196
+                }
+              ],
+              "url": "https://a.mktgcdn.com/p/fQSp34B_0kwd172PjR4MZTGIJ0nBjFkmRvpp5_3BMAQ/2670x1782.jpg",
+              "width": 2670
+            }
+          },
+          "title": "Our clients"
+        }
+      ]
+    },
+    "name": "Investment Advisor of RBC Dominion Securities",
+    "slug": "janesmith",
+    "timezone": "America/New_York"
+  },
+  "entityType": "financialProfessional",
+  "folder": "yext/root",
+  "labels": []
+}

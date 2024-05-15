@@ -1,0 +1,14 @@
+{
+  "$id": "financialProfessional.default",
+  "$schema": "https://schema.yext.com/config/km/field-eligibility-group/v1",
+  "name": "Financial Professional-default",
+  "entityType": "financialProfessional",
+  "fields": [
+    "c_financialProfessionalVisualConfiguration",
+    "c_hero",
+    "c_intro",
+    "c_primaryHighlights",
+    "c_secondaryHero"
+  ],
+  "required": []
+}

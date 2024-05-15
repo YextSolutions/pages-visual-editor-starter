@@ -1,0 +1,8 @@
+{
+  "$id": "c_hero",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Hero",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "c_hero"
+}
