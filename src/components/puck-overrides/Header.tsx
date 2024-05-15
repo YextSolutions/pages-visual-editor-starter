@@ -2,8 +2,9 @@ import { Button } from "@measured/puck";
 import "./puck.css";
 import { useDocument } from "../../hooks/useDocument";
 import { usePuck } from "@measured/puck";
-import { RotateCcw, RotateCw } from "lucide-react"
+import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
 import * as buttons from "../ui/Button"
+import { useCallback } from "react";
 
 
 const handleClick = (slug: string) => {
@@ -20,10 +21,10 @@ export const customHeaderActions = (children: any) => {
     <>
       {children}
       <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
-        <RotateCcw className="h-4 w-4" />
+        <RotateCcw className="sm-icon" />
       </buttons.Button>
       <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
-        <RotateCw className="h-4 w-4" />
+        <RotateCw className="sm-icon" />
       </buttons.Button>
       <Button onClick={() => handleClick(entityDocument.slug)}>
         Live Preview
@@ -41,10 +42,54 @@ export const customHeader = ({
 }: customHeaderProps) => {
   return (
     <header className="puck-header">
-      <div className="header-left" />
+      <div className="header-left">
+        <ToggleUIButtons/>
+      </div>
       <div className="header-center">
       </div>
       <div className="actions">{actions}</div>
     </header>
   );
 };
+
+const ToggleUIButtons = () => {  
+  const {
+    dispatch,
+    appState: {
+      ui: {
+        leftSideBarVisible, 
+        rightSideBarVisible
+      }
+    }
+  } = usePuck();
+
+  const toggleSidebars = useCallback(
+    (sidebar: "left" | "right") => {
+      const widerViewport = window.matchMedia("(min-width: 638px)").matches;
+      const sideBarVisible =
+        sidebar === "left" ? leftSideBarVisible : rightSideBarVisible;
+      const oppositeSideBar =
+        sidebar === "left" ? "rightSideBarVisible" : "leftSideBarVisible";
+
+      dispatch({
+        type: "setUi",
+        ui: {
+          [`${sidebar}SideBarVisible`]: !sideBarVisible,
+          ...(!widerViewport ? { [oppositeSideBar]: false } : {}),
+        },
+      });
+    },
+    [dispatch, leftSideBarVisible, rightSideBarVisible]
+  );
+
+  return (
+    <>
+      <buttons.Button variant="ghost" size="icon" onClick={() => {toggleSidebars("left")}}>
+        <PanelLeft className="sm-icon" />
+      </buttons.Button>
+      <buttons.Button variant="ghost" size="icon" onClick={() => {toggleSidebars("right")}}>
+        <PanelRight className="sm-icon" />
+      </buttons.Button>
+    </>
+  )
+}
