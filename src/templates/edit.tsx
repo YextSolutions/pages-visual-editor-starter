@@ -178,7 +178,7 @@ const Edit: Template<TemplateRenderProps> = () => {
               entities={entities}
               selectedTemplate={template}
               templates={templates}
-              entityId={entity?.externalId ?? siteEntityId}
+              entityId={getPuckRole() === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
               puckConfig={puckConfig}
               puckData={puckData}
             />
