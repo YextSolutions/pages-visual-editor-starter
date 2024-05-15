@@ -29,45 +29,6 @@
   }
 }
 
-.entity-picker {
-  .dropdown-button {
-    background-color: #181818;
-    color: #ffffff;
-    padding: 7px 19px;
-    font-size: 14px;
-    font-weight: 400;
-    gap: 8px;
-    font-family: InterVariable, sans-serif;
-  }
-
-  .current-entity-item {
-    background-color: #cbd5e0;
-  }
-}
-
-.confirmation-modal {
-  [aria-label="Close"] {
-    display: none;
-  }
-
-  .content-line {
-    margin-bottom: 3px;
-  }
-
-  .close-button {
-    background-color: #dcdcdc;
-  }
-
-  .primary-button {
-    color: #ffffff;
-    background-color: #0158ad;
-  }
-
-  .footer {
-    justify-content: space-between;
-  }
-}
-
 .loading-screen {
   .wrapper {
     width: 100vw;
