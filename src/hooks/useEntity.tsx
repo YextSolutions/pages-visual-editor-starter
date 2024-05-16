@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchEntity } from "../utils/api";
+import { Role } from "../templates/edit";
 
 /**
  * If an entityId is provided and has data, returns the data from that entity. Returns
@@ -7,10 +8,11 @@ import { fetchEntity } from "../utils/api";
  */
 export const GetPuckData = (
   siteEntityId: string,
+  role: string,
   field?: string,
   entityId?: string,
 ): string => {
-  const {entity, status} = useEntity(entityId ?? "");
+  const {entity, status} = useEntity(role === Role.GLOBAL ? siteEntityId : entityId ?? "");
   const {entity: siteEntity, status: siteEntityStatus} = useEntity(siteEntityId);
   if (!field) {
     return "";
