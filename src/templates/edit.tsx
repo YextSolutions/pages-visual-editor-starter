@@ -129,7 +129,7 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  const puckData = GetPuckData(siteEntityId, template?.dataField ?? "", entity?.externalId, getPuckRole())
+  const puckData = GetPuckData(siteEntityId, template?.dataField, entity?.externalId);
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
