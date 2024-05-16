@@ -12,12 +12,12 @@ export const GetPuckData = (
   field?: string,
   entityId?: string,
 ): string => {
-  const {entity, status} = useEntity(role === Role.GLOBAL ? siteEntityId : entityId ?? "");
+  const {entity, status} = useEntity(role === Role.INDIVIDUAL ? entityId ?? "" : "");
   const {entity: siteEntity, status: siteEntityStatus} = useEntity(siteEntityId);
   if (!field) {
     return "";
   }
-  if (status === "success" && entity.response?.[field]) {
+  if (role === Role.INDIVIDUAL && status === "success" && entity.response?.[field]) {
     return entity.response[field];
   }
   if (siteEntityStatus === "success" && siteEntity.response?.[field]) {
