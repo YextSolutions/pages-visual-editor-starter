@@ -1,62 +1,127 @@
 import { ComponentConfig } from "@measured/puck";
-// import { cn } from "../../utils/cn";
-import { Image } from "@yext/pages-components";
+import { Address, Image } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
 import { C_hero, FinancialProfessionalStream } from "../types/autogen";
 import { Mail, Phone } from "lucide-react";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/button";
+import { cn } from "../utils/cn";
 
-export type AdvisorHeroProps = {};
+export type AdvisorHeroProps = {
+  imageMode: "background" | "left" | "right";
+  advisorInfoLayout: "center" | "left";
+};
 
 export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
-  fields: {},
-  defaultProps: {},
-  render: ({}) => {
-    // TODO: ask team about types
+  fields: {
+    imageMode: {
+      type: "radio",
+      label: "Image Mode",
+      options: [
+        { label: "Background", value: "background" },
+        { label: "Left", value: "left" },
+        { label: "Right", value: "right" },
+      ],
+    },
+    advisorInfoLayout: {
+      type: "radio",
+      label: "Advisor Info Layout",
+      options: [
+        { label: "Center", value: "center" },
+        { label: "Left", value: "left" },
+      ],
+    },
+  },
+  defaultProps: {
+    imageMode: "background",
+    advisorInfoLayout: "left",
+  },
+  render: ({ imageMode, advisorInfoLayout }) => {
     const hero: C_hero = useDocument<FinancialProfessionalStream>(
       (document) => document.c_hero
     );
 
-    const backgroundImageUrl = hero?.image?.image.url;
+    const containerClasses = cn(
+      "relative bg-blue-950 opacity-90 py-28 flex h-[465px]",
+      imageMode === "background"
+        ? "flex-col justify-center items-center"
+        : "flex-row items-center",
+      imageMode === "left"
+        ? "flex-row"
+        : imageMode === "right"
+          ? "flex-row-reverse"
+          : ""
+    );
+
+    const imageClasses = cn(
+      "h-[465px]",
+      imageMode === "background"
+        ? "absolute inset-0 h-full w-full object-cover"
+        : "w-1/2 object-cover"
+    );
+
+    const contentContainerClasses = cn(
+      "z-10 flex-col",
+      imageMode === "background" ? "flex justify-center items-center" : "w-1/2",
+      advisorInfoLayout === "center"
+        ? "items-center text-center"
+        : "items-start text-left pl-4"
+    );
 
     return (
-      <div className="relative bg-blue-950 opacity-90 py-28 flex flex-col justify-center items-center gap-4">
-        {backgroundImageUrl && (
+      <div className={containerClasses}>
+        {hero?.image && (
           <>
-            <img
-              className="absolute inset-0 h-full w-full object-cover"
-              src={backgroundImageUrl}
-              alt=""
-            />
-            <div className="absolute inset-0 bg-blue-950 bg-opacity-70"></div>
+            {hero.image && (
+              <div className="">
+                <Image className={imageClasses} image={hero.image} />
+              </div>
+            )}
+            {imageMode === "background" && (
+              <div className="absolute inset-0 bg-blue-950 bg-opacity-70" />
+            )}
           </>
         )}
-        <div className="z-10 flex flex-col items-center text-center gap-y-4">
+        <div className={contentContainerClasses}>
           <h1 className="text-white text-lg font-bold leading-10 pb-1 border-b border-white md:text-3xl">
             {hero?.title}
           </h1>
-          <p className="text-white text-sm font-bold leading-[30px] md:text-2xl">
-            New York City
-          </p>
-          <div className="text-white text-sm font-normal leading-normal">
-            2145 Pennsylvania Avenue West
-            <br />
-            New York City, NY 11202
+          <h3 className="text-white font-bold mt-4">{hero?.subtitle}</h3>
+          {hero?.address && (
+            <Address
+              className="text-white font-normal leading-normal mt-4"
+              lines={[["line1"], ["city", "region", "postalCode"]]}
+              address={hero?.address}
+            />
+          )}
+
+          <div
+            className={cn(
+              "flex gap-4  mt-4",
+              advisorInfoLayout === "left" ? "" : "justify-center"
+            )}
+          >
+            {hero?.phoneNumber && (
+              <>
+                <Phone className="w-5 h-5 text-white" />
+                <div className="text-white text-base font-normal leading-normal ml-2">
+                  {hero?.phoneNumber}
+                </div>
+              </>
+            )}
+            {hero?.email && (
+              <>
+                <Mail className="w-5 h-5 text-white" />
+                {hero?.email && (
+                  <div className="text-white text-base font-normal underline leading-normal">
+                    {hero?.email}
+                  </div>
+                )}
+              </>
+            )}
           </div>
-          <div className="justify-start items-center gap-4 inline-flex">
-            <Phone className="w-5 h-5 text-white" />
-            <div className="text-white text-base font-normal  leading-normal">
-              (339) 291-5039
-            </div>
-            <div className="h-5 w-0.5 bg-white"></div>
-            <div className="justify-start items-center gap-2 flex">
-              <Mail className="text-white text-base font-normal leading-normal" />
-              <div className="text-white text-base font-normal underline leading-normal">
-                capital-nyc@capital.com
-              </div>
-            </div>
-          </div>
-          <Button variant="secondary">Button</Button>
+          <Button className="mt-4" variant="secondary">
+            Button
+          </Button>
         </div>
       </div>
     );

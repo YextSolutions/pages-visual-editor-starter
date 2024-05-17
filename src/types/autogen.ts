@@ -12,15 +12,15 @@ export interface FinancialProfessionalStream {
 }
 
 export interface Address {
-  line1?: string;
+  line1: string;
   line2?: string;
   line3?: string;
   sublocality?: string;
-  city?: string;
+  city: string;
   region?: string;
-  postalCode?: string;
+  postalCode: string;
   extraDescription?: string;
-  countryCode?: string;
+  countryCode: string;
 }
 
 export interface ImageThumbnail {
@@ -46,9 +46,11 @@ export interface ComplexImage {
 
 export interface C_hero {
   title?: string;
+  subtitle?: string;
   image?: ComplexImage;
   email?: string;
   phoneNumber?: string;
+  address?: Address;
 }
 
 export interface LocationStream {

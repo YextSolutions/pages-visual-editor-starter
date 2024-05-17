@@ -2,7 +2,7 @@ import { ComponentConfig } from "@measured/puck";
 import { Section } from "./Section";
 import { Mail, Phone } from "lucide-react";
 import useScreenSizes from "../hooks/useScreenSizes";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/button";
 import { backgroundColors } from "../puck/theme";
 import { cn } from "../utils/cn";
 import { C_locator, FinancialProfessionalStream } from "../types/autogen";

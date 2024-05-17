@@ -10,6 +10,7 @@ import {
 import { ContentGrid, ContentGridProps } from "../components/ContentGrid";
 import { FeaturedBlogs, FeaturedBlogsProps } from "../components/FeaturedBlogs";
 import { Locator, LocatorProps } from "../components/Locator";
+import Root from "./root";
 
 type LocationProps = {
   Toggle: ToggleProps;
@@ -37,7 +38,7 @@ export const locationConfig: Config<LocationProps> = {
     Hero,
   },
   root: {
-    fields: {},
+    render: Root,
   },
 };
 
@@ -47,7 +48,7 @@ export const productConfig: Config<ProductProps> = {
     Toggle,
   },
   root: {
-    fields: {},
+    render: Root,
   },
 };
 
@@ -63,7 +64,7 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     Locator,
   },
   root: {
-    fields: {},
+    render: Root,
   },
 };
 

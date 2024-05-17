@@ -1,4 +1,4 @@
-import { Button } from "../ui/Button";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogClose,
@@ -7,7 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../ui/Dialog"
+} from "../ui/Dialog";
 
 export type ConfirmationModalProps = {
   isOpen: boolean;
@@ -24,8 +24,7 @@ export function TemplateConfirmationModal(props: ConfirmationModalProps) {
         <DialogHeader>
           <DialogTitle>Load template {destinationName}</DialogTitle>
           <DialogDescription>
-            Any unsaved changes will be lost.
-            Are you sure you wish to continue?
+            Any unsaved changes will be lost. Are you sure you wish to continue?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -68,25 +68,23 @@ export function TemplatePicker({
 
   return (
     <>
-    <TemplateConfirmationModal
-      isOpen={modalOpen}
-      destinationName={modalTemplate?.name || ""}
-      destinationUrl={modalTemplate ? urlFromTemplate(modalTemplate) : ""}
-      onClose={() => setModalOpen(false)}
-    />
-    <div className="entity-picker">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant={selectedTemplate ? "default" : "ghost"}
-          >
-            {selectedTemplate ? selectedTemplate.name : "Template"}
-            <ChevronDownIcon />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>{templateMenuItems}</DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+      <TemplateConfirmationModal
+        isOpen={modalOpen}
+        destinationName={modalTemplate?.name || ""}
+        destinationUrl={modalTemplate ? urlFromTemplate(modalTemplate) : ""}
+        onClose={() => setModalOpen(false)}
+      />
+      <div className="entity-picker">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant={selectedTemplate ? "default" : "ghost"}>
+              {selectedTemplate ? selectedTemplate.name : "Template"}
+              <ChevronDownIcon />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>{templateMenuItems}</DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </>
   );
 }
