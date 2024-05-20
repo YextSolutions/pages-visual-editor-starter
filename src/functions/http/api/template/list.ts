@@ -6,19 +6,16 @@ export const templates: TemplateDefinition[] = [
     name: "Location",
     id: "location",
     entityTypes: ["location"],
-    dataField: "c_locationVisualConfiguration",
   },
   {
     name: "Product",
     id: "product",
     entityTypes: ["product"],
-    dataField: "c_productVisualConfiguration",
   },
   {
     name: "Financial Professional",
     id: "financialProfessional",
     entityTypes: ["financialProfessional"],
-    dataField: "c_financialProfessionalVisualConfiguration",
   },
 ];
 

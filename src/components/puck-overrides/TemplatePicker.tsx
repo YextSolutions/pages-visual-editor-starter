@@ -13,7 +13,6 @@ export type TemplateDefinition = {
   name: string;
   id: string;
   entityTypes: string[];
-  dataField: string;
 };
 
 export interface TemplatePickerProps {
