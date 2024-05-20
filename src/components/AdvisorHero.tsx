@@ -3,8 +3,8 @@ import { Address, Image } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
 import { C_hero, FinancialProfessionalStream } from "../types/autogen";
 import { Mail, Phone } from "lucide-react";
-import { Button } from "./ui/button";
 import { cn } from "../utils/cn";
+import { Button } from "./ui/button";
 
 export type AdvisorHeroProps = {
   imageMode: "background" | "left" | "right";

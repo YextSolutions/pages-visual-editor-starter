@@ -11,6 +11,10 @@ import { ContentGrid, ContentGridProps } from "../components/ContentGrid";
 import { FeaturedBlogs, FeaturedBlogsProps } from "../components/FeaturedBlogs";
 import { Locator, LocatorProps } from "../components/Locator";
 import Root from "./root";
+import { BodyContainer, BodyContainerProps } from "../components/BodyContainer";
+import { ContactForm, ContactFormProps } from "../components/ContactForm";
+import { Columns, ColumnsProps } from "../components/Columns";
+import { InfoCard, InfoCardProps } from "../components/cards/InfoCard";
 
 type LocationProps = {
   Toggle: ToggleProps;
@@ -29,6 +33,10 @@ type FinancialProfessionalProps = {
   ContentGrid: ContentGridProps;
   FeaturedBlogs: FeaturedBlogsProps;
   Locator: LocatorProps;
+  BodyContainer: BodyContainerProps;
+  ContactForm: ContactFormProps;
+  Columns: ColumnsProps;
+  InfoCard: InfoCardProps;
 };
 
 // All the available components for locations
@@ -62,6 +70,10 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     ContentGrid,
     FeaturedBlogs,
     Locator,
+    BodyContainer,
+    ContactForm,
+    Columns,
+    InfoCard,
   },
   root: {
     render: Root,
