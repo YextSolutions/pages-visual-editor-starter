@@ -3,10 +3,6 @@ import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
 import { AdvisorHero, AdvisorHeroProps } from "../components/AdvisorHero";
 import { AdvisorBio, AdvisorBioProps } from "../components/AdvisorBio";
-import {
-  ContentCarouselProps,
-  ContentCarousel,
-} from "../components/ContentCarousel";
 import { ContentGrid, ContentGridProps } from "../components/ContentGrid";
 import { FeaturedBlogs, FeaturedBlogsProps } from "../components/FeaturedBlogs";
 import { Locator, LocatorProps } from "../components/Locator";
@@ -29,7 +25,6 @@ type ProductProps = {
 type FinancialProfessionalProps = {
   AdvisorHero: AdvisorHeroProps;
   AdvisorBio: AdvisorBioProps;
-  ContentCarousel: ContentCarouselProps;
   ContentGrid: ContentGridProps;
   FeaturedBlogs: FeaturedBlogsProps;
   Locator: LocatorProps;
@@ -66,7 +61,6 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   components: {
     AdvisorHero,
     AdvisorBio,
-    ContentCarousel,
     ContentGrid,
     FeaturedBlogs,
     Locator,
@@ -84,7 +78,6 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
       components: [
         "AdvisorHero",
         "AdvisorBio",
-        "ContentCarousel",
         "ContentGrid",
         "FeaturedBlogs",
         "Services",

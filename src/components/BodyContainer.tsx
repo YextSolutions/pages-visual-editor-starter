@@ -64,11 +64,11 @@ export const BodyContainer: ComponentConfig<BodyContainerProps> = {
               zone={`section-${idx}`}
               allow={[
                 "AdvisorBio",
-                "ContentCarousel",
                 "ContentGrid",
                 "FeaturedBlogs",
                 "Locator",
                 "Columns",
+                "Services",
               ]}
             />
           </div>
