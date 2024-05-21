@@ -181,6 +181,8 @@ const Edit: Template<TemplateRenderProps> = () => {
               entityId={getPuckRole() === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
               puckConfig={puckConfig}
               puckData={puckData}
+              role={getPuckRole()}
+              siteEntityId={siteEntityId}
             />
           </>
         ) : (

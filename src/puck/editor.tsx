@@ -9,6 +9,9 @@ import { toast } from "sonner"
 import { useEffect } from "react";
 import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
+import { fetchEntity } from "../utils/api";
+import { Role } from "../templates/edit";
+import { VisualConfiguration } from "../hooks/useEntity";
 
 export interface EditorProps {
   selectedEntity: EntityDefinition;
@@ -18,7 +21,13 @@ export interface EditorProps {
   entityId: string;
   puckConfig: Config;
   puckData: string;
+  role: string;
+  siteEntityId: string;
 }
+
+const siteEntityVisualConfigField = "c_visualLayouts";
+const pageLayoutVisualConfigField = "c_visualConfiguration";
+const baseEntityVisualConfigField = "c_visualConfigurations";
 
 // Render Puck editor
 export const Editor = ({
@@ -29,6 +38,8 @@ export const Editor = ({
   entityId,
   puckConfig,
   puckData,
+  role,
+  siteEntityId,
 }: EditorProps) => {
   const toastId = "toast"
   const mutation = useUpdateEntityMutation();
@@ -50,19 +61,58 @@ export const Editor = ({
   }, [mutation]);
 
   // Save the data to our site entity
-  const save = async (data: Data) => {
+  const save = async (data: Data, role: string) => {
     const templateData = JSON.stringify(data);
-    mutation.mutate({
-      entityId: entityId,
-      body: { [selectedTemplate.dataField]: templateData },
-    });
+    if (role === Role.INDIVIDUAL) {
+      // since we are updating a list, we must get the original data, append to it, then push
+      const response = await fetchEntity(entityId);
+      const entity = response.response;
+      const visualConfigs: VisualConfiguration[] = entity[baseEntityVisualConfigField];
+      const existingTemplate = visualConfigs.find((visualConfig: VisualConfiguration) => visualConfig.template === selectedTemplate.id);
+      if (existingTemplate) {
+        existingTemplate.data = templateData;
+      } else {
+        visualConfigs.push({
+          template: selectedTemplate.id,
+          data: templateData,
+        });
+      }
+      mutation.mutate({
+        entityId: entityId,
+        body: {
+          [baseEntityVisualConfigField]: visualConfigs
+        },
+      });
+    } else if (role === Role.GLOBAL) {
+      // for global role, we need to find the Page Layout entity through the Site entity
+      const response = await fetchEntity(siteEntityId);
+      const siteEntity = response.response;
+      // get Page Layouts attached to the Site entity
+      const visualConfigIds = siteEntity[siteEntityVisualConfigField];
+      for (const visualConfigId of visualConfigIds) {
+        const configResponse = await fetchEntity(visualConfigId);
+        const config: VisualConfiguration = configResponse.response[pageLayoutVisualConfigField];
+        if (config.template === selectedTemplate.id) {
+          config.data = templateData;
+          mutation.mutate({
+            entityId: visualConfigId,
+            body: {
+              [pageLayoutVisualConfigField]: config
+            },
+          });
+          return;
+        }
+      }
+      // we failed to update a Page Layout with the changes at this point
+      throw new Error("Unable to find a page layout for template: " + selectedTemplate.name);
+    }
   };
 
   return (
     <Puck
       config={puckConfig}
       data={JSON.parse(puckData)}
-      onPublish={save}
+      onPublish={(data: Data) => save(data, role)}
       overrides={{
         headerActions: ({ children }) => customHeaderActions(children),
         header: ({ actions }) =>
