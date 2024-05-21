@@ -67,7 +67,7 @@ export const Editor = ({
       // since we are updating a list, we must get the original data, append to it, then push
       const response = await fetchEntity(entityId);
       const entity = response.response;
-      const visualConfigs: VisualConfiguration[] = entity[baseEntityVisualConfigField];
+      const visualConfigs: VisualConfiguration[] = entity[baseEntityVisualConfigField] ?? [];
       const existingTemplate = visualConfigs.find((visualConfig: VisualConfiguration) => visualConfig.template === selectedTemplate.id);
       if (existingTemplate) {
         existingTemplate.data = templateData;
