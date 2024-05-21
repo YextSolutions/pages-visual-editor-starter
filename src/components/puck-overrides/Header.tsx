@@ -13,6 +13,11 @@ const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
 };
 
+const handleClearLocalChanges = () => {
+  window.localStorage.clear();
+  window.location.reload();
+};
+
 export const customHeaderActions = (children: any) => {
   const entityDocument = useDocument();
   const {
@@ -28,6 +33,9 @@ export const customHeaderActions = (children: any) => {
       <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
         <RotateCw className="sm-icon" />
       </buttons.Button>
+      <Button onClick={() => handleClearLocalChanges()}>
+        Clear Local Changes
+      </Button>
       <Button onClick={() => handleClick(entityDocument.slug)}>
         Live Preview
       </Button>
