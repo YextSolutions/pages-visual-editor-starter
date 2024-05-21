@@ -15,6 +15,7 @@ import { BodyContainer, BodyContainerProps } from "../components/BodyContainer";
 import { ContactForm, ContactFormProps } from "../components/ContactForm";
 import { Columns, ColumnsProps } from "../components/Columns";
 import { InfoCard, InfoCardProps } from "../components/cards/InfoCard";
+import { ServicesProps, Services } from "../components/Services";
 
 type LocationProps = {
   Toggle: ToggleProps;
@@ -26,7 +27,6 @@ type ProductProps = {
 };
 
 type FinancialProfessionalProps = {
-  Toggle: ToggleProps;
   AdvisorHero: AdvisorHeroProps;
   AdvisorBio: AdvisorBioProps;
   ContentCarousel: ContentCarouselProps;
@@ -37,6 +37,7 @@ type FinancialProfessionalProps = {
   ContactForm: ContactFormProps;
   Columns: ColumnsProps;
   InfoCard: InfoCardProps;
+  Services: ServicesProps;
 };
 
 // All the available components for locations
@@ -63,7 +64,6 @@ export const productConfig: Config<ProductProps> = {
 // All the available components for financial professionals
 export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   components: {
-    Toggle,
     AdvisorHero,
     AdvisorBio,
     ContentCarousel,
@@ -74,6 +74,28 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     ContactForm,
     Columns,
     InfoCard,
+    Services,
+  },
+  categories: {
+    layouts: {
+      components: ["Columns", "BodyContainer", "InfoCard"],
+    },
+    core: {
+      components: [
+        "AdvisorHero",
+        "AdvisorBio",
+        "ContentCarousel",
+        "ContentGrid",
+        "FeaturedBlogs",
+        "Services",
+      ],
+    },
+    forms: {
+      components: ["ContactForm"],
+    },
+    other: {
+      components: ["Locator"],
+    },
   },
   root: {
     render: Root,

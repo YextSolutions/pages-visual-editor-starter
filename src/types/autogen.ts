@@ -470,13 +470,17 @@ export interface C_locator {
   coordinates?: Coordinates;
 }
 
+export interface ServicesOffered {
+  servicesOptions: LinkedService[];
+}
+
 export interface FinancialProfessionalStream {
   id: string;
   name: string;
   slug: string;
   c_hero: C_hero;
   c_advisorBio: C_advisorBio;
-  c_contentCarousel: ContentCarousel;
+  c_servicesOffered: ServicesOffered;
   c_contentGrid: ContentGrid;
   c_insights: FeaturedBlogs[];
   c_locator: C_locator;
