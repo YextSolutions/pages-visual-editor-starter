@@ -16,12 +16,13 @@ const handleClearLocalChanges = () => {
   window.location.reload();
 };
 
-export const customHeaderActions = (children: any) => {
+export const customHeaderActions = (children: any, templateId: string, role: string) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, historyStore },
   } = usePuck();
   const { hasFuture = false, hasPast = false } = historyStore || {};
+  const hasLocalStorage = !!window.localStorage.getItem(role + templateId);
   return (
     <>
       {children}
@@ -31,7 +32,7 @@ export const customHeaderActions = (children: any) => {
       <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
         <RotateCw className="sm-icon" />
       </buttons.Button>
-      <Button onClick={() => handleClearLocalChanges()}>
+      <Button disabled={!hasLocalStorage} onClick={() => handleClearLocalChanges()}>
         Clear Local Changes
       </Button>
       <Button onClick={() => handleClick(entityDocument.slug)}>

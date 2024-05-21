@@ -84,7 +84,7 @@ export const Editor = ({
       onPublish={save}
       onChange={change}
       overrides={{
-        headerActions: ({ children }) => customHeaderActions(children),
+        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, role),
         header: ({ actions }) =>
           customHeader({
             actions: actions
