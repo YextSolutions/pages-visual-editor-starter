@@ -15,7 +15,6 @@ export type TemplateDefinition = {
   dataField: string;
 };
 
-
 export interface EditorProps {
   selectedTemplate: TemplateDefinition;
   entityId: string;
