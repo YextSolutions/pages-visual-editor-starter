@@ -7,15 +7,17 @@ import {
 } from "../components/puck-overrides/Header";
 import { toast } from "sonner"
 import { useEffect, useState } from "react";
-import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
-import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
+
+export type TemplateDefinition = {
+  name: string;
+  id: string;
+  entityTypes: string[];
+  dataField: string;
+};
 
 
 export interface EditorProps {
-  selectedEntity: EntityDefinition;
-  entities: EntityDefinition[];
   selectedTemplate: TemplateDefinition;
-  templates: TemplateDefinition[];
   entityId: string;
   puckConfig: Config;
   puckData: string;
@@ -25,10 +27,7 @@ export interface EditorProps {
 
 // Render Puck editor
 export const Editor = ({
-  selectedEntity,
-  entities,
   selectedTemplate,
-  templates,
   entityId,
   puckConfig,
   puckData,
@@ -88,11 +87,7 @@ export const Editor = ({
         headerActions: ({ children }) => customHeaderActions(children),
         header: ({ actions }) =>
           customHeader({
-            actions: actions,
-            entity: selectedEntity,
-            template: selectedTemplate,
-            entities: entities,
-            templates: templates,
+            actions: actions
           }),
       }}
     />
