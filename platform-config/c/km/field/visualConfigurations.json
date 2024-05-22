@@ -1,0 +1,14 @@
+{
+  "$id": "c_visualConfigurations",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Visual Configurations",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "type": {
+    "listType": {
+      "typeId": "c_visualConfiguration",
+      "maxLength": 5000
+    }
+  },
+  "typeId": "list"
+}

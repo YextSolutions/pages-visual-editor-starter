@@ -3,6 +3,15 @@
   "$schema": "https://schema.yext.com/config/km/entity/v1",
   "primaryLocale": "en",
   "content": {
+    "c_pages_layouts": [
+      "productVisualConfiguration"
+    ],
+    "c_visualConfigurations": [
+      {
+        "data": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-65c649c6-2a0d-4788-a3ec-b48302585bc8\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-5e777752-cc54-454d-8381-4da1ee0b53b9\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-99947f67-0eca-4ac3-a750-bdc334ab9a86\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-8982745a-09e7-45d2-af62-d4ed46f1716f\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-b064e7cb-1f1d-45e4-b0eb-17a65a52920f\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+        "template": "product"
+      }
+    ],
     "name": "Cold Brew",
     "price": {
       "currencyCode": "USD",

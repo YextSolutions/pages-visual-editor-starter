@@ -203,6 +203,15 @@
       "rating": "5"
     },
     "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"LocationHero\",\"props\":{\"id\":\"LocationHero-f36fd860-9cc0-4c4d-b102-35d1c64b4de2\"}},{\"type\":\"LocationCore\",\"props\":{\"id\":\"LocationCore-940ec5f7-6d5f-4b86-b1d5-37f75fb73c6e\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_pages_layouts": [
+      "locationVisualConfiguration"
+    ],
+    "c_visualConfigurations": [
+      {
+        "data": "{\"content\":[{\"type\":\"LocationHero\",\"props\":{\"id\":\"LocationHero-f36fd860-9cc0-4c4d-b102-35d1c64b4de2\"}},{\"type\":\"Hero\",\"props\":{\"id\":\"Hero-7c7ca6e3-1ae7-47c9-aa07-ed7c47e041f2\"}},{\"type\":\"LocationCore\",\"props\":{\"id\":\"LocationCore-940ec5f7-6d5f-4b86-b1d5-37f75fb73c6e\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-4c827b8b-0da7-4f00-88a3-a0b385506ab1\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-33b98d85-193d-4a2c-8858-e816f832acdc\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+        "template": "location"
+      }
+    ],
     "categoryIds": [
       "777"
     ],

@@ -12,6 +12,9 @@
       "region": "MD"
     },
     "addressHidden": false,
+    "c_pages_layouts": [
+      "financialProfessionalVisualConfiguration"
+    ],
     "name": "John Doe",
     "slug": "johndoe",
     "timezone": "America/New_York"

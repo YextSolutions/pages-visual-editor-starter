@@ -1,0 +1,22 @@
+{
+  "$id": "locationVisualConfiguration",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_entities": [
+      "cafe",
+      "yext-dc",
+      "washington-monument",
+      "turtlehead-tacos",
+      "fashion-warehouse-61"
+    ],
+    "c_visualConfiguration": {
+      "data": "{\"content\":[{\"type\":\"LocationHero\",\"props\":{\"id\":\"LocationHero-f36fd860-9cc0-4c4d-b102-35d1c64b4de2\"}},{\"type\":\"LocationCore\",\"props\":{\"id\":\"LocationCore-940ec5f7-6d5f-4b86-b1d5-37f75fb73c6e\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-bcf16af8-01f1-4b87-9044-8961ce584b1b\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-0f13c4dd-8ccc-4c0e-b1c5-fe5a3808901e\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+      "template": "location"
+    },
+    "name": "Location Visual Configuration"
+  },
+  "entityType": "ce_pagesLayout",
+  "folder": "yext/root",
+  "labels": []
+}

@@ -48,6 +48,10 @@
       },
       "title": "[[name]]"
     },
+    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"Hero\",\"props\":{\"id\":\"Hero-5448e148-dd15-40af-beab-9c37b2c1a19f\"}},{\"type\":\"LocationCore\",\"props\":{\"id\":\"LocationCore-940ec5f7-6d5f-4b86-b1d5-37f75fb73c6e\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_pages_layouts": [
+      "locationVisualConfiguration"
+    ],
     "categoryIds": [
       "1322912"
     ],

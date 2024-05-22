@@ -12,6 +12,19 @@
       "region": "KY"
     },
     "addressHidden": false,
+    "c_pages_layouts": [
+      "financialProfessionalVisualConfiguration"
+    ],
+    "c_visualConfigurations": [
+      {
+        "data": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-2df8e920-23b1-4b24-8bfc-dd73d474994a\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-84c75d44-ce9b-4159-8b31-81a197a0a974\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-f7c32a5a-4027-4323-8433-ae63f6244995\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-1c30a852-3c0e-4ee0-8253-d64a18b88b79\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-36396bfa-2643-4187-b2a6-a4ed7404e5b2\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-9e1fa4da-2d8a-43eb-aea3-f76276878b27\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+        "template": "financialProfessional"
+      },
+      {
+        "data": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-2df8e920-23b1-4b24-8bfc-dd73d474994a\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-84c75d44-ce9b-4159-8b31-81a197a0a974\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-f7c32a5a-4027-4323-8433-ae63f6244995\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+        "template": "kfc"
+      }
+    ],
     "name": "Colonel Sanders",
     "slug": "colonelsanders",
     "timezone": "America/New_York"

@@ -1,0 +1,19 @@
+{
+  "$id": "c_pages_layouts",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Pages Layouts",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "type": {
+    "listType": {
+      "typeId": "entityReference",
+      "type": {
+        "entityReferenceType": {
+          "relatedFieldId": "c_entities",
+          "type": "TWO_WAY"
+        }
+      }
+    }
+  },
+  "typeId": "list"
+}
