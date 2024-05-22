@@ -17,13 +17,13 @@ const handleClearLocalChanges = () => {
   window.location.reload();
 };
 
-export const customHeaderActions = (children: any, templateId: string, entityId: string, role: string) => {
+export const customHeaderActions = (children: any, templateId: string, layoutId: string, entityId: string, role: string) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, historyStore },
   } = usePuck();
   const { hasFuture = false, hasPast = false } = historyStore || {};
-  const hasLocalStorage = !!window.localStorage.getItem(getLocalStorageKey(role, templateId, entityId));
+  const hasLocalStorage = !!window.localStorage.getItem(getLocalStorageKey(role, templateId, layoutId, entityId));
   return (
     <>
       {children}

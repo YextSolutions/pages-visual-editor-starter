@@ -16,10 +16,11 @@ export type VisualConfiguration = {
 
 // used to track 'priority' of data, where lower is prioritized
 enum DataSource {
-  Entity = 0,
-  EntityLayout = 1,
-  SiteLayout = 2,
-  None = 3
+  Layout = 0,
+  Entity = 1,
+  EntityLayout = 2,
+  SiteLayout = 3,
+  None = 4
 }
 
 /**
@@ -34,9 +35,27 @@ export const GetPuckData = (
   role: string,
   templateId?: string,
   entityId?: string,
+  layoutId?: string,
 ): string => {
   const [data, setData] = React.useState("");
   const [dataSource, setDataSource] = React.useState(DataSource.None);
+
+  // for Global role, get the puck data from layout entity using the layoutId
+  const {entity: layoutEntity, status: layoutStatus} = useEntity(layoutId ?? "", dataSource > DataSource.Layout && role === Role.GLOBAL);
+  if (layoutStatus === "success" && layoutEntity?.response) {
+    const layout: VisualConfiguration = layoutEntity.response[pageLayoutVisualConfigField];
+    if (layout) {
+      if (layout.template !== templateId) {
+        throw new Error("Mismatch between template and page layout: Template: " + templateId + ", Page Layout: " + layoutId);
+      }
+      if (dataSource > DataSource.Layout) {
+        setDataSource(DataSource.Layout);
+        setData(layout.data);
+      }
+    } else {
+      throw new Error("Failed to find page layout for id: " + layoutId);
+    }
+  }
 
   const {entity, status} = useEntity(entityId ?? "", dataSource > DataSource.EntityLayout);
   // page layout ids from the entity
