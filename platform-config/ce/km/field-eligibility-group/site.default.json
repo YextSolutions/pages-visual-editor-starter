@@ -6,7 +6,8 @@
   "fields": [
     "c_financialProfessionalVisualConfiguration",
     "c_locationVisualConfiguration",
-    "c_productVisualConfiguration"
+    "c_productVisualConfiguration",
+    "c_visualLayouts"
   ],
   "required": []
 }

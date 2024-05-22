@@ -7,8 +7,10 @@
     "c_financialProfessionalVisualConfiguration",
     "c_hero",
     "c_intro",
+    "c_pages_layouts",
     "c_primaryHighlights",
-    "c_secondaryHero"
+    "c_secondaryHero",
+    "c_visualConfigurations"
   ],
   "required": []
 }

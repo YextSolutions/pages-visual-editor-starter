@@ -133,6 +133,10 @@
       "numberOfReviews": "200",
       "rating": "5"
     },
+    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"LocationHero\",\"props\":{\"id\":\"LocationHero-f36fd860-9cc0-4c4d-b102-35d1c64b4de2\"}},{\"type\":\"Hero\",\"props\":{\"id\":\"Hero-1870bf78-eaf8-4bdb-917f-e767c4ae76f0\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-9aa57fed-afb4-4894-8e20-5461e13efb1a\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_pages_layouts": [
+      "locationVisualConfiguration"
+    ],
     "categoryIds": [
       "152"
     ],
