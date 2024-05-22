@@ -2,11 +2,12 @@ import {useQueries, useQuery} from "@tanstack/react-query";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
 import React from "react";
-
-const entityVisualConfigurationsFieldId = "c_visualConfigurations";
-const entityPagesLayoutsFieldId = "c_pages_layouts";
-const layoutVisualConfigurationFieldId = "c_visualConfiguration";
-const sitePagesLayoutsFieldId = "c_visualLayouts";
+import {
+  baseEntityPageLayoutsField,
+  baseEntityVisualConfigField,
+  pageLayoutVisualConfigField,
+  siteEntityVisualConfigField
+} from "../puck/editor";
 
 export type VisualConfiguration = {
   template: string;
@@ -22,12 +23,11 @@ enum DataSource {
 }
 
 /**
- * For role 'individual', first searches the entity for a matching layout.
- * Then searches the related Page Layouts for a match.
- * Finally, gets the Site entity and searches the Page Layouts connected to the site entity.
+ * Gets the puck data using the configuration directly on the baseEntity, then falling back to
+ * the Page Layout referenced by the base entity, and failing that gets the Page Layout referenced
+ * by the Site entity.
  *
- * For role 'global', the behavior is the same but we do not use the data directly from the base
- * entity.
+ * The data directly on the base entity is only used for role 'individual'.
  */
 export const GetPuckData = (
   siteEntityId: string,
@@ -43,16 +43,16 @@ export const GetPuckData = (
   const entityPageLayoutIds: string[] = [];
   if (status === "success" && entity?.response) {
     // look for c_visualConfigurations directly on the entity
-    const configs = entity?.response[entityVisualConfigurationsFieldId] ?? [];
+    const configs = entity?.response[baseEntityVisualConfigField] ?? [];
     configs.forEach((config: VisualConfiguration) => {
-      // only use the data directly off the entity for ICs
+      // only use the data directly off the entity for role 'INDIVIDUAL'
       if (templateId && dataSource > DataSource.Entity && config.template === templateId && role === Role.INDIVIDUAL) {
         setDataSource(DataSource.Entity);
         setData(config.data);
       }
     });
     // get the page layout entity ids in c_pages_layouts to search
-    const pagesLayouts = entity?.response[entityPagesLayoutsFieldId] ?? [];
+    const pagesLayouts = entity?.response[baseEntityPageLayoutsField] ?? [];
     pagesLayouts.forEach((pagesLayout: string) => {
       entityPageLayoutIds.push(pagesLayout);
     });
@@ -61,7 +61,7 @@ export const GetPuckData = (
   const entityLayouts = useEntities(entityPageLayoutIds, dataSource > DataSource.EntityLayout);
   entityLayouts.forEach((result: {entity: any, status: string}) => {
     if (result.status === "success" && result.entity?.response) {
-      const layout = result.entity.response[layoutVisualConfigurationFieldId];
+      const layout = result.entity.response[pageLayoutVisualConfigField];
       if (templateId && layout["data"] && layout["template"] === templateId) {
         if (dataSource > DataSource.EntityLayout) {
           setDataSource(DataSource.EntityLayout);
@@ -73,17 +73,17 @@ export const GetPuckData = (
   // get page layout ids from the Site entity
   const sitePagesLayoutsIds: string[] = [];
   const {entity: siteEntity, status: siteEntityStatus} = useEntity(siteEntityId, dataSource > DataSource.SiteLayout);
-  if (siteEntityStatus === "success" && siteEntity.response?.[sitePagesLayoutsFieldId]) {
+  if (siteEntityStatus === "success" && siteEntity.response?.[siteEntityVisualConfigField]) {
     // read the c_visualLayouts field off the Site entity
-    siteEntity.response[sitePagesLayoutsFieldId].forEach((visualLayout: string) => {
+    siteEntity.response[siteEntityVisualConfigField].forEach((visualLayout: string) => {
       sitePagesLayoutsIds.push(visualLayout);
-    })
+    });
   }
   // pull the layouts using the ids from the Site entity, then find matching layout
   const siteLayouts = useEntities(sitePagesLayoutsIds, dataSource > DataSource.SiteLayout);
   siteLayouts.forEach((result: {entity: any, status: string}) => {
-    if (result.status === "success" && result.entity?.response[layoutVisualConfigurationFieldId]) {
-      const layout = result.entity.response[layoutVisualConfigurationFieldId];
+    if (result.status === "success" && result.entity?.response[pageLayoutVisualConfigField]) {
+      const layout = result.entity.response[pageLayoutVisualConfigField];
       if (templateId && layout["data"] && layout["template"] === templateId) {
         if (dataSource > DataSource.SiteLayout) {
           setDataSource(DataSource.SiteLayout);

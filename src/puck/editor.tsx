@@ -7,17 +7,18 @@ import {
 } from "../components/puck-overrides/Header";
 import { toast } from "sonner"
 import { useEffect } from "react";
-import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
-import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
 import { VisualConfiguration } from "../hooks/useEntity";
 
+export type TemplateDefinition = {
+  name: string;
+  id: string;
+  entityTypes: string[];
+};
+
 export interface EditorProps {
-  selectedEntity: EntityDefinition;
-  entities: EntityDefinition[];
   selectedTemplate: TemplateDefinition;
-  templates: TemplateDefinition[];
   entityId: string;
   puckConfig: Config;
   puckData: string;
@@ -25,16 +26,15 @@ export interface EditorProps {
   siteEntityId: string;
 }
 
-const siteEntityVisualConfigField = "c_visualLayouts";
-const pageLayoutVisualConfigField = "c_visualConfiguration";
-const baseEntityVisualConfigField = "c_visualConfigurations";
+export const
+    siteEntityVisualConfigField = "c_visualLayouts",
+    pageLayoutVisualConfigField = "c_visualConfiguration",
+    baseEntityVisualConfigField = "c_visualConfigurations",
+    baseEntityPageLayoutsField = "c_pages_layouts";
 
 // Render Puck editor
 export const Editor = ({
-  selectedEntity,
-  entities,
   selectedTemplate,
-  templates,
   entityId,
   puckConfig,
   puckData,
@@ -117,11 +117,7 @@ export const Editor = ({
         headerActions: ({ children }) => customHeaderActions(children),
         header: ({ actions }) =>
           customHeader({
-            actions: actions,
-            entity: selectedEntity,
-            template: selectedTemplate,
-            entities: entities,
-            templates: templates,
+            actions: actions
           }),
       }}
     />
