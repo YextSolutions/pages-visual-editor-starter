@@ -6,10 +6,16 @@ import {
   customHeaderActions,
 } from "../components/puck-overrides/Header";
 import { toast } from "sonner"
-import { useEffect } from "react";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
 import { VisualConfiguration } from "../hooks/useEntity";
+import { useEffect, useState } from "react";
+
+export type EntityDefinition = {
+  name: string;
+  externalId: string;
+  internalId: number;
+};
 
 export type TemplateDefinition = {
   name: string;
@@ -24,6 +30,7 @@ export interface EditorProps {
   puckData: string;
   role: string;
   siteEntityId: string;
+  isLoading: boolean;
 }
 
 export const
@@ -40,9 +47,11 @@ export const Editor = ({
   puckData,
   role,
   siteEntityId,
+  isLoading,
 }: EditorProps) => {
   const toastId = "toast"
   const mutation = useUpdateEntityMutation();
+  const [canEdit, setCanEdit] = useState<boolean>(false);
 
   useEffect(() => {
     if (mutation.isPending) {
@@ -77,6 +86,7 @@ export const Editor = ({
           data: templateData,
         });
       }
+      window.localStorage.removeItem(role + selectedTemplate.id + "_" + entityId);
       mutation.mutate({
         entityId: entityId,
         body: {
@@ -94,6 +104,7 @@ export const Editor = ({
         const config: VisualConfiguration = configResponse.response[pageLayoutVisualConfigField];
         if (config.template === selectedTemplate.id) {
           config.data = templateData;
+          window.localStorage.removeItem(role + selectedTemplate.id + "_" + entityId);
           mutation.mutate({
             entityId: visualConfigId,
             body: {
@@ -108,13 +119,26 @@ export const Editor = ({
     }
   };
 
+  const change = async (data: Data) => {
+    if (isLoading) {
+      return
+    }
+    if (!canEdit) {
+      setCanEdit(true);
+      return
+    }
+      
+    window.localStorage.setItem(role + selectedTemplate.id, JSON.stringify(data));
+  };
+
   return (
     <Puck
       config={puckConfig}
       data={JSON.parse(puckData)}
       onPublish={(data: Data) => save(data, role)}
+      onChange={change}
       overrides={{
-        headerActions: ({ children }) => customHeaderActions(children),
+        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, role),
         header: ({ actions }) =>
           customHeader({
             actions: actions

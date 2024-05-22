@@ -6,15 +6,13 @@ import {
   TemplateProps,
   TemplateRenderProps,
 } from "@yext/pages";
-import { Editor } from "../puck/editor";
+import {Editor, EntityDefinition, TemplateDefinition} from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
-import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
-import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
 import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 import { toast } from "sonner"
@@ -77,6 +75,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [entity, setEntity] = useState<EntityDefinition>();
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
+  const [localStorage, setLocaleStorage] = useState<string>('');
 
   useEffect(() => {
     async function getData() {
@@ -111,13 +110,15 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          toast.error(`Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`)
+          toast.error(`Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`);
         }
       }
       setEntities(fetchedEntities);
       setEntity(targetEntity);
       // get puckConfig from hardcoded map
       const puckConfig = puckConfigs.get(targetTemplate.id);
+      setLocaleStorage(typeof window !== "undefined" ?
+          window.localStorage.getItem(getPuckRole() + targetTemplate.id + "_" + targetEntity.externalId) || '' : '');
       setPuckConfig(puckConfig);
       window.history.replaceState(
         null,
@@ -129,7 +130,11 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  const puckData = GetPuckData(siteEntityId, getPuckRole(), template?.id, entity?.externalId);
+  let puckData = GetPuckData(siteEntityId, getPuckRole(), template?.id, entity?.externalId);
+  // use localStorage if it exists
+  if (localStorage) {
+    puckData = localStorage;
+  }
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -174,15 +179,13 @@ const Edit: Template<TemplateRenderProps> = () => {
         {!isLoading && !!puckData ? (
           <>
             <Editor
-              selectedEntity={entity}
-              entities={entities}
               selectedTemplate={template}
-              templates={templates}
-              entityId={getPuckRole() === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
+              entityId={entity?.externalId ?? ""}
               puckConfig={puckConfig}
               puckData={puckData}
               role={getPuckRole()}
               siteEntityId={siteEntityId}
+              isLoading={isLoading}
             />
           </>
         ) : (
