@@ -7,7 +7,9 @@
     "c_hero",
     "c_locationCore",
     "c_locationHero",
-    "c_locationVisualConfiguration"
+    "c_locationVisualConfiguration",
+    "c_pages_layouts",
+    "c_visualConfigurations"
   ],
   "required": []
 }

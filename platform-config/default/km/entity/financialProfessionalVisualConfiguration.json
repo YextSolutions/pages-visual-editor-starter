@@ -1,0 +1,20 @@
+{
+  "$id": "financialProfessionalVisualConfiguration",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_entities": [
+      "colonelSanders",
+      "investment-advisor",
+      "johnDoe"
+    ],
+    "c_visualConfiguration": {
+      "data": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-2df8e920-23b1-4b24-8bfc-dd73d474994a\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-84c75d44-ce9b-4159-8b31-81a197a0a974\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-e8ef8a9c-0309-4de4-ac60-0bef2f7c3376\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+      "template": "financialProfessional"
+    },
+    "name": "Financial Professional Visual Configuration"
+  },
+  "entityType": "ce_pagesLayout",
+  "folder": "yext/root",
+  "labels": []
+}

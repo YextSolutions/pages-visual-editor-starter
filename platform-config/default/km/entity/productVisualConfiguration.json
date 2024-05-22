@@ -1,0 +1,22 @@
+{
+  "$id": "productVisualConfiguration",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_entities": [
+      "americano",
+      "coldBrew",
+      "espresso",
+      "latte",
+      "milkshake"
+    ],
+    "c_visualConfiguration": {
+      "data": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-8852d9b6-4c79-40d2-a153-7b4dcbf2e162\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-712b6632-26db-4ade-9b09-20942ea56c38\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-9651da59-c51b-431a-944c-8fa78314c9ba\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+      "template": "product"
+    },
+    "name": "Product Visual Configuration"
+  },
+  "entityType": "ce_pagesLayout",
+  "folder": "yext/root",
+  "labels": []
+}

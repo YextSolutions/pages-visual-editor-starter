@@ -5,7 +5,9 @@
   "entityType": "product",
   "fields": [
     "c_hero",
-    "c_productVisualConfiguration"
+    "c_pages_layouts",
+    "c_productVisualConfiguration",
+    "c_visualConfigurations"
   ],
   "required": []
 }
