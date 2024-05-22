@@ -6,7 +6,7 @@ import {
   customHeaderActions,
 } from "../components/puck-overrides/Header";
 import { toast } from "sonner"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export type TemplateDefinition = {
   name: string;
@@ -20,6 +20,8 @@ export interface EditorProps {
   entityId: string;
   puckConfig: Config;
   puckData: string;
+  role: string;
+  isLoading: boolean;
 }
 
 // Render Puck editor
@@ -28,9 +30,13 @@ export const Editor = ({
   entityId,
   puckConfig,
   puckData,
+  role,
+  isLoading,
 }: EditorProps) => {
   const toastId = "toast"
   const mutation = useUpdateEntityMutation();
+  const [canEdit, setCanEdit] = useState<boolean>(false);
+
 
   useEffect(() => {
     if (mutation.isPending) {
@@ -51,10 +57,23 @@ export const Editor = ({
   // Save the data to our site entity
   const save = async (data: Data) => {
     const templateData = JSON.stringify(data);
+    window.localStorage.removeItem(role + selectedTemplate.id);
     mutation.mutate({
       entityId: entityId,
       body: { [selectedTemplate.dataField]: templateData },
     });
+  };
+
+  const change = async (data: Data) => {
+    if (isLoading) {
+      return
+    }
+    if (!canEdit) {
+      setCanEdit(true);
+      return
+    }
+      
+    window.localStorage.setItem(role + selectedTemplate.id, JSON.stringify(data));
   };
 
   return (
@@ -62,8 +81,9 @@ export const Editor = ({
       config={puckConfig}
       data={JSON.parse(puckData)}
       onPublish={save}
+      onChange={change}
       overrides={{
-        headerActions: ({ children }) => customHeaderActions(children),
+        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, role),
         header: ({ actions }) =>
           customHeader({
             actions: actions

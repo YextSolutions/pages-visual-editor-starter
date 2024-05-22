@@ -77,6 +77,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [entity, setEntity] = useState<EntityDefinition>();
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
+  const [localStorage, setLocaleStorage] = useState<string>('');
 
   useEffect(() => {
     async function getData() {
@@ -98,6 +99,8 @@ const Edit: Template<TemplateRenderProps> = () => {
       }
       setTemplates(fetchedTemplates);
       setTemplate(targetTemplate);
+      setLocaleStorage(typeof window !== "undefined" ? 
+        window.localStorage.getItem(getPuckRole() + targetTemplate.id) || '' : '');
       // get entities
       const fetchedEntities = await fetchEntities(targetTemplate.entityTypes);
       let targetEntity: EntityDefinition = fetchedEntities[0];
@@ -129,7 +132,12 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  const puckData = GetPuckData(siteEntityId, getPuckRole(), template?.dataField, entity?.externalId);
+
+  let puckData = GetPuckData(siteEntityId, getPuckRole(), template?.dataField, entity?.externalId);
+  // use localStorage if it exists
+  if (localStorage) {
+    puckData = localStorage;
+  }
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -181,6 +189,8 @@ const Edit: Template<TemplateRenderProps> = () => {
               entityId={getPuckRole() === Role.INDIVIDUAL ? entity?.externalId : siteEntityId}
               puckConfig={puckConfig}
               puckData={puckData}
+              role={getPuckRole()}
+              isLoading={isLoading}
             />
           </>
         ) : (
