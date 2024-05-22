@@ -1,8 +1,16 @@
-import {Role} from "../templates/edit";
+import { Role } from "../templates/edit";
 
-export function getLocalStorageKey(role: string, templateId: string, entityId: string) {
-  if (role === Role.INDIVIDUAL) {
-    return role + "_" + templateId + "_" + entityId;
+const ROLE= "ROLE_",
+    TEMPLATE= "TEMPLATE_",
+    LAYOUT= "LAYOUT_",
+    ENTITY= "ENTITY_";
+
+export function getLocalStorageKey(role: string, templateId: string, layoutId: string, entityId: string) {
+  if (!role || !templateId || (!entityId && !layoutId)) {
+    throw new Error("Unable to generate local storage key, missing query parameters");
   }
-  return role + "_" + templateId;
+  if (role === Role.INDIVIDUAL) {
+    return ROLE + role + TEMPLATE + templateId + ENTITY + entityId;
+  }
+  return ROLE + role + TEMPLATE + templateId + LAYOUT + layoutId;
 }

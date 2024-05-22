@@ -27,10 +27,10 @@ export type TemplateDefinition = {
 export interface EditorProps {
   selectedTemplate: TemplateDefinition;
   entityId: string;
+  layoutId: string;
   puckConfig: Config;
   puckData: string;
   role: string;
-  siteEntityId: string;
   isLoading: boolean;
 }
 
@@ -43,11 +43,11 @@ export const
 // Render Puck editor
 export const Editor = ({
   selectedTemplate,
+  layoutId,
   entityId,
   puckConfig,
   puckData,
   role,
-  siteEntityId,
   isLoading,
 }: EditorProps) => {
   const toastId = "toast"
@@ -78,7 +78,9 @@ export const Editor = ({
       const response = await fetchEntity(entityId);
       const entity = response.response;
       const visualConfigs: VisualConfiguration[] = entity[baseEntityVisualConfigField] ?? [];
-      const existingTemplate = visualConfigs.find((visualConfig: VisualConfiguration) => visualConfig.template === selectedTemplate.id);
+      const existingTemplate =
+          visualConfigs.find((visualConfig: VisualConfiguration) =>
+              visualConfig.template === selectedTemplate.id);
       if (existingTemplate) {
         existingTemplate.data = templateData;
       } else {
@@ -87,7 +89,7 @@ export const Editor = ({
           data: templateData,
         });
       }
-      window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, entityId));
+      window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId));
       mutation.mutate({
         entityId: entityId,
         body: {
@@ -95,28 +97,18 @@ export const Editor = ({
         },
       });
     } else if (role === Role.GLOBAL) {
-      // for global role, we need to find the Page Layout entity through the Site entity
-      const response = await fetchEntity(siteEntityId);
-      const siteEntity = response.response;
-      // get Page Layouts attached to the Site entity
-      const visualConfigIds = siteEntity[siteEntityVisualConfigField];
-      for (const visualConfigId of visualConfigIds) {
-        const configResponse = await fetchEntity(visualConfigId);
-        const config: VisualConfiguration = configResponse.response[pageLayoutVisualConfigField];
-        if (config.template === selectedTemplate.id) {
-          config.data = templateData;
-          window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, entityId));
-          mutation.mutate({
-            entityId: visualConfigId,
-            body: {
-              [pageLayoutVisualConfigField]: config
-            },
-          });
-          return;
-        }
+      // for global role, we save to the layout entity
+      const visualConfig: VisualConfiguration = {
+        data: templateData,
+        template: selectedTemplate.id,
       }
-      // we failed to update a Page Layout with the changes at this point
-      throw new Error("Unable to find a page layout for template: " + selectedTemplate.name);
+      window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId));
+      mutation.mutate({
+        entityId: layoutId,
+        body: {
+          [pageLayoutVisualConfigField]: visualConfig
+        },
+      });
     }
   };
 
@@ -129,7 +121,7 @@ export const Editor = ({
       return
     }
       
-    window.localStorage.setItem(getLocalStorageKey(role, selectedTemplate.id, entityId), JSON.stringify(data));
+    window.localStorage.setItem(getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId), JSON.stringify(data));
   };
 
   return (
@@ -139,7 +131,7 @@ export const Editor = ({
       onPublish={(data: Data) => save(data, role)}
       onChange={change}
       overrides={{
-        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, entityId, role),
+        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, layoutId, entityId, role),
         header: ({ actions }) =>
           customHeader({
             actions: actions
