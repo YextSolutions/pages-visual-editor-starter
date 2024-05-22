@@ -10,6 +10,7 @@ import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
 import { VisualConfiguration } from "../hooks/useEntity";
 import { useEffect, useState } from "react";
+import { getLocalStorageKey } from "../utils/localStorageHelper";
 
 export type EntityDefinition = {
   name: string;
@@ -86,7 +87,7 @@ export const Editor = ({
           data: templateData,
         });
       }
-      window.localStorage.removeItem(role + selectedTemplate.id + "_" + entityId);
+      window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, entityId));
       mutation.mutate({
         entityId: entityId,
         body: {
@@ -104,7 +105,7 @@ export const Editor = ({
         const config: VisualConfiguration = configResponse.response[pageLayoutVisualConfigField];
         if (config.template === selectedTemplate.id) {
           config.data = templateData;
-          window.localStorage.removeItem(role + selectedTemplate.id + "_" + entityId);
+          window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, entityId));
           mutation.mutate({
             entityId: visualConfigId,
             body: {
@@ -128,7 +129,7 @@ export const Editor = ({
       return
     }
       
-    window.localStorage.setItem(role + selectedTemplate.id, JSON.stringify(data));
+    window.localStorage.setItem(getLocalStorageKey(role, selectedTemplate.id, entityId), JSON.stringify(data));
   };
 
   return (
@@ -138,7 +139,7 @@ export const Editor = ({
       onPublish={(data: Data) => save(data, role)}
       onChange={change}
       overrides={{
-        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, role),
+        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, entityId, role),
         header: ({ actions }) =>
           customHeader({
             actions: actions

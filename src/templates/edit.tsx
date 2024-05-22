@@ -17,6 +17,7 @@ import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 import { toast } from "sonner"
 import { Toaster } from "../components/ui/Toaster";
+import { getLocalStorageKey } from "../utils/localStorageHelper";
 
 export const Role = {
   GLOBAL: "global",
@@ -117,8 +118,7 @@ const Edit: Template<TemplateRenderProps> = () => {
       setEntity(targetEntity);
       // get puckConfig from hardcoded map
       const puckConfig = puckConfigs.get(targetTemplate.id);
-      setLocaleStorage(typeof window !== "undefined" ?
-          window.localStorage.getItem(getPuckRole() + targetTemplate.id + "_" + targetEntity.externalId) || '' : '');
+      setLocaleStorage(typeof window !== "undefined" ? window.localStorage.getItem(getLocalStorageKey(getPuckRole(), targetTemplate.id, targetEntity.externalId)) ?? "" : "");
       setPuckConfig(puckConfig);
       window.history.replaceState(
         null,
