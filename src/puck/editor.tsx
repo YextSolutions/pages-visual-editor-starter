@@ -5,10 +5,9 @@ import {
   customHeader,
   customHeaderActions,
 } from "../components/puck-overrides/Header";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
-import { VisualConfiguration } from "../hooks/useEntity";
 import { useEffect, useState } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 
@@ -16,6 +15,18 @@ export type EntityDefinition = {
   name: string;
   externalId: string;
   internalId: number;
+};
+
+export type LayoutDefinition = {
+  name: string;
+  externalId: string;
+  internalId: number;
+  visualConfiguration: VisualConfiguration;
+};
+
+export type VisualConfiguration = {
+  template: string;
+  data: string;
 };
 
 export type TemplateDefinition = {
@@ -34,12 +45,11 @@ export interface EditorProps {
   isLoading: boolean;
 }
 
-export const
-    siteEntityVisualConfigField = "c_visualLayouts",
-    pageLayoutVisualConfigField = "c_visualConfiguration",
-    pageLayoutTypeId = "ce_pagesLayout",
-    baseEntityVisualConfigField = "c_visualConfigurations",
-    baseEntityPageLayoutsField = "c_pages_layouts";
+export const siteEntityVisualConfigField = "c_visualLayouts",
+  pageLayoutVisualConfigField = "c_visualConfiguration",
+  pageLayoutTypeId = "ce_pagesLayout",
+  baseEntityVisualConfigField = "c_visualConfigurations",
+  baseEntityPageLayoutsField = "c_pages_layouts";
 
 // Render Puck editor
 export const Editor = ({
@@ -51,7 +61,7 @@ export const Editor = ({
   role,
   isLoading,
 }: EditorProps) => {
-  const toastId = "toast"
+  const toastId = "toast";
   const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
@@ -63,11 +73,11 @@ export const Editor = ({
     } else if (mutation.isSuccess) {
       toast.success("Save completed.", {
         id: toastId,
-      })
+      });
     } else if (mutation.isError) {
       toast.error(`Error occured: ${mutation.error.message}`, {
         id: toastId,
-      })
+      });
     }
   }, [mutation]);
 
@@ -78,10 +88,12 @@ export const Editor = ({
       // since we are updating a list, we must get the original data, append to it, then push
       const response = await fetchEntity(entityId);
       const entity = response.response;
-      const visualConfigs: VisualConfiguration[] = entity[baseEntityVisualConfigField] ?? [];
-      const existingTemplate =
-          visualConfigs.find((visualConfig: VisualConfiguration) =>
-              visualConfig.template === selectedTemplate.id);
+      const visualConfigs: VisualConfiguration[] =
+        entity[baseEntityVisualConfigField] ?? [];
+      const existingTemplate = visualConfigs.find(
+        (visualConfig: VisualConfiguration) =>
+          visualConfig.template === selectedTemplate.id,
+      );
       if (existingTemplate) {
         existingTemplate.data = templateData;
       } else {
@@ -90,11 +102,13 @@ export const Editor = ({
           data: templateData,
         });
       }
-      window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId));
+      window.localStorage.removeItem(
+        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+      );
       mutation.mutate({
         entityId: entityId,
         body: {
-          [baseEntityVisualConfigField]: visualConfigs
+          [baseEntityVisualConfigField]: visualConfigs,
         },
       });
     } else if (role === Role.GLOBAL) {
@@ -102,12 +116,14 @@ export const Editor = ({
       const visualConfig: VisualConfiguration = {
         data: templateData,
         template: selectedTemplate.id,
-      }
-      window.localStorage.removeItem(getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId));
+      };
+      window.localStorage.removeItem(
+        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+      );
       mutation.mutate({
         entityId: layoutId,
         body: {
-          [pageLayoutVisualConfigField]: visualConfig
+          [pageLayoutVisualConfigField]: visualConfig,
         },
       });
     }
@@ -115,14 +131,17 @@ export const Editor = ({
 
   const change = async (data: Data) => {
     if (isLoading) {
-      return
+      return;
     }
     if (!canEdit) {
       setCanEdit(true);
-      return
+      return;
     }
-      
-    window.localStorage.setItem(getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId), JSON.stringify(data));
+
+    window.localStorage.setItem(
+      getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+      JSON.stringify(data),
+    );
   };
 
   return (
@@ -132,10 +151,17 @@ export const Editor = ({
       onPublish={(data: Data) => save(data, role)}
       onChange={change}
       overrides={{
-        headerActions: ({ children }) => customHeaderActions(children, selectedTemplate.id, layoutId, entityId, role),
+        headerActions: ({ children }) =>
+          customHeaderActions(
+            children,
+            selectedTemplate.id,
+            layoutId,
+            entityId,
+            role,
+          ),
         header: ({ actions }) =>
           customHeader({
-            actions: actions
+            actions: actions,
           }),
       }}
     />

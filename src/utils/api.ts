@@ -1,5 +1,11 @@
 import { EntityContent, YextResponse } from "../types/api";
-import { EntityDefinition, TemplateDefinition } from "../puck/editor";
+import {
+  EntityDefinition,
+  LayoutDefinition,
+  pageLayoutTypeId,
+  pageLayoutVisualConfigField,
+  TemplateDefinition,
+} from "../puck/editor";
 
 export const fetchEntity = async (entityId: string): Promise<any> => {
   const response = await fetch(`/api/entity/${entityId}`);
@@ -95,5 +101,31 @@ export async function fetchEntities(
     });
   } catch (e) {
     throw new Error("Failed to fetch entities: " + e.message);
+  }
+}
+
+/**
+ * Fetches layouts using the getEntities() function and parses the response.
+ * @return {Promise<LayoutDefinition[]>}
+ */
+export async function fetchLayouts(): Promise<LayoutDefinition[]> {
+  try {
+    const reqUrl = `api/entity/list?entityTypes=${pageLayoutTypeId}`;
+    const res = await fetch(reqUrl);
+    const json = await res.json();
+    const entities = json.response.entities;
+    return entities.map((entity: any): LayoutDefinition => {
+      return {
+        name: entity.name,
+        externalId: entity.meta.id,
+        internalId: entity.meta.uid,
+        visualConfiguration: {
+          template: entity[pageLayoutVisualConfigField].template,
+          data: entity[pageLayoutVisualConfigField].data,
+        },
+      };
+    });
+  } catch (e) {
+    throw new Error("Failed to fetch layouts: " + e.message);
   }
 }
