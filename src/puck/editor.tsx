@@ -8,7 +8,6 @@ import {
 import { toast } from "sonner"
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
-import { VisualConfiguration } from "../hooks/useEntity";
 import { useEffect, useState } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 
@@ -17,6 +16,18 @@ export type EntityDefinition = {
   externalId: string;
   internalId: number;
 };
+
+export type LayoutDefinition = {
+  name: string;
+  externalId: string;
+  internalId: number;
+  visualConfiguration: VisualConfiguration,
+};
+
+export type VisualConfiguration = {
+  template: string;
+  data: string;
+}
 
 export type TemplateDefinition = {
   name: string;

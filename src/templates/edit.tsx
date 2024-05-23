@@ -13,11 +13,11 @@ import { useEffect, useState } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
-import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 import { toast } from "sonner"
 import { Toaster } from "../components/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
+import { GetPuckData } from "../hooks/GetPuckData";
 
 export const Role = {
   GLOBAL: "global",
@@ -63,7 +63,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [template, setTemplate] = useState<TemplateDefinition>();
   const [entities, setEntities] = useState<EntityDefinition[]>();
   const [entity, setEntity] = useState<EntityDefinition>();
-  const [layoutId, setLayoutId] = useState<string>();
+  const [layoutId, setLayoutId] = useState<string>('');
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
   const [localStorage, setLocaleStorage] = useState<string>('');
@@ -126,7 +126,7 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  let puckData = GetPuckData(siteEntityId, getPuckRole(), template?.id, entity?.externalId, layoutId);
+  let puckData = GetPuckData(getPuckRole(), siteEntityId, template?.id ?? "", layoutId, entity?.externalId ?? "");
   // use localStorage if it exists
   if (localStorage) {
     puckData = localStorage;
