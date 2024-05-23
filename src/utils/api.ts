@@ -105,7 +105,7 @@ export async function fetchEntities(
 }
 
 /**
- * Fetches entities using the getEntities() function and parses the response.
+ * Fetches layouts using the getEntities() function and parses the response.
  * @return {Promise<LayoutDefinition[]>}
  */
 export async function fetchLayouts(): Promise<LayoutDefinition[]> {
