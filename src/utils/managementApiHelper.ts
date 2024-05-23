@@ -43,7 +43,6 @@ export async function getTemplateData(entityVisualConfigurations: C_visualConfig
   // check the base entity for puck data
   entityVisualConfigurations.forEach((entityVisualConfig: C_visualConfigurations) => {
     if (entityVisualConfig.template === templateName) {
-      console.log("setting data from base entity");
       templateData = entityVisualConfig.data;
     }
   });
@@ -60,7 +59,6 @@ export async function getTemplateData(entityVisualConfigurations: C_visualConfig
       const visualConfig = layout[pageLayoutVisualConfigField];
       entityLayoutIds.map((obj: any) => parseInt(obj)).forEach((id: number) => {
         if (id === layoutInternalId && visualConfig.template === templateName) {
-          console.log("setting data from entity layout");
           templateData = visualConfig.data;
         }
       });
@@ -72,7 +70,6 @@ export async function getTemplateData(entityVisualConfigurations: C_visualConfig
         const visualConfig = layout[pageLayoutVisualConfigField];
         siteLayoutIds.map((obj: any) => parseInt(obj)).forEach((id: number) => {
           if (id === layoutInternalId && visualConfig.template === templateName) {
-            console.log("setting data from site layout");
             templateData = visualConfig.data;
           }
         });
