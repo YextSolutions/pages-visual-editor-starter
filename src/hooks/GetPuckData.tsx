@@ -88,10 +88,7 @@ export const GetPuckData = (
       if (layout.externalId === layoutId) {
         if (layout.visualConfiguration.template !== templateId) {
           throw new Error(
-            "Mismatch between layout and template: " +
-              layoutId +
-              ", " +
-              templateId,
+            `Mismatch between layout and template: ${layoutId}, ${templateId}`,
           );
         }
         if (role === Role.GLOBAL && data.source > DataSource.LayoutId) {
