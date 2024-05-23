@@ -4,7 +4,7 @@ import {
   LayoutDefinition,
   pageLayoutTypeId,
   pageLayoutVisualConfigField,
-  TemplateDefinition
+  TemplateDefinition,
 } from "../puck/editor";
 
 export const fetchEntity = async (entityId: string): Promise<any> => {
@@ -122,7 +122,7 @@ export async function fetchLayouts(): Promise<LayoutDefinition[]> {
         visualConfiguration: {
           template: entity[pageLayoutVisualConfigField].template,
           data: entity[pageLayoutVisualConfigField].data,
-        }
+        },
       };
     });
   } catch (e) {

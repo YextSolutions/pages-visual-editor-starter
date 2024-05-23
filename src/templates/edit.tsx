@@ -6,7 +6,7 @@ import {
   TemplateProps,
   TemplateRenderProps,
 } from "@yext/pages";
-import {Editor, EntityDefinition, TemplateDefinition} from "../puck/editor";
+import { Editor, EntityDefinition, TemplateDefinition } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState } from "react";
@@ -14,15 +14,15 @@ import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { Toaster } from "../components/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import { GetPuckData } from "../hooks/GetPuckData";
 
 export const Role = {
   GLOBAL: "global",
-  INDIVIDUAL: "individual"
-}
+  INDIVIDUAL: "individual",
+};
 const siteEntityId = "site";
 const layoutEntityType = "ce_pagesLayout";
 
@@ -44,12 +44,12 @@ const getUrlParam = (paramName: string): string => {
     }
   }
   return "";
-}
+};
 
-const getPuckRole = (): string =>  {
+const getPuckRole = (): string => {
   if (typeof document !== "undefined") {
     const params = new URL(document.location.toString()).searchParams;
-    const roleValue = params.get('role');
+    const roleValue = params.get("role");
     if (roleValue === "individual") {
       return Role.INDIVIDUAL;
     }
@@ -63,10 +63,10 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [template, setTemplate] = useState<TemplateDefinition>();
   const [entities, setEntities] = useState<EntityDefinition[]>();
   const [entity, setEntity] = useState<EntityDefinition>();
-  const [layoutId, setLayoutId] = useState<string>('');
+  const [layoutId, setLayoutId] = useState<string>("");
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
-  const [localStorage, setLocaleStorage] = useState<string>('');
+  const [localStorage, setLocaleStorage] = useState<string>("");
 
   useEffect(() => {
     async function getData() {
@@ -83,7 +83,7 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          toast.error(`Could not find template with id '${urlTemplateId}'`)
+          toast.error(`Could not find template with id '${urlTemplateId}'`);
         }
       }
       let targetLayoutId = getUrlParam("layoutId");
@@ -107,14 +107,27 @@ const Edit: Template<TemplateRenderProps> = () => {
           }
         });
         if (!found) {
-          toast.error(`Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`);
+          toast.error(
+            `Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`,
+          );
         }
       }
       setEntities(fetchedEntities);
       setEntity(targetEntity);
       // get puckConfig from hardcoded map
       const puckConfig = puckConfigs.get(targetTemplate.id);
-      setLocaleStorage(typeof window !== "undefined" ? window.localStorage.getItem(getLocalStorageKey(getPuckRole(), targetTemplate.id, targetLayoutId, targetEntity.externalId)) ?? "" : "");
+      setLocaleStorage(
+        typeof window !== "undefined"
+          ? window.localStorage.getItem(
+              getLocalStorageKey(
+                getPuckRole(),
+                targetTemplate.id,
+                targetLayoutId,
+                targetEntity.externalId,
+              ),
+            ) ?? ""
+          : "",
+      );
       setPuckConfig(puckConfig);
       window.history.replaceState(
         null,
@@ -126,7 +139,13 @@ const Edit: Template<TemplateRenderProps> = () => {
     getData();
   }, []);
 
-  let puckData = GetPuckData(getPuckRole(), siteEntityId, template?.id ?? "", layoutId, entity?.externalId ?? "");
+  let puckData = GetPuckData(
+    getPuckRole(),
+    siteEntityId,
+    template?.id ?? "",
+    layoutId,
+    entity?.externalId ?? "",
+  );
   // use localStorage if it exists
   if (localStorage) {
     puckData = localStorage;
@@ -188,7 +207,7 @@ const Edit: Template<TemplateRenderProps> = () => {
           <LoadingScreen progress={progress} message={loadingMessage} />
         )}
       </DocumentProvider>
-      <Toaster closeButton richColors/>
+      <Toaster closeButton richColors />
     </>
   );
 };
