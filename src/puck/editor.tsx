@@ -37,6 +37,7 @@ export interface EditorProps {
 export const
     siteEntityVisualConfigField = "c_visualLayouts",
     pageLayoutVisualConfigField = "c_visualConfiguration",
+    pageLayoutTypeId = "ce_pagesLayout",
     baseEntityVisualConfigField = "c_visualConfigurations",
     baseEntityPageLayoutsField = "c_pages_layouts";
 

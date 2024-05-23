@@ -1,6 +1,5 @@
 import { EntityContent, YextResponse } from "../types/api";
-import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
-import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
+import { EntityDefinition, TemplateDefinition } from "../puck/editor";
 
 export const fetchEntity = async (entityId: string): Promise<any> => {
   const response = await fetch(`/api/entity/${entityId}`);
@@ -48,7 +47,6 @@ export const fetchTemplates = async (): Promise<TemplateDefinition[]> => {
         name: template.name,
         id: template.id,
         entityTypes: template.entityTypes,
-        dataField: template.dataField,
       };
       return templateDef;
     });

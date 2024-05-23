@@ -11,8 +11,10 @@ import {
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
+import { getTemplateData } from "../utils/managementApiHelper";
 
 export const config: TemplateConfig = {
+  name: "location",
   stream: {
     $id: "location-stream",
     filter: {
@@ -26,9 +28,10 @@ export const config: TemplateConfig = {
       "address",
       "slug",
       "c_hero",
-      "c_locationVisualConfiguration",
       "c_locationHero",
       "c_locationCore",
+      "c_visualConfigurations",
+      "c_pages_layouts",
     ],
     localization: {
       locales: ["en"],
@@ -38,10 +41,12 @@ export const config: TemplateConfig = {
 
 export const transformProps = async (data) => {
   const { document } = data;
+  const entityVisualConfigurations = document.c_visualConfigurations ?? [];
+  const entityLayoutIds = document.c_pages_layouts ?? [];
+  const siteLayoutIds = document._site?.c_visualLayouts ?? [];
   try {
-    const visualTemplate = document.c_locationVisualConfiguration 
-      ? JSON.parse(document.c_locationVisualConfiguration) 
-      : JSON.parse(document._site?.c_locationVisualConfiguration);
+    const templateData = await getTemplateData(entityVisualConfigurations, entityLayoutIds, siteLayoutIds, config.name);
+    const visualTemplate = JSON.parse(templateData);
     return {
       ...data,
       document: {
