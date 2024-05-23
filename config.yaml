@@ -11,10 +11,8 @@ livePreviewConfiguration:
 siteStream:
   id: site-stream
   entityId: site
-  fields: 
-    - c_locationVisualConfiguration
-    - c_productVisualConfiguration
-    - c_financialProfessionalVisualConfiguration
+  fields:
+    - c_visualLayouts
   localization:
     locales:
       - en

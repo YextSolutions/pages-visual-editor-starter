@@ -11,8 +11,10 @@ import {
 import { Config, Render } from "@measured/puck";
 import { productConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
+import { getTemplateData } from "../utils/managementApiHelper";
 
 export const config: TemplateConfig = {
+  name: "product",
   stream: {
     $id: "product-stream",
     filter: {
@@ -23,7 +25,8 @@ export const config: TemplateConfig = {
       "name", 
       "price", 
       "slug",
-      "c_productVisualConfiguration"
+      "c_visualConfigurations",
+      "c_pages_layouts",
     ],
     localization: {
       locales: ["en"],
@@ -34,10 +37,12 @@ export const config: TemplateConfig = {
 // Right now product entity data isn't used
 export const transformProps = async (data) => {
   const { document } = data;
+  const entityVisualConfigurations = document.c_visualConfigurations ?? [];
+  const entityLayoutIds = document.c_pages_layouts ?? [];
+  const siteLayoutIds = document._site?.c_visualLayouts ?? [];
   try {
-    const visualTemplate = document.c_productVisualConfiguration 
-      ? JSON.parse(document.c_productVisualConfiguration) 
-      : JSON.parse(document._site?.c_productVisualConfiguration);
+    const templateData = await getTemplateData(entityVisualConfigurations, entityLayoutIds, siteLayoutIds, config.name);
+    const visualTemplate = JSON.parse(templateData);
     return {
       ...data,
       document: {
