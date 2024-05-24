@@ -69,4 +69,7 @@ export const puckConfigs = new Map<string, Config>([
   ["location", locationConfig],
   ["product", productConfig],
   ["financialProfessional", financialProfessionalConfig],
+  ["teamPage", financialProfessionalConfig],
+  ["advisorPage", financialProfessionalConfig],
+  ["showroom", locationConfig]
 ]);

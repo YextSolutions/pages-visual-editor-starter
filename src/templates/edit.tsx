@@ -115,7 +115,7 @@ const Edit: Template<TemplateRenderProps> = () => {
       setEntities(fetchedEntities);
       setEntity(targetEntity);
       // get puckConfig from hardcoded map
-      const puckConfig = puckConfigs.get(targetTemplate.id);
+      const puckConfig = puckConfigs.get(targetLayoutId);
       setLocaleStorage(
         typeof window !== "undefined"
           ? window.localStorage.getItem(
