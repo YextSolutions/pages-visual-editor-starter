@@ -1,141 +1,3 @@
-export interface C_visualConfigurations {
-	template: string,
-	data: string,
-}
-
-export interface EntityReference {
-	entityId: string,
-	name: string,
-}
-
-export interface FinancialProfessionalStream {
-	id: string,
-	name: string,
-	slug: string,
-	c_visualConfigurations: C_visualConfigurations[],
-	c_pages_layouts: EntityReference[],
-}
-
-export interface Address {
-	line1?: string,
-	line2?: string,
-	line3?: string,
-	sublocality?: string,
-	city?: string,
-	region?: string,
-	postalCode?: string,
-	extraDescription?: string,
-	countryCode?: string,
-}
-
-export interface ImageThumbnail {
-	url: string,
-	width: number,
-	height: number,
-}
-
-export interface Image {
-	url: string,
-	width: number,
-	height: number,
-	thumbnails?: ImageThumbnail[],
-	alternateText?: string,
-}
-
-export interface ComplexImage {
-	image: Image,
-	details?: string,
-	description?: string,
-	clickthroughUrl?: string,
-}
-
-export interface C_hero {
-	title?: string,
-	image?: ComplexImage,
-}
-
-export interface Interval {
-	start: any,
-	end: any,
-}
-
-export interface DayHour {
-	openIntervals?: Interval[],
-	isClosed?: boolean,
-}
-
-export interface HolidayHours {
-	date: string,
-	openIntervals?: Interval[],
-	isClosed?: boolean,
-	isRegularHours?: boolean,
-}
-
-export interface Hours {
-	monday?: DayHour,
-	tuesday?: DayHour,
-	wednesday?: DayHour,
-	thursday?: DayHour,
-	friday?: DayHour,
-	saturday?: DayHour,
-	sunday?: DayHour,
-	holidayHours?: HolidayHours[],
-	reopenDate?: string,
-}
-
-export enum LinkType {
-	OTHER = "Other",
-	URL = "URL",
-	PHONE = "Phone",
-	EMAIL = "Email",
-}
-
-export interface Cta1 {
-	label?: string,
-	linkType?: LinkType,
-	link?: string,
-}
-
-export interface Cta2 {
-	label?: string,
-	linkType?: LinkType,
-	link?: string,
-}
-
-export interface C_locationHero {
-	address?: Address,
-	image?: ComplexImage,
-	name?: string,
-	hours?: Hours,
-	rating?: number,
-	numberOfReviews?: number,
-	cta1?: Cta1,
-	cta2?: Cta2,
-}
-
-export interface C_locationCore {
-	address?: Address,
-	hours?: Hours,
-	mainPhone?: string,
-	tollfreePhone?: string,
-	emails?: string[],
-	services?: string[],
-}
-
-export interface LocationStream {
-	id: string,
-	uid: string,
-	meta: any,
-	name: string,
-	address: Address,
-	slug: string,
-	c_hero: C_hero,
-	c_locationHero: C_locationHero,
-	c_locationCore: C_locationCore,
-	c_visualConfigurations: C_visualConfigurations[],
-	c_pages_layouts: EntityReference[],
-}
-
 export enum CurrencyCode {
 	AED = "AED-United Arab Emirates Dirham",
 	AFN = "AFN-Afghan Afghani",
@@ -296,6 +158,16 @@ export interface Price {
 	currencyCode: CurrencyCode,
 }
 
+export interface C_visualConfigurations {
+	template: string,
+	data: string,
+}
+
+export interface EntityReference {
+	entityId: string,
+	name: string,
+}
+
 export interface ProductStream {
 	id: string,
 	name: string,
@@ -305,6 +177,147 @@ export interface ProductStream {
 	c_pages_layouts: EntityReference[],
 }
 
+export interface C_visualConfiguration {
+	template: string,
+	data: string,
+}
+
+export interface C_visualLayouts {
+	c_visualConfiguration?: C_visualConfiguration,
+}
+
 export interface SiteStream {
-	c_visualLayouts: EntityReference[],
+	c_visualLayouts: C_visualLayouts[],
+}
+
+export interface C_pages_layouts {
+	c_visualConfiguration?: C_visualConfiguration,
+}
+
+export interface FinancialProfessionalStream {
+	id: string,
+	name: string,
+	slug: string,
+	c_visualConfigurations: C_visualConfigurations[],
+	c_pages_layouts: C_pages_layouts[],
+}
+
+export interface Address {
+	line1?: string,
+	line2?: string,
+	line3?: string,
+	sublocality?: string,
+	city?: string,
+	region?: string,
+	postalCode?: string,
+	extraDescription?: string,
+	countryCode?: string,
+}
+
+export interface ImageThumbnail {
+	url: string,
+	width: number,
+	height: number,
+}
+
+export interface Image {
+	url: string,
+	width: number,
+	height: number,
+	thumbnails?: ImageThumbnail[],
+	alternateText?: string,
+}
+
+export interface ComplexImage {
+	image: Image,
+	details?: string,
+	description?: string,
+	clickthroughUrl?: string,
+}
+
+export interface C_hero {
+	title?: string,
+	image?: ComplexImage,
+}
+
+export interface Interval {
+	start: any,
+	end: any,
+}
+
+export interface DayHour {
+	openIntervals?: Interval[],
+	isClosed?: boolean,
+}
+
+export interface HolidayHours {
+	date: string,
+	openIntervals?: Interval[],
+	isClosed?: boolean,
+	isRegularHours?: boolean,
+}
+
+export interface Hours {
+	monday?: DayHour,
+	tuesday?: DayHour,
+	wednesday?: DayHour,
+	thursday?: DayHour,
+	friday?: DayHour,
+	saturday?: DayHour,
+	sunday?: DayHour,
+	holidayHours?: HolidayHours[],
+	reopenDate?: string,
+}
+
+export enum LinkType {
+	OTHER = "Other",
+	URL = "URL",
+	PHONE = "Phone",
+	EMAIL = "Email",
+}
+
+export interface Cta1 {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
+export interface Cta2 {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
+export interface C_locationHero {
+	address?: Address,
+	image?: ComplexImage,
+	name?: string,
+	hours?: Hours,
+	rating?: number,
+	numberOfReviews?: number,
+	cta1?: Cta1,
+	cta2?: Cta2,
+}
+
+export interface C_locationCore {
+	address?: Address,
+	hours?: Hours,
+	mainPhone?: string,
+	tollfreePhone?: string,
+	emails?: string[],
+	services?: string[],
+}
+
+export interface LocationStream {
+	id: string,
+	uid: string,
+	meta: any,
+	name: string,
+	address: Address,
+	slug: string,
+	c_hero: C_hero,
+	c_locationHero: C_locationHero,
+	c_locationCore: C_locationCore,
+	c_visualConfigurations: C_visualConfigurations[],
+	c_pages_layouts: EntityReference[],
 }
