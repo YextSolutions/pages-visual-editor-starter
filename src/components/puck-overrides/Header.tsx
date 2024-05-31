@@ -2,11 +2,10 @@ import { Button } from "@measured/puck";
 import "./puck.css";
 import { useDocument } from "../../hooks/useDocument";
 import { usePuck } from "@measured/puck";
-import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
-import * as buttons from "../ui/Button"
+import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
+import * as buttons from "../ui/button";
 import { useCallback } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
-
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -17,23 +16,44 @@ const handleClearLocalChanges = () => {
   window.location.reload();
 };
 
-export const customHeaderActions = (children: any, templateId: string, layoutId: string, entityId: string, role: string) => {
+export const customHeaderActions = (
+  children: any,
+  templateId: string,
+  layoutId: string,
+  entityId: string,
+  role: string
+) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, historyStore },
   } = usePuck();
   const { hasFuture = false, hasPast = false } = historyStore || {};
-  const hasLocalStorage = !!window.localStorage.getItem(getLocalStorageKey(role, templateId, layoutId, entityId));
+  const hasLocalStorage = !!window.localStorage.getItem(
+    getLocalStorageKey(role, templateId, layoutId, entityId)
+  );
   return (
     <>
       {children}
-      <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
+      <buttons.Button
+        variant="ghost"
+        size="icon"
+        disabled={!hasPast}
+        onClick={back}
+      >
         <RotateCcw className="sm-icon" />
       </buttons.Button>
-      <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
+      <buttons.Button
+        variant="ghost"
+        size="icon"
+        disabled={!hasFuture}
+        onClick={forward}
+      >
         <RotateCw className="sm-icon" />
       </buttons.Button>
-      <Button disabled={!hasLocalStorage} onClick={() => handleClearLocalChanges()}>
+      <Button
+        disabled={!hasLocalStorage}
+        onClick={() => handleClearLocalChanges()}
+      >
         Clear Local Changes
       </Button>
       <Button onClick={() => handleClick(entityDocument.slug)}>
@@ -47,30 +67,24 @@ export interface customHeaderProps {
   actions: any;
 }
 
-export const customHeader = ({
-  actions
-}: customHeaderProps) => {
+export const customHeader = ({ actions }: customHeaderProps) => {
   return (
     <header className="puck-header">
       <div className="header-left">
-        <ToggleUIButtons/>
+        <ToggleUIButtons />
       </div>
-      <div className="header-center">
-      </div>
+      <div className="header-center"></div>
       <div className="actions">{actions}</div>
     </header>
   );
 };
 
-const ToggleUIButtons = () => {  
+const ToggleUIButtons = () => {
   const {
     dispatch,
     appState: {
-      ui: {
-        leftSideBarVisible, 
-        rightSideBarVisible
-      }
-    }
+      ui: { leftSideBarVisible, rightSideBarVisible },
+    },
   } = usePuck();
 
   const toggleSidebars = useCallback(
@@ -94,12 +108,24 @@ const ToggleUIButtons = () => {
 
   return (
     <>
-      <buttons.Button variant="ghost" size="icon" onClick={() => {toggleSidebars("left")}}>
+      <buttons.Button
+        variant="ghost"
+        size="icon"
+        onClick={() => {
+          toggleSidebars("left");
+        }}
+      >
         <PanelLeft className="sm-icon" />
       </buttons.Button>
-      <buttons.Button variant="ghost" size="icon" onClick={() => {toggleSidebars("right")}}>
+      <buttons.Button
+        variant="ghost"
+        size="icon"
+        onClick={() => {
+          toggleSidebars("right");
+        }}
+      >
         <PanelRight className="sm-icon" />
       </buttons.Button>
     </>
-  )
-}
+  );
+};
