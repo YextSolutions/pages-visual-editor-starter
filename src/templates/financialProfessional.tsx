@@ -11,8 +11,10 @@ import {
 import { Config, Render } from "@measured/puck";
 import { financialProfessionalConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
+import { getTemplatePuckData } from "../utils/puckDataHelper";
 
 export const config: TemplateConfig = {
+  name: "financialProfessional",
   stream: {
     $id: "financialProfessional-stream",
     filter: {
@@ -22,13 +24,14 @@ export const config: TemplateConfig = {
       "id",
       "name",
       "slug",
+      "c_visualConfigurations",
+      "c_pages_layouts.c_visualConfiguration",
       "c_hero",
       "c_advisorBio",
       "c_servicesOffered.servicesOptions.id",
       "c_servicesOffered.servicesOptions.name",
       "c_servicesOffered.servicesOptions.c_description",
       "c_servicesOffered.servicesOptions.c_iconName",
-      // "c_contentGrid",
       "c_contentGrid.financialProfessionals.id",
       "c_contentGrid.financialProfessionals.name",
       "c_contentGrid.financialProfessionals.mainPhone",
@@ -52,10 +55,17 @@ export const config: TemplateConfig = {
 // Right now financial professional entity data isn't used
 export const transformProps = async (data) => {
   const { document } = data;
+  const entityConfigurations = document.c_visualConfigurations ?? [];
+  const entityLayoutConfigurations = document.c_pages_layouts ?? [];
+  const siteLayoutConfigurations = document._site?.c_visualLayouts;
   try {
-    const visualTemplate = document.c_financialProfessionalVisualConfiguration
-      ? JSON.parse(document.c_financialProfessionalVisualConfiguration)
-      : JSON.parse(document._site?.c_financialProfessionalVisualConfiguration);
+    const templateData = getTemplatePuckData(
+      entityConfigurations,
+      entityLayoutConfigurations,
+      siteLayoutConfigurations,
+      config.name
+    );
+    const visualTemplate = JSON.parse(templateData);
     return {
       ...data,
       document: {

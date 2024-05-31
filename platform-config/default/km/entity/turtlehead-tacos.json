@@ -11,6 +11,132 @@
       "region": "FL"
     },
     "addressHidden": false,
+    "c_locationCore": {
+      "address": {
+        "city": "[[address.city]]",
+        "countryCode": "[[countryCode]]",
+        "extraDescription": "[[address.extraDescription]]",
+        "line1": "[[address.line1]]",
+        "line2": "[[address.line2]]",
+        "postalCode": "[[address.postalCode]]",
+        "region": "[[address.region]]",
+        "sublocality": "[[address.sublocality]]"
+      },
+      "hours": {
+        "friday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "monday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "saturday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "sunday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "thursday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "tuesday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "wednesday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        }
+      },
+      "mainPhone": "[[mainPhone]]"
+    },
+    "c_locationHero": {
+      "address": {
+        "city": "[[address.city]]",
+        "countryCode": "[[countryCode]]",
+        "extraDescription": "[[address.extraDescription]]",
+        "line1": "[[address.line1]]",
+        "line2": "[[address.line2]]",
+        "postalCode": "[[address.postalCode]]",
+        "region": "[[address.region]]",
+        "sublocality": "[[address.sublocality]]"
+      },
+      "cta1": {
+        "label": "Get Directions"
+      },
+      "cta2": {
+        "label": "Learn More"
+      },
+      "image": {
+        "image": {
+          "height": 799,
+          "sourceUrl": "https://www.news10.com/wp-content/uploads/sites/64/2023/09/taco-shop.jpg?strip\u003d1",
+          "thumbnails": [
+            {
+              "height": 799,
+              "url": "https://a.mktgcdn.com/p/1eJETwWkN1Yk2a-kLxJoYcFgWtmIwHBZD_W9N6PZbo0/1440x799.jpg",
+              "width": 1440
+            },
+            {
+              "height": 343,
+              "url": "https://a.mktgcdn.com/p/1eJETwWkN1Yk2a-kLxJoYcFgWtmIwHBZD_W9N6PZbo0/619x343.jpg",
+              "width": 619
+            },
+            {
+              "height": 333,
+              "url": "https://a.mktgcdn.com/p/1eJETwWkN1Yk2a-kLxJoYcFgWtmIwHBZD_W9N6PZbo0/600x333.jpg",
+              "width": 600
+            },
+            {
+              "height": 109,
+              "url": "https://a.mktgcdn.com/p/1eJETwWkN1Yk2a-kLxJoYcFgWtmIwHBZD_W9N6PZbo0/196x109.jpg",
+              "width": 196
+            }
+          ],
+          "url": "https://a.mktgcdn.com/p/1eJETwWkN1Yk2a-kLxJoYcFgWtmIwHBZD_W9N6PZbo0/1440x799.jpg",
+          "width": 1440
+        }
+      },
+      "name": "[[name]]",
+      "numberOfReviews": "200",
+      "rating": "5"
+    },
+    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"LocationHero\",\"props\":{\"id\":\"LocationHero-f36fd860-9cc0-4c4d-b102-35d1c64b4de2\"}},{\"type\":\"Hero\",\"props\":{\"id\":\"Hero-1870bf78-eaf8-4bdb-917f-e767c4ae76f0\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-9aa57fed-afb4-4894-8e20-5461e13efb1a\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_pages_layouts": [
+      "locationVisualConfiguration"
+    ],
     "categoryIds": [
       "152"
     ],

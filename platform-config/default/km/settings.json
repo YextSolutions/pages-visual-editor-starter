@@ -53,15 +53,22 @@
       "disabled": true
     },
     {
+      "entityType": "ce_pagesLayout",
+      "defaultFieldEligibilityGroup": "ce_pagesLayout.default",
+      "disabled": false
+    },
+    {
       "entityType": "helpArticle",
       "disabled": true
     },
     {
       "entityType": "product",
+      "defaultFieldEligibilityGroup": "product.default",
       "disabled": false
     },
     {
       "entityType": "financialProfessional",
+      "defaultFieldEligibilityGroup": "financialProfessional.default",
       "disabled": false
     }
   ]

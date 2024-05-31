@@ -1,6 +1,8 @@
 import type { Config } from "@measured/puck";
 import { Toggle, ToggleProps } from "../components/Toggle";
 import { Hero, HeroProps } from "../components/Hero";
+import { LocationCore } from "../components/LocationCore";
+import { LocationHero } from "../components/LocationHero";
 import { AdvisorHero, AdvisorHeroProps } from "../components/AdvisorHero";
 import { AdvisorBio, AdvisorBioProps } from "../components/AdvisorBio";
 import { ContentGrid, ContentGridProps } from "../components/ContentGrid";
@@ -16,10 +18,13 @@ import { ServicesProps, Services } from "../components/Services";
 type LocationProps = {
   Toggle: ToggleProps;
   Hero: HeroProps;
+  LocationHero: any;
+  LocationCore: any;
 };
 
 type ProductProps = {
   Toggle: ToggleProps;
+  Hero: HeroProps;
 };
 
 type FinancialProfessionalProps = {
@@ -40,6 +45,8 @@ export const locationConfig: Config<LocationProps> = {
   components: {
     Toggle,
     Hero,
+    LocationHero,
+    LocationCore,
   },
   root: {
     render: Root,
@@ -50,6 +57,7 @@ export const locationConfig: Config<LocationProps> = {
 export const productConfig: Config<ProductProps> = {
   components: {
     Toggle,
+    Hero,
   },
   root: {
     render: Root,

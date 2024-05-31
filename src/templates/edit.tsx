@@ -6,25 +6,25 @@ import {
   TemplateProps,
   TemplateRenderProps,
 } from "@yext/pages";
-import { Editor } from "../puck/editor";
+import { Editor, EntityDefinition, TemplateDefinition } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
-import { TemplateDefinition } from "../components/puck-overrides/TemplatePicker";
-import { EntityDefinition } from "../components/puck-overrides/EntityPicker";
-import { GetPuckData } from "../hooks/useEntity";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 import { toast } from "sonner";
 import { Toaster } from "../components/ui/Toaster";
+import { getLocalStorageKey } from "../utils/localStorageHelper";
+import { GetPuckData } from "../hooks/GetPuckData";
 
 export const Role = {
   GLOBAL: "global",
   INDIVIDUAL: "individual",
 };
 const siteEntityId = "site";
+const layoutEntityType = "ce_pagesLayout";
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -35,27 +35,26 @@ export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
 };
 
-const getUrlEntityId = (): string => {
+const getUrlParam = (paramName: string): string => {
   if (typeof document !== "undefined") {
     const params = new URL(document.location.toString()).searchParams;
-    const entityId = params.get("entityId");
-    if (entityId) {
-      return entityId;
+    const paramValue = params.get(paramName);
+    if (paramValue) {
+      return paramValue;
     }
   }
   return "";
 };
 
-const getUrlTemplateId = (): string => {
+const getPuckRole = (): string => {
   if (typeof document !== "undefined") {
     const params = new URL(document.location.toString()).searchParams;
-    const templateId = params.get("templateId");
-    if (templateId) {
-      return templateId;
+    const roleValue = params.get("role");
+    if (roleValue === "individual") {
+      return Role.INDIVIDUAL;
     }
   }
-
-  return "";
+  return Role.GLOBAL;
 };
 
 // Render the editor
@@ -64,15 +63,17 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [template, setTemplate] = useState<TemplateDefinition>();
   const [entities, setEntities] = useState<EntityDefinition[]>();
   const [entity, setEntity] = useState<EntityDefinition>();
+  const [layoutId, setLayoutId] = useState<string>("");
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
+  const [localStorage, setLocaleStorage] = useState<string>("");
 
   useEffect(() => {
     async function getData() {
       // get templates
       const fetchedTemplates = await fetchTemplates();
       let targetTemplate: TemplateDefinition = fetchedTemplates[0];
-      const urlTemplateId = getUrlTemplateId();
+      const urlTemplateId = getUrlParam("templateId");
       if (urlTemplateId) {
         let found = false;
         fetchedTemplates.forEach((fetchedTemplate: TemplateDefinition) => {
@@ -85,12 +86,18 @@ const Edit: Template<TemplateRenderProps> = () => {
           toast.error(`Could not find template with id '${urlTemplateId}'`);
         }
       }
+      let targetLayoutId = getUrlParam("layoutId");
+      if (!targetLayoutId) {
+        const fetchedLayouts = await fetchEntities([layoutEntityType]);
+        targetLayoutId = fetchedLayouts[0].externalId;
+      }
+      setLayoutId(targetLayoutId);
       setTemplates(fetchedTemplates);
       setTemplate(targetTemplate);
       // get entities
       const fetchedEntities = await fetchEntities(targetTemplate.entityTypes);
       let targetEntity: EntityDefinition = fetchedEntities[0];
-      const urlEntityId = getUrlEntityId();
+      const urlEntityId = getUrlParam("entityId");
       if (urlEntityId) {
         let found = false;
         fetchedEntities.forEach((fetchedEntity: EntityDefinition) => {
@@ -109,24 +116,40 @@ const Edit: Template<TemplateRenderProps> = () => {
       setEntity(targetEntity);
       // get puckConfig from hardcoded map
       const puckConfig = puckConfigs.get(targetTemplate.id);
+      setLocaleStorage(
+        typeof window !== "undefined"
+          ? window.localStorage.getItem(
+              getLocalStorageKey(
+                getPuckRole(),
+                targetTemplate.id,
+                targetLayoutId,
+                targetEntity.externalId
+              )
+            ) ?? ""
+          : ""
+      );
       setPuckConfig(puckConfig);
       window.history.replaceState(
         null,
         "",
-        `edit?templateId=${targetTemplate.id}&entityId=${targetEntity.externalId}`
+        `edit?templateId=${targetTemplate.id}&layoutId=${targetLayoutId}&entityId=${targetEntity.externalId}&role=${getPuckRole()}`
       );
     }
     setMounted(true);
     getData();
   }, []);
 
-  const role = Role.GLOBAL;
-  const puckData = GetPuckData(
+  let puckData = GetPuckData(
+    getPuckRole(),
     siteEntityId,
-    template?.dataField ?? "",
-    entity?.externalId,
-    role
+    template?.id ?? "",
+    layoutId,
+    entity?.externalId ?? ""
   );
+  // use localStorage if it exists
+  if (localStorage) {
+    puckData = localStorage;
+  }
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
@@ -171,15 +194,13 @@ const Edit: Template<TemplateRenderProps> = () => {
         {!isLoading && !!puckData ? (
           <>
             <Editor
-              selectedEntity={entity}
-              entities={entities}
               selectedTemplate={template}
-              templates={templates}
-              entityId={
-                role === Role.INDIVIDUAL ? entity?.externalId : siteEntityId
-              }
+              layoutId={layoutId ?? ""}
+              entityId={entity?.externalId ?? ""}
               puckConfig={puckConfig}
               puckData={puckData}
+              role={getPuckRole()}
+              isLoading={isLoading}
             />
           </>
         ) : (

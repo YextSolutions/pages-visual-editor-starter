@@ -1,0 +1,22 @@
+{
+  "$id": "c_visualLayouts",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "VisualLayouts",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "type": {
+    "listType": {
+      "typeId": "entityReference",
+      "maxLength": 5000,
+      "type": {
+        "entityReferenceType": {
+          "supportedEntityTypeIds": [
+            "ce_pagesLayout"
+          ],
+          "type": "ONE_WAY"
+        }
+      }
+    }
+  },
+  "typeId": "list"
+}

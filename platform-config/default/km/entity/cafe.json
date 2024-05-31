@@ -11,6 +11,47 @@
       "region": "NY"
     },
     "addressHidden": false,
+    "c_hero": {
+      "image": {
+        "image": {
+          "height": 3034,
+          "thumbnails": [
+            {
+              "height": 3034,
+              "url": "https://a.mktgcdn.com/p/x7FsbwyFvECTdwYpE2pDRrr4_2g6vzkH4yWGaY1H1n8/4591x3034.jpg",
+              "width": 4591
+            },
+            {
+              "height": 1256,
+              "url": "https://a.mktgcdn.com/p/x7FsbwyFvECTdwYpE2pDRrr4_2g6vzkH4yWGaY1H1n8/1900x1256.jpg",
+              "width": 1900
+            },
+            {
+              "height": 409,
+              "url": "https://a.mktgcdn.com/p/x7FsbwyFvECTdwYpE2pDRrr4_2g6vzkH4yWGaY1H1n8/619x409.jpg",
+              "width": 619
+            },
+            {
+              "height": 397,
+              "url": "https://a.mktgcdn.com/p/x7FsbwyFvECTdwYpE2pDRrr4_2g6vzkH4yWGaY1H1n8/600x397.jpg",
+              "width": 600
+            },
+            {
+              "height": 130,
+              "url": "https://a.mktgcdn.com/p/x7FsbwyFvECTdwYpE2pDRrr4_2g6vzkH4yWGaY1H1n8/196x130.jpg",
+              "width": 196
+            }
+          ],
+          "url": "https://a.mktgcdn.com/p/x7FsbwyFvECTdwYpE2pDRrr4_2g6vzkH4yWGaY1H1n8/4591x3034.jpg",
+          "width": 4591
+        }
+      },
+      "title": "[[name]]"
+    },
+    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"Hero\",\"props\":{\"id\":\"Hero-5448e148-dd15-40af-beab-9c37b2c1a19f\"}},{\"type\":\"LocationCore\",\"props\":{\"id\":\"LocationCore-940ec5f7-6d5f-4b86-b1d5-37f75fb73c6e\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_pages_layouts": [
+      "locationVisualConfiguration"
+    ],
     "categoryIds": [
       "1322912"
     ],

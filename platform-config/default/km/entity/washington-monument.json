@@ -11,6 +11,136 @@
       "region": "DC"
     },
     "addressHidden": false,
+    "c_locationCore": {
+      "address": {
+        "city": "[[address.city]]",
+        "countryCode": "[[countryCode]]",
+        "extraDescription": "[[address.extraDescription]]",
+        "line1": "[[address.line1]]",
+        "line2": "[[address.line2]]",
+        "postalCode": "[[address.postalCode]]",
+        "region": "[[address.region]]",
+        "sublocality": "[[address.sublocality]]"
+      },
+      "hours": {
+        "friday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "monday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "saturday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "sunday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "thursday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "tuesday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        },
+        "wednesday": {
+          "openIntervals": [
+            {
+              "end": "20:00",
+              "start": "08:00"
+            }
+          ]
+        }
+      },
+      "mainPhone": "[[mainPhone]]"
+    },
+    "c_locationHero": {
+      "address": {
+        "city": "[[address.city]]",
+        "countryCode": "[[countryCode]]",
+        "extraDescription": "[[address.extraDescription]]",
+        "line1": "[[address.line1]]",
+        "line2": "[[address.line2]]",
+        "postalCode": "[[address.postalCode]]",
+        "region": "[[address.region]]",
+        "sublocality": "[[address.sublocality]]"
+      },
+      "cta1": {
+        "label": "Get Directions"
+      },
+      "cta2": {
+        "label": "Contact Us"
+      },
+      "image": {
+        "image": {
+          "height": 1367,
+          "sourceUrl": "https://d1dzqwexhp5ztx.cloudfront.net/imageRepo/7/0/113/310/593/S_Washington_Monument_S.jpg",
+          "thumbnails": [
+            {
+              "height": 1367,
+              "url": "https://a.mktgcdn.com/p/5aIsJsJDeEEQ9KNxpoug2SPwyjPRvzBiv-JdFJ_HVik/2048x1367.jpg",
+              "width": 2048
+            },
+            {
+              "height": 1268,
+              "url": "https://a.mktgcdn.com/p/5aIsJsJDeEEQ9KNxpoug2SPwyjPRvzBiv-JdFJ_HVik/1900x1268.jpg",
+              "width": 1900
+            },
+            {
+              "height": 413,
+              "url": "https://a.mktgcdn.com/p/5aIsJsJDeEEQ9KNxpoug2SPwyjPRvzBiv-JdFJ_HVik/619x413.jpg",
+              "width": 619
+            },
+            {
+              "height": 400,
+              "url": "https://a.mktgcdn.com/p/5aIsJsJDeEEQ9KNxpoug2SPwyjPRvzBiv-JdFJ_HVik/600x400.jpg",
+              "width": 600
+            },
+            {
+              "height": 131,
+              "url": "https://a.mktgcdn.com/p/5aIsJsJDeEEQ9KNxpoug2SPwyjPRvzBiv-JdFJ_HVik/196x131.jpg",
+              "width": 196
+            }
+          ],
+          "url": "https://a.mktgcdn.com/p/5aIsJsJDeEEQ9KNxpoug2SPwyjPRvzBiv-JdFJ_HVik/2048x1367.jpg",
+          "width": 2048
+        }
+      },
+      "name": "[[name]]",
+      "numberOfReviews": "156",
+      "rating": "5"
+    },
+    "c_pages_layouts": [
+      "locationVisualConfiguration"
+    ],
     "categoryIds": [
       "2189"
     ],

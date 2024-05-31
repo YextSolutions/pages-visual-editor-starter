@@ -13,7 +13,6 @@ export type TemplateDefinition = {
   name: string;
   id: string;
   entityTypes: string[];
-  dataField: string;
 };
 
 export interface TemplatePickerProps {
@@ -50,19 +49,16 @@ export function TemplatePicker({
   const [modalTemplate, setModalTemplate] = useState<TemplateDefinition>();
 
   const templateMenuItems = templates.map((template: TemplateDefinition) => (
-    <DropdownMenuItem key={template.id}>
-      <Button
-        variant="ghost"
-        key={template.id}
-        onClick={() => {
-          if (template.id !== selectedTemplate?.id) {
-            setModalOpen(true);
-            setModalTemplate(template);
-          }
-        }}
-      >
-        {template.name}
-      </Button>
+    <DropdownMenuItem
+      key={template.id}
+      onClick={() => {
+        if (template.id !== selectedTemplate?.id) {
+          setModalOpen(true);
+          setModalTemplate(template);
+        }
+      }}
+    >
+      {template.name}
     </DropdownMenuItem>
   ));
 
