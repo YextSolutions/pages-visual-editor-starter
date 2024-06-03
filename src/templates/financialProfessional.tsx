@@ -99,7 +99,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return `financialProfessional/${document.slug || document.name || document.id}`;
+  return document.slug ? document.slug : `financialProfessional/${document.id}`;
 };
 
 const FinancialProfessional: Template<TemplateRenderProps> = ({ document }) => {
