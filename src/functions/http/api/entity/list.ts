@@ -12,11 +12,9 @@ export default async function getEntities(
 
   let mgmtApiReq = `https://api.yextapis.com/v2/accounts/me/entities?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`;
   const entityTypes = queryParams.entityTypes;
-  // if (entityTypes) {
-  //   mgmtApiReq += `&entityTypes=${entityTypes}`;
-  // }
-
-  mgmtApiReq += `&searchIds=256409`;
+  if (entityTypes) {
+    mgmtApiReq += `&entityTypes=${entityTypes}`;
+  }
 
   const mgmtApiResp = await fetch(mgmtApiReq);
   try {
