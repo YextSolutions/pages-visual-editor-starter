@@ -5,7 +5,8 @@
   "entityType": "ce_pagesLayout",
   "fields": [
     "c_entities",
-    "c_visualConfiguration"
+    "c_visualConfiguration",
+    "c_layoutImage"
   ],
   "required": []
 }
