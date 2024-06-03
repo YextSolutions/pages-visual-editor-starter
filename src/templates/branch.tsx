@@ -14,7 +14,7 @@ import { DocumentProvider } from "../hooks/useDocument";
 import { getTemplatePuckData } from "../utils/puckDataHelper";
 
 export const config: TemplateConfig = {
-  name: "branch",
+  name: "ce_branch",
   stream: {
     $id: "branch-stream",
     filter: {
@@ -66,6 +66,7 @@ export const transformProps = async (data) => {
       config.name
     );
     const visualTemplate = JSON.parse(templateData);
+
     return {
       ...data,
       document: {
