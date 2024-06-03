@@ -15,17 +15,23 @@ import { Columns, ColumnsProps } from "../components/Columns";
 import { InfoCard, InfoCardProps } from "../components/cards/InfoCard";
 import { ServicesProps, Services } from "../components/Services";
 
-type LocationProps = {
-  Toggle: ToggleProps;
-  Hero: HeroProps;
-  LocationHero: any;
-  LocationCore: any;
+type BranchProps = {
+  AdvisorHero: AdvisorHeroProps;
+  AdvisorBio: AdvisorBioProps;
+  ContentGrid: ContentGridProps;
+  FeaturedBlogs: FeaturedBlogsProps;
+  Locator: LocatorProps;
+  BodyContainer: BodyContainerProps;
+  ContactForm: ContactFormProps;
+  Columns: ColumnsProps;
+  InfoCard: InfoCardProps;
+  Services: ServicesProps;
 };
 
-type ProductProps = {
-  Toggle: ToggleProps;
-  Hero: HeroProps;
-};
+// type ProductProps = {
+//   Toggle: ToggleProps;
+//   Hero: HeroProps;
+// };
 
 type FinancialProfessionalProps = {
   AdvisorHero: AdvisorHeroProps;
@@ -41,12 +47,38 @@ type FinancialProfessionalProps = {
 };
 
 // All the available components for locations
-export const locationConfig: Config<LocationProps> = {
+export const branchConfig: Config<BranchProps> = {
   components: {
-    Toggle,
-    Hero,
-    LocationHero,
-    LocationCore,
+    AdvisorHero,
+    AdvisorBio,
+    ContentGrid,
+    FeaturedBlogs,
+    Locator,
+    BodyContainer,
+    ContactForm,
+    Columns,
+    InfoCard,
+    Services,
+  },
+  categories: {
+    layouts: {
+      components: ["Columns", "BodyContainer", "InfoCard"],
+    },
+    core: {
+      components: [
+        "AdvisorHero",
+        "AdvisorBio",
+        "ContentGrid",
+        "FeaturedBlogs",
+        "Services",
+      ],
+    },
+    forms: {
+      components: ["ContactForm"],
+    },
+    other: {
+      components: ["Locator"],
+    },
   },
   root: {
     render: Root,
@@ -54,15 +86,15 @@ export const locationConfig: Config<LocationProps> = {
 };
 
 // All the available components for products
-export const productConfig: Config<ProductProps> = {
-  components: {
-    Toggle,
-    Hero,
-  },
-  root: {
-    render: Root,
-  },
-};
+// export const productConfig: Config<ProductProps> = {
+//   components: {
+//     Toggle,
+//     Hero,
+//   },
+//   root: {
+//     render: Root,
+//   },
+// };
 
 // All the available components for financial professionals
 export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
@@ -104,7 +136,7 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
 };
 
 export const puckConfigs = new Map<string, Config>([
-  ["location", locationConfig],
-  ["product", productConfig],
+  ["ce_branch", branchConfig],
+  // ["product", productConfig],
   ["financialProfessional", financialProfessionalConfig],
 ]);

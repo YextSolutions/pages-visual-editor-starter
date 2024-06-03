@@ -9,7 +9,7 @@ import {
   HeadConfig,
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
-import { financialProfessionalConfig } from "../puck/puck.config";
+import { branchConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
 import { getTemplatePuckData } from "../utils/puckDataHelper";
 
@@ -107,10 +107,7 @@ const Branch: Template<TemplateRenderProps> = ({ document }) => {
   console.log(document);
   return (
     <DocumentProvider value={document}>
-      <Render
-        config={financialProfessionalConfig as Config}
-        data={visualTemplate}
-      />
+      <Render config={branchConfig as Config} data={visualTemplate} />
     </DocumentProvider>
   );
 };
