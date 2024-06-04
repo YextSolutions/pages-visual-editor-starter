@@ -3,14 +3,9 @@ import { TemplateDefinition } from "../../../../components/puck-overrides/Templa
 
 export const templates: TemplateDefinition[] = [
   {
-    name: "Location",
-    id: "location",
-    entityTypes: ["location"],
-  },
-  {
-    name: "Product",
-    id: "product",
-    entityTypes: ["product"],
+    name: "Branch",
+    id: "ce_branch",
+    entityTypes: ["ce_branch"],
   },
   {
     name: "Financial Professional",
