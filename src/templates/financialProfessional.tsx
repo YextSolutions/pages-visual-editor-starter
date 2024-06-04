@@ -18,7 +18,8 @@ export const config: TemplateConfig = {
   stream: {
     $id: "financialProfessional-stream",
     filter: {
-      savedFilterIds: ["1384352191"],
+      // savedFilterIds: ["1384352191"],
+      entityTypes: ["financialProfessional"],
     },
     fields: [
       "id",
