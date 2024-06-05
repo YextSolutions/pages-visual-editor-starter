@@ -1,11 +1,6 @@
 import { ComponentConfig } from "@measured/puck";
 import { useDocument } from "../hooks/useDocument";
-import {
-  FinancialProfessionalStream,
-  ContentCarousel as ContentCarouselType,
-  ServicesOffered,
-  LinkedService,
-} from "../types/autogen";
+import { FinancialProfessionalStream, LinkedService } from "../types/autogen";
 
 import { Section } from "./Section";
 import {
@@ -19,10 +14,11 @@ import { ServiceCard } from "./cards/ServiceCard";
 import { backgroundColors } from "../puck/theme";
 import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
+import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
 
 export type ServicesProps = {
   backgroundColor: string;
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
 };
 
 export const Services: ComponentConfig<ServicesProps> = {
@@ -33,13 +29,38 @@ export const Services: ComponentConfig<ServicesProps> = {
       options: backgroundColors,
     },
     sectionTitle: {
+      type: "object",
       label: "Section Title",
-      type: "text",
+      objectFields: {
+        title: { type: "text", label: "Title" },
+        align: {
+          type: "radio",
+          label: "Align",
+          options: [
+            { label: "Left", value: "left" },
+            { label: "Center", value: "center" },
+            { label: "Right", value: "right" },
+          ],
+        },
+        size: {
+          type: "radio",
+          label: "Size",
+          options: [
+            { label: "Small", value: "sm" },
+            { label: "Medium", value: "md" },
+            { label: "Large", value: "lg" },
+          ],
+        },
+      },
     },
   },
   defaultProps: {
     backgroundColor: "bg-white",
-    sectionTitle: "Section",
+    sectionTitle: {
+      title: "Section",
+      align: "center",
+      size: "md",
+    },
   },
   render: ({ backgroundColor, sectionTitle }) => {
     // TODO: ask team about types
@@ -64,9 +85,7 @@ export const Services: ComponentConfig<ServicesProps> = {
 
     return (
       <Section className={backgroundColor}>
-        <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-          {sectionTitle}
-        </h2>
+        <SectionTitle {...sectionTitle} />
         <Carousel>
           <CarouselContent>
             {services.map((service) => (
@@ -88,7 +107,7 @@ export const Services: ComponentConfig<ServicesProps> = {
 
 interface ServicesSkeletonProps {
   backgroundColor: string;
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
 }
 
 const ServicesSkeleton = ({
@@ -99,9 +118,7 @@ const ServicesSkeleton = ({
 
   return (
     <Section className={backgroundColor}>
-      <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-        {sectionTitle}
-      </h2>
+      <SectionTitle {...sectionTitle} />
       <Carousel>
         <CarouselContent>
           {Array.from({ length: itemCount }).map((_, index) => (

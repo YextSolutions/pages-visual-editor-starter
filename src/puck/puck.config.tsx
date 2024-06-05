@@ -1,8 +1,4 @@
 import type { Config } from "@measured/puck";
-import { Toggle, ToggleProps } from "../components/Toggle";
-import { Hero, HeroProps } from "../components/Hero";
-import { LocationCore } from "../components/LocationCore";
-import { LocationHero } from "../components/LocationHero";
 import { AdvisorHero, AdvisorHeroProps } from "../components/AdvisorHero";
 import { AdvisorBio, AdvisorBioProps } from "../components/AdvisorBio";
 import { ContentGrid, ContentGridProps } from "../components/ContentGrid";
@@ -14,6 +10,7 @@ import { ContactForm, ContactFormProps } from "../components/ContactForm";
 import { Columns, ColumnsProps } from "../components/Columns";
 import { InfoCard, InfoCardProps } from "../components/cards/InfoCard";
 import { ServicesProps, Services } from "../components/Services";
+import { Divider, DividerProps } from "../components/VerticalDivider";
 
 type BranchProps = {
   AdvisorHero: AdvisorHeroProps;
@@ -26,6 +23,7 @@ type BranchProps = {
   Columns: ColumnsProps;
   InfoCard: InfoCardProps;
   Services: ServicesProps;
+  Divider: DividerProps;
 };
 
 // type ProductProps = {
@@ -44,6 +42,7 @@ type FinancialProfessionalProps = {
   Columns: ColumnsProps;
   InfoCard: InfoCardProps;
   Services: ServicesProps;
+  Divider: DividerProps;
 };
 
 // All the available components for locations
@@ -59,10 +58,11 @@ export const branchConfig: Config<BranchProps> = {
     Columns,
     InfoCard,
     Services,
+    Divider: Divider,
   },
   categories: {
     layouts: {
-      components: ["Columns", "BodyContainer", "InfoCard"],
+      components: ["Columns", "BodyContainer", "InfoCard", "Divider"],
     },
     core: {
       components: [
@@ -109,10 +109,11 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     Columns,
     InfoCard,
     Services,
+    Divider,
   },
   categories: {
     layouts: {
-      components: ["Columns", "BodyContainer", "InfoCard"],
+      components: ["Columns", "BodyContainer", "InfoCard", "Divider"],
     },
     core: {
       components: [

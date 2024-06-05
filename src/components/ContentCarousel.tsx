@@ -18,11 +18,13 @@ import { EventCard } from "./cards/EventCard";
 import { backgroundColors } from "../puck/theme";
 import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
+import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
 
 export type ContentCarouselProps = {
   content: "services" | "events";
   backgroundColor: string;
-  sectionTitle: string;
+  // sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
 };
 
 const contentOptions = [
@@ -43,14 +45,36 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
       options: backgroundColors,
     },
     sectionTitle: {
-      label: "Section Title",
-      type: "text",
+      type: "object",
+      objectFields: {
+        title: { type: "text" },
+        align: {
+          type: "radio",
+          options: [
+            { label: "Left", value: "left" },
+            { label: "Center", value: "center" },
+            { label: "Right", value: "right" },
+          ],
+        },
+        size: {
+          type: "radio",
+          options: [
+            { label: "Small", value: "small" },
+            { label: "Medium", value: "medium" },
+            { label: "Large", value: "large" },
+          ],
+        },
+      },
     },
   },
   defaultProps: {
     content: "services",
     backgroundColor: "bg-white",
-    sectionTitle: "Section",
+    sectionTitle: {
+      title: "Section",
+      align: "center",
+      size: "md",
+    },
   },
   render: ({ content, backgroundColor, sectionTitle }) => {
     // TODO: ask team about types
@@ -79,10 +103,7 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
 
     return (
       <Section className={backgroundColor}>
-        {/* TODO: move to a prop on the section */}
-        <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-          {contentCarousel?.title}
-        </h2>
+        <SectionTitle {...sectionTitle} />
         <Carousel>
           <CarouselContent>
             {content === "services"
@@ -110,7 +131,7 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
 
 interface ContentCarouselSkeletonProps {
   backgroundColor: string;
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
 }
 
 const ContentCarouselSkeleton = ({
@@ -121,9 +142,7 @@ const ContentCarouselSkeleton = ({
 
   return (
     <Section className={backgroundColor}>
-      <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-        {sectionTitle}
-      </h2>
+      <SectionTitle {...sectionTitle} />
       <Carousel>
         <CarouselContent>
           {Array.from({ length: itemCount }).map((_, index) => (

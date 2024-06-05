@@ -1,5 +1,4 @@
 import { ComponentConfig } from "@measured/puck";
-// import { cn } from "../../utils/cn";
 
 import { Section } from "./Section";
 import { ChevronUp } from "lucide-react";
@@ -13,17 +12,39 @@ import useScreenSizes from "../hooks/useScreenSizes";
 import { backgroundColors } from "../puck/theme";
 import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
+import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
 
 export type FeaturedBlogsProps = {
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
   backgroundColor: string;
 };
 
 export const FeaturedBlogs: ComponentConfig<FeaturedBlogsProps> = {
   fields: {
     sectionTitle: {
+      type: "object",
       label: "Section Title",
-      type: "text",
+      objectFields: {
+        title: { type: "text", label: "Title" },
+        align: {
+          type: "radio",
+          label: "Align",
+          options: [
+            { label: "Left", value: "left" },
+            { label: "Center", value: "center" },
+            { label: "Right", value: "right" },
+          ],
+        },
+        size: {
+          type: "radio",
+          label: "Size",
+          options: [
+            { label: "Small", value: "sm" },
+            { label: "Medium", value: "md" },
+            { label: "Large", value: "lg" },
+          ],
+        },
+      },
     },
     backgroundColor: {
       label: "Background Color",
@@ -32,7 +53,11 @@ export const FeaturedBlogs: ComponentConfig<FeaturedBlogsProps> = {
     },
   },
   defaultProps: {
-    sectionTitle: "Section",
+    sectionTitle: {
+      title: "Section",
+      align: "center",
+      size: "md",
+    },
     backgroundColor: "bg-white",
   },
   render: ({ sectionTitle, backgroundColor }) => {
@@ -65,9 +90,9 @@ export const FeaturedBlogs: ComponentConfig<FeaturedBlogsProps> = {
     // TODO: add placeholder for null content value
     return (
       <Section className={backgroundColor}>
-        <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-          {sectionTitle}
-        </h2>
+        <div className="mb-8">
+          <SectionTitle {...sectionTitle} />
+        </div>
         <div className="bg-white">
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 px-6 sm:gap-y-16 lg:grid-cols-2 lg:px-8">
             <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">
@@ -161,7 +186,7 @@ export const FeaturedBlogs: ComponentConfig<FeaturedBlogsProps> = {
 };
 
 interface FeaturedBlogsSkeletonProps {
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
   backgroundColor: string;
 }
 
@@ -171,9 +196,7 @@ const FeaturedBlogsSkeleton = ({
 }: FeaturedBlogsSkeletonProps) => {
   return (
     <Section className={backgroundColor}>
-      <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-        {sectionTitle}
-      </h2>
+      <SectionTitle {...sectionTitle} />
       <div className="bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-12 px-6 sm:gap-y-16 lg:grid-cols-2 lg:px-8">
           <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-lg">

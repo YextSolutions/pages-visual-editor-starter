@@ -12,17 +12,12 @@ import { AdvisorCard, AdvisorCardSkeleton } from "./cards/AdvisorCard";
 import { backgroundColors } from "../puck/theme";
 import { cn } from "../utils/cn";
 import useEnvironment from "../hooks/useEnvironment";
+import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
 
 export type ContentGridProps = {
-  // content: "services" | "events";
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
   backgroundColor: string;
 };
-
-// const contentOptions = [
-//   { label: "Services", value: "services" },
-//   { label: "Events", value: "events" },
-// ];
 
 export const ContentGrid: ComponentConfig<ContentGridProps> = {
   fields: {
@@ -32,8 +27,29 @@ export const ContentGrid: ComponentConfig<ContentGridProps> = {
     //   options: contentOptions,
     // },
     sectionTitle: {
+      type: "object",
       label: "Section Title",
-      type: "text",
+      objectFields: {
+        title: { type: "text", label: "Title" },
+        align: {
+          type: "radio",
+          label: "Align",
+          options: [
+            { label: "Left", value: "left" },
+            { label: "Center", value: "center" },
+            { label: "Right", value: "right" },
+          ],
+        },
+        size: {
+          type: "radio",
+          label: "Size",
+          options: [
+            { label: "Small", value: "sm" },
+            { label: "Medium", value: "md" },
+            { label: "Large", value: "lg" },
+          ],
+        },
+      },
     },
     backgroundColor: {
       label: "Background Color",
@@ -43,7 +59,11 @@ export const ContentGrid: ComponentConfig<ContentGridProps> = {
   },
   defaultProps: {
     backgroundColor: "bg-white",
-    sectionTitle: "Section",
+    sectionTitle: {
+      title: "Section",
+      align: "center",
+      size: "md",
+    },
   },
   render: ({ backgroundColor, sectionTitle }) => {
     // TODO: ask team about types
@@ -72,9 +92,7 @@ export const ContentGrid: ComponentConfig<ContentGridProps> = {
     // TODO: add placeholder for null content value
     return (
       <Section className={cn("flex flex-col", backgroundColor)}>
-        <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-          {sectionTitle}
-        </h2>
+        <SectionTitle {...sectionTitle} />
         <div className="grid gap-[30px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {contentGridItems.map((item) => (
             <AdvisorCard key={item.id} advisor={item} />
@@ -87,7 +105,7 @@ export const ContentGrid: ComponentConfig<ContentGridProps> = {
 
 interface ContentGridSkeletonProps {
   backgroundColor: string;
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
 }
 
 const ContentGridSkeleton = ({
@@ -96,9 +114,7 @@ const ContentGridSkeleton = ({
 }: ContentGridSkeletonProps) => {
   return (
     <Section className="flex flex-col">
-      <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-        {sectionTitle}
-      </h2>
+      <SectionTitle {...sectionTitle} />
       <div
         className={`grid gap-[30px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${backgroundColor}`}
       >

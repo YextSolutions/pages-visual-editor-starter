@@ -55,7 +55,9 @@ export const AdvisorBio: ComponentConfig<AdvisorBioProps> = {
               <p className="text-blue-950 font-bold text-base">{bio.role}</p>
             )}
             {bio?.email && <p className="text-[#333333]">{bio.email}</p>}
-            {bio?.bio && <p className="text-black">{bio.bio}</p>}
+            {bio?.bio && (
+              <p className="text-black font-extralight">{bio.bio}</p>
+            )}
           </div>
         </div>
       </Section>

@@ -4,11 +4,12 @@ import { useDocument } from "../hooks/useDocument";
 import { C_hero, FinancialProfessionalStream } from "../types/autogen";
 import { Mail, Phone } from "lucide-react";
 import { cn } from "../utils/cn";
-import { Button } from "./ui/button";
+import { CTA, CTAProps } from "./ui/cta";
 
 export type AdvisorHeroProps = {
   imageMode: "background" | "left" | "right";
   advisorInfoLayout: "center" | "left";
+  cta: CTAProps;
 };
 
 export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
@@ -30,12 +31,43 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
         { label: "Left", value: "left" },
       ],
     },
+    cta: {
+      type: "object",
+      label: "CTA",
+      objectFields: {
+        label: { type: "text", label: "Label" },
+        url: { type: "text", label: "URL" },
+        variant: {
+          type: "radio",
+          label: "Variant",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Secondary", value: "secondary" },
+            { label: "Outline", value: "outline" },
+          ],
+        },
+        size: {
+          type: "radio",
+          label: "Size",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Large", value: "lg" },
+          ],
+        },
+      },
+    },
   },
   defaultProps: {
     imageMode: "background",
     advisorInfoLayout: "left",
+    cta: {
+      label: "Button",
+      url: "#",
+      variant: "default",
+      size: "default",
+    },
   },
-  render: ({ imageMode, advisorInfoLayout }) => {
+  render: ({ imageMode, advisorInfoLayout, cta }) => {
     const hero: C_hero = useDocument<FinancialProfessionalStream>(
       (document) => document.c_hero
     );
@@ -119,9 +151,7 @@ export const AdvisorHero: ComponentConfig<AdvisorHeroProps> = {
               </>
             )}
           </div>
-          <Button className="mt-4" variant="secondary">
-            Button
-          </Button>
+          <CTA className="mt-4" {...cta} />
         </div>
       </div>
     );

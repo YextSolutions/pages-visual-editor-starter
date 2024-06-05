@@ -2,24 +2,72 @@ import { ComponentConfig } from "@measured/puck";
 import { Section } from "./Section";
 import { Mail, Phone } from "lucide-react";
 import useScreenSizes from "../hooks/useScreenSizes";
-import { Button } from "./ui/button";
 import { backgroundColors } from "../puck/theme";
 import { cn } from "../utils/cn";
 import { C_locator, FinancialProfessionalStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
 import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
+import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
+import { CTA, CTAProps } from "./ui/cta";
 
 export type LocatorProps = {
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
   backgroundColor: string;
+  cta?: CTAProps;
 };
 
 export const Locator: ComponentConfig<LocatorProps> = {
   fields: {
     sectionTitle: {
+      type: "object",
       label: "Section Title",
-      type: "text",
+      objectFields: {
+        title: { type: "text", label: "Title" },
+        align: {
+          type: "radio",
+          label: "Align",
+          options: [
+            { label: "Left", value: "left" },
+            { label: "Center", value: "center" },
+            { label: "Right", value: "right" },
+          ],
+        },
+        size: {
+          type: "radio",
+          label: "Size",
+          options: [
+            { label: "Small", value: "sm" },
+            { label: "Medium", value: "md" },
+            { label: "Large", value: "lg" },
+          ],
+        },
+      },
+    },
+    cta: {
+      type: "object",
+      label: "CTA",
+      objectFields: {
+        label: { type: "text", label: "Label" },
+        url: { type: "text", label: "URL" },
+        variant: {
+          type: "radio",
+          label: "Variant",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Secondary", value: "secondary" },
+            { label: "Outline", value: "outline" },
+          ],
+        },
+        size: {
+          type: "radio",
+          label: "Size",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Large", value: "lg" },
+          ],
+        },
+      },
     },
     backgroundColor: {
       label: "Background Color",
@@ -28,10 +76,20 @@ export const Locator: ComponentConfig<LocatorProps> = {
     },
   },
   defaultProps: {
-    sectionTitle: "Section",
+    sectionTitle: {
+      title: "Section",
+      align: "center",
+      size: "md",
+    },
     backgroundColor: "bg-white",
+    cta: {
+      label: "Button",
+      url: "#",
+      variant: "default",
+      size: "default",
+    },
   },
-  render: ({ sectionTitle, backgroundColor }) => {
+  render: ({ sectionTitle, backgroundColor, cta }) => {
     const locator: C_locator = useDocument<FinancialProfessionalStream>(
       (document) => document.c_locator
     );
@@ -57,9 +115,7 @@ export const Locator: ComponentConfig<LocatorProps> = {
     // TODO: add placeholder for null content value
     return (
       <Section className={cn("gap-y-4 md:gap-y-8", backgroundColor)}>
-        <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-          {sectionTitle}
-        </h2>
+        <SectionTitle {...sectionTitle} />
         <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-x-[30px]">
           <div>
             <p>{locator.description}</p>
@@ -77,9 +133,7 @@ export const Locator: ComponentConfig<LocatorProps> = {
                 </div>
               </div>
             </div>
-            <div>
-              <Button variant="outline">Button</Button>
-            </div>
+            <CTA {...cta} />
           </div>
 
           <img
@@ -94,7 +148,7 @@ export const Locator: ComponentConfig<LocatorProps> = {
 
 interface LocatorSkeletonProps {
   backgroundColor: string;
-  sectionTitle: string;
+  sectionTitle?: SectionTitleProps;
 }
 
 const LocatorSkeleton = ({
@@ -103,9 +157,7 @@ const LocatorSkeleton = ({
 }: LocatorSkeletonProps) => {
   return (
     <Section className={`gap-y-4 md:gap-y-8 w-full ${backgroundColor}`}>
-      <h2 className="text-center text-blue-950 text-[34px] font-bold mb-8">
-        {sectionTitle}
-      </h2>
+      <SectionTitle {...sectionTitle} />
       <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-x-[30px]">
         <div>
           <Skeleton className="h-6 my-2" />

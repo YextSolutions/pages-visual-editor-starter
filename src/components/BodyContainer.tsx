@@ -2,6 +2,7 @@ import { ComponentConfig, DropZone } from "@measured/puck";
 import { useRef } from "react";
 
 export type BodyContainerProps = {
+  additionalSpacing: "gap-y-0" | "gap-y-4" | "gap-y-8" | "gap-y-12";
   sections: {
     title: string;
   }[];
@@ -9,7 +10,18 @@ export type BodyContainerProps = {
 
 export const BodyContainer: ComponentConfig<BodyContainerProps> = {
   fields: {
+    additionalSpacing: {
+      type: "radio",
+      label: "Additional Spacing",
+      options: [
+        { label: "None", value: "gap-y-0" },
+        { label: "Small", value: "gap-y-8" },
+        { label: "Medium", value: "gap-y-16" },
+        { label: "Large", value: "gap-y-24" },
+      ],
+    },
     sections: {
+      label: "Sections",
       type: "array",
       getItemSummary: (col) => col.title,
       arrayFields: {
@@ -21,6 +33,7 @@ export const BodyContainer: ComponentConfig<BodyContainerProps> = {
     },
   },
   defaultProps: {
+    additionalSpacing: "gap-y-0",
     sections: [
       {
         title: "Column 1",
@@ -30,7 +43,7 @@ export const BodyContainer: ComponentConfig<BodyContainerProps> = {
       },
     ],
   },
-  render: ({ sections }) => {
+  render: ({ additionalSpacing, sections }) => {
     const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const handleNavClick = (index: number) => {
@@ -41,7 +54,7 @@ export const BodyContainer: ComponentConfig<BodyContainerProps> = {
     };
 
     return (
-      <div className="flex flex-col">
+      <div className={`flex flex-col ${additionalSpacing}`}>
         <div className="py-4 border-b-2 border-gray-50 justify-center items-center gap-16 inline-flex">
           {sections.map(({ title }, idx) => (
             <div

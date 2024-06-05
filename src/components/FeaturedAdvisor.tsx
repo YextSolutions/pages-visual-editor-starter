@@ -1,10 +1,7 @@
 import { ComponentConfig } from "@measured/puck";
-// import { cn } from "../../utils/cn";
-import { Image } from "@yext/pages-components";
 import { useDocument } from "../hooks/useDocument";
 import { FinancialProfessionalStream } from "../types/autogen";
-import { Button } from "./ui/button";
-import { Phone, Mail } from "lucide-react";
+
 import {
   Card,
   CardContent,
