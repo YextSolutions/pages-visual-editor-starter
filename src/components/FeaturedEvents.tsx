@@ -63,7 +63,7 @@ export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
   render: ({ backgroundColor, sectionTitle }) => {
     // TODO: ask team about types
     const events: LinkedEvent[] = useDocument<FinancialProfessionalStream>(
-      (document) => document.c_events.events
+      (document) => document.c_events?.events
     );
 
     const isEditor = useEnvironment();
@@ -138,9 +138,9 @@ const EventsSkeleton = ({
 const CardSkeleton = () => {
   return (
     <div className="h-full gap-y-4 rounded-lg border border-zinc-200">
-      <Skeleton className="h-14 w-14 mx-auto" />{" "}
-      <Skeleton className="h-8 w-full mb-2" />{" "}
-      <Skeleton className="h-24 w-full" />{" "}
+      <Skeleton className="h-14 w-14 mx-auto" />
+      <Skeleton className="h-8 w-full mb-2" />
+      <Skeleton className="h-24 w-full" />
     </div>
   );
 };

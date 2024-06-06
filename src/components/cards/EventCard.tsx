@@ -11,7 +11,7 @@ interface EventCardProps {
 export const EventCard = ({ event }: EventCardProps) => {
   return (
     <Card className="w-full">
-      {event.c_coverPhoto && (
+      {event?.c_coverPhoto && (
         <div className="w-full pb-4">
           <div className="group relative w-full h-44">
             <Image
@@ -22,14 +22,14 @@ export const EventCard = ({ event }: EventCardProps) => {
         </div>
       )}
       <CardContent className="flex flex-col gap-y-4">
-        <CardTitle className="text-blue-950 text-2xl">{event.name}</CardTitle>
+        <CardTitle className="text-blue-950 text-2xl">{event?.name}</CardTitle>
         <div className="flex flex-col gap-y-8">
-          {event.time && (
+          {event?.time && (
             <p className="text-gray-500 text-sm">
               {formatEventTime(event.time)}
             </p>
           )}
-          <p className="line-clamp-4">{event.c_description}</p>
+          <p className="line-clamp-4">{event?.c_description}</p>
         </div>
       </CardContent>
       <CardFooter>
