@@ -1,9 +1,6 @@
 import { ComponentConfig } from "@measured/puck";
 import { useDocument } from "../hooks/useDocument";
-import {
-  FinancialProfessionalStream,
-  ContentCarousel as ContentCarouselType,
-} from "../types/autogen";
+import { FinancialProfessionalStream, LinkedEvent } from "../types/autogen";
 
 import { Section } from "./Section";
 import {
@@ -13,7 +10,6 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "./ui/carousel";
-import { ServiceCard } from "./cards/ServiceCard";
 import { EventCard } from "./cards/EventCard";
 import { backgroundColors } from "../puck/theme";
 import { Skeleton } from "./ui/skeleton";
@@ -65,17 +61,16 @@ export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
   },
   render: ({ backgroundColor, sectionTitle }) => {
     // TODO: ask team about types
-    const events: ContentCarouselType =
-      useDocument<FinancialProfessionalStream>((document) => document.c_events);
-
-    const events = events?.events || [];
+    const events: LinkedEvent[] = useDocument<FinancialProfessionalStream>(
+      (document) => document.c_events.events
+    );
 
     const isEditor = useEnvironment();
 
     if (!events) {
       if (isEditor) {
         return (
-          <ContentCarouselSkeleton
+          <EventsSkeleton
             backgroundColor={backgroundColor}
             sectionTitle={sectionTitle}
           />
@@ -90,20 +85,14 @@ export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
         <SectionTitle {...sectionTitle} />
         <Carousel>
           <CarouselContent>
-            {content === "services"
-              ? services.map((service) => (
-                  <CarouselItem
-                    className="basis-3/ md:basis-1/2 lg:basis-1/3"
-                    key={service.id}
-                  >
-                    <ServiceCard service={service} />
-                  </CarouselItem>
-                ))
-              : events.map((event) => (
-                  <CarouselItem key={event.id}>
-                    <EventCard event={event} />
-                  </CarouselItem>
-                ))}
+            {events.map((event) => (
+              <CarouselItem
+                key={event.id}
+                className="basis-3/ md:basis-1/2 lg:basis-1/3"
+              >
+                <EventCard event={event} />
+              </CarouselItem>
+            ))}
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
@@ -113,15 +102,15 @@ export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
   },
 };
 
-interface ContentCarouselSkeletonProps {
+interface EventsSkeletonProps {
   backgroundColor: string;
   sectionTitle?: SectionTitleProps;
 }
 
-const ContentCarouselSkeleton = ({
+const EventsSkeleton = ({
   backgroundColor,
   sectionTitle,
-}: ContentCarouselSkeletonProps) => {
+}: EventsSkeletonProps) => {
   const itemCount = 3; // Typical number of items to display for layout consistency
 
   return (

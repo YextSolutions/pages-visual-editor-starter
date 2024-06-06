@@ -11,6 +11,10 @@ import { Columns, ColumnsProps } from "../components/Columns";
 import { InfoCard, InfoCardProps } from "../components/cards/InfoCard";
 import { ServicesProps, Services } from "../components/Services";
 import { Divider, DividerProps } from "../components/VerticalDivider";
+import {
+  FeaturedEventsProps,
+  FeaturedEvents,
+} from "../components/FeaturedEvents";
 
 type BranchProps = {
   Hero: HeroProps;
@@ -24,6 +28,7 @@ type BranchProps = {
   InfoCard: InfoCardProps;
   Services: ServicesProps;
   Divider: DividerProps;
+  FeaturedEvents: FeaturedEventsProps;
 };
 
 // type ProductProps = {
@@ -43,6 +48,7 @@ type FinancialProfessionalProps = {
   InfoCard: InfoCardProps;
   Services: ServicesProps;
   Divider: DividerProps;
+  FeaturedEvents: FeaturedEventsProps;
 };
 
 // All the available components for locations
@@ -59,13 +65,21 @@ export const branchConfig: Config<BranchProps> = {
     InfoCard,
     Services,
     Divider,
+    FeaturedEvents,
   },
   categories: {
     layouts: {
       components: ["Columns", "BodyContainer", "InfoCard"],
     },
     core: {
-      components: ["Hero", "Bio", "TeamGrid", "FeaturedBlogs", "Services"],
+      components: [
+        "Hero",
+        "Bio",
+        "TeamGrid",
+        "FeaturedBlogs",
+        "Services",
+        "FeaturedEvents",
+      ],
     },
     forms: {
       components: ["ContactForm"],
@@ -104,13 +118,21 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     InfoCard,
     Services,
     Divider,
+    FeaturedEvents,
   },
   categories: {
     layouts: {
       components: ["Columns", "BodyContainer", "InfoCard", "Divider"],
     },
     core: {
-      components: ["Hero", "Bio", "TeamGrid", "FeaturedBlogs", "Services"],
+      components: [
+        "Hero",
+        "Bio",
+        "TeamGrid",
+        "FeaturedBlogs",
+        "Services",
+        "FeaturedEvents",
+      ],
     },
     forms: {
       components: ["ContactForm"],
