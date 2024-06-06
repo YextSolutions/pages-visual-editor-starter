@@ -1,7 +1,7 @@
 import type { Config } from "@measured/puck";
-import { AdvisorHero, AdvisorHeroProps } from "../components/AdvisorHero";
-import { AdvisorBio, AdvisorBioProps } from "../components/AdvisorBio";
-import { ContentGrid, ContentGridProps } from "../components/ContentGrid";
+import { Hero, HeroProps } from "../components/Hero";
+import { Bio, BioProps } from "../components/Bio";
+import { TeamGrid, TeamGridProps } from "../components/TeamGrid";
 import { FeaturedBlogs, FeaturedBlogsProps } from "../components/FeaturedBlogs";
 import { Locator, LocatorProps } from "../components/Locator";
 import Root from "./root";
@@ -13,9 +13,9 @@ import { ServicesProps, Services } from "../components/Services";
 import { Divider, DividerProps } from "../components/VerticalDivider";
 
 type BranchProps = {
-  AdvisorHero: AdvisorHeroProps;
-  AdvisorBio: AdvisorBioProps;
-  ContentGrid: ContentGridProps;
+  Hero: HeroProps;
+  Bio: BioProps;
+  TeamGrid: TeamGridProps;
   FeaturedBlogs: FeaturedBlogsProps;
   Locator: LocatorProps;
   BodyContainer: BodyContainerProps;
@@ -32,9 +32,9 @@ type BranchProps = {
 // };
 
 type FinancialProfessionalProps = {
-  AdvisorHero: AdvisorHeroProps;
-  AdvisorBio: AdvisorBioProps;
-  ContentGrid: ContentGridProps;
+  Hero: HeroProps;
+  Bio: BioProps;
+  TeamGrid: TeamGridProps;
   FeaturedBlogs: FeaturedBlogsProps;
   Locator: LocatorProps;
   BodyContainer: BodyContainerProps;
@@ -48,9 +48,9 @@ type FinancialProfessionalProps = {
 // All the available components for locations
 export const branchConfig: Config<BranchProps> = {
   components: {
-    AdvisorHero,
-    AdvisorBio,
-    ContentGrid,
+    Hero,
+    Bio,
+    TeamGrid,
     FeaturedBlogs,
     Locator,
     BodyContainer,
@@ -58,20 +58,14 @@ export const branchConfig: Config<BranchProps> = {
     Columns,
     InfoCard,
     Services,
-    Divider: Divider,
+    Divider,
   },
   categories: {
     layouts: {
-      components: ["Columns", "BodyContainer", "InfoCard", "Divider"],
+      components: ["Columns", "BodyContainer", "InfoCard"],
     },
     core: {
-      components: [
-        "AdvisorHero",
-        "AdvisorBio",
-        "ContentGrid",
-        "FeaturedBlogs",
-        "Services",
-      ],
+      components: ["Hero", "Bio", "TeamGrid", "FeaturedBlogs", "Services"],
     },
     forms: {
       components: ["ContactForm"],
@@ -99,9 +93,9 @@ export const branchConfig: Config<BranchProps> = {
 // All the available components for financial professionals
 export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   components: {
-    AdvisorHero,
-    AdvisorBio,
-    ContentGrid,
+    Hero,
+    Bio,
+    TeamGrid: TeamGrid,
     FeaturedBlogs,
     Locator,
     BodyContainer,
@@ -116,13 +110,7 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
       components: ["Columns", "BodyContainer", "InfoCard", "Divider"],
     },
     core: {
-      components: [
-        "AdvisorHero",
-        "AdvisorBio",
-        "ContentGrid",
-        "FeaturedBlogs",
-        "Services",
-      ],
+      components: ["Hero", "Bio", "TeamGrid", "FeaturedBlogs", "Services"],
     },
     forms: {
       components: ["ContactForm"],

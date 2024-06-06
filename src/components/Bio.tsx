@@ -7,11 +7,11 @@ import { backgroundColors } from "../puck/theme";
 import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
 
-export type AdvisorBioProps = {
+export type BioProps = {
   backgroundColor: string;
 };
 
-export const AdvisorBio: ComponentConfig<AdvisorBioProps> = {
+export const Bio: ComponentConfig<BioProps> = {
   fields: {
     backgroundColor: {
       label: "Background Color",
@@ -32,7 +32,7 @@ export const AdvisorBio: ComponentConfig<AdvisorBioProps> = {
 
     if (!bio) {
       if (isEditor) {
-        return <AdvisorBioSkeleton backgroundColor={backgroundColor} />;
+        return <BioSkeleton backgroundColor={backgroundColor} />;
       } else {
         return <></>;
       }
@@ -65,11 +65,11 @@ export const AdvisorBio: ComponentConfig<AdvisorBioProps> = {
   },
 };
 
-interface AdvisorBioSkeletonProps {
+interface BioSkeletonProps {
   backgroundColor: string;
 }
 
-const AdvisorBioSkeleton = ({ backgroundColor }: AdvisorBioSkeletonProps) => {
+const BioSkeleton = ({ backgroundColor }: BioSkeletonProps) => {
   return (
     <Section className={backgroundColor}>
       <div className="flex flex-col gap-x-8 md:flex-row">

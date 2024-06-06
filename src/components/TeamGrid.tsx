@@ -14,12 +14,13 @@ import { cn } from "../utils/cn";
 import useEnvironment from "../hooks/useEnvironment";
 import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
 
-export type ContentGridProps = {
+export type TeamGridProps = {
   sectionTitle?: SectionTitleProps;
   backgroundColor: string;
 };
 
-export const ContentGrid: ComponentConfig<ContentGridProps> = {
+export const TeamGrid: ComponentConfig<TeamGridProps> = {
+  label: "Team Grid",
   fields: {
     // content: {
     //   label: "Content",
@@ -79,7 +80,7 @@ export const ContentGrid: ComponentConfig<ContentGridProps> = {
     if (!contentGrid) {
       if (isEditor) {
         return (
-          <ContentGridSkeleton
+          <TeamGridSkeleton
             backgroundColor={backgroundColor}
             sectionTitle={sectionTitle}
           />
@@ -103,15 +104,15 @@ export const ContentGrid: ComponentConfig<ContentGridProps> = {
   },
 };
 
-interface ContentGridSkeletonProps {
+interface TeamGridSkeletonProps {
   backgroundColor: string;
   sectionTitle?: SectionTitleProps;
 }
 
-const ContentGridSkeleton = ({
+const TeamGridSkeleton = ({
   backgroundColor,
   sectionTitle,
-}: ContentGridSkeletonProps) => {
+}: TeamGridSkeletonProps) => {
   return (
     <Section className="flex flex-col">
       <SectionTitle {...sectionTitle} />

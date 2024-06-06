@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 import { ComponentConfig } from "@measured/puck";
 
@@ -15,6 +8,7 @@ export type InfoCardProps = {
 };
 
 export const InfoCard: ComponentConfig<InfoCardProps> = {
+  label: "Info Card",
   fields: {
     title: {
       type: "text",

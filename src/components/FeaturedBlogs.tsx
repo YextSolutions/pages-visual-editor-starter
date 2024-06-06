@@ -20,6 +20,7 @@ export type FeaturedBlogsProps = {
 };
 
 export const FeaturedBlogs: ComponentConfig<FeaturedBlogsProps> = {
+  label: "Featured Blogs",
   fields: {
     sectionTitle: {
       type: "object",

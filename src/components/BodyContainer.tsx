@@ -9,6 +9,7 @@ export type BodyContainerProps = {
 };
 
 export const BodyContainer: ComponentConfig<BodyContainerProps> = {
+  label: "Body Container",
   fields: {
     additionalSpacing: {
       type: "radio",

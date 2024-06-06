@@ -143,7 +143,6 @@ export const Editor = ({
       JSON.stringify(data)
     );
   };
-
   return (
     <Puck
       config={puckConfig}

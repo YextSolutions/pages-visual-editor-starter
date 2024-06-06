@@ -31,6 +31,7 @@ const formSchema = z.object({
 export type ContactFormProps = {};
 
 export const ContactForm: ComponentConfig<ContactFormProps> = {
+  label: "Contact Form",
   fields: {},
   defaultProps: {},
   render: () => {
