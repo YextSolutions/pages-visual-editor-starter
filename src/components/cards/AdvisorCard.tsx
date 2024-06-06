@@ -3,21 +3,24 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { ChevronUp, CircleUserRound } from "lucide-react";
 import { Phone, Mail } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
+import { Image } from "@yext/pages-components";
 
 interface AdvisorCardProps {
   advisor: LinkedFinancialProfessional;
 }
 
 export const AdvisorCard = ({ advisor }: AdvisorCardProps) => {
+  const headshot = advisor?.photoGallery?.[0];
   return (
     <Card className="h-full gap-y-4 rounded-lg border border-zinc-200">
       <CardHeader className="flex flex-row gap-x-6 border-b border-zinc-200">
-        {advisor?.c_headshot ? (
-          <img
-            className="w-24 h-24 rounded-full"
-            src={"https://via.placeholder.com/150"}
-            alt={advisor.name}
-          />
+        {headshot ? (
+          <div className="rounded-full w-24 h-24">
+            <Image
+              image={headshot}
+              className="rounded-full object-cover h-full w-full"
+            />
+          </div>
         ) : (
           <CircleUserRound className="stroke-gray-300 h-20 w-20" />
         )}

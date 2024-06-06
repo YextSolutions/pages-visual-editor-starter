@@ -290,7 +290,7 @@ export interface LinkedFinancialProfessional {
   id: string;
   name: string;
   c_role?: string;
-  c_headshot?: ComplexImage;
+  photoGallery?: ComplexImage[];
   emails?: string[];
   mainPhone?: string;
 }
