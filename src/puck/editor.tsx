@@ -163,9 +163,6 @@ export const Editor = ({
             customHeader({
               actions: actions,
             }),
-          preview: ({ children }) => (
-            <div className="font-lato-container h-full">{children}</div>
-          ),
         }}
       />
     </div>

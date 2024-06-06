@@ -63,7 +63,7 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        lato: ["Lato", "sans-serif"],
+        sans: ["Lato", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

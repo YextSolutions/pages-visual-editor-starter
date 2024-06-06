@@ -72,6 +72,8 @@ export const Hero: ComponentConfig<HeroProps> = {
       (document) => document.c_hero
     );
 
+    console.log(hero);
+
     const containerClasses = cn(
       "relative bg-blue-950 opacity-90 py-28 flex h-[465px]",
       imageMode === "background"
