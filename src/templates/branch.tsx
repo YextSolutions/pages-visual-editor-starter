@@ -28,6 +28,7 @@ export const config: TemplateConfig = {
       "c_pages_layouts.c_visualConfiguration",
       "c_hero",
       "c_advisorBio",
+      "c_locationCore",
       "c_servicesOffered.servicesOptions.id",
       "c_servicesOffered.servicesOptions.name",
       "c_servicesOffered.servicesOptions.c_description",
