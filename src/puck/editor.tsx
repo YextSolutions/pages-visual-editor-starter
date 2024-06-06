@@ -144,25 +144,30 @@ export const Editor = ({
     );
   };
   return (
-    <Puck
-      config={puckConfig}
-      data={JSON.parse(puckData)}
-      onPublish={(data: Data) => save(data, role)}
-      onChange={change}
-      overrides={{
-        headerActions: ({ children }) =>
-          customHeaderActions(
-            children,
-            selectedTemplate.id,
-            layoutId,
-            entityId,
-            role
+    <div className="font-lato">
+      <Puck
+        config={puckConfig}
+        data={JSON.parse(puckData)}
+        onPublish={(data: Data) => save(data, role)}
+        onChange={change}
+        overrides={{
+          headerActions: ({ children }) =>
+            customHeaderActions(
+              children,
+              selectedTemplate.id,
+              layoutId,
+              entityId,
+              role
+            ),
+          header: ({ actions }) =>
+            customHeader({
+              actions: actions,
+            }),
+          preview: ({ children }) => (
+            <div className="font-lato-container h-full">{children}</div>
           ),
-        header: ({ actions }) =>
-          customHeader({
-            actions: actions,
-          }),
-      }}
-    />
+        }}
+      />
+    </div>
   );
 };

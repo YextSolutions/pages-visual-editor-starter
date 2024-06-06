@@ -4,6 +4,8 @@ import { FaPhone, FaEnvelope } from "react-icons/fa";
 import { BranchStream, C_locationCore } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
 import { ComponentConfig } from "@measured/puck";
+import { Section } from "./Section";
+import { SectionTitle } from "./ui/sectionTitle";
 
 const Core = () => {
   const profile = useDocument<BranchStream>(
@@ -29,17 +31,21 @@ const CoreHeading = (props: { children: ReactNode }) => {
 
 const CoreLayout = (props: CoreLayoutProps) => {
   const { profile } = props;
+  const address = profile.address?.address;
+
+  console.log(profile);
 
   return (
-    <div className="core container">
+    <Section className="flex flex-col gap-y-8 md:grid md:grid-cols-3">
       <CoreSection>
-        <CoreHeading>Information</CoreHeading>
-        <Address address={profile.address as AddressType} />
-        {profile.mainPhone && (
-          <div className="phone-section">
-            <FaPhone className="icon" />
+        <SectionTitle title="Information" size="md" />
+        {address && <Address className="text-blue-950" address={address} />}
+
+        {profile.phone && (
+          <div className="flex gap-x-2 pt-4 items-center">
+            <FaPhone className="icon text-blue-950" />
             <span className="phone">Phone</span>
-            <span>{profile.mainPhone}</span>
+            <span>{profile.phone}</span>
           </div>
         )}
         {profile.tollfreePhone && (
@@ -62,15 +68,19 @@ const CoreLayout = (props: CoreLayoutProps) => {
       </CoreSection>
       {profile.hours && (
         <CoreSection>
-          <CoreHeading>Hours</CoreHeading>
+          <SectionTitle title="Hours" size="md" />
           {profile.hours && (
-            <HoursTable hours={profile.hours} startOfWeek="Monday" />
+            <HoursTable
+              className="text-blue-950"
+              hours={profile.hours}
+              startOfWeek="Monday"
+            />
           )}
         </CoreSection>
       )}
       {profile.services && (
         <CoreSection>
-          <CoreHeading>Services</CoreHeading>
+          <SectionTitle title="Services" size="md" />
           <ul className="list-inside">
             {profile.services.map((service) => (
               <li className="mb-2" key={service}>
@@ -80,7 +90,7 @@ const CoreLayout = (props: CoreLayoutProps) => {
           </ul>
         </CoreSection>
       )}
-    </div>
+    </Section>
   );
 };
 

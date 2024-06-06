@@ -362,7 +362,7 @@ export interface AssociatedLocations {
 }
 
 export interface C_locationCore {
-  address?: Address;
+  address?: { address: Address };
   hours?: HoursType;
   mainPhone?: string;
   tollfreePhone?: string;

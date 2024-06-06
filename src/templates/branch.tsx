@@ -113,7 +113,9 @@ const Branch: Template<TemplateRenderProps> = ({ document }) => {
   console.log(document);
   return (
     <DocumentProvider value={document}>
-      <Render config={branchConfig as Config} data={visualTemplate} />
+      <div className="font-lato-container">
+        <Render config={branchConfig as Config} data={visualTemplate} />
+      </div>
     </DocumentProvider>
   );
 };

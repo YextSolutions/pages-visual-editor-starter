@@ -1,4 +1,3 @@
-import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
@@ -64,7 +63,7 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["Lato", ...fontFamily.sans],
+        lato: ["Lato", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
