@@ -39,6 +39,7 @@ export const config: TemplateConfig = {
       "c_contentGrid.financialProfessionals.emails",
       "c_contentGrid.financialProfessionals.c_role",
       "c_contentGrid.financialProfessionals.photoGallery",
+      "c_events.events.id",
       "c_events.events.name",
       "c_events.events.time",
       "c_events.events.c_description",
