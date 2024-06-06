@@ -113,12 +113,10 @@ const FinancialProfessional: Template<TemplateRenderProps> = ({ document }) => {
   console.log(document);
   return (
     <DocumentProvider value={document}>
-      <div className="font-lato-container">
-        <Render
-          config={financialProfessionalConfig as Config}
-          data={visualTemplate}
-        />
-      </div>
+      <Render
+        config={financialProfessionalConfig as Config}
+        data={visualTemplate}
+      />
     </DocumentProvider>
   );
 };
