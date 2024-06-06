@@ -83,6 +83,8 @@ export const BodyContainer: ComponentConfig<BodyContainerProps> = {
                 "Locator",
                 "Columns",
                 "Services",
+                "FeaturedEvents",
+                "NearbyLocations",
               ]}
             />
           </div>

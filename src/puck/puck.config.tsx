@@ -15,6 +15,10 @@ import {
   FeaturedEventsProps,
   FeaturedEvents,
 } from "../components/FeaturedEvents";
+import {
+  NearbyLocations,
+  NearbyLocationsProps,
+} from "../components/NearbyLocations";
 
 type BranchProps = {
   Hero: HeroProps;
@@ -29,6 +33,7 @@ type BranchProps = {
   Services: ServicesProps;
   Divider: DividerProps;
   FeaturedEvents: FeaturedEventsProps;
+  NearbyLocations: NearbyLocationsProps;
 };
 
 // type ProductProps = {
@@ -66,6 +71,7 @@ export const branchConfig: Config<BranchProps> = {
     Services,
     Divider,
     FeaturedEvents,
+    NearbyLocations,
   },
   categories: {
     layouts: {
@@ -79,6 +85,7 @@ export const branchConfig: Config<BranchProps> = {
         "FeaturedBlogs",
         "Services",
         "FeaturedEvents",
+        "NearbyLocations",
       ],
     },
     forms: {
@@ -109,7 +116,7 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   components: {
     Hero,
     Bio,
-    TeamGrid: TeamGrid,
+    TeamGrid,
     FeaturedBlogs,
     Locator,
     BodyContainer,

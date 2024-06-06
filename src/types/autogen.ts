@@ -1,3 +1,5 @@
+import { HoursType } from "@yext/pages-components";
+
 export interface SiteStream {
   c_locationVisualConfiguration: string;
   c_productVisualConfiguration: string;
@@ -345,4 +347,19 @@ export interface FinancialProfessionalStream {
   c_insights: FeaturedBlogs[];
   c_locator: C_locator;
   c_events: Events;
+}
+
+export interface AssociatedLocation {
+  id: string;
+  name: string;
+  hours?: HoursType;
+  address?: Address;
+}
+
+export interface AssociatedLocations {
+  title?: string;
+  associatedLocations?: AssociatedLocation[];
+}
+export interface BranchStream {
+  c_associatedLocations: AssociatedLocations;
 }

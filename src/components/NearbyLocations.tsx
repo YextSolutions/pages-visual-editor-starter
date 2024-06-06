@@ -1,6 +1,6 @@
 import { ComponentConfig } from "@measured/puck";
 import { useDocument } from "../hooks/useDocument";
-import { FinancialProfessionalStream, LinkedEvent } from "../types/autogen";
+import { AssociatedLocation, BranchStream } from "../types/autogen";
 
 import { Section } from "./Section";
 import {
@@ -10,19 +10,19 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "./ui/carousel";
-import { EventCard } from "./cards/EventCard";
 import { backgroundColors } from "../puck/theme";
 import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
 import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
+import { LocationCard } from "./cards/LocationCard";
 
-export type FeaturedEventsProps = {
+export type NearbyLocationsProps = {
   backgroundColor: string;
   sectionTitle?: SectionTitleProps;
 };
 
-export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
-  label: "Featured Events",
+export const NearbyLocations: ComponentConfig<NearbyLocationsProps> = {
+  label: "Nearby Locations",
   fields: {
     backgroundColor: {
       label: "Background Color",
@@ -62,13 +62,15 @@ export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
   },
   render: ({ backgroundColor, sectionTitle }) => {
     // TODO: ask team about types
-    const events: LinkedEvent[] = useDocument<FinancialProfessionalStream>(
-      (document) => document.c_events.events
+    const locations: AssociatedLocation[] = useDocument<BranchStream>(
+      (document) => document.c_associatedLocations?.associatedLocations
     );
+
+    console.log(locations);
 
     const isEditor = useEnvironment();
 
-    if (!events) {
+    if (!locations) {
       if (isEditor) {
         return (
           <EventsSkeleton
@@ -83,21 +85,14 @@ export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
 
     return (
       <Section className={backgroundColor}>
-        <SectionTitle {...sectionTitle} />
-        <Carousel>
-          <CarouselContent>
-            {events.map((event) => (
-              <CarouselItem
-                key={event.id}
-                className="basis-3/ md:basis-1/2 lg:basis-1/3"
-              >
-                <EventCard event={event} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        <div className="mb-8">
+          <SectionTitle {...sectionTitle} />
+        </div>
+        <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          {locations.map((location) => (
+            <LocationCard key={location.id} location={location} />
+          ))}
+        </div>
       </Section>
     );
   },
