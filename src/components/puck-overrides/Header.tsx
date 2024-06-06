@@ -12,12 +12,7 @@ const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
 };
 
-const handleClearLocalChanges = () => {
-  window.localStorage.clear();
-  window.location.reload();
-};
-
-export const customHeaderActions = (children: any, templateId: string, layoutId: string, entityId: string, role: string) => {
+export const customHeaderActions = (children: any, templateId: string, layoutId: string, entityId: string, role: string, handleClearLocalChanges : Function) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, historyStore },
