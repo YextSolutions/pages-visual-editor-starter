@@ -45,6 +45,10 @@ export const config: TemplateConfig = {
       "c_insights.blogs.landingPageUrl",
       "c_insights.blogs.photoGallery",
       "c_locator",
+      "c_associatedLocations.associatedLocations.id",
+      "c_associatedLocations.associatedLocations.name",
+      "c_associatedLocations.associatedLocations.hours",
+      "c_associatedLocations.associatedLocations.address",
     ],
     localization: {
       locales: ["en"],
