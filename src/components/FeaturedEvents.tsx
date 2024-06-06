@@ -20,25 +20,13 @@ import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
 import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
 
-export type ContentCarouselProps = {
-  content: "services" | "events";
+export type FeaturedEventsProps = {
   backgroundColor: string;
-  // sectionTitle: string;
   sectionTitle?: SectionTitleProps;
 };
 
-const contentOptions = [
-  { label: "Services", value: "services" },
-  { label: "Events", value: "events" },
-];
-
-export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
+export const FeaturedEvents: ComponentConfig<FeaturedEventsProps> = {
   fields: {
-    content: {
-      label: "Content",
-      type: "select",
-      options: contentOptions,
-    },
     backgroundColor: {
       label: "Background Color",
       type: "select",
@@ -68,7 +56,6 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
     },
   },
   defaultProps: {
-    content: "services",
     backgroundColor: "bg-white",
     sectionTitle: {
       title: "Section",
@@ -76,19 +63,16 @@ export const ContentCarousel: ComponentConfig<ContentCarouselProps> = {
       size: "md",
     },
   },
-  render: ({ content, backgroundColor, sectionTitle }) => {
+  render: ({ backgroundColor, sectionTitle }) => {
     // TODO: ask team about types
-    const contentCarousel: ContentCarouselType =
-      useDocument<FinancialProfessionalStream>(
-        (document) => document.c_contentCarousel
-      );
+    const events: ContentCarouselType =
+      useDocument<FinancialProfessionalStream>((document) => document.c_events);
 
-    const services = contentCarousel?.services || [];
-    const events = contentCarousel?.events || [];
+    const events = events?.events || [];
 
     const isEditor = useEnvironment();
 
-    if (!contentCarousel) {
+    if (!events) {
       if (isEditor) {
         return (
           <ContentCarouselSkeleton

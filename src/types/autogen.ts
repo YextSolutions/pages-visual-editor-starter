@@ -273,9 +273,17 @@ export interface LinkedService {
   c_iconName?: string;
 }
 
+export interface EventTime {
+  start?: string;
+  end?: string;
+}
+
 export interface LinkedEvent {
   id: string;
   name: string;
+  time?: EventTime;
+  c_description?: string;
+  c_coverPhoto?: ComplexImage;
 }
 
 export interface LinkedFinancialProfessional {
@@ -296,9 +304,8 @@ export interface LinkedBlog {
   photoGallery?: ComplexImage[];
 }
 
-export interface ContentCarousel {
+export interface Events {
   title?: string;
-  services?: LinkedService[];
   events?: LinkedEvent[];
 }
 
@@ -337,4 +344,5 @@ export interface FinancialProfessionalStream {
   c_contentGrid: ContentGrid;
   c_insights: FeaturedBlogs[];
   c_locator: C_locator;
+  c_events: Events;
 }
