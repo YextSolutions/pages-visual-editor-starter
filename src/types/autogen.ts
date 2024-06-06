@@ -360,6 +360,17 @@ export interface AssociatedLocations {
   title?: string;
   associatedLocations?: AssociatedLocation[];
 }
+
+export interface C_locationCore {
+  address?: Address;
+  hours?: HoursType;
+  mainPhone?: string;
+  tollfreePhone?: string;
+  emails?: string[];
+  services?: string[];
+}
+
 export interface BranchStream {
   c_associatedLocations: AssociatedLocations;
+  c_locationCore: C_locationCore;
 }

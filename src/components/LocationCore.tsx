@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { Link, Address, AddressType, HoursTable } from "@yext/pages-components";
 import { FaPhone, FaEnvelope } from "react-icons/fa";
-import { C_locationCore, LocationStream } from "../types/autogen";
+import { BranchStream, C_locationCore } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
 import { ComponentConfig } from "@measured/puck";
 
 const Core = () => {
-  const profile = useDocument<LocationStream>(
+  const profile = useDocument<BranchStream>(
     (document) => document.c_locationCore
   );
 
@@ -84,7 +84,10 @@ const CoreLayout = (props: CoreLayoutProps) => {
   );
 };
 
+export interface LocationCoreProps {}
+
 export const LocationCore: ComponentConfig = {
+  label: "Branch Information",
   fields: {},
   render: () => <Core />,
 };

@@ -19,6 +19,7 @@ import {
   NearbyLocations,
   NearbyLocationsProps,
 } from "../components/NearbyLocations";
+import { LocationCoreProps, LocationCore } from "../components/LocationCore";
 
 type BranchProps = {
   Hero: HeroProps;
@@ -34,6 +35,7 @@ type BranchProps = {
   Divider: DividerProps;
   FeaturedEvents: FeaturedEventsProps;
   NearbyLocations: NearbyLocationsProps;
+  LocationCore: LocationCoreProps;
 };
 
 // type ProductProps = {
@@ -72,6 +74,7 @@ export const branchConfig: Config<BranchProps> = {
     Divider,
     FeaturedEvents,
     NearbyLocations,
+    LocationCore,
   },
   categories: {
     layouts: {
@@ -86,6 +89,7 @@ export const branchConfig: Config<BranchProps> = {
         "Services",
         "FeaturedEvents",
         "NearbyLocations",
+        "LocationCore",
       ],
     },
     forms: {
