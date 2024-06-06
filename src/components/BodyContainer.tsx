@@ -86,6 +86,7 @@ export const BodyContainer: ComponentConfig<BodyContainerProps> = {
                 "FeaturedEvents",
                 "NearbyLocations",
                 "LocationCore",
+                "TeamGrid",
               ]}
             />
           </div>
