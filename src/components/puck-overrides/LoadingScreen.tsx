@@ -7,11 +7,8 @@ export interface LoadingScreenProps {
 
 export function LoadingScreen({ message, progress }: LoadingScreenProps) {
   return (
-    <div className="loading-screen">
-      <Progress
-        className="progress"
-        value={progress}
-      ></Progress>
+    <div className="flex justify-center items-center flex-col h-full w-full">
+      <Progress className="progress" value={progress}></Progress>
       <div>{message}</div>
     </div>
   );
