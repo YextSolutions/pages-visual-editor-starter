@@ -1,6 +1,6 @@
 import { Image, ImageType, Link, CTA } from "@yext/pages-components";
 import { MaybeLink } from "./MaybeLink";
-import "./index.css";
+import "./components.css";
 
 const navigation: CTA[] = [
   { link: "/", label: "Home" },
