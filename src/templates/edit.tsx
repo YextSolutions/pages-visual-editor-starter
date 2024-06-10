@@ -57,16 +57,33 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [localStorage, setLocaleStorage] = useState<string>("");
   const [role, setRole] = useState<string>('');
 
-  useEffect(() => {
-    setMounted(true);
-    listenForParentMessages();
-  }, []);
+  const postParentMessage = (message : any) => {
+    window.parent.postMessage(message, "*");
+  };
 
   useEffect(() => {
-    setTimeout(() => {  // want to make sure to send ack first
-      postParentMessage({entityId: entity?.externalId ?? ''});
-    }, 2000);
-  }, [entity])
+    const handleParentMessage = (message: MessageEvent) => {
+      if (message.source !== window.parent) {
+        return;
+      }
+      if(typeof message.data === 'object') {
+        setParams({...message.data, _role: message.data.role});
+        postParentMessage({ack: true});
+      }
+    };
+
+    const listenForParentMessages = () => {
+      window.addEventListener('message', handleParentMessage);
+    };
+
+    setMounted(true);
+    listenForParentMessages();
+    postParentMessage({entityId: entity?.externalId ?? ''});
+
+    return () => {
+      window.removeEventListener('message', handleParentMessage);
+    };
+  }, []);
 
   async function setParams({
     templateId,
@@ -138,32 +155,11 @@ const Edit: Template<TemplateRenderProps> = () => {
     );
   }
 
-  const handleParentMessage = (message: MessageEvent) => {
-    if (message.source !== window.parent) {
-      return;
-    }
-    if(typeof message.data === 'object') {
-      setParams({...message.data, _role: message.data.role});
-      postParentMessage({ack: true});
-    }
-    else{
-      console.log('Message from parent (VE): ' + message.data);
-    }
-  };
-
   const handleClearLocalChanges = () => {
     postParentMessage({clearLocalChanges: true});
     window.localStorage.clear();
     window.location.reload();
-  }
-
-  const listenForParentMessages = () => {
-    window.addEventListener('message', handleParentMessage);
-  }
-
-  const postParentMessage = (message : any) => {
-    window.parent.postMessage(message, "*");
-  }
+  };
 
   let puckData = GetPuckData(
     getPuckRole(role),
