@@ -45,6 +45,8 @@ const getPuckRole = (role: string): string => {
   return Role.GLOBAL;
 };
 
+const TARGET_ORIGINS = ["https://dev.yext.com", "https://www.yext.com", "https://qa.yext.com", "https://sandbox.yext.com", "https://app.eu.yext.com", "https://app-qa.eu.yext.com", "http://localhost"];
+
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
   const [templates, setTemplates] = useState<TemplateDefinition[]>();
@@ -58,17 +60,18 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [role, setRole] = useState<string>('');
 
   const postParentMessage = (message : any) => {
-    window.parent.postMessage(message, "*");
+    for (const targetOrigin of TARGET_ORIGINS){
+      window.parent.postMessage(message, targetOrigin);
+    }
   };
 
   useEffect(() => {
     const handleParentMessage = (message: MessageEvent) => {
-      if (message.source !== window.parent) {
+      if (!TARGET_ORIGINS.includes(message.origin)) { 
         return;
       }
       if(typeof message.data === 'object') {
         setParams({...message.data, _role: message.data.role});
-        postParentMessage({ack: true});
       }
     };
 
