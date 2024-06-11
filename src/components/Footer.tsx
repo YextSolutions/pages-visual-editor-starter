@@ -6,21 +6,26 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import logo from "../assets/logo-white.png"; // Adjust the path as needed
 
 const navigation: CTA[] = [
-  { link: "/", label: "Link 1" },
-  { link: "/", label: "Link 2" },
+  { link: "#", label: "Contact Us" },
+  { link: "#", label: "Restaurants" },
+  { link: "#", label: "Blog" },
+  { link: "#", label: "Support" },
+  { link: "#", label: "Careers" },
+  { link: "#", label: "FAQs" },
 ];
 
 const Footer = () => {
   return (
     <FooterLayout
-      copyrightMessage={"© 2024. All Rights Reserved."}
-      youtube="https://www.youtube.com/"
-      twitter="https://twitter.com/"
-      linkedIn="https://www.linkedin.com/"
-      facebook="https://www.facebook.com/"
-      instagram="https://www.instagram.com/"
+      copyrightMessage={"All Rights Reserved."}
+      youtube="#"
+      twitter="#"
+      linkedIn="#"
+      facebook="#"
+      instagram="#"
       footerLinks={navigation}
     />
   );
@@ -37,57 +42,71 @@ interface FooterLayoutProps {
 }
 
 const FooterLayout = (props: FooterLayoutProps) => {
-  const copyrightMessage = props.copyrightMessage;
+  const {
+    copyrightMessage,
+    youtube,
+    linkedIn,
+    twitter,
+    facebook,
+    instagram,
+    footerLinks,
+  } = props;
 
   const socialLinks = [
     {
       name: "facebook",
-      link: props.facebook,
-      label: <FaFacebook className="social-icon" />,
+      link: facebook,
+      label: <FaFacebook size="24" className="text-white" />,
     },
     {
       name: "instagram",
-      link: props.instagram,
-      label: <FaInstagram className="social-icon" />,
+      link: instagram,
+      label: <FaInstagram size="24" className="text-white" />,
     },
     {
       name: "youtube",
-      link: props.youtube,
-      label: <FaYoutube className="social-icon" />,
+      link: youtube,
+      label: <FaYoutube size="24" className="text-white" />,
     },
     {
       name: "linkedIn",
-      link: props.linkedIn,
-      label: <FaLinkedinIn className="social-icon" />,
+      link: linkedIn,
+      label: <FaLinkedinIn size="24" className="text-white" />,
     },
     {
       name: "twitter",
-      link: props.twitter,
-      label: <FaTwitter className="social-icon" />,
+      link: twitter,
+      label: <FaTwitter size="24" className="text-white" />,
     },
   ].filter((link) => link.link);
 
-  const footerLinks = props.footerLinks || [];
-
   return (
-    <footer className="footer container">
-      <div className="footer-top">
-        <div className="links">
+    <footer className="bg-[#1C1B1B] p-4 text-white">
+      <div className="mb-4 flex flex-col-reverse md:flex-row md:justify-between">
+        <div className="flex flex-col space-y-4 pt-4 md:grid md:grid-cols-2 md:grid-rows-4 md:gap-y-4 md:space-y-0 md:pt-0">
           {footerLinks.map((link, i) => (
-            <Link className="link" key={i} cta={link} eventName={`link${i}`} />
+            <Link
+              key={i}
+              cta={link}
+              className="font-bold hover:underline md:px-4"
+              eventName={`link${i}`}
+            />
           ))}
         </div>
-        <div className="social-links">
+        <div className="flex space-x-4 pb-4">
           {socialLinks.map((socialLink, i) =>
             socialLink.link ? (
-              <Link key={i} href={socialLink.link} eventName={socialLink.name}>
+              <a key={i} href={socialLink.link} className="hover:text-gray-300">
                 {socialLink.label}
-              </Link>
+              </a>
             ) : null
           )}
         </div>
       </div>
-      <div className="copyright-msg">{copyrightMessage}</div>
+      <div className="flex items-center space-x-6">
+        <img src={logo} height={47} width={40} />
+        <span className="text-center text-sm">{copyrightMessage}</span>
+      </div>
     </footer>
   );
 };

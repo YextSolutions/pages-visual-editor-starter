@@ -1,10 +1,9 @@
 import "./puck.css";
-import { useDocument } from "../../hooks/useDocument";
 import { usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
-import * as buttons from "../ui/Button";
 import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
+import { useDocument } from "../../hooks/useDocument";
 import { Button } from "./button";
 
 const handleClick = (slug: string) => {

@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "pages dev",
     "prod": "pages prod",
-    "build": "pages build"
+    "build": "pages build",
+    "fmt": "prettier -w ./src --plugin=prettier-plugin-tailwindcss"
   },
   "engines": {
     "node": "^18.4.0 || >=20.2.0"
@@ -16,6 +17,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.12",
     "@heroicons/react": "^2.0.14",
+    "@mantine/core": "^7.10.1",
+    "@mantine/hooks": "^7.10.1",
     "@measured/puck": "^0.14.1",
     "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
@@ -46,8 +49,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
     "postcss": "^8.4.32",
-    "prettier": "^3.2.5",
-    "tailwindcss": "^3.1.8",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "0.4.1",
+    "tailwindcss": "^3.3.0",
     "typescript": "^5.3.3",
     "vite": "^5.1.6"
   }
