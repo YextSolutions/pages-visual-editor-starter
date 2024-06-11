@@ -56,7 +56,6 @@ export const Hero: ComponentConfig<HeroProps> = {
           options: [
             { label: "Default", value: "default" },
             { label: "Primary", value: "primary" },
-            { label: "Secondary", value: "secondary" },
             { label: "Accent", value: "accent" },
           ],
         },
@@ -81,7 +80,6 @@ export const Hero: ComponentConfig<HeroProps> = {
           options: [
             { label: "Default", value: "default" },
             { label: "Primary", value: "primary" },
-            { label: "Secondary", value: "secondary" },
             { label: "Accent", value: "accent" },
           ],
         },
@@ -146,6 +144,8 @@ export const Hero: ComponentConfig<HeroProps> = {
     const hours = useDocument<LocationStream>((document) => document.hours);
 
     const { isMediumDevice } = useDeviceSizes();
+
+    console.log("name", name);
 
     return (
       <Section>
