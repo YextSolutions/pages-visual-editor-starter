@@ -45,7 +45,7 @@ const getPuckRole = (role: string): string => {
   return Role.GLOBAL;
 };
 
-const TARGET_ORIGINS = ["https://dev.yext.com", "https://www.yext.com", "https://qa.yext.com", "https://sandbox.yext.com", "https://app.eu.yext.com", "https://app-qa.eu.yext.com", "http://localhost"];
+const TARGET_ORIGINS = ["http://localhost", "https://dev.yext.com", "https://qa.yext.com", "https://sandbox.yext.com", "https://www.yext.com", "https://app-qa.eu.yext.com", "https://app.eu.yext.com"];
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
