@@ -43,6 +43,7 @@ export interface EditorProps {
   puckData: string;
   role: string;
   isLoading: boolean;
+  handleClearLocalChanges: Function;
 }
 
 export const siteEntityVisualConfigField = "c_visualLayouts",
@@ -60,6 +61,7 @@ export const Editor = ({
   puckData,
   role,
   isLoading,
+  handleClearLocalChanges
 }: EditorProps) => {
   const toastId = "toast";
   const mutation = useUpdateEntityMutation();
@@ -158,6 +160,7 @@ export const Editor = ({
             layoutId,
             entityId,
             role,
+            handleClearLocalChanges
           ),
         header: ({ actions }) =>
           customHeader({

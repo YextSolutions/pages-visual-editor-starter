@@ -9,7 +9,7 @@ import {
 import { Editor, EntityDefinition, TemplateDefinition } from "../puck/editor";
 import { DocumentProvider } from "../hooks/useDocument";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { fetchEntities, fetchTemplates } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
@@ -35,27 +35,17 @@ export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
 };
 
-const getUrlParam = (paramName: string): string => {
+const getPuckRole = (role: string): string => {
   if (typeof document !== "undefined") {
-    const params = new URL(document.location.toString()).searchParams;
-    const paramValue = params.get(paramName);
-    if (paramValue) {
-      return paramValue;
-    }
-  }
-  return "";
-};
-
-const getPuckRole = (): string => {
-  if (typeof document !== "undefined") {
-    const params = new URL(document.location.toString()).searchParams;
-    const roleValue = params.get("role");
+    const roleValue = role;
     if (roleValue === "individual") {
       return Role.INDIVIDUAL;
     }
   }
   return Role.GLOBAL;
 };
+
+const TARGET_ORIGINS = ["http://localhost", "https://dev.yext.com", "https://qa.yext.com", "https://sandbox.yext.com", "https://www.yext.com", "https://app-qa.eu.yext.com", "https://app.eu.yext.com"];
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
@@ -67,80 +57,115 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
   const [localStorage, setLocaleStorage] = useState<string>("");
+  const [role, setRole] = useState<string>('');
+
+  const postParentMessage = (message : any) => {
+    for (const targetOrigin of TARGET_ORIGINS){
+      window.parent.postMessage(message, targetOrigin);
+    }
+  };
 
   useEffect(() => {
-    async function getData() {
-      // get templates
-      const fetchedTemplates = await fetchTemplates();
-      let targetTemplate: TemplateDefinition = fetchedTemplates[0];
-      const urlTemplateId = getUrlParam("templateId");
-      if (urlTemplateId) {
-        let found = false;
-        fetchedTemplates.forEach((fetchedTemplate: TemplateDefinition) => {
-          if (fetchedTemplate.id === urlTemplateId) {
-            targetTemplate = fetchedTemplate;
-            found = true;
-          }
-        });
-        if (!found) {
-          toast.error(`Could not find template with id '${urlTemplateId}'`);
-        }
+    const handleParentMessage = (message: MessageEvent) => {
+      if (!TARGET_ORIGINS.includes(message.origin)) { 
+        return;
       }
-      let targetLayoutId = getUrlParam("layoutId");
-      if (!targetLayoutId) {
-        const fetchedLayouts = await fetchEntities([layoutEntityType]);
-        targetLayoutId = fetchedLayouts[0].externalId;
+      if(typeof message.data === 'object') {
+        setParams({...message.data, _role: message.data.role});
       }
-      setLayoutId(targetLayoutId);
-      setTemplates(fetchedTemplates);
-      setTemplate(targetTemplate);
-      // get entities
-      const fetchedEntities = await fetchEntities(targetTemplate.entityTypes);
-      let targetEntity: EntityDefinition = fetchedEntities[0];
-      const urlEntityId = getUrlParam("entityId");
-      if (urlEntityId) {
-        let found = false;
-        fetchedEntities.forEach((fetchedEntity: EntityDefinition) => {
-          if (fetchedEntity.externalId === urlEntityId) {
-            targetEntity = fetchedEntity;
-            found = true;
-          }
-        });
-        if (!found) {
-          toast.error(
-            `Could not find entity with id '${urlEntityId}' belonging to template '${targetTemplate.id}'`,
-          );
-        }
-      }
-      setEntities(fetchedEntities);
-      setEntity(targetEntity);
-      // get puckConfig from hardcoded map
-      const puckConfig = puckConfigs.get(targetTemplate.id);
-      setLocaleStorage(
-        typeof window !== "undefined"
-          ? window.localStorage.getItem(
-              getLocalStorageKey(
-                getPuckRole(),
-                targetTemplate.id,
-                targetLayoutId,
-                targetEntity.externalId,
-              ),
-            ) ?? ""
-          : "",
-      );
-      setPuckConfig(puckConfig);
-      window.history.replaceState(
-        null,
-        "",
-        `edit?templateId=${targetTemplate.id}&layoutId=${targetLayoutId}&entityId=${targetEntity.externalId}&role=${getPuckRole()}`,
-      );
-    }
+    };
+
+    const listenForParentMessages = () => {
+      window.addEventListener('message', handleParentMessage);
+    };
+
     setMounted(true);
-    getData();
+    listenForParentMessages();
+    postParentMessage({entityId: entity?.externalId ?? ''});
+
+    return () => {
+      window.removeEventListener('message', handleParentMessage);
+    };
   }, []);
 
+  async function setParams({
+    templateId,
+    layoutId,
+    entityId,
+    _role}) {
+    // get templates
+    const fetchedTemplates = await fetchTemplates();
+    let targetTemplate: TemplateDefinition = fetchedTemplates[0];
+    if (templateId) {
+      let found = false;
+      fetchedTemplates.forEach((fetchedTemplate: TemplateDefinition) => {
+        if (fetchedTemplate.id === templateId) {
+          targetTemplate = fetchedTemplate;
+          found = true;
+        }
+      });
+      if (!found) {
+        toast.error(`Could not find template with id '${templateId}'`);
+      }
+    }
+    if (!layoutId) {
+      const fetchedLayouts = await fetchEntities([layoutEntityType]);
+      layoutId = fetchedLayouts[0].externalId;
+    }
+    setLayoutId(layoutId);
+    setTemplates(fetchedTemplates);
+    setTemplate(targetTemplate);
+    // get entities
+    const fetchedEntities = await fetchEntities(targetTemplate.entityTypes);
+    let targetEntity: EntityDefinition = fetchedEntities[0];
+    if (entityId) {
+      let found = false;
+      fetchedEntities.forEach((fetchedEntity: EntityDefinition) => {
+        if (fetchedEntity.externalId === entityId) {
+          targetEntity = fetchedEntity;
+          found = true;
+        }
+      });
+      if (!found) {
+        toast.error(
+          `Could not find entity with id '${entityId}' belonging to template '${targetTemplate.id}'`,
+        );
+      }
+    }
+    setEntities(fetchedEntities);
+    setEntity(targetEntity);
+    // set local state
+    setRole(_role);
+    // get puckConfig from hardcoded map
+    const puckConfig = puckConfigs.get(targetTemplate.id);
+    setLocaleStorage(
+      typeof window !== "undefined"
+        ? window.localStorage.getItem(
+          getLocalStorageKey(
+            getPuckRole(role),
+            targetTemplate.id,
+            layoutId,
+            targetEntity.externalId,
+          ),
+        ) ?? ""
+        : "",
+    );
+    setPuckConfig(puckConfig);
+    window.history.replaceState(
+      null,
+      "",
+      `edit?templateId=${targetTemplate.id}&layoutId=${layoutId}&entityId=${targetEntity.externalId}&role=${getPuckRole(role)}`,
+    );
+  }
+
+  const handleClearLocalChanges = () => {
+    postParentMessage({clearLocalChanges: true});
+    window.localStorage.clear();
+    window.location.reload();
+  };
+
   let puckData = GetPuckData(
-    getPuckRole(),
+    getPuckRole(role),
     siteEntityId,
     template?.id ?? "",
     layoutId,
@@ -199,8 +224,9 @@ const Edit: Template<TemplateRenderProps> = () => {
               entityId={entity?.externalId ?? ""}
               puckConfig={puckConfig}
               puckData={puckData}
-              role={getPuckRole()}
+              role={getPuckRole(role)}
               isLoading={isLoading}
+              handleClearLocalChanges={handleClearLocalChanges}
             />
           </>
         ) : (
