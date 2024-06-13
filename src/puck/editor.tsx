@@ -44,6 +44,9 @@ export interface EditorProps {
   role: string;
   isLoading: boolean;
   handleClearLocalChanges: Function;
+  postParentMessage: Function;
+  internalLayoutId: number;
+  internalEntityId: number;
 }
 
 export const siteEntityVisualConfigField = "c_visualLayouts",
@@ -56,12 +59,15 @@ export const siteEntityVisualConfigField = "c_visualLayouts",
 export const Editor = ({
   selectedTemplate,
   layoutId,
+  internalLayoutId,
   entityId,
+  internalEntityId,
   puckConfig,
   puckData,
   role,
   isLoading,
-  handleClearLocalChanges
+  handleClearLocalChanges,
+  postParentMessage,
 }: EditorProps) => {
   const toastId = "toast";
   const mutation = useUpdateEntityMutation();
@@ -144,6 +150,14 @@ export const Editor = ({
       getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
       JSON.stringify(data),
     );
+
+    postParentMessage({ 
+      localChange: true,
+      hash: getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+      history: JSON.stringify(data),
+      layoutId: internalLayoutId,
+      entityId: internalEntityId,
+    });
   };
 
   return (
