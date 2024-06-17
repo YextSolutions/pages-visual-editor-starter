@@ -8,7 +8,7 @@ import {
 import { toast } from "sonner";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 
 export type EntityDefinition = {
@@ -44,6 +44,9 @@ export interface EditorProps {
   role: string;
   isLoading: boolean;
   handleClearLocalChanges: Function;
+  postParentMessage: Function;
+  internalLayoutId: number;
+  internalEntityId: number;
 }
 
 export const siteEntityVisualConfigField = "c_visualLayouts",
@@ -56,16 +59,33 @@ export const siteEntityVisualConfigField = "c_visualLayouts",
 export const Editor = ({
   selectedTemplate,
   layoutId,
+  internalLayoutId,
   entityId,
+  internalEntityId,
   puckConfig,
   puckData,
   role,
   isLoading,
-  handleClearLocalChanges
+  handleClearLocalChanges,
+  postParentMessage,
 }: EditorProps) => {
   const toastId = "toast";
   const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
+  const historyIndex = useRef<number>(-1);
+
+  const handleHistoryChange = useCallback((history: any) => {
+    if (history.index !== -1 && historyIndex.current !== history.index) {
+      historyIndex.current = history.index;
+      postParentMessage({ 
+        localChange: true,
+        hash: history.currentHistory.id,
+        history: JSON.stringify(history.currentHistory.data),
+        layoutId: internalLayoutId,
+        entityId: internalEntityId,
+      });
+    }
+  }, [internalEntityId, internalLayoutId, postParentMessage]);
 
   useEffect(() => {
     if (mutation.isPending) {
@@ -160,7 +180,8 @@ export const Editor = ({
             layoutId,
             entityId,
             role,
-            handleClearLocalChanges
+            handleClearLocalChanges,
+            handleHistoryChange,
           ),
         header: ({ actions }) =>
           customHeader({

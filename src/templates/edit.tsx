@@ -54,6 +54,7 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [entities, setEntities] = useState<EntityDefinition[]>();
   const [entity, setEntity] = useState<EntityDefinition>();
   const [layoutId, setLayoutId] = useState<string>("");
+  const [internalLayoutId, setInternalLayoutId] = useState<number>();
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
   const [localStorage, setLocaleStorage] = useState<string>("");
@@ -108,10 +109,13 @@ const Edit: Template<TemplateRenderProps> = () => {
         toast.error(`Could not find template with id '${templateId}'`);
       }
     }
+    const fetchedLayouts = await fetchEntities([layoutEntityType]);
     if (!layoutId) {
-      const fetchedLayouts = await fetchEntities([layoutEntityType]);
       layoutId = fetchedLayouts[0].externalId;
     }
+    const targetLayout = fetchedLayouts.find((layout) => layout.externalId === layoutId);
+    const internalLayoutId = targetLayout?.internalId;
+    setInternalLayoutId(internalLayoutId);
     setLayoutId(layoutId);
     setTemplates(fetchedTemplates);
     setTemplate(targetTemplate);
@@ -227,6 +231,9 @@ const Edit: Template<TemplateRenderProps> = () => {
               role={getPuckRole(role)}
               isLoading={isLoading}
               handleClearLocalChanges={handleClearLocalChanges}
+              postParentMessage={postParentMessage}
+              internalEntityId={entity?.internalId}
+              internalLayoutId={internalLayoutId}
             />
           </>
         ) : (

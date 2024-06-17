@@ -4,7 +4,7 @@ import { useDocument } from "../../hooks/useDocument";
 import { usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
 import * as buttons from "../ui/Button"
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 
 
@@ -12,13 +12,17 @@ const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
 };
 
-export const customHeaderActions = (children: any, templateId: string, layoutId: string, entityId: string, role: string, handleClearLocalChanges : Function) => {
+export const customHeaderActions = (children: any, templateId: string, layoutId: string, entityId: string, role: string, handleClearLocalChanges : Function, handleHistoryChange: (history: any) => void) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, historyStore },
   } = usePuck();
   const { hasFuture = false, hasPast = false } = historyStore || {};
   const hasLocalStorage = !!window.localStorage.getItem(getLocalStorageKey(role, templateId, layoutId, entityId));
+  useEffect(() => {
+      handleHistoryChange(historyStore);
+  }, [historyStore?.index]);
+
   return (
     <>
       {children}
