@@ -8,7 +8,7 @@ import {
 import { toast } from "sonner";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 
 export type EntityDefinition = {
@@ -72,6 +72,20 @@ export const Editor = ({
   const toastId = "toast";
   const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
+  const historyIndex = useRef<number>(-1);
+
+  const handleHistoryChange = useCallback((history: any) => {
+    if (history.index !== -1 && historyIndex.current !== history.index) {
+      historyIndex.current = history.index;
+      postParentMessage({ 
+        localChange: true,
+        hash: history.currentHistory.id,
+        history: JSON.stringify(history.currentHistory.data),
+        layoutId: internalLayoutId,
+        entityId: internalEntityId,
+      });
+    }
+  }, [internalEntityId, internalLayoutId, postParentMessage]);
 
   useEffect(() => {
     if (mutation.isPending) {
@@ -150,14 +164,6 @@ export const Editor = ({
       getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
       JSON.stringify(data),
     );
-
-    postParentMessage({ 
-      localChange: true,
-      hash: getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
-      history: JSON.stringify(data),
-      layoutId: internalLayoutId,
-      entityId: internalEntityId,
-    });
   };
 
   return (
@@ -174,7 +180,8 @@ export const Editor = ({
             layoutId,
             entityId,
             role,
-            handleClearLocalChanges
+            handleClearLocalChanges,
+            handleHistoryChange,
           ),
         header: ({ actions }) =>
           customHeader({
