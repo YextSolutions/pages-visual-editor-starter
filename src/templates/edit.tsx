@@ -162,12 +162,6 @@ const Edit: Template<TemplateRenderProps> = () => {
     );
   }
 
-  const handleClearLocalChanges = () => {
-    postParentMessage({clearLocalChanges: true});
-    window.localStorage.clear();
-    window.location.reload();
-  };
-
   let puckData = GetPuckData(
     getPuckRole(role),
     siteEntityId,
@@ -230,7 +224,6 @@ const Edit: Template<TemplateRenderProps> = () => {
               puckData={puckData}
               role={getPuckRole(role)}
               isLoading={isLoading}
-              handleClearLocalChanges={handleClearLocalChanges}
               postParentMessage={postParentMessage}
               internalEntityId={entity?.internalId}
               internalLayoutId={internalLayoutId}

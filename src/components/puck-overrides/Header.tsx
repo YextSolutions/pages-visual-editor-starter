@@ -4,6 +4,16 @@ import { useDocument } from "../../hooks/useDocument";
 import { usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
 import * as buttons from "../ui/Button"
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/AlertDialog"
 import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 
@@ -25,20 +35,37 @@ export const customHeaderActions = (children: any, templateId: string, layoutId:
 
   return (
     <>
-      {children}
-      <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
-        <RotateCcw className="sm-icon" />
-      </buttons.Button>
-      <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
-        <RotateCw className="sm-icon" />
-      </buttons.Button>
-      <Button disabled={!hasLocalStorage} onClick={() => handleClearLocalChanges()}>
-        Clear Local Changes
-      </Button>
-      <Button onClick={() => handleClick(entityDocument.slug)}>
-        Live Preview
-      </Button>
-    </>
+    {children}
+    <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
+      <RotateCcw className="sm-icon" />
+    </buttons.Button>
+    <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
+      <RotateCw className="sm-icon" />
+    </buttons.Button>
+    <AlertDialog>
+      <AlertDialogTrigger disabled={!hasLocalStorage} asChild>
+        <Button>Clear Local Changes</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action will remove your local changes. It cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <Button onClick={() => handleClearLocalChanges()}>
+            Confirm
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+    <Button onClick={() => handleClick(entityDocument.slug)}>
+      Live Preview
+    </Button>
+  </>
+
   );
 };
 
