@@ -71,6 +71,7 @@ export const Editor = ({
   const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
+  const [data, setData] = useState<Data>();
 
   const handleHistoryChange = useCallback((history: any) => {
     if (history.index !== -1 && historyIndex.current !== history.index) {
@@ -169,35 +170,36 @@ export const Editor = ({
       setCanEdit(true);
       return;
     }
-
+    setData(data);
     window.localStorage.setItem(
       getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
       JSON.stringify(data),
     );
   };
 
+  const handleSave = async (data : Data) => {
+    await save(data, role);
+  };
+
   return (
-    <Puck
-      config={puckConfig}
-      data={JSON.parse(puckData)}
-      onPublish={(data: Data) => save(data, role)}
-      onChange={change}
-      overrides={{
-        headerActions: ({ children }) =>
-          customHeaderActions(
-            children,
-            selectedTemplate.id,
-            layoutId,
-            entityId,
-            role,
-            handleClearLocalChanges,
-            handleHistoryChange,
-          ),
-        header: ({ actions }) =>
-          customHeader({
-            actions: actions,
-          }),
-      }}
-    />
+      <Puck
+          config={puckConfig}
+          data={JSON.parse(puckData)}
+          onChange={change}
+          overrides={{
+            header: () =>
+                customHeader(
+                    selectedTemplate.id,
+                    layoutId,
+                    entityId,
+                    role,
+                    handleClearLocalChanges,
+                    handleHistoryChange,
+                    data,
+                    handleSave
+                ),
+          }}
+      />
   );
 };
+
