@@ -1,7 +1,7 @@
 import "./puck.css";
 import { usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
-import * as buttons from "../ui/Button"
+import * as buttons from "./button"
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -44,28 +44,19 @@ export const customHeaderActions = (
 
   return (
     <>
-      {children}
-      <Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
-        <RotateCcw className="sm-icon" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        disabled={!hasFuture}
-        onClick={forward}
-      >
-        <RotateCw className="sm-icon" />
-      </Button>
-      <Button
-        disabled={!hasLocalStorage}
-        onClick={() => handleClearLocalChanges()}
-      >
-        Clear Local Changes
-      </Button>
-      <Button onClick={() => handleClick(entityDocument.slug)}>
-        Live Preview
-      </Button>
-    </>
+    {children}
+    <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
+      <RotateCcw className="sm-icon" />
+    </buttons.Button>
+    <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
+      <RotateCw className="sm-icon" />
+    </buttons.Button>
+    <ClearLocalChangesButton disabled={!hasLocalStorage} onClearLocalChanges={handleClearLocalChanges} />
+    <Button onClick={() => handleClick(entityDocument.slug)}>
+      Live Preview
+    </Button>
+  </>
+
   );
 };
 
