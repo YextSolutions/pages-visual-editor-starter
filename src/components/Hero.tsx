@@ -1,9 +1,30 @@
 import { ComponentConfig } from "@measured/puck";
-import { LocationStream } from "../types/autogen";
+import { C_hero, LocationStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
+import { Section } from "./ui/section";
+import { HoursStatus, Image } from "@yext/pages-components";
+import { Heading, HeadingProps } from "./ui/heading";
+import { CTA } from "./ui/cta";
+import { ButtonProps } from "./ui/button";
+import { cn } from "../utils/cn";
+import useDeviceSizes from "../hooks/useDeviceSizes";
 
 export type HeroProps = {
-  imageMode: "inline" | "inline-fancy" | "background";
+  imageMode: "left" | "right";
+  name: {
+    size: HeadingProps["size"];
+    color: HeadingProps["color"];
+  };
+  location: {
+    size: HeadingProps["size"];
+    color: HeadingProps["color"];
+  };
+  cta1: {
+    variant: ButtonProps["variant"];
+  };
+  cta2: {
+    variant: ButtonProps["variant"];
+  };
 };
 
 export const Hero: ComponentConfig<HeroProps> = {
@@ -12,82 +33,167 @@ export const Hero: ComponentConfig<HeroProps> = {
       label: "Image Mode",
       type: "radio",
       options: [
-        { label: "Inline", value: "inline" },
-        { label: "Inline Fancy", value: "inline-fancy" },
-        { label: "Background", value: "background" },
+        { label: "Left", value: "left" },
+        { label: "Right", value: "right" },
       ],
     },
+    name: {
+      type: "object",
+      label: "Location Name",
+      objectFields: {
+        size: {
+          label: "Size",
+          type: "radio",
+          options: [
+            { label: "Page", value: "page" },
+            { label: "Section", value: "section" },
+            { label: "Subheading", value: "subheading" },
+          ],
+        },
+        color: {
+          label: "Color",
+          type: "radio",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Primary", value: "primary" },
+            { label: "Accent", value: "accent" },
+          ],
+        },
+      },
+    },
+    location: {
+      type: "object",
+      label: "Location",
+      objectFields: {
+        size: {
+          label: "Size",
+          type: "radio",
+          options: [
+            { label: "Page", value: "page" },
+            { label: "Section", value: "section" },
+            { label: "Subheading", value: "subheading" },
+          ],
+        },
+        color: {
+          label: "Color",
+          type: "radio",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Primary", value: "primary" },
+            { label: "Accent", value: "accent" },
+          ],
+        },
+      },
+    },
+    cta1: {
+      type: "object",
+      label: "CTA 1",
+      objectFields: {
+        variant: {
+          label: "Variant",
+          type: "radio",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Outline", value: "outline" },
+            { label: "Link", value: "link" },
+          ],
+        },
+      },
+    },
+    cta2: {
+      type: "object",
+      label: "CTA 2",
+      objectFields: {
+        variant: {
+          label: "Variant",
+          type: "radio",
+          options: [
+            { label: "Default", value: "default" },
+            { label: "Outline", value: "outline" },
+            { label: "Link", value: "link" },
+          ],
+        },
+      },
+    },
   },
-  render: ({ imageMode }) => {
-    const hero = useDocument<LocationStream>((document) => document.c_hero);
-    const backgroundImageUrl = hero?.image.image.url;
+  defaultProps: {
+    imageMode: "left",
+    name: {
+      size: "section",
+      color: "default",
+    },
+    location: {
+      size: "section",
+      color: "default",
+    },
+    cta1: {
+      variant: "default",
+    },
+    cta2: {
+      variant: "default",
+    },
+  },
+  render: ({ imageMode, name, location, cta1, cta2 }) => {
+    const hero: C_hero = useDocument<LocationStream>(
+      (document) => document.c_hero
+    );
+    const address = useDocument<LocationStream>((document) => document.address);
+    const locationName = useDocument<LocationStream>(
+      (document) => document.name
+    );
+    const hours = useDocument<LocationStream>((document) => document.hours);
+
+    const { isMediumDevice } = useDeviceSizes();
+
+    console.log("name", name);
+
     return (
-      <div
-        className={`relative ${imageMode === "background" ? "bg-gray-900" : ""}`}
-      >
-        {hero?.image && imageMode === "background" && (
-          <>
-            <img
-              className="absolute inset-0 h-full w-full object-cover"
-              src={backgroundImageUrl}
-              alt=""
+      <Section>
+        <div
+          className={cn(
+            "flex flex-col gap-x-10 md:flex-row",
+            imageMode === "right" && "md:flex-row-reverse"
+          )}
+        >
+          {hero?.image ? (
+            <Image
+              className="rounded-[30px]"
+              image={hero.image}
+              layout="fixed"
+              width={isMediumDevice ? 723 : 343}
+              height={isMediumDevice ? 482 : 232}
             />
-            <div className="absolute inset-0 bg-gray-800 bg-opacity-70"></div>
-          </>
-        )}
-
-        <div className="mx-auto max-w-7xl">
-          <div
-            className={`relative z-10 pt-14 lg:w-full lg:max-w-2xl ${imageMode === "background" ? "text-white" : ""}`}
-          >
-            {imageMode === "inline-fancy" && (
-              <svg
-                className="absolute inset-y-0 right-8 hidden h-full w-80 translate-x-1/2 transform fill-white lg:block"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <polygon points="0,0 90,0 50,100 0,100" />
-              </svg>
-            )}
-
-            <div className="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
-              <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-                <img
-                  className="h-11"
-                  src="https://a.mktgcdn.com/p/7VJD1Cq6Hm_CVQM8ejzL5PKXZPechztCKS4gOKucv1Q/800x800.png?timestamp=1712936686883"
-                  alt="Your Company"
+          ) : (
+            <></>
+          )}
+          <div className="flex flex-col justify-center gap-y-3 pt-8">
+            <Heading level={2} size={name.size} color={name.color}>
+              {locationName}
+            </Heading>
+            <Heading level={1} size={location.size} color={location.color}>
+              {address.city}
+            </Heading>
+            {hours && <HoursStatus className="font-semibold" hours={hours} />}
+            <div className="flex">
+              {hero?.cta1 && (
+                <CTA
+                  className="mr-3"
+                  variant={cta1.variant}
+                  label={hero.cta1.name}
+                  url={hero.cta1.link ? hero.cta1.link : "#"}
                 />
-                <h1 className="text-4xl font-bold tracking-tight sm:mt-32 lg:mt-16 sm:text-6xl">
-                  {hero?.title ?? "Location Page"}
-                </h1>
-                <p className="mt-6 text-lg leading-8">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                  occaecat fugiat aliqua.
-                </p>
-                <div className="mt-10 flex items-center gap-x-6">
-                  <a
-                    href="#"
-                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Get Directions
-                  </a>
-                </div>
-              </div>
+              )}
+              {hero?.cta2 && (
+                <CTA
+                  variant={cta2.variant}
+                  label={hero.cta2.name}
+                  url={hero.cta2.link ? hero.cta2.link : "#"}
+                />
+              )}
             </div>
           </div>
         </div>
-        {hero?.image && imageMode !== "background" && (
-          <div className="bg-gray-50 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-            <img
-              className="aspect-[3/2] object-cover lg:aspect-auto lg:h-full lg:w-full"
-              src={backgroundImageUrl}
-              alt=""
-            />
-          </div>
-        )}
-      </div>
+      </Section>
     );
   },
 };

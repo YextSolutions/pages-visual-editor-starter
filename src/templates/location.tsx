@@ -24,14 +24,13 @@ export const config: TemplateConfig = {
       "id",
       "uid",
       "meta",
-      "name",
-      "address",
       "slug",
-      "c_hero",
-      "c_locationHero",
-      "c_locationCore",
       "c_visualConfigurations",
-      "c_pages_layouts.c_visualConfiguration"
+      "c_pages_layouts.c_visualConfiguration",
+      "name",
+      "hours",
+      "address",
+      "c_hero",
     ],
     localization: {
       locales: ["en"],
@@ -45,7 +44,12 @@ export const transformProps = async (data) => {
   const entityLayoutConfigurations = document.c_pages_layouts ?? [];
   const siteLayoutConfigurations = document._site?.c_visualLayouts;
   try {
-    const templateData = getTemplatePuckData(entityConfigurations, entityLayoutConfigurations, siteLayoutConfigurations, config.name);
+    const templateData = getTemplatePuckData(
+      entityConfigurations,
+      entityLayoutConfigurations,
+      siteLayoutConfigurations,
+      config.name
+    );
     const visualTemplate = JSON.parse(templateData);
     return {
       ...data,

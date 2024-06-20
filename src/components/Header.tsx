@@ -1,16 +1,11 @@
-import { Image, ImageType, Link, CTA } from "@yext/pages-components";
-import { MaybeLink } from "./MaybeLink";
-import "./index.css";
+import { ImageType, Link, CTA } from "@yext/pages-components";
+import logo from "../assets/logo.png";
 
 const navigation: CTA[] = [
-  { link: "/", label: "Home" },
-  { link: "/", label: "About" },
+  { link: "/", label: "Restaurants" },
+  { link: "/", label: "Blog" },
+  { link: "/", label: "Support" },
 ];
-const logo: ImageType = {
-  url: "https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc",
-  width: 10,
-  height: 10,
-};
 
 const Header = () => {
   return <HeaderLayout links={navigation} logo={logo} />;
@@ -23,37 +18,26 @@ type HeaderLayoutProps = {
 };
 
 const HeaderLayout = (props: HeaderLayoutProps) => {
-  const { logo, logoLink, links } = props;
+  const { logo } = props;
 
   return (
-    <header className="header container">
-      {logo && <HeaderLogo logo={logo} logoLink={logoLink} />}
-      <HeaderLinks links={links} />
-    </header>
-  );
-};
-
-const HeaderLogo = (props: { logo: ImageType; logoLink?: string }) => {
-  return (
-    <MaybeLink href={props.logoLink}>
-      <div className="header-logo">
-        <Image image={props.logo} layout="fill" />
+    <header className=" w-full bg-white">
+      <div className="mx-auto flex max-w-6xl flex-1 items-center justify-between px-4 py-6">
+        <img src={logo} height={47} width={40} layout="fill" />
+        <div className="flex items-center justify-end space-x-4">
+          <ul className="flex space-x-8">
+            {props.links.map((item: CTA, idx) => (
+              <li
+                key={item.label}
+                className="cursor-pointer font-bold text-[#D72E2E] hover:text-[#871900] "
+              >
+                <Link cta={item} eventName={`link${idx}`} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </MaybeLink>
-  );
-};
-
-const HeaderLinks = (props: { links: CTA[] }) => {
-  return (
-    <div className="header-links">
-      <ul className="link">
-        {props.links.map((item: CTA, idx) => (
-          <li key={item.label}>
-            <Link cta={item} eventName={`link${idx}`} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    </header>
   );
 };
 
