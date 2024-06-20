@@ -8,8 +8,7 @@
   "scripts": {
     "dev": "pages dev",
     "prod": "pages prod",
-    "build": "pages build",
-    "fmt": "prettier -w ./src --plugin=prettier-plugin-tailwindcss"
+    "build": "pages build"
   },
   "engines": {
     "node": "^18.4.0 || >=20.2.0"
