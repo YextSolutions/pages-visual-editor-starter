@@ -42,8 +42,27 @@ export const customHeaderActions = (children: any, templateId: string, layoutId:
     <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
       <RotateCw className="sm-icon" />
     </buttons.Button>
+    <ClearLocalChangesButton disabled={!hasLocalStorage} onClearLocalChanges={() => handleClearLocalChanges()} />
+    <Button onClick={() => handleClick(entityDocument.slug)}>
+      Live Preview
+    </Button>
+  </>
+
+  );
+};
+
+interface ClearLocalChangesButtonProps {
+  disabled: boolean
+  onClearLocalChanges: Function
+}
+
+const ClearLocalChangesButton = ({
+  disabled,
+  onClearLocalChanges
+}: ClearLocalChangesButtonProps) => {
+  return (
     <AlertDialog>
-      <AlertDialogTrigger disabled={!hasLocalStorage} asChild>
+      <AlertDialogTrigger disabled={disabled} asChild>
         <Button>Clear Local Changes</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -55,19 +74,14 @@ export const customHeaderActions = (children: any, templateId: string, layoutId:
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={() => handleClearLocalChanges()}>
+          <Button onClick={() => onClearLocalChanges()}>
             Confirm
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-    <Button onClick={() => handleClick(entityDocument.slug)}>
-      Live Preview
-    </Button>
-  </>
-
-  );
-};
+  )
+}
 
 export interface customHeaderProps {
   actions: any;
