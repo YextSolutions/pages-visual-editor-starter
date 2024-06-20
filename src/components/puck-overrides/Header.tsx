@@ -1,6 +1,17 @@
 import "./puck.css";
 import { usePuck } from "@measured/puck";
-import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
+import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
+import * as buttons from "./button"
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/AlertDialog"
 import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
@@ -33,30 +44,53 @@ export const customHeaderActions = (
 
   return (
     <>
-      {children}
-      <Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
-        <RotateCcw className="sm-icon" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        disabled={!hasFuture}
-        onClick={forward}
-      >
-        <RotateCw className="sm-icon" />
-      </Button>
-      <Button
-        disabled={!hasLocalStorage}
-        onClick={() => handleClearLocalChanges()}
-      >
-        Clear Local Changes
-      </Button>
-      <Button onClick={() => handleClick(entityDocument.slug)}>
-        Live Preview
-      </Button>
-    </>
+    {children}
+    <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
+      <RotateCcw className="sm-icon" />
+    </buttons.Button>
+    <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
+      <RotateCw className="sm-icon" />
+    </buttons.Button>
+    <ClearLocalChangesButton disabled={!hasLocalStorage} onClearLocalChanges={handleClearLocalChanges} />
+    <Button onClick={() => handleClick(entityDocument.slug)}>
+      Live Preview
+    </Button>
+  </>
+
   );
 };
+
+interface ClearLocalChangesButtonProps {
+  disabled: boolean
+  onClearLocalChanges: Function
+}
+
+const ClearLocalChangesButton = ({
+  disabled,
+  onClearLocalChanges
+}: ClearLocalChangesButtonProps) => {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger disabled={disabled} asChild>
+        <Button>Clear Local Changes</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action will remove your local changes. It cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <Button onClick={() => onClearLocalChanges()}>
+            Confirm
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
 
 export interface customHeaderProps {
   actions: any;

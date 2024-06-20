@@ -43,7 +43,6 @@ export interface EditorProps {
   puckData: string;
   role: string;
   isLoading: boolean;
-  handleClearLocalChanges: Function;
   postParentMessage: Function;
   internalLayoutId: number;
   internalEntityId: number;
@@ -66,7 +65,6 @@ export const Editor = ({
   puckData,
   role,
   isLoading,
-  handleClearLocalChanges,
   postParentMessage,
 }: EditorProps) => {
   const toastId = "toast";
@@ -86,6 +84,18 @@ export const Editor = ({
       });
     }
   }, [internalEntityId, internalLayoutId, postParentMessage]);
+
+  const handleClearLocalChanges = () => {
+    postParentMessage({
+      clearLocalChanges: true,
+      layoutId: internalLayoutId,
+      entityId: internalEntityId,
+    });
+    window.localStorage.removeItem(
+      getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+    );
+    window.location.reload();
+  };
 
   useEffect(() => {
     if (mutation.isPending) {
