@@ -88,11 +88,11 @@ export const Editor = ({
           layoutId: internalLayoutId,
           entityId: internalEntityId,
         });
+        window.localStorage.setItem(
+            getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+            JSON.stringify(histories),
+        );
       }
-      window.localStorage.setItem(
-        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
-        JSON.stringify(histories),
-      );
     },
     [internalEntityId, internalLayoutId, postParentMessage],
   );
@@ -192,7 +192,7 @@ export const Editor = ({
       config={puckConfig}
       data={puckData}
       onPublish={(data: Data) => save(data, role)}
-      initialHistory={{ histories: histories, index: index }}
+      initialHistory={index === -1? undefined: { histories: histories, index: index }}
       onChange={change}
       overrides={{
         header: () => {
