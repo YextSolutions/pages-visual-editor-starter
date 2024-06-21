@@ -1,5 +1,5 @@
 import "./puck.css";
-import { usePuck } from "@measured/puck";
+import {Data, usePuck} from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
 import * as buttons from "./button"
 import {
@@ -21,15 +21,7 @@ const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
 };
 
-export const customHeaderActions = (
-  children: any,
-  templateId: string,
-  layoutId: string,
-  entityId: string,
-  role: string,
-  handleClearLocalChanges: Function,
-  handleHistoryChange: (history: any) => void
-) => {
+export const customHeader = (templateId: string, layoutId: string, entityId: string, role: string, handleClearLocalChanges: Function, handleHistoryChange: (history: any) => void, data: Data, handleSaveData: Function) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, historyStore },
@@ -43,20 +35,31 @@ export const customHeaderActions = (
   }, [historyStore?.index]);
 
   return (
-    <>
-    {children}
-    <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
-      <RotateCcw className="sm-icon" />
-    </buttons.Button>
-    <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
-      <RotateCw className="sm-icon" />
-    </buttons.Button>
-    <ClearLocalChangesButton disabled={!hasLocalStorage} onClearLocalChanges={handleClearLocalChanges} />
-    <Button onClick={() => handleClick(entityDocument.slug)}>
-      Live Preview
-    </Button>
-  </>
-
+      <header className="puck-header">
+        <div className="header-left">
+          <ToggleUIButtons/>
+        </div>
+        <div className="header-center">
+        </div>
+        <div className="actions">
+          <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
+            <RotateCcw className="sm-icon"/>
+          </buttons.Button>
+          <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
+            <RotateCw className="sm-icon"/>
+          </buttons.Button>
+          <ClearLocalChangesButton disabled={!hasLocalStorage} onClearLocalChanges={handleClearLocalChanges} />
+          <Button onClick={() => handleClick(entityDocument.slug)}>
+            Live Preview
+          </Button>
+          <Button disabled={!hasLocalStorage} onClick={async () => {
+            await handleSaveData(data);
+            handleClearLocalChanges();
+          }}>
+            Publish
+          </Button>
+        </div>
+      </header>
   );
 };
 
@@ -91,22 +94,6 @@ const ClearLocalChangesButton = ({
     </AlertDialog>
   )
 }
-
-export interface customHeaderProps {
-  actions: any;
-}
-
-export const customHeader = ({ actions }: customHeaderProps) => {
-  return (
-    <header className="puck-header">
-      <div className="header-left">
-        <ToggleUIButtons />
-      </div>
-      <div className="header-center"></div>
-      <div className="actions">{actions}</div>
-    </header>
-  );
-};
 
 const ToggleUIButtons = () => {
   const {
