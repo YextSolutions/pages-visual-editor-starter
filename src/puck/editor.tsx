@@ -55,9 +55,12 @@ export const Editor = ({
   const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
+  console.log("Editor payload", messagePayload);
 
   const handleHistoryChange = useCallback(
     (histories: Array<{ data: any; id: string }>, index: number) => {
+      console.log("handleHistoryChange payload", messagePayload);
+      console.log("histories", histories);
       if (
         index !== -1 &&
         historyIndex.current !== index &&

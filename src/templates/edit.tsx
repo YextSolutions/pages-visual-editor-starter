@@ -195,34 +195,20 @@ const Edit: () => JSX.Element = () => {
     }
   };
 
-  const setParams = (messagePayloadTemp: MessagePayload) => {
-    console.log("setParms");
-    setMessagePayload(messagePayloadTemp);
-  };
-
   useEffect(() => {
     console.log("useEffect");
     const handleParentMessage = (message: MessageEvent) => {
-      console.log("handleParentMessage");
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
       if (typeof message.data === "object" && message.data.params) {
-        console.log("before convert");
         const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
           message.data.params
         );
-        console.log("after convert");
-        setParams(messagePayloadTemp);
 
         const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
         setPuckConfig(puckConfig);
         setMessagePayload(messagePayloadTemp);
-        window.history.replaceState(
-          null,
-          "",
-          `edit?templateId=${messagePayloadTemp.templateId}&layoutId=${messagePayloadTemp.externalLayoutId}&entityId=${messagePayloadTemp.externalEntityId}&role=${messagePayloadTemp.role}}`
-        );
         loadPuckDataUsingHistory(messagePayloadTemp);
         console.log("messagePayloadTemp", messagePayloadTemp);
       }
@@ -265,9 +251,6 @@ const Edit: () => JSX.Element = () => {
   if (!mounted || typeof navigator === "undefined") {
     return <></>;
   }
-  console.log("puckData", puckData);
-  console.log("puckConfig", puckConfig);
-  console.log("messagePayload", messagePayload);
 
   return (
     <>
