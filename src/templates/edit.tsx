@@ -188,8 +188,8 @@ const Edit: () => JSX.Element = () => {
 
   const clearHistory = (
     templateId: string,
-    layoutId: string,
-    entityId: string
+    layoutId: number,
+    entityId: number
   ) => {
     console.log("clearHistory save: layout, entity", layoutId, entityId);
     setHistories([]);
@@ -217,14 +217,18 @@ const Edit: () => JSX.Element = () => {
         getLocalStorageKey(
           getPuckRole(role),
           template.id,
-          layoutId,
-          baseEntity.externalId
+          internalLayoutId!,
+          entity!.internalId!
         )
       );
 
       // nothing in save_state table, start fresh from Content
       if (!saveStateHistory) {
-        clearHistory(template?.id ?? "", layoutId, baseEntity.externalId);
+        clearHistory(
+          template?.id ?? "",
+          internalLayoutId!,
+          entity!.internalId!
+        );
         const siteEntity = await fetchEntity(siteEntityId);
         setPuckData(
           getPuckData(
@@ -242,7 +246,11 @@ const Edit: () => JSX.Element = () => {
 
       // nothing in localStorage, start fresh from VES data
       if (!localHistoryArray) {
-        clearHistory(template?.id ?? "", layoutId, baseEntity.externalId);
+        clearHistory(
+          template?.id ?? "",
+          internalLayoutId!,
+          entity!.internalId!
+        );
         setPuckData(saveStateHistory.data);
         return;
       }
@@ -261,7 +269,7 @@ const Edit: () => JSX.Element = () => {
         return;
       }
       // otherwise start fresh
-      clearHistory(template?.id ?? "", layoutId, baseEntity.externalId);
+      clearHistory(template?.id ?? "", internalLayoutId!, entity!.internalId!);
     },
     [
       role,
@@ -292,6 +300,7 @@ const Edit: () => JSX.Element = () => {
           _role: message.data.params.role,
           _entity: message.data.params.entity,
         });
+        console.log("msg params", message.data.params);
         if (message.data.params.saveState) {
           populatePuckParams(
             JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this

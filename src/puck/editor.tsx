@@ -47,8 +47,8 @@ export interface EditorProps {
   index: number;
   clearHistory: (
     templateId: string,
-    layoutId: string,
-    entityId: string
+    layoutId: number,
+    entityId: number
   ) => void;
 }
 
@@ -100,7 +100,12 @@ export const Editor = ({
           entityId: internalEntityId,
         });
         window.localStorage.setItem(
-          getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+          getLocalStorageKey(
+            role,
+            selectedTemplate.id,
+            internalLayoutId,
+            internalEntityId
+          ),
           JSON.stringify(histories)
         );
       }
@@ -123,7 +128,7 @@ export const Editor = ({
   );
 
   const handleClearLocalChanges = () => {
-    clearHistory(selectedTemplate.id, layoutId, entityId);
+    clearHistory(selectedTemplate.id, internalLayoutId, internalEntityId);
   };
 
   useEffect(() => {
@@ -164,7 +169,12 @@ export const Editor = ({
         });
       }
       window.localStorage.removeItem(
-        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
+        getLocalStorageKey(
+          role,
+          selectedTemplate.id,
+          internalLayoutId,
+          internalEntityId
+        )
       );
       mutation.mutate({
         entityId: entityId,
@@ -179,7 +189,12 @@ export const Editor = ({
         template: selectedTemplate.id,
       };
       window.localStorage.removeItem(
-        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
+        getLocalStorageKey(
+          role,
+          selectedTemplate.id,
+          internalLayoutId,
+          internalEntityId
+        )
       );
       mutation.mutate({
         entityId: layoutId,
