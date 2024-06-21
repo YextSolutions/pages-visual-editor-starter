@@ -128,7 +128,7 @@ const Edit: () => JSX.Element = () => {
     );
   };
 
-  const populatePuckParams = useCallback(
+  const loadPuckDataUsingHistory = useCallback(
     async (messagePayload: MessagePayload) => {
       // nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
@@ -206,7 +206,8 @@ const Edit: () => JSX.Element = () => {
         const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
         setPuckConfig(puckConfig);
         setMessagePayload(messagePayloadTemp);
-        populatePuckParams(messagePayloadTemp);
+        loadPuckDataUsingHistory(messagePayloadTemp);
+        console.log("messagePayloadTemp", messagePayloadTemp);
       }
     };
 
@@ -217,7 +218,7 @@ const Edit: () => JSX.Element = () => {
     setMounted(true);
     listenForParentMessages();
     // is this necessary?
-    // postParentMessage({ entityId: entity?.externalId ?? "" });
+    postParentMessage({ entityId: messagePayload?.externalEntityId });
 
     return () => {
       window.removeEventListener("message", handleParentMessage);
@@ -239,13 +240,17 @@ const Edit: () => JSX.Element = () => {
         ? "Loading document.."
         : "";
 
-  const isLoading = !document || !puckData || !puckConfig;
+  const isLoading = !document || !puckData || !puckConfig || !messagePayload;
 
-  const progress: number = (100 * (!!puckConfig + !!puckData + !!document)) / 3;
+  const progress: number =
+    (100 * (!!puckConfig + !!puckData + !!messagePayload + !!document)) / 4;
 
   if (!mounted || typeof navigator === "undefined") {
     return <></>;
   }
+  console.log("puckData", puckData);
+  console.log("puckConfig", puckConfig);
+  console.log("messagePayload", messagePayload);
 
   return (
     <>
