@@ -135,24 +135,22 @@ export const Hero: ComponentConfig<HeroProps> = {
   },
   render: ({ imageMode, name, location, cta1, cta2 }) => {
     const hero: C_hero = useDocument<LocationStream>(
-      (document) => document.c_hero,
+      (document) => document.c_hero
     );
     const address = useDocument<LocationStream>((document) => document.address);
     const locationName = useDocument<LocationStream>(
-      (document) => document.name,
+      (document) => document.name
     );
     const hours = useDocument<LocationStream>((document) => document.hours);
 
     const { isMediumDevice } = useDeviceSizes();
-
-    console.log("name", name);
 
     return (
       <Section>
         <div
           className={cn(
             "flex flex-col gap-x-10 md:flex-row",
-            imageMode === "right" && "md:flex-row-reverse",
+            imageMode === "right" && "md:flex-row-reverse"
           )}
         >
           {hero?.image ? (

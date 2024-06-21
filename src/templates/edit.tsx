@@ -77,7 +77,7 @@ const getPuckData = (
   layoutId: string,
   baseEntity: any,
   layouts: LayoutDefinitionViewModel[],
-  siteEntity: any,
+  siteEntity: any
 ): string => {
   let data: TemplateData = { data: "", source: DataSource.None };
 
@@ -110,7 +110,7 @@ const getPuckData = (
     (siteEntity?.response[baseEntityPageLayoutsField] ?? []).forEach(
       (id: string) => {
         siteEntityPageLayoutIds.push(id);
-      },
+      }
     );
   }
 
@@ -120,7 +120,7 @@ const getPuckData = (
       if (layout.externalId === layoutId) {
         if (layout.templateId !== templateId) {
           throw new Error(
-            `Mismatch between layout and template: ${layoutId}, ${templateId}`,
+            `Mismatch between layout and template: ${layoutId}, ${templateId}`
           );
         }
         if (role === Role.GLOBAL && data.source > DataSource.LayoutId) {
@@ -181,67 +181,47 @@ const Edit: () => JSX.Element = () => {
   const [internalLayoutId, setInternalLayoutId] = useState<number>();
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
-  const [localStorage, setLocaleStorage] = useState<string>("");
   const [role, setRole] = useState<string>("");
-  const [puckData, setPuckDataState] = useState<any>("");
-  const [histories, setHistories] = useState<any>({});
+  const [puckData, setPuckData] = useState<any>({});
+  const [histories, setHistories] = useState<Array<any>>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
 
-  const setPuckData = useCallback(
+  const populatePuckParams = useCallback(
     async (
-      VEData: any,
-      VEHash: string,
+      saveStateHistory: any,
+      saveStateHash: string,
       baseEntity: any,
       layouts: LayoutDefinitionViewModel[],
       layoutId: string,
-      template: TemplateDefinition,
+      template: TemplateDefinition
     ) => {
-      const setNewHistory = (newHist: { data: any; id: string }) => {
-        const newHistory = [];
-        newHistory.push(newHist);
-        setHistories(newHistory);
-        setHistoryIndex(0);
-        setLocaleStorage(JSON.stringify(newHistory));
-        window.localStorage.setItem(
+      const clearHistory = () => {
+        setHistories([]);
+        setHistoryIndex(-1);
+        window.localStorage.removeItem(
           getLocalStorageKey(
             getPuckRole(role),
             template.id,
             layoutId,
-            baseEntity.externalId,
-          ),
-          JSON.stringify(newHistory),
+            baseEntity.externalId
+          )
         );
       };
 
-      if (VEData) {
-        setPuckDataState(VEData);
-        const localCurr = window.localStorage.getItem(
-          getLocalStorageKey(
-            getPuckRole(role),
-            template.id,
-            layoutId,
-            baseEntity.externalId,
-          ),
-        );
-        if (localCurr) {
-          const foundIndex = JSON.parse(localCurr).findIndex(
-            (item: any) => item.id === VEHash,
-          );
-          if (foundIndex !== -1) {
-            // if we have the save_state history in local storage
-            setHistoryIndex(foundIndex);
-            setHistories(JSON.parse(localCurr));
-          } else {
-            // otherwise start fresh from VES
-            setNewHistory({ data: VEData, id: VEHash }); // TODO: too many datas
-          }
-        } else {
-          // if there is no local storage start fresh from VES
-          setNewHistory({ data: VEData, id: VEHash });
-        }
-      } else {
+      const localHistoryArray = window.localStorage.getItem(
+        getLocalStorageKey(
+          getPuckRole(role),
+          template.id,
+          layoutId,
+          baseEntity.externalId
+        )
+      );
+
+      // nothing in save_state table, start fresh from Content
+      if (!saveStateHistory) {
+        clearHistory();
         const siteEntity = await fetchEntity(siteEntityId);
-        setPuckDataState(
+        setPuckData(
           getPuckData(
             getPuckRole(role),
             siteEntityId,
@@ -249,35 +229,45 @@ const Edit: () => JSX.Element = () => {
             layoutId,
             baseEntity,
             layouts,
-            siteEntity,
-          ),
+            siteEntity
+          )
         );
-        // if getting from content, wipe everything
-        setLocaleStorage("");
-        window.localStorage.removeItem(
-          getLocalStorageKey(
-            getPuckRole(role),
-            template.id,
-            layoutId,
-            baseEntity.externalId,
-          ),
-        );
-        setHistories([]);
-        setHistoryIndex(0);
+        return;
       }
+
+      // nothing in localStorage, start fresh from VES data
+      if (!localHistoryArray) {
+        clearHistory();
+        setPuckData(saveStateHistory.data);
+        return;
+      }
+
+      const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
+        (item: any) => item.id === saveStateHash
+      );
+
+      // if we have VES data, use it for current puck data
+      setPuckData(saveStateHistory.data);
+
+      // if saved history in local storage, use that for future/past
+      if (localHistoryIndex !== -1) {
+        setHistoryIndex(localHistoryIndex);
+        setHistories(JSON.parse(localHistoryArray));
+        return;
+      }
+      // otherwise start fresh
+      clearHistory();
     },
     [
       role,
-      localStorage,
       entity,
       template,
       setHistories,
       setHistoryIndex,
-      setPuckDataState,
+      setPuckData,
       layoutId,
       getPuckRole,
-      setLocaleStorage,
-    ],
+    ]
   );
 
   const postParentMessage = (message: any) => {
@@ -298,22 +288,22 @@ const Edit: () => JSX.Element = () => {
           _entity: message.data.params.entity,
         });
         if (message.data.params.saveState) {
-          setPuckData(
+          populatePuckParams(
             JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
             message.data.params.saveState.Hash,
             message.data.params.entity,
             message.data.params.layouts,
             message.data.params.layoutId,
-            message.data.params.template,
+            message.data.params.template
           );
         } else {
-          setPuckData(
+          populatePuckParams(
             null,
             "",
             message.data.params.entity,
             message.data.params.layouts,
             message.data.params.layoutId,
-            message.data.params.template,
+            message.data.params.template
           );
         }
       }
@@ -339,7 +329,7 @@ const Edit: () => JSX.Element = () => {
     }
 
     const targetLayout = layouts.find(
-      (layout: { externalId: any }) => layout.externalId === layoutId,
+      (layout: { externalId: any }) => layout.externalId === layoutId
     );
     const internalLayoutId = targetLayout?.id;
     setInternalLayoutId(internalLayoutId);
@@ -351,23 +341,11 @@ const Edit: () => JSX.Element = () => {
     setEntity(_entity);
     // get puckConfig from hardcoded map
     const puckConfig = puckConfigs.get(template.id);
-    setLocaleStorage(
-      typeof window !== "undefined"
-        ? window.localStorage.getItem(
-            getLocalStorageKey(
-              getPuckRole(role),
-              template.id,
-              layoutId,
-              _entity.externalId,
-            ),
-          ) ?? ""
-        : "",
-    );
     setPuckConfig(puckConfig);
     window.history.replaceState(
       null,
       "",
-      `edit?templateId=${template.id}&layoutId=${layoutId}&entityId=${_entity.externalId}&role=${getPuckRole(role)}`,
+      `edit?templateId=${template.id}&layoutId=${layoutId}&entityId=${_entity.externalId}&role=${getPuckRole(role)}`
     );
   }
 
