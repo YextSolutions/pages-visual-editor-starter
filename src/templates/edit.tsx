@@ -294,6 +294,7 @@ const Edit: () => JSX.Element = () => {
           _entity: message.data.params.entity,
         });
         if (message.data.params.saveState) {
+          console.log("has saveState populatePuckParams");
           populatePuckParams(
             JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
             message.data.params.saveState.Hash,
@@ -303,6 +304,7 @@ const Edit: () => JSX.Element = () => {
             message.data.params.template
           );
         } else {
+          console.log("no saveState populatePuckParams");
           populatePuckParams(
             null,
             "",
@@ -366,6 +368,9 @@ const Edit: () => JSX.Element = () => {
       "",
       `edit?templateId=${template.id}&layoutId=${layoutId}&entityId=${_entity.externalId}&role=${getPuckRole(role)}`
     );
+
+    console.log("setParams internalLayoutId", internalLayoutId);
+    console.log("setParams entity?.internalId", entity?.internalId);
   };
 
   // get the document
