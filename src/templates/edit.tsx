@@ -188,8 +188,8 @@ const Edit: () => JSX.Element = () => {
 
   const clearHistory = (
     templateId: string,
-    layoutId: number,
-    entityId: number
+    layoutId?: number,
+    entityId?: number
   ) => {
     console.log("clearHistory save: layout, entity", layoutId, entityId);
     setHistories([]);
@@ -217,18 +217,14 @@ const Edit: () => JSX.Element = () => {
         getLocalStorageKey(
           getPuckRole(role),
           template.id,
-          internalLayoutId!,
-          entity!.internalId!
+          internalLayoutId,
+          entity?.internalId
         )
       );
 
       // nothing in save_state table, start fresh from Content
       if (!saveStateHistory) {
-        clearHistory(
-          template?.id ?? "",
-          internalLayoutId!,
-          entity!.internalId!
-        );
+        clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
         const siteEntity = await fetchEntity(siteEntityId);
         setPuckData(
           getPuckData(
@@ -246,11 +242,7 @@ const Edit: () => JSX.Element = () => {
 
       // nothing in localStorage, start fresh from VES data
       if (!localHistoryArray) {
-        clearHistory(
-          template?.id ?? "",
-          internalLayoutId!,
-          entity!.internalId!
-        );
+        clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
         setPuckData(saveStateHistory.data);
         return;
       }
@@ -269,7 +261,7 @@ const Edit: () => JSX.Element = () => {
         return;
       }
       // otherwise start fresh
-      clearHistory(template?.id ?? "", internalLayoutId!, entity!.internalId!);
+      clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
     },
     [
       role,
