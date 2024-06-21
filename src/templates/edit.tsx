@@ -195,7 +195,7 @@ const Edit: () => JSX.Element = () => {
     setHistoryIndex(-1);
     postParentMessage({
       clearLocalChanges: true,
-      layoutId: internalLayoutId,
+      layoutId: layoutId,
       entityId: entityId,
     });
     window.localStorage.removeItem(
