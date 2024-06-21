@@ -128,6 +128,11 @@ export const Editor = ({
   );
 
   const handleClearLocalChanges = () => {
+    console.log(
+      "handleClearLocalChanges: layout, entity",
+      internalLayoutId,
+      internalEntityId
+    );
     clearHistory(selectedTemplate.id, internalLayoutId, internalEntityId);
   };
 

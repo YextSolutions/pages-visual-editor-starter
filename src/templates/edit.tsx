@@ -290,12 +290,12 @@ const Edit: () => JSX.Element = () => {
   };
 
   useEffect(() => {
-    const handleParentMessage = (message: MessageEvent) => {
+    const handleParentMessage = async (message: MessageEvent) => {
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
       if (typeof message.data === "object" && message.data.params) {
-        setParams({
+        await setParams({
           ...message.data.params,
           _role: message.data.params.role,
           _entity: message.data.params.entity,

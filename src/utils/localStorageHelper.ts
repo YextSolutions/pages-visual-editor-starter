@@ -8,12 +8,12 @@ const ROLE = "ROLE_",
 export function getLocalStorageKey(
   role: string,
   templateId: string,
-  layoutId: string,
-  entityId: string,
+  layoutId: number,
+  entityId: number
 ) {
   if (!role || !templateId || (!entityId && !layoutId)) {
     throw new Error(
-      "Unable to generate local storage key, missing query parameters",
+      "Unable to generate local storage key, missing query parameters"
     );
   }
   if (role === Role.INDIVIDUAL) {
