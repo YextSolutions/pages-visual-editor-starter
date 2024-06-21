@@ -7,49 +7,29 @@ import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-
-export type EntityDefinition = {
-  name: string;
-  externalId: string;
-  internalId: number;
-};
-
-export type LayoutDefinition = {
-  name: string;
-  externalId: string;
-  internalId: number;
-  visualConfiguration: VisualConfiguration;
-};
-
-export type VisualConfiguration = {
-  template: string;
-  data: string;
-};
-
-export type TemplateDefinition = {
-  name: string;
-  id: string;
-  entityTypes: string[];
-};
+import {
+  JSONValue,
+  MessagePayload,
+  Template,
+  VisualConfiguration,
+} from "../types/messagePayload";
 
 export interface EditorProps {
-  selectedTemplate: TemplateDefinition;
-  entityId: string;
-  layoutId: string;
+  selectedTemplate: Template;
   puckConfig: Config;
-  puckData: string;
+  puckData: JSONValue;
   role: string;
   isLoading: boolean;
   postParentMessage: (args: any) => void;
-  internalLayoutId: number;
-  internalEntityId: number;
   histories: Array<{ data: any; id: string }>;
   index: number;
   clearHistory: (
+    role: string,
     templateId: string,
-    layoutId: number,
-    entityId: number
+    layoutId?: number,
+    entityId?: number
   ) => void;
+  messagePayload: MessagePayload;
 }
 
 export const siteEntityVisualConfigField = "c_visualLayouts",
@@ -61,10 +41,6 @@ export const siteEntityVisualConfigField = "c_visualLayouts",
 // Render Puck editor
 export const Editor = ({
   selectedTemplate,
-  layoutId,
-  internalLayoutId,
-  entityId,
-  internalEntityId,
   puckConfig,
   puckData,
   role,
@@ -73,6 +49,7 @@ export const Editor = ({
   histories,
   index,
   clearHistory,
+  messagePayload,
 }: EditorProps) => {
   const toastId = "toast";
   const mutation = useUpdateEntityMutation();
@@ -87,24 +64,20 @@ export const Editor = ({
         histories.length > 0
       ) {
         historyIndex.current = index;
-        console.log(
-          "handleHistoryChange save: layout, entity",
-          internalLayoutId,
-          internalEntityId
-        );
+
         postParentMessage({
           localChange: true,
           hash: histories[index].id,
           history: JSON.stringify(histories[index].data),
-          layoutId: internalLayoutId,
-          entityId: internalEntityId,
+          layoutId: messagePayload.layoutId,
+          entityId: messagePayload.entity?.id,
         });
         window.localStorage.setItem(
           getLocalStorageKey(
             role,
             selectedTemplate.id,
-            internalLayoutId,
-            internalEntityId
+            messagePayload.layoutId,
+            messagePayload.entity?.id
           ),
           JSON.stringify(histories)
         );
@@ -112,28 +85,24 @@ export const Editor = ({
 
       if (index === -1 && historyIndex.current !== index) {
         historyIndex.current = index;
-        console.log(
-          "handleHistoryChange save index - 1: layout, entity",
-          internalLayoutId,
-          internalEntityId
-        );
+
         postParentMessage({
           clearLocalChanges: true,
-          layoutId: internalLayoutId,
-          entityId: internalEntityId,
+          layoutId: messagePayload.layoutId,
+          entityId: messagePayload.entity?.id,
         });
       }
     },
-    [internalEntityId, internalLayoutId, postParentMessage]
+    [messagePayload, postParentMessage]
   );
 
   const handleClearLocalChanges = () => {
-    console.log(
-      "handleClearLocalChanges: layout, entity",
-      internalLayoutId,
-      internalEntityId
+    clearHistory(
+      messagePayload.role,
+      selectedTemplate.id,
+      messagePayload.layoutId,
+      messagePayload.entity?.id
     );
-    clearHistory(selectedTemplate.id, internalLayoutId, internalEntityId);
   };
 
   useEffect(() => {
@@ -157,7 +126,9 @@ export const Editor = ({
     const templateData = JSON.stringify(data);
     if (role === Role.INDIVIDUAL) {
       // since we are updating a list, we must get the original data, append to it, then push
-      const response = await fetchEntity(entityId);
+      const response = await fetchEntity(
+        messagePayload.entity?.externalId || "" // this should be handled better
+      );
       const entity = response.response;
       const visualConfigs: VisualConfiguration[] =
         entity[baseEntityVisualConfigField] ?? [];
@@ -175,14 +146,14 @@ export const Editor = ({
       }
       window.localStorage.removeItem(
         getLocalStorageKey(
-          role,
-          selectedTemplate.id,
-          internalLayoutId,
-          internalEntityId
+          messagePayload.role,
+          messagePayload.templateId,
+          messagePayload.layoutId,
+          messagePayload.entity?.id
         )
       );
       mutation.mutate({
-        entityId: entityId,
+        entityId: messagePayload.entity?.externalId || "", // this should be handled better
         body: {
           [baseEntityVisualConfigField]: visualConfigs,
         },
@@ -195,14 +166,14 @@ export const Editor = ({
       };
       window.localStorage.removeItem(
         getLocalStorageKey(
-          role,
-          selectedTemplate.id,
-          internalLayoutId,
-          internalEntityId
+          messagePayload.role,
+          messagePayload.templateId,
+          messagePayload.layoutId,
+          messagePayload.entity?.id
         )
       );
       mutation.mutate({
-        entityId: layoutId,
+        entityId: messagePayload.externalLayoutId,
         body: {
           [pageLayoutVisualConfigField]: visualConfig,
         },
@@ -237,14 +208,11 @@ export const Editor = ({
         header: () => {
           const { appState } = usePuck();
           return customHeader(
-            selectedTemplate.id,
-            layoutId,
-            entityId,
-            role,
             handleClearLocalChanges,
             handleHistoryChange,
             appState.data,
-            handleSave
+            handleSave,
+            messagePayload
           );
         },
       }}
