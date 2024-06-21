@@ -23,7 +23,7 @@ const HeaderLayout = (props: HeaderLayoutProps) => {
   return (
     <header className=" w-full bg-white">
       <div className="mx-auto flex max-w-6xl flex-1 items-center justify-between px-4 py-6">
-        <img src={logo} height={47} width={40} layout="fill" />
+        <img src={logo} height={47} width={40} />
         <div className="flex items-center justify-end space-x-4">
           <ul className="flex space-x-8">
             {props.links.map((item: CTA, idx) => (

@@ -195,15 +195,25 @@ const Edit: () => JSX.Element = () => {
     }
   };
 
+  const setParams = (messagePayloadTemp: MessagePayload) => {
+    console.log("setParms");
+    setMessagePayload(messagePayloadTemp);
+  };
+
   useEffect(() => {
+    console.log("useEffect");
     const handleParentMessage = (message: MessageEvent) => {
+      console.log("handleParentMessage");
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
       if (typeof message.data === "object" && message.data.params) {
+        console.log("before convert");
         const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
           message.data.params
         );
+        console.log("after convert");
+        setParams(messagePayloadTemp);
 
         const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
         setPuckConfig(puckConfig);
