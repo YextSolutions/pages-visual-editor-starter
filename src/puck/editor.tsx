@@ -43,6 +43,8 @@ export interface EditorProps {
   postParentMessage: Function;
   internalLayoutId: number;
   internalEntityId: number;
+  histories: Array<{ data: any; id: string }>;
+  index: number;
 }
 
 export const siteEntityVisualConfigField = "c_visualLayouts",
@@ -63,6 +65,8 @@ export const Editor = ({
   role,
   isLoading,
   postParentMessage,
+  histories,
+  index,
 }: EditorProps) => {
   const toastId = "toast";
   const mutation = useUpdateEntityMutation();
@@ -70,17 +74,25 @@ export const Editor = ({
   const historyIndex = useRef<number>(-1);
 
   const handleHistoryChange = useCallback(
-    (history: any) => {
-      if (history.index !== -1 && historyIndex.current !== history.index) {
-        historyIndex.current = history.index;
+    (histories: Array<{ data: any; id: string }>, index: number) => {
+      if (
+        index !== -1 &&
+        historyIndex.current !== index &&
+        histories.length > 0
+      ) {
+        historyIndex.current = index;
         postParentMessage({
           localChange: true,
-          hash: history.currentHistory.id,
-          history: JSON.stringify(history.currentHistory.data),
+          hash: histories[index].id,
+          history: JSON.stringify(histories[index].data),
           layoutId: internalLayoutId,
           entityId: internalEntityId,
         });
       }
+      window.localStorage.setItem(
+        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
+        JSON.stringify(histories),
+      );
     },
     [internalEntityId, internalLayoutId, postParentMessage],
   );
@@ -169,11 +181,6 @@ export const Editor = ({
       setCanEdit(true);
       return;
     }
-
-    window.localStorage.setItem(
-      getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
-      JSON.stringify(data),
-    );
   };
 
   const handleSave = async (data: Data) => {
@@ -183,7 +190,9 @@ export const Editor = ({
   return (
     <Puck
       config={puckConfig}
-      data={JSON.parse(puckData)}
+      data={puckData}
+      onPublish={(data: Data) => save(data, role)}
+      initialHistory={{ histories: histories, index: index }}
       onChange={change}
       overrides={{
         header: () => {

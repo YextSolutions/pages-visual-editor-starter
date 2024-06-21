@@ -27,21 +27,20 @@ export const customHeader = (
   entityId: string,
   role: string,
   handleClearLocalChanges: Function,
-  handleHistoryChange: (history: any) => void,
+  handleHistoryChange: (histories: Array<{data:any, id:string}>, index:number) => void,
   data: Data,
   handleSaveData: Function,
 ) => {
   const entityDocument = useDocument();
   const {
-    history: { back, forward, historyStore },
+    history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
-  const { hasFuture = false, hasPast = false } = historyStore || {};
   const hasLocalStorage = !!window.localStorage.getItem(
     getLocalStorageKey(role, templateId, layoutId, entityId),
   );
   useEffect(() => {
-    handleHistoryChange(historyStore);
-  }, [historyStore?.index]);
+    handleHistoryChange(histories, index);
+  }, [index, histories, handleHistoryChange]);
 
   return (
     <header className="puck-header">
