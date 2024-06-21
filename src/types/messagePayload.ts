@@ -69,7 +69,7 @@ export type MessagePayload = {
 export const convertRawMessageToObject = (
   messageParams: any
 ): MessagePayload => {
-  const layouts = (messageParams.layouts || []).map((layout: any) => {
+  const layouts: Layout[] = (messageParams.layouts || []).map((layout: any) => {
     return {
       id: layout.id,
       externalId: layout.externalId,
@@ -81,6 +81,10 @@ export const convertRawMessageToObject = (
       entityCount: layout.entityCount,
     };
   });
+
+  const layoutForExternalLayoutId = layouts.find(
+    (layout: Layout) => layout.externalId === messageParams.layoutId
+  );
 
   return {
     entity: messageParams.entity
@@ -108,10 +112,7 @@ export const convertRawMessageToObject = (
       : undefined,
     externalEntityId: messageParams.entityId,
     externalLayoutId: messageParams.layoutId,
-    layoutId: layouts.find(
-      (layout: { externalId: any }) =>
-        layout.externalId === messageParams.layoutId
-    ),
+    layoutId: layoutForExternalLayoutId?.id,
     layouts: layouts,
     role: messageParams.role,
     template: {
