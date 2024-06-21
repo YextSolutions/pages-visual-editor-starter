@@ -204,65 +204,77 @@ const Edit: () => JSX.Element = () => {
     );
   };
 
-  const populatePuckParams = async (
-    saveStateHistory: any,
-    saveStateHash: string,
-    baseEntity: any,
-    layouts: LayoutDefinitionViewModel[],
-    layoutId: string,
-    template: TemplateDefinition
-  ) => {
-    console.log("populatePuckParams");
-    // nothing in save_state table, start fresh from Content
-    if (!saveStateHistory) {
-      clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
-      const siteEntity = await fetchEntity(siteEntityId);
-      setPuckData(
-        getPuckData(
+  const populatePuckParams = useCallback(
+    async (
+      saveStateHistory: any,
+      saveStateHash: string,
+      baseEntity: any,
+      layouts: LayoutDefinitionViewModel[],
+      layoutId: string,
+      template: TemplateDefinition
+    ) => {
+      // nothing in save_state table, start fresh from Content
+      if (!saveStateHistory) {
+        clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
+        const siteEntity = await fetchEntity(siteEntityId);
+        setPuckData(
+          getPuckData(
+            getPuckRole(role),
+            siteEntityId,
+            template?.id ?? "",
+            layoutId,
+            baseEntity,
+            layouts,
+            siteEntity
+          )
+        );
+        return;
+      }
+
+      const localHistoryArray = window.localStorage.getItem(
+        getLocalStorageKey(
           getPuckRole(role),
-          siteEntityId,
-          template?.id ?? "",
-          layoutId,
-          baseEntity,
-          layouts,
-          siteEntity
+          template.id,
+          internalLayoutId,
+          entity?.internalId
         )
       );
-      return;
-    }
 
-    const localHistoryArray = window.localStorage.getItem(
-      getLocalStorageKey(
-        getPuckRole(role),
-        template.id,
-        internalLayoutId,
-        entity?.internalId
-      )
-    );
+      // nothing in localStorage, start fresh from VES data
+      if (!localHistoryArray) {
+        clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
+        setPuckData(saveStateHistory.data);
+        return;
+      }
 
-    // nothing in localStorage, start fresh from VES data
-    if (!localHistoryArray) {
-      clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
+      const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
+        (item: any) => item.id === saveStateHash
+      );
+
+      // if we have VES data, use it for current puck data
       setPuckData(saveStateHistory.data);
-      return;
-    }
 
-    const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-      (item: any) => item.id === saveStateHash
-    );
-
-    // if we have VES data, use it for current puck data
-    setPuckData(saveStateHistory.data);
-
-    // if saved history in local storage, use that for future/past
-    if (localHistoryIndex !== -1) {
-      setHistoryIndex(localHistoryIndex);
-      setHistories(JSON.parse(localHistoryArray));
-      return;
-    }
-    // otherwise start fresh
-    clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
-  };
+      // if saved history in local storage, use that for future/past
+      if (localHistoryIndex !== -1) {
+        setHistoryIndex(localHistoryIndex);
+        setHistories(JSON.parse(localHistoryArray));
+        return;
+      }
+      // otherwise start fresh
+      clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
+    },
+    [
+      role,
+      entity,
+      template,
+      setHistories,
+      setHistoryIndex,
+      setPuckData,
+      layoutId,
+      getPuckRole,
+      internalLayoutId,
+    ]
+  );
 
   const postParentMessage = (message: any) => {
     for (const targetOrigin of TARGET_ORIGINS) {
@@ -271,7 +283,7 @@ const Edit: () => JSX.Element = () => {
   };
 
   useEffect(() => {
-    const handleParentMessage = async (message: MessageEvent) => {
+    const handleParentMessage = (message: MessageEvent) => {
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
@@ -284,7 +296,7 @@ const Edit: () => JSX.Element = () => {
         });
         if (message.data.params.saveState) {
           console.log("has saveState populatePuckParams");
-          await populatePuckParams(
+          populatePuckParams(
             JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
             message.data.params.saveState.Hash,
             message.data.params.entity,
@@ -294,7 +306,7 @@ const Edit: () => JSX.Element = () => {
           );
         } else {
           console.log("no saveState populatePuckParams");
-          await populatePuckParams(
+          populatePuckParams(
             null,
             "",
             message.data.params.entity,
