@@ -87,6 +87,11 @@ export const Editor = ({
         histories.length > 0
       ) {
         historyIndex.current = index;
+        console.log(
+          "handleHistoryChange save: layout, entity",
+          internalLayoutId,
+          internalEntityId
+        );
         postParentMessage({
           localChange: true,
           hash: histories[index].id,
@@ -102,6 +107,11 @@ export const Editor = ({
 
       if (index === -1 && historyIndex.current !== index) {
         historyIndex.current = index;
+        console.log(
+          "handleHistoryChange save index - 1: layout, entity",
+          internalLayoutId,
+          internalEntityId
+        );
         postParentMessage({
           clearLocalChanges: true,
           layoutId: internalLayoutId,

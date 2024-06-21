@@ -191,6 +191,7 @@ const Edit: () => JSX.Element = () => {
     layoutId: string,
     entityId: string
   ) => {
+    console.log("clearHistory save: layout, entity", layoutId, entityId);
     setHistories([]);
     setHistoryIndex(-1);
     postParentMessage({
