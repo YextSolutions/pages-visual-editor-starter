@@ -38,8 +38,6 @@ export const customHeader = (
   const {
     history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
-  console.log("histories", histories);
-  console.log("hasPast", hasPast);
   const hasLocalStorage = !!window.localStorage.getItem(
     getLocalStorageKey(role, templateId, layoutId, entityId)
   );
