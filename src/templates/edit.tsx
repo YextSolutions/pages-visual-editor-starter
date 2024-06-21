@@ -290,17 +290,17 @@ const Edit: () => JSX.Element = () => {
   };
 
   useEffect(() => {
-    const handleParentMessage = async (message: MessageEvent) => {
+    const handleParentMessage = (message: MessageEvent) => {
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
+      console.log("msg params", message?.data?.params);
       if (typeof message.data === "object" && message.data.params) {
-        await setParams({
+        setParams({
           ...message.data.params,
           _role: message.data.params.role,
           _entity: message.data.params.entity,
         });
-        console.log("msg params", message.data.params);
         if (message.data.params.saveState) {
           populatePuckParams(
             JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
@@ -324,7 +324,7 @@ const Edit: () => JSX.Element = () => {
     };
 
     const listenForParentMessages = () => {
-      window.addEventListener("message", (e) => handleParentMessage(e));
+      window.addEventListener("message", handleParentMessage);
     };
 
     setMounted(true);
@@ -332,11 +332,23 @@ const Edit: () => JSX.Element = () => {
     postParentMessage({ entityId: entity?.externalId ?? "" });
 
     return () => {
-      window.removeEventListener("message", (e) => handleParentMessage(e));
+      window.removeEventListener("message", handleParentMessage);
     };
   }, []);
 
-  async function setParams({ template, layoutId, _entity, _role, layouts }) {
+  const setParams = ({
+    template,
+    layoutId,
+    _entity,
+    _role,
+    layouts,
+  }: {
+    template: TemplateDefinition;
+    layoutId: string;
+    _entity: EntityDefinition;
+    _role: string;
+    layouts: any;
+  }) => {
     // get layout
     if (!layoutId) {
       layoutId = layouts[0].externalId;
@@ -361,7 +373,7 @@ const Edit: () => JSX.Element = () => {
       "",
       `edit?templateId=${template.id}&layoutId=${layoutId}&entityId=${_entity.externalId}&role=${getPuckRole(role)}`
     );
-  }
+  };
 
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
