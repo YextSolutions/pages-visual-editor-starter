@@ -43,13 +43,16 @@ export const enum DataSource {
 const getPuckData = (messagePayload: MessagePayload): any => {
   // get Puck data from the base entity for INDIVIDUAL
   if (messagePayload.entity) {
+    console.log("has entity");
     if (messagePayload.role === Role.INDIVIDUAL) {
+      console.log("has individual");
       const entityPuckData = messagePayload.entity.visualConfigurations.find(
         (config: VisualConfiguration) =>
           config.template === messagePayload.templateId
       );
 
       if (entityPuckData) {
+        console.log("has entity data");
         return entityPuckData.data;
       }
     }
@@ -66,14 +69,17 @@ const getPuckData = (messagePayload: MessagePayload): any => {
       );
     }
   });
+  console.log("passed validaton");
 
   // get Puck data from the layout attached to the entity for GLOBAL
   if (messagePayload.role === Role.GLOBAL) {
+    console.log("has global");
     const layoutEntity = messagePayload.layouts.find(
       (layout: Layout) => layout.externalId === messagePayload.externalLayoutId
     );
 
     if (layoutEntity) {
+      console.log("has layout data");
       return layoutEntity.visualConfiguration;
     }
   }
@@ -84,6 +90,7 @@ const getPuckData = (messagePayload: MessagePayload): any => {
   );
 
   if (defaultEntity) {
+    console.log("has default data", defaultEntity.visualConfiguration);
     return defaultEntity.visualConfiguration;
   }
 
@@ -134,6 +141,7 @@ const Edit: () => JSX.Element = () => {
       console.log("messagePayload?", messagePayload);
       // nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
+        console.log("no saveState from DB");
         clearHistory(
           messagePayload.role,
           messagePayload.templateId,
@@ -155,6 +163,7 @@ const Edit: () => JSX.Element = () => {
 
       // nothing in localStorage, start fresh from VES data
       if (!localHistoryArray) {
+        console.log("no localStorage");
         clearHistory(
           messagePayload.role,
           messagePayload.templateId,
@@ -170,15 +179,18 @@ const Edit: () => JSX.Element = () => {
       );
 
       // if we have VES data, use it for current puck data
+      console.log("has saveState from db");
       setPuckData(messagePayload.saveState.history);
 
       // if saved history in local storage, use that for future/past
       if (localHistoryIndex !== -1) {
+        console.log("found the index");
         setHistoryIndex(localHistoryIndex);
         setHistories(JSON.parse(localHistoryArray));
         return;
       }
       // otherwise start fresh
+      console.log("start over");
       clearHistory(
         messagePayload.role,
         messagePayload.templateId,
