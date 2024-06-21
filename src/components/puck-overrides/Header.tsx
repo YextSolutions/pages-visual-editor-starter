@@ -33,12 +33,13 @@ export const customHeader = (
 ) => {
   const entityDocument = useDocument();
   const {
-    history: { back, forward, historyStore },
+    history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
-  const { hasFuture = false, hasPast = false } = historyStore || {};
-  const hasLocalStorage = !!window.localStorage.getItem(
-    getLocalStorageKey(role, templateId, layoutId, entityId),
-  );
+  const hasLocalStorage = !!window.localStorage.getItem(getLocalStorageKey(role, templateId, layoutId, entityId));
+  useEffect(() => {
+      handleHistoryChange(histories, index);
+  }, [index, histories, handleHistoryChange]);
+
   useEffect(() => {
     handleHistoryChange(historyStore);
   }, [historyStore?.index]);
