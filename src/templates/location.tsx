@@ -48,7 +48,7 @@ export const transformProps = async (data) => {
       entityConfigurations,
       entityLayoutConfigurations,
       siteLayoutConfigurations,
-      config.name
+      config.name,
     );
     const visualTemplate = JSON.parse(templateData);
     return {

@@ -45,7 +45,15 @@ const getPuckRole = (role: string): string => {
   return Role.GLOBAL;
 };
 
-const TARGET_ORIGINS = ["http://localhost", "https://dev.yext.com", "https://qa.yext.com", "https://sandbox.yext.com", "https://www.yext.com", "https://app-qa.eu.yext.com", "https://app.eu.yext.com"];
+const TARGET_ORIGINS = [
+  "http://localhost",
+  "https://dev.yext.com",
+  "https://qa.yext.com",
+  "https://sandbox.yext.com",
+  "https://www.yext.com",
+  "https://app-qa.eu.yext.com",
+  "https://app.eu.yext.com",
+];
 
 // Render the editor
 const Edit: Template<TemplateRenderProps> = () => {
@@ -58,42 +66,38 @@ const Edit: Template<TemplateRenderProps> = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
   const [localStorage, setLocaleStorage] = useState<string>("");
-  const [role, setRole] = useState<string>('');
+  const [role, setRole] = useState<string>("");
 
-  const postParentMessage = (message : any) => {
-    for (const targetOrigin of TARGET_ORIGINS){
+  const postParentMessage = (message: any) => {
+    for (const targetOrigin of TARGET_ORIGINS) {
       window.parent.postMessage(message, targetOrigin);
     }
   };
 
   useEffect(() => {
     const handleParentMessage = (message: MessageEvent) => {
-      if (!TARGET_ORIGINS.includes(message.origin)) { 
+      if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
-      if(typeof message.data === 'object') {
-        setParams({...message.data, _role: message.data.role});
+      if (typeof message.data === "object") {
+        setParams({ ...message.data, _role: message.data.role });
       }
     };
 
     const listenForParentMessages = () => {
-      window.addEventListener('message', handleParentMessage);
+      window.addEventListener("message", handleParentMessage);
     };
 
     setMounted(true);
     listenForParentMessages();
-    postParentMessage({entityId: entity?.externalId ?? ''});
+    postParentMessage({ entityId: entity?.externalId ?? "" });
 
     return () => {
-      window.removeEventListener('message', handleParentMessage);
+      window.removeEventListener("message", handleParentMessage);
     };
   }, []);
 
-  async function setParams({
-    templateId,
-    layoutId,
-    entityId,
-    _role}) {
+  async function setParams({ templateId, layoutId, entityId, _role }) {
     // get templates
     const fetchedTemplates = await fetchTemplates();
     let targetTemplate: TemplateDefinition = fetchedTemplates[0];
@@ -113,7 +117,9 @@ const Edit: Template<TemplateRenderProps> = () => {
     if (!layoutId) {
       layoutId = fetchedLayouts[0].externalId;
     }
-    const targetLayout = fetchedLayouts.find((layout) => layout.externalId === layoutId);
+    const targetLayout = fetchedLayouts.find(
+      (layout) => layout.externalId === layoutId,
+    );
     const internalLayoutId = targetLayout?.internalId;
     setInternalLayoutId(internalLayoutId);
     setLayoutId(layoutId);
@@ -145,13 +151,13 @@ const Edit: Template<TemplateRenderProps> = () => {
     setLocaleStorage(
       typeof window !== "undefined"
         ? window.localStorage.getItem(
-          getLocalStorageKey(
-            getPuckRole(role),
-            targetTemplate.id,
-            layoutId,
-            targetEntity.externalId,
-          ),
-        ) ?? ""
+            getLocalStorageKey(
+              getPuckRole(role),
+              targetTemplate.id,
+              layoutId,
+              targetEntity.externalId,
+            ),
+          ) ?? ""
         : "",
     );
     setPuckConfig(puckConfig);

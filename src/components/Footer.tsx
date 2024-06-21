@@ -99,7 +99,7 @@ const FooterLayout = (props: FooterLayoutProps) => {
               <a key={i} href={socialLink.link} className="hover:text-gray-300">
                 {socialLink.label}
               </a>
-            ) : null
+            ) : null,
           )}
         </div>
       </div>
