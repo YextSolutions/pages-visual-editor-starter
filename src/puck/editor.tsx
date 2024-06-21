@@ -1,9 +1,7 @@
-import {Puck, Data, Config, usePuck} from "@measured/puck";
+import { Puck, Data, Config, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
-import {
-  customHeader,
-} from "../components/puck-overrides/Header";
+import { customHeader } from "../components/puck-overrides/Header";
 import { toast } from "sonner";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
@@ -71,18 +69,21 @@ export const Editor = ({
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
 
-  const handleHistoryChange = useCallback((history: any) => {
-    if (history.index !== -1 && historyIndex.current !== history.index) {
-      historyIndex.current = history.index;
-      postParentMessage({ 
-        localChange: true,
-        hash: history.currentHistory.id,
-        history: JSON.stringify(history.currentHistory.data),
-        layoutId: internalLayoutId,
-        entityId: internalEntityId,
-      });
-    }
-  }, [internalEntityId, internalLayoutId, postParentMessage]);
+  const handleHistoryChange = useCallback(
+    (history: any) => {
+      if (history.index !== -1 && historyIndex.current !== history.index) {
+        historyIndex.current = history.index;
+        postParentMessage({
+          localChange: true,
+          hash: history.currentHistory.id,
+          history: JSON.stringify(history.currentHistory.data),
+          layoutId: internalLayoutId,
+          entityId: internalEntityId,
+        });
+      }
+    },
+    [internalEntityId, internalLayoutId, postParentMessage],
+  );
 
   const handleClearLocalChanges = () => {
     postParentMessage({
@@ -175,30 +176,30 @@ export const Editor = ({
     );
   };
 
-  const handleSave = async (data : Data) => {
+  const handleSave = async (data: Data) => {
     await save(data, role);
   };
 
   return (
-      <Puck
-          config={puckConfig}
-          data={JSON.parse(puckData)}
-          onChange={change}
-          overrides={{
-            header: () => {
-              const { appState } = usePuck();
-              return customHeader(
-                  selectedTemplate.id,
-                  layoutId,
-                  entityId,
-                  role,
-                  handleClearLocalChanges,
-                  handleHistoryChange,
-                  appState.data,
-                  handleSave
-              );
-            },
-          }}
-      />
+    <Puck
+      config={puckConfig}
+      data={JSON.parse(puckData)}
+      onChange={change}
+      overrides={{
+        header: () => {
+          const { appState } = usePuck();
+          return customHeader(
+            selectedTemplate.id,
+            layoutId,
+            entityId,
+            role,
+            handleClearLocalChanges,
+            handleHistoryChange,
+            appState.data,
+            handleSave,
+          );
+        },
+      }}
+    />
   );
 };

@@ -7,7 +7,7 @@ import { ComponentConfig } from "@measured/puck";
 
 const Core = () => {
   const profile = useDocument<LocationStream>(
-    (document) => document.c_locationCore
+    (document) => document.c_locationCore,
   );
 
   if (profile) {

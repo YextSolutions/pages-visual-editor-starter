@@ -1,7 +1,7 @@
 import "./puck.css";
-import {Data, usePuck} from "@measured/puck";
-import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react"
-import * as buttons from "./button"
+import { Data, usePuck } from "@measured/puck";
+import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
+import * as buttons from "./button";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,7 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/AlertDialog"
+} from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
@@ -21,56 +21,80 @@ const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
 };
 
-export const customHeader = (templateId: string, layoutId: string, entityId: string, role: string, handleClearLocalChanges: Function, handleHistoryChange: (history: any) => void, data: Data, handleSaveData: Function) => {
+export const customHeader = (
+  templateId: string,
+  layoutId: string,
+  entityId: string,
+  role: string,
+  handleClearLocalChanges: Function,
+  handleHistoryChange: (history: any) => void,
+  data: Data,
+  handleSaveData: Function,
+) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, historyStore },
   } = usePuck();
   const { hasFuture = false, hasPast = false } = historyStore || {};
   const hasLocalStorage = !!window.localStorage.getItem(
-    getLocalStorageKey(role, templateId, layoutId, entityId)
+    getLocalStorageKey(role, templateId, layoutId, entityId),
   );
   useEffect(() => {
     handleHistoryChange(historyStore);
   }, [historyStore?.index]);
 
   return (
-      <header className="puck-header">
-        <div className="header-left">
-          <ToggleUIButtons/>
-        </div>
-        <div className="header-center">
-        </div>
-        <div className="actions">
-          <buttons.Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
-            <RotateCcw className="sm-icon"/>
-          </buttons.Button>
-          <buttons.Button variant="ghost" size="icon" disabled={!hasFuture} onClick={forward}>
-            <RotateCw className="sm-icon"/>
-          </buttons.Button>
-          <ClearLocalChangesButton disabled={!hasLocalStorage} onClearLocalChanges={handleClearLocalChanges} />
-          <Button onClick={() => handleClick(entityDocument.slug)}>
-            Live Preview
-          </Button>
-          <Button disabled={!hasLocalStorage} onClick={async () => {
+    <header className="puck-header">
+      <div className="header-left">
+        <ToggleUIButtons />
+      </div>
+      <div className="header-center"></div>
+      <div className="actions">
+        <buttons.Button
+          variant="ghost"
+          size="icon"
+          disabled={!hasPast}
+          onClick={back}
+        >
+          <RotateCcw className="sm-icon" />
+        </buttons.Button>
+        <buttons.Button
+          variant="ghost"
+          size="icon"
+          disabled={!hasFuture}
+          onClick={forward}
+        >
+          <RotateCw className="sm-icon" />
+        </buttons.Button>
+        <ClearLocalChangesButton
+          disabled={!hasLocalStorage}
+          onClearLocalChanges={handleClearLocalChanges}
+        />
+        <Button onClick={() => handleClick(entityDocument.slug)}>
+          Live Preview
+        </Button>
+        <Button
+          disabled={!hasLocalStorage}
+          onClick={async () => {
             await handleSaveData(data);
             handleClearLocalChanges();
-          }}>
-            Publish
-          </Button>
-        </div>
-      </header>
+          }}
+        >
+          Publish
+        </Button>
+      </div>
+    </header>
   );
 };
 
 interface ClearLocalChangesButtonProps {
-  disabled: boolean
-  onClearLocalChanges: Function
+  disabled: boolean;
+  onClearLocalChanges: Function;
 }
 
 const ClearLocalChangesButton = ({
   disabled,
-  onClearLocalChanges
+  onClearLocalChanges,
 }: ClearLocalChangesButtonProps) => {
   return (
     <AlertDialog>
@@ -86,14 +110,12 @@ const ClearLocalChangesButton = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={() => onClearLocalChanges()}>
-            Confirm
-          </Button>
+          <Button onClick={() => onClearLocalChanges()}>Confirm</Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
-}
+  );
+};
 
 const ToggleUIButtons = () => {
   const {
@@ -119,7 +141,7 @@ const ToggleUIButtons = () => {
         },
       });
     },
-    [dispatch, leftSideBarVisible, rightSideBarVisible]
+    [dispatch, leftSideBarVisible, rightSideBarVisible],
   );
 
   return (

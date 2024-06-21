@@ -12,7 +12,7 @@ import { ComponentConfig } from "@measured/puck";
 
 const Hero = () => {
   const hero: C_locationHero = useDocument<LocationStream>(
-    (document) => document.c_locationHero
+    (document) => document.c_locationHero,
   );
 
   return (
