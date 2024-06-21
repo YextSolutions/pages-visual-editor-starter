@@ -27,7 +27,7 @@ export const customHeader = (
   entityId: string,
   role: string,
   handleClearLocalChanges: Function,
-  handleHistoryChange: (history: any) => void,
+  handleHistoryChange: (history: any, index: any) => void,
   data: Data,
   handleSaveData: Function,
 ) => {
@@ -35,14 +35,12 @@ export const customHeader = (
   const {
     history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
-  const hasLocalStorage = !!window.localStorage.getItem(getLocalStorageKey(role, templateId, layoutId, entityId));
+  const hasLocalStorage = !!window.localStorage.getItem(
+    getLocalStorageKey(role, templateId, layoutId, entityId),
+  );
   useEffect(() => {
-      handleHistoryChange(histories, index);
+    handleHistoryChange(histories, index);
   }, [index, histories, handleHistoryChange]);
-
-  useEffect(() => {
-    handleHistoryChange(historyStore);
-  }, [historyStore?.index]);
 
   return (
     <header className="puck-header">

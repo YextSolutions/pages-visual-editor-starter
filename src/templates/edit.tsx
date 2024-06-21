@@ -1,35 +1,28 @@
 import "../index.css";
+import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
+import { DocumentProvider } from "../hooks/useDocument";
 import {
-  Template,
-  GetPath,
-  TemplateConfig,
-  TemplateProps,
-  TemplateRenderProps,
-} from "@yext/pages";
-import { DocumentProvider } from "../hooks/useDocument";import {
   baseEntityPageLayoutsField,
   baseEntityVisualConfigField,
   VisualConfiguration,
   Editor,
   EntityDefinition,
-  TemplateDefinition
+  TemplateDefinition,
 } from "../puck/editor";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState, useCallback } from "react";
-import { fetchEntities, fetchTemplates, fetchEntity } from "../utils/api";
+import { fetchEntity } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
 import { Toaster } from "../components/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import { useLayouts } from "../hooks/useEntity";
 
 export const Role = {
   GLOBAL: "global",
   INDIVIDUAL: "individual",
 };
 const siteEntityId = "site";
-const layoutEntityType = "ce_pagesLayout";
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -86,7 +79,7 @@ const getPuckData = (
   layouts: LayoutDefinitionViewModel[],
   siteEntity: any,
 ): string => {
-  let data: TemplateData = {data:"", source: DataSource.None};
+  let data: TemplateData = { data: "", source: DataSource.None };
 
   // get puck data off base entity for ICs
   const baseEntityPageLayoutIds: string[] = [];
@@ -106,11 +99,9 @@ const getPuckData = (
         };
       }
     });
-    (baseEntity[baseEntityPageLayoutsField] ?? []).forEach(
-      (id: string) => {
-        baseEntityPageLayoutIds.push(id);
-      },
-    );
+    (baseEntity[baseEntityPageLayoutsField] ?? []).forEach((id: string) => {
+      baseEntityPageLayoutIds.push(id);
+    });
   }
 
   // get siteEntity layout ids from the site entity
@@ -172,12 +163,18 @@ const getPuckData = (
   return JSON.parse(data.data);
 };
 
-
-
-const TARGET_ORIGINS = ["http://localhost", "https://dev.yext.com", "https://qa.yext.com", "https://sandbox.yext.com", "https://www.yext.com", "https://app-qa.eu.yext.com", "https://app.eu.yext.com"];
+const TARGET_ORIGINS = [
+  "http://localhost",
+  "https://dev.yext.com",
+  "https://qa.yext.com",
+  "https://sandbox.yext.com",
+  "https://www.yext.com",
+  "https://app-qa.eu.yext.com",
+  "https://app.eu.yext.com",
+];
 
 // Render the editor
-const Edit: () => (JSX.Element) = () => {
+const Edit: () => JSX.Element = () => {
   const [template, setTemplate] = useState<TemplateDefinition>();
   const [entity, setEntity] = useState<EntityDefinition>();
   const [layoutId, setLayoutId] = useState<string>("");
@@ -185,110 +182,135 @@ const Edit: () => (JSX.Element) = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
   const [localStorage, setLocaleStorage] = useState<string>("");
-  const [role, setRole] = useState<string>('');
+  const [role, setRole] = useState<string>("");
   const [puckData, setPuckDataState] = useState<any>("");
   const [histories, setHistories] = useState<any>({});
   const [historyIndex, setHistoryIndex] = useState<number>(0);
 
-  const setPuckData = useCallback(async (
-    VEData: any, 
-    VEHash: string, 
-    baseEntity: any, 
-    layouts: LayoutDefinitionViewModel[],
-    layoutId: string,
-    template: TemplateDefinition,
-  ) => {
+  const setPuckData = useCallback(
+    async (
+      VEData: any,
+      VEHash: string,
+      baseEntity: any,
+      layouts: LayoutDefinitionViewModel[],
+      layoutId: string,
+      template: TemplateDefinition,
+    ) => {
+      const setNewHistory = (newHist: { data: any; id: string }) => {
+        const newHistory = [];
+        newHistory.push(newHist);
+        setHistories(newHistory);
+        setHistoryIndex(0);
+        setLocaleStorage(JSON.stringify(newHistory));
+        window.localStorage.setItem(
+          getLocalStorageKey(
+            getPuckRole(role),
+            template.id,
+            layoutId,
+            baseEntity.externalId,
+          ),
+          JSON.stringify(newHistory),
+        );
+      };
 
-    const setNewHistory = (newHist: {data: any, id: string}) => {
-      const newHistory = [];
-      newHistory.push(newHist);
-      setHistories(newHistory);
-      setHistoryIndex(0);
-      setLocaleStorage(JSON.stringify(newHistory));
-      window.localStorage.setItem(getLocalStorageKey(
-        getPuckRole(role),
-        template.id,
-        layoutId,
-        baseEntity.externalId,
-      ), JSON.stringify(newHistory));
-    }
-
-    if (VEData) {
-      setPuckDataState(VEData);
-      const localCurr = window.localStorage.getItem(
-        getLocalStorageKey(
-          getPuckRole(role),
-          template.id,
-          layoutId,
-          baseEntity.externalId,
-        ))
-      if (localCurr) {
-        const foundIndex = JSON.parse(localCurr).findIndex((item: any) => item.id === VEHash)
-        if (foundIndex !== -1) {  // if we have the save_state history in local storage
-          setHistoryIndex(foundIndex);
-          setHistories(JSON.parse(localCurr));
+      if (VEData) {
+        setPuckDataState(VEData);
+        const localCurr = window.localStorage.getItem(
+          getLocalStorageKey(
+            getPuckRole(role),
+            template.id,
+            layoutId,
+            baseEntity.externalId,
+          ),
+        );
+        if (localCurr) {
+          const foundIndex = JSON.parse(localCurr).findIndex(
+            (item: any) => item.id === VEHash,
+          );
+          if (foundIndex !== -1) {
+            // if we have the save_state history in local storage
+            setHistoryIndex(foundIndex);
+            setHistories(JSON.parse(localCurr));
+          } else {
+            // otherwise start fresh from VES
+            setNewHistory({ data: VEData, id: VEHash }); // TODO: too many datas
+          }
+        } else {
+          // if there is no local storage start fresh from VES
+          setNewHistory({ data: VEData, id: VEHash });
         }
-        else {  // otherwise start fresh from VES
-          setNewHistory({data: VEData, id: VEHash});  // TODO: too many datas
-        }
+      } else {
+        const siteEntity = await fetchEntity(siteEntityId);
+        setPuckDataState(
+          getPuckData(
+            getPuckRole(role),
+            siteEntityId,
+            template?.id ?? "",
+            layoutId,
+            baseEntity,
+            layouts,
+            siteEntity,
+          ),
+        );
+        // if getting from content, wipe everything
+        setLocaleStorage("");
+        window.localStorage.removeItem(
+          getLocalStorageKey(
+            getPuckRole(role),
+            template.id,
+            layoutId,
+            baseEntity.externalId,
+          ),
+        );
+        setHistories([]);
+        setHistoryIndex(0);
       }
-      else { // if there is no local storage start fresh from VES
-        setNewHistory({data: VEData, id: VEHash});
-      }
-    }
-    else{
-      const siteEntity = await fetchEntity(siteEntityId);
-      setPuckDataState(getPuckData(
-        getPuckRole(role),
-        siteEntityId,
-        template?.id ?? "",
-        layoutId,
-        baseEntity,
-        layouts,
-        siteEntity,
-      ));
-      // if getting from content, wipe everything
-      setLocaleStorage("");
-      window.localStorage.removeItem(getLocalStorageKey(
-        getPuckRole(role),
-        template.id,
-        layoutId,
-        baseEntity.externalId,
-      ));
-      setHistories([]);
-      setHistoryIndex(0);
-    }
-    
-  }, [role, localStorage, entity, template, setHistories, setHistoryIndex, setPuckDataState, layoutId, getPuckRole, setLocaleStorage, ]);
+    },
+    [
+      role,
+      localStorage,
+      entity,
+      template,
+      setHistories,
+      setHistoryIndex,
+      setPuckDataState,
+      layoutId,
+      getPuckRole,
+      setLocaleStorage,
+    ],
+  );
 
-  const postParentMessage = (message : any) => {
-    for (const targetOrigin of TARGET_ORIGINS){
+  const postParentMessage = (message: any) => {
+    for (const targetOrigin of TARGET_ORIGINS) {
       window.parent.postMessage(message, targetOrigin);
     }
   };
 
   useEffect(() => {
     const handleParentMessage = (message: MessageEvent) => {
-      if (!TARGET_ORIGINS.includes(message.origin)) { 
+      if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
-      if(typeof message.data === 'object' && message.data.params) {
-        setParams({...message.data.params, _role: message.data.params.role, _entity: message.data.params.entity});
-        if(message.data.params.saveState) {
+      if (typeof message.data === "object" && message.data.params) {
+        setParams({
+          ...message.data.params,
+          _role: message.data.params.role,
+          _entity: message.data.params.entity,
+        });
+        if (message.data.params.saveState) {
           setPuckData(
-          JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
-          message.data.params.saveState.Hash,
-          message.data.params.entity, 
-          message.data.params.layouts,
-          message.data.params.layoutId,
-          message.data.params.template,
-        );
-        }
-        else{
+            JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
+            message.data.params.saveState.Hash,
+            message.data.params.entity,
+            message.data.params.layouts,
+            message.data.params.layoutId,
+            message.data.params.template,
+          );
+        } else {
           setPuckData(
             null,
             "",
-            message.data.params.entity, 
+            message.data.params.entity,
             message.data.params.layouts,
             message.data.params.layoutId,
             message.data.params.template,
@@ -298,30 +320,27 @@ const Edit: () => (JSX.Element) = () => {
     };
 
     const listenForParentMessages = () => {
-      window.addEventListener('message', handleParentMessage);
+      window.addEventListener("message", handleParentMessage);
     };
 
     setMounted(true);
     listenForParentMessages();
-    postParentMessage({entityId: entity?.externalId ?? ''});
+    postParentMessage({ entityId: entity?.externalId ?? "" });
 
     return () => {
-      window.removeEventListener('message', handleParentMessage);
+      window.removeEventListener("message", handleParentMessage);
     };
   }, []);
 
-  async function setParams({
-    template,
-    layoutId,
-    _entity,
-    _role,
-    layouts}) {
+  async function setParams({ template, layoutId, _entity, _role, layouts }) {
     // get layout
     if (!layoutId) {
       layoutId = layouts[0].externalId;
     }
-  
-    const targetLayout = layouts.find((layout: { externalId: any; }) => layout.externalId === layoutId);
+
+    const targetLayout = layouts.find(
+      (layout: { externalId: any }) => layout.externalId === layoutId,
+    );
     const internalLayoutId = targetLayout?.id;
     setInternalLayoutId(internalLayoutId);
     setLayoutId(layoutId);
@@ -335,13 +354,13 @@ const Edit: () => (JSX.Element) = () => {
     setLocaleStorage(
       typeof window !== "undefined"
         ? window.localStorage.getItem(
-          getLocalStorageKey(
-            getPuckRole(role),
-            template.id,
-            layoutId,
-            _entity.externalId,
-          ),
-        ) ?? ""
+            getLocalStorageKey(
+              getPuckRole(role),
+              template.id,
+              layoutId,
+              _entity.externalId,
+            ),
+          ) ?? ""
         : "",
     );
     setPuckConfig(puckConfig);
@@ -372,15 +391,10 @@ const Edit: () => (JSX.Element) = () => {
             : "";
 
   const isLoading =
-    !document ||
-    !puckData ||
-    !puckConfig ||
-    !template ||
-    !entity;
+    !document || !puckData || !puckConfig || !template || !entity;
 
   const progress: number =
-    (100 *
-      (!!template + !!entity + !!puckConfig + !!puckData + !!document)) /
+    (100 * (!!template + !!entity + !!puckConfig + !!puckData + !!document)) /
     5;
 
   if (!mounted || typeof navigator === "undefined") {
