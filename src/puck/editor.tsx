@@ -190,7 +190,7 @@ export const Editor = ({
   return (
     <Puck
       config={puckConfig}
-      data={JSON.parse(puckData)} //TODO: tbd on parse, see how this works in dev
+      data={puckData}
       onPublish={(data: Data) => save(data, role)}
       initialHistory={{ histories: histories, index: index }}
       onChange={change}
