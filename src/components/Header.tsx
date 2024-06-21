@@ -29,7 +29,7 @@ const HeaderLayout = (props: HeaderLayoutProps) => {
             {props.links.map((item: CTA, idx) => (
               <li
                 key={item.label}
-                className="cursor-pointer font-bold text-[#D72E2E] hover:text-[#871900] "
+                className="cursor-pointer font-bold text-[#1B78D0] hover:text-[#073866] "
               >
                 <Link cta={item} eventName={`link${idx}`} />
               </li>
