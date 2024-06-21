@@ -213,15 +213,6 @@ const Edit: () => JSX.Element = () => {
       layoutId: string,
       template: TemplateDefinition
     ) => {
-      const localHistoryArray = window.localStorage.getItem(
-        getLocalStorageKey(
-          getPuckRole(role),
-          template.id,
-          internalLayoutId,
-          entity?.internalId
-        )
-      );
-
       // nothing in save_state table, start fresh from Content
       if (!saveStateHistory) {
         clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
@@ -239,6 +230,15 @@ const Edit: () => JSX.Element = () => {
         );
         return;
       }
+
+      const localHistoryArray = window.localStorage.getItem(
+        getLocalStorageKey(
+          getPuckRole(role),
+          template.id,
+          internalLayoutId,
+          entity?.internalId
+        )
+      );
 
       // nothing in localStorage, start fresh from VES data
       if (!localHistoryArray) {
@@ -341,6 +341,7 @@ const Edit: () => JSX.Element = () => {
     _role: string;
     layouts: any;
   }) => {
+    console.log("setParms");
     // get layout
     if (!layoutId) {
       layoutId = layouts[0].externalId;
