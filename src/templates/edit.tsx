@@ -324,7 +324,7 @@ const Edit: () => JSX.Element = () => {
     };
 
     const listenForParentMessages = () => {
-      window.addEventListener("message", handleParentMessage);
+      window.addEventListener("message", (e) => handleParentMessage(e));
     };
 
     setMounted(true);
@@ -332,7 +332,7 @@ const Edit: () => JSX.Element = () => {
     postParentMessage({ entityId: entity?.externalId ?? "" });
 
     return () => {
-      window.removeEventListener("message", handleParentMessage);
+      window.removeEventListener("message", (e) => handleParentMessage(e));
     };
   }, []);
 
