@@ -27,7 +27,7 @@ export const customHeader = (
   entityId: string,
   role: string,
   handleClearLocalChanges: Function,
-  handleHistoryChange: (history: any, index: any) => void,
+  handleHistoryChange: (histories: Array<{data:any, id:string}>, index:number) => void,
   data: Data,
   handleSaveData: Function,
 ) => {
