@@ -129,7 +129,9 @@ const Edit: () => JSX.Element = () => {
   };
 
   const loadPuckDataUsingHistory = useCallback(
-    async (messagePayload: MessagePayload) => {
+    (messagePayload: MessagePayload) => {
+      console.log("loadPuckDataUsingHistory payload", messagePayload);
+      console.log("messagePayload?", messagePayload);
       // nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
         clearHistory(
@@ -184,7 +186,7 @@ const Edit: () => JSX.Element = () => {
         messagePayload.entity?.id
       );
     },
-    [setHistories, setHistoryIndex, setPuckData]
+    [setHistories, setHistoryIndex, setPuckData, clearHistory, getPuckData]
   );
 
   const postParentMessage = (message: any) => {
@@ -206,6 +208,11 @@ const Edit: () => JSX.Element = () => {
         const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
         setPuckConfig(puckConfig);
         setMessagePayload(messagePayloadTemp);
+        window.history.replaceState(
+          null,
+          "",
+          `edit?templateId=${messagePayloadTemp.templateId}&layoutId=${messagePayloadTemp.externalLayoutId}&entityId=${messagePayloadTemp.externalEntityId}&role=${messagePayloadTemp.role}}`
+        );
         loadPuckDataUsingHistory(messagePayloadTemp);
         console.log("messagePayloadTemp", messagePayloadTemp);
       }
