@@ -177,7 +177,7 @@ const getPuckData = (
 const TARGET_ORIGINS = ["http://localhost", "https://dev.yext.com", "https://qa.yext.com", "https://sandbox.yext.com", "https://www.yext.com", "https://app-qa.eu.yext.com", "https://app.eu.yext.com"];
 
 // Render the editor
-const Edit: Template<TemplateRenderProps> = () => {
+const Edit: () => (JSX.Element) = () => {
   const [template, setTemplate] = useState<TemplateDefinition>();
   const [entity, setEntity] = useState<EntityDefinition>();
   const [layoutId, setLayoutId] = useState<string>("");
@@ -352,13 +352,6 @@ const Edit: Template<TemplateRenderProps> = () => {
     );
   }
 
-  const handleClearLocalChanges = () => {
-    postParentMessage({clearLocalChanges: true});
-    window.localStorage.clear();
-    window.location.reload();
-  };
-  
-
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
     templateId: template?.id,
@@ -407,7 +400,6 @@ const Edit: Template<TemplateRenderProps> = () => {
               puckData={puckData}
               role={getPuckRole(role)}
               isLoading={isLoading}
-              handleClearLocalChanges={handleClearLocalChanges}
               postParentMessage={postParentMessage}
               internalEntityId={entity?.internalId}
               internalLayoutId={internalLayoutId}

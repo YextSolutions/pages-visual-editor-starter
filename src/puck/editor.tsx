@@ -40,7 +40,6 @@ export interface EditorProps {
   puckData: string;
   role: string;
   isLoading: boolean;
-  handleClearLocalChanges: Function;
   postParentMessage: Function;
   internalLayoutId: number;
   internalEntityId: number;
@@ -65,7 +64,6 @@ export const Editor = ({
   puckData,
   role,
   isLoading,
-  handleClearLocalChanges,
   postParentMessage,
   histories,
   index,
