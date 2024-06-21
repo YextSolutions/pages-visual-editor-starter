@@ -213,6 +213,7 @@ const Edit: () => JSX.Element = () => {
       layoutId: string,
       template: TemplateDefinition
     ) => {
+      console.log("populatePuckParams");
       // nothing in save_state table, start fresh from Content
       if (!saveStateHistory) {
         clearHistory(template?.id ?? "", internalLayoutId, entity?.internalId);
@@ -282,7 +283,7 @@ const Edit: () => JSX.Element = () => {
   };
 
   useEffect(() => {
-    const handleParentMessage = (message: MessageEvent) => {
+    const handleParentMessage = async (message: MessageEvent) => {
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
       }
@@ -295,7 +296,7 @@ const Edit: () => JSX.Element = () => {
         });
         if (message.data.params.saveState) {
           console.log("has saveState populatePuckParams");
-          populatePuckParams(
+          await populatePuckParams(
             JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
             message.data.params.saveState.Hash,
             message.data.params.entity,
@@ -305,7 +306,7 @@ const Edit: () => JSX.Element = () => {
           );
         } else {
           console.log("no saveState populatePuckParams");
-          populatePuckParams(
+          await populatePuckParams(
             null,
             "",
             message.data.params.entity,
