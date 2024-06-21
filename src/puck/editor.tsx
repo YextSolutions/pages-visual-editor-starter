@@ -40,11 +40,16 @@ export interface EditorProps {
   puckData: string;
   role: string;
   isLoading: boolean;
-  postParentMessage: Function;
+  postParentMessage: (args: any) => void;
   internalLayoutId: number;
   internalEntityId: number;
   histories: Array<{ data: any; id: string }>;
   index: number;
+  clearHistory: (
+    templateId: string,
+    layoutId: string,
+    entityId: string
+  ) => void;
 }
 
 export const siteEntityVisualConfigField = "c_visualLayouts",
@@ -67,6 +72,7 @@ export const Editor = ({
   postParentMessage,
   histories,
   index,
+  clearHistory,
 }: EditorProps) => {
   const toastId = "toast";
   const mutation = useUpdateEntityMutation();
@@ -107,15 +113,7 @@ export const Editor = ({
   );
 
   const handleClearLocalChanges = () => {
-    postParentMessage({
-      clearLocalChanges: true,
-      layoutId: internalLayoutId,
-      entityId: internalEntityId,
-    });
-    window.localStorage.removeItem(
-      getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
-    );
-    setTimeout(() => window.location.reload(), 1000);
+    clearHistory(selectedTemplate.id, layoutId, entityId);
   };
 
   useEffect(() => {
@@ -182,7 +180,7 @@ export const Editor = ({
     }
   };
 
-  const change = async (data: Data) => {
+  const change = async () => {
     if (isLoading) {
       return;
     }
@@ -199,7 +197,7 @@ export const Editor = ({
   return (
     <Puck
       config={puckConfig}
-      data={puckData}
+      data={puckData as Partial<Data>}
       onPublish={(data: Data) => save(data, role)}
       initialHistory={
         index === -1 ? undefined : { histories: histories, index: index }

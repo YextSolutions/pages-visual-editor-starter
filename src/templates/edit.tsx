@@ -186,6 +186,23 @@ const Edit: () => JSX.Element = () => {
   const [histories, setHistories] = useState<Array<any>>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
 
+  const clearHistory = (
+    templateId: string,
+    layoutId: string,
+    entityId: string
+  ) => {
+    setHistories([]);
+    setHistoryIndex(-1);
+    postParentMessage({
+      clearLocalChanges: true,
+      layoutId: internalLayoutId,
+      entityId: entityId,
+    });
+    window.localStorage.removeItem(
+      getLocalStorageKey(getPuckRole(role), templateId, layoutId, entityId)
+    );
+  };
+
   const populatePuckParams = useCallback(
     async (
       saveStateHistory: any,
@@ -195,19 +212,6 @@ const Edit: () => JSX.Element = () => {
       layoutId: string,
       template: TemplateDefinition
     ) => {
-      const clearHistory = () => {
-        setHistories([]);
-        setHistoryIndex(-1);
-        window.localStorage.removeItem(
-          getLocalStorageKey(
-            getPuckRole(role),
-            template.id,
-            layoutId,
-            baseEntity.externalId
-          )
-        );
-      };
-
       const localHistoryArray = window.localStorage.getItem(
         getLocalStorageKey(
           getPuckRole(role),
@@ -219,7 +223,7 @@ const Edit: () => JSX.Element = () => {
 
       // nothing in save_state table, start fresh from Content
       if (!saveStateHistory) {
-        clearHistory();
+        clearHistory(template?.id ?? "", layoutId, baseEntity.externalId);
         const siteEntity = await fetchEntity(siteEntityId);
         setPuckData(
           getPuckData(
@@ -237,7 +241,7 @@ const Edit: () => JSX.Element = () => {
 
       // nothing in localStorage, start fresh from VES data
       if (!localHistoryArray) {
-        clearHistory();
+        clearHistory(template?.id ?? "", layoutId, baseEntity.externalId);
         setPuckData(saveStateHistory.data);
         return;
       }
@@ -256,7 +260,7 @@ const Edit: () => JSX.Element = () => {
         return;
       }
       // otherwise start fresh
-      clearHistory();
+      clearHistory(template?.id ?? "", layoutId, baseEntity.externalId);
     },
     [
       role,
@@ -397,6 +401,7 @@ const Edit: () => JSX.Element = () => {
               internalLayoutId={internalLayoutId}
               index={historyIndex}
               histories={histories}
+              clearHistory={clearHistory}
             />
           </>
         ) : (
