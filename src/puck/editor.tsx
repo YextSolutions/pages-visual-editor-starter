@@ -93,6 +93,15 @@ export const Editor = ({
           JSON.stringify(histories)
         );
       }
+
+      if (index === 1 && historyIndex.current !== index) {
+        historyIndex.current = index;
+        postParentMessage({
+          clearLocalChanges: true,
+          layoutId: internalLayoutId,
+          entityId: internalEntityId,
+        });
+      }
     },
     [internalEntityId, internalLayoutId, postParentMessage]
   );
