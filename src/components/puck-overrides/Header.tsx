@@ -27,16 +27,21 @@ export const customHeader = (
   entityId: string,
   role: string,
   handleClearLocalChanges: Function,
-  handleHistoryChange: (histories: Array<{data:any, id:string}>, index:number) => void,
+  handleHistoryChange: (
+    histories: Array<{ data: any; id: string }>,
+    index: number
+  ) => void,
   data: Data,
-  handleSaveData: Function,
+  handleSaveData: Function
 ) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
+  console.log("histories", histories);
+  console.log("hasPast", hasPast);
   const hasLocalStorage = !!window.localStorage.getItem(
-    getLocalStorageKey(role, templateId, layoutId, entityId),
+    getLocalStorageKey(role, templateId, layoutId, entityId)
   );
   useEffect(() => {
     handleHistoryChange(histories, index);
@@ -140,7 +145,7 @@ const ToggleUIButtons = () => {
         },
       });
     },
-    [dispatch, leftSideBarVisible, rightSideBarVisible],
+    [dispatch, leftSideBarVisible, rightSideBarVisible]
   );
 
   return (
