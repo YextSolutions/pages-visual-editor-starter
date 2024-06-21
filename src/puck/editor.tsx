@@ -75,8 +75,6 @@ export const Editor = ({
 
   const handleHistoryChange = useCallback(
     (histories: Array<{ data: any; id: string }>, index: number) => {
-      console.log("before index", index);
-      console.log("before historyIndex.current", historyIndex.current);
       if (
         index !== -1 &&
         historyIndex.current !== index &&
@@ -95,8 +93,7 @@ export const Editor = ({
           JSON.stringify(histories)
         );
       }
-      console.log("index", index);
-      console.log("historyIndex.current", historyIndex.current);
+
       if (index === -1 && historyIndex.current !== index) {
         historyIndex.current = index;
         postParentMessage({
@@ -118,7 +115,7 @@ export const Editor = ({
     window.localStorage.removeItem(
       getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
     );
-    window.location.reload();
+    setTimeout(() => window.location.reload(), 1000);
   };
 
   useEffect(() => {
