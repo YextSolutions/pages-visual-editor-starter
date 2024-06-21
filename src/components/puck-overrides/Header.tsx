@@ -40,6 +40,7 @@ export const customHeader = (
   } = usePuck();
   console.log("histories", histories);
   console.log("hasPast", hasPast);
+  console.log("index", index);
   const hasLocalStorage = !!window.localStorage.getItem(
     getLocalStorageKey(role, templateId, layoutId, entityId)
   );
