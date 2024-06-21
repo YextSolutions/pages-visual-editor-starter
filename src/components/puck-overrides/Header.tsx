@@ -16,30 +16,33 @@ import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
 import { Button } from "./button";
+import { MessagePayload } from "../../types/messagePayload";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
 };
 
 export const customHeader = (
-  templateId: string,
-  layoutId: string,
-  entityId: string,
-  role: string,
-  handleClearLocalChanges: Function,
+  handleClearLocalChanges: () => void,
   handleHistoryChange: (
     histories: Array<{ data: any; id: string }>,
     index: number
   ) => void,
   data: Data,
-  handleSaveData: Function
+  handleSaveData: (data: Data) => Promise<void>,
+  messagePayload: MessagePayload
 ) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
   const hasLocalStorage = !!window.localStorage.getItem(
-    getLocalStorageKey(role, templateId, layoutId, entityId)
+    getLocalStorageKey(
+      messagePayload.role,
+      messagePayload.templateId,
+      messagePayload.layoutId,
+      messagePayload.entity?.id
+    )
   );
   useEffect(() => {
     handleHistoryChange(histories, index);
@@ -91,7 +94,7 @@ export const customHeader = (
 
 interface ClearLocalChangesButtonProps {
   disabled: boolean;
-  onClearLocalChanges: Function;
+  onClearLocalChanges: () => void;
 }
 
 const ClearLocalChangesButton = ({
@@ -112,7 +115,7 @@ const ClearLocalChangesButton = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={() => onClearLocalChanges()}>Confirm</Button>
+          <Button onClick={onClearLocalChanges}>Confirm</Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

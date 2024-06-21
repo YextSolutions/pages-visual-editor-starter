@@ -1,10 +1,9 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
 
 const vparam = 20240401;
-const apiRoot = API_ROOT || "api.yext.com";
 
 export default async function entityDocument(
-  request: PagesHttpRequest
+  request: PagesHttpRequest,
 ): Promise<PagesHttpResponse> {
   const { method, pathParams } = request;
 
@@ -26,7 +25,7 @@ export default async function entityDocument(
   switch (method) {
     case "GET":
       try {
-        let requestPath = `https://${apiRoot}/v2/accounts/me/sites/${YEXT_PUBLIC_SITE_ID}/fetchentitydocument?v=${vparam}&entityId=${entityId}&templateId=${templateId}&locale=en&api_key=${YEXT_PUBLIC_API_KEY}`;
+        let requestPath = `https://api.yext.com/v2/accounts/me/sites/${YEXT_PUBLIC_SITE_ID}/fetchentitydocument?v=${vparam}&entityId=${entityId}&templateId=${templateId}&locale=en&api_key=${YEXT_PUBLIC_API_KEY}`;
         if (suggestionIds) {
           requestPath += `&editIds=${suggestionIds}`;
         }
