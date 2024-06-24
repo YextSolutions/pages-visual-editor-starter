@@ -125,20 +125,21 @@ const Edit: () => JSX.Element = () => {
     entityId?: number
   ) => {
     console.log("clearHistory save: layout, entity", layoutId, entityId);
-    setHistories([]);
-    setHistoryIndex(-1);
-    postParentMessage({
-      clearLocalChanges: true,
-      layoutId: layoutId,
-      entityId: entityId,
-    });
-    window.localStorage.removeItem(
-      getLocalStorageKey(role, templateId, layoutId, entityId)
-    );
+    // setHistories([]);
+    // setHistoryIndex(-1);
+    // postParentMessage({
+    //   clearLocalChanges: true,
+    //   layoutId: layoutId,
+    //   entityId: entityId,
+    // });
+    // window.localStorage.removeItem(
+    //   getLocalStorageKey(role, templateId, layoutId, entityId)
+    // );
   };
 
   const loadPuckDataUsingHistory = useCallback(
     (messagePayload: MessagePayload) => {
+      console.log("calling loadPuckDataUsingHistory");
       // nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
         console.log("no saveState from DB");
