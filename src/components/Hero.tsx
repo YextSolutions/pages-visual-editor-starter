@@ -176,7 +176,7 @@ export const Hero: ComponentConfig<HeroProps> = {
             <div className="flex">
               {hero?.cta1 && (
                 <CTA
-                  className="mr-3"
+                  className="mr-3 components"
                   variant={cta1.variant}
                   label={hero.cta1.name}
                   url={hero.cta1.link ? hero.cta1.link : "#"}
@@ -184,6 +184,7 @@ export const Hero: ComponentConfig<HeroProps> = {
               )}
               {hero?.cta2 && (
                 <CTA
+                className="components"
                   variant={cta2.variant}
                   label={hero.cta2.name}
                   url={hero.cta2.link ? hero.cta2.link : "#"}
