@@ -166,6 +166,7 @@ const Edit: () => JSX.Element = () => {
       // Nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
         console.log("No save state, clearing localStorage");
+        setHistories([]);
         // clearLocalStorage(
         //   messagePayload.role,
         //   messagePayload.templateId,
