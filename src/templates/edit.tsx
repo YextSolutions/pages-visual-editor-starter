@@ -137,66 +137,67 @@ const Edit: () => JSX.Element = () => {
 
   const loadPuckDataUsingHistory = useCallback(
     (messagePayload: MessagePayload) => {
-      console.log("loadPuckDataUsingHistory payload", messagePayload);
-      console.log("messagePayload?", messagePayload);
-      // nothing in save_state table, start fresh from Content
-      if (!messagePayload.saveState) {
-        console.log("no saveState from DB");
-        clearHistory(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        );
-        setPuckData(getPuckData(messagePayload));
-        return;
-      }
+      console.log("calling loadPuckDataUsingHistory");
+      // console.log("loadPuckDataUsingHistory payload", messagePayload);
+      // console.log("messagePayload?", messagePayload);
+      // // nothing in save_state table, start fresh from Content
+      // if (!messagePayload.saveState) {
+      //   console.log("no saveState from DB");
+      //   clearHistory(
+      //     messagePayload.role,
+      //     messagePayload.templateId,
+      //     messagePayload.layoutId,
+      //     messagePayload.entity?.id
+      //   );
+      //   setPuckData(getPuckData(messagePayload));
+      //   return;
+      // }
 
-      const localHistoryArray = window.localStorage.getItem(
-        getLocalStorageKey(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        )
-      );
+      // const localHistoryArray = window.localStorage.getItem(
+      //   getLocalStorageKey(
+      //     messagePayload.role,
+      //     messagePayload.templateId,
+      //     messagePayload.layoutId,
+      //     messagePayload.entity?.id
+      //   )
+      // );
 
-      // nothing in localStorage, start fresh from VES data
-      if (!localHistoryArray) {
-        console.log("no localStorage");
-        clearHistory(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        );
-        setPuckData(messagePayload.saveState.history);
-        return;
-      }
+      // // nothing in localStorage, start fresh from VES data
+      // if (!localHistoryArray) {
+      //   console.log("no localStorage");
+      //   clearHistory(
+      //     messagePayload.role,
+      //     messagePayload.templateId,
+      //     messagePayload.layoutId,
+      //     messagePayload.entity?.id
+      //   );
+      //   setPuckData(messagePayload.saveState.history);
+      //   return;
+      // }
 
-      const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-        (item: any) => item.id === messagePayload.saveState?.hash
-      );
+      // const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
+      //   (item: any) => item.id === messagePayload.saveState?.hash
+      // );
 
-      // if we have VES data, use it for current puck data
-      console.log("has saveState from db");
-      setPuckData(messagePayload.saveState.history);
+      // // if we have VES data, use it for current puck data
+      // console.log("has saveState from db");
+      // setPuckData(messagePayload.saveState.history);
 
-      // if saved history in local storage, use that for future/past
-      if (localHistoryIndex !== -1) {
-        console.log("found the index");
-        setHistoryIndex(localHistoryIndex);
-        setHistories(JSON.parse(localHistoryArray));
-        return;
-      }
-      // otherwise start fresh
-      console.log("start over");
-      clearHistory(
-        messagePayload.role,
-        messagePayload.templateId,
-        messagePayload.layoutId,
-        messagePayload.entity?.id
-      );
+      // // if saved history in local storage, use that for future/past
+      // if (localHistoryIndex !== -1) {
+      //   console.log("found the index");
+      //   setHistoryIndex(localHistoryIndex);
+      //   setHistories(JSON.parse(localHistoryArray));
+      //   return;
+      // }
+      // // otherwise start fresh
+      // console.log("start over");
+      // clearHistory(
+      //   messagePayload.role,
+      //   messagePayload.templateId,
+      //   messagePayload.layoutId,
+      //   messagePayload.entity?.id
+      // );
     },
     [setHistories, setHistoryIndex, setPuckData, clearHistory, getPuckData]
   );

@@ -59,42 +59,45 @@ export const Editor = ({
 
   const handleHistoryChange = useCallback(
     (histories: Array<{ data: any; id: string }>, index: number) => {
-      console.log("handleHistoryChange payload", messagePayload);
-      console.log("histories", histories);
-      if (
-        index !== -1 &&
-        historyIndex.current !== index &&
-        histories.length > 0
-      ) {
-        historyIndex.current = index;
+      console.log("calling handleHistoryChange");
+      //   console.log("handleHistoryChange payload", messagePayload);
+      //   console.log("histories", histories);
+      //   if (
+      //     index !== -1 &&
+      //     historyIndex.current !== index &&
+      //     histories.length > 0
+      //   ) {
+      //     historyIndex.current = index;
 
-        postParentMessage({
-          localChange: true,
-          hash: histories[index].id,
-          history: JSON.stringify(histories[index].data),
-          layoutId: messagePayload.layoutId,
-          entityId: messagePayload.entity?.id,
-        });
-        window.localStorage.setItem(
-          getLocalStorageKey(
-            role,
-            selectedTemplate.id,
-            messagePayload.layoutId,
-            messagePayload.entity?.id
-          ),
-          JSON.stringify(histories)
-        );
-      }
+      //     //TODO: something is wiping history out of localStorage and the data is wonk in DB
 
-      if (index === -1 && historyIndex.current !== index) {
-        historyIndex.current = index;
+      //     postParentMessage({
+      //       localChange: true,
+      //       hash: histories[index].id,
+      //       history: JSON.stringify(histories[index].data),
+      //       layoutId: messagePayload.layoutId,
+      //       entityId: messagePayload.entity?.id,
+      //     });
+      //     window.localStorage.setItem(
+      //       getLocalStorageKey(
+      //         role,
+      //         selectedTemplate.id,
+      //         messagePayload.layoutId,
+      //         messagePayload.entity?.id
+      //       ),
+      //       JSON.stringify(histories)
+      //     );
+      //   }
 
-        postParentMessage({
-          clearLocalChanges: true,
-          layoutId: messagePayload.layoutId,
-          entityId: messagePayload.entity?.id,
-        });
-      }
+      //   if (index === -1 && historyIndex.current !== index) {
+      //     historyIndex.current = index;
+
+      //     postParentMessage({
+      //       clearLocalChanges: true,
+      //       layoutId: messagePayload.layoutId,
+      //       entityId: messagePayload.entity?.id,
+      //     });
+      //   }
     },
     [messagePayload, postParentMessage]
   );
