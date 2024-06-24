@@ -1,5 +1,6 @@
 import { ImageType, Link, CTA } from "@yext/pages-components";
 import logo from "../assets/logo.png";
+import "./index.css";
 
 const navigation: CTA[] = [
   { link: "/", label: "Restaurants" },

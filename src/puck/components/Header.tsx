@@ -1,7 +1,7 @@
 import "./puck.css";
 import { Data, usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
-import * as buttons from "./button";
+import * as buttons from "../../components/ui/button";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,11 +11,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/AlertDialog";
+} from "../../components/ui/AlertDialog";
 import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
-import { Button } from "./button";
+import { Button } from "../../components/ui/button";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");

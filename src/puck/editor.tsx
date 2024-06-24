@@ -1,7 +1,7 @@
 import { Puck, Data, Config, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
-import { customHeader } from "../components/puck-overrides/Header";
+import { customHeader } from "./components/Header";
 import { toast } from "sonner";
 import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";

@@ -8,6 +8,7 @@ import { CTA } from "./ui/cta";
 import { ButtonProps } from "./ui/button";
 import { cn } from "../utils/cn";
 import useDeviceSizes from "../hooks/useDeviceSizes";
+import "./index.css";
 
 export type HeroProps = {
   imageMode: "left" | "right";

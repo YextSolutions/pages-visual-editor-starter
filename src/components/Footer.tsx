@@ -7,6 +7,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import logo from "../assets/logo-white.png"; // Adjust the path as needed
+import "./index.css";
 
 const navigation: CTA[] = [
   { link: "#", label: "Contact Us" },

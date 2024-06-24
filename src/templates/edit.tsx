@@ -14,7 +14,7 @@ import { useEffect, useState, useCallback } from "react";
 import { fetchEntity } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
-import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
+import { LoadingScreen } from "../puck/components/LoadingScreen";
 import { Toaster } from "../components/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 
