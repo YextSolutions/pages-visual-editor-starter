@@ -68,12 +68,12 @@ export const Editor = ({
         historyIndex.current = index;
 
         //TODO: something is wiping history out of localStorage and the data is wonk in DB
-        console.log("posting to parent", JSON.stringify(histories[index].data));
+        console.log("posting to parent", histories[index].data);
 
         postParentMessage({
           localChange: true,
           hash: histories[index].id,
-          history: JSON.stringify(histories[index].data),
+          history: histories[index].data,
           layoutId: messagePayload.layoutId,
           entityId: messagePayload.entity?.id,
         });
