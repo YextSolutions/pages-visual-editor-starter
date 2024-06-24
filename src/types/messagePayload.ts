@@ -129,7 +129,7 @@ export const convertRawMessageToObject = (
     templateId: messageParams.templateId,
     saveState: messageParams.saveState
       ? {
-          history: messageParams.saveState.History.data,
+          history: JSON.parse(messageParams.saveState.History),
           hash: messageParams.saveState.Hash,
         }
       : undefined,
