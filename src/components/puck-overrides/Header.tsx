@@ -13,7 +13,6 @@ import {
   AlertDialogTrigger,
 } from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
-import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
 import { Button } from "./button";
 
@@ -38,9 +37,6 @@ export const customHeader = (
   const {
     history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
-  const hasLocalStorage = !!window.localStorage.getItem(
-    getLocalStorageKey(role, templateId, layoutId, entityId)
-  );
   useEffect(() => {
     handleHistoryChange(histories, index);
   }, [index, histories, handleHistoryChange]);
@@ -69,14 +65,14 @@ export const customHeader = (
           <RotateCw className="sm-icon" />
         </buttons.Button>
         <ClearLocalChangesButton
-          disabled={!hasLocalStorage}
+          disabled={!hasPast}
           onClearLocalChanges={handleClearLocalChanges}
         />
         <Button onClick={() => handleClick(entityDocument.slug)}>
           Live Preview
         </Button>
         <Button
-          disabled={!hasLocalStorage}
+          disabled={!hasPast}
           onClick={async () => {
             await handleSaveData(data);
             handleClearLocalChanges();
