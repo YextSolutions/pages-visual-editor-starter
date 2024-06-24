@@ -41,6 +41,7 @@ export const enum DataSource {
 }
 
 const getPuckData = (messagePayload: MessagePayload): any => {
+  console.log("calling getPuckData");
   // get Puck data from the base entity for INDIVIDUAL
   if (messagePayload.entity) {
     console.log("has entity");
@@ -209,7 +210,7 @@ const Edit: () => JSX.Element = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect");
+    console.log("remounting edit.tsx");
     const handleParentMessage = (message: MessageEvent) => {
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
