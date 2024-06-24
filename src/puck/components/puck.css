@@ -1,9 +1,9 @@
 .puck {
-  --border: 214.3 31.8% 91.4%;
+  --border: #e6e6f1;
   --primary: #5a58f2;
-  --primary-foreground: #000000;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  --primary-foreground: #ffffff;
+  --secondary: #9d9cf9;
+  --secondary-foreground: #000000;
   --destructive: #ff0000;
   --destructive-foreground: #000000;
   --accent: 210 40% 96.1%;
