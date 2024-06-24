@@ -143,13 +143,13 @@ const Edit: () => JSX.Element = () => {
       // nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
         console.log("no saveState from DB");
-        clearHistory(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        );
-        setPuckData(getPuckData(messagePayload));
+        // clearHistory(
+        //   messagePayload.role,
+        //   messagePayload.templateId,
+        //   messagePayload.layoutId,
+        //   messagePayload.entity?.id
+        // );
+        // setPuckData(getPuckData(messagePayload));
         return;
       }
 
@@ -165,13 +165,13 @@ const Edit: () => JSX.Element = () => {
       // nothing in localStorage, start fresh from VES data
       if (!localHistoryArray) {
         console.log("no localStorage");
-        clearHistory(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        );
-        setPuckData(messagePayload.saveState.history);
+        // clearHistory(
+        //   messagePayload.role,
+        //   messagePayload.templateId,
+        //   messagePayload.layoutId,
+        //   messagePayload.entity?.id
+        // );
+        // setPuckData(messagePayload.saveState.history);
         return;
       }
 
@@ -181,12 +181,14 @@ const Edit: () => JSX.Element = () => {
 
       // if we have VES data, use it for current puck data
       console.log("has saveState from db");
+      console.log("DB data", messagePayload.saveState.history);
       setPuckData(messagePayload.saveState.history);
 
       // if saved history in local storage, use that for future/past
       if (localHistoryIndex !== -1) {
         console.log("found the index");
         setHistoryIndex(localHistoryIndex);
+        console.log("setHistories", JSON.parse(localHistoryArray));
         setHistories(JSON.parse(localHistoryArray));
         return;
       }
