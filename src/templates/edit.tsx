@@ -164,56 +164,56 @@ const Edit: () => JSX.Element = () => {
     (messagePayload: MessagePayload) => {
       console.log("calling loadPuckDataUsingHistory");
       // Nothing in save_state table, start fresh from Content
-      // if (!messagePayload.saveState) {
-      //   console.log("No save state, clearing localStorage");
-      //   clearLocalStorage(
-      //     messagePayload.role,
-      //     messagePayload.templateId,
-      //     messagePayload.layoutId,
-      //     messagePayload.entity?.id
-      //   );
-      //   setPuckData(getPuckData(messagePayload));
-      //   return;
-      // }
+      if (!messagePayload.saveState) {
+        console.log("No save state, clearing localStorage");
+        // clearLocalStorage(
+        //   messagePayload.role,
+        //   messagePayload.templateId,
+        //   messagePayload.layoutId,
+        //   messagePayload.entity?.id
+        // );
+        setPuckData(getPuckData(messagePayload));
+        return;
+      }
 
-      // // Use save_state data
-      // console.log("Setting puck data to", messagePayload.saveState.history);
-      // setPuckData(messagePayload.saveState.history);
+      // Use save_state data
+      console.log("Setting puck data to", messagePayload.saveState.history);
+      setPuckData(messagePayload.saveState.history);
 
-      // // Check localStorage for existing Puck history
-      // const localHistoryArray = window.localStorage.getItem(
-      //   getLocalStorageKey(
-      //     messagePayload.role,
-      //     messagePayload.templateId,
-      //     messagePayload.layoutId,
-      //     messagePayload.entity?.id
-      //   )
-      // );
+      // Check localStorage for existing Puck history
+      const localHistoryArray = window.localStorage.getItem(
+        getLocalStorageKey(
+          messagePayload.role,
+          messagePayload.templateId,
+          messagePayload.layoutId,
+          messagePayload.entity?.id
+        )
+      );
 
-      // // No localStorage
-      // if (!localHistoryArray) {
-      //   console.log("No localStorage");
-      //   return;
-      // }
+      // No localStorage
+      if (!localHistoryArray) {
+        console.log("No localStorage");
+        return;
+      }
 
-      // const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-      //   (item: any) => item.id === messagePayload.saveState?.hash
-      // );
+      const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
+        (item: any) => item.id === messagePayload.saveState?.hash
+      );
 
-      // // If local storage reset Puck history to it
-      // if (localHistoryIndex !== -1) {
-      //   console.log(
-      //     "localStorage, using index and data",
-      //     localHistoryIndex,
-      //     JSON.parse(localHistoryArray)
-      //   );
-      //   setHistoryIndex(localHistoryIndex);
-      //   setHistories(JSON.parse(localHistoryArray));
-      //   return;
-      // }
+      // If local storage reset Puck history to it
+      if (localHistoryIndex !== -1) {
+        console.log(
+          "localStorage, using index and data",
+          localHistoryIndex,
+          JSON.parse(localHistoryArray)
+        );
+        // setHistoryIndex(localHistoryIndex);
+        // setHistories(JSON.parse(localHistoryArray));
+        return;
+      }
 
-      // // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
-      // console.log("Clearing localStorage");
+      // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
+      console.log("Clearing localStorage");
       // clearLocalStorage(
       //   messagePayload.role,
       //   messagePayload.templateId,
