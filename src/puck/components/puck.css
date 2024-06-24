@@ -1,3 +1,26 @@
+.puck {
+  --border: 214.3 31.8% 91.4%;
+  --primary: #5a58f2;
+  --primary-foreground: #000000;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --destructive: #ff0000;
+  --destructive-foreground: #000000;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --radius: 0.5rem;
+  --ring: 215 20.2% 65.1%;
+  --input: 214.3 31.8% 91.4%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 47.4% 11.2%;
+  --background: 0 0% 100%;
+  --foreground: 222.2 47.4% 11.2%;                
+}
+
 .puck-header {
   grid-area: header;
   display: flex;

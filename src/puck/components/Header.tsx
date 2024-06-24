@@ -46,7 +46,7 @@ export const customHeader = (
   }, [index, histories, handleHistoryChange]);
 
   return (
-    <header className="puck-header">
+    <header className="puck puck-header">
       <div className="header-left">
         <ToggleUIButtons />
       </div>
