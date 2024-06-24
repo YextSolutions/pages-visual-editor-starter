@@ -165,6 +165,7 @@ const Edit: () => JSX.Element = () => {
       console.log("calling loadPuckDataUsingHistory");
       // Nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
+        console.log("No save state, clearing localStorage");
         clearLocalStorage(
           messagePayload.role,
           messagePayload.templateId,
@@ -176,6 +177,7 @@ const Edit: () => JSX.Element = () => {
       }
 
       // Use save_state data
+      console.log("Setting puck data to", messagePayload.saveState.history);
       setPuckData(messagePayload.saveState.history);
 
       // Check localStorage for existing Puck history
@@ -190,6 +192,7 @@ const Edit: () => JSX.Element = () => {
 
       // No localStorage
       if (!localHistoryArray) {
+        console.log("No localStorage");
         return;
       }
 
@@ -199,12 +202,18 @@ const Edit: () => JSX.Element = () => {
 
       // If local storage reset Puck history to it
       if (localHistoryIndex !== -1) {
+        console.log(
+          "localStorage, using index and data",
+          localHistoryIndex,
+          JSON.parse(localHistoryArray)
+        );
         setHistoryIndex(localHistoryIndex);
         setHistories(JSON.parse(localHistoryArray));
         return;
       }
 
       // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
+      console.log("Clearing localStorage");
       clearLocalStorage(
         messagePayload.role,
         messagePayload.templateId,
