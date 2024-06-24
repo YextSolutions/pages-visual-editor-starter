@@ -118,6 +118,33 @@ const Edit: () => JSX.Element = () => {
   const [puckConfig, setPuckConfig] = useState<any>();
   const [messagePayload, setMessagePayload] = useState<MessagePayload>();
 
+  /**
+   * Clears the user's localStorage and resets the current Puck history
+   * @param role
+   * @param templateId
+   * @param layoutId
+   * @param entityId
+   */
+  const clearLocalStorage = (
+    role: string,
+    templateId: string,
+    layoutId?: number,
+    entityId?: number
+  ) => {
+    setHistories([]);
+    setHistoryIndex(-1);
+    window.localStorage.removeItem(
+      getLocalStorageKey(role, templateId, layoutId, entityId)
+    );
+  };
+
+  /**
+   * Clears localStorage and resets the save data in the DB
+   * @param role
+   * @param templateId
+   * @param layoutId
+   * @param entityId
+   */
   const clearHistory = (
     role: string,
     templateId: string,
@@ -125,34 +152,33 @@ const Edit: () => JSX.Element = () => {
     entityId?: number
   ) => {
     console.log("clearHistory save: layout, entity", layoutId, entityId);
-    // setHistories([]);
-    // setHistoryIndex(-1);
-    // postParentMessage({
-    //   clearLocalChanges: true,
-    //   layoutId: layoutId,
-    //   entityId: entityId,
-    // });
-    // window.localStorage.removeItem(
-    //   getLocalStorageKey(role, templateId, layoutId, entityId)
-    // );
+    clearLocalStorage(role, templateId, layoutId, entityId);
+    postParentMessage({
+      clearLocalChanges: true,
+      layoutId: layoutId,
+      entityId: entityId,
+    });
   };
 
   const loadPuckDataUsingHistory = useCallback(
     (messagePayload: MessagePayload) => {
       console.log("calling loadPuckDataUsingHistory");
-      // nothing in save_state table, start fresh from Content
+      // Nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
-        console.log("no saveState from DB");
-        // clearHistory(
-        //   messagePayload.role,
-        //   messagePayload.templateId,
-        //   messagePayload.layoutId,
-        //   messagePayload.entity?.id
-        // );
-        // setPuckData(getPuckData(messagePayload));
+        clearLocalStorage(
+          messagePayload.role,
+          messagePayload.templateId,
+          messagePayload.layoutId,
+          messagePayload.entity?.id
+        );
+        setPuckData(getPuckData(messagePayload));
         return;
       }
 
+      // Use save_state data
+      setPuckData(messagePayload.saveState.history);
+
+      // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
         getLocalStorageKey(
           messagePayload.role,
@@ -162,16 +188,8 @@ const Edit: () => JSX.Element = () => {
         )
       );
 
-      // nothing in localStorage, start fresh from VES data
+      // No localStorage
       if (!localHistoryArray) {
-        console.log("no localStorage");
-        // clearHistory(
-        //   messagePayload.role,
-        //   messagePayload.templateId,
-        //   messagePayload.layoutId,
-        //   messagePayload.entity?.id
-        // );
-        // setPuckData(messagePayload.saveState.history);
         return;
       }
 
@@ -179,29 +197,22 @@ const Edit: () => JSX.Element = () => {
         (item: any) => item.id === messagePayload.saveState?.hash
       );
 
-      // if we have VES data, use it for current puck data
-      console.log("has saveState from db");
-      console.log("DB data", messagePayload.saveState.history);
-      setPuckData(messagePayload.saveState.history);
-
-      // if saved history in local storage, use that for future/past
+      // If local storage reset Puck history to it
       if (localHistoryIndex !== -1) {
-        console.log("found the index");
         setHistoryIndex(localHistoryIndex);
-        console.log("setHistories", JSON.parse(localHistoryArray));
         setHistories(JSON.parse(localHistoryArray));
         return;
       }
-      // otherwise start fresh
-      console.log("start over");
-      clearHistory(
+
+      // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
+      clearLocalStorage(
         messagePayload.role,
         messagePayload.templateId,
         messagePayload.layoutId,
         messagePayload.entity?.id
       );
     },
-    [setHistories, setHistoryIndex, setPuckData, clearHistory, getPuckData]
+    [setHistories, setHistoryIndex, setPuckData, clearLocalStorage, getPuckData]
   );
 
   const postParentMessage = (message: any) => {
