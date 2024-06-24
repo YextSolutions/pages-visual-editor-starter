@@ -94,7 +94,7 @@ export const Editor = ({
         );
       }
 
-      if (index === 1 && historyIndex.current !== index) {
+      if (index === -1 && historyIndex.current !== index) {
         historyIndex.current = index;
         postParentMessage({
           clearLocalChanges: true,
