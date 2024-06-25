@@ -213,8 +213,8 @@ const Edit: () => JSX.Element = () => {
           localHistoryIndex,
           JSON.parse(localHistoryArray)
         );
-        // setHistoryIndex(localHistoryIndex);
-        // setHistories(JSON.parse(localHistoryArray));
+        setHistoryIndex(localHistoryIndex);
+        setHistories(JSON.parse(localHistoryArray));
         return;
       }
 
