@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.components {
+.components * {
   --border: 214.3 31.8% 91.4%;
   --primary: 222.2 47.4% 11.2%;
   --primary-foreground: 210 40% 98%;

@@ -45,14 +45,13 @@ export const customHeader = (
   }, [index, histories, handleHistoryChange]);
 
   return (
-    <header className="puck-header">
+    <header className="puck-header puck-css">
       <div className="header-left">
         <ToggleUIButtons />
       </div>
       <div className="header-center"></div>
       <div className="actions">
         <Button
-          className="puck-css"
           variant="ghost"
           size="icon"
           disabled={!hasPast}
@@ -61,7 +60,6 @@ export const customHeader = (
           <RotateCcw className="sm-icon" />
         </Button>
         <Button
-          className="puck-css"
           variant="ghost"
           size="icon"
           disabled={!hasFuture}
@@ -74,13 +72,11 @@ export const customHeader = (
           onClearLocalChanges={handleClearLocalChanges}
         />
         <Button 
-          className="puck-css"
           onClick={() => handleClick(entityDocument.slug)}
         >
           Live Preview
         </Button>
         <Button
-          className="puck-css"
           disabled={!hasLocalStorage}
           onClick={async () => {
             await handleSaveData(data);
@@ -106,9 +102,9 @@ const ClearLocalChangesButton = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger disabled={disabled} asChild>
-        <Button className="puck-css" >Clear Local Changes</Button>
+        <Button>Clear Local Changes</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="puck-css">
+      <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
           <AlertDialogDescription>
@@ -117,7 +113,7 @@ const ClearLocalChangesButton = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button className="puck-css" onClick={() => onClearLocalChanges()}>Confirm</Button>
+          <Button onClick={() => onClearLocalChanges()}>Confirm</Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -154,7 +150,6 @@ const ToggleUIButtons = () => {
   return (
     <>
       <Button
-        className="puck-css"
         variant="ghost"
         size="icon"
         onClick={() => {
@@ -164,7 +159,6 @@ const ToggleUIButtons = () => {
         <PanelLeft className="sm-icon" />
       </Button>
       <Button
-        className="puck-css"
         variant="ghost"
         size="icon"
         onClick={() => {
