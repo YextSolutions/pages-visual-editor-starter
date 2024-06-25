@@ -69,18 +69,15 @@ export const Editor = ({
         historyIndex.current = index;
 
         //TODO: something is wiping history out of localStorage and the data is wonk in DB
-        console.log(
-          "NOT posting to parent",
-          JSON.stringify(histories[index].data)
-        );
+        console.log("posting to parent", JSON.stringify(histories[index].data));
 
-        // postParentMessage({
-        //   localChange: true,
-        //   hash: histories[index].id,
-        //   history: JSON.stringify(histories[index].data),
-        //   layoutId: messagePayload.layoutId,
-        //   entityId: messagePayload.entity?.id,
-        // });
+        postParentMessage({
+          localChange: true,
+          hash: histories[index].id,
+          history: JSON.stringify(histories[index].data),
+          layoutId: messagePayload.layoutId,
+          entityId: messagePayload.entity?.id,
+        });
         window.localStorage.setItem(
           getLocalStorageKey(
             role,
@@ -95,11 +92,11 @@ export const Editor = ({
       if (index === -1 && historyIndex.current !== index) {
         historyIndex.current = index;
 
-        // postParentMessage({
-        //   clearLocalChanges: true,
-        //   layoutId: messagePayload.layoutId,
-        //   entityId: messagePayload.entity?.id,
-        // });
+        postParentMessage({
+          clearLocalChanges: true,
+          layoutId: messagePayload.layoutId,
+          entityId: messagePayload.entity?.id,
+        });
       }
     },
     [messagePayload, postParentMessage]

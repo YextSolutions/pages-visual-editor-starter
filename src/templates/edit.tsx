@@ -220,12 +220,12 @@ const Edit: () => JSX.Element = () => {
 
       // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
       console.log("Clearing localStorage");
-      // clearLocalStorage(
-      //   messagePayload.role,
-      //   messagePayload.templateId,
-      //   messagePayload.layoutId,
-      //   messagePayload.entity?.id
-      // );
+      clearLocalStorage(
+        messagePayload.role,
+        messagePayload.templateId,
+        messagePayload.layoutId,
+        messagePayload.entity?.id
+      );
     },
     [setHistories, setHistoryIndex, setPuckData, clearLocalStorage, getPuckData]
   );
