@@ -204,6 +204,9 @@ export const Editor = ({
     await save(data, role);
   };
 
+  console.log("saved histories", histories);
+  console.log("saved histories index", index);
+
   return (
     <Puck
       config={puckConfig}

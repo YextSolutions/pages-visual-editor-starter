@@ -129,6 +129,7 @@ const Edit: () => JSX.Element = () => {
     layoutId?: number,
     entityId?: number
   ) => {
+    console.log("calling clearLocalStorage");
     setHistories([]);
     setHistoryIndex(-1);
     window.localStorage.removeItem(

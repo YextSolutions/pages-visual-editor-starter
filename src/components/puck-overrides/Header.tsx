@@ -34,6 +34,9 @@ export const customHeader = (
   const {
     history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
+  console.log("puck saved histories", histories);
+  console.log("puck saved histories index", index);
+  console.log("has back", back);
   const hasLocalStorage = !!window.localStorage.getItem(
     getLocalStorageKey(
       messagePayload.role,
