@@ -201,6 +201,12 @@ export const Editor = ({
     await save(data, role);
   };
 
+  console.log(
+    "initial histories",
+    index === -1 ? undefined : { histories: histories, index: index }
+  );
+  console.log("puckData", puckData);
+
   return (
     <Puck
       config={puckConfig}
