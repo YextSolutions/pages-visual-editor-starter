@@ -99,7 +99,7 @@ export const Editor = ({
         });
       }
     },
-    [messagePayload, postParentMessage]
+    [messagePayload, postParentMessage, getLocalStorageKey]
   );
 
   const handleClearLocalChanges = () => {

@@ -178,13 +178,13 @@ const Edit: () => JSX.Element = () => {
           messagePayload.layoutId,
           messagePayload.entity?.id
         );
-        setPuckData(getPuckData(messagePayload));
+        // setPuckData(getPuckData(messagePayload));
         return;
       }
 
       // Use save_state data
       console.log("Setting puck data to", messagePayload.saveState.history);
-      setPuckData(messagePayload.saveState.history);
+      // setPuckData(messagePayload.saveState.history);
 
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
@@ -227,7 +227,14 @@ const Edit: () => JSX.Element = () => {
         messagePayload.entity?.id
       );
     },
-    [setHistories, setHistoryIndex, setPuckData, clearLocalStorage, getPuckData]
+    [
+      setHistories,
+      setHistoryIndex,
+      setPuckData,
+      clearLocalStorage,
+      getPuckData,
+      getLocalStorageKey,
+    ]
   );
 
   const postParentMessage = (message: any) => {
