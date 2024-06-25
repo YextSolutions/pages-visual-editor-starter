@@ -1,4 +1,4 @@
-import { Image, Link, CTA } from "@yext/pages-components";
+import { Link, CTA } from "@yext/pages-components";
 import {
   FaFacebook,
   FaInstagram,
@@ -109,7 +109,7 @@ const FooterLayout = (props: FooterLayoutProps) => {
         </div>
       </div>
       <div className="flex items-center space-x-6">
-        <Image image={logo} height={47} width={40} />
+        <img src={logo} height={47} width={40} />
         <span className="text-center text-sm">{copyrightMessage}</span>
       </div>
     </footer>
