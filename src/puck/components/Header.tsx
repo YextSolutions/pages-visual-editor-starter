@@ -73,7 +73,10 @@ export const customHeader = (
           disabled={!hasLocalStorage}
           onClearLocalChanges={handleClearLocalChanges}
         />
-        <Button onClick={() => handleClick(entityDocument.slug)}>
+        <Button 
+          className="puck-css"
+          onClick={() => handleClick(entityDocument.slug)}
+        >
           Live Preview
         </Button>
         <Button

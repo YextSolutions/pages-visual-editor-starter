@@ -1,11 +1,11 @@
-.puck-css {
-  --border: #e6e6f1;
-  --primary: #5a58f2;
-  --primary-foreground: #ffffff;
-  --secondary: #9d9cf9;
-  --secondary-foreground: #000000;
-  --destructive: #ff0000;
-  --destructive-foreground: #000000;
+Button {
+  --border: 240 28% 92%;
+  --primary: 241 86% 65%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 241 89% 79%;
+  --secondary-foreground: 0 0% 0%;
+  --destructive: 0, 100%, 50%;
+  --destructive-foreground: 0 0% 0%;
   --accent: 210 40% 96.1%;
   --accent-foreground: 222.2 47.4% 11.2%;
   --radius: 0.5rem;
