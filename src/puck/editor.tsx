@@ -8,7 +8,6 @@ import { Role } from "../templates/edit";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
-  JSONValue,
   MessagePayload,
   Template,
   VisualConfiguration,
@@ -18,7 +17,7 @@ import { type History } from "../templates/edit";
 export interface EditorProps {
   selectedTemplate: Template;
   puckConfig: Config;
-  puckData: JSONValue;
+  puckData: any; // json object
   role: string;
   isLoading: boolean;
   postParentMessage: (args: any) => void;

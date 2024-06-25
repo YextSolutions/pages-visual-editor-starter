@@ -10,7 +10,6 @@ import { Toaster } from "../components/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   convertRawMessageToObject,
-  JSONValue,
   Layout,
   MessagePayload,
   VisualConfiguration,
@@ -118,7 +117,7 @@ export type History<D = any> = {
 // Render the editor
 const Edit: () => JSX.Element = () => {
   const [mounted, setMounted] = useState<boolean>(false);
-  const [puckData, setPuckData] = useState<JSONValue>({});
+  const [puckData, setPuckData] = useState<any>({}); // json object
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<any>();
@@ -187,6 +186,8 @@ const Edit: () => JSX.Element = () => {
         "Setting puck data to",
         messagePayload.saveState.history.data
       );
+      // The history stored has both "ui" and "data" keys, but PuckData
+      // is only concerned with the "data" portion.
       setPuckData(messagePayload.saveState.history.data);
 
       // Check localStorage for existing Puck history

@@ -1,6 +1,6 @@
 export type VisualConfiguration = {
   template: string;
-  data: JSONValue;
+  data: any; // json object
 };
 
 export type Entity = {
@@ -21,7 +21,7 @@ export type Layout = {
   externalId: string;
   name: string;
   templateId: string;
-  visualConfiguration: JSONValue;
+  visualConfiguration: any; // json object
   isDefault: boolean;
   entityIds: number[]; // internal
   entityCount: number;
@@ -42,15 +42,8 @@ export type Template = {
   entityTypes: string[];
 };
 
-export type JSONValue =
-  | string
-  | number
-  | boolean
-  | { [x: string]: JSONValue }
-  | Array<JSONValue>;
-
 export type SaveState = {
-  history: JSONValue;
+  history: any; // json object
   hash: string;
 };
 
@@ -138,6 +131,7 @@ export const convertRawMessageToObject = (
   };
 };
 
-const jsonFromEscapedJsonString = (escapedJsonString: string): JSONValue => {
+// TODO: Remove this when the frontend has been fixed to not string escape
+const jsonFromEscapedJsonString = (escapedJsonString: string) => {
   return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
 };
