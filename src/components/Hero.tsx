@@ -57,6 +57,7 @@ export const Hero: ComponentConfig<HeroProps> = {
           options: [
             { label: "Default", value: "default" },
             { label: "Primary", value: "primary" },
+            { label: "Secondary", value: "secondary" },
             { label: "Accent", value: "accent" },
           ],
         },
@@ -81,6 +82,7 @@ export const Hero: ComponentConfig<HeroProps> = {
           options: [
             { label: "Default", value: "default" },
             { label: "Primary", value: "primary" },
+            { label: "Secondary", value: "secondary" },
             { label: "Accent", value: "accent" },
           ],
         },
