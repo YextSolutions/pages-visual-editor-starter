@@ -57,8 +57,12 @@ export const Editor = ({
   const historyIndex = useRef<number>(-1);
 
   useEffect(() => {
-    console.log("remounting editor.tsx");
+    console.log("mounting editor.tsx");
   }, []);
+
+  useEffect(() => {
+    console.log("rendering editor.tsx");
+  });
 
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {

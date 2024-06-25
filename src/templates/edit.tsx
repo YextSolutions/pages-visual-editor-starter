@@ -228,7 +228,11 @@ const Edit: () => JSX.Element = () => {
   };
 
   useEffect(() => {
-    console.log("remounting edit.tsx");
+    console.log("rendering edit.tsx");
+  });
+
+  useEffect(() => {
+    console.log("mounting edit.tsx");
     const handleParentMessage = (message: MessageEvent) => {
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;
