@@ -1,13 +1,14 @@
 import { ComponentConfig } from "@measured/puck";
 import { C_hero, LocationStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
-import { Section } from "./ui/section";
+import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
-import { Heading, HeadingProps } from "./ui/heading";
-import { CTA } from "./ui/cta";
-import { ButtonProps } from "./ui/button";
+import { Heading, HeadingProps } from "./atoms/heading";
+import { CTA } from "./atoms/cta";
+import { ButtonProps } from "./atoms/button";
 import { cn } from "../utils/cn";
 import useDeviceSizes from "../hooks/useDeviceSizes";
+import "./index.css";
 
 export type HeroProps = {
   imageMode: "left" | "right";
@@ -56,7 +57,7 @@ export const Hero: ComponentConfig<HeroProps> = {
           options: [
             { label: "Default", value: "default" },
             { label: "Primary", value: "primary" },
-            { label: "Accent", value: "accent" },
+            { label: "Secondary", value: "secondary" },
           ],
         },
       },
@@ -80,7 +81,7 @@ export const Hero: ComponentConfig<HeroProps> = {
           options: [
             { label: "Default", value: "default" },
             { label: "Primary", value: "primary" },
-            { label: "Accent", value: "accent" },
+            { label: "Secondary", value: "secondary" },
           ],
         },
       },
@@ -146,7 +147,7 @@ export const Hero: ComponentConfig<HeroProps> = {
     const { isMediumDevice } = useDeviceSizes();
 
     return (
-      <Section>
+      <Section className="components">
         <div
           className={cn(
             "flex flex-col gap-x-10 md:flex-row",

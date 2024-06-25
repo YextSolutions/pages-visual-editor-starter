@@ -1,7 +1,6 @@
 import "./puck.css";
 import { Data, usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
-import * as buttons from "./button";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -15,7 +14,7 @@ import {
 import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
-import { Button } from "./button";
+import { Button } from "../ui/button";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -46,36 +45,40 @@ export const customHeader = (
   }, [index, histories, handleHistoryChange]);
 
   return (
-    <header className="puck-header">
+    <header className="puck-header puck-css">
       <div className="header-left">
         <ToggleUIButtons />
       </div>
       <div className="header-center"></div>
       <div className="actions">
-        <buttons.Button
+        <Button
           variant="ghost"
           size="icon"
           disabled={!hasPast}
           onClick={back}
         >
           <RotateCcw className="sm-icon" />
-        </buttons.Button>
-        <buttons.Button
+        </Button>
+        <Button
           variant="ghost"
           size="icon"
           disabled={!hasFuture}
           onClick={forward}
         >
           <RotateCw className="sm-icon" />
-        </buttons.Button>
+        </Button>
         <ClearLocalChangesButton
           disabled={!hasLocalStorage}
           onClearLocalChanges={handleClearLocalChanges}
         />
-        <Button onClick={() => handleClick(entityDocument.slug)}>
+        <Button 
+          variant="outline"
+          onClick={() => handleClick(entityDocument.slug)}
+        >
           Live Preview
         </Button>
         <Button
+          variant="secondary"
           disabled={!hasLocalStorage}
           onClick={async () => {
             await handleSaveData(data);
@@ -101,9 +104,9 @@ const ClearLocalChangesButton = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger disabled={disabled} asChild>
-        <Button>Clear Local Changes</Button>
+        <Button variant="outline">Clear Local Changes</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="puck-css">
         <AlertDialogHeader>
           <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
           <AlertDialogDescription>

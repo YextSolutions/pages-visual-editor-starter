@@ -7,6 +7,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import logo from "../assets/logo-white.png"; // Adjust the path as needed
+import "./index.css";
 
 const navigation: CTA[] = [
   { link: "#", label: "Contact Us" },
@@ -81,7 +82,7 @@ const FooterLayout = (props: FooterLayoutProps) => {
   ].filter((link) => link.link);
 
   return (
-    <footer className="bg-[#1C1B1B] p-4 text-white">
+    <footer className="bg-[#1C1B1B] p-4 text-white components">
       <div className="mb-4 flex flex-col-reverse md:flex-row md:justify-between">
         <div className="flex flex-col space-y-4 pt-4 md:grid md:grid-cols-2 md:grid-rows-4 md:gap-y-4 md:space-y-0 md:pt-0">
           {footerLinks.map((link, i) => (

@@ -1,5 +1,5 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import { TemplateDefinition } from "../../../../components/puck-overrides/TemplatePicker";
+import { TemplateDefinition } from "../../../../puck/components/TemplatePicker";
 
 export const templates: TemplateDefinition[] = [
   {

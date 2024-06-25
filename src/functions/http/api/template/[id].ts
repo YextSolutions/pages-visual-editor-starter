@@ -1,5 +1,5 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import { TemplateDefinition } from "../../../../components/puck-overrides/TemplatePicker";
+import { TemplateDefinition } from "../../../../puck/components/TemplatePicker";
 import { templates } from "./list";
 
 export default async function getTemplate(
