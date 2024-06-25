@@ -1,6 +1,6 @@
 export type VisualConfiguration = {
   template: string;
-  data: string;
+  data: JSONValue;
 };
 
 export type Entity = {
@@ -21,7 +21,7 @@ export type Layout = {
   externalId: string;
   name: string;
   templateId: string;
-  visualConfiguration: string;
+  visualConfiguration: JSONValue;
   isDefault: boolean;
   entityIds: number[]; // internal
   entityCount: number;
@@ -75,7 +75,9 @@ export const convertRawMessageToObject = (
       externalId: layout.externalId,
       name: layout.name,
       templateId: layout.templateId,
-      visualConfiguration: layout.visualConfiguration,
+      visualConfiguration: jsonFromEscapedJsonString(
+        layout.visualConfiguration
+      ),
       isDefault: layout.isDefault,
       entityIds: layout.entityIds,
       entityCount: layout.entityCount,
@@ -98,7 +100,7 @@ export const convertRawMessageToObject = (
           ).map((visualConfig: any) => {
             return {
               template: visualConfig.template,
-              data: JSON.parse(visualConfig.data),
+              data: jsonFromEscapedJsonString(visualConfig.data),
             };
           }),
           layouts: (messageParams.entity.c_pages_layouts || []).map(
@@ -129,9 +131,13 @@ export const convertRawMessageToObject = (
     templateId: messageParams.templateId,
     saveState: messageParams.saveState
       ? {
-          history: JSON.parse(messageParams.saveState.History),
+          history: jsonFromEscapedJsonString(messageParams.saveState.History),
           hash: messageParams.saveState.Hash,
         }
       : undefined,
   };
+};
+
+const jsonFromEscapedJsonString = (escapedJsonString: string): JSONValue => {
+  return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
 };
