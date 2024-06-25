@@ -1,4 +1,4 @@
-import { ComponentConfig, DropZone } from "@measured/puck";
+import { ComponentConfig, DropZone, Fields } from "@measured/puck";
 import { Section } from "./atoms/section";
 import "./index.css";
 
@@ -33,10 +33,7 @@ const Columns = ({ columns, distribution }: ColumnsProps) => {
                   : "",
             }}
           >
-            <DropZone
-              zone={`column-${idx}`}
-              disallow={["Hero", "Logos", "Stats"]}
-            />
+            <DropZone zone={`column-${idx}`} disallow={["Hero"]} />
           </div>
         ))}
       </div>
@@ -44,42 +41,44 @@ const Columns = ({ columns, distribution }: ColumnsProps) => {
   );
 };
 
-export const ColumnsComponent: ComponentConfig<ColumnsProps> = {
-  fields: {
-    distribution: {
-      type: "radio",
-      options: [
-        {
-          value: "auto",
-          label: "Auto",
-        },
-        {
-          value: "manual",
-          label: "Manual",
-        },
-      ],
-    },
-    columns: {
-      type: "array",
-      getItemSummary: (col, id) =>
-        `Column ${id + 1}, span ${
-          col.span ? Math.max(Math.min(col.span, 12), 1) : "auto"
-        }`,
-      arrayFields: {
-        span: {
-          label: "Span (1-12)",
-          type: "number",
-          min: 0,
-          max: 12,
-        },
+const columnsFields: Fields<ColumnsProps> = {
+  distribution: {
+    type: "radio",
+    options: [
+      {
+        value: "auto",
+        label: "Auto",
+      },
+      {
+        value: "manual",
+        label: "Manual",
+      },
+    ],
+  },
+  columns: {
+    type: "array",
+    getItemSummary: (col, id) =>
+      `Column ${id + 1}, span ${
+        col.span ? Math.max(Math.min(col.span, 12), 1) : "auto"
+      }`,
+    arrayFields: {
+      span: {
+        label: "Span (1-12)",
+        type: "number",
+        min: 0,
+        max: 12,
       },
     },
   },
+};
+
+export const ColumnsComponent: ComponentConfig<ColumnsProps> = {
+  fields: columnsFields,
   defaultProps: {
     distribution: "auto",
     columns: [{}, {}],
   },
   render: ({ columns, distribution }) => (
-    <Columns columns={columns} distribution={distribution}/>
-  )
+    <Columns columns={columns} distribution={distribution} />
+  ),
 };
