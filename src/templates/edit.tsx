@@ -72,12 +72,11 @@ type LayoutDefinitionViewModel = {
 
 const getPuckData = (
   role: string,
-  siteEntityId: string,
   templateId: string,
   layoutId: string,
   baseEntity: any,
   layouts: LayoutDefinitionViewModel[],
-  siteEntity: any
+  siteEntity: any,
 ): string => {
   let data: TemplateData = { data: "", source: DataSource.None };
 
@@ -110,7 +109,7 @@ const getPuckData = (
     (siteEntity?.response[baseEntityPageLayoutsField] ?? []).forEach(
       (id: string) => {
         siteEntityPageLayoutIds.push(id);
-      }
+      },
     );
   }
 
@@ -120,7 +119,7 @@ const getPuckData = (
       if (layout.externalId === layoutId) {
         if (layout.templateId !== templateId) {
           throw new Error(
-            `Mismatch between layout and template: ${layoutId}, ${templateId}`
+            `Mismatch between layout and template: ${layoutId}, ${templateId}`,
           );
         }
         if (role === Role.GLOBAL && data.source > DataSource.LayoutId) {
@@ -193,7 +192,7 @@ const Edit: () => JSX.Element = () => {
       baseEntity: any,
       layouts: LayoutDefinitionViewModel[],
       layoutId: string,
-      template: TemplateDefinition
+      template: TemplateDefinition,
     ) => {
       const clearHistory = () => {
         setHistories([]);
@@ -203,8 +202,8 @@ const Edit: () => JSX.Element = () => {
             getPuckRole(role),
             template.id,
             layoutId,
-            baseEntity.externalId
-          )
+            baseEntity.externalId,
+          ),
         );
       };
 
@@ -213,8 +212,8 @@ const Edit: () => JSX.Element = () => {
           getPuckRole(role),
           template.id,
           layoutId,
-          baseEntity.externalId
-        )
+          baseEntity.externalId,
+        ),
       );
 
       // nothing in save_state table, start fresh from Content
@@ -224,13 +223,12 @@ const Edit: () => JSX.Element = () => {
         setPuckData(
           getPuckData(
             getPuckRole(role),
-            siteEntityId,
             template?.id ?? "",
             layoutId,
             baseEntity,
             layouts,
-            siteEntity
-          )
+            siteEntity,
+          ),
         );
         return;
       }
@@ -243,7 +241,7 @@ const Edit: () => JSX.Element = () => {
       }
 
       const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-        (item: any) => item.id === saveStateHash
+        (item: any) => item.id === saveStateHash,
       );
 
       // if we have VES data, use it for current puck data
@@ -267,7 +265,7 @@ const Edit: () => JSX.Element = () => {
       setPuckData,
       layoutId,
       getPuckRole,
-    ]
+    ],
   );
 
   const postParentMessage = (message: any) => {
@@ -294,7 +292,7 @@ const Edit: () => JSX.Element = () => {
             message.data.params.entity,
             message.data.params.layouts,
             message.data.params.layoutId,
-            message.data.params.template
+            message.data.params.template,
           );
         } else {
           populatePuckParams(
@@ -303,7 +301,7 @@ const Edit: () => JSX.Element = () => {
             message.data.params.entity,
             message.data.params.layouts,
             message.data.params.layoutId,
-            message.data.params.template
+            message.data.params.template,
           );
         }
       }
@@ -329,7 +327,7 @@ const Edit: () => JSX.Element = () => {
     }
 
     const targetLayout = layouts.find(
-      (layout: { externalId: any }) => layout.externalId === layoutId
+      (layout: { externalId: any }) => layout.externalId === layoutId,
     );
     const internalLayoutId = targetLayout?.id;
     setInternalLayoutId(internalLayoutId);
@@ -345,7 +343,7 @@ const Edit: () => JSX.Element = () => {
     window.history.replaceState(
       null,
       "",
-      `edit?templateId=${template.id}&layoutId=${layoutId}&entityId=${_entity.externalId}&role=${getPuckRole(role)}`
+      `edit?templateId=${template.id}&layoutId=${layoutId}&entityId=${_entity.externalId}&role=${getPuckRole(role)}`,
     );
   }
 
@@ -407,4 +405,5 @@ const Edit: () => JSX.Element = () => {
     </>
   );
 };
+
 export default Edit;

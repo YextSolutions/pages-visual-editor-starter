@@ -1,3 +1,4 @@
+import { Link } from "@yext/pages-components";
 import { Button, ButtonProps } from "./button";
 
 export interface CTAProps
@@ -11,7 +12,7 @@ export interface CTAProps
 const CTA = ({ label, url, variant, size, className }: CTAProps) => {
   return (
     <Button asChild className={className} variant={variant} size={size}>
-      <a href={url}>{label}</a>
+      <Link href={url}>{label}</Link>
     </Button>
   );
 };

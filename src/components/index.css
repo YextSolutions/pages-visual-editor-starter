@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.components, .components * {
+.components,
+.components * {
   --border: 214.3 31.8% 91.4%;
   --primary: 0 68% 51%;
   --primary-foreground: 0 0% 100%;
@@ -16,11 +17,11 @@
   --ring: 215 20.2% 65.1%;
   --input: 214.3 31.8% 91.4%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 47.4% 11.2%;
+  --popover-foreground: 0 2% 11%;
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
   --card: 0 0% 100%;
-  --card-foreground: 222.2 47.4% 11.2%;
+  --card-foreground: 0 2% 11%;
   --background: 0 0% 100%;
-  --foreground: 222.2 47.4% 11.2%;                
+  --foreground: 0 2% 11%;
 }

@@ -90,7 +90,7 @@ export const Editor = ({
         });
         window.localStorage.setItem(
           getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
-          JSON.stringify(histories)
+          JSON.stringify(histories),
         );
       }
 
@@ -103,7 +103,7 @@ export const Editor = ({
         });
       }
     },
-    [internalEntityId, internalLayoutId, postParentMessage]
+    [internalEntityId, internalLayoutId, postParentMessage],
   );
 
   const handleClearLocalChanges = () => {
@@ -113,7 +113,7 @@ export const Editor = ({
       entityId: internalEntityId,
     });
     window.localStorage.removeItem(
-      getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
+      getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
     );
     window.location.reload();
   };
@@ -145,7 +145,7 @@ export const Editor = ({
         entity[baseEntityVisualConfigField] ?? [];
       const existingTemplate = visualConfigs.find(
         (visualConfig: VisualConfiguration) =>
-          visualConfig.template === selectedTemplate.id
+          visualConfig.template === selectedTemplate.id,
       );
       if (existingTemplate) {
         existingTemplate.data = templateData;
@@ -156,7 +156,7 @@ export const Editor = ({
         });
       }
       window.localStorage.removeItem(
-        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
+        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
       );
       mutation.mutate({
         entityId: entityId,
@@ -171,7 +171,7 @@ export const Editor = ({
         template: selectedTemplate.id,
       };
       window.localStorage.removeItem(
-        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
+        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
       );
       mutation.mutate({
         entityId: layoutId,
@@ -216,7 +216,7 @@ export const Editor = ({
             handleClearLocalChanges,
             handleHistoryChange,
             appState.data,
-            handleSave
+            handleSave,
           );
         },
       }}
