@@ -58,6 +58,10 @@ export const Editor = ({
   const [, updateState] = useState<any>();
   const forceUpdate = useCallback(() => updateState({}), []);
 
+  useEffect(() => {
+    console.log("remounting editor.tsx");
+  }, []);
+
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
       console.log("calling handleHistoryChange");
