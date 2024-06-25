@@ -169,6 +169,8 @@ const Edit: () => JSX.Element = () => {
   const loadPuckDataUsingHistory = useCallback(
     (messagePayload: MessagePayload) => {
       console.log("calling loadPuckDataUsingHistory");
+      console.log("resetting history for test");
+      setHistories([]);
       // Nothing in save_state table, start fresh from Content
       // if (!messagePayload.saveState) {
       //   console.log("No save state, clearing localStorage");
