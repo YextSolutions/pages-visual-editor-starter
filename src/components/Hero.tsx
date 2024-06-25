@@ -132,10 +132,8 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
       >
         {hero?.image && (
           <Image
-            className="rounded-[30px]"
+            className="rounded-[30px] max-w-3xl max-h-96"
             image={hero.image}
-            max-width={723}
-            max-height={482}
           />
         )}
         <div className="flex flex-col justify-center gap-y-3 pt-8">
