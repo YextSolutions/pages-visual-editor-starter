@@ -25,8 +25,7 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: (data: Data) => Promise<void>,
-  hasHistory: boolean
+  handleSaveData: (data: Data) => Promise<void>
 ) => {
   const entityDocument = useDocument();
   const {
@@ -64,14 +63,14 @@ export const customHeader = (
           <RotateCw className="sm-icon" />
         </buttons.Button>
         <ClearLocalChangesButton
-          disabled={!hasHistory}
+          disabled={histories.length > 0}
           onClearLocalChanges={handleClearLocalChanges}
         />
         <Button onClick={() => handleClick(entityDocument.slug)}>
           Live Preview
         </Button>
         <Button
-          disabled={!hasHistory}
+          disabled={histories.length > 0}
           onClick={async () => {
             await handleSaveData(data);
             handleClearLocalChanges();
