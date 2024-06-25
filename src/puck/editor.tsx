@@ -55,7 +55,6 @@ export const Editor = ({
   const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
-  console.log("Editor payload", messagePayload);
 
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
@@ -66,9 +65,6 @@ export const Editor = ({
         histories.length > 0
       ) {
         historyIndex.current = index;
-
-        //TODO: something is wiping history out of localStorage and the data is wonk in DB
-        console.log("posting to parent", JSON.stringify(histories[index].data));
 
         postParentMessage({
           localChange: true,
@@ -199,12 +195,6 @@ export const Editor = ({
   const handleSave = async (data: Data) => {
     await save(data, role);
   };
-
-  console.log(
-    "initial histories",
-    index === -1 ? undefined : { histories: histories, index: index }
-  );
-  console.log("puckData", puckData);
 
   return (
     <Puck

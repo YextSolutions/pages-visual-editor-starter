@@ -44,16 +44,13 @@ const getPuckData = (messagePayload: MessagePayload): any => {
 
   // get Puck data from the base entity for INDIVIDUAL
   if (messagePayload.entity) {
-    console.log("has entity");
     if (messagePayload.role === Role.INDIVIDUAL) {
-      console.log("has individual");
       const entityPuckData = messagePayload.entity.visualConfigurations.find(
         (config: VisualConfiguration) =>
           config.template === messagePayload.templateId
       );
 
       if (entityPuckData) {
-        console.log("has entity data");
         return entityPuckData.data;
       }
     }
@@ -70,17 +67,14 @@ const getPuckData = (messagePayload: MessagePayload): any => {
       );
     }
   });
-  console.log("passed validaton");
 
   // get Puck data from the layout attached to the entity for GLOBAL
   if (messagePayload.role === Role.GLOBAL) {
-    console.log("has global");
     const layoutEntity = messagePayload.layouts.find(
       (layout: Layout) => layout.externalId === messagePayload.externalLayoutId
     );
 
     if (layoutEntity) {
-      console.log("has layout data");
       return layoutEntity.visualConfiguration;
     }
   }
@@ -91,7 +85,6 @@ const getPuckData = (messagePayload: MessagePayload): any => {
   );
 
   if (defaultEntity) {
-    console.log("has default data", defaultEntity.visualConfiguration);
     return defaultEntity.visualConfiguration;
   }
 
@@ -156,7 +149,7 @@ const Edit: () => JSX.Element = () => {
     layoutId?: number,
     entityId?: number
   ) => {
-    console.log("clearHistory save: layout, entity", layoutId, entityId);
+    console.log("calling clearHistory");
     clearLocalStorage(role, templateId, layoutId, entityId);
     postParentMessage({
       clearLocalChanges: true,
@@ -170,7 +163,6 @@ const Edit: () => JSX.Element = () => {
       console.log("calling loadPuckDataUsingHistory");
       // Nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
-        console.log("No save state, clearing localStorage");
         clearLocalStorage(
           messagePayload.role,
           messagePayload.templateId,
@@ -181,11 +173,6 @@ const Edit: () => JSX.Element = () => {
         return;
       }
 
-      // Use save_state data
-      console.log(
-        "Setting puck data to",
-        messagePayload.saveState.history.data
-      );
       // The history stored has both "ui" and "data" keys, but PuckData
       // is only concerned with the "data" portion.
       setPuckData(messagePayload.saveState.history.data);
@@ -202,7 +189,6 @@ const Edit: () => JSX.Element = () => {
 
       // No localStorage
       if (!localHistoryArray) {
-        console.log("No localStorage");
         return;
       }
 
@@ -212,18 +198,12 @@ const Edit: () => JSX.Element = () => {
 
       // If local storage reset Puck history to it
       if (localHistoryIndex !== -1) {
-        console.log(
-          "localStorage, using index and data",
-          localHistoryIndex,
-          JSON.parse(localHistoryArray)
-        );
         setHistoryIndex(localHistoryIndex);
         setHistories(JSON.parse(localHistoryArray));
         return;
       }
 
       // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
-      console.log("Clearing localStorage");
       clearLocalStorage(
         messagePayload.role,
         messagePayload.templateId,
@@ -254,7 +234,6 @@ const Edit: () => JSX.Element = () => {
         return;
       }
       if (typeof message.data === "object" && message.data.params) {
-        console.log("message payload raw", message);
         const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
           message.data.params
         );
@@ -263,7 +242,6 @@ const Edit: () => JSX.Element = () => {
         setPuckConfig(puckConfig);
         setMessagePayload(messagePayloadTemp);
         loadPuckDataUsingHistory(messagePayloadTemp);
-        console.log("messagePayloadTemp", messagePayloadTemp);
       }
     };
 
