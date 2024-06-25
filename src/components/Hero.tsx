@@ -147,7 +147,7 @@ export const Hero: ComponentConfig<HeroProps> = {
     const { isMediumDevice } = useDeviceSizes();
 
     return (
-      <Section>
+      <Section className="components">
         <div
           className={cn(
             "flex flex-col gap-x-10 md:flex-row",
@@ -176,7 +176,7 @@ export const Hero: ComponentConfig<HeroProps> = {
             <div className="flex">
               {hero?.cta1 && (
                 <CTA
-                  className="mr-3 components"
+                  className="mr-3"
                   variant={cta1.variant}
                   label={hero.cta1.name}
                   url={hero.cta1.link ? hero.cta1.link : "#"}
@@ -184,7 +184,6 @@ export const Hero: ComponentConfig<HeroProps> = {
               )}
               {hero?.cta2 && (
                 <CTA
-                className="components"
                   variant={cta2.variant}
                   label={hero.cta2.name}
                   url={hero.cta2.link ? hero.cta2.link : "#"}

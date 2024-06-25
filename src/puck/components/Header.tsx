@@ -72,11 +72,13 @@ export const customHeader = (
           onClearLocalChanges={handleClearLocalChanges}
         />
         <Button 
+          variant="outline"
           onClick={() => handleClick(entityDocument.slug)}
         >
           Live Preview
         </Button>
         <Button
+          variant="secondary"
           disabled={!hasLocalStorage}
           onClick={async () => {
             await handleSaveData(data);
@@ -102,7 +104,7 @@ const ClearLocalChangesButton = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger disabled={disabled} asChild>
-        <Button>Clear Local Changes</Button>
+        <Button variant="outline">Clear Local Changes</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
