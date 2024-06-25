@@ -11,9 +11,9 @@ const headingVariants = cva("font-bold", {
       subheading: "text-2xl",
     },
     color: {
-      default: "text-black",
-      primary: "text-[#D72E2E]",
-      accent: "text-[#871900]",
+      default: "text-default",
+      primary: "text-primary",
+      accent: "text-secondary",
     },
   },
   defaultVariants: {

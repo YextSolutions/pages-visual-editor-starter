@@ -102,23 +102,25 @@ const ClearLocalChangesButton = ({
   onClearLocalChanges,
 }: ClearLocalChangesButtonProps) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger disabled={disabled} asChild>
-        <Button variant="outline">Clear Local Changes</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action will remove your local changes. It cannot be undone.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={() => onClearLocalChanges()}>Confirm</Button>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <div className="puck-css">
+      <AlertDialog>
+        <AlertDialogTrigger disabled={disabled} asChild>
+          <Button variant="outline">Clear Local Changes</Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action will remove your local changes. It cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <Button onClick={() => onClearLocalChanges()}>Confirm</Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
   );
 };
 
