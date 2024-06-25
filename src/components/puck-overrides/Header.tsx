@@ -17,6 +17,7 @@ import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
 import { Button } from "./button";
 import { MessagePayload } from "../../types/messagePayload";
+import { type History } from "../../templates/edit";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -24,10 +25,7 @@ const handleClick = (slug: string) => {
 
 export const customHeader = (
   handleClearLocalChanges: () => void,
-  handleHistoryChange: (
-    histories: Array<{ data: any; id: string }>,
-    index: number
-  ) => void,
+  handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
   handleSaveData: (data: Data) => Promise<void>,
   messagePayload: MessagePayload
