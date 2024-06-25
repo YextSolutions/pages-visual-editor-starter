@@ -224,7 +224,7 @@ export const Editor = ({
             handleHistoryChange,
             appState.data,
             handleSave,
-            messagePayload
+            histories.length > 0
           );
         },
       }}
