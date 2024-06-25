@@ -10,11 +10,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../components/ui/AlertDialog";
+} from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
 import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");

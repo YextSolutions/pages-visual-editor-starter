@@ -15,7 +15,7 @@ import { fetchEntity } from "../utils/api";
 import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
-import { Toaster } from "../components/ui/Toaster";
+import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 
 export const Role = {

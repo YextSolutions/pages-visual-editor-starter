@@ -1,11 +1,11 @@
 import { ComponentConfig } from "@measured/puck";
 import { C_hero, LocationStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
-import { Section } from "./ui/section";
+import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
-import { Heading, HeadingProps } from "./ui/heading";
-import { CTA } from "./ui/cta";
-import { ButtonProps } from "./ui/button";
+import { Heading, HeadingProps } from "./atoms/heading";
+import { CTA } from "./atoms/cta";
+import { ButtonProps } from "./atoms/button";
 import { cn } from "../utils/cn";
 import useDeviceSizes from "../hooks/useDeviceSizes";
 import "./index.css";

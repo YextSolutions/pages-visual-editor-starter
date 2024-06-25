@@ -1,4 +1,4 @@
-import { Progress } from "../../components/ui/Progress";
+import { Progress } from "../ui/Progress";
 
 export interface LoadingScreenProps {
   message: string;
