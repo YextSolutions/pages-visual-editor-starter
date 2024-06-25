@@ -13,6 +13,7 @@ import {
   Template,
   VisualConfiguration,
 } from "../types/messagePayload";
+import { type History } from "../templates/edit";
 
 export interface EditorProps {
   selectedTemplate: Template;
@@ -58,7 +59,7 @@ export const Editor = ({
   console.log("Editor payload", messagePayload);
 
   const handleHistoryChange = useCallback(
-    (histories: Array<{ data: any; id: string }>, index: number) => {
+    (histories: History[], index: number) => {
       console.log("calling handleHistoryChange");
       if (
         index !== -1 &&
