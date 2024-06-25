@@ -55,8 +55,6 @@ export const Editor = ({
   const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
-  const [, updateState] = useState<any>();
-  const forceUpdate = useCallback(() => updateState({}), []);
 
   useEffect(() => {
     console.log("remounting editor.tsx");
@@ -110,7 +108,6 @@ export const Editor = ({
       messagePayload.layoutId,
       messagePayload.entity?.id
     );
-    forceUpdate();
   };
 
   useEffect(() => {
