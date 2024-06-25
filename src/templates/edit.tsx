@@ -178,13 +178,16 @@ const Edit: () => JSX.Element = () => {
           messagePayload.layoutId,
           messagePayload.entity?.id
         );
-        // setPuckData(getPuckData(messagePayload));
+        setPuckData(getPuckData(messagePayload));
         return;
       }
 
       // Use save_state data
-      console.log("Setting puck data to", messagePayload.saveState.history);
-      // setPuckData(messagePayload.saveState.history);
+      console.log(
+        "Setting puck data to",
+        messagePayload.saveState.history.data
+      );
+      setPuckData(messagePayload.saveState.history.data);
 
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
