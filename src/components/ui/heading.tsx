@@ -13,7 +13,7 @@ const headingVariants = cva("font-bold", {
     color: {
       default: "text-default",
       primary: "text-primary",
-      accent: "text-secondary",
+      accent: "text-accent",
     },
   },
   defaultVariants: {

@@ -107,7 +107,7 @@ const ClearLocalChangesButton = ({
         <AlertDialogTrigger disabled={disabled} asChild>
           <Button variant="outline">Clear Local Changes</Button>
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="puck-css">
           <AlertDialogHeader>
             <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
             <AlertDialogDescription>
