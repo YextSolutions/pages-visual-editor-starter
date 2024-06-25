@@ -63,14 +63,14 @@ export const customHeader = (
           <RotateCw className="sm-icon" />
         </buttons.Button>
         <ClearLocalChangesButton
-          disabled={histories.length > 0}
+          disabled={histories.length === 0}
           onClearLocalChanges={handleClearLocalChanges}
         />
         <Button onClick={() => handleClick(entityDocument.slug)}>
           Live Preview
         </Button>
         <Button
-          disabled={histories.length > 0}
+          disabled={histories.length === 0}
           onClick={async () => {
             await handleSaveData(data);
             handleClearLocalChanges();
