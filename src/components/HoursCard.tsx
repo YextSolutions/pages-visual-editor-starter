@@ -17,6 +17,10 @@ const HoursCard = ({}: HoursCardProps) => {
         justify-content: space-between;
         gap: 30px;
       }
+      
+      .HoursTable {
+        display: grid;
+      }
   `
 
   return (
