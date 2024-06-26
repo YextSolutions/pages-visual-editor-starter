@@ -25,7 +25,7 @@ const HoursCard = ({}: HoursCardProps) => {
       >
         <style>{css}</style>
         <div>
-          <Heading>Hours</Heading>
+          <Heading level={2}>Hours</Heading>
           <HoursTable hours={hours}/>
         </div>
       </Section>
