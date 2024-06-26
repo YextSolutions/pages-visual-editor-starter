@@ -15,7 +15,7 @@ type LocationProps = {
 export const locationConfig: Config<LocationProps> = {
   components: {
     Hero,
-    Columns
+    Columns,
     Card,
   },
   root: {
