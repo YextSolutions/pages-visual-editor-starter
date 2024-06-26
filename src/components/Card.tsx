@@ -131,7 +131,7 @@ const cardFields: Fields<CardProps> = {
 
 const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
   return (
-    <Section className="flex flex-col justify-center components">
+    <Section className="flex flex-col justify-center components" padding="small">
       {image?.url && (
         <div
           style={{
@@ -139,13 +139,14 @@ const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            borderRadius: 24,
-            height: 356,
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            height: 200,
             width: "100%",
           }}
         />
       )}
-      <div className="p-8">
+      <div className="flex flex-col gap-y-3 p-8">
         <Heading level={2} size={heading.size} color={heading.color}>
           {heading.text}
         </Heading>
