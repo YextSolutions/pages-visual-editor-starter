@@ -32,7 +32,7 @@ const HoursCard = ({}: HoursCardProps) => {
         className='flex flex-col justify-center components items-center'
         padding='small'
       >
-        <style>{css}</style>
+        {/*<style>{css}</style>*/}
         <div>
           <Heading>Hours</Heading>
           <HoursTable hours={hours}/>
