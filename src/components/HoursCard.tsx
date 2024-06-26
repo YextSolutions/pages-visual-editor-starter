@@ -25,15 +25,13 @@ const HoursCard = ({}: HoursCardProps) => {
 
   return (
       <Section
-        className='flex flex-col justify-center components'
+        className='flex flex-col justify-center components items-center'
         padding='small'
       >
         <style>{css}</style>
         <div>
           <Heading>Hours</Heading>
-          <div className='flex flex-col justify-center gap-y-3'>
-            <HoursTable hours={hours}/>
-          </div>
+          <HoursTable hours={hours}/>
         </div>
       </Section>
   );
