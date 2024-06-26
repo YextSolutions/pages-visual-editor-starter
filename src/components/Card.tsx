@@ -131,7 +131,7 @@ const cardFields: Fields<CardProps> = {
 
 const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
   return (
-    <Section className="components">
+    <Section className="flex flex-col justify-center components">
       {image?.url && (
         <div
           style={{
@@ -145,18 +145,20 @@ const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
           }}
         />
       )}
-      <Heading level={2} size={heading.size} color={heading.color}>
-        {heading.text}
-      </Heading>
-      <Heading level={1} size={subheading.size} color={subheading.color}>
-        {subheading.text}
-      </Heading>
-      <Body weight={body.weight} size={body.size}>
-        {body.text}
-      </Body>
-      {cta && (
-        <CTA variant={cta.variant} label={cta.label} url={cta.link ?? "#"} />
-      )}
+      <div className="p-8">
+        <Heading level={2} size={heading.size} color={heading.color}>
+          {heading.text}
+        </Heading>
+        <Heading level={1} size={subheading.size} color={subheading.color}>
+          {subheading.text}
+        </Heading>
+        <Body weight={body.weight} size={body.size}>
+          {body.text}
+        </Body>
+        {cta && (
+          <CTA variant={cta.variant} label={cta.label} url={cta.link ?? "#"} />
+        )}
+      </div>
     </Section>
   );
 };
