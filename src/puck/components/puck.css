@@ -1,4 +1,5 @@
-.puck-css, .puck-css * {
+.puck-css,
+.puck-css * {
   --border: 240 28% 92%;
   --primary: 241 86% 65%;
   --primary-foreground: 0 0% 100%;
@@ -18,7 +19,7 @@
   --card: 0 0% 100%;
   --card-foreground: 222.2 47.4% 11.2%;
   --background: 0 0% 100%;
-  --foreground: 222.2 47.4% 11.2%;                
+  --foreground: 222.2 47.4% 11.2%;
 }
 
 .puck-header {
