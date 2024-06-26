@@ -16,8 +16,9 @@ export type CardProps = {
   };
   subheading: {
     text: string;
-    size: HeadingProps["size"];
-    color: HeadingProps["color"];
+    size: BodyProps["size"];
+    color: BodyProps["color"];
+    weight: BodyProps["weight"];
   };
   body: {
     text: string;
@@ -71,8 +72,17 @@ const cardFields: Fields<CardProps> = {
         label: "Size",
         type: "radio",
         options: [
-          { label: "Section", value: "section" },
-          { label: "Subheading", value: "subheading" },
+          { label: "Small", value: "small" },
+          { label: "Base", value: "base" },
+          { label: "Large", value: "Large" },
+        ],
+      },
+      weight: {
+        label: "Weight",
+        type: "radio",
+        options: [
+          { label: "Default", value: "default" },
+          { label: "Bold", value: "bold" },
         ],
       },
       color: {
@@ -81,7 +91,7 @@ const cardFields: Fields<CardProps> = {
         options: [
           { label: "Default", value: "default" },
           { label: "Primary", value: "primary" },
-          { label: "Secondary", value: "secondary" },
+          { label: "Gray", value: "gray" },
         ],
       },
     },
@@ -150,9 +160,9 @@ const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
         <Heading level={2} size={heading.size} color={heading.color}>
           {heading.text}
         </Heading>
-        <Heading level={1} size={subheading.size} color={subheading.color}>
+        <Body weight={subheading.weight} size={subheading.size} color={subheading.color}>
           {subheading.text}
-        </Heading>
+        </Body>
         <Body weight={body.weight} size={body.size}>
           {body.text}
         </Body>
@@ -174,8 +184,9 @@ export const CardComponent: ComponentConfig<CardProps> = {
     },
     subheading: {
       text: "heading",
-      size: "subheading",
-      color: "default",
+      size: "small",
+      weight: "default",
+      color: "gray",
     },
     body: {
       text: "body",

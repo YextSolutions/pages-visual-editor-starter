@@ -14,10 +14,16 @@ const bodyVariants = cva("font-bold", {
       default: "font-normal",
       bold: "font-bold",
     },
+    color: {
+      default: "text-default",
+      primary: "text-primary",
+      gray: "text-slate-700"
+    }
   },
   defaultVariants: {
     size: "base",
     weight: "default",
+    color: "default",
   },
 });
 
@@ -27,10 +33,10 @@ export interface BodyProps
     VariantProps<typeof bodyVariants> {}
 
 const Body = React.forwardRef<HTMLParagraphElement, BodyProps>(
-  ({ className, size, weight, ...props }, ref) => {
+  ({ className, size, weight, color, ...props }, ref) => {
     return (
       <p
-        className={cn(bodyVariants({ size, weight, className }))}
+        className={cn(bodyVariants({ size, weight, color, className }))}
         ref={ref}
         {...props}
       >
