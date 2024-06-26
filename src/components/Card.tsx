@@ -41,7 +41,7 @@ const cardFields: Fields<CardProps> = {
   },
   heading: {
     type: "object",
-    label: "Location Name",
+    label: "Heading",
     objectFields: {
       text: { type: "text" },
       size: {
@@ -141,7 +141,10 @@ const cardFields: Fields<CardProps> = {
 
 const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
   return (
-    <Section className="flex flex-col justify-center components" padding="small">
+    <Section
+      className="flex flex-col justify-center components"
+      padding="small"
+    >
       {image?.url && (
         <div
           style={{
@@ -160,7 +163,11 @@ const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
         <Heading level={2} size={heading.size} color={heading.color}>
           {heading.text}
         </Heading>
-        <Body weight={subheading.weight} size={subheading.size} color={subheading.color}>
+        <Body
+          weight={subheading.weight}
+          size={subheading.size}
+          color={subheading.color}
+        >
           {subheading.text}
         </Body>
         <Body weight={body.weight} size={body.size}>
