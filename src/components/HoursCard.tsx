@@ -12,7 +12,7 @@ const HoursCard = ({}: HoursCardProps) => {
   const hours = useDocument<LocationStream>(document => document.hours);
 
   const css = `
-      .HoursTable-row: {
+      .HoursTable-row {
         display: inline-flex;
         justify-content: space-between;
         gap: 30px;
