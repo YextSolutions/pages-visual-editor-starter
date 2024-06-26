@@ -12,7 +12,6 @@ import {
   VisualConfiguration,
 } from "../types/messagePayload";
 import { type History } from "../templates/edit";
-import "@yext/pages-components/style.css";
 
 export interface EditorProps {
   selectedTemplateId: string;
