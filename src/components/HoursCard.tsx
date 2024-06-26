@@ -21,6 +21,10 @@ const HoursCard = ({}: HoursCardProps) => {
       .HoursTable {
         display: grid;
       }
+      
+      .is-today {
+        font-weight: 700;
+      }
   `
 
   return (
