@@ -190,7 +190,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
       color: "default",
     },
     subheading: {
-      text: "heading",
+      text: "subheading",
       size: "small",
       weight: "default",
       color: "gray",
