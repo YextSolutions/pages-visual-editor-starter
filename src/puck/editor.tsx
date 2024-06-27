@@ -121,16 +121,16 @@ export const Editor = ({
     }
   }, [mutation]);
 
-  // const handleSave = async (data: Data) => {
-  //   const templateData = JSON.stringify(data);
-  //   postParentMessage({
-  //     saveVisualConfigData: true,
-  //     templateId: selectedTemplate.id,
-  //     layoutId: messagePayload.layoutId,
-  //     entityId: messagePayload.entity?.id,
-  //     VisualConfigurationData: templateData
-  //   });
-  // };
+  const handleSave = async (data: Data) => {
+    const templateData = JSON.stringify(data);
+    postParentMessage({
+      saveVisualConfigData: true,
+      templateId: selectedTemplate.id,
+      layoutId: messagePayload.layoutId,
+      entityId: messagePayload.entity?.id,
+      VisualConfigurationData: templateData
+    });
+  };
 
   // Save the data to our site entity
   const save = async (data: Data, role: string) => {
@@ -202,9 +202,9 @@ export const Editor = ({
     }
   };
 
-  const handleSave = async (data: Data) => {
-    await save(data, role);
-  };
+  // const handleSave = async (data: Data) => {
+  //   await save(data, role);
+  // };
 
   return (
     <Puck
