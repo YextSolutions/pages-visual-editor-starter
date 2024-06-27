@@ -1,7 +1,6 @@
 import "./puck.css";
 import { Data, usePuck } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
-import * as buttons from "./button";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -14,8 +13,8 @@ import {
 } from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
 import { useDocument } from "../../hooks/useDocument";
-import { Button } from "./button";
 import { type History } from "../../templates/edit";
+import { Button } from "../ui/button";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -25,7 +24,7 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: (data: Data) => Promise<void>
+  handleSaveData: Function
 ) => {
   const entityDocument = useDocument();
   const {
@@ -36,36 +35,35 @@ export const customHeader = (
   }, [index, histories, handleHistoryChange]);
 
   return (
-    <header className="puck-header">
+    <header className="puck-header puck-css">
       <div className="header-left">
         <ToggleUIButtons />
       </div>
       <div className="header-center"></div>
       <div className="actions">
-        <buttons.Button
-          variant="ghost"
-          size="icon"
-          disabled={!hasPast}
-          onClick={back}
-        >
+        <Button variant="ghost" size="icon" disabled={!hasPast} onClick={back}>
           <RotateCcw className="sm-icon" />
-        </buttons.Button>
-        <buttons.Button
+        </Button>
+        <Button
           variant="ghost"
           size="icon"
           disabled={!hasFuture}
           onClick={forward}
         >
           <RotateCw className="sm-icon" />
-        </buttons.Button>
+        </Button>
         <ClearLocalChangesButton
           disabled={histories.length === 0}
           onClearLocalChanges={handleClearLocalChanges}
         />
-        <Button onClick={() => handleClick(entityDocument.slug)}>
+        <Button
+          variant="outline"
+          onClick={() => handleClick(entityDocument.slug)}
+        >
           Live Preview
         </Button>
         <Button
+          variant="secondary"
           disabled={histories.length === 0}
           onClick={async () => {
             await handleSaveData(data);
@@ -91,9 +89,9 @@ const ClearLocalChangesButton = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger disabled={disabled} asChild>
-        <Button>Clear Local Changes</Button>
+        <Button variant="outline">Clear Local Changes</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="puck-css">
         <AlertDialogHeader>
           <AlertDialogTitle>Clear Local Changes</AlertDialogTitle>
           <AlertDialogDescription>

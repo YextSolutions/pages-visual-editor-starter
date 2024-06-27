@@ -1,5 +1,6 @@
-import { ImageType, Link, CTA } from "@yext/pages-components";
+import { Link, CTA } from "@yext/pages-components";
 import logo from "../assets/logo.png";
+import "./index.css";
 
 const navigation: CTA[] = [
   { link: "/", label: "Restaurants" },
@@ -13,7 +14,7 @@ const Header = () => {
 
 type HeaderLayoutProps = {
   links: CTA[];
-  logo?: ImageType;
+  logo?: string;
   logoLink?: string;
 };
 
@@ -21,15 +22,15 @@ const HeaderLayout = (props: HeaderLayoutProps) => {
   const { logo } = props;
 
   return (
-    <header className=" w-full bg-white">
+    <header className=" w-full bg-white components">
       <div className="mx-auto flex max-w-6xl flex-1 items-center justify-between px-4 py-6">
-        <img src={logo} height={47} width={40} />
+        {logo && <img src={logo} height={47} width={40} />}
         <div className="flex items-center justify-end space-x-4">
           <ul className="flex space-x-8">
             {props.links.map((item: CTA, idx) => (
               <li
-                key={item.label}
-                className="cursor-pointer font-bold text-[#1B78D0] hover:text-[#073866] "
+                key={item.label?.toString()}
+                className="cursor-pointer font-bold text-primary hover:text-primary/90"
               >
                 <Link cta={item} eventName={`link${idx}`} />
               </li>

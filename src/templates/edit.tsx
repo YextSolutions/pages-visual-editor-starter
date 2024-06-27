@@ -5,8 +5,8 @@ import { Editor } from "../puck/editor";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState, useCallback } from "react";
 import { puckConfigs } from "../puck/puck.config";
-import { LoadingScreen } from "../components/puck-overrides/LoadingScreen";
-import { Toaster } from "../components/ui/Toaster";
+import { LoadingScreen } from "../puck/components/LoadingScreen";
+import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   convertRawMessageToObject,
@@ -304,4 +304,5 @@ const Edit: () => JSX.Element = () => {
     </>
   );
 };
+
 export default Edit;
