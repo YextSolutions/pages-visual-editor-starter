@@ -10,33 +10,46 @@ export type ColumnsProps = {
 };
 
 const Columns = ({ columns, distribution }: ColumnsProps) => {
+
+  const getRows = () => {
+    const rows = [];
+    let currentGroup = 0;
+    for (let i = 3; i < columns.length; i += 3) {
+      rows.push(
+          <div
+              className="components flex flex-col min-h-0 min-w-0 gap-6 md:grid md:grid-cols-12"
+              style={{
+                gridTemplateColumns:
+                    distribution === "manual"
+                        ? "repeat(12, 1fr)"
+                        : `repeat(${columns.length}, 1fr)`,
+              }}
+          >
+            {columns.slice(currentGroup, i).map(({ span }, idx) => (
+                <div
+                    key={idx}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gridColumn:
+                          span && distribution === "manual"
+                              ? `span ${Math.max(Math.min(span, 12), 1)}`
+                              : "",
+                    }}
+                >
+                  <DropZone zone={`column-${idx}`} disallow={["Hero"]} />
+                </div>
+            ))}
+          </div>
+      )
+      currentGroup += 3;
+    }
+    return rows
+  }
+
   return (
     <Section>
-      <div
-        className="components flex flex-col min-h-0 min-w-0 gap-6 md:grid md:grid-cols-12"
-        style={{
-          gridTemplateColumns:
-            distribution === "manual"
-              ? "repeat(12, 1fr)"
-              : `repeat(${columns.length}, 1fr)`,
-        }}
-      >
-        {columns.map(({ span }, idx) => (
-          <div
-            key={idx}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gridColumn:
-                span && distribution === "manual"
-                  ? `span ${Math.max(Math.min(span, 12), 1)}`
-                  : "",
-            }}
-          >
-            <DropZone zone={`column-${idx}`} disallow={["Hero"]} />
-          </div>
-        ))}
-      </div>
+      {getRows()}
     </Section>
   );
 };
