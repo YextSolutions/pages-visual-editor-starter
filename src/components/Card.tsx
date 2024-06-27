@@ -17,7 +17,6 @@ export type CardProps = {
   subheading: {
     text: string;
     size: BodyProps["size"];
-    color: BodyProps["color"];
     weight: BodyProps["weight"];
   };
   body: {
@@ -36,14 +35,20 @@ const cardFields: Fields<CardProps> = {
   image: {
     type: "object",
     objectFields: {
-      url: { type: "text" },
+      url: { 
+        label: "Url",
+        type: "text" 
+      },
     },
   },
   heading: {
     type: "object",
     label: "Heading",
     objectFields: {
-      text: { type: "text" },
+      text: { 
+        label: "Text",
+        type: "text" 
+      },
       size: {
         label: "Size",
         type: "radio",
@@ -67,14 +72,17 @@ const cardFields: Fields<CardProps> = {
     type: "object",
     label: "Subheading",
     objectFields: {
-      text: { type: "text" },
+      text: { 
+        label: "Text",
+        type: "text" 
+      },
       size: {
         label: "Size",
         type: "radio",
         options: [
           { label: "Small", value: "small" },
           { label: "Base", value: "base" },
-          { label: "Large", value: "Large" },
+          { label: "Large", value: "large" },
         ],
       },
       weight: {
@@ -85,22 +93,16 @@ const cardFields: Fields<CardProps> = {
           { label: "Bold", value: "bold" },
         ],
       },
-      color: {
-        label: "Color",
-        type: "radio",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Primary", value: "primary" },
-          { label: "Gray", value: "gray" },
-        ],
-      },
     },
   },
   body: {
     type: "object",
     label: "Body",
     objectFields: {
-      text: { type: "text" },
+      text: { 
+        label: "Text",
+        type: "textarea" 
+      },
       size: {
         label: "Size",
         type: "radio",
@@ -124,8 +126,14 @@ const cardFields: Fields<CardProps> = {
     type: "object",
     label: "CTA",
     objectFields: {
-      label: { type: "text" },
-      link: { type: "text" },
+      label: { 
+        label: "Label",
+        type: "text" 
+      },
+      link: { 
+        label: "Link",
+        type: "text" 
+      },
       variant: {
         label: "Variant",
         type: "radio",
@@ -142,7 +150,7 @@ const cardFields: Fields<CardProps> = {
 const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
   return (
     <Section
-      className="flex flex-col justify-center components"
+      className="flex flex-col justify-center bg-white components"
       padding="small"
     >
       {image?.url && (
@@ -164,13 +172,17 @@ const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
           {heading.text}
         </Heading>
         <Body
+          className="line-clamp-1"
           weight={subheading.weight}
           size={subheading.size}
-          color={subheading.color}
         >
           {subheading.text}
         </Body>
-        <Body weight={body.weight} size={body.size}>
+        <Body 
+          className="line-clamp-5"
+          weight={body.weight}
+          size={body.size}
+        >
           {body.text}
         </Body>
         {cta && (
@@ -193,7 +205,6 @@ export const CardComponent: ComponentConfig<CardProps> = {
       text: "subheading",
       size: "small",
       weight: "default",
-      color: "gray",
     },
     body: {
       text: "body",
