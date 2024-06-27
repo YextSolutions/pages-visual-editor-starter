@@ -27,7 +27,7 @@ const HoursCard = ({}: HoursCardProps) => {
         <div>
           <Heading level={2} size={'subheading'}>Hours</Heading>
           <br/>
-          <HoursTable hours={hours as HoursType}/>
+          <HoursTable hours={hours as HoursType} startOfWeek={'monday'}/>
         </div>
       </Section>
   );
