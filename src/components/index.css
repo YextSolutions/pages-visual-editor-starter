@@ -4,24 +4,20 @@
 
 .components,
 .components * {
-  --border: 214.3 31.8% 91.4%;
-  --primary: 0 68% 51%;
+  --border: 214 100% 39%%; // #0054C5
+  --primary: 0 68% 51%; // #D72E2E
   --primary-foreground: 0 0% 100%;
-  --secondary: 0 65% 32%;
+  --secondary: 11 100% 26%%; // #871900
   --secondary-foreground: 0 0% 100%;
   --destructive: 0 100% 50%;
   --destructive-foreground: 210 40% 98%;
-  --accent: 75 79% 51%;
+  --accent: 166 55% 67%; // #7EDAC4
   --accent-foreground: 0 0% 0%;
   --radius: 2rem;
   --ring: 215 20.2% 65.1%;
   --input: 214.3 31.8% 91.4%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 2% 11%;
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 2% 11%;
   --background: 0 0% 100%;
   --foreground: 0 2% 11%;
 }
