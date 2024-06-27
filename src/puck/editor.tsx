@@ -133,64 +133,64 @@ export const Editor = ({
   // };
 
   // Save the data to our site entity
-  const save = async (data: Data, role: string) => {
-    const templateData = JSON.stringify(data);
-    if (role === Role.INDIVIDUAL) {
-      // since we are updating a list, we must get the original data, append to it, then push
-      const response = await fetchEntity(
-        messagePayload.entity?.externalId || "" // this should be handled better
-      );
-      const entity = response.response;
-      const visualConfigs: VisualConfiguration[] =
-        entity[baseEntityVisualConfigField] ?? [];
-      const existingTemplate = visualConfigs.find(
-        (visualConfig: VisualConfiguration) =>
-          visualConfig.template === selectedTemplate.id
-      );
-      if (existingTemplate) {
-        existingTemplate.data = templateData;
-      } else {
-        visualConfigs.push({
-          template: selectedTemplate.id,
-          data: templateData,
-        });
-      }
-      window.localStorage.removeItem(
-        getLocalStorageKey(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        )
-      );
-      mutation.mutate({
-        entityId: messagePayload.entity?.externalId || "", // this should be handled better
-        body: {
-          [baseEntityVisualConfigField]: visualConfigs,
-        },
-      });
-    } else if (role === Role.GLOBAL) {
-      // for global role, we save to the layout entity
-      const visualConfig: VisualConfiguration = {
-        data: templateData,
-        template: selectedTemplate.id,
-      };
-      window.localStorage.removeItem(
-        getLocalStorageKey(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        )
-      );
-      mutation.mutate({
-        entityId: messagePayload.externalLayoutId,
-        body: {
-          [pageLayoutVisualConfigField]: visualConfig,
-        },
-      });
-    }
-  };
+  // const save = async (data: Data, role: string) => {
+  //   const templateData = JSON.stringify(data);
+  //   if (role === Role.INDIVIDUAL) {
+  //     // since we are updating a list, we must get the original data, append to it, then push
+  //     const response = await fetchEntity(
+  //       messagePayload.entity?.externalId || "" // this should be handled better
+  //     );
+  //     const entity = response.response;
+  //     const visualConfigs: VisualConfiguration[] =
+  //       entity[baseEntityVisualConfigField] ?? [];
+  //     const existingTemplate = visualConfigs.find(
+  //       (visualConfig: VisualConfiguration) =>
+  //         visualConfig.template === selectedTemplate.id
+  //     );
+  //     if (existingTemplate) {
+  //       existingTemplate.data = templateData;
+  //     } else {
+  //       visualConfigs.push({
+  //         template: selectedTemplate.id,
+  //         data: templateData,
+  //       });
+  //     }
+  //     window.localStorage.removeItem(
+  //       getLocalStorageKey(
+  //         messagePayload.role,
+  //         messagePayload.templateId,
+  //         messagePayload.layoutId,
+  //         messagePayload.entity?.id
+  //       )
+  //     );
+  //     mutation.mutate({
+  //       entityId: messagePayload.entity?.externalId || "", // this should be handled better
+  //       body: {
+  //         [baseEntityVisualConfigField]: visualConfigs,
+  //       },
+  //     });
+  //   } else if (role === Role.GLOBAL) {
+  //     // for global role, we save to the layout entity
+  //     const visualConfig: VisualConfiguration = {
+  //       data: templateData,
+  //       template: selectedTemplate.id,
+  //     };
+  //     window.localStorage.removeItem(
+  //       getLocalStorageKey(
+  //         messagePayload.role,
+  //         messagePayload.templateId,
+  //         messagePayload.layoutId,
+  //         messagePayload.entity?.id
+  //       )
+  //     );
+  //     mutation.mutate({
+  //       entityId: messagePayload.externalLayoutId,
+  //       body: {
+  //         [pageLayoutVisualConfigField]: visualConfig,
+  //       },
+  //     });
+  //   }
+  // };
 
   const change = async () => {
     if (isLoading) {
