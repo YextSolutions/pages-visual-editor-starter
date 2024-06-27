@@ -39,6 +39,7 @@ const HoursCard = ({}: HoursCardProps) => {
 export const HoursCardComponent: ComponentConfig<HoursCardProps> = {
   fields: hoursCardFields,
   defaultProps: {},
+  label: 'Hours Card',
   render: ({}) => (
     <HoursCard/>
   ),
