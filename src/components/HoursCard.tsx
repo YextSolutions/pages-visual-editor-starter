@@ -1,7 +1,7 @@
 import {ComponentConfig, Fields} from "@measured/puck";
 import {useDocument} from "../hooks/useDocument";
-import {LocationStream} from "../types/autogen";
-import { HoursTable } from "@yext/pages-components";
+import {LocationStream, Hours} from "../types/autogen";
+import {HoursTable, HoursType} from "@yext/pages-components";
 import {Section} from "./atoms/section";
 import {Heading} from "./atoms/heading";
 import "@yext/pages-components/style.css";
@@ -10,7 +10,7 @@ export type HoursCardProps = {};
 const hoursCardFields: Fields<HoursCardProps> = {};
 
 const HoursCard = ({}: HoursCardProps) => {
-  const hours = useDocument<LocationStream>(document => document.hours);
+  const hours:Hours = useDocument<LocationStream>(document => document.hours);
 
   const css = `
       .is-today {
@@ -26,7 +26,8 @@ const HoursCard = ({}: HoursCardProps) => {
         <style>{css}</style>
         <div>
           <Heading level={2} size={'subheading'}>Hours</Heading>
-          <HoursTable hours={hours}/>
+          <br/>
+          <HoursTable hours={hours as HoursType}/>
         </div>
       </Section>
   );
