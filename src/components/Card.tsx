@@ -139,8 +139,7 @@ const cardFields: Fields<CardProps> = {
         type: "radio",
         options: [
           { label: "Default", value: "default" },
-          { label: "Outline", value: "outline" },
-          { label: "Link", value: "link" },
+          { label: "Secondary", value: "secondary" },
         ],
       },
     },
