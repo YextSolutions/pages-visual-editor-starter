@@ -5,7 +5,7 @@ const vparam = 20240401;
 export default async function getEntities(
   request: PagesHttpRequest,
 ): Promise<PagesHttpResponse> {
-  const { method, queryParams, body } = request;
+  const { method, queryParams } = request;
   if (method !== "GET") {
     return { body: "Method not allowed", headers: {}, statusCode: 405 };
   }

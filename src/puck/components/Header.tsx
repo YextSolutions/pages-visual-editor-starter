@@ -12,8 +12,8 @@ import {
   AlertDialogTrigger,
 } from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
-import { getLocalStorageKey } from "../../utils/localStorageHelper";
 import { useDocument } from "../../hooks/useDocument";
+import { type History } from "../../templates/edit";
 import { Button } from "../ui/button";
 
 const handleClick = (slug: string) => {
@@ -21,25 +21,15 @@ const handleClick = (slug: string) => {
 };
 
 export const customHeader = (
-  templateId: string,
-  layoutId: string,
-  entityId: string,
-  role: string,
-  handleClearLocalChanges: Function,
-  handleHistoryChange: (
-    histories: Array<{ data: any; id: string }>,
-    index: number,
-  ) => void,
+  handleClearLocalChanges: () => void,
+  handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: Function,
+  handleSaveData: Function
 ) => {
   const entityDocument = useDocument();
   const {
     history: { back, forward, histories, index, hasFuture, hasPast },
   } = usePuck();
-  const hasLocalStorage = !!window.localStorage.getItem(
-    getLocalStorageKey(role, templateId, layoutId, entityId),
-  );
   useEffect(() => {
     handleHistoryChange(histories, index);
   }, [index, histories, handleHistoryChange]);
@@ -63,7 +53,7 @@ export const customHeader = (
           <RotateCw className="sm-icon" />
         </Button>
         <ClearLocalChangesButton
-          disabled={!hasLocalStorage}
+          disabled={histories.length === 0}
           onClearLocalChanges={handleClearLocalChanges}
         />
         <Button
@@ -74,7 +64,7 @@ export const customHeader = (
         </Button>
         <Button
           variant="secondary"
-          disabled={!hasLocalStorage}
+          disabled={histories.length === 0}
           onClick={async () => {
             await handleSaveData(data);
             handleClearLocalChanges();
@@ -89,7 +79,7 @@ export const customHeader = (
 
 interface ClearLocalChangesButtonProps {
   disabled: boolean;
-  onClearLocalChanges: Function;
+  onClearLocalChanges: () => void;
 }
 
 const ClearLocalChangesButton = ({
@@ -110,7 +100,7 @@ const ClearLocalChangesButton = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={() => onClearLocalChanges()}>Confirm</Button>
+          <Button onClick={onClearLocalChanges}>Confirm</Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -141,7 +131,7 @@ const ToggleUIButtons = () => {
         },
       });
     },
-    [dispatch, leftSideBarVisible, rightSideBarVisible],
+    [dispatch, leftSideBarVisible, rightSideBarVisible]
   );
 
   return (
