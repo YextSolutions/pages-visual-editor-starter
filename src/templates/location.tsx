@@ -31,6 +31,7 @@ export const config: TemplateConfig = {
       "hours",
       "address",
       "c_hero",
+      "c_deliveryPromo",
     ],
     localization: {
       locales: ["en"],

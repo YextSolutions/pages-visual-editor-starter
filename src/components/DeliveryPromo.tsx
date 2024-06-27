@@ -1,7 +1,11 @@
 import {ComponentConfig, Fields} from '@measured/puck';
-import {HeadingProps} from './atoms/heading';
-import {BodyProps} from './atoms/body';
+import {Heading, HeadingProps} from './atoms/heading';
+import {Body, BodyProps} from './atoms/body';
 import {ButtonProps} from './atoms/button';
+import {C_deliveryPromo, LocationStream} from "../types/autogen";
+import {useDocument} from "../hooks/useDocument";
+import {Image} from "@yext/pages-components";
+import {CTA} from "./atoms/cta";
 
 export type DeliveryPromoProps = {
   imageMode: 'left' | 'right';
@@ -95,9 +99,30 @@ const deliveryPromoFields: Fields<DeliveryPromoProps> = {
   },
 };
 
-const DeliveryPromo = ({}: DeliveryPromoProps) => {
+const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: DeliveryPromoProps) => {
+  const deliveryPromo: C_deliveryPromo = useDocument<LocationStream>(document => document.c_deliveryPromo);
+
   return (
-      <></>
+      <>
+        {deliveryPromo.image && <Image image={deliveryPromo.image} />}
+        {deliveryPromo.title && <Heading
+            size={promoTitle.size}
+            color={promoTitle.color}
+        >
+          {deliveryPromo.title}
+        </Heading>}
+        {deliveryPromo.description && <Body
+            size={promoDescription.size}
+            weight={promoDescription.weight}
+        >
+          {deliveryPromo.description} //TODO: promoDescription.text ? get from content or user input
+        </Body>}
+        {deliveryPromo.cta && <CTA
+            variant={promoCTA.variant}
+            label={deliveryPromo.cta.name}
+            url={deliveryPromo.cta.link ?? '#'}
+        />}
+      </>
   );
 };
 
@@ -110,7 +135,7 @@ export const DeliveryPromoComponent: ComponentConfig<DeliveryPromoProps> = {
       color: 'default',
     },
     promoDescription: {
-      text: "body",
+      text: "description",
       size: "base",
       weight: "default",
     },
