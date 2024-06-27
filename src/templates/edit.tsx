@@ -40,8 +40,6 @@ export const enum DataSource {
 }
 
 const getPuckData = (messagePayload: MessagePayload): any => {
-  console.log("calling getPuckData");
-
   // get Puck data from the base entity for INDIVIDUAL
   if (messagePayload.entity) {
     if (messagePayload.role === Role.INDIVIDUAL) {
@@ -129,7 +127,6 @@ const Edit: () => JSX.Element = () => {
     layoutId?: number,
     entityId?: number
   ) => {
-    console.log("calling clearLocalStorage");
     setHistories([]);
     setHistoryIndex(-1);
     window.localStorage.removeItem(
@@ -150,7 +147,6 @@ const Edit: () => JSX.Element = () => {
     layoutId?: number,
     entityId?: number
   ) => {
-    console.log("calling clearHistory");
     clearLocalStorage(role, templateId, layoutId, entityId);
     postParentMessage({
       clearLocalChanges: true,
@@ -161,7 +157,6 @@ const Edit: () => JSX.Element = () => {
 
   const loadPuckDataUsingHistory = useCallback(
     (messagePayload: MessagePayload) => {
-      console.log("calling loadPuckDataUsingHistory");
       // Nothing in save_state table, start fresh from Content
       if (!messagePayload.saveState) {
         clearLocalStorage(
@@ -229,11 +224,6 @@ const Edit: () => JSX.Element = () => {
   };
 
   useEffect(() => {
-    console.log("rendering edit.tsx");
-  });
-
-  useEffect(() => {
-    console.log("mounting edit.tsx");
     const handleParentMessage = (message: MessageEvent) => {
       if (!TARGET_ORIGINS.includes(message.origin)) {
         return;

@@ -56,17 +56,8 @@ export const Editor = ({
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
 
-  useEffect(() => {
-    console.log("mounting editor.tsx");
-  }, []);
-
-  useEffect(() => {
-    console.log("rendering editor.tsx");
-  });
-
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
-      console.log("calling handleHistoryChange");
       if (
         index !== -1 &&
         historyIndex.current !== index &&
@@ -203,9 +194,6 @@ export const Editor = ({
   const handleSave = async (data: Data) => {
     await save(data, role);
   };
-
-  console.log("saved histories", histories);
-  console.log("saved histories index", index);
 
   return (
     <Puck
