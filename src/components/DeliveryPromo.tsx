@@ -6,6 +6,9 @@ import {C_deliveryPromo, LocationStream} from "../types/autogen";
 import {useDocument} from "../hooks/useDocument";
 import {Image} from "@yext/pages-components";
 import {CTA} from "./atoms/cta";
+import {Section} from "./atoms/section";
+import {cn} from "../utils/cn";
+import "./index.css";
 
 export type DeliveryPromoProps = {
   imageMode: 'left' | 'right';
@@ -103,27 +106,43 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
   const deliveryPromo: C_deliveryPromo = useDocument<LocationStream>(document => document.c_deliveryPromo);
 
   return (
-      <>
-        {deliveryPromo.image && <Image image={deliveryPromo.image} />}
-        {deliveryPromo.title && <Heading
-            size={promoTitle.size}
-            color={promoTitle.color}
+      <Section className='components'>
+        <div
+          className={cn(
+            "flex flex-col gap-x-10 md:flex-row",
+            imageMode === "right" && "md:flex-row-reverse",
+          )}
         >
-          {deliveryPromo.title}
-        </Heading>}
-        {deliveryPromo.description && <Body
-            size={promoDescription.size}
-            weight={promoDescription.weight}
-        >
-          {deliveryPromo.description} {/*TODO: promoDescription.text ? get from content or user
+          {deliveryPromo.image && <Image
+              image={deliveryPromo.image}
+              className={cn(
+                  imageMode == 'right' && 'rounded-tr-[30px] rounded-br-[30px]',
+                  imageMode == 'left' && 'rounded-tl-[30px] rounded-bl-[30px]',
+                  'max-w-3xl max-h-96',
+              )}
+          />}
+          <div className='flex flex-col justify-center gap-y-3 pt-8 bg-white'>
+            {deliveryPromo.title && <Heading
+                size={promoTitle.size}
+                color={promoTitle.color}
+            >
+              {deliveryPromo.title}
+            </Heading>}
+            {deliveryPromo.description && <Body
+                size={promoDescription.size}
+                weight={promoDescription.weight}
+            >
+              {deliveryPromo.description} {/*TODO: promoDescription.text ? get from content or user
            input*/}
-        </Body>}
-        {deliveryPromo.cta && <CTA
-            variant={promoCTA.variant}
-            label={deliveryPromo.cta.name}
-            url={deliveryPromo.cta.link ?? '#'}
-        />}
-      </>
+            </Body>}
+            {deliveryPromo.cta && <CTA
+                variant={promoCTA.variant}
+                label={deliveryPromo.cta.name}
+                url={deliveryPromo.cta.link ?? '#'}
+            />}
+          </div>
+        </div>
+      </Section>
   );
 };
 
