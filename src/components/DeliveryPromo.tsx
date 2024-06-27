@@ -115,7 +115,8 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
             size={promoDescription.size}
             weight={promoDescription.weight}
         >
-          {deliveryPromo.description} //TODO: promoDescription.text ? get from content or user input
+          {deliveryPromo.description} {/*TODO: promoDescription.text ? get from content or user
+           input*/}
         </Body>}
         {deliveryPromo.cta && <CTA
             variant={promoCTA.variant}
