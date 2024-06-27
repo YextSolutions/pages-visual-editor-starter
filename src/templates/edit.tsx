@@ -1,28 +1,24 @@
 import "../index.css";
 import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
 import { DocumentProvider } from "../hooks/useDocument";
-import {
-  baseEntityPageLayoutsField,
-  baseEntityVisualConfigField,
-  VisualConfiguration,
-  Editor,
-  EntityDefinition,
-  TemplateDefinition,
-} from "../puck/editor";
+import { Editor } from "../puck/editor";
 import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState, useCallback } from "react";
-import { fetchEntity } from "../utils/api";
-import { Config } from "@measured/puck";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
 import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
+import {
+  convertRawMessageToObject,
+  Layout,
+  MessagePayload,
+  VisualConfiguration,
+} from "../types/messagePayload";
 
 export const Role = {
   GLOBAL: "global",
   INDIVIDUAL: "individual",
 };
-const siteEntityId = "site";
 
 export const config: TemplateConfig = {
   name: "edit",
@@ -31,16 +27,6 @@ export const config: TemplateConfig = {
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
-};
-
-const getPuckRole = (role: string): string => {
-  if (typeof document !== "undefined") {
-    const roleValue = role;
-    if (roleValue === "individual") {
-      return Role.INDIVIDUAL;
-    }
-  }
-  return Role.GLOBAL;
 };
 
 // used to track 'priority' of data, where lower is prioritized
@@ -53,113 +39,54 @@ export const enum DataSource {
   None = 5,
 }
 
-type TemplateData = {
-  data: string;
-  source: DataSource;
-};
+const getPuckData = (messagePayload: MessagePayload): any => {
+  // get Puck data from the base entity for INDIVIDUAL
+  if (messagePayload.entity) {
+    if (messagePayload.role === Role.INDIVIDUAL) {
+      const entityPuckData = messagePayload.entity.visualConfigurations.find(
+        (config: VisualConfiguration) =>
+          config.template === messagePayload.templateId
+      );
 
-type LayoutDefinitionViewModel = {
-  name: string;
-  externalId: string;
-  id: number; //internal
-  visualConfiguration: string;
-  templateId: string;
-  entityCount: number;
-  entityIds: string[];
-  isDefault: boolean;
-  layoutImageUrl: string;
-};
-
-const getPuckData = (
-  role: string,
-  templateId: string,
-  layoutId: string,
-  baseEntity: any,
-  layouts: LayoutDefinitionViewModel[],
-  siteEntity: any,
-): string => {
-  let data: TemplateData = { data: "", source: DataSource.None };
-
-  // get puck data off base entity for ICs
-  const baseEntityPageLayoutIds: string[] = [];
-  if (baseEntity) {
-    const configs = baseEntity[baseEntityVisualConfigField] ?? [];
-    configs.forEach((config: VisualConfiguration) => {
-      // only use the data directly off the entity for role 'INDIVIDUAL'
-      if (
-        templateId &&
-        config.template === templateId &&
-        data.source > DataSource.Entity &&
-        role === Role.INDIVIDUAL
-      ) {
-        data = {
-          data: config.data,
-          source: DataSource.Entity,
-        };
+      if (entityPuckData) {
+        return entityPuckData.data;
       }
-    });
-    (baseEntity[baseEntityPageLayoutsField] ?? []).forEach((id: string) => {
-      baseEntityPageLayoutIds.push(id);
-    });
+    }
   }
 
-  // get siteEntity layout ids from the site entity
-  const siteEntityPageLayoutIds: string[] = [];
-  if (siteEntity) {
-    (siteEntity?.response[baseEntityPageLayoutsField] ?? []).forEach(
-      (id: string) => {
-        siteEntityPageLayoutIds.push(id);
-      },
+  // validate no shenanigans with the account setup
+  messagePayload.layouts.forEach((layout: Layout) => {
+    if (
+      layout.externalId === messagePayload.externalLayoutId &&
+      layout.templateId !== messagePayload.templateId
+    ) {
+      throw new Error(
+        `Mismatch between layout and template: ${messagePayload.externalLayoutId}, ${messagePayload.templateId}`
+      );
+    }
+  });
+
+  // get Puck data from the layout attached to the entity for GLOBAL
+  if (messagePayload.role === Role.GLOBAL) {
+    const layoutEntity = messagePayload.layouts.find(
+      (layout: Layout) => layout.externalId === messagePayload.externalLayoutId
     );
+
+    if (layoutEntity) {
+      return layoutEntity.visualConfiguration;
+    }
   }
 
-  if (layouts) {
-    layouts.forEach((layout: LayoutDefinitionViewModel) => {
-      // apply the layoutId data, unless we have data from the base entity
-      if (layout.externalId === layoutId) {
-        if (layout.templateId !== templateId) {
-          throw new Error(
-            `Mismatch between layout and template: ${layoutId}, ${templateId}`,
-          );
-        }
-        if (role === Role.GLOBAL && data.source > DataSource.LayoutId) {
-          data = {
-            data: layout.visualConfiguration,
-            source: DataSource.LayoutId,
-          };
-        }
-      }
-      // fallback to layout related to entity, related to the site, or just matching the template
-      if (layout.templateId === templateId) {
-        if (
-          data.source > DataSource.EntityLayout &&
-          baseEntityPageLayoutIds.includes(layout.externalId)
-        ) {
-          data = {
-            data: layout.visualConfiguration,
-            source: DataSource.EntityLayout,
-          };
-        }
-        if (
-          data.source > DataSource.SiteLayout &&
-          siteEntityPageLayoutIds.includes(layout.externalId)
-        ) {
-          data = {
-            data: layout.visualConfiguration,
-            source: DataSource.SiteLayout,
-          };
-        }
-        if (data.source > DataSource.AnyLayout) {
-          data = {
-            data: layout.visualConfiguration,
-            source: DataSource.AnyLayout,
-          };
-        }
-      }
-    });
+  // get Puck data from the default layout
+  const defaultEntity = messagePayload.layouts.find(
+    (layout: Layout) => layout.isDefault
+  );
+
+  if (defaultEntity) {
+    return defaultEntity.visualConfiguration;
   }
 
-  return JSON.parse(data.data);
+  throw new Error("Could not find VisualConfiguration to load");
 };
 
 const TARGET_ORIGINS = [
@@ -172,100 +99,122 @@ const TARGET_ORIGINS = [
   "https://app.eu.yext.com",
 ];
 
+// TODO: Import from Puck once it's exported
+export type History<D = any> = {
+  id: string;
+  data: D;
+};
+
 // Render the editor
 const Edit: () => JSX.Element = () => {
-  const [template, setTemplate] = useState<TemplateDefinition>();
-  const [entity, setEntity] = useState<EntityDefinition>();
-  const [layoutId, setLayoutId] = useState<string>("");
-  const [internalLayoutId, setInternalLayoutId] = useState<number>();
-  const [puckConfig, setPuckConfig] = useState<Config>();
   const [mounted, setMounted] = useState<boolean>(false);
-  const [role, setRole] = useState<string>("");
-  const [puckData, setPuckData] = useState<any>({});
-  const [histories, setHistories] = useState<Array<any>>([]);
+  const [puckData, setPuckData] = useState<any>({}); // json object
+  const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
+  const [puckConfig, setPuckConfig] = useState<any>();
+  const [messagePayload, setMessagePayload] = useState<MessagePayload>();
 
-  const populatePuckParams = useCallback(
-    async (
-      saveStateHistory: any,
-      saveStateHash: string,
-      baseEntity: any,
-      layouts: LayoutDefinitionViewModel[],
-      layoutId: string,
-      template: TemplateDefinition,
-    ) => {
-      const clearHistory = () => {
-        setHistories([]);
-        setHistoryIndex(-1);
-        window.localStorage.removeItem(
-          getLocalStorageKey(
-            getPuckRole(role),
-            template.id,
-            layoutId,
-            baseEntity.externalId,
-          ),
+  /**
+   * Clears the user's localStorage and resets the current Puck history
+   * @param role
+   * @param templateId
+   * @param layoutId
+   * @param entityId
+   */
+  const clearLocalStorage = (
+    role: string,
+    templateId: string,
+    layoutId?: number,
+    entityId?: number
+  ) => {
+    setHistories([]);
+    setHistoryIndex(-1);
+    window.localStorage.removeItem(
+      getLocalStorageKey(role, templateId, layoutId, entityId)
+    );
+  };
+
+  /**
+   * Clears localStorage and resets the save data in the DB
+   * @param role
+   * @param templateId
+   * @param layoutId
+   * @param entityId
+   */
+  const clearHistory = (
+    role: string,
+    templateId: string,
+    layoutId?: number,
+    entityId?: number
+  ) => {
+    clearLocalStorage(role, templateId, layoutId, entityId);
+    postParentMessage({
+      clearLocalChanges: true,
+      layoutId: layoutId,
+      entityId: entityId,
+    });
+  };
+
+  const loadPuckDataUsingHistory = useCallback(
+    (messagePayload: MessagePayload) => {
+      // Nothing in save_state table, start fresh from Content
+      if (!messagePayload.saveState) {
+        clearLocalStorage(
+          messagePayload.role,
+          messagePayload.templateId,
+          messagePayload.layoutId,
+          messagePayload.entity?.id
         );
-      };
-
-      const localHistoryArray = window.localStorage.getItem(
-        getLocalStorageKey(
-          getPuckRole(role),
-          template.id,
-          layoutId,
-          baseEntity.externalId,
-        ),
-      );
-
-      // nothing in save_state table, start fresh from Content
-      if (!saveStateHistory) {
-        clearHistory();
-        const siteEntity = await fetchEntity(siteEntityId);
-        setPuckData(
-          getPuckData(
-            getPuckRole(role),
-            template?.id ?? "",
-            layoutId,
-            baseEntity,
-            layouts,
-            siteEntity,
-          ),
-        );
+        setPuckData(getPuckData(messagePayload));
         return;
       }
 
-      // nothing in localStorage, start fresh from VES data
+      // The history stored has both "ui" and "data" keys, but PuckData
+      // is only concerned with the "data" portion.
+      setPuckData(messagePayload.saveState.history.data);
+
+      // Check localStorage for existing Puck history
+      const localHistoryArray = window.localStorage.getItem(
+        getLocalStorageKey(
+          messagePayload.role,
+          messagePayload.templateId,
+          messagePayload.layoutId,
+          messagePayload.entity?.id
+        )
+      );
+
+      // No localStorage
       if (!localHistoryArray) {
-        clearHistory();
-        setPuckData(saveStateHistory.data);
         return;
       }
 
       const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-        (item: any) => item.id === saveStateHash,
+        (item: any) => item.id === messagePayload.saveState?.hash
       );
 
-      // if we have VES data, use it for current puck data
-      setPuckData(saveStateHistory.data);
-
-      // if saved history in local storage, use that for future/past
+      // If local storage reset Puck history to it
       if (localHistoryIndex !== -1) {
         setHistoryIndex(localHistoryIndex);
         setHistories(JSON.parse(localHistoryArray));
         return;
       }
-      // otherwise start fresh
-      clearHistory();
+
+      // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
+      clearLocalStorage(
+        messagePayload.role,
+        messagePayload.templateId,
+        messagePayload.layoutId,
+        messagePayload.entity?.id
+      );
     },
     [
-      role,
-      entity,
-      template,
       setHistories,
       setHistoryIndex,
       setPuckData,
-      layoutId,
-      getPuckRole,
-    ],
+      clearLocalStorage,
+      getPuckData,
+      getLocalStorageKey,
+    ]
   );
 
   const postParentMessage = (message: any) => {
@@ -280,30 +229,14 @@ const Edit: () => JSX.Element = () => {
         return;
       }
       if (typeof message.data === "object" && message.data.params) {
-        setParams({
-          ...message.data.params,
-          _role: message.data.params.role,
-          _entity: message.data.params.entity,
-        });
-        if (message.data.params.saveState) {
-          populatePuckParams(
-            JSON.parse(message.data.params.saveState.History), //TODO: ternary or optional chain this
-            message.data.params.saveState.Hash,
-            message.data.params.entity,
-            message.data.params.layouts,
-            message.data.params.layoutId,
-            message.data.params.template,
-          );
-        } else {
-          populatePuckParams(
-            null,
-            "",
-            message.data.params.entity,
-            message.data.params.layouts,
-            message.data.params.layoutId,
-            message.data.params.template,
-          );
-        }
+        const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
+          message.data.params
+        );
+
+        const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
+        setPuckConfig(puckConfig);
+        setMessagePayload(messagePayloadTemp);
+        loadPuckDataUsingHistory(messagePayloadTemp);
       }
     };
 
@@ -313,65 +246,33 @@ const Edit: () => JSX.Element = () => {
 
     setMounted(true);
     listenForParentMessages();
-    postParentMessage({ entityId: entity?.externalId ?? "" });
+    // is this necessary?
+    postParentMessage({ entityId: messagePayload?.externalEntityId });
 
     return () => {
       window.removeEventListener("message", handleParentMessage);
     };
   }, []);
 
-  async function setParams({ template, layoutId, _entity, _role, layouts }) {
-    // get layout
-    if (!layoutId) {
-      layoutId = layouts[0].externalId;
-    }
-
-    const targetLayout = layouts.find(
-      (layout: { externalId: any }) => layout.externalId === layoutId,
-    );
-    const internalLayoutId = targetLayout?.id;
-    setInternalLayoutId(internalLayoutId);
-    setLayoutId(layoutId);
-    setTemplate(template);
-    // set local state
-    setRole(_role);
-    // set entity
-    setEntity(_entity);
-    // get puckConfig from hardcoded map
-    const puckConfig = puckConfigs.get(template.id);
-    setPuckConfig(puckConfig);
-    window.history.replaceState(
-      null,
-      "",
-      `edit?templateId=${template.id}&layoutId=${layoutId}&entityId=${_entity.externalId}&role=${getPuckRole(role)}`,
-    );
-  }
-
   // get the document
   const { entityDocument } = useEntityDocumentQuery({
-    templateId: template?.id,
-    entityId: entity?.externalId,
+    templateId: messagePayload?.templateId,
+    entityId: messagePayload?.externalEntityId,
   });
   const document = entityDocument?.response.document;
 
-  const loadingMessage = !template
-    ? "Loading template.."
-    : !entity
-      ? "Loading entity.."
-      : !puckConfig
-        ? "Loading configuration.."
-        : !puckData
-          ? "Loading data.."
-          : !document
-            ? "Loading document.."
-            : "";
+  const loadingMessage = !puckConfig
+    ? "Loading configuration.."
+    : !puckData
+      ? "Loading data.."
+      : !document
+        ? "Loading document.."
+        : "";
 
-  const isLoading =
-    !document || !puckData || !puckConfig || !template || !entity;
+  const isLoading = !document || !puckData || !puckConfig || !messagePayload;
 
   const progress: number =
-    (100 * (!!template + !!entity + !!puckConfig + !!puckData + !!document)) /
-    5;
+    (100 * (!!puckConfig + !!puckData + !!messagePayload + !!document)) / 4;
 
   if (!mounted || typeof navigator === "undefined") {
     return <></>;
@@ -380,21 +281,19 @@ const Edit: () => JSX.Element = () => {
   return (
     <>
       <DocumentProvider value={document}>
-        {!isLoading && !!puckData ? (
+        {!isLoading && !!puckData && !!messagePayload ? (
           <>
             <Editor
-              selectedTemplate={template}
-              layoutId={layoutId ?? ""}
-              entityId={entity?.externalId ?? ""}
+              selectedTemplate={messagePayload.template}
               puckConfig={puckConfig}
               puckData={puckData}
-              role={getPuckRole(role)}
+              role={messagePayload.role}
               isLoading={isLoading}
               postParentMessage={postParentMessage}
-              internalEntityId={entity?.internalId}
-              internalLayoutId={internalLayoutId}
               index={historyIndex}
               histories={histories}
+              clearHistory={clearHistory}
+              messagePayload={messagePayload}
             />
           </>
         ) : (
