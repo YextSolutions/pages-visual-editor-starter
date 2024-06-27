@@ -4,14 +4,14 @@
 
 .components,
 .components * {
-  --border: 214 100% 39%%; // #0054C5
-  --primary: 0 68% 51%; // #D72E2E
+  --border: 214 100% 39%;
+  --primary: 0 68% 51%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 11 100% 26%%; // #871900
+  --secondary: 11 100% 26%;
   --secondary-foreground: 0 0% 100%;
   --destructive: 0 100% 50%;
   --destructive-foreground: 210 40% 98%;
-  --accent: 166 55% 67%; // #7EDAC4
+  --accent: 166 55% 67%;
   --accent-foreground: 0 0% 0%;
   --radius: 2rem;
   --ring: 215 20.2% 65.1%;
