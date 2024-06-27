@@ -9,7 +9,8 @@
     "c_locationHero",
     "c_locationVisualConfiguration",
     "c_pages_layouts",
-    "c_visualConfigurations"
+    "c_visualConfigurations",
+    "additionalHoursText"
   ],
   "required": []
 }

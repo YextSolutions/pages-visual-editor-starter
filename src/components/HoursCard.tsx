@@ -11,6 +11,7 @@ const hoursCardFields: Fields<HoursCardProps> = {};
 
 const HoursCard = ({}: HoursCardProps) => {
   const hours:Hours = useDocument<LocationStream>(document => document.hours);
+  const additionalHoursText:string = useDocument<LocationStream>(document => document.additionalHoursText);
 
   const css = `
       .is-today {
@@ -25,9 +26,11 @@ const HoursCard = ({}: HoursCardProps) => {
       >
         <style>{css}</style>
         <div>
-          <Heading level={2} size={'subheading'}>Hours</Heading>
-          <br/>
+          <Heading level={2} size={'subheading'} className={'mb-4'}>Hours</Heading>
           <HoursTable hours={hours as HoursType} startOfWeek={'monday'}/>
+          {additionalHoursText && (
+              <div className="mt-4">{additionalHoursText}</div>
+          )}
         </div>
       </Section>
   );
