@@ -73,8 +73,6 @@ export const convertRawMessageToObject = (
     (layout: Layout) => layout.externalId === messageParams.layoutId
   );
 
-  console.log(messageParams);
-
   return {
     entity: messageParams.entity
       ? {
