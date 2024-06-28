@@ -70,7 +70,7 @@ const Banner = ({
   backgroundColor,
 }: BannerProps) => {
   return (
-    <div className={`Banner ${backgroundColor} components px-4 md:px-8 py-6`}>
+    <div className={`Banner ${backgroundColor} components px-4 md:px-20 py-6`}>
       <div className={`flex ${textAlignment} items-center`}>
         <Body color={textColor} weight={fontWeight} size={textSize}>
           {text}
