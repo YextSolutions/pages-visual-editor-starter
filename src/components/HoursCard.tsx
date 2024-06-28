@@ -106,7 +106,7 @@ const HoursCard = ({heading, startOfWeek, collapseDays, showAdditionalHoursText}
               startOfWeek={startOfWeek}
               collapseDays={collapseDays}
           />
-          {(additionalHoursText & showAdditionalHoursText) && (
+          {(additionalHoursText && showAdditionalHoursText) && (
               <div className="mt-4">{additionalHoursText}</div>
           )}
         </div>
