@@ -17,7 +17,6 @@ export type DeliveryPromoProps = {
     color: HeadingProps['color'];
   };
   promoDescription: {
-    text: string;
     size: BodyProps['size'];
     weight: BodyProps['weight'];
   };
@@ -62,10 +61,6 @@ const deliveryPromoFields: Fields<DeliveryPromoProps> = {
     type: "object",
     label: "Promo Description",
     objectFields: {
-      text: {
-        label: "Text",
-        type: "textarea"
-      },
       size: {
         label: "Size",
         type: "radio",
@@ -128,8 +123,7 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
                 size={promoDescription.size}
                 weight={promoDescription.weight}
             >
-              {deliveryPromo.description} {/*TODO: promoDescription.text ? get from content or user
-           input*/}
+              {deliveryPromo.description}
             </Body>}
             {deliveryPromo.cta && <CTA
                 variant={promoCTA.variant}
@@ -151,7 +145,6 @@ export const DeliveryPromoComponent: ComponentConfig<DeliveryPromoProps> = {
       color: 'default',
     },
     promoDescription: {
-      text: "description",
       size: "base",
       weight: "default",
     },
