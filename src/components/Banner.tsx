@@ -4,11 +4,11 @@ import { Section } from "./atoms/section";
 
 export type BannerProps = {
   text: string;
-  textAlignment: "end" | "start" | "center";
+  textAlignment: "justify-end" | "justify-start" | "justify-center";
   textSize: BodyProps["size"];
   fontWeight: BodyProps["weight"];
   textColor: BodyProps["color"];
-  backgroundColor: "white" | "primary" | "secondary";
+  backgroundColor: "bg-white" | "bg-primary" | "bg-secondary";
 };
 
 const bannerFields: Fields<BannerProps> = {
@@ -20,9 +20,9 @@ const bannerFields: Fields<BannerProps> = {
     label: "Text Alignment",
     type: "radio",
     options: [
-      { label: "Left", value: "start" },
-      { label: "Right", value: "end" },
-      { label: "Center", value: "center" },
+      { label: "Left", value: "justify-start" },
+      { label: "Right", value: "justify-end" },
+      { label: "Center", value: "justify-center" },
     ],
   },
   textSize: {
@@ -72,7 +72,7 @@ const Banner = ({
 }: BannerProps) => {
   return (
     <Section className={`Banner ${backgroundColor} components`}>
-      <div className={`flex justify-${textAlignment} items-center`}>
+      <div className={`flex ${textAlignment} items-center`}>
         <Body color={textColor} weight={fontWeight} size={textSize}>
           {text}
         </Body>
@@ -85,11 +85,11 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
   fields: bannerFields,
   defaultProps: {
     text: "Banner Text",
-    textAlignment: "center",
+    textAlignment: "justify-center",
     textSize: "base",
     fontWeight: "default",
     textColor: "default",
-    backgroundColor: "white",
+    backgroundColor: "bg-white",
   },
   render: ({
     text,
