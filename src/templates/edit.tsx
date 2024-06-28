@@ -40,50 +40,8 @@ export const enum DataSource {
 }
 
 const getPuckData = (messagePayload: MessagePayload): any => {
-  // get Puck data from the base entity for INDIVIDUAL
-  if (messagePayload.entity) {
-    if (messagePayload.role === Role.INDIVIDUAL) {
-      const entityPuckData = messagePayload.entity.visualConfigurations.find(
-        (config: VisualConfiguration) =>
-          config.template === messagePayload.templateId
-      );
-
-      if (entityPuckData) {
-        return entityPuckData.data;
-      }
-    }
-  }
-
-  // validate no shenanigans with the account setup
-  messagePayload.layouts.forEach((layout: Layout) => {
-    if (
-      layout.externalId === messagePayload.externalLayoutId &&
-      layout.templateId !== messagePayload.templateId
-    ) {
-      throw new Error(
-        `Mismatch between layout and template: ${messagePayload.externalLayoutId}, ${messagePayload.templateId}`
-      );
-    }
-  });
-
-  // get Puck data from the layout attached to the entity for GLOBAL
-  if (messagePayload.role === Role.GLOBAL) {
-    const layoutEntity = messagePayload.layouts.find(
-      (layout: Layout) => layout.externalId === messagePayload.externalLayoutId
-    );
-
-    if (layoutEntity) {
-      return layoutEntity.visualConfiguration;
-    }
-  }
-
-  // get Puck data from the default layout
-  const defaultEntity = messagePayload.layouts.find(
-    (layout: Layout) => layout.isDefault
-  );
-
-  if (defaultEntity) {
-    return defaultEntity.visualConfiguration;
+  if (messagePayload?.visualConfigurationData) {
+    return messagePayload.visualConfigurationData;
   }
 
   throw new Error("Could not find VisualConfiguration to load");
