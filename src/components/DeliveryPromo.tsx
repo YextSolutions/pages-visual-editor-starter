@@ -109,19 +109,16 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
       <Section className='components'>
         <div
           className={cn(
-            "flex flex-col gap-x-10 md:flex-row",
-            imageMode === "right" && "md:flex-row-reverse",
+            "flex flex-col md:flex-row bg-white overflow-hidden",
+            imageMode === "right" && "md:flex-row-reverse rounded-tr-[30px] rounded-br-[30px]",
+            imageMode == 'left' && 'rounded-tl-[30px] rounded-bl-[30px]',
           )}
         >
           {deliveryPromo.image && <Image
               image={deliveryPromo.image}
-              className={cn(
-                  imageMode == 'right' && 'rounded-tr-[30px] rounded-br-[30px]',
-                  imageMode == 'left' && 'rounded-tl-[30px] rounded-bl-[30px]',
-                  'max-w-3xl max-h-96',
-              )}
+              className={'max-w-3xl max-h-96'}
           />}
-          <div className='flex flex-col justify-center gap-y-3 pt-8 bg-white'>
+          <div className='flex flex-col justify-center gap-y-4 pl-8 pr-8'>
             {deliveryPromo.title && <Heading
                 size={promoTitle.size}
                 color={promoTitle.color}
