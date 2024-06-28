@@ -1,5 +1,6 @@
 import { BodyProps, Body } from "./atoms/body";
 import { ComponentConfig, Fields } from "@measured/puck";
+import { Section } from "./atoms/section";
 
 export type BannerProps = {
   text: string;
@@ -54,9 +55,9 @@ const bannerFields: Fields<BannerProps> = {
     label: "Background Color",
     type: "radio",
     options: [
-      { label: "Default", value: "white" },
-      { label: "Primary", value: "primary" },
-      { label: "Secondary", value: "secondary" },
+      { label: "Default", value: "bg-white" },
+      { label: "Primary", value: "bg-primary" },
+      { label: "Secondary", value: "bg-secondary" },
     ],
   },
 };
@@ -70,13 +71,13 @@ const Banner = ({
   backgroundColor,
 }: BannerProps) => {
   return (
-    <div className={`Banner bg-${backgroundColor} py-4 components`}>
-      <div className={`container flex justify-${textAlignment} items-center`}>
+    <Section className={`Banner ${backgroundColor} components`}>
+      <div className={`flex justify-${textAlignment} items-center`}>
         <Body color={textColor} weight={fontWeight} size={textSize}>
           {text}
         </Body>
       </div>
-    </div>
+    </Section>
   );
 };
 
