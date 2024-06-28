@@ -279,7 +279,7 @@ const Edit: () => JSX.Element = () => {
         {!isLoading && !!puckData && !!messagePayload ? (
           <>
             <Editor
-              selectedTemplate={messagePayload.template}
+              selectedTemplateId={messagePayload.templateId}
               puckConfig={puckConfig}
               puckData={puckData}
               role={messagePayload.role}

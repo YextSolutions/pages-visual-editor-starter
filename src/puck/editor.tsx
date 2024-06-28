@@ -9,12 +9,11 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   MessagePayload,
-  Template,
   VisualConfiguration,
 } from "../types/messagePayload";
 
 export interface EditorProps {
-  selectedTemplate: Template;
+  selectedTemplateId: string;
   puckConfig: Config;
   puckData: any; // json object
   role: string;
@@ -39,7 +38,7 @@ export const siteEntityVisualConfigField = "c_visualLayouts",
 
 // Render Puck editor
 export const Editor = ({
-  selectedTemplate,
+  selectedTemplateId,
   puckConfig,
   puckData,
   role,
@@ -78,7 +77,7 @@ export const Editor = ({
         window.localStorage.setItem(
           getLocalStorageKey(
             role,
-            selectedTemplate.id,
+            selectedTemplateId,
             messagePayload.layoutId,
             messagePayload.entity?.id
           ),
@@ -102,7 +101,7 @@ export const Editor = ({
   const handleClearLocalChanges = () => {
     clearHistory(
       messagePayload.role,
-      selectedTemplate.id,
+      selectedTemplateId,
       messagePayload.layoutId,
       messagePayload.entity?.id
     );
@@ -137,13 +136,13 @@ export const Editor = ({
         entity[baseEntityVisualConfigField] ?? [];
       const existingTemplate = visualConfigs.find(
         (visualConfig: VisualConfiguration) =>
-          visualConfig.template === selectedTemplate.id
+          visualConfig.template === selectedTemplateId
       );
       if (existingTemplate) {
         existingTemplate.data = templateData;
       } else {
         visualConfigs.push({
-          template: selectedTemplate.id,
+          template: selectedTemplateId,
           data: templateData,
         });
       }
@@ -165,7 +164,7 @@ export const Editor = ({
       // for global role, we save to the layout entity
       const visualConfig: VisualConfiguration = {
         data: templateData,
-        template: selectedTemplate.id,
+        template: selectedTemplateId,
       };
       window.localStorage.removeItem(
         getLocalStorageKey(
