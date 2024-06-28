@@ -1,4 +1,4 @@
-import { Puck, Data, Config, usePuck } from "@measured/puck";
+import { Puck, Data, Config, usePuck, type History } from "@measured/puck";
 import "@measured/puck/puck.css";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 import { customHeader } from "./components/Header";
@@ -12,7 +12,6 @@ import {
   Template,
   VisualConfiguration,
 } from "../types/messagePayload";
-import { type History } from "../templates/edit";
 
 export interface EditorProps {
   selectedTemplate: Template;
@@ -56,6 +55,10 @@ export const Editor = ({
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
 
+  /**
+   * When the Puck history changes save it to localStorage and set a message
+   * to the parent which saves the state to the VES database.
+   */
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
       if (

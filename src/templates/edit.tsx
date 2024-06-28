@@ -14,6 +14,7 @@ import {
   MessagePayload,
   VisualConfiguration,
 } from "../types/messagePayload";
+import { type History } from "@measured/puck";
 
 export const Role = {
   GLOBAL: "global",
@@ -98,12 +99,6 @@ const TARGET_ORIGINS = [
   "https://app-qa.eu.yext.com",
   "https://app.eu.yext.com",
 ];
-
-// TODO: Import from Puck once it's exported
-export type History<D = any> = {
-  id: string;
-  data: D;
-};
 
 // Render the editor
 const Edit: () => JSX.Element = () => {

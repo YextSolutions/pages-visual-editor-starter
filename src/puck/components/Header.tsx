@@ -1,5 +1,5 @@
 import "./puck.css";
-import { Data, usePuck } from "@measured/puck";
+import { Data, usePuck, type History } from "@measured/puck";
 import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
 import {
   AlertDialog,
@@ -13,7 +13,6 @@ import {
 } from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
 import { useDocument } from "../../hooks/useDocument";
-import { type History } from "../../templates/edit";
 import { Button } from "../ui/button";
 
 const handleClick = (slug: string) => {
@@ -24,14 +23,25 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: Function
+  handleSaveData: (data: Data) => void
 ) => {
   const entityDocument = useDocument();
   const {
-    history: { back, forward, histories, index, hasFuture, hasPast },
+    history: {
+      back,
+      forward,
+      histories,
+      index,
+      hasFuture,
+      hasPast,
+      setHistories,
+      setHistoryIndex,
+    },
   } = usePuck();
   useEffect(() => {
     handleHistoryChange(histories, index);
+    setHistories(histories);
+    setHistoryIndex(index);
   }, [index, histories, handleHistoryChange]);
 
   return (
