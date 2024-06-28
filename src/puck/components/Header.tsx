@@ -41,6 +41,9 @@ export const customHeader = (
     },
   } = usePuck();
   useEffect(() => {
+    console.log("handleHistoryChange and reset puck history");
+    console.log("puck history/index", histories, index);
+    console.log("local history/index", localHistories, localHistoryIndex);
     handleHistoryChange(histories, index);
     setHistories(localHistories);
     setHistoryIndex(localHistoryIndex);
