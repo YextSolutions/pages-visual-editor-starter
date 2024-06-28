@@ -7,10 +7,7 @@ import { fetchEntity } from "../utils/api";
 import { Role } from "../templates/edit";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import {
-  MessagePayload,
-  VisualConfiguration,
-} from "../types/messagePayload";
+import { MessagePayload, VisualConfiguration } from "../types/messagePayload";
 
 export interface EditorProps {
   selectedTemplateId: string;
@@ -213,7 +210,9 @@ export const Editor = ({
             handleClearLocalChanges,
             handleHistoryChange,
             appState.data,
-            handleSave
+            handleSave,
+            histories,
+            index
           );
         },
       }}

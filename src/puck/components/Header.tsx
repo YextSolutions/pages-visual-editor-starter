@@ -23,7 +23,9 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: (data: Data) => void
+  handleSaveData: (data: Data) => void,
+  localHistories: History[],
+  localHistoryIndex: number
 ) => {
   const entityDocument = useDocument();
   const {
@@ -40,8 +42,8 @@ export const customHeader = (
   } = usePuck();
   useEffect(() => {
     handleHistoryChange(histories, index);
-    setHistories(histories);
-    setHistoryIndex(index);
+    setHistories(localHistories);
+    setHistoryIndex(localHistoryIndex);
   }, [index, histories, handleHistoryChange]);
 
   return (
