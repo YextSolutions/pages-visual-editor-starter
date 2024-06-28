@@ -139,6 +139,7 @@ const Promo = ({imageMode, promoTitle, promoDescription, promoCta, image}: Promo
           {image?.url && <img
               src={image?.url}
               alt={'image'} //TODO: add alt prop?
+              className='md:max-w-[60%]'
           />}
           <div className='flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0'>
             {promoTitle?.text && <Heading
