@@ -35,13 +35,6 @@ export type Scope = {
   locales: string[];
 };
 
-export type Template = {
-  id: string;
-  name: string;
-  scope: Scope;
-  entityTypes: string[];
-};
-
 export type SaveState = {
   history: any; // json object
   hash: string;
@@ -54,7 +47,6 @@ export type MessagePayload = {
   layoutId?: number;
   layouts: Layout[];
   role: string;
-  template: Template;
   templateId: string;
   saveState?: SaveState;
 };
@@ -110,17 +102,6 @@ export const convertRawMessageToObject = (
     layoutId: layoutForExternalLayoutId?.id,
     layouts: layouts,
     role: messageParams.role,
-    template: {
-      id: messageParams.template.id,
-      name: messageParams.template.name,
-      scope: {
-        entityIds: messageParams.template.entities,
-        entityTypeIds: messageParams.template.entityTypeIds,
-        savedSearchIds: messageParams.template.savedSearches,
-        locales: messageParams.template.locales,
-      },
-      entityTypes: messageParams.template.entityTypes,
-    },
     templateId: messageParams.templateId,
     saveState: messageParams.saveState
       ? {
