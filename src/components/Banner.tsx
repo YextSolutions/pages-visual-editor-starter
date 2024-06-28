@@ -1,6 +1,5 @@
 import { BodyProps, Body } from "./atoms/body";
 import { ComponentConfig, Fields } from "@measured/puck";
-import { Section } from "./atoms/section";
 
 export type BannerProps = {
   text: string;
@@ -71,13 +70,13 @@ const Banner = ({
   backgroundColor,
 }: BannerProps) => {
   return (
-    <Section className={`Banner ${backgroundColor} components`}>
+    <div className={`Banner ${backgroundColor} components px-4 py-8`}>
       <div className={`flex ${textAlignment} items-center`}>
         <Body color={textColor} weight={fontWeight} size={textSize}>
           {text}
         </Body>
       </div>
-    </Section>
+    </div>
   );
 };
 
