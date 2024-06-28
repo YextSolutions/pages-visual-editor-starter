@@ -1,10 +1,6 @@
 import {ComponentConfig, Fields} from '@measured/puck';
 import {Heading, HeadingProps} from './atoms/heading';
 import {Body, BodyProps} from './atoms/body';
-import {ButtonProps} from './atoms/button';
-import {C_deliveryPromo, LocationStream} from "../types/autogen";
-import {useDocument} from "../hooks/useDocument";
-import {Image} from "@yext/pages-components";
 import {CTA, CTAProps} from "./atoms/cta";
 import {Section} from "./atoms/section";
 import {cn} from "../utils/cn";
