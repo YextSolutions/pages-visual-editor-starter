@@ -17,6 +17,7 @@ const bodyVariants = cva("font-bold", {
     color: {
       default: "text-default",
       primary: "text-primary",
+      secondary: "text-secondary",
       gray: "text-slate-700"
     }
   },

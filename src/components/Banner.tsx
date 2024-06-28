@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { BodyProps, Body } from "./atoms/body";
 import { ComponentConfig, Fields } from "@measured/puck";
-import { FaTimes } from "react-icons/fa";
 
 export type BannerProps = {
   text: string;
@@ -10,7 +8,6 @@ export type BannerProps = {
   fontWeight: BodyProps["weight"];
   textColor: BodyProps["color"];
   backgroundColor: "white" | "primary" | "secondary";
-  hasCloseBtn: "true" | "false";
 };
 
 const bannerFields: Fields<BannerProps> = {
@@ -22,8 +19,8 @@ const bannerFields: Fields<BannerProps> = {
     label: "Text Alignment",
     type: "radio",
     options: [
-      { label: "Left", value: "end" },
-      { label: "Right", value: "start" },
+      { label: "Left", value: "start" },
+      { label: "Right", value: "end" },
       { label: "Center", value: "center" },
     ],
   },
@@ -62,14 +59,6 @@ const bannerFields: Fields<BannerProps> = {
       { label: "Secondary", value: "secondary" },
     ],
   },
-  hasCloseBtn: {
-    label: "Close Button",
-    type: "radio",
-    options: [
-      { label: "Yes", value: "true" },
-      { label: "No", value: "false" },
-    ],
-  },
 };
 
 const Banner = ({
@@ -79,26 +68,13 @@ const Banner = ({
   fontWeight,
   textColor,
   backgroundColor,
-  hasCloseBtn,
 }: BannerProps) => {
-  const [showBanner, setShowBanner] = useState(true);
-
-  if (!showBanner) {
-    return null;
-  }
-
   return (
-    <div className={`Banner bg-${backgroundColor} py-4`}>
+    <div className={`Banner bg-${backgroundColor} py-4 components`}>
       <div className={`container flex justify-${textAlignment} items-center`}>
         <Body color={textColor} weight={fontWeight} size={textSize}>
           {text}
         </Body>
-        {hasCloseBtn && (
-          <button onClick={() => setShowBanner(false)}>
-            <FaTimes className="w-4 h-4" />
-            <span className="sr-only">Hide banner</span>
-          </button>
-        )}
       </div>
     </div>
   );
@@ -113,7 +89,6 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
     fontWeight: "default",
     textColor: "default",
     backgroundColor: "white",
-    hasCloseBtn: "false",
   },
   render: ({
     text,
@@ -122,7 +97,6 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
     fontWeight,
     textColor,
     backgroundColor,
-    hasCloseBtn,
   }) => (
     <Banner
       text={text}
@@ -131,7 +105,6 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
       fontWeight={fontWeight}
       textColor={textColor}
       backgroundColor={backgroundColor}
-      hasCloseBtn={hasCloseBtn}
     />
   ),
 };
