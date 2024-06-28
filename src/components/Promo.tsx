@@ -6,7 +6,7 @@ import {Section} from "./atoms/section";
 import {cn} from "../utils/cn";
 import "./index.css";
 
-const PLACEHOLDER_IMAGE_URL = 'https://images.unsplash.com/photo-1714241759740-75a397e2a174?q=80&w=1326&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+const PLACEHOLDER_IMAGE_URL = 'https://images.unsplash.com/photo-1718062457138-2d6fcab216d9?q=80&w=1510&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 
 export type PromoProps = {
   imageMode: 'left' | 'right';
