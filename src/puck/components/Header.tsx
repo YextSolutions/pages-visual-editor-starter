@@ -38,6 +38,8 @@ export const customHeader = (
       setHistoryIndex,
     },
   } = usePuck();
+  console.log("puck histories", histories);
+  console.log("puck index", index);
   useEffect(() => {
     handleHistoryChange(histories, index);
   }, [index, histories, handleHistoryChange]);
@@ -63,6 +65,7 @@ export const customHeader = (
         <ClearLocalChangesButton
           disabled={histories.length === 0}
           onClearLocalChanges={() => {
+            console.log("onClearLocalChanges");
             handleClearLocalChanges();
             setHistories([]);
             setHistoryIndex(-1);
