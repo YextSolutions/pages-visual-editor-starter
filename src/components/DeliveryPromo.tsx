@@ -104,7 +104,7 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
       <Section className='components'>
         <div
           className={cn(
-            "flex flex-col md:flex-row bg-white overflow-hidden rounded-[30px] gap-[32px]",
+            "flex flex-col md:flex-row bg-white overflow-hidden rounded-[30px] md:gap-8",
             imageMode === "right" && "md:flex-row-reverse",
           )}
         >
@@ -112,7 +112,7 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
               image={deliveryPromo.image}
               className={'max-w-3xl max-h-96'}
           />}
-          <div className='flex flex-col justify-center gap-y-[32px] px-[64px]'>
+          <div className='flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0'>
             {deliveryPromo.title && <Heading
                 size={promoTitle.size}
                 color={promoTitle.color}
