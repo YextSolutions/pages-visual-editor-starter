@@ -110,7 +110,7 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
         >
           {deliveryPromo.image && <Image
               image={deliveryPromo.image}
-              className={'max-w-3xl max-h-96'}
+              className={'max-h-96'}
           />}
           <div className='flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0'>
             {deliveryPromo.title && <Heading
