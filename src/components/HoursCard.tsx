@@ -1,7 +1,7 @@
 import {ComponentConfig, Fields} from "@measured/puck";
 import {useDocument} from "../hooks/useDocument";
 import {LocationStream, Hours} from "../types/autogen";
-import {HoursTable, HoursTableProps, HoursType} from "@yext/pages-components";
+import {DayOfWeekNames, HoursTable, HoursTableProps, HoursType} from "@yext/pages-components";
 import {Section} from "./atoms/section";
 import {Heading, HeadingProps} from "./atoms/heading";
 import "@yext/pages-components/style.css";
@@ -12,7 +12,7 @@ export type HoursCardProps = {
     size: HeadingProps["size"];
     color: HeadingProps["color"];
   };
-  startOfWeek: "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday" | "today";
+  startOfWeek: keyof DayOfWeekNames | "today";
   collapseDays: boolean;
   showAdditionalHoursText: boolean;
 };
