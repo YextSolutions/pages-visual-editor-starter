@@ -93,7 +93,7 @@ const heroFields: Fields<HeroProps> = {
         type: "radio",
         options: [
           { label: "Default", value: "default" },
-          { label: "Outline", value: "outline" },
+          { label: "Secondary", value: "secondary" },
           { label: "Link", value: "link" },
         ],
       },
@@ -108,7 +108,7 @@ const heroFields: Fields<HeroProps> = {
         type: "radio",
         options: [
           { label: "Default", value: "default" },
-          { label: "Outline", value: "outline" },
+          { label: "Secondary", value: "secondary" },
           { label: "Link", value: "link" },
         ],
       },
