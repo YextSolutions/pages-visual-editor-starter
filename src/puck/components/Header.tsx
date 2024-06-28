@@ -23,9 +23,7 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: (data: Data) => void,
-  localHistories: History[],
-  localHistoryIndex: number
+  handleSaveData: (data: Data) => void
 ) => {
   const entityDocument = useDocument();
   const {
@@ -41,12 +39,7 @@ export const customHeader = (
     },
   } = usePuck();
   useEffect(() => {
-    console.log("handleHistoryChange and reset puck history");
-    console.log("puck history/index", histories, index);
-    console.log("local history/index", localHistories, localHistoryIndex);
     handleHistoryChange(histories, index);
-    setHistories(localHistories);
-    setHistoryIndex(localHistoryIndex);
   }, [index, histories, handleHistoryChange]);
 
   return (
@@ -69,7 +62,11 @@ export const customHeader = (
         </Button>
         <ClearLocalChangesButton
           disabled={histories.length === 0}
-          onClearLocalChanges={handleClearLocalChanges}
+          onClearLocalChanges={() => {
+            handleClearLocalChanges();
+            setHistories([]);
+            setHistoryIndex(-1);
+          }}
         />
         <Button
           variant="outline"

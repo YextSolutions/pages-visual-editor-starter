@@ -210,9 +210,7 @@ export const Editor = ({
             handleClearLocalChanges,
             handleHistoryChange,
             appState.data,
-            handleSave,
-            histories,
-            index
+            handleSave
           );
         },
       }}
