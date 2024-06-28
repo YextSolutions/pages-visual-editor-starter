@@ -104,7 +104,7 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
       <Section className='components'>
         <div
           className={cn(
-            "flex flex-col md:flex-row bg-white overflow-hidden rounded-[30px] gap-x-[32px]",
+            "flex flex-col md:flex-row bg-white overflow-hidden rounded-[30px] gap-[32px]",
             imageMode === "right" && "md:flex-row-reverse",
           )}
         >
