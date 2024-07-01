@@ -4,14 +4,14 @@ import { ColumnsComponent as Columns, ColumnsProps } from "../components/Columns
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { CardComponent as Card, CardProps } from "../components/Card";
-import {DeliveryPromoComponent as DeliveryPromo, DeliveryPromoProps} from "../components/DeliveryPromo";
+import {HoursCardComponent as HoursCard, HoursCardProps} from "../components/HoursCard";
 import {PromoComponent as Promo, PromoProps} from "../components/Promo";
 
 type LocationProps = {
   Hero: HeroProps;
   Columns: ColumnsProps;
   Card: CardProps;
-  DeliveryPromo: DeliveryPromoProps;
+  HoursCard: HoursCardProps;
   Promo: PromoProps;
 };
 
@@ -21,7 +21,7 @@ export const locationConfig: Config<LocationProps> = {
     Hero,
     Columns,
     Card,
-    DeliveryPromo,
+    HoursCard,
     Promo
   },
   root: {

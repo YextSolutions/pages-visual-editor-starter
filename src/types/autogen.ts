@@ -90,13 +90,6 @@ export interface C_pages_layouts {
   c_visualConfiguration?: C_visualConfiguration;
 }
 
-export interface C_deliveryPromo {
-  image?: ComplexImage;
-  title?: string;
-  description?: string;
-  cta?: Cta1;
-}
-
 export interface LocationStream {
   id: string;
   uid: string;
@@ -108,7 +101,7 @@ export interface LocationStream {
   address: Address;
   c_hero: C_hero;
   c_pages_layouts: C_pages_layouts[];
-  c_deliveryPromo: C_deliveryPromo;
+  additionalHoursText: string;
 }
 
 export interface C_visualLayouts {
