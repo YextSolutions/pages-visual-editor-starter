@@ -4,6 +4,7 @@ import {Body, BodyProps} from './atoms/body';
 import {ButtonProps} from './atoms/button';
 import {C_deliveryPromo, LocationStream} from "../types/autogen";
 import {useDocument} from "../hooks/useDocument";
+import useScreenSizes from "../hooks/useDeviceSizes";
 import {Image} from "@yext/pages-components";
 import {CTA} from "./atoms/cta";
 import {Section} from "./atoms/section";
@@ -99,6 +100,7 @@ const deliveryPromoFields: Fields<DeliveryPromoProps> = {
 
 const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: DeliveryPromoProps) => {
   const deliveryPromo: C_deliveryPromo = useDocument<LocationStream>(document => document.c_deliveryPromo);
+  const {isMediumDevice} = useScreenSizes();
 
   return (
       <Section className='components'>
@@ -109,6 +111,9 @@ const DeliveryPromo = ({imageMode, promoTitle, promoDescription, promoCTA}: Deli
           )}
         >
           {deliveryPromo.image && <Image
+              layout="fixed"
+              width={isMediumDevice? 640 : 343}
+              height={isMediumDevice ? 474 : 253}
               image={deliveryPromo.image}
           />}
           <div className='flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0'>
