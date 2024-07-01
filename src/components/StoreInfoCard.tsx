@@ -73,21 +73,26 @@ const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
                 address={address}
                 lines={[['line1'],['line2', 'city', 'region', 'postalCode']]}
             />
-            <Link cta={{link: coordinates, label: 'Get Directions', linkType: 'URL'}}/>
+            <Link 
+                cta={{link: coordinates, label: "Get Directions", linkType: "URL"}}
+                className="font-bold hover:underline md:px-4 color:red"
+            />
             <IconContext.Provider
             value={{ color: 'red'}}
             >
             <div style={{
                 display: "flex",
-                flexDirection: "row"}}>
+                flexDirection: "row",
+                justifyContent: "stretch"}}>
                 <HiOutlinePhone />
-                {phoneNumber}
+                {' ' + phoneNumber}
             </div>
             <div style={{
                 display: "flex",
-                flexDirection: "row"}}>
+                flexDirection: "row",
+                justifyContent: "stretch"}}>
                 <MdOutlineEmail/>
-                {emails}
+                {' ' + emails}
             </div>
             </IconContext.Provider>
         </div>
