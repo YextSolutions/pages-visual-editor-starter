@@ -102,6 +102,8 @@ export interface LocationStream {
   c_hero: C_hero;
   c_pages_layouts: C_pages_layouts[];
   additionalHoursText: string;
+  mainPhone: string;
+  emails: string[];
 }
 
 export interface C_visualLayouts {

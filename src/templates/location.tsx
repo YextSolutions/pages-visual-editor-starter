@@ -32,6 +32,9 @@ export const config: TemplateConfig = {
       "address",
       "c_hero",
       "additionalHoursText",
+      "mainPhone",
+      "emails",
+      
     ],
     localization: {
       locales: ["en"],
