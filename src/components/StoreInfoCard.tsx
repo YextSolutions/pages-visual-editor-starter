@@ -54,7 +54,6 @@ const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
   const phoneNumber = formatPhoneNumber(useDocument<LocationStream>((document) => document.mainPhone));
   const emails = useDocument<LocationStream>((document) => document.emails);
   const coordinates = getDirections(address);
-  console.log(coordinates);
  
   return (
       <Section
@@ -74,21 +73,20 @@ const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
               address={address}
               lines={[['line2', 'city', 'region', 'postalCode']]}
           />
-          <Link
-                key={0}
-                href={coordinates}
-                className="hover:text-gray-300"
-              >
-                {'Get Directions'}
-              </Link>
+          <Link cta={{link: coordinates, label: 'Get Directions', linkType: 'URL'}}/>
+            
         <IconContext.Provider
         value={{ color: 'red'}}
         >
-          <div className="mx-auto flex max-w-6xl flex-1 items-center justify-between px-4 py-6">
+          <div style={{
+              display: "flex",
+              flexDirection: "column"}}>
             <HiOutlinePhone />
             {phoneNumber}
           </div>
-          <div className="mx-auto flex max-w-6xl flex-1 items-center justify-between px-4 py-6">
+          <div style={{
+              display: "flex",
+              flexDirection: "column"}}>
             <MdOutlineEmail/>
             {emails}
           </div>
@@ -119,7 +117,7 @@ function formatPhoneNumber(phoneNumberString:string) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
     var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
     if (match) {
-      return ['(', match[2], ')', match[3], '-', match[4]].join('');
+      return ['(', match[2], ') ', match[3], '-', match[4]].join('');
     }
     return null;
   }
