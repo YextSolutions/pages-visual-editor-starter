@@ -25,7 +25,7 @@ export default async function entityDocument(
   switch (method) {
     case "GET":
       try {
-        let requestPath = `https://api.yextapis.com/v2/accounts/me/sites/${YEXT_PUBLIC_SITE_ID}/fetchentitydocument?v=${vparam}&entityId=${entityId}&templateId=${templateId}&locale=en&api_key=${YEXT_PUBLIC_API_KEY}`;
+        let requestPath = `https://api.yext.com/v2/accounts/me/sites/${YEXT_PUBLIC_SITE_ID}/fetchentitydocument?v=${vparam}&entityId=${entityId}&templateId=${templateId}&locale=en&api_key=${YEXT_PUBLIC_API_KEY}`;
         if (suggestionIds) {
           requestPath += `&editIds=${suggestionIds}`;
         }
