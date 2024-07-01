@@ -63,7 +63,7 @@ export const convertRawMessageToObject = (
       name: layout.name,
       templateId: layout.templateId,
       visualConfiguration: jsonFromEscapedJsonString(
-        layout.visualConfiguration
+        layout?.visualConfiguration
       ),
       isDefault: layout.isDefault,
       entityIds: layout.entityIds,
@@ -118,5 +118,12 @@ export const convertRawMessageToObject = (
 
 // TODO: Remove this when the frontend has been fixed to not string escape
 const jsonFromEscapedJsonString = (escapedJsonString: string) => {
-  return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
+  if (!escapedJsonString) {
+    return {};
+  }
+  try {
+    return JSON.parse(escapedJsonString);
+  } catch (ignored) {
+    return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
+  }
 };
