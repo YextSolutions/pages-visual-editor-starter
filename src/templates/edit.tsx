@@ -57,7 +57,7 @@ export type History<D = any> = {
 const Edit: () => JSX.Element = () => {
   const [mounted, setMounted] = useState<boolean>(false);
   const [puckData, setPuckData] = useState<any>({}); // json object
-  const [puckDataStatus, setPuckDataStatus] = useState<"successful" | "pending" | "error">("successful");
+  const [puckDataStatus, setPuckDataStatus] = useState<"successful" | "pending" | "error">("pending");
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<any>();
@@ -116,8 +116,11 @@ const Edit: () => JSX.Element = () => {
         );
         const payloadPuckData = messagePayload?.visualConfigurationData;
         const payloadPuckDataStatus = messagePayload?.visualConfigurationDataStatus;
-        if (!payloadPuckData && payloadPuckDataStatus == "successful") {
+        if (!payloadPuckData && payloadPuckDataStatus === "successful") {
           throw new Error("Could not find VisualConfiguration to load");
+        }
+        if (payloadPuckDataStatus === "error") {
+          throw new Error("An error occurred while fetching visual config data");
         }
 
         setPuckData(payloadPuckData);
@@ -167,6 +170,7 @@ const Edit: () => JSX.Element = () => {
       setHistories,
       setHistoryIndex,
       setPuckData,
+      setPuckDataStatus,
       clearLocalStorage,
       getLocalStorageKey,
     ]
