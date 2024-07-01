@@ -39,14 +39,6 @@ export const enum DataSource {
   None = 5,
 }
 
-const getPuckData = (messagePayload: MessagePayload): any => {
-  if (messagePayload?.visualConfigurationData) {
-    return messagePayload.visualConfigurationData;
-  }
-
-  throw new Error("Could not find VisualConfiguration to load");
-};
-
 const TARGET_ORIGINS = [
   "http://localhost",
   "https://dev.yext.com",
@@ -67,6 +59,7 @@ export type History<D = any> = {
 const Edit: () => JSX.Element = () => {
   const [mounted, setMounted] = useState<boolean>(false);
   const [puckData, setPuckData] = useState<any>({}); // json object
+  const [puckDataStatus, setPuckDataStatus] = useState<"successful" | "pending" | "error">("successful");
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<any>();
@@ -123,7 +116,14 @@ const Edit: () => JSX.Element = () => {
           messagePayload.layoutId,
           messagePayload.entity?.id
         );
-        setPuckData(getPuckData(messagePayload));
+        const payloadPuckData = messagePayload?.visualConfigurationData;
+        const payloadPuckDataStatus = messagePayload?.visualConfigurationDataStatus;
+        if (!payloadPuckData && payloadPuckDataStatus == "successful") {
+          throw new Error("Could not find VisualConfiguration to load");
+        }
+
+        setPuckData(payloadPuckData);
+        setPuckDataStatus(payloadPuckDataStatus);
         return;
       }
 
@@ -170,7 +170,6 @@ const Edit: () => JSX.Element = () => {
       setHistoryIndex,
       setPuckData,
       clearLocalStorage,
-      getPuckData,
       getLocalStorageKey,
     ]
   );
@@ -221,7 +220,7 @@ const Edit: () => JSX.Element = () => {
 
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
-    : !puckData
+    : !puckData || puckDataStatus === "pending"
       ? "Loading data.."
       : !document
         ? "Loading document.."
