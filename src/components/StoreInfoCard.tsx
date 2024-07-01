@@ -73,32 +73,40 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                     address={address}
                     lines={[['line1'], ['line2', 'city', 'region', 'postalCode']]}
                 />
-                <div style={{paddingTop:"5px"}}></div>
+                <div style={{ paddingTop: "5px" }} />
                 <Link
                     cta={{ link: coordinates, label: "Get Directions", linkType: "URL" }}
-                    className="font-bold text-primary hover:underline md:px-4"
+                    className="font-bold text-primary hover:underline md:px-4;"
                 />
                 <IconContext.Provider
                     value={{ color: 'red' }}
                 >
-                    <div style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: "5px",
-                        alignItems: "center",
-                    }}>
-                        <HiOutlinePhone />
-                        {phoneNumber}
-                    </div>
-                    <div style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: "5px",
-                        alignItems: "center",
-                    }}>
-                        <MdOutlineEmail />
-                        {emails}
-                    </div>
+                    {
+                        phoneNumber &&
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: "5px",
+                            alignItems: "center",
+                            paddingTop: "5px",
+                        }}>
+                            <HiOutlinePhone />
+                            {phoneNumber}
+                        </div>
+                    }
+                    {
+                        emails &&
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: "5px",
+                            alignItems: "center",
+                            paddingTop: "5px",
+                        }}>
+                            <MdOutlineEmail />
+                            {emails}
+                        </div>
+                    }
                 </IconContext.Provider>
             </div>
         </Section>
