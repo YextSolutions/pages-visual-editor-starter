@@ -1,7 +1,7 @@
 import {ComponentConfig, Fields} from "@measured/puck";
 import {useDocument} from "../hooks/useDocument";
-import {LocationStream, Hours} from "../types/autogen";
-import { Address, getDirections, HoursTable, HoursType} from "@yext/pages-components";
+import {LocationStream} from "../types/autogen";
+import { Address, getDirections} from "@yext/pages-components";
 import {Section} from "./atoms/section";
 import {Heading, HeadingProps} from "./atoms/heading";
 import { Link } from "@yext/pages-components";
@@ -19,7 +19,7 @@ export type StoreInfoCardProps = {
     color: HeadingProps["color"];
   };
 };
-const hoursCardFields: Fields<StoreInfoCardProps> = {
+const storeInfoCardFields: Fields<StoreInfoCardProps> = {
   heading: {
     type: "object",
     label: "Heading",
@@ -49,7 +49,7 @@ const hoursCardFields: Fields<StoreInfoCardProps> = {
   },
 };
 
-const HoursCard = ({heading}: StoreInfoCardProps) => {
+const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
   const address = useDocument<LocationStream>((document) => document.address);
   const phoneNumber = useDocument<LocationStream>((document) => document.mainPhone);
   const emails = useDocument<LocationStream>((document) => document.emails);
@@ -93,17 +93,17 @@ const HoursCard = ({heading}: StoreInfoCardProps) => {
 };
 
 export const StoreInfoCardComponent: ComponentConfig<StoreInfoCardProps> = {
-  fields: hoursCardFields,
+  fields: storeInfoCardFields,
   defaultProps: {
     heading: {
-      text: "Hours",
+      text: "Store Info",
       size: "subheading",
       color: "default",
     },
   },
   label: 'Store Info Card',
   render: ({heading}) => (
-    <HoursCard
+    <StoreInfoCard
       heading={heading}
     />
   ),
