@@ -10,9 +10,7 @@ import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   convertRawMessageToObject,
-  Layout,
   MessagePayload,
-  VisualConfiguration,
 } from "../types/messagePayload";
 
 export const Role = {
