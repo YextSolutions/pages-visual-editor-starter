@@ -61,36 +61,35 @@ const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
         padding='small'
       >
         <div>
-          <Heading
-              level={2}
-              size={heading.size}
-              className={'mb-4'}
-              color={heading.color}
-          >
-            {heading.text}
-          </Heading>
-          <Address
-              address={address}
-              lines={[['line2', 'city', 'region', 'postalCode']]}
-          />
-          <Link cta={{link: coordinates, label: 'Get Directions', linkType: 'URL'}}/>
-            
-        <IconContext.Provider
-        value={{ color: 'red'}}
-        >
-          <div style={{
-              display: "flex",
-              flexDirection: "column"}}>
-            <HiOutlinePhone />
-            {phoneNumber}
-          </div>
-          <div style={{
-              display: "flex",
-              flexDirection: "column"}}>
-            <MdOutlineEmail/>
-            {emails}
-          </div>
-        </IconContext.Provider>
+            <Heading
+                level={2}
+                size={heading.size}
+                className={'mb-4'}
+                color={heading.color}
+            >
+                {heading.text}
+            </Heading>
+            <Address
+                address={address}
+                lines={[['line1'],['line2', 'city', 'region', 'postalCode']]}
+            />
+            <Link cta={{link: coordinates, label: 'Get Directions', linkType: 'URL'}}/>
+            <IconContext.Provider
+            value={{ color: 'red'}}
+            >
+            <div style={{
+                display: "flex",
+                flexDirection: "row"}}>
+                <HiOutlinePhone />
+                {phoneNumber}
+            </div>
+            <div style={{
+                display: "flex",
+                flexDirection: "row"}}>
+                <MdOutlineEmail/>
+                {emails}
+            </div>
+            </IconContext.Provider>
         </div>
       </Section>
   );
@@ -100,7 +99,7 @@ export const StoreInfoCardComponent: ComponentConfig<StoreInfoCardProps> = {
   fields: storeInfoCardFields,
   defaultProps: {
     heading: {
-      text: "Store Info",
+      text: "Information",
       size: "subheading",
       color: "default",
     },
