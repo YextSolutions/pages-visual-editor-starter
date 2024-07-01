@@ -51,9 +51,10 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
 
 const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
   const address = useDocument<LocationStream>((document) => document.address);
-  const phoneNumber = useDocument<LocationStream>((document) => document.mainPhone);
+  const phoneNumber = formatPhoneNumber(useDocument<LocationStream>((document) => document.mainPhone));
   const emails = useDocument<LocationStream>((document) => document.emails);
   const coordinates = getDirections(address);
+  console.log(coordinates);
  
   return (
       <Section
@@ -71,6 +72,7 @@ const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
           </Heading>
           <Address
               address={address}
+              lines={[['line2', 'city', 'region', 'postalCode']]}
           />
           <Link
                 key={0}
@@ -82,10 +84,14 @@ const StoreInfoCard = ({heading}: StoreInfoCardProps) => {
         <IconContext.Provider
         value={{ color: 'red'}}
         >
-          <HiOutlinePhone />
-          <div>{phoneNumber}</div>
-          <MdOutlineEmail/>
-          <div>{emails}</div>
+          <div className="mx-auto flex max-w-6xl flex-1 items-center justify-between px-4 py-6">
+            <HiOutlinePhone />
+            {phoneNumber}
+          </div>
+          <div className="mx-auto flex max-w-6xl flex-1 items-center justify-between px-4 py-6">
+            <MdOutlineEmail/>
+            {emails}
+          </div>
         </IconContext.Provider>
         </div>
       </Section>
@@ -108,3 +114,12 @@ export const StoreInfoCardComponent: ComponentConfig<StoreInfoCardProps> = {
     />
   ),
 };
+
+function formatPhoneNumber(phoneNumberString:string) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return ['(', match[2], ')', match[3], '-', match[4]].join('');
+    }
+    return null;
+  }
