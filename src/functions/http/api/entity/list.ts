@@ -10,7 +10,7 @@ export default async function getEntities(
     return { body: "Method not allowed", headers: {}, statusCode: 405 };
   }
 
-  let mgmtApiReq = `https://api.yextapis.com/v2/accounts/me/entities?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`;
+  let mgmtApiReq = `https://dev.yext.com/v2/accounts/me/entities?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`;
   const entityTypes = queryParams.entityTypes;
   if (entityTypes) {
     mgmtApiReq += `&entityTypes=${entityTypes}`;
