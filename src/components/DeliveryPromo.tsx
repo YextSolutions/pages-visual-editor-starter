@@ -120,11 +120,6 @@ const DeliveryPromo = ({
       >
         {deliveryPromo.image && (
           <Image
-            className={cn(
-              "rounded-t-lg lg:rounded-t-none",
-              imageMode === "right" && "lg:rounded-r-lg",
-              imageMode === "left" && "lg:rounded-l-lg"
-            )}
             image={deliveryPromo.image}
             layout="fixed"
             width={isMediumDevice ? 640 : 343}
