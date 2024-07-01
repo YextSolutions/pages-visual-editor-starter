@@ -63,7 +63,7 @@ export const convertRawMessageToObject = (
       name: layout.name,
       templateId: layout.templateId,
       visualConfiguration: jsonFromEscapedJsonString(
-        layout.visualConfiguration
+        layout?.visualConfiguration
       ),
       isDefault: layout.isDefault,
       entityIds: layout.entityIds,
