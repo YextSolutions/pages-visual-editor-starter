@@ -49,6 +49,8 @@ export type MessagePayload = {
   role: string;
   templateId: string;
   saveState?: SaveState;
+  visualConfigurationData: string;
+  visualConfigurationDataStatus: "successful" | "pending" | "error";
 };
 
 export const convertRawMessageToObject = (
@@ -109,6 +111,8 @@ export const convertRawMessageToObject = (
           hash: messageParams.saveState.Hash,
         }
       : undefined,
+    visualConfigurationData: messageParams?.visualConfigData?.visualConfigurationData,
+    visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
   };
 };
 
