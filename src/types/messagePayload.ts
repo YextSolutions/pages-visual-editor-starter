@@ -118,14 +118,12 @@ export const convertRawMessageToObject = (
 
 // TODO: Remove this when the frontend has been fixed to not string escape
 const jsonFromEscapedJsonString = (escapedJsonString: string) => {
-  try {
-    return JSON.parse(escapedJsonString);
-  } catch (e) {
-    console.log(`First try didn't work ${e}`);
-  }
   if (!escapedJsonString) {
-    console.log("escaped string was empty");
     return "";
   }
-  return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
+  try {
+    return JSON.parse(escapedJsonString);
+  } catch (ignored) {
+    return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
+  }
 };
