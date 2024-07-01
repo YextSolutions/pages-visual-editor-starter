@@ -22,6 +22,8 @@ export default async function entityDocument(
     return { body: "Missing entity id", headers: {}, statusCode: 400 };
   }
 
+  console.log(`API KEY ${YEXT_PUBLIC_API_KEY}`);
+
   switch (method) {
     case "GET":
       try {
