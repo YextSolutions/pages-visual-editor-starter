@@ -124,7 +124,7 @@ export const Editor = ({
     const templateData = JSON.stringify(data);
     postParentMessage({
       saveVisualConfigData: true,
-      templateId: selectedTemplate.id,
+      templateId: selectedTemplateId,
       layoutId: messagePayload.layoutId,
       entityId: messagePayload.entity?.id,
       VisualConfigurationData: templateData
