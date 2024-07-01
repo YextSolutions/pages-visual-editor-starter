@@ -141,7 +141,7 @@ const Promo = ({imageMode, promoTitle, promoDescription, promoCta, image}: Promo
               alt={'image'} //TODO: add alt prop?
               className='md:max-w-[60%]'
           />}
-          <div className='flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0 w-full'>
+          <div className='flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0 w-full break-all'>
             {promoTitle?.text && <Heading
                 size={promoTitle.size}
                 color={promoTitle.color}
