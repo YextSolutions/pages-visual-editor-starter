@@ -30,7 +30,7 @@ const getEntity = async (entityId?: string): Promise<PagesHttpResponse> => {
   }
 
   const mgmtApiResp = await fetch(
-    `https://dev.yext.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`,
+    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`,
   );
 
   try {
@@ -60,7 +60,7 @@ const updateEntity = async (
   }
 
   const mgmtApiResp = await fetch(
-    `https://dev.yext.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`,
+    `https://api.yextapis.com/v2/accounts/me/entities/${entityId}?api_key=${YEXT_PUBLIC_API_KEY}&v=${vparam}`,
     {
       method: "PUT",
       headers: {
