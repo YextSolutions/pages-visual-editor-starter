@@ -102,6 +102,8 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                             gap: "5px",
                             alignItems: "center",
                             paddingTop: "5px",
+                            color: "red",
+                            textDecoration: "underline"
                         }}>
                             <MdOutlineEmail />
                             {emails}
