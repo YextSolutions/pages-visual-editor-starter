@@ -20,8 +20,8 @@ const bannerFields: Fields<BannerProps> = {
     type: "radio",
     options: [
       { label: "Left", value: "justify-start" },
-      { label: "Right", value: "justify-end" },
       { label: "Center", value: "justify-center" },
+      { label: "Right", value: "justify-end" },
     ],
   },
   textSize: {
