@@ -6,7 +6,7 @@ import {Section} from "./atoms/section";
 import {cn} from "../utils/cn";
 import "./index.css";
 
-const PLACEHOLDER_IMAGE_URL = 'https://placehold.co/800x600';
+const PLACEHOLDER_IMAGE_URL = 'https://placehold.co/640x360';
 
 export type PromoProps = {
   imageMode: 'left' | 'right';
