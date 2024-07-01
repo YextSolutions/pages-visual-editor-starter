@@ -67,8 +67,8 @@ export const customHeader = (
           onClearLocalChanges={() => {
             console.log("onClearLocalChanges");
             handleClearLocalChanges();
-            setHistories([]);
-            setHistoryIndex(-1);
+            // setHistories([]);
+            setHistoryIndex(0);
           }}
         />
         <Button
