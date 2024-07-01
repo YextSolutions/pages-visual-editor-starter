@@ -10,9 +10,7 @@ import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   convertRawMessageToObject,
-  Layout,
   MessagePayload,
-  VisualConfiguration,
 } from "../types/messagePayload";
 
 export const Role = {
@@ -39,56 +37,6 @@ export const enum DataSource {
   None = 5,
 }
 
-const getPuckData = (messagePayload: MessagePayload): any => {
-  // get Puck data from the base entity for INDIVIDUAL
-  if (messagePayload.entity) {
-    if (messagePayload.role === Role.INDIVIDUAL) {
-      const entityPuckData = messagePayload.entity.visualConfigurations.find(
-        (config: VisualConfiguration) =>
-          config.template === messagePayload.templateId
-      );
-
-      if (entityPuckData) {
-        return entityPuckData.data;
-      }
-    }
-  }
-
-  // validate no shenanigans with the account setup
-  messagePayload.layouts.forEach((layout: Layout) => {
-    if (
-      layout.externalId === messagePayload.externalLayoutId &&
-      layout.templateId !== messagePayload.templateId
-    ) {
-      throw new Error(
-        `Mismatch between layout and template: ${messagePayload.externalLayoutId}, ${messagePayload.templateId}`
-      );
-    }
-  });
-
-  // get Puck data from the layout attached to the entity for GLOBAL
-  if (messagePayload.role === Role.GLOBAL) {
-    const layoutEntity = messagePayload.layouts.find(
-      (layout: Layout) => layout.externalId === messagePayload.externalLayoutId
-    );
-
-    if (layoutEntity) {
-      return layoutEntity.visualConfiguration;
-    }
-  }
-
-  // get Puck data from the default layout
-  const defaultEntity = messagePayload.layouts.find(
-    (layout: Layout) => layout.isDefault
-  );
-
-  if (defaultEntity) {
-    return defaultEntity.visualConfiguration;
-  }
-
-  throw new Error("Could not find VisualConfiguration to load");
-};
-
 const TARGET_ORIGINS = [
   "http://localhost",
   "https://dev.yext.com",
@@ -109,6 +57,7 @@ export type History<D = any> = {
 const Edit: () => JSX.Element = () => {
   const [mounted, setMounted] = useState<boolean>(false);
   const [puckData, setPuckData] = useState<any>({}); // json object
+  const [puckDataStatus, setPuckDataStatus] = useState<"successful" | "pending" | "error">("pending");
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<any>();
@@ -165,7 +114,17 @@ const Edit: () => JSX.Element = () => {
           messagePayload.layoutId,
           messagePayload.entity?.id
         );
-        setPuckData(getPuckData(messagePayload));
+        const payloadPuckData = messagePayload?.visualConfigurationData;
+        const payloadPuckDataStatus = messagePayload?.visualConfigurationDataStatus;
+        if (!payloadPuckData && payloadPuckDataStatus === "successful") {
+          throw new Error("Could not find VisualConfiguration to load");
+        }
+        if (payloadPuckDataStatus === "error") {
+          throw new Error("An error occurred while fetching visual config data");
+        }
+
+        setPuckData(payloadPuckData);
+        setPuckDataStatus(payloadPuckDataStatus);
         return;
       }
 
@@ -211,8 +170,8 @@ const Edit: () => JSX.Element = () => {
       setHistories,
       setHistoryIndex,
       setPuckData,
+      setPuckDataStatus,
       clearLocalStorage,
-      getPuckData,
       getLocalStorageKey,
     ]
   );
@@ -263,7 +222,7 @@ const Edit: () => JSX.Element = () => {
 
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
-    : !puckData
+    : !puckData || puckDataStatus === "pending"
       ? "Loading data.."
       : !document
         ? "Loading document.."
