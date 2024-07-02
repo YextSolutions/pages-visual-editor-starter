@@ -64,7 +64,7 @@ export const useMessage = (
 
   const onWatchEventHandler = useCallback(
     ({ origin, source, data }: MessageEvent) => {
-      if (!targetOrigins.includes(origin)) {
+      if (!targetOrigins.includes(data.source)) {
         throw new Error("Unrecognized origin");
       }
 
