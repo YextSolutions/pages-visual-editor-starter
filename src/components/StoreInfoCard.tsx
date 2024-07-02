@@ -76,7 +76,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                 <div className="pt-2.5" />
                 <Link
                     cta={{ link: coordinates, label: "Get Directions", linkType: "URL" }}
-                    className="font-bold text-primary hover:underline md:px-4;"
+                    className="font-bold text-primary Link--underline md:px-4;"
                 />
                 <IconContext.Provider
                     value={{ color: 'red' }}
@@ -92,11 +92,11 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                     {
                         emails &&
                         emails.map((email: any) => (
-                            <div className="pt-2.5 gap-x-1.5 flex flex-row items-center underline text-primary">
+                            <div className="pt-2.5 gap-x-1.5 flex flex-row items-center">
                                 <MdOutlineEmail />
                                 <Link
                                     cta={{ link: email, label: email, linkType: "Email" }}
-                                    className="hover:underline text-primary"
+                                    className="Link--underline text-primary"
                                 />
                             </div>
                         ))
