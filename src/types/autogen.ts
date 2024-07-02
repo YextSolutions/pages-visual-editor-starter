@@ -85,7 +85,7 @@ export interface linkedFAQs {
 }
 
 export interface C_faqSection {
-	linkedFAQs?: linkedFAQs,
+	linkedFAQs?: linkedFAQs[],
 }
 
 export interface LocationStream {

@@ -119,24 +119,21 @@ const FAQCard = ({sectionTitle}: FAQProps) => {
       (document) => document.c_faqSection
   );
 
-  console.log(faq.linkedFAQs);
-
   return (
       <Section className="flex flex-col justify-center bg-white components">
         <Heading level={1} size={sectionTitle.size} color={sectionTitle.color}>
           {sectionTitle.text}
         </Heading>
         <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>{faq.linkedFAQs?.question}</AccordionTrigger>
-            <AccordionContent>
-              {/*{faq.linkedFAQs?.answerV2 && (<LexicalRichText serializedAST={faq.linkedFAQs?.answerV2} />)}*/}
-            </AccordionContent>
-          </AccordionItem>
+          {faq.linkedFAQs && faq.linkedFAQs.map((faqItem, index) => (
+              <AccordionItem value={index}>
+                <AccordionTrigger>{faqItem.question}</AccordionTrigger>
+                <AccordionContent><LexicalRichText serializedAST={faqItem.answerV2} /></AccordionContent>
+              </AccordionItem>
+          ))}
         </Accordion>
       </Section>
-  );
-};
+  )};
 
 export const FAQComponent: ComponentConfig<FAQProps> = {
   fields: FAQFields,
