@@ -25,7 +25,7 @@ export type FeaturedItemsProps = {
       size: BodyProps["size"];
       weight: BodyProps["weight"];
     };
-    cta: {
+    cta?: {
       variant: CTAProps["variant"];
     };
   };
@@ -220,9 +220,6 @@ export const FeaturedItemsComponent: ComponentConfig<FeaturedItemsProps> = {
       body: {
         size: "base",
         weight: "default",
-      },
-      cta: {
-        variant: "default",
       },
     },
   },
