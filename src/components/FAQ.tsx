@@ -2,8 +2,6 @@ import {ComponentConfig, Fields} from "@measured/puck";
 import { Heading, HeadingProps } from "./atoms/heading";
 import {BodyProps} from "./atoms/body";
 import {Section} from "./atoms/section";
-import {Accordion} from "@mantine/core";
-
 
 export type FAQProps = {
   sectionTitle: {
@@ -113,12 +111,6 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
         <Heading level={1} size={sectionTitle.size} color={sectionTitle.color}>
           {sectionTitle.text}
         </Heading>
-        <Accordion>
-          <Accordion.Item key={question.text} value={answer.text}>
-            <Accordion.Control>{question.text}</Accordion.Control>
-            <Accordion.Panel>{answer.text}</Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
       </Section>
   );
 };
