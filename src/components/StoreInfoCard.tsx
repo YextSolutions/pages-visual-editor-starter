@@ -94,7 +94,10 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                         emails.map((email: any) => (
                             <div className="pt-2.5 gap-x-1.5 flex flex-row items-center underline text-primary">
                                 <MdOutlineEmail />
-                                {email}
+                                <Link
+                                    cta={{ link: email, label: email, linkType: "Email" }}
+                                    className="hover:underline text-primary"
+                                />
                             </div>
                         ))
                     }
