@@ -119,7 +119,7 @@ const FAQCard = ({sectionTitle}: FAQProps) => {
       (document) => document.c_faqSection
   );
 
-  console.log(faq);
+  console.log(faq.linkedFAQs);
 
   return (
       <Section className="flex flex-col justify-center bg-white components">
