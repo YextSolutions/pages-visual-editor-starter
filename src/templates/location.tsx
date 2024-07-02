@@ -34,6 +34,7 @@ export const config: TemplateConfig = {
       "additionalHoursText",
       "mainPhone",
       "emails",
+      "c_deliveryPromo",
     ],
     localization: {
       locales: ["en"],
