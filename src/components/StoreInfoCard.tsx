@@ -54,7 +54,6 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
     const phoneNumber = formatPhoneNumber(useDocument<LocationStream>((document) => document.mainPhone));
     const emails = useDocument<LocationStream>((document) => document.emails);
     const coordinates = getDirections(address);
-    console.log(emails);
 
     return (
         <Section
@@ -95,7 +94,9 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                         <div
                             className="pt-1 gap-x-1.5 flex flex-row items-center underline text-primary">
                             <MdOutlineEmail />
-                            {emails.join(",<br>")}
+                            {emails.map((email: any) => (
+                                <div>{email}</div>
+                            ))}
                         </div>
                     }
                 </IconContext.Provider>
