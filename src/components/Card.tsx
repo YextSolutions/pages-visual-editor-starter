@@ -146,7 +146,7 @@ const cardFields: Fields<CardProps> = {
   },
 };
 
-const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
+export const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
   return (
     <Section
       className="flex flex-col justify-center bg-white components"
