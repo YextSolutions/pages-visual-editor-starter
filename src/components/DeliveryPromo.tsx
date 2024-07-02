@@ -122,7 +122,7 @@ const DeliveryPromo = ({
         {deliveryPromo.image && (
           <Image
             image={deliveryPromo.image}
-            layout={isLargeDevice ? "fixed" : undefined}
+            layout={isLargeDevice ? "fixed" : 'intrinsic'}
             width={isLargeDevice ? 640 : undefined}
             height={isLargeDevice ? 474 : undefined}
           />
