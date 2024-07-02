@@ -5,6 +5,7 @@ import {Section} from "./atoms/section";
 import { C_faqSection, LocationStream } from "../types/autogen";
 import { LexicalRichText } from "@yext/pages-components";
 import {useDocument} from "../hooks/useDocument";
+import {Body} from "./atoms/body";
 import {
   Accordion,
   AccordionContent,
@@ -114,7 +115,7 @@ const FAQFields: Fields<FAQProps> = {
   },
 };
 
-const FAQCard = ({sectionTitle}: FAQProps) => {
+const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
   const faq: C_faqSection = useDocument<LocationStream>(
       (document) => document.c_faqSection
   );
@@ -127,8 +128,16 @@ const FAQCard = ({sectionTitle}: FAQProps) => {
         <Accordion type="single" collapsible>
           {faq.linkedFAQs && faq.linkedFAQs.map((faqItem, index) => (
               <AccordionItem value={index}>
-                <AccordionTrigger><LexicalRichText serializedAST={faqItem.answerV2} /></AccordionTrigger>
-                <AccordionContent><LexicalRichText serializedAST={faqItem.answerV2} /></AccordionContent>
+                <AccordionTrigger>
+                  <Heading level={1} size={question.size} color={question.color}>
+                    {faqItem.question}
+                  </Heading>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <Body size={answer.size} weight={answer.weight}>
+                    <LexicalRichText serializedAST={faqItem.answerV2} />
+                  </Body>
+                </AccordionContent>
               </AccordionItem>
           ))}
         </Accordion>
