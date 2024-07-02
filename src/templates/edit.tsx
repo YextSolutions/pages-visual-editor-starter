@@ -60,6 +60,7 @@ const Edit: () => JSX.Element = () => {
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<any>();
   const [messagePayload, setMessagePayload] = useState<MessagePayload>();
+  const [parentText, setParentText] = useState<string>("");
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -222,7 +223,7 @@ const Edit: () => JSX.Element = () => {
   const document = entityDocument?.response.document;
 
   const { sendToParent } = useMessage("test", TARGET_ORIGINS, (_, payload) => {
-    console.log("Message from parent:", payload);
+    setParentText("Message from parent:" + payload);
   });
 
   const loadingMessage = !puckConfig
@@ -260,6 +261,7 @@ const Edit: () => JSX.Element = () => {
             SEND TO PARENT
           </button>
         </div>
+        <div>Parent text: {parentText}</div>
         {!isLoading && !!puckData && !!messagePayload ? (
           <>
             <Editor
