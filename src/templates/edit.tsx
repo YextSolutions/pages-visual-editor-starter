@@ -224,8 +224,11 @@ const Edit: () => JSX.Element = () => {
   const { sendToParent } = useMessage("test", TARGET_ORIGINS, (_, payload) => {
     console.log("Message from parent:", payload);
   });
-  console.log("window", window);
-  console.log("window.parent", window.parent);
+
+  useEffect(() => {
+    console.log("window", window);
+    console.log("window.parent", window.parent);
+  }, []);
 
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
