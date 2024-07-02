@@ -9,7 +9,6 @@ import { IconContext } from "react-icons";
 import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlinePhone } from "react-icons/hi";
 
-
 import "@yext/pages-components/style.css";
 
 export type StoreInfoCardProps = {
@@ -19,6 +18,7 @@ export type StoreInfoCardProps = {
         color: HeadingProps["color"];
     };
 };
+
 const storeInfoCardFields: Fields<StoreInfoCardProps> = {
     heading: {
         type: "object",
@@ -73,7 +73,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                     address={address}
                     lines={[['line1'], ['line2', 'city', 'region', 'postalCode']]}
                 />
-                <div style={{ paddingTop: "5px" }} />
+                <div className="pt-1" />
                 <Link
                     cta={{ link: coordinates, label: "Get Directions", linkType: "URL" }}
                     className="font-bold text-primary hover:underline md:px-4;"
@@ -83,30 +83,20 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                 >
                     {
                         phoneNumber &&
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            gap: "5px",
-                            alignItems: "center",
-                            paddingTop: "5px",
-                        }}>
+                        <div
+                            className="pt-1 gap-x-1.5 flex flex-row items-center">
                             <HiOutlinePhone />
                             {phoneNumber}
                         </div>
                     }
                     {
                         emails &&
-                        <div style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            gap: "5px",
-                            alignItems: "center",
-                            paddingTop: "5px",
-                            color: "red",
-                            textDecoration: "underline"
-                        }}>
+                        <div
+                            className="pt-1 gap-x-1.5 flex flex-row items-center underline text-primary">
                             <MdOutlineEmail />
-                            {emails}
+                            {emails.map((email: string) => {
+                                <div>{email}</div>
+                            })}
                         </div>
                     }
                 </IconContext.Provider>
@@ -132,7 +122,10 @@ export const StoreInfoCardComponent: ComponentConfig<StoreInfoCardProps> = {
     ),
 };
 
-function formatPhoneNumber(phoneNumberString: string) {
+function formatPhoneNumber(phoneNumberString?: string) {
+    if (!phoneNumberString) {
+        return null;
+    }
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
     var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
     if (match) {
