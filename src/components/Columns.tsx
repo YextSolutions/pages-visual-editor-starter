@@ -33,7 +33,7 @@ const Columns = ({ columns, distribution }: ColumnsProps) => {
                   : "",
             }}
           >
-            <DropZone zone={`column-${idx}`} disallow={["Hero", "Promo"]} />
+            <DropZone zone={`column-${idx}`} disallow={["Hero", "DeliveryPromo", "Promo"]} />
           </div>
         ))}
       </div>
