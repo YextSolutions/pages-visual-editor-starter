@@ -54,6 +54,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
     const phoneNumber = formatPhoneNumber(useDocument<LocationStream>((document) => document.mainPhone));
     const emails = useDocument<LocationStream>((document) => document.emails);
     const coordinates = getDirections(address);
+    console.log(emails);
 
     return (
         <Section
