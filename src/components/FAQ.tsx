@@ -20,12 +20,10 @@ export type FAQProps = {
     color: HeadingProps["color"];
   };
   question: {
-    text: string;
     size: HeadingProps["size"];
     color: HeadingProps["color"];
   };
   answer: {
-    text: string;
     size: BodyProps['size'];
     weight: BodyProps['weight'];
   };
@@ -63,10 +61,6 @@ const FAQFields: Fields<FAQProps> = {
     type: "object",
     label: "Question",
     objectFields: {
-      text: {
-        label: "Text",
-        type: "text"
-      },
       size: {
         label: "Size",
         type: "radio",
@@ -90,10 +84,6 @@ const FAQFields: Fields<FAQProps> = {
     type: "object",
     label: "Answer",
     objectFields: {
-      text: {
-        label: "Text",
-        type: "text"
-      },
       size: {
         label: "Size",
         type: "radio",
@@ -148,17 +138,15 @@ export const FAQComponent: ComponentConfig<FAQProps> = {
   fields: FAQFields,
   defaultProps: {
     sectionTitle: {
-      text: "sectionTitle",
+      text: "Frequently Asked Questions",
       size: "section",
       color: "default",
     },
     question: {
-      text: "question",
-      size: "section",
+      size: "subheading",
       color: "default",
     },
     answer: {
-      text: "answer",
       size: "base",
       weight: "default",
     },
