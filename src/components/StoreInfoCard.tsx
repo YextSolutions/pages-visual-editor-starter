@@ -73,7 +73,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                     address={address}
                     lines={[['line1'], ['line2', 'city', 'region', 'postalCode']]}
                 />
-                <div className="pt-1" />
+                <div className="pt-2.5" />
                 <Link
                     cta={{ link: coordinates, label: "Get Directions", linkType: "URL" }}
                     className="font-bold text-primary hover:underline md:px-4;"
@@ -84,20 +84,19 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                     {
                         phoneNumber &&
                         <div
-                            className="pt-1 gap-x-1.5 flex flex-row items-center">
+                            className="pt-2.5 gap-x-1.5 flex flex-row items-center">
                             <HiOutlinePhone />
                             {phoneNumber}
                         </div>
                     }
                     {
                         emails &&
-                        <div
-                            className="pt-1 gap-x-1.5 flex flex-row items-center underline text-primary">
-                            <MdOutlineEmail />
-                            {emails.map((email: any) => (
-                                <div>{email}</div>
-                            ))}
-                        </div>
+                        emails.map((email: any) => (
+                            <div className="pt-2.5 gap-x-1.5 flex flex-row items-center underline text-primary">
+                                <MdOutlineEmail />
+                                {email}
+                            </div>
+                        ))
                     }
                 </IconContext.Provider>
             </div>
