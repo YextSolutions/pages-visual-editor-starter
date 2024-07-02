@@ -120,64 +120,15 @@ export const Editor = ({
     }
   }, [mutation]);
 
-  // Save the data to our site entity
-  const save = async (data: Data, role: string) => {
+  const handleSave = async (data: Data) => {
     const templateData = JSON.stringify(data);
-    if (role === Role.INDIVIDUAL) {
-      // since we are updating a list, we must get the original data, append to it, then push
-      const response = await fetchEntity(
-        messagePayload.entity?.externalId || "" // this should be handled better
-      );
-      const entity = response.response;
-      const visualConfigs: VisualConfiguration[] =
-        entity[baseEntityVisualConfigField] ?? [];
-      const existingTemplate = visualConfigs.find(
-        (visualConfig: VisualConfiguration) =>
-          visualConfig.template === selectedTemplateId
-      );
-      if (existingTemplate) {
-        existingTemplate.data = templateData;
-      } else {
-        visualConfigs.push({
-          template: selectedTemplateId,
-          data: templateData,
-        });
-      }
-      window.localStorage.removeItem(
-        getLocalStorageKey(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        )
-      );
-      mutation.mutate({
-        entityId: messagePayload.entity?.externalId || "", // this should be handled better
-        body: {
-          [baseEntityVisualConfigField]: visualConfigs,
-        },
-      });
-    } else if (role === Role.GLOBAL) {
-      // for global role, we save to the layout entity
-      const visualConfig: VisualConfiguration = {
-        data: templateData,
-        template: selectedTemplateId,
-      };
-      window.localStorage.removeItem(
-        getLocalStorageKey(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        )
-      );
-      mutation.mutate({
-        entityId: messagePayload.externalLayoutId,
-        body: {
-          [pageLayoutVisualConfigField]: visualConfig,
-        },
-      });
-    }
+    postParentMessage({
+      saveVisualConfigData: true,
+      templateId: selectedTemplateId,
+      layoutId: messagePayload.layoutId,
+      entityId: messagePayload.entity?.id,
+      VisualConfigurationData: templateData
+    });
   };
 
   const change = async () => {
@@ -190,15 +141,10 @@ export const Editor = ({
     }
   };
 
-  const handleSave = async (data: Data) => {
-    await save(data, role);
-  };
-
   return (
     <Puck
       config={puckConfig}
       data={puckData as Partial<Data>}
-      onPublish={(data: Data) => save(data, role)}
       initialHistory={
         index === -1 ? undefined : { histories: histories, index: index }
       }
