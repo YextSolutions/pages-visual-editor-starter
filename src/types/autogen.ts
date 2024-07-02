@@ -81,11 +81,11 @@ export interface C_pages_layouts {
 
 export interface linkedFAQs {
   question: string,
-  answer: string,
+  answerV2: string,
 }
 
 export interface C_faqSection {
-	linkedFAQs?: any,
+	linkedFAQs?: linkedFAQs,
 }
 
 export interface LocationStream {

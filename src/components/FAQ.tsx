@@ -119,6 +119,8 @@ const FAQCard = ({sectionTitle}: FAQProps) => {
       (document) => document.c_faqSection
   );
 
+  console.log(faq);
+
   return (
       <Section className="flex flex-col justify-center bg-white components">
         <Heading level={1} size={sectionTitle.size} color={sectionTitle.color}>
@@ -126,15 +128,9 @@ const FAQCard = ({sectionTitle}: FAQProps) => {
         </Heading>
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>{faq.linkedFAQs?.question}</AccordionTrigger>
             <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
+              {/*{faq.linkedFAQs?.answerV2 && (<LexicalRichText serializedAST={faq.linkedFAQs?.answerV2} />)}*/}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
