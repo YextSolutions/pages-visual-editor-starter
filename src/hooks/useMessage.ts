@@ -65,7 +65,7 @@ export const useMessage = (
       console.log("repo data", data);
       console.log("repo targetOrigins", targetOrigins);
 
-      if (!targetOrigins.includes(data.source)) {
+      if (!targetOrigins.includes(origin)) {
         throw new Error("Unrecognized origin");
       }
 
