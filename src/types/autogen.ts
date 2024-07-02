@@ -104,7 +104,7 @@ export interface LocationStream {
   c_hero: C_hero;
   c_pages_layouts: C_pages_layouts[];
   c_deliveryPromo: C_deliveryPromo;
-  c_productSection: C_productSection,
+  c_productSection: C_productSection;
   additionalHoursText: string;
 }
 
