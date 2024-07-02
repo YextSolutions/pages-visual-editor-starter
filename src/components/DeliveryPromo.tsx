@@ -122,9 +122,7 @@ const DeliveryPromo = ({
         {deliveryPromo.image && (
           <Image
             image={deliveryPromo.image}
-            layout={isLargeDevice ? "fixed" : 'intrinsic'}
-            width={isLargeDevice ? 640 : undefined}
-            height={isLargeDevice ? 474 : undefined}
+            className={'flex-none'}
           />
         )}
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0">
