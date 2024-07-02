@@ -49,21 +49,22 @@ export const useMessage = (
     postMessage(data, sourceRef.current, originRef.current);
 
   const sendToParent = (data: IPostMessage) => {
-    console.log("sendToParent window", window);
-    console.log("sendToParent window.parent", window.parent);
     // const { opener } = window.parent;
     if (!window.parent) {
       throw new Error("Parent window has closed");
     }
     for (const targetOrigin of targetOrigins) {
-      // window.parent.postMessage(message, targetOrigin);
       window.parent.postMessage(data, targetOrigin);
-      //   postMessage(data, opener, targetOrigin);
     }
   };
 
   const onWatchEventHandler = useCallback(
     ({ origin, source, data }: MessageEvent) => {
+      console.log("repo origin", origin);
+      console.log("repo source", source);
+      console.log("repo data", data);
+      console.log("repo targetOrigins", targetOrigins);
+
       if (!targetOrigins.includes(data.source)) {
         throw new Error("Unrecognized origin");
       }

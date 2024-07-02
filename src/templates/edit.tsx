@@ -225,11 +225,6 @@ const Edit: () => JSX.Element = () => {
     console.log("Message from parent:", payload);
   });
 
-  useEffect(() => {
-    console.log("window", window);
-    console.log("window.parent", window.parent);
-  }, []);
-
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
     : !puckData || puckDataStatus === "pending"
