@@ -13,6 +13,7 @@ import {
   MessagePayload,
 } from "../types/messagePayload";
 import { type History } from "@measured/puck";
+import { useMessage } from "../hooks/useMessage";
 
 export const Role = {
   GLOBAL: "global",
@@ -52,7 +53,9 @@ const TARGET_ORIGINS = [
 const Edit: () => JSX.Element = () => {
   const [mounted, setMounted] = useState<boolean>(false);
   const [puckData, setPuckData] = useState<any>({}); // json object
-  const [puckDataStatus, setPuckDataStatus] = useState<"successful" | "pending" | "error">("pending");
+  const [puckDataStatus, setPuckDataStatus] = useState<
+    "successful" | "pending" | "error"
+  >("pending");
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<any>();
@@ -110,12 +113,15 @@ const Edit: () => JSX.Element = () => {
           messagePayload.entity?.id
         );
         const payloadPuckData = messagePayload?.visualConfigurationData;
-        const payloadPuckDataStatus = messagePayload?.visualConfigurationDataStatus;
+        const payloadPuckDataStatus =
+          messagePayload?.visualConfigurationDataStatus;
         if (!payloadPuckData && payloadPuckDataStatus === "successful") {
           throw new Error("Could not find VisualConfiguration to load");
         }
         if (payloadPuckDataStatus === "error") {
-          throw new Error("An error occurred while fetching visual config data");
+          throw new Error(
+            "An error occurred while fetching visual config data"
+          );
         }
 
         setPuckData(payloadPuckData);
@@ -215,6 +221,10 @@ const Edit: () => JSX.Element = () => {
   });
   const document = entityDocument?.response.document;
 
+  const { sendToParent } = useMessage("test", TARGET_ORIGINS, (_, payload) => {
+    console.log("Message from parent:", payload);
+  });
+
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
     : !puckData || puckDataStatus === "pending"
@@ -235,6 +245,21 @@ const Edit: () => JSX.Element = () => {
   return (
     <>
       <DocumentProvider value={document}>
+        <div>
+          <button
+            onClick={() => {
+              sendToParent({
+                type: "test",
+                payload: {
+                  message: "Hello from child",
+                  date: new Date().toLocaleString(),
+                },
+              });
+            }}
+          >
+            SEND TO PARENT
+          </button>
+        </div>
         {!isLoading && !!puckData && !!messagePayload ? (
           <>
             <Editor
