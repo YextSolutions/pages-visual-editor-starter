@@ -127,7 +127,7 @@ const FAQCard = ({sectionTitle}: FAQProps) => {
         <Accordion type="single" collapsible>
           {faq.linkedFAQs && faq.linkedFAQs.map((faqItem, index) => (
               <AccordionItem value={index}>
-                <AccordionTrigger>{faqItem.question}</AccordionTrigger>
+                <AccordionTrigger><LexicalRichText serializedAST={faqItem.answerV2} /></AccordionTrigger>
                 <AccordionContent><LexicalRichText serializedAST={faqItem.answerV2} /></AccordionContent>
               </AccordionItem>
           ))}
