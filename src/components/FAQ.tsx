@@ -117,7 +117,7 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
         </Heading>
         <Accordion type="single" collapsible>
           {faq.linkedFAQs && faq.linkedFAQs.map((faqItem, index) => (
-              <AccordionItem value={index}>
+              <AccordionItem value={index+1}>
                 <AccordionTrigger>
                   <Heading level={1} size={question.size} color={question.color}>
                     {faqItem.question}
