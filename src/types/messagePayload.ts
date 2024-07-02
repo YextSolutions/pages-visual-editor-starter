@@ -57,7 +57,6 @@ export const convertRawMessageToObject = (
   messageParams: any
 ): MessagePayload => {
   const layouts: Layout[] = (messageParams.layouts || []).map((layout: any) => {
-    console.log(layout.visualConfiguration.replace(/\\"/g, '"'))
     return {
       id: layout.id,
       externalId: layout.externalId,
