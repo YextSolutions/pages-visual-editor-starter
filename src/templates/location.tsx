@@ -31,6 +31,8 @@ export const config: TemplateConfig = {
       "hours",
       "address",
       "c_hero",
+      "c_faqSection.linkedFAQs.question",
+      "c_faqSection.linkedFAQs.answerV2",
       "additionalHoursText",
     ],
     localization: {

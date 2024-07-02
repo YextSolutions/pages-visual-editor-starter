@@ -2,6 +2,15 @@ import {ComponentConfig, Fields} from "@measured/puck";
 import { Heading, HeadingProps } from "./atoms/heading";
 import {BodyProps} from "./atoms/body";
 import {Section} from "./atoms/section";
+import { C_faqSection, LocationStream } from "../types/autogen";
+import { LexicalRichText } from "@yext/pages-components";
+import {useDocument} from "../hooks/useDocument";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./atoms/accordion"
 
 export type FAQProps = {
   sectionTitle: {
@@ -105,12 +114,30 @@ const FAQFields: Fields<FAQProps> = {
   },
 };
 
-const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
+const FAQCard = ({sectionTitle}: FAQProps) => {
+  const faq: C_faqSection = useDocument<LocationStream>(
+      (document) => document.c_faqSection
+  );
+
   return (
-      <Section>
+      <Section className="flex flex-col justify-center bg-white components">
         <Heading level={1} size={sectionTitle.size} color={sectionTitle.color}>
           {sectionTitle.text}
         </Heading>
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </Section>
   );
 };
