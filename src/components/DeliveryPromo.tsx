@@ -108,7 +108,7 @@ const DeliveryPromo = ({
     (document) => document.c_deliveryPromo
   );
 
-  const { isMediumDevice } = useScreenSizes();
+  const { isLargeDevice } = useScreenSizes();
 
   return (
     <Section className="components">
@@ -122,9 +122,9 @@ const DeliveryPromo = ({
         {deliveryPromo.image && (
           <Image
             image={deliveryPromo.image}
-            // layout="fixed"
-            // width={isMediumDevice ? 640 : 343}
-            // height={isMediumDevice ? 474 : 253}
+            layout={isLargeDevice ? "fixed" : undefined}
+            width={isLargeDevice ? 640 : undefined}
+            height={isLargeDevice ? 474 : undefined}
           />
         )}
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0">
