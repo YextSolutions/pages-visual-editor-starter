@@ -122,7 +122,7 @@ const DeliveryPromo = ({
         {deliveryPromo.image && (
           <Image
             image={deliveryPromo.image}
-            layout="fixed"
+            // layout="fixed"
             // width={isMediumDevice ? 640 : 343}
             // height={isMediumDevice ? 474 : 253}
           />
