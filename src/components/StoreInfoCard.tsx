@@ -76,7 +76,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                 <div className="pt-2.5" />
                 <Link
                     cta={{ link: coordinates, label: "Get Directions", linkType: "URL" }}
-                    className="font-bold text-primary Link--underline md:px-4;"
+                    className="Link font-bold text-primary Link--underline md:px-4;"
                 />
                 <IconContext.Provider
                     value={{ color: 'red' }}
@@ -96,7 +96,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                                 <MdOutlineEmail />
                                 <Link
                                     cta={{ link: email, label: email, linkType: "Email" }}
-                                    className="Link--underline text-primary"
+                                    className="Link Link--underline text-primary"
                                 />
                             </div>
                         ))
