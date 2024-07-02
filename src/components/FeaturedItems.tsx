@@ -173,7 +173,11 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
               }}
             >
               <Card
-                cta={product.c_productCTA}
+                cta={{
+                  label: product.c_productCTA?.name,
+                  link: product.c_productCTA?.link,
+                  variant: cards.cta?.variant,
+                }}
                 heading={{
                   text: product.name,
                   size: cards.heading.size,
