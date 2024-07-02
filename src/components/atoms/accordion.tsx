@@ -3,7 +3,6 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { ChevronDown } from "lucide-react"
 import {cn} from "../../utils/cn";
 
-
 const Accordion = AccordionPrimitive.Root
 
 const AccordionItem = React.forwardRef<
@@ -12,7 +11,7 @@ const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <AccordionPrimitive.Item
         ref={ref}
-        className={cn("border-b", className)}
+        className={cn("rounded-lg mb-2 border-b", className)}
         {...props}
     />
 ))
