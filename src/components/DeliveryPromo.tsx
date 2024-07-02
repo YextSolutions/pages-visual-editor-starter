@@ -114,7 +114,7 @@ const DeliveryPromo = ({
     <Section className="components">
       <div
         className={cn(
-          "flex flex-col mx-auto max-w-[343px] bg-white rounded-[30px] md:gap-8 md:max-w-[640px]" +
+          "flex flex-col mx-auto bg-white rounded-[30px] md:gap-8 md:max-w-[640px]" +
             " lg:max-w-full lg:flex-row overflow-hidden",
           imageMode === "right" && "lg:flex-row-reverse"
         )}
@@ -122,7 +122,7 @@ const DeliveryPromo = ({
         {deliveryPromo.image && (
           <Image
             image={deliveryPromo.image}
-            className={'flex-none'}
+            className={'flex-auto'}
             layout={"fill"}
           />
         )}
