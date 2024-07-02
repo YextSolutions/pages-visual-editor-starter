@@ -243,7 +243,7 @@ const Edit: () => JSX.Element = () => {
   const progress: number =
     (100 * (!!puckConfig + !!puckData + !!messagePayload + !!document)) / 4;
 
-  if (!mounted || typeof navigator === "undefined") {
+  if (typeof navigator === "undefined") {
     return <></>;
   }
 
