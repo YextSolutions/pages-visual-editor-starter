@@ -36,10 +36,10 @@ export const useMessage = (
   eventHandler: EventHandler
 ) => {
   const [history, setHistory] = useState<IPostMessage[]>([]);
-  const [origin, setOrigin] = useState<string>();
+  const [origin, setOrigin] = useState<string>("");
   const [source, setSource] = useState<MessageEvent["source"] | null>(null);
 
-  const originRef = useRef<string>();
+  const originRef = useRef<string>("");
   const sourceRef = useRef<MessageEvent["source"]>(null);
 
   originRef.current = origin;
@@ -49,7 +49,7 @@ export const useMessage = (
     postMessage(data, sourceRef.current, originRef.current);
 
   const sendToParent = (data: IPostMessage) => {
-    const { opener } = window;
+    const { opener } = window.parent;
     if (!opener) {
       throw new Error("Parent window has closed");
     }
