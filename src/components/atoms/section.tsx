@@ -5,7 +5,7 @@ import { cn } from "../../utils/cn";
 const sectionVariants = cva(" px-4  md:px-8 py-16 mx-auto", {
   variants: {
     padding: {
-      default: " py-16",
+      default: "py-16",
       small: "px-4 py-8",
       large: "px-[200px] py-24",
     },
