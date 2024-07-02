@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { CardComponent as Card, CardProps } from "../components/Card";
 import { BannerComponent as Banner, BannerProps } from "../components/Banner";
 import {HoursCardComponent as HoursCard, HoursCardProps} from "../components/HoursCard";
+import {PromoComponent as Promo, PromoProps} from "../components/Promo";
 
 type LocationProps = {
   Hero: HeroProps;
@@ -13,6 +14,7 @@ type LocationProps = {
   Card: CardProps;
   Banner: BannerProps;
   HoursCard: HoursCardProps;
+  Promo: PromoProps;
 };
 
 // All the available components for locations
@@ -23,6 +25,7 @@ export const locationConfig: Config<LocationProps> = {
     Card,
     Banner,
     HoursCard,
+    Promo
   },
   root: {
     render: ({ children }) => {
