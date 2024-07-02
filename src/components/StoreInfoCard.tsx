@@ -94,9 +94,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
                         <div
                             className="pt-1 gap-x-1.5 flex flex-row items-center underline text-primary">
                             <MdOutlineEmail />
-                            {emails.map((email: string) => {
-                                <div>{email}</div>
-                            })}
+                            {emails.join(",<br>")}
                         </div>
                     }
                 </IconContext.Provider>
