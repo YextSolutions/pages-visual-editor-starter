@@ -226,6 +226,7 @@ export const FeaturedItemsComponent: ComponentConfig<FeaturedItemsProps> = {
       },
     },
   },
+  label: 'Featured Items',
   render: ({ heading, cards }) => (
     <FeaturedItems heading={heading} cards={cards} />
   ),
