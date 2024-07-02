@@ -51,13 +51,14 @@ export const useMessage = (
   const sendToParent = (data: IPostMessage) => {
     console.log("sendToParent window", window);
     console.log("sendToParent window.parent", window.parent);
-    const { opener } = window.parent;
-    if (!opener) {
+    // const { opener } = window.parent;
+    if (!window.parent) {
       throw new Error("Parent window has closed");
     }
     for (const targetOrigin of targetOrigins) {
       // window.parent.postMessage(message, targetOrigin);
-      postMessage(data, opener, targetOrigin);
+      window.parent.postMessage(data, targetOrigin);
+      //   postMessage(data, opener, targetOrigin);
     }
   };
 
