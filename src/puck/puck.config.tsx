@@ -9,6 +9,8 @@ import {DeliveryPromoComponent as DeliveryPromo, DeliveryPromoProps} from "../co
 import { BannerComponent as Banner, BannerProps } from "../components/Banner";
 import {HoursCardComponent as HoursCard, HoursCardProps} from "../components/HoursCard";
 import {PromoComponent as Promo, PromoProps} from "../components/Promo";
+import {FeaturedItemsComponent as FeaturedItems, FeaturedItemsProps} from "../components/FeaturedItems";
+
 
 type LocationProps = {
   Hero: HeroProps;
@@ -19,6 +21,7 @@ type LocationProps = {
   HoursCard: HoursCardProps;
   StoreInfoCard: StoreInfoCardProps;
   Promo: PromoProps;
+  FeaturedItems: FeaturedItemsProps;
 };
 
 // All the available components for locations
@@ -31,7 +34,8 @@ export const locationConfig: Config<LocationProps> = {
     Banner,
     HoursCard,
     StoreInfoCard,
-    Promo
+    Promo,
+    FeaturedItems,
   },
   root: {
     render: ({ children }) => {
