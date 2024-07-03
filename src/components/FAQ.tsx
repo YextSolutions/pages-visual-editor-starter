@@ -12,7 +12,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./atoms/accordion"
-import {text} from "node:stream/consumers";
 
 export type FAQProps = {
   sectionTitle: {
@@ -125,7 +124,7 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
                   </Heading>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <Body>
+                  <Body size={answer.size} weight={answer.weight}>
                     <LexicalRichText nodeClassNames={{"text": {"bold": answer.weight!, "base": answer.size!}}} serializedAST={JSON.stringify(faqItem.answerV2.json)} />
                   </Body>
                 </AccordionContent>
