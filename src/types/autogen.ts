@@ -106,6 +106,7 @@ export interface LocationStream {
   c_deliveryPromo: C_deliveryPromo;
   c_productSection: C_productSection;
   additionalHoursText: string;
+  c_faqSection: C_faqSection,
 }
 
 export interface C_visualLayouts {
@@ -126,6 +127,19 @@ export interface LinkedProducts {
 	name: string,
 	c_productPromo: string,
 	c_description?: string,
-	c_coverPhoto?: ComplexImage, 
+	c_coverPhoto?: ComplexImage,
 	c_productCTA?: Cta
+}
+
+export interface answerV2	{
+	json: Object;
+}
+
+export interface linkedFAQs {
+	question: string;
+	answerV2: answerV2;
+}
+
+export interface C_faqSection {
+	linkedFAQs?: linkedFAQs[];
 }
