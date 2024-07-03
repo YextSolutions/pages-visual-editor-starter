@@ -111,8 +111,8 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
   );
 
   return (
-      <Section className="flex flex-col justify-center bg-white components items-center">
-        <Heading level={1} size={sectionTitle.size} color={sectionTitle.color}>
+      <Section className="flex flex-col justify-center bg-white components">
+        <Heading level={1} size={sectionTitle.size} color={sectionTitle.color} className="text-center">
           {sectionTitle.text}
         </Heading>
         <Accordion type="single" collapsible>
