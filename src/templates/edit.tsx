@@ -264,7 +264,7 @@ const Edit: () => JSX.Element = () => {
           <button
             onClick={() => {
               sendToParent({
-                type: "sentToParent",
+                type: "sendToParent",
                 payload: {
                   message: "Hello from child",
                   date: new Date().toLocaleString(),
