@@ -1,6 +1,6 @@
 // Inspired by https://github.com/rottitime/react-hook-window-message-event
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 export type IPostMessage = { type: string; payload: Record<string, unknown> };
 export type EventHandler = (
@@ -20,11 +20,13 @@ const postMessage = (
  * @param messageName - The message name to listen on
  * @param targetOrigins - The origin urls the message can be posted to and received from
  * @param eventHandler - The function that will be called when the event is triggered
+ * @param iframeRef - A MutableRefObject to send postMessages to - usually an iFrame
  */
 export const useMessage = (
   messageName: string,
   targetOrigins: string[],
-  eventHandler: EventHandler
+  eventHandler: EventHandler,
+  iframeRef?: RefObject<HTMLIFrameElement>
 ) => {
   const [history, setHistory] = useState<IPostMessage[]>([]);
   const [origin, setOrigin] = useState<string>("");
@@ -42,6 +44,18 @@ export const useMessage = (
     }
     for (const targetOrigin of targetOrigins) {
       postMessage(data, window.parent, targetOrigin);
+    }
+  };
+
+  const sendToIFrame = (data: IPostMessage) => {
+    if (!iframeRef) {
+      throw new Error("IFrame ref not set");
+    }
+
+    if (iframeRef.current) {
+      for (const targetOrigin of targetOrigins) {
+        postMessage(data, iframeRef.current.contentWindow, targetOrigin);
+      }
     }
   };
 
@@ -65,7 +79,15 @@ export const useMessage = (
         }
       }
     },
-    [messageName, targetOrigins, eventHandler, setSource, setOrigin, setHistory]
+    [
+      messageName,
+      targetOrigins,
+      eventHandler,
+      iframeRef,
+      setSource,
+      setOrigin,
+      setHistory,
+    ]
   );
 
   useEffect(() => {
@@ -73,5 +95,5 @@ export const useMessage = (
     return () => window.removeEventListener("message", onWatchEventHandler);
   }, [messageName, source, origin, onWatchEventHandler]);
 
-  return { history, sendToParent };
+  return { history, sendToParent, sendToIFrame };
 };
