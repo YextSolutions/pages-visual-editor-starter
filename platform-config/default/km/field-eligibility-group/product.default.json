@@ -4,9 +4,12 @@
   "name": "Product-default",
   "entityType": "product",
   "fields": [
+    "c_coverPhoto",
+    "c_description",
     "c_hero",
     "c_pages_layouts",
-    "c_productVisualConfiguration",
+    "c_productCTA",
+    "c_productPromo",
     "c_visualConfigurations"
   ],
   "required": []

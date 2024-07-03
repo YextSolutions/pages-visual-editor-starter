@@ -1,0 +1,43 @@
+{
+  "$id": "order-faq",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "answerV2": {
+      "json": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Yes, we offer both takeout and delivery services. You can place your order online through our website or by calling your nearest Galaxy Grill location.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      }
+    },
+    "name": "Do you offer takeout or delivery services?",
+    "question": "Do you offer takeout or delivery services?"
+  },
+  "entityType": "faq",
+  "folder": "yext/root",
+  "labels": []
+}

@@ -26,7 +26,7 @@
     },
     {
       "entityType": "faq",
-      "disabled": true
+      "disabled": false
     },
     {
       "entityType": "healthcareFacility",
@@ -67,8 +67,7 @@
       "disabled": false
     },
     {
-      "entityType": "financialProfessional",
-      "defaultFieldEligibilityGroup": "financialProfessional.default",
+      "entityType": "ce_location",
       "disabled": false
     }
   ]

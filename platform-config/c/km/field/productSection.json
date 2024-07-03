@@ -1,0 +1,8 @@
+{
+  "$id": "c_productSection",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Product Section",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "c_productSection"
+}

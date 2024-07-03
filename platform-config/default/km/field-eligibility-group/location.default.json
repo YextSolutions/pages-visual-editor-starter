@@ -4,11 +4,12 @@
   "name": "Location-default",
   "entityType": "location",
   "fields": [
+    "c_deliveryPromo",
+    "c_faqSection",
     "c_hero",
-    "c_locationCore",
-    "c_locationHero",
     "c_locationVisualConfiguration",
     "c_pages_layouts",
+    "c_productSection",
     "c_visualConfigurations"
   ],
   "required": []

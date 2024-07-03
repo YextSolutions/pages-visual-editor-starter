@@ -1,12 +1,12 @@
 {
-  "$id": "c_productVisualConfiguration",
+  "$id": "c_description",
   "$schema": "https://schema.yext.com/config/km/field/v1",
-  "displayName": "Product Visual Configuration",
+  "displayName": "Description",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
   "type": {
     "stringType": {
-      "stereotype": "SIMPLE",
+      "stereotype": "MULTILINE",
       "maxLength": 100000
     }
   },
