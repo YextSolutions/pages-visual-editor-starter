@@ -111,7 +111,7 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
   );
 
   return (
-      <Section className="flex flex-col justify-center bg-white components">
+      <Section className="flex flex-col justify-center bg-white components items-center">
         <Heading level={1} size={sectionTitle.size} color={sectionTitle.color}>
           {sectionTitle.text}
         </Heading>
