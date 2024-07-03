@@ -37,6 +37,8 @@ export const config: TemplateConfig = {
       "c_productSection.linkedProducts.c_coverPhoto",
       "c_productSection.linkedProducts.c_productCTA",
       "c_hero",
+      "c_faqSection.linkedFAQs.question",
+      "c_faqSection.linkedFAQs.answerV2",
       "additionalHoursText",
       "mainPhone",
       "emails",
