@@ -34,6 +34,7 @@ export const config: TemplateConfig = {
       "c_faqSection.linkedFAQs.question",
       "c_faqSection.linkedFAQs.answerV2",
       "additionalHoursText",
+      "c_deliveryPromo",
     ],
     localization: {
       locales: ["en"],
