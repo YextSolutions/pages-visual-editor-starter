@@ -223,17 +223,22 @@ const Edit: () => JSX.Element = () => {
   const document = entityDocument?.response.document;
 
   const { sendToParent } = useMessage(
-    "test",
+    "sendToParent",
     TARGET_ORIGINS,
-    (send, payload) => {
+    (_, payload) => {
       console.log("Message from parent", payload);
       setParentText("Message from parent:" + JSON.stringify(payload));
-      send({
-        type: "test",
-        payload: { success: true, message: "received message from parent" },
-      });
     }
   );
+
+  useMessage("sendToIframe", TARGET_ORIGINS, (send, payload) => {
+    console.log("Message from parent", payload);
+    setParentText("Message from parent:" + JSON.stringify(payload));
+    send({
+      type: "test",
+      payload: { success: true, message: "received message from parent" },
+    });
+  });
 
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
@@ -259,7 +264,7 @@ const Edit: () => JSX.Element = () => {
           <button
             onClick={() => {
               sendToParent({
-                type: "test",
+                type: "sentToParent",
                 payload: {
                   message: "Hello from child",
                   date: new Date().toLocaleString(),
