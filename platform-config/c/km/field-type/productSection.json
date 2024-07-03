@@ -1,0 +1,42 @@
+{
+  "$id": "c_productSection",
+  "$schema": "https://schema.yext.com/config/km/field-type/v1",
+  "displayName": "Product Section",
+  "type": {
+    "structType": {
+      "property": [
+        {
+          "name": "sectionTitle",
+          "displayName": "Section Title",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "SIMPLE",
+              "maxLength": 100000
+            }
+          }
+        },
+        {
+          "name": "linkedProducts",
+          "displayName": "linkedProducts",
+          "isRequired": false,
+          "typeId": "list",
+          "type": {
+            "listType": {
+              "typeId": "entityReference",
+              "maxLength": 5000,
+              "type": {
+                "entityReferenceType": {
+                  "supportedEntityTypeIds": [
+                    "product"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

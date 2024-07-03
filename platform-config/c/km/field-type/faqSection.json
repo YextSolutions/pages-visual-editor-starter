@@ -1,0 +1,43 @@
+{
+  "$id": "c_faqSection",
+  "$schema": "https://schema.yext.com/config/km/field-type/v1",
+  "displayName": "FAQ Section",
+  "type": {
+    "structType": {
+      "property": [
+        {
+          "name": "sectionTitle",
+          "displayName": "Section Title",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "SIMPLE",
+              "maxLength": 100000
+            }
+          }
+        },
+        {
+          "name": "linkedFAQs",
+          "displayName": "Linked FAQs",
+          "isRequired": false,
+          "typeId": "list",
+          "type": {
+            "listType": {
+              "typeId": "entityReference",
+              "maxLength": 5000,
+              "type": {
+                "entityReferenceType": {
+                  "supportedEntityTypeIds": [
+                    "faq"
+                  ],
+                  "type": "ONE_WAY"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

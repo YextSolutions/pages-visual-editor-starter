@@ -1,0 +1,43 @@
+{
+  "$id": "kids-menu-faq",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "answerV2": {
+      "json": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Absolutely! Our kids’ menu features a range of child-friendly options like mini pancakes, chicken tenders, and grilled cheese sandwiches, all served with a side of fun.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      }
+    },
+    "name": "Do you have a kids’ menu?",
+    "question": "Do you have a kids’ menu?"
+  },
+  "entityType": "faq",
+  "folder": "yext/root",
+  "labels": []
+}

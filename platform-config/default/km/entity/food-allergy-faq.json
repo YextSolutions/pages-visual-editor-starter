@@ -1,0 +1,43 @@
+{
+  "$id": "food-allergy-faq",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "answerV2": {
+      "json": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "We take food allergies seriously and can accommodate most dietary restrictions. Please inform your server of any allergies, and we will ensure your meal is prepared safely.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      }
+    },
+    "name": "Are you able to accommodate food allergies?",
+    "question": "Are you able to accommodate food allergies?"
+  },
+  "entityType": "faq",
+  "folder": "yext/root",
+  "labels": []
+}

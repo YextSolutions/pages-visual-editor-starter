@@ -1,0 +1,43 @@
+{
+  "$id": "parking-faq",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "answerV2": {
+      "json": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Yes, Galaxy Grill offers ample parking spaces for our guests, including designated spots for families and individuals with disabilities.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      }
+    },
+    "name": "Is there parking available?",
+    "question": "Is there parking available?"
+  },
+  "entityType": "faq",
+  "folder": "yext/root",
+  "labels": []
+}

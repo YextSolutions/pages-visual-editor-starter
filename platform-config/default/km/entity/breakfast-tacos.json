@@ -1,0 +1,46 @@
+{
+  "$id": "breakfast-tacos",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_coverPhoto": {
+      "image": {
+        "height": 867,
+        "sourceUrl": "https://s3-alpha-sig.figma.com/img/db46/9870/8af0ef57782a9e21d138c02dee74dc59?Expires\u003d1720396800\u0026Key-Pair-Id\u003dAPKAQ4GOSFWCVNEHN3O4\u0026Signature\u003dEYIAqKPdzGOrl8ikJeud-uvrcuwBn3UayKbEbazHfvwJ4Nbj3iYD7mGhFWTvtEtUVWXegEEBaFRQX4vc4UdoZAti4xD0pMrUY3bNCtooi-9MUW-a1ZIEa8SoB3~wSwRZJC2BxgjB55BRAtKdUJDhEJ1SJK6fySN9uTexFqhheSLmmY0Mz3xF1eZkbDgIBOHsvP4P4skspwDzws1mQMJR~pN0ES4oIML8VpCdUDYOaOgPGwJgN2T2OENWSgP40S-XEJE2yfYtKwCJckpN53hKlStH61LKqN64sGQkh1i4kFNhu3~P8U1lidgnrViE6EB2D8ZmtBo8x3JOXZr66371vg__",
+        "thumbnails": [
+          {
+            "height": 867,
+            "url": "https://a.mktgcdn.com/p/w8dNwz5T8hcM_mGwyU8yxr7qpmLZE_8FtWSp04KgxVI/1300x867.png",
+            "width": 1300
+          },
+          {
+            "height": 413,
+            "url": "https://a.mktgcdn.com/p/w8dNwz5T8hcM_mGwyU8yxr7qpmLZE_8FtWSp04KgxVI/619x413.png",
+            "width": 619
+          },
+          {
+            "height": 400,
+            "url": "https://a.mktgcdn.com/p/w8dNwz5T8hcM_mGwyU8yxr7qpmLZE_8FtWSp04KgxVI/600x400.png",
+            "width": 600
+          },
+          {
+            "height": 131,
+            "url": "https://a.mktgcdn.com/p/w8dNwz5T8hcM_mGwyU8yxr7qpmLZE_8FtWSp04KgxVI/196x131.png",
+            "width": 196
+          }
+        ],
+        "url": "https://a.mktgcdn.com/p/w8dNwz5T8hcM_mGwyU8yxr7qpmLZE_8FtWSp04KgxVI/1300x867.png",
+        "width": 1300
+      }
+    },
+    "c_description": "Start your day with our delicious breakfast tacos, featuring freshly made tortillas filled with savory eggs, crispy chorizo, and a blend of authentic spices.",
+    "c_productCTA": {
+      "name": "Order Online"
+    },
+    "c_productPromo": "Available until 1 PM!",
+    "name": "Breakfast Tacos"
+  },
+  "entityType": "product",
+  "folder": "yext/root",
+  "labels": []
+}

@@ -1,0 +1,8 @@
+{
+  "$id": "c_productCTA",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Product CTA",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "c_cta"
+}
