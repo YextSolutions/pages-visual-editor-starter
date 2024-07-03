@@ -111,7 +111,7 @@ export const convertRawMessageToObject = (
           hash: messageParams.saveState.Hash,
         }
       : undefined,
-    visualConfigurationData: messageParams?.visualConfigData?.visualConfigurationData,
+    visualConfigurationData: JSON.parse(messageParams?.visualConfigData?.visualConfigurationData),
     visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
   };
 };
