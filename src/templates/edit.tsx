@@ -10,6 +10,7 @@ import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   convertRawMessageToObject,
+  jsonFromEscapedJsonString,
   MessagePayload,
 } from "../types/messagePayload";
 
@@ -130,7 +131,7 @@ const Edit: () => JSX.Element = () => {
 
       // The history stored has both "ui" and "data" keys, but PuckData
       // is only concerned with the "data" portion.
-      setPuckData(messagePayload.saveState.history.data);
+      setPuckData(jsonFromEscapedJsonString(messagePayload.saveState.history.data));
 
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
@@ -147,14 +148,14 @@ const Edit: () => JSX.Element = () => {
         return;
       }
 
-      const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
+      const localHistoryIndex = jsonFromEscapedJsonString(localHistoryArray).findIndex(
         (item: any) => item.id === messagePayload.saveState?.hash
       );
 
       // If local storage reset Puck history to it
       if (localHistoryIndex !== -1) {
         setHistoryIndex(localHistoryIndex);
-        setHistories(JSON.parse(localHistoryArray));
+        setHistories(jsonFromEscapedJsonString(localHistoryArray));
         return;
       }
 

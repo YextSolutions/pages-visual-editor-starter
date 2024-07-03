@@ -8,6 +8,7 @@ import { Role } from "../templates/edit";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
+  jsonFromEscapedJsonString,
   MessagePayload,
   VisualConfiguration,
 } from "../types/messagePayload";
@@ -67,7 +68,7 @@ export const Editor = ({
         postParentMessage({
           localChange: true,
           hash: histories[index].id,
-          history: JSON.stringify(histories[index].data),
+          history: JSON.stringify(jsonFromEscapedJsonString(histories[index].data)),
           layoutId: messagePayload.layoutId,
           entityId: messagePayload.entity?.id,
         });

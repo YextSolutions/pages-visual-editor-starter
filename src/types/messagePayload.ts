@@ -111,12 +111,12 @@ export const convertRawMessageToObject = (
           hash: messageParams.saveState.Hash,
         }
       : undefined,
-    visualConfigurationData: messageParams?.visualConfigData?.visualConfigurationData,
+    visualConfigurationData: jsonFromEscapedJsonString(messageParams?.visualConfigData?.visualConfigurationData),
     visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
   };
 };
 
 // TODO: Remove this when the frontend has been fixed to not string escape
-const jsonFromEscapedJsonString = (escapedJsonString: string) => {
+export const jsonFromEscapedJsonString = (escapedJsonString: string) => {
   return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
 };
