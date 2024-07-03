@@ -235,7 +235,7 @@ const Edit: () => JSX.Element = () => {
     console.log("Message from parent", payload);
     setParentText("Message from parent:" + JSON.stringify(payload));
     send({
-      type: "test",
+      type: "sendToIframe",
       payload: { success: true, message: "received message from parent" },
     });
   });
