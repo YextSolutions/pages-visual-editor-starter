@@ -131,7 +131,7 @@ const Edit: () => JSX.Element = () => {
 
       // The history stored has both "ui" and "data" keys, but PuckData
       // is only concerned with the "data" portion.
-      setPuckData(jsonFromEscapedJsonString(messagePayload.saveState.history.data));
+      setPuckData(messagePayload.saveState.history.data);
 
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
