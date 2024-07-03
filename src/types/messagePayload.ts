@@ -118,5 +118,9 @@ export const convertRawMessageToObject = (
 
 // TODO: Remove this when the frontend has been fixed to not string escape
 export const jsonFromEscapedJsonString = (escapedJsonString: string) => {
+  if (typeof escapedJsonString !== "string" || !escapedJsonString ) {
+    return escapedJsonString
+  }
+
   return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
 };
