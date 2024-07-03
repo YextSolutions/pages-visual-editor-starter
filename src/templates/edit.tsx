@@ -223,7 +223,8 @@ const Edit: () => JSX.Element = () => {
   const document = entityDocument?.response.document;
 
   const { sendToParent } = useMessage("test", TARGET_ORIGINS, (_, payload) => {
-    setParentText("Message from parent:" + payload);
+    console.log("Message from parent", payload);
+    setParentText("Message from parent:" + JSON.stringify(payload));
   });
 
   const loadingMessage = !puckConfig

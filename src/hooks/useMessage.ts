@@ -14,15 +14,6 @@ const postMessage = (
   origin = "*"
 ) => target?.postMessage(data, { targetOrigin: origin });
 
-export type UseMessageProps = {
-  /** The message name to listen on */
-  messageName: string;
-  /** The origin urls the message can be posted to and received from */
-  targetOrigins: string[];
-  /** The function that will be called when the event is triggered */
-  eventHandler?: EventHandler;
-};
-
 /**
  * Listens for a specific message type, and when it receives it, it calls the event handler with the
  * message payload and a function to send a message back to the sender.
@@ -45,26 +36,25 @@ export const useMessage = (
   originRef.current = origin;
   sourceRef.current = source as MessageEvent["source"];
 
-  const sendToSender = (data: IPostMessage) =>
+  const sendToSender = (data: IPostMessage) => {
     postMessage(data, sourceRef.current, originRef.current);
+  };
 
   const sendToParent = (data: IPostMessage) => {
-    // const { opener } = window.parent;
     if (!window.parent) {
       throw new Error("Parent window has closed");
     }
     for (const targetOrigin of targetOrigins) {
-      window.parent.postMessage(data, targetOrigin);
+      postMessage(data, window.parent, targetOrigin);
     }
   };
 
   const onWatchEventHandler = useCallback(
     ({ origin, source, data }: MessageEvent) => {
-      console.log("repo origin", origin);
-      console.log("repo source", source);
-      console.log("repo data", data);
-      console.log("repo targetOrigins", targetOrigins);
-
+      // Ignore React Dev Tools messages
+      if (data.source === "react-devtools-content-script") {
+        return;
+      }
       if (!targetOrigins.includes(origin)) {
         throw new Error("Unrecognized origin");
       }
@@ -79,7 +69,7 @@ export const useMessage = (
         }
       }
     },
-    [messageName, targetOrigins, eventHandler, setSource, setOrigin]
+    [messageName, targetOrigins, eventHandler, setSource, setOrigin, setHistory]
   );
 
   useEffect(() => {
