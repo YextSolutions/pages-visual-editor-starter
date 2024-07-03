@@ -36,10 +36,6 @@ export const useMessage = (
   originRef.current = origin;
   sourceRef.current = source as MessageEvent["source"];
 
-  const sendToSender = (data: IPostMessage) => {
-    postMessage(data, sourceRef.current, originRef.current);
-  };
-
   const sendToParent = (data: IPostMessage) => {
     if (!window.parent) {
       throw new Error("Parent window has closed");
@@ -65,7 +61,7 @@ export const useMessage = (
         setOrigin(origin);
         setHistory((old) => [...old, payload]);
         if (typeof eventHandler === "function") {
-          eventHandler(sendToSender, payload);
+          eventHandler((data) => postMessage(data, source, origin), payload);
         }
       }
     },
