@@ -125,7 +125,7 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
                   </Heading>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <Body size={answer.size} weight={answer.weight}>
+                  <Body>
                     <LexicalRichText nodeClassNames={{"text": {"bold": answer.weight!, "base": answer.size!}}} serializedAST={JSON.stringify(faqItem.answerV2.json)} />
                   </Body>
                 </AccordionContent>
