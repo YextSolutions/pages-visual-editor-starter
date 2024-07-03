@@ -4,6 +4,7 @@ import { ColumnsComponent as Columns, ColumnsProps } from "../components/Columns
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { CardComponent as Card, CardProps } from "../components/Card";
+import { StoreInfoCardComponent as StoreInfoCard, StoreInfoCardProps } from "../components/StoreInfoCard";
 import { FAQComponent as FAQ, FAQProps } from "../components/FAQ";
 import {DeliveryPromoComponent as DeliveryPromo, DeliveryPromoProps} from "../components/DeliveryPromo";
 import { BannerComponent as Banner, BannerProps } from "../components/Banner";
@@ -20,6 +21,7 @@ type LocationProps = {
   DeliveryPromo: DeliveryPromoProps;
   Banner: BannerProps;
   HoursCard: HoursCardProps;
+  StoreInfoCard: StoreInfoCardProps;
   Promo: PromoProps;
   FeaturedItems: FeaturedItemsProps;
 };
@@ -34,6 +36,7 @@ export const locationConfig: Config<LocationProps> = {
     DeliveryPromo,
     Banner,
     HoursCard,
+    StoreInfoCard,
     Promo,
     FeaturedItems,
   },

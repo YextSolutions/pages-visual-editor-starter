@@ -106,6 +106,8 @@ export interface LocationStream {
   c_deliveryPromo: C_deliveryPromo;
   c_productSection: C_productSection;
   additionalHoursText: string;
+  mainPhone: string;
+  emails: string[];
   c_faqSection: C_faqSection,
 }
 
