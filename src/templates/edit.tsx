@@ -213,25 +213,16 @@ const Edit: () => JSX.Element = () => {
     };
   }, []);
 
-  // get the document
-  const { entityDocument } = useEntityDocumentQuery({
-    templateId: messagePayload?.templateId,
-    entityId: messagePayload?.externalEntityId,
-  });
-  const document = entityDocument?.response.document;
-
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
     : !puckData || puckDataStatus === "pending"
       ? "Loading data.."
-      : !document
-        ? "Loading document.."
-        : "";
+      : "";
 
-  const isLoading = !document || !puckData || !puckConfig || !messagePayload;
+  const isLoading = !puckData || !puckConfig || !messagePayload;
 
   const progress: number =
-    (100 * (!!puckConfig + !!puckData + !!messagePayload + !!document)) / 4;
+    (100 * (!!puckConfig + !!puckData + !!messagePayload)) / 3;
 
   if (!mounted || typeof navigator === "undefined") {
     return <></>;
@@ -239,7 +230,7 @@ const Edit: () => JSX.Element = () => {
 
   return (
     <>
-      <DocumentProvider value={document}>
+      <DocumentProvider value={messagePayload?.entityDocumentData}>
         {!isLoading && !!puckData && !!messagePayload ? (
           <>
             <Editor

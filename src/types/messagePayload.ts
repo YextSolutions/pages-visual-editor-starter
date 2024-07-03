@@ -51,6 +51,8 @@ export type MessagePayload = {
   saveState?: SaveState;
   visualConfigurationData: string;
   visualConfigurationDataStatus: "successful" | "pending" | "error";
+  entityDocumentData: any; // json object
+  entityDocumentDataStatus: "successful" | "pending" | "error";
 };
 
 export const convertRawMessageToObject = (
@@ -113,6 +115,8 @@ export const convertRawMessageToObject = (
       : undefined,
     visualConfigurationData: JSON.parse(messageParams?.visualConfigData?.visualConfigurationData),
     visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
+    entityDocumentData: messageParams?.entityDocumentData,
+    entityDocumentDataStatus: messageParams.entityDocumentDataStatus,
   };
 };
 
