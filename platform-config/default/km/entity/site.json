@@ -3,13 +3,9 @@
   "$schema": "https://schema.yext.com/config/km/entity/v1",
   "primaryLocale": "en",
   "content": {
-    "c_financialProfessionalVisualConfiguration": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
-    "c_locationVisualConfiguration": "{\"content\":[{\"type\":\"LocationHero\",\"props\":{\"id\":\"LocationHero-f36fd860-9cc0-4c4d-b102-35d1c64b4de2\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-9105cb5a-72f6-4df1-ab62-4eb5c5c3ec34\"}},{\"type\":\"LocationCore\",\"props\":{\"id\":\"LocationCore-940ec5f7-6d5f-4b86-b1d5-37f75fb73c6e\"}},{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"left\",\"id\":\"Toggle-0f13c4dd-8ccc-4c0e-b1c5-fe5a3808901e\"}},{\"type\":\"Hero\",\"props\":{\"id\":\"Hero-f9dd6645-ab88-4926-a1f5-797d86e5e1be\",\"imageMode\":\"background\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
-    "c_productVisualConfiguration": "{\"content\":[{\"type\":\"Toggle\",\"props\":{\"textAlign\":\"right\",\"id\":\"Toggle-bf91d576-a192-4d41-827e-43f428ea65f6\"}}],\"root\":{\"props\":{\"name\":\"\"}},\"zones\":{}}",
+    "c_locationVisualConfiguration": "{“root”:{},“content”:[],“zones”:{}}",
     "c_visualLayouts": [
-      "financialProfessionalVisualConfiguration",
-      "locationVisualConfiguration",
-      "productVisualConfiguration"
+      "locationVisualConfiguration"
     ],
     "name": "Site"
   },

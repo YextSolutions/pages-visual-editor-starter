@@ -1,7 +1,7 @@
 {
-  "$id": "c_financialProfessionalVisualConfiguration",
+  "$id": "c_productPromo",
   "$schema": "https://schema.yext.com/config/km/field/v1",
-  "displayName": "Financial Professional Visual Configuration",
+  "displayName": "Product Promo",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",
   "type": {

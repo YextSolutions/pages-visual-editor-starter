@@ -1,6 +1,7 @@
 {
   "$id": "c_pages_layouts",
   "$schema": "https://schema.yext.com/config/km/field/v1",
+  "description": "",
   "displayName": "Pages Layouts",
   "group": "NONE",
   "localization": "PRIMARY_ONLY",

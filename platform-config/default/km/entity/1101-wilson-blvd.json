@@ -1,0 +1,182 @@
+{
+  "$id": "1101-wilson-blvd",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "additionalHoursText": "Closed on Christmas.",
+    "address": {
+      "city": "Arlington",
+      "countryCode": "US",
+      "line1": "1101 Wilson Blvd",
+      "postalCode": "22209",
+      "region": "VA"
+    },
+    "addressHidden": false,
+    "c_deliveryPromo": {
+      "cta": {
+        "name": "Order Now"
+      },
+      "description": "Craving Galaxy Grill but can’t make it to the diner? No problem! Order your favorite meals from Galaxy Grill on DoorDash and enjoy our delicious dishes delivered right to your doorstep. Click below to order now and bring the taste of the Galaxy home!",
+      "image": {
+        "image": {
+          "height": 474,
+          "thumbnails": [
+            {
+              "height": 474,
+              "url": "https://a.mktgcdn.com/p/kkgTZWHLvzC87uvfD1F9UvPcGAWzdJleluwpbKiJaeM/640x474.png",
+              "width": 640
+            },
+            {
+              "height": 458,
+              "url": "https://a.mktgcdn.com/p/kkgTZWHLvzC87uvfD1F9UvPcGAWzdJleluwpbKiJaeM/619x458.png",
+              "width": 619
+            },
+            {
+              "height": 444,
+              "url": "https://a.mktgcdn.com/p/kkgTZWHLvzC87uvfD1F9UvPcGAWzdJleluwpbKiJaeM/600x444.png",
+              "width": 600
+            },
+            {
+              "height": 145,
+              "url": "https://a.mktgcdn.com/p/kkgTZWHLvzC87uvfD1F9UvPcGAWzdJleluwpbKiJaeM/196x145.png",
+              "width": 196
+            }
+          ],
+          "url": "https://a.mktgcdn.com/p/kkgTZWHLvzC87uvfD1F9UvPcGAWzdJleluwpbKiJaeM/640x474.png",
+          "width": 640
+        }
+      },
+      "title": "Order Delivery with DoorDash"
+    },
+    "c_faqSection": {
+      "linkedFAQs": [
+        "food-allergy-faq",
+        "kids-menu-faq",
+        "order-faq",
+        "veg-options-faq",
+        "parking-faq"
+      ],
+      "sectionTitle": "Frequently Asked Questions"
+    },
+    "c_hero": {
+      "cta1": {
+        "name": "Get Directions"
+      },
+      "cta2": {
+        "name": "Order Online"
+      },
+      "image": {
+        "image": {
+          "height": 2592,
+          "thumbnails": [
+            {
+              "height": 2592,
+              "url": "https://a.mktgcdn.com/p/ETWoS5bg4iVNVcSQA4yvzm7w1uMtr37ub1GG5oeNWKc/3834x2592.jpg",
+              "width": 3834
+            },
+            {
+              "height": 1285,
+              "url": "https://a.mktgcdn.com/p/ETWoS5bg4iVNVcSQA4yvzm7w1uMtr37ub1GG5oeNWKc/1900x1285.jpg",
+              "width": 1900
+            },
+            {
+              "height": 418,
+              "url": "https://a.mktgcdn.com/p/ETWoS5bg4iVNVcSQA4yvzm7w1uMtr37ub1GG5oeNWKc/619x418.jpg",
+              "width": 619
+            },
+            {
+              "height": 406,
+              "url": "https://a.mktgcdn.com/p/ETWoS5bg4iVNVcSQA4yvzm7w1uMtr37ub1GG5oeNWKc/600x406.jpg",
+              "width": 600
+            },
+            {
+              "height": 133,
+              "url": "https://a.mktgcdn.com/p/ETWoS5bg4iVNVcSQA4yvzm7w1uMtr37ub1GG5oeNWKc/196x133.jpg",
+              "width": 196
+            }
+          ],
+          "url": "https://a.mktgcdn.com/p/ETWoS5bg4iVNVcSQA4yvzm7w1uMtr37ub1GG5oeNWKc/3834x2592.jpg",
+          "width": 3834
+        }
+      }
+    },
+    "c_productSection": {
+      "sectionTitle": "Featured Menu Items at [[name]] in [[address.city]]",
+      "linkedProducts": [
+        "signature-burger",
+        "quesadilla",
+        "breakfast-tacos"
+      ]
+    },
+    "categoryIds": [
+      "777"
+    ],
+    "emails": [
+      "yext@gmail.com"
+    ],
+    "hours": {
+      "friday": {
+        "openIntervals": [
+          {
+            "end": "22:00",
+            "start": "10:00"
+          }
+        ]
+      },
+      "monday": {
+        "openIntervals": [
+          {
+            "end": "22:00",
+            "start": "10:00"
+          }
+        ]
+      },
+      "saturday": {
+        "openIntervals": [
+          {
+            "end": "22:00",
+            "start": "10:00"
+          }
+        ]
+      },
+      "sunday": {
+        "openIntervals": [
+          {
+            "end": "22:00",
+            "start": "10:00"
+          }
+        ]
+      },
+      "thursday": {
+        "openIntervals": [
+          {
+            "end": "22:00",
+            "start": "10:00"
+          }
+        ]
+      },
+      "tuesday": {
+        "openIntervals": [
+          {
+            "end": "22:00",
+            "start": "10:00"
+          }
+        ]
+      },
+      "wednesday": {
+        "openIntervals": [
+          {
+            "end": "22:00",
+            "start": "10:00"
+          }
+        ]
+      }
+    },
+    "mainPhone": "+17577017560",
+    "name": "Galaxy Grill",
+    "slug": "locations/[[entityId]]",
+    "timezone": "America/New_York"
+  },
+  "entityType": "location",
+  "labels": []
+}

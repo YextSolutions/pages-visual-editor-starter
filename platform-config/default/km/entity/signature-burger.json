@@ -1,0 +1,51 @@
+{
+  "$id": "signature-burger",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_coverPhoto": {
+      "image": {
+        "height": 2247,
+        "sourceUrl": "https://images.unsplash.com/photo-1515467410840-96a3cf21dbea?q\u003d80\u0026w\u003d3996\u0026auto\u003dformat\u0026fit\u003dcrop\u0026ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "thumbnails": [
+          {
+            "height": 2247,
+            "url": "https://a.mktgcdn.com/p/zOfEayCr7Wo4c9PGB5qF0ZrViYSPt-71itc-bD3HT3Q/3996x2247.webp",
+            "width": 3996
+          },
+          {
+            "height": 1068,
+            "url": "https://a.mktgcdn.com/p/zOfEayCr7Wo4c9PGB5qF0ZrViYSPt-71itc-bD3HT3Q/1900x1068.webp",
+            "width": 1900
+          },
+          {
+            "height": 348,
+            "url": "https://a.mktgcdn.com/p/zOfEayCr7Wo4c9PGB5qF0ZrViYSPt-71itc-bD3HT3Q/619x348.webp",
+            "width": 619
+          },
+          {
+            "height": 337,
+            "url": "https://a.mktgcdn.com/p/zOfEayCr7Wo4c9PGB5qF0ZrViYSPt-71itc-bD3HT3Q/600x337.webp",
+            "width": 600
+          },
+          {
+            "height": 110,
+            "url": "https://a.mktgcdn.com/p/zOfEayCr7Wo4c9PGB5qF0ZrViYSPt-71itc-bD3HT3Q/196x110.webp",
+            "width": 196
+          }
+        ],
+        "url": "https://a.mktgcdn.com/p/zOfEayCr7Wo4c9PGB5qF0ZrViYSPt-71itc-bD3HT3Q/3996x2247.webp",
+        "width": 3996
+      }
+    },
+    "c_description": "Indulge in our signature burger, a juicy beef patty topped with melted cheese, fresh lettuce, and ripe tomatoes, served with a side of crispy, golden fries.",
+    "c_productCTA": {
+      "name": "Order Online"
+    },
+    "c_productPromo": "Fan favorite!",
+    "name": "Signature Burger"
+  },
+  "entityType": "product",
+  "folder": "yext/root",
+  "labels": []
+}

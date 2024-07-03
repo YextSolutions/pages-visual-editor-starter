@@ -1,0 +1,296 @@
+{
+  "$id": "ce_product",
+  "$schema": "https://schema.yext.com/config/km/field-presentation/v1",
+  "entityType": "product",
+  "displayName": "Product",
+  "presentationEntries": [
+    {
+      "displayName": "Content",
+      "entryType": "DIVIDER"
+    },
+    {
+      "displayName": "Core Information",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "name",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "sku",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "gtin",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "mpn",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "entityId",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "parentProduct",
+          "visibleOnAdd": true
+        }
+      ]
+    },
+    {
+      "displayName": "Location Page Details",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "c_productPromo"
+        },
+        {
+          "id": "c_coverPhoto"
+        },
+        {
+          "id": "c_description"
+        },
+        {
+          "id": "c_productCTA"
+        }
+      ]
+    },
+    {
+      "displayName": "Components",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "c_hero"
+        }
+      ]
+    },
+    {
+      "displayName": "Product Details",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "richTextDescriptionV2",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "stockStatus"
+        },
+        {
+          "id": "availabilityDate"
+        },
+        {
+          "id": "inventoryQuantity"
+        },
+        {
+          "id": "color"
+        },
+        {
+          "id": "size"
+        },
+        {
+          "id": "brand"
+        },
+        {
+          "id": "salesChannel"
+        },
+        {
+          "id": "condition"
+        },
+        {
+          "id": "includesAdultContent"
+        },
+        {
+          "id": "productHighlights"
+        },
+        {
+          "id": "expirationDate"
+        }
+      ]
+    },
+    {
+      "displayName": "Pricing",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "price",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "sales"
+        },
+        {
+          "id": "productionCost"
+        },
+        {
+          "id": "numberOfItemsInPack"
+        },
+        {
+          "id": "unitPricingMeasure"
+        },
+        {
+          "id": "unitPricingBaseMeasure"
+        },
+        {
+          "id": "bundle"
+        },
+        {
+          "id": "installmentPlan"
+        },
+        {
+          "id": "subscriptionPlan"
+        },
+        {
+          "id": "loyaltyPoints"
+        }
+      ]
+    },
+    {
+      "displayName": "Shipping Details",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "shippingWeight"
+        },
+        {
+          "id": "shippingLength"
+        },
+        {
+          "id": "shippingWidth"
+        },
+        {
+          "id": "shippingHeight"
+        }
+      ]
+    },
+    {
+      "displayName": "Media",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "primaryPhoto"
+        },
+        {
+          "id": "photoGallery"
+        },
+        {
+          "id": "videos"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Additional Attributes",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "keywords"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Landing Pages",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "landingPageUrl"
+        },
+        {
+          "id": "mobileOptimizedLandingPage"
+        }
+      ]
+    },
+    {
+      "displayName": "Product Specific",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Apparel-Specific Details",
+      "displayNameTranslations": [
+        {
+          "localeCode": "en",
+          "value": "Clothing-Specific Details"
+        }
+      ],
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "targetAgeGroup"
+        },
+        {
+          "id": "targetGender"
+        },
+        {
+          "id": "material"
+        },
+        {
+          "id": "pattern"
+        },
+        {
+          "id": "sizeType"
+        },
+        {
+          "id": "sizeSystem"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Vehicle-Specific Details",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "energyEfficiencyClass"
+        },
+        {
+          "id": "minimumEnergyEfficiencyClass"
+        },
+        {
+          "id": "maximumEnergyEfficiencyClass"
+        }
+      ]
+    },
+    {
+      "displayName": "Other",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Internal Use Only",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "folder"
+        },
+        {
+          "id": "labels"
+        },
+        {
+          "id": "timezone"
+        },
+        {
+          "id": "slug"
+        }
+      ]
+    },
+    {
+      "displayName": "Settings",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Knowledge Assistant",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "primaryConversationContact"
+        },
+        {
+          "id": "nudgeEnabled"
+        }
+      ]
+    }
+  ]
+}
