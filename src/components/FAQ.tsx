@@ -109,7 +109,7 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
   const faq: C_faqSection = useDocument<LocationStream>(
       (document) => document.c_faqSection
   );
-  console.log(faq.linkedFAQs)
+
   return (
       <Section className="flex flex-col justify-center bg-white components">
         <Heading level={1} size={sectionTitle.size} color={sectionTitle.color}>
@@ -125,7 +125,6 @@ const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
                 </AccordionTrigger>
                 <AccordionContent>
                   <Body size={answer.size} weight={answer.weight}>
-                    {"testing"}
                     <LexicalRichText serializedAST={JSON.stringify(faqItem.answerV2.json)} />
                   </Body>
                 </AccordionContent>
