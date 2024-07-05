@@ -2,7 +2,6 @@ import "../index.css";
 import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
 import { DocumentProvider } from "../hooks/useDocument";
 import { Editor } from "../puck/editor";
-import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState, useCallback } from "react";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
