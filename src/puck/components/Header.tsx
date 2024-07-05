@@ -53,7 +53,7 @@ export const customHeader = (
           <RotateCw className="sm-icon" />
         </Button>
         <ClearLocalChangesButton
-          disabled={histories.length === 0}
+          disabled={!hasPast}
           onClearLocalChanges={handleClearLocalChanges}
         />
         <Button
@@ -63,8 +63,7 @@ export const customHeader = (
           Live Preview
         </Button>
         <Button
-          variant="secondary"
-          disabled={histories.length === 0}
+          disabled={!hasPast}
           onClick={async () => {
             await handleSaveData(data);
             handleClearLocalChanges();

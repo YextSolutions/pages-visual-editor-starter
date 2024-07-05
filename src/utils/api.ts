@@ -61,21 +61,6 @@ export const fetchTemplates = async (): Promise<TemplateDefinition[]> => {
   }
 };
 
-export const fetchEntityDocument = async (
-  templateId: string,
-  entityId: string,
-): Promise<YextResponse<EntityContent>> => {
-  try {
-    const response = await fetch(
-      `/api/streams/${templateId}/entity/${entityId}/fetchentitydocument`,
-    );
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
 /**
  * Fetches entities using the getEntities() function and parses the response.
  * @param entityTypes {string[] | undefined} entityTypes to filter by
