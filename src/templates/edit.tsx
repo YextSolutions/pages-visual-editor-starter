@@ -173,36 +173,36 @@ const Edit: () => JSX.Element = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const handleParentMessage = (message: MessageEvent) => {
-  //     if (!TARGET_ORIGINS.includes(message.origin)) {
-  //       return;
-  //     }
-  //     if (typeof message.data === "object" && message.data.params) {
-  //       const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
-  //         message.data.params
-  //       );
+  useEffect(() => {
+    const handleParentMessage = (message: MessageEvent) => {
+      if (!TARGET_ORIGINS.includes(message.origin)) {
+        return;
+      }
+      if (typeof message.data === "object" && message.data.params) {
+        const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
+          message.data.params
+        );
 
-  //       const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
-  //       setPuckConfig(puckConfig);
-  //       setMessagePayload(messagePayloadTemp);
-  //       loadPuckDataUsingHistory(messagePayloadTemp);
-  //     }
-  //   };
+        const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
+        setPuckConfig(puckConfig);
+        setMessagePayload(messagePayloadTemp);
+        loadPuckDataUsingHistory(messagePayloadTemp);
+      }
+    };
 
-  //   const listenForParentMessages = () => {
-  //     window.addEventListener("message", handleParentMessage);
-  //   };
+    const listenForParentMessages = () => {
+      window.addEventListener("message", handleParentMessage);
+    };
 
-  //   setMounted(true);
-  //   listenForParentMessages();
-  //   // is this necessary?
-  //   postParentMessage({ entityId: messagePayload?.externalEntityId });
+    setMounted(true);
+    listenForParentMessages();
+    // is this necessary?
+    postParentMessage({ entityId: messagePayload?.externalEntityId });
 
-  //   return () => {
-  //     window.removeEventListener("message", handleParentMessage);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("message", handleParentMessage);
+    };
+  }, []);
 
   const { sendToParent, status } = useSendMessageToParent(
     "bar",

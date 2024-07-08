@@ -112,7 +112,6 @@ export const useSendMessageToIFrame = (
  * message payload and a function to send a message back to the sender.
  * @param messageName - The message name to listen on
  * @param targetOrigins - The origin urls the message can be posted to and received from
- * @param iframeRef - A MutableRefObject to send postMessages to - usually an iFrame
  */
 export const useSendMessageToParent = (
   messageName: string,
