@@ -18,6 +18,11 @@ export type ReceivePayload = {
   payload: Payload;
 };
 
+export type ReceivePayloadInternal = {
+  type: string;
+  status: "success" | "error";
+};
+
 export type MessageStatus = "pending" | "error" | "success";
 
 export type EventHandler = (
@@ -59,6 +64,7 @@ export const useSendMessageToIFrame = (
     }
 
     if (iframeRef.current) {
+      setStatus("pending");
       for (const targetOrigin of targetOrigins) {
         postMessage(
           { ...data, type: messageName },
@@ -79,13 +85,13 @@ export const useSendMessageToIFrame = (
         throw new Error("Unrecognized origin");
       }
 
-      const { type, payload }: { type: string; payload: Payload } = data;
+      const { type, status }: ReceivePayloadInternal = data;
       if (type === messageName) {
         setSource(source);
         setOrigin(origin);
-        if (payload.status === "success") {
+        if (status === "success") {
           setStatus("success");
-        } else if (payload.status === "error") {
+        } else if (status === "error") {
           setStatus("error");
         }
       }
@@ -126,6 +132,7 @@ export const useSendMessageToParent = (
     if (!window.parent) {
       throw new Error("Parent window has closed");
     }
+    setStatus("pending");
     for (const targetOrigin of targetOrigins) {
       postMessage({ ...data, type: messageName }, window.parent, targetOrigin);
     }
@@ -141,13 +148,13 @@ export const useSendMessageToParent = (
         throw new Error("Unrecognized origin");
       }
 
-      const { type, payload }: { type: string; payload: Payload } = data;
+      const { type, status }: ReceivePayloadInternal = data;
       if (type === messageName) {
         setSource(source);
         setOrigin(origin);
-        if (payload.status === "success") {
+        if (status === "success") {
           setStatus("success");
-        } else if (payload.status === "error") {
+        } else if (status === "error") {
           setStatus("error");
         }
       }
@@ -215,8 +222,3 @@ export const useReceiveMessage = (
     return () => window.removeEventListener("message", onWatchEventHandler);
   }, [messageName, source, origin, onWatchEventHandler]);
 };
-
-// useSendMessageToIFrame => sendToIFrame, sendToParent, status
-// useReceiveMessageFromParent
-// useSendMessageToParent
-// useReceiveMessageFromIFrame => returns nothing
