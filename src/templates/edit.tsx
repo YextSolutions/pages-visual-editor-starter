@@ -13,7 +13,7 @@ import {
   MessagePayload,
 } from "../types/messagePayload";
 import { type History } from "@measured/puck";
-import { useMessage } from "../hooks/useMessage";
+import { useReceiveMessage, useSendMessageToParent } from "../hooks/useMessage";
 
 export const Role = {
   GLOBAL: "global",
@@ -222,22 +222,14 @@ const Edit: () => JSX.Element = () => {
   });
   const document = entityDocument?.response.document;
 
-  const { sendToParent } = useMessage(
-    "sendToParent",
-    TARGET_ORIGINS,
-    (_, payload) => {
-      console.log("Message from parent", payload);
-      setParentText("Message from parent:" + JSON.stringify(payload));
-    }
+  const { sendToParent, status } = useSendMessageToParent(
+    "bar",
+    TARGET_ORIGINS
   );
 
-  useMessage("sendToIframe", TARGET_ORIGINS, (send, payload) => {
-    console.log("Message from parent", payload);
-    setParentText("Message from parent:" + JSON.stringify(payload));
-    send({
-      type: "sendToIframe",
-      payload: { success: true, message: "received message from parent" },
-    });
+  useReceiveMessage("foo", TARGET_ORIGINS, (send, payload) => {
+    console.log("Message from parent:", payload);
+    send({ status: "success", payload: { message: "iframe handled foo" } });
   });
 
   const loadingMessage = !puckConfig
@@ -264,9 +256,8 @@ const Edit: () => JSX.Element = () => {
           <button
             onClick={() => {
               sendToParent({
-                type: "sendToParent",
                 payload: {
-                  message: "Hello from child",
+                  message: "Hello from iframe",
                   date: new Date().toLocaleString(),
                 },
               });
@@ -275,7 +266,7 @@ const Edit: () => JSX.Element = () => {
             SEND TO PARENT
           </button>
         </div>
-        <div>Parent text: {parentText}</div>
+        <div>Send to parent status: {status}</div>
         {!isLoading && !!puckData && !!messagePayload ? (
           <>
             <Editor
