@@ -2,7 +2,6 @@ import "../index.css";
 import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
 import { DocumentProvider } from "../hooks/useDocument";
 import { Editor } from "../puck/editor";
-import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState, useCallback } from "react";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
@@ -26,16 +25,6 @@ export const config: TemplateConfig = {
 export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
 };
-
-// used to track 'priority' of data, where lower is prioritized
-export const enum DataSource {
-  Entity = 0,
-  LayoutId = 1,
-  EntityLayout = 2,
-  SiteLayout = 3,
-  AnyLayout = 4,
-  None = 5,
-}
 
 const TARGET_ORIGINS = [
   "http://localhost",
