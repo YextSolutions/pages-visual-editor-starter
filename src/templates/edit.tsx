@@ -225,7 +225,7 @@ const Edit: () => JSX.Element = () => {
   const progress: number =
     (100 * (!!puckConfig + !!puckData + !!messagePayload)) / 3;
 
-  if (!mounted || typeof navigator === "undefined") {
+  if (typeof navigator === "undefined") {
     return <></>;
   }
 
