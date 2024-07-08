@@ -1,9 +1,7 @@
 import { Puck, Data, Config, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
-import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 import { customHeader } from "./components/Header";
-import { toast } from "sonner";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   MessagePayload,
@@ -41,8 +39,6 @@ export const Editor = ({
   clearHistory,
   messagePayload,
 }: EditorProps) => {
-  const toastId = "toast";
-  const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
 
@@ -94,22 +90,6 @@ export const Editor = ({
       messagePayload.entity?.id
     );
   };
-
-  useEffect(() => {
-    if (mutation.isPending) {
-      toast("Save in progress...", {
-        id: toastId,
-      });
-    } else if (mutation.isSuccess) {
-      toast.success("Save completed.", {
-        id: toastId,
-      });
-    } else if (mutation.isError) {
-      toast.error(`Error occured: ${mutation.error.message}`, {
-        id: toastId,
-      });
-    }
-  }, [mutation]);
 
   const handleSave = async (data: Data) => {
     const templateData = JSON.stringify(data);
