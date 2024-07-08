@@ -2,7 +2,6 @@ import "../index.css";
 import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
 import { DocumentProvider } from "../hooks/useDocument";
 import { Editor } from "../puck/editor";
-import useEntityDocumentQuery from "../hooks/queries/useEntityDocumentQuery";
 import { useEffect, useState, useCallback } from "react";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
@@ -28,16 +27,6 @@ export const config: TemplateConfig = {
 export const getPath: GetPath<TemplateProps> = () => {
   return `edit`;
 };
-
-// used to track 'priority' of data, where lower is prioritized
-export const enum DataSource {
-  Entity = 0,
-  LayoutId = 1,
-  EntityLayout = 2,
-  SiteLayout = 3,
-  AnyLayout = 4,
-  None = 5,
-}
 
 const TARGET_ORIGINS = [
   "http://localhost",
@@ -215,13 +204,6 @@ const Edit: () => JSX.Element = () => {
   //   };
   // }, []);
 
-  // get the document
-  const { entityDocument } = useEntityDocumentQuery({
-    templateId: messagePayload?.templateId,
-    entityId: messagePayload?.externalEntityId,
-  });
-  const document = entityDocument?.response.document;
-
   const { sendToParent, status } = useSendMessageToParent(
     "bar",
     TARGET_ORIGINS
@@ -236,22 +218,20 @@ const Edit: () => JSX.Element = () => {
     ? "Loading configuration.."
     : !puckData || puckDataStatus === "pending"
       ? "Loading data.."
-      : !document
-        ? "Loading document.."
-        : "";
+      : "";
 
-  const isLoading = !document || !puckData || !puckConfig || !messagePayload;
+  const isLoading = !puckData || !puckConfig || !messagePayload;
 
   const progress: number =
-    (100 * (!!puckConfig + !!puckData + !!messagePayload + !!document)) / 4;
+    (100 * (!!puckConfig + !!puckData + !!messagePayload)) / 3;
 
-  if (typeof navigator === "undefined") {
+  if (!mounted || typeof navigator === "undefined") {
     return <></>;
   }
 
   return (
     <>
-      <DocumentProvider value={document}>
+      <DocumentProvider value={messagePayload?.entityDocumentData}>
         <div>
           <button
             onClick={() => {
@@ -267,6 +247,7 @@ const Edit: () => JSX.Element = () => {
           </button>
         </div>
         <div>Send to parent status: {status}</div>
+
         {!isLoading && !!puckData && !!messagePayload ? (
           <>
             <Editor

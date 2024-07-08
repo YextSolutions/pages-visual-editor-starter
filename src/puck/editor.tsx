@@ -1,13 +1,9 @@
 import { Puck, Data, Config, usePuck, type History } from "@measured/puck";
 import "@measured/puck/puck.css";
-import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 import { customHeader } from "./components/Header";
-import { toast } from "sonner";
-import { fetchEntity } from "../utils/api";
-import { Role } from "../templates/edit";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import { MessagePayload, VisualConfiguration } from "../types/messagePayload";
+import { MessagePayload } from "../types/messagePayload";
 
 export interface EditorProps {
   selectedTemplateId: string;
@@ -27,12 +23,6 @@ export interface EditorProps {
   messagePayload: MessagePayload;
 }
 
-export const siteEntityVisualConfigField = "c_visualLayouts",
-  pageLayoutVisualConfigField = "c_visualConfiguration",
-  pageLayoutTypeId = "ce_pagesLayout",
-  baseEntityVisualConfigField = "c_visualConfigurations",
-  baseEntityPageLayoutsField = "c_pages_layouts";
-
 // Render Puck editor
 export const Editor = ({
   selectedTemplateId,
@@ -46,8 +36,6 @@ export const Editor = ({
   clearHistory,
   messagePayload,
 }: EditorProps) => {
-  const toastId = "toast";
-  const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
 
@@ -104,22 +92,6 @@ export const Editor = ({
     );
   };
 
-  useEffect(() => {
-    if (mutation.isPending) {
-      toast("Save in progress...", {
-        id: toastId,
-      });
-    } else if (mutation.isSuccess) {
-      toast.success("Save completed.", {
-        id: toastId,
-      });
-    } else if (mutation.isError) {
-      toast.error(`Error occured: ${mutation.error.message}`, {
-        id: toastId,
-      });
-    }
-  }, [mutation]);
-
   const handleSave = async (data: Data) => {
     const templateData = JSON.stringify(data);
     postParentMessage({
@@ -127,7 +99,7 @@ export const Editor = ({
       templateId: selectedTemplateId,
       layoutId: messagePayload.layoutId,
       entityId: messagePayload.entity?.id,
-      VisualConfigurationData: templateData
+      VisualConfigurationData: templateData,
     });
   };
 
