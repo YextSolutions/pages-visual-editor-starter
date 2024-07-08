@@ -3,13 +3,10 @@ import "@measured/puck/puck.css";
 import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
 import { customHeader } from "./components/Header";
 import { toast } from "sonner";
-import { fetchEntity } from "../utils/api";
-import { Role } from "../templates/edit";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   MessagePayload,
-  VisualConfiguration,
 } from "../types/messagePayload";
 import { type History } from "../templates/edit";
 
@@ -30,12 +27,6 @@ export interface EditorProps {
   ) => void;
   messagePayload: MessagePayload;
 }
-
-export const siteEntityVisualConfigField = "c_visualLayouts",
-  pageLayoutVisualConfigField = "c_visualConfiguration",
-  pageLayoutTypeId = "ce_pagesLayout",
-  baseEntityVisualConfigField = "c_visualConfigurations",
-  baseEntityPageLayoutsField = "c_pages_layouts";
 
 // Render Puck editor
 export const Editor = ({

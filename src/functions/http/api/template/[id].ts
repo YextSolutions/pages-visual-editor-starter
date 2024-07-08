@@ -1,6 +1,6 @@
 import { PagesHttpRequest, PagesHttpResponse } from "@yext/pages/*";
-import { TemplateDefinition } from "../../../../puck/components/TemplatePicker";
 import { templates } from "./list";
+import { TemplateDefinition } from "../../../../types/definitions";
 
 export default async function getTemplate(
   request: PagesHttpRequest,
