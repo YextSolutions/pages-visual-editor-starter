@@ -33,9 +33,7 @@ export const EntityField = ({
     <TooltipProvider>
       <Tooltip open={tooltipsVisible && !!tooltipContent}>
         <TooltipTrigger asChild>
-          <div>
-            {children}
-          </div>
+          {children}
         </TooltipTrigger>
         <TooltipContent>
           <p>{tooltipContent}</p>
@@ -60,7 +58,7 @@ export const EntityFieldProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [tooltipsVisible, setTooltipsVisible] = useState(true);
+  const [tooltipsVisible, setTooltipsVisible] = useState(false);
 
   const toggleTooltips = () => {
     setTooltipsVisible((prev: boolean) => !prev);
