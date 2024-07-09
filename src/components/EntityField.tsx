@@ -33,7 +33,9 @@ export const EntityField = ({
     <TooltipProvider>
       <Tooltip open={tooltipsVisible && !!tooltipContent}>
         <TooltipTrigger asChild>
-          {children}
+          <div>
+            {children}
+          </div>
         </TooltipTrigger>
         <TooltipContent>
           <p>{tooltipContent}</p>
