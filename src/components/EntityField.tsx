@@ -26,10 +26,10 @@ export const EntityField = ({
 
   return (
     <TooltipProvider>
-      <TooltipTrigger>
-        {children}
-      </TooltipTrigger>
       <Tooltip open={tooltipsVisible}>
+        <TooltipTrigger asChild>
+          {children}
+        </TooltipTrigger>
         <TooltipContent>
           <p>{tooltipContent}</p>
         </TooltipContent>
