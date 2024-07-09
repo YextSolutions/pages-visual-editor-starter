@@ -6,8 +6,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./atoms/tooltip";
-import "@yext/pages-components/style.css";
-import "index.css";
 
 type EntityFieldProps = {
   displayName?: string;
