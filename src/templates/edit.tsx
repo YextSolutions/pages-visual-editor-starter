@@ -195,7 +195,7 @@ const Edit: () => JSX.Element = () => {
     setMounted(true);
     listenForParentMessages();
     // is this necessary?
-    postParentMessage({ entityId: messagePayload?.externalEntityId });
+    postParentMessage({ entityId: messagePayload?.entity?.id });
 
     return () => {
       window.removeEventListener("message", handleParentMessage);
