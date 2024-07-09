@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { Tooltip, TooltipContent, TooltipProvider } from "./atoms/tooltip";
+import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider } from "./atoms/tooltip";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
 
 type EntityFieldProps = {
@@ -32,6 +32,7 @@ export const EntityField = ({
         </TooltipTrigger>
         <TooltipContent>
           <p>{tooltipContent}</p>
+          <TooltipArrow fill="bg-popover"/>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
