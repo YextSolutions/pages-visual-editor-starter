@@ -204,6 +204,14 @@ const Edit: () => JSX.Element = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const { sendToParent: iFrameLoaded } = useSendMessageToParent(
+      "iFrameLoaded",
+      TARGET_ORIGINS
+    );
+    iFrameLoaded({ payload: {} });
+  }, []);
+
   const { sendToParent, status } = useSendMessageToParent(
     "bar",
     TARGET_ORIGINS

@@ -81,6 +81,7 @@ export const useSendMessageToIFrame = (
       if (data.source === "react-devtools-content-script") {
         return;
       }
+
       if (!targetOrigins.includes(origin)) {
         throw new Error("Unrecognized origin");
       }
