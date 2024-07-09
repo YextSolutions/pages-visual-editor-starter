@@ -204,15 +204,15 @@ const Edit: () => JSX.Element = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("iFrameLoaded useEffect");
-    const { sendToParent: iFrameLoaded } = useSendMessageToParent(
-      "iFrameLoaded",
-      TARGET_ORIGINS
-    );
-    console.log("calling iFrameLoaded");
-    iFrameLoaded({ payload: { message: "iFrame is loaded" } });
-  }, [mounted]);
+  // useEffect(() => {
+  //   console.log("iFrameLoaded useEffect");
+  //   const { sendToParent: iFrameLoaded } = useSendMessageToParent(
+  //     "iFrameLoaded",
+  //     TARGET_ORIGINS
+  //   );
+  //   console.log("calling iFrameLoaded");
+  //   iFrameLoaded({ payload: { message: "iFrame is loaded" } });
+  // }, [mounted]);
 
   const { sendToParent, status } = useSendMessageToParent(
     "bar",
@@ -263,7 +263,7 @@ const Edit: () => JSX.Element = () => {
         </div>
         <div>Send to parent status: {status}</div>
 
-        {!isLoading && !!puckData && !!messagePayload ? (
+        {!isLoading ? (
           <>
             <Editor
               selectedTemplateId={messagePayload.templateId}
