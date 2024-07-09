@@ -93,18 +93,20 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
           )}
           {emails && (
             <EntityField displayName="Emails" fieldId="emails">
-              {emails.map((email: any) => (
-                <div
-                  className="pt-2.5 gap-x-1.5 flex flex-row items-center"
-                  key="email"
-                >
-                  <MdOutlineEmail />
-                  <Link
-                    cta={{ link: email, label: email, linkType: "Email" }}
-                    className="no-underline hover:underline text-primary"
-                  />
-                </div>
-              ))}
+              <div>
+                {emails.map((email: any) => (
+                  <div
+                    className="pt-2.5 gap-x-1.5 flex flex-row items-center"
+                    key="email"
+                  >
+                    <MdOutlineEmail />
+                    <Link
+                      cta={{ link: email, label: email, linkType: "Email" }}
+                      className="no-underline hover:underline text-primary"
+                    />
+                  </div>
+                ))}
+              </div>
             </EntityField>
           )}
         </IconContext.Provider>

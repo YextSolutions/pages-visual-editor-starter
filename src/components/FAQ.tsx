@@ -127,29 +127,31 @@ const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
             displayName="Linked FAQs"
             fieldId="c_faqSection.linkedFAQs"
           >
-            {faq.linkedFAQs.map((faqItem, index) => (
-              <AccordionItem value={index + 1} key={index + 1}>
-                <AccordionTrigger>
-                  <Heading
-                    level={1}
-                    size={question.size}
-                    color={question.color}
-                  >
-                    {faqItem.question}
-                  </Heading>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Body size={answer.size} weight={answer.weight}>
-                    <LexicalRichText
-                      nodeClassNames={{
-                        text: { bold: answer.weight!, base: answer.size! },
-                      }}
-                      serializedAST={JSON.stringify(faqItem.answerV2.json)}
-                    />
-                  </Body>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+            <div>
+              {faq.linkedFAQs.map((faqItem, index) => (
+                <AccordionItem value={index + 1} key={index + 1}>
+                  <AccordionTrigger>
+                    <Heading
+                      level={1}
+                      size={question.size}
+                      color={question.color}
+                    >
+                      {faqItem.question}
+                    </Heading>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Body size={answer.size} weight={answer.weight}>
+                      <LexicalRichText
+                        nodeClassNames={{
+                          text: { bold: answer.weight!, base: answer.size! },
+                        }}
+                        serializedAST={JSON.stringify(faqItem.answerV2.json)}
+                      />
+                    </Body>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </div>
           </EntityField>
         )}
       </Accordion>
