@@ -161,21 +161,21 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
         </EntityField>
       )}
       {productSection.linkedProducts && (
-        <div
-          className="flex flex-col min-h-0 min-w-0 gap-6 md:grid md:grid-cols-12"
-          style={{
-            gridTemplateColumns: `repeat(${productSection.linkedProducts.length}, 1fr)`,
-          }}
-        >
-          {productSection.linkedProducts.map((product, idx) => (
-            <div
-              key={idx}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <EntityField displayName="Linked Entity" fieldId="Product">
+        <EntityField displayName="Linked Entities" fieldId="product">
+          <div
+            className="flex flex-col min-h-0 min-w-0 gap-6 md:grid md:grid-cols-12"
+            style={{
+              gridTemplateColumns: `repeat(${productSection.linkedProducts.length}, 1fr)`,
+            }}
+          >
+            {productSection.linkedProducts.map((product, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <Card
                   cta={{
                     label: product.c_productCTA?.name,
@@ -201,10 +201,10 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
                     url: product.c_coverPhoto?.image.url,
                   }}
                 />
-              </EntityField>
-            </div>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        </EntityField>
       )}
     </Section>
   );
