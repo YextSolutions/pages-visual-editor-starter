@@ -214,6 +214,11 @@ const Edit: () => JSX.Element = () => {
     send({ status: "success", payload: { message: "iframe handled foo" } });
   });
 
+  useReceiveMessage("saveState", TARGET_ORIGINS, (send, payload) => {
+    console.log("Message from parent:", payload);
+    send({ status: "success", payload: { message: "got saveState data" } });
+  });
+
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
     : !puckData || puckDataStatus === "pending"
