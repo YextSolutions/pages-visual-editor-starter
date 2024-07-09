@@ -1,17 +1,18 @@
-import {ComponentConfig, Fields} from "@measured/puck";
+import { ComponentConfig, Fields } from "@measured/puck";
 import { Heading, HeadingProps } from "./atoms/heading";
-import {BodyProps} from "./atoms/body";
-import {Section} from "./atoms/section";
+import { BodyProps } from "./atoms/body";
+import { Section } from "./atoms/section";
 import { C_faqSection, LocationStream } from "../types/autogen";
 import { LexicalRichText } from "@yext/pages-components";
-import {useDocument} from "../hooks/useDocument";
-import {Body} from "./atoms/body";
+import { useDocument } from "../hooks/useDocument";
+import { Body } from "./atoms/body";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./atoms/accordion"
+} from "./atoms/accordion";
+import { EntityField } from "./EntityField";
 
 export type FAQProps = {
   sectionTitle: {
@@ -24,8 +25,8 @@ export type FAQProps = {
     color: HeadingProps["color"];
   };
   answer: {
-    size: BodyProps['size'];
-    weight: BodyProps['weight'];
+    size: BodyProps["size"];
+    weight: BodyProps["weight"];
   };
 };
 
@@ -36,7 +37,7 @@ const FAQFields: Fields<FAQProps> = {
     objectFields: {
       text: {
         label: "Text",
-        type: "text"
+        type: "text",
       },
       size: {
         label: "Size",
@@ -88,51 +89,73 @@ const FAQFields: Fields<FAQProps> = {
         label: "Size",
         type: "radio",
         options: [
-          {label: "Small", value: "small"},
-          {label: "Base", value: "base"},
-          {label: "Large", value: "large"},
+          { label: "Small", value: "small" },
+          { label: "Base", value: "base" },
+          { label: "Large", value: "large" },
         ],
       },
       weight: {
         label: "Weight",
         type: "radio",
         options: [
-          {label: "Default", value: "default"},
-          {label: "Bold", value: "bold"},
+          { label: "Default", value: "default" },
+          { label: "Bold", value: "bold" },
         ],
       },
     },
   },
 };
 
-const FAQCard = ({sectionTitle, question, answer}: FAQProps) => {
+const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
   const faq: C_faqSection = useDocument<LocationStream>(
-      (document) => document.c_faqSection
+    (document) => document.c_faqSection
   );
 
   return (
-      <Section className="flex flex-col justify-center bg-white components">
-        <Heading level={1} size={sectionTitle.size} color={sectionTitle.color} className="text-center">
-          {sectionTitle.text}
-        </Heading>
-        <Accordion type="single" collapsible>
-          {faq.linkedFAQs && faq.linkedFAQs.map((faqItem, index) => (
-              <AccordionItem value={index+1}>
+    <Section className="flex flex-col justify-center bg-white components">
+      <Heading
+        level={1}
+        size={sectionTitle.size}
+        color={sectionTitle.color}
+        className="text-center"
+      >
+        {sectionTitle.text}
+      </Heading>
+      <Accordion type="single" collapsible>
+        {faq.linkedFAQs && (
+          <EntityField
+            displayName="Linked FAQs"
+            fieldId="c_faqSection.linkedFAQs"
+          >
+            {faq.linkedFAQs.map((faqItem, index) => (
+              <AccordionItem value={index + 1} key={index + 1}>
                 <AccordionTrigger>
-                  <Heading level={1} size={question.size} color={question.color}>
+                  <Heading
+                    level={1}
+                    size={question.size}
+                    color={question.color}
+                  >
                     {faqItem.question}
                   </Heading>
                 </AccordionTrigger>
                 <AccordionContent>
                   <Body size={answer.size} weight={answer.weight}>
-                    <LexicalRichText nodeClassNames={{"text": {"bold": answer.weight!, "base": answer.size!}}} serializedAST={JSON.stringify(faqItem.answerV2.json)} />
+                    <LexicalRichText
+                      nodeClassNames={{
+                        text: { bold: answer.weight!, base: answer.size! },
+                      }}
+                      serializedAST={JSON.stringify(faqItem.answerV2.json)}
+                    />
                   </Body>
                 </AccordionContent>
               </AccordionItem>
-          ))}
-        </Accordion>
-      </Section>
-  )};
+            ))}
+          </EntityField>
+        )}
+      </Accordion>
+    </Section>
+  );
+};
 
 export const FAQComponent: ComponentConfig<FAQProps> = {
   fields: FAQFields,
@@ -151,11 +174,7 @@ export const FAQComponent: ComponentConfig<FAQProps> = {
       weight: "default",
     },
   },
-  render: ({ sectionTitle, question, answer}) => (
-      <FAQCard
-        sectionTitle={sectionTitle}
-        question={question}
-        answer={answer}
-      />
+  render: ({ sectionTitle, question, answer }) => (
+    <FAQCard sectionTitle={sectionTitle} question={question} answer={answer} />
   ),
 };

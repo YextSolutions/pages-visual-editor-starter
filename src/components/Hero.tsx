@@ -7,6 +7,7 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { CTA } from "./atoms/cta";
 import { ButtonProps } from "./atoms/button";
 import { cn } from "../utils/cn";
+import { EntityField } from "./EntityField";
 import "./index.css";
 
 export type HeroProps = {
@@ -127,38 +128,52 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
       <div
         className={cn(
           "flex flex-col gap-x-10 md:flex-row",
-          imageMode === "right" && "md:flex-row-reverse",
+          imageMode === "right" && "md:flex-row-reverse"
         )}
       >
         {hero?.image && (
-          <Image
-            className="rounded-[30px] max-w-3xl max-h-96"
-            image={hero.image}
-          />
+          <EntityField displayName="Hero Image" fieldId="c_hero.image">
+            <Image
+              className="rounded-[30px] max-w-3xl max-h-96"
+              image={hero.image}
+            />
+          </EntityField>
         )}
         <div className="flex flex-col justify-center gap-y-3 pt-8">
-          <Heading level={2} size={name.size} color={name.color}>
-            {locationName}
-          </Heading>
-          <Heading level={1} size={location.size} color={location.color}>
-            {address.city}
-          </Heading>
-          {hours && <HoursStatus className="font-semibold" hours={hours} />}
+          <EntityField displayName="Location Name" fieldId="name">
+            <Heading level={2} size={name.size} color={name.color}>
+              {locationName}
+            </Heading>
+          </EntityField>
+          <EntityField displayName="Address" fieldId="address">
+            <Heading level={1} size={location.size} color={location.color}>
+              {address.city}
+            </Heading>
+          </EntityField>
+          {hours && (
+            <EntityField displayName="Hours" fieldId="hours">
+              <HoursStatus className="font-semibold" hours={hours} />
+            </EntityField>
+          )}
           <div className="flex">
             {hero?.cta1 && (
-              <CTA
-                className="mr-3"
-                variant={cta1.variant}
-                label={hero.cta1.name}
-                url={hero.cta1.link ? hero.cta1.link : "#"}
-              />
+              <EntityField displayName="CTA" fieldId="hero.cta1">
+                <CTA
+                  className="mr-3"
+                  variant={cta1.variant}
+                  label={hero.cta1.name}
+                  url={hero.cta1.link ? hero.cta1.link : "#"}
+                />
+              </EntityField>
             )}
             {hero?.cta2 && (
-              <CTA
-                variant={cta2.variant}
-                label={hero.cta2.name}
-                url={hero.cta2.link ? hero.cta2.link : "#"}
-              />
+              <EntityField displayName="CTA" fieldId="hero.cta2">
+                <CTA
+                  variant={cta2.variant}
+                  label={hero.cta2.name}
+                  url={hero.cta2.link ? hero.cta2.link : "#"}
+                />
+              </EntityField>
             )}
           </div>
         </div>
