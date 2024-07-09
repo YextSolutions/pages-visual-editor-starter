@@ -11,9 +11,11 @@ export interface CTAProps
 
 const CTA = ({ label, url, variant, size, className }: CTAProps) => {
   return (
-    <Button asChild className={className} variant={variant} size={size}>
-      <Link href={url}>{label}</Link>
-    </Button>
+    <div>
+      <Button asChild className={className} variant={variant} size={size}>
+        <Link href={url}>{label}</Link>
+      </Button>
+    </div>
   );
 };
 

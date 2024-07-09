@@ -119,11 +119,13 @@ const DeliveryPromo = ({
       >
         {deliveryPromo.image && (
           <EntityField displayName="Image" fieldId="c_deliveryPromo.image">
-            <Image
-              image={deliveryPromo.image}
-              className={"flex-auto"}
-              layout={"fill"}
-            />
+            <div>
+              <Image
+                image={deliveryPromo.image}
+                className={"flex-auto"}
+                layout={"fill"}
+              />
+            </div>
           </EntityField>
         )}
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0">
