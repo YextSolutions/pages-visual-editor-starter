@@ -212,7 +212,7 @@ const Edit: () => JSX.Element = () => {
     );
     console.log("calling iFrameLoaded");
     iFrameLoaded({ payload: { message: "iFrame is loaded" } });
-  }, []);
+  }, [mounted]);
 
   const { sendToParent, status } = useSendMessageToParent(
     "bar",
