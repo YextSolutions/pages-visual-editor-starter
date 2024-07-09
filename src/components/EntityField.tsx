@@ -6,8 +6,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./atoms/tooltip";
-import "@yext/pages-components/style.css";
-import "index.css";
 
 type EntityFieldProps = {
   displayName?: string;
@@ -35,9 +33,7 @@ export const EntityField = ({
     <TooltipProvider>
       <Tooltip open={tooltipsVisible && !!tooltipContent}>
         <TooltipTrigger>
-          <div>
-            {children}
-          </div>
+          {children}
         </TooltipTrigger>
         <TooltipContent>
           <p>{tooltipContent}</p>
