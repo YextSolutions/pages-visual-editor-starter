@@ -58,7 +58,7 @@ export const EntityFieldProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [tooltipsVisible, setTooltipsVisible] = useState(false);
+  const [tooltipsVisible, setTooltipsVisible] = useState(true);
 
   const toggleTooltips = () => {
     setTooltipsVisible((prev: boolean) => !prev);
