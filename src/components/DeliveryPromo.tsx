@@ -8,9 +8,8 @@ import { Image } from "@yext/pages-components";
 import { CTA } from "./atoms/cta";
 import { Section } from "./atoms/section";
 import { cn } from "../utils/cn";
-import "./index.css";
-import useScreenSizes from "../hooks/useDeviceSizes";
 import { EntityField } from "./EntityField";
+import "./index.css";
 
 export type DeliveryPromoProps = {
   imageMode: "left" | "right";
@@ -122,7 +121,7 @@ const DeliveryPromo = ({
           <EntityField displayName="Image" fieldId="c_deliveryPromo.image">
             <Image
               image={deliveryPromo.image}
-              className={'flex-auto'}
+              className={"flex-auto"}
               layout={"fill"}
             />
           </EntityField>
