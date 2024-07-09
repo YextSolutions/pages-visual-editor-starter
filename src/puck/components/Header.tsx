@@ -166,7 +166,7 @@ const ToggleEntityFields = () => {
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => toggleTooltips}
+      onClick={toggleTooltips}
     >
       <RectangleEllipsis className="sm-icon" />
     </Button>

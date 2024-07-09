@@ -61,6 +61,7 @@ export const EntityFieldProvider = ({
   const [tooltipsVisible, setTooltipsVisible] = useState(false);
 
   const toggleTooltips = () => {
+    console.log("tooltipsVisible")
     setTooltipsVisible((prev: boolean) => !prev);
   };
 
