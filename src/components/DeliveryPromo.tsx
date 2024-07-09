@@ -119,13 +119,11 @@ const DeliveryPromo = ({
       >
         {deliveryPromo.image && (
           <EntityField displayName="Image" fieldId="c_deliveryPromo.image">
-            <div>
-              <Image
-                image={deliveryPromo.image}
-                className={"flex-auto"}
-                layout={"fill"}
-              />
-            </div>
+            <Image
+              image={deliveryPromo.image}
+              className={"flex-auto"}
+              layout={"fill"}
+            />
           </EntityField>
         )}
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0">
@@ -144,12 +142,14 @@ const DeliveryPromo = ({
             </EntityField>
           )}
           {deliveryPromo.cta && (
-            <EntityField fieldId="c_deliveryPromo.cta">
-              <CTA
-                variant={promoCTA.variant}
-                label={deliveryPromo.cta.name}
-                url={deliveryPromo.cta.link ?? "#"}
-              />
+            <EntityField displayName="CTA" fieldId="c_deliveryPromo.cta">
+              <div>
+                <CTA
+                  variant={promoCTA.variant}
+                  label={deliveryPromo.cta.name}
+                  url={deliveryPromo.cta.link ?? "#"}
+                />
+              </div>
             </EntityField>
           )}
         </div>

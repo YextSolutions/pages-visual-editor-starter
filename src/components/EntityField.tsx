@@ -61,7 +61,6 @@ export const EntityFieldProvider = ({
   const [tooltipsVisible, setTooltipsVisible] = useState(false);
 
   const toggleTooltips = () => {
-    console.log("tooltipsVisible")
     setTooltipsVisible((prev: boolean) => !prev);
   };
 
@@ -75,7 +74,6 @@ export const EntityFieldProvider = ({
 export const useEntityField = () => {
   const context = useContext(EntityFieldContext);
   if (!context) {
-    console.log('no context')
     return {
       tooltipsVisible: false,
       toggleTooltips: () => {},
