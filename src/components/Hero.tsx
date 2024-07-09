@@ -152,9 +152,7 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
           </EntityField>
           {hours && (
             <EntityField displayName="Hours" fieldId="hours">
-              <div>
-                <HoursStatus className="font-semibold" hours={hours} />
-              </div>
+              <HoursStatus className="font-semibold" hours={hours} />
             </EntityField>
           )}
           <div className="flex">
