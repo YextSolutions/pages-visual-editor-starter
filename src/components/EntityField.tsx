@@ -75,6 +75,7 @@ export const EntityFieldProvider = ({
 export const useEntityField = () => {
   const context = useContext(EntityFieldContext);
   if (!context) {
+    console.log('no context')
     return {
       tooltipsVisible: false,
       toggleTooltips: () => {},
