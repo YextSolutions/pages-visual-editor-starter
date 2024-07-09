@@ -129,11 +129,13 @@ export const useSendMessageToParent = (
   sourceRef.current = source as MessageEvent["source"];
 
   const sendToParent = (data: PostMessage) => {
+    console.log("starter sendToParent");
     if (!window.parent) {
       throw new Error("Parent window has closed");
     }
     setStatus("pending");
     for (const targetOrigin of targetOrigins) {
+      console.log("starter sendToParent postMessage to ", targetOrigin);
       postMessage({ ...data, type: messageName }, window.parent, targetOrigin);
     }
   };
@@ -145,6 +147,9 @@ export const useSendMessageToParent = (
         return;
       }
       if (!targetOrigins.includes(origin)) {
+        console.log("starter Unrecognized origin", origin);
+        console.log("starter target origin", targetOrigins);
+        console.log("starter messageName", messageName);
         throw new Error("Unrecognized origin");
       }
 
