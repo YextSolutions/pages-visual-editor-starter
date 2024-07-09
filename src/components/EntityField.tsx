@@ -1,6 +1,11 @@
 import { createContext, useContext, useState } from "react";
-import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider } from "./atoms/tooltip";
-import { TooltipTrigger } from "@radix-ui/react-tooltip";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./atoms/tooltip";
 
 type EntityFieldProps = {
   displayName?: string;
@@ -27,12 +32,10 @@ export const EntityField = ({
   return (
     <TooltipProvider>
       <Tooltip open={tooltipsVisible}>
-        <TooltipTrigger asChild>
-          {children}
-        </TooltipTrigger>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent>
           <p>{tooltipContent}</p>
-          <TooltipArrow fill="bg-popover"/>
+          <TooltipArrow fill="bg-popover" />
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -69,8 +72,10 @@ export const EntityFieldProvider = ({
 export const useEntityField = () => {
   const context = useContext(EntityFieldContext);
   if (!context) {
-    throw new Error("useEntityField must be used within a EntityFieldProvider");
-    // prob do smth else
+    return {
+      tooltipsVisible: false,
+      toggleTooltips: () => {},
+    };
   }
   return context;
 };
