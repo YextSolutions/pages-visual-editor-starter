@@ -10,6 +10,7 @@ import { Section } from "./atoms/section";
 import { cn } from "../utils/cn";
 import "./index.css";
 import useScreenSizes from "../hooks/useDeviceSizes";
+import { EntityField } from "./EntityField";
 
 export type DeliveryPromoProps = {
   imageMode: "left" | "right";
@@ -108,8 +109,6 @@ const DeliveryPromo = ({
     (document) => document.c_deliveryPromo
   );
 
-  const { isLargeDevice } = useScreenSizes();
-
   return (
     <Section className="components">
       <div
@@ -128,9 +127,11 @@ const DeliveryPromo = ({
         )}
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0">
           {deliveryPromo.title && (
-            <Heading size={promoTitle.size} color={promoTitle.color}>
-              {deliveryPromo.title}
-            </Heading>
+            <EntityField fieldId="deliveryPromo.title">
+              <Heading size={promoTitle.size} color={promoTitle.color}>
+                {deliveryPromo.title}
+              </Heading>
+            </EntityField>
           )}
           {deliveryPromo.description && (
             <Body size={promoDescription.size} weight={promoDescription.weight}>
