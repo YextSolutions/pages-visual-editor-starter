@@ -118,9 +118,6 @@ export const useSendMessageToParent = (
   messageName: string,
   targetOrigins: string[]
 ) => {
-  console.log("starter useSendMessageToParent");
-  console.log("starter messageName", messageName);
-  console.log("starter targetOrigins", targetOrigins);
   const [origin, setOrigin] = useState<string>("");
   const [source, setSource] = useState<MessageEvent["source"] | null>(null);
   const [status, setStatus] = useState<MessageStatus>("pending");
@@ -132,36 +129,27 @@ export const useSendMessageToParent = (
   sourceRef.current = source as MessageEvent["source"];
 
   const sendToParent = (data: PostMessage) => {
-    console.log("starter sendToParent");
     if (!window.parent) {
       throw new Error("Parent window has closed");
     }
     setStatus("pending");
     for (const targetOrigin of targetOrigins) {
-      console.log("starter sendToParent postMessage to ", targetOrigin);
       postMessage({ ...data, type: messageName }, window.parent, targetOrigin);
     }
   };
 
   const onWatchEventHandler = useCallback(
     ({ origin, source, data }: MessageEvent) => {
-      console.log("starter onWatchEventHandler");
       // Ignore React Dev Tools messages
       if (data.source === "react-devtools-content-script") {
-        console.log("starter ignoring react-devtools");
         return;
       }
       if (!targetOrigins.includes(origin)) {
-        console.log("starter Unrecognized origin", origin);
-        console.log("starter target origin", targetOrigins);
-        console.log("starter messageName", messageName);
         throw new Error("Unrecognized origin");
       }
 
       const { type, status }: ReceivePayloadInternal = data;
-      console.log("starter type, status", type, status);
       if (type === messageName) {
-        console.log("starter type matches messageName");
         setSource(source);
         setOrigin(origin);
         if (status === "success") {
@@ -169,19 +157,12 @@ export const useSendMessageToParent = (
         } else if (status === "error") {
           setStatus("error");
         }
-      } else {
-        console.log(
-          "starter type DOES NOT match messageName",
-          type,
-          messageName
-        );
       }
     },
     [messageName, targetOrigins, setSource, setOrigin, setStatus]
   );
 
   useEffect(() => {
-    console.log("starter useEffect for event listener");
     window.addEventListener("message", onWatchEventHandler);
     return () => window.removeEventListener("message", onWatchEventHandler);
   }, [messageName, source, origin, onWatchEventHandler]);
