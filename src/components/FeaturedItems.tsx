@@ -6,6 +6,7 @@ import { C_productSection, LocationStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
 import { Section } from "./atoms/section";
 import { Card } from "./Card";
+import { EntityField } from "./EntityField";
 
 export type FeaturedItemsProps = {
   heading: {
@@ -153,53 +154,57 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
   return (
     <Section className="flex flex-col justify-center bg-white components">
       {productSection.sectionTitle && (
-        <Heading size={heading.size} color={heading.color}>
-          {productSection.sectionTitle}
-        </Heading>
+        <EntityField displayName="Product Section Title" fieldId="c_productSection.sectionTitle">
+          <Heading size={heading.size} color={heading.color}>
+            {productSection.sectionTitle}
+          </Heading>
+        </EntityField>
       )}
       {productSection.linkedProducts && (
-        <div
-          className="flex flex-col min-h-0 min-w-0 gap-6 md:grid md:grid-cols-12"
-          style={{
-            gridTemplateColumns: `repeat(${productSection.linkedProducts.length}, 1fr)`,
-          }}
-        >
-          {productSection.linkedProducts.map((product, idx) => (
-            <div
-              key={idx}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Card
-                cta={{
-                  label: product.c_productCTA?.name,
-                  link: product.c_productCTA?.link,
-                  variant: cards.cta?.variant,
+        <EntityField displayName="Linked Entities" fieldId="product">
+          <div
+            className="flex flex-col min-h-0 min-w-0 gap-6 md:grid md:grid-cols-12"
+            style={{
+              gridTemplateColumns: `repeat(${productSection.linkedProducts.length}, 1fr)`,
+            }}
+          >
+            {productSection.linkedProducts.map((product, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
                 }}
-                heading={{
-                  text: product.name,
-                  size: cards.heading.size,
-                  color: cards.heading.color,
-                }}
-                subheading={{
-                  text: product.c_productPromo,
-                  size: cards.subheading.size,
-                  weight: cards.subheading.weight,
-                }}
-                body={{
-                  text: product.c_description ?? "",
-                  size: cards.body.size,
-                  weight: cards.body.weight,
-                }}
-                image={{
-                  url: product.c_coverPhoto?.image.url,
-                }}
-              />
-            </div>
-          ))}
-        </div>
+              >
+                <Card
+                  cta={{
+                    label: product.c_productCTA?.name,
+                    link: product.c_productCTA?.link,
+                    variant: cards.cta?.variant,
+                  }}
+                  heading={{
+                    text: product.name,
+                    size: cards.heading.size,
+                    color: cards.heading.color,
+                  }}
+                  subheading={{
+                    text: product.c_productPromo,
+                    size: cards.subheading.size,
+                    weight: cards.subheading.weight,
+                  }}
+                  body={{
+                    text: product.c_description ?? "",
+                    size: cards.body.size,
+                    weight: cards.body.weight,
+                  }}
+                  image={{
+                    url: product.c_coverPhoto?.image.url,
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </EntityField>
       )}
     </Section>
   );

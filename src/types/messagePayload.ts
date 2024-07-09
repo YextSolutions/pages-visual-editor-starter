@@ -42,8 +42,6 @@ export type SaveState = {
 
 export type MessagePayload = {
   entity?: Entity;
-  externalEntityId?: string;
-  externalLayoutId?: string;
   layoutId?: number;
   layouts: Layout[];
   role: string;
@@ -73,10 +71,6 @@ export const convertRawMessageToObject = (
     };
   });
 
-  const layoutForExternalLayoutId = layouts.find(
-    (layout: Layout) => layout.externalId === messageParams.layoutId
-  );
-
   return {
     entity: messageParams.entity
       ? {
@@ -101,9 +95,7 @@ export const convertRawMessageToObject = (
           ),
         }
       : undefined,
-    externalEntityId: messageParams.entityId,
-    externalLayoutId: messageParams.layoutId,
-    layoutId: layoutForExternalLayoutId?.id,
+    layoutId: messageParams.layoutId,
     layouts: layouts,
     role: messageParams.role,
     templateId: messageParams.templateId,
