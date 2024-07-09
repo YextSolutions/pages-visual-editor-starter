@@ -209,7 +209,7 @@ const Edit: () => JSX.Element = () => {
       "iFrameLoaded",
       TARGET_ORIGINS
     );
-    iFrameLoaded({ payload: {} });
+    iFrameLoaded({ payload: { message: "iFrame is loaded" } });
   }, []);
 
   const { sendToParent, status } = useSendMessageToParent(
