@@ -7,6 +7,7 @@ import {
   MessagePayload,
 } from "../types/messagePayload";
 import { type History } from "../templates/edit";
+import { EntityFieldProvider } from "../components/EntityField";
 
 export interface EditorProps {
   selectedTemplateId: string;
@@ -113,24 +114,26 @@ export const Editor = ({
   };
 
   return (
-    <Puck
-      config={puckConfig}
-      data={puckData as Partial<Data>}
-      initialHistory={
-        index === -1 ? undefined : { histories: histories, index: index }
-      }
-      onChange={change}
-      overrides={{
-        header: () => {
-          const { appState } = usePuck();
-          return customHeader(
-            handleClearLocalChanges,
-            handleHistoryChange,
-            appState.data,
-            handleSave
-          );
-        },
-      }}
-    />
+    <EntityFieldProvider>
+      <Puck
+        config={puckConfig}
+        data={puckData as Partial<Data>}
+        initialHistory={
+          index === -1 ? undefined : { histories: histories, index: index }
+        }
+        onChange={change}
+        overrides={{
+          header: () => {
+            const { appState } = usePuck();
+            return customHeader(
+              handleClearLocalChanges,
+              handleHistoryChange,
+              appState.data,
+              handleSave
+            );
+          },
+        }}
+      />
+    </EntityFieldProvider>
   );
 };

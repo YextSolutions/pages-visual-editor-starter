@@ -8,8 +8,8 @@ import { Image } from "@yext/pages-components";
 import { CTA } from "./atoms/cta";
 import { Section } from "./atoms/section";
 import { cn } from "../utils/cn";
+import { EntityField } from "./EntityField";
 import "./index.css";
-import useScreenSizes from "../hooks/useDeviceSizes";
 
 export type DeliveryPromoProps = {
   imageMode: "left" | "right";
@@ -108,8 +108,6 @@ const DeliveryPromo = ({
     (document) => document.c_deliveryPromo
   );
 
-  const { isLargeDevice } = useScreenSizes();
-
   return (
     <Section className="components">
       <div
@@ -120,29 +118,37 @@ const DeliveryPromo = ({
         )}
       >
         {deliveryPromo.image && (
-          <Image
-            image={deliveryPromo.image}
-            className={'flex-auto'}
-            layout={"fill"}
-          />
+          <EntityField displayName="Image" fieldId="c_deliveryPromo.image">
+            <Image
+              image={deliveryPromo.image}
+              className={"flex-auto"}
+              layout={"fill"}
+            />
+          </EntityField>
         )}
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0">
           {deliveryPromo.title && (
-            <Heading size={promoTitle.size} color={promoTitle.color}>
-              {deliveryPromo.title}
-            </Heading>
+            <EntityField displayName="Title" fieldId="c_deliveryPromo.title">
+              <Heading size={promoTitle.size} color={promoTitle.color}>
+                {deliveryPromo.title}
+              </Heading>
+            </EntityField>
           )}
           {deliveryPromo.description && (
-            <Body size={promoDescription.size} weight={promoDescription.weight}>
-              {deliveryPromo.description}
-            </Body>
+            <EntityField displayName="Description" fieldId="c_deliveryPromo.description">
+              <Body size={promoDescription.size} weight={promoDescription.weight}>
+                {deliveryPromo.description}
+              </Body>
+            </EntityField>
           )}
           {deliveryPromo.cta && (
-            <CTA
-              variant={promoCTA.variant}
-              label={deliveryPromo.cta.name}
-              url={deliveryPromo.cta.link ?? "#"}
-            />
+            <EntityField fieldId="c_deliveryPromo.cta">
+              <CTA
+                variant={promoCTA.variant}
+                label={deliveryPromo.cta.name}
+                url={deliveryPromo.cta.link ?? "#"}
+              />
+            </EntityField>
           )}
         </div>
       </div>
