@@ -214,10 +214,10 @@ const Edit: () => JSX.Element = () => {
     iFrameLoaded({ payload: { message: "iFrame is loaded" } });
   }, [mounted]);
 
-  const { sendToParent, status } = useSendMessageToParent(
-    "bar",
-    TARGET_ORIGINS
-  );
+  // const { sendToParent, status } = useSendMessageToParent(
+  //   "bar",
+  //   TARGET_ORIGINS
+  // );
 
   useReceiveMessage("foo", TARGET_ORIGINS, (send, payload) => {
     console.log("Message from parent:", payload);
@@ -247,7 +247,7 @@ const Edit: () => JSX.Element = () => {
   return (
     <>
       <DocumentProvider value={messagePayload?.entityDocumentData}>
-        <div>
+        {/* <div>
           <button
             onClick={() => {
               sendToParent({
@@ -261,7 +261,7 @@ const Edit: () => JSX.Element = () => {
             SEND TO PARENT
           </button>
         </div>
-        <div>Send to parent status: {status}</div>
+        <div>Send to parent status: {status}</div> */}
 
         {!isLoading ? (
           <>
