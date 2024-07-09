@@ -143,13 +143,11 @@ const DeliveryPromo = ({
           )}
           {deliveryPromo.cta && (
             <EntityField displayName="CTA" fieldId="c_deliveryPromo.cta">
-              <div>
-                <CTA
-                  variant={promoCTA.variant}
-                  label={deliveryPromo.cta.name}
-                  url={deliveryPromo.cta.link ?? "#"}
-                />
-              </div>
+              <CTA
+                variant={promoCTA.variant}
+                label={deliveryPromo.cta.name}
+                url={deliveryPromo.cta.link ?? "#"}
+              />
             </EntityField>
           )}
         </div>
