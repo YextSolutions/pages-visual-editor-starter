@@ -206,7 +206,7 @@ const Edit: () => JSX.Element = () => {
     return () => {
       window.removeEventListener("message", handleParentMessage);
     };
-  }, []);
+  }, [saveState]);
 
   const { sendToParent: iFrameLoaded } = useSendMessageToParent(
     "iFrameLoaded",
