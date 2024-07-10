@@ -13,7 +13,7 @@ import {
   MessagePayload,
   SaveState,
 } from "../types/messagePayload";
-import { type History } from "@measured/puck";
+import { type History, type Data, type Config } from "@measured/puck";
 import { useReceiveMessage, useSendMessageToParent } from "../hooks/useMessage";
 
 export const Role = {
@@ -42,14 +42,13 @@ const TARGET_ORIGINS = [
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
-  const [mounted, setMounted] = useState<boolean>(false);
-  const [puckData, setPuckData] = useState<any>({}); // json object
+  const [puckData, setPuckData] = useState<Data>();
   const [puckDataStatus, setPuckDataStatus] = useState<
     "successful" | "pending" | "error"
   >("pending");
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
-  const [puckConfig, setPuckConfig] = useState<any>();
+  const [puckConfig, setPuckConfig] = useState<Config>();
   const [messagePayload, setMessagePayload] = useState<MessagePayload>();
   const [saveState, setSaveState] = useState<SaveState>("");
 
@@ -269,7 +268,7 @@ const Edit: () => JSX.Element = () => {
 
   useEffect(() => {
     console.log("puckData", puckData);
-  }, [setPuckData]);
+  }, [setPuckData, puckData]);
 
   // useEffect(() => {
   //   const handleParentMessage = (message: MessageEvent) => {
