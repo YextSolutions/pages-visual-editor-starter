@@ -104,6 +104,10 @@ const Edit: () => JSX.Element = () => {
   }, [messagePayload, saveState]);
 
   const loadPuckDataUsingHistory = () => {
+    if (!messagePayload || !saveState) {
+      return;
+    }
+
     if (!saveState) {
       console.log("not using save state");
       clearLocalStorage(
