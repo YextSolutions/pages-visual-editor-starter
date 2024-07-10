@@ -19,12 +19,12 @@ export type PostMessage = {
 
 type PostMessageInternal = {
   type: string;
-  payload: Payload;
+  payload?: Payload;
 };
 
 export type ReceivePayload = {
   status: Status;
-  payload: Payload;
+  payload?: Payload;
 };
 
 type ReceivePayloadInternal = {
@@ -35,7 +35,7 @@ type ReceivePayloadInternal = {
 export type MessageStatus = Status | "pending";
 
 export type EventHandler = (
-  callback: (data: ReceivePayload) => unknown,
+  respond: (data: ReceivePayload) => unknown,
   payload: Payload
 ) => unknown;
 
@@ -46,8 +46,8 @@ const postMessage = (
 ) => target?.postMessage(data, { targetOrigin: origin });
 
 /**
- * Listens for a specific message type, and when it receives it, it calls the event handler with the
- * message payload and a function to send a message back to the sender.
+ * A hook that allows sending a postMessage from a parent window to an iframe. Additionally,
+ * it listens for a response from the iframe (two way communication) to update its status.
  * @param messageName - The message name to listen on
  * @param targetOrigins - The origin urls the message can be posted to and received from
  * @param iframeRef - A MutableRefObject to send postMessages to - usually an iFrame
@@ -59,7 +59,11 @@ export const useSendMessageToIFrame = (
 ) => {
   const [status, setStatus] = useState<MessageStatus>("pending");
 
-  useSendMessage(messageName, targetOrigins, statusSetter(setStatus));
+  useListenAndRespondMessage(
+    messageName,
+    targetOrigins,
+    statusSetter(setStatus)
+  );
 
   const sendToIFrame = (data: PostMessage) => {
     if (iframeRef.current) {
@@ -78,8 +82,8 @@ export const useSendMessageToIFrame = (
 };
 
 /**
- * Listens for a specific message type, and when it receives it, it calls the event handler with the
- * message payload and a function to send a message back to the sender.
+ * A hook that allows sending a postMessage from an iframe to its parent window. Additionally,
+ * it listens for a response from the parent (two way communication) to update its status.
  * @param messageName - The message name to listen on
  * @param targetOrigins - The origin urls the message can be posted to and received from
  */
@@ -89,7 +93,11 @@ export const useSendMessageToParent = (
 ) => {
   const [status, setStatus] = useState<MessageStatus>("pending");
 
-  useSendMessage(messageName, targetOrigins, statusSetter(setStatus));
+  useListenAndRespondMessage(
+    messageName,
+    targetOrigins,
+    statusSetter(setStatus)
+  );
 
   const sendToParent = (data: PostMessage) => {
     if (!window.parent) {
@@ -105,8 +113,11 @@ export const useSendMessageToParent = (
 };
 
 /**
- * Listens for a specific message type, and when it receives it, it calls the event handler with the
- * message payload and a function to send a message back to the sender.
+ * A hook to receive a postMessage request, either in a parent window or an iframe. It is
+ * the receiving end for both {@link useSendMessageToIFrame} and {@link useSendMessageToParent}.
+ * The eventHandler if fired when a message is received, which contains a payload and callback
+ * function. The receiver can choose to do something with the payload as well as send a
+ * status and payload back to the publisher.
  * @param messageName - The message name to listen on
  * @param targetOrigins - The origin urls the message can be posted to and received from
  * @param eventHandler - The function that will be called when the event is triggered
@@ -132,18 +143,22 @@ export const useReceiveMessage = (
     }
   };
 
-  useSendMessage(messageName, targetOrigins, handleMessageAndSendResponse);
+  useListenAndRespondMessage(
+    messageName,
+    targetOrigins,
+    handleMessageAndSendResponse
+  );
 };
 
 /**
- * An internal hook which listens for a specific message type, and when it receives it,
- * it calls the event handler with the message payload and a function to send a message back
+ * An internal hook which listens for a specific message type. When a message is received,
+ * the event handler is called with the message payload and a function to send a message back
  * to the sender.
  * @param messageName - The message name to listen on
  * @param targetOrigins - The origin urls the message can be posted to and received from
  * @param callback - Callback function to handle the response data and message source
  */
-const useSendMessage = (
+const useListenAndRespondMessage = (
   messageName: string,
   targetOrigins: string[],
   callback: (data: any, source: MessageEvent["source"]) => void
@@ -184,6 +199,11 @@ const useSendMessage = (
   }, [messageName, source, origin, onWatchEventHandler]);
 };
 
+/**
+ * Sets a status based on the incoming message's status.
+ * @param setStatus - A React useState hook for setting the status of the
+ * original postMessage coming from the parent window or iframe.
+ */
 const statusSetter = (setStatus: Dispatch<SetStateAction<MessageStatus>>) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return (data: any, source: MessageEvent["source"]) => {
