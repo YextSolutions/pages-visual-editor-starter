@@ -99,83 +99,13 @@ const Edit: () => JSX.Element = () => {
       isFirstRender.current = false; // toggle flag after first render/mounting
       return;
     }
+    console.log(
+      "messagePayload or saveState changed, calling loadPuckDataUsingHistory"
+    );
     loadPuckDataUsingHistory(); // do something after state has updated
   }, [messagePayload, saveState]);
 
-  // const loadPuckDataUsingHistory = () => {
-  //   if (!messagePayload || !saveState) {
-  //     return;
-  //   }
-
-  //   if (!saveState) {
-  //     console.log("not using save state");
-  //     clearLocalStorage(
-  //       messagePayload.role,
-  //       messagePayload.templateId,
-  //       messagePayload.layoutId,
-  //       messagePayload.entity?.id
-  //     );
-  //     const payloadPuckData = messagePayload?.visualConfigurationData;
-  //     const payloadPuckDataStatus =
-  //       messagePayload?.visualConfigurationDataStatus;
-  //     if (!payloadPuckData && payloadPuckDataStatus === "successful") {
-  //       throw new Error("Could not find VisualConfiguration to load");
-  //     }
-  //     if (payloadPuckDataStatus === "error") {
-  //       throw new Error("An error occurred while fetching visual config data");
-  //     }
-
-  //     setPuckData(payloadPuckData);
-  //     setPuckDataStatus(payloadPuckDataStatus);
-  //     return;
-  //   }
-
-  //   console.log("using save state");
-  //   console.log("raw history", saveState.History);
-  //   console.log(
-  //     "escaped history",
-  //     jsonFromEscapedJsonString(saveState.History)
-  //   );
-  //   // The history stored has both "ui" and "data" keys, but PuckData
-  //   // is only concerned with the "data" portion.
-  //   setPuckData(jsonFromEscapedJsonString(saveState.History).data); // TODO - fix the payload
-
-  //   // Check localStorage for existing Puck history
-  //   const localHistoryArray = window.localStorage.getItem(
-  //     getLocalStorageKey(
-  //       messagePayload.role,
-  //       messagePayload.templateId,
-  //       messagePayload.layoutId,
-  //       messagePayload.entity?.id
-  //     )
-  //   );
-
-  //   // No localStorage
-  //   if (!localHistoryArray) {
-  //     return;
-  //   }
-
-  //   const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-  //     (item: any) => item.id === saveState?.Hash // TODO - fix the payload
-  //   );
-
-  //   // If local storage reset Puck history to it
-  //   if (localHistoryIndex !== -1) {
-  //     setHistoryIndex(localHistoryIndex);
-  //     setHistories(JSON.parse(localHistoryArray));
-  //     return;
-  //   }
-
-  //   // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
-  //   clearLocalStorage(
-  //     messagePayload.role,
-  //     messagePayload.templateId,
-  //     messagePayload.layoutId,
-  //     messagePayload.entity?.id
-  //   );
-  // };
-
-  const loadPuckDataUsingHistory = () => {
+  const loadPuckDataUsingHistory = useCallback(() => {
     if (!messagePayload || !saveState) {
       return;
     }
@@ -251,7 +181,14 @@ const Edit: () => JSX.Element = () => {
       messagePayload.layoutId,
       messagePayload.entity?.id
     );
-  };
+  }, [
+    setHistories,
+    setHistoryIndex,
+    setPuckData,
+    setPuckDataStatus,
+    clearLocalStorage,
+    getLocalStorageKey,
+  ]);
 
   const postParentMessage = (message: any) => {
     for (const targetOrigin of TARGET_ORIGINS) {
@@ -301,6 +238,8 @@ const Edit: () => JSX.Element = () => {
   if (typeof navigator === "undefined") {
     return <></>;
   }
+
+  console.log("edit.tsx rendering");
 
   return (
     <>

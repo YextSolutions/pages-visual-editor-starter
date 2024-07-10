@@ -46,7 +46,7 @@ const postMessage = (
 export const useSendMessageToIFrame = (
   messageName: string,
   targetOrigins: string[],
-  iframeRef?: RefObject<HTMLIFrameElement>
+  iframeRef: RefObject<HTMLIFrameElement>
 ) => {
   const [origin, setOrigin] = useState<string>("");
   const [source, setSource] = useState<MessageEvent["source"] | null>(null);
@@ -97,7 +97,7 @@ export const useSendMessageToIFrame = (
         }
       }
     },
-    [messageName, targetOrigins, iframeRef, setSource, setOrigin, setStatus]
+    [messageName, targetOrigins, setSource, setOrigin, setStatus]
   );
 
   useEffect(() => {
