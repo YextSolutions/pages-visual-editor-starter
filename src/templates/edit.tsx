@@ -128,12 +128,16 @@ const Edit: () => JSX.Element = () => {
       const payloadPuckData = messagePayload?.visualConfigurationData;
       const payloadPuckDataStatus =
         messagePayload?.visualConfigurationDataStatus;
+      console.log("messagePayload", messagePayload);
       if (!payloadPuckData && payloadPuckDataStatus === "successful") {
         throw new Error("Could not find VisualConfiguration to load");
       }
       if (payloadPuckDataStatus === "error") {
         throw new Error("An error occurred while fetching visual config data");
       }
+
+      console.log("payloadPuckData", payloadPuckData);
+      console.log("payloadPuckDataStatus", payloadPuckDataStatus);
 
       setPuckData(payloadPuckData);
       setPuckDataStatus(payloadPuckDataStatus);
