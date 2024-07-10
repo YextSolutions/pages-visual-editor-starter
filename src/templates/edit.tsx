@@ -40,17 +40,18 @@ const TARGET_ORIGINS = [
   "https://app.eu.yext.com",
 ];
 
+type Status = "pending" | "error" | "success";
+
 // Render the editor
 const Edit: () => JSX.Element = () => {
   const [puckData, setPuckData] = useState<Data>();
-  const [puckDataStatus, setPuckDataStatus] = useState<
-    "successful" | "pending" | "error"
-  >("pending");
+  const [puckDataStatus, setPuckDataStatus] = useState<Status>("pending");
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [messagePayload, setMessagePayload] = useState<MessagePayload>();
-  const [saveState, setSaveState] = useState<SaveState>("");
+  const [saveState, setSaveState] = useState<SaveState>();
+  const [saveStateStatus, setSaveStateStatus] = useState<Status>("pending");
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -108,7 +109,7 @@ const Edit: () => JSX.Element = () => {
   }, [messagePayload, saveState]);
 
   const loadPuckDataUsingHistory = useCallback(() => {
-    if (!messagePayload || !saveState) {
+    if (!messagePayload || saveStateStatus !== "success") {
       return;
     }
 
@@ -211,6 +212,7 @@ const Edit: () => JSX.Element = () => {
   useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
     console.log("saveState from parent:", payload);
     setSaveState(payload);
+    setSaveStateStatus("success");
     send({ status: "success", payload: { message: "saveState received" } });
   });
 
