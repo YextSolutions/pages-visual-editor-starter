@@ -263,6 +263,10 @@ const Edit: () => JSX.Element = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("puckData", puckData);
+  }, [setPuckData]);
+
   // useEffect(() => {
   //   const handleParentMessage = (message: MessageEvent) => {
   //     if (!TARGET_ORIGINS.includes(message.origin)) {
