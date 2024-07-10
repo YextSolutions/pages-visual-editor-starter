@@ -10,6 +10,7 @@ import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   convertRawMessageToObject,
   MessagePayload,
+  SaveState,
 } from "../types/messagePayload";
 import { type History } from "@measured/puck";
 import { useReceiveMessage, useSendMessageToParent } from "../hooks/useMessage";
@@ -49,7 +50,7 @@ const Edit: () => JSX.Element = () => {
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<any>();
   const [messagePayload, setMessagePayload] = useState<MessagePayload>();
-  const [parentText, setParentText] = useState<string>("");
+  const [saveState, setSaveState] = useState<SaveState>("");
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -95,7 +96,7 @@ const Edit: () => JSX.Element = () => {
   const loadPuckDataUsingHistory = useCallback(
     (messagePayload: MessagePayload) => {
       // Nothing in save_state table, start fresh from Content
-      if (!messagePayload.saveState) {
+      if (!saveState) {
         clearLocalStorage(
           messagePayload.role,
           messagePayload.templateId,
@@ -121,7 +122,7 @@ const Edit: () => JSX.Element = () => {
 
       // The history stored has both "ui" and "data" keys, but PuckData
       // is only concerned with the "data" portion.
-      setPuckData(messagePayload.saveState.history.data);
+      setPuckData(saveState.History.data); // TODO - fix they payload
 
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
@@ -139,7 +140,7 @@ const Edit: () => JSX.Element = () => {
       }
 
       const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-        (item: any) => item.id === messagePayload.saveState?.hash
+        (item: any) => item.id === saveState?.Hash // TODO - fix they payload
       );
 
       // If local storage reset Puck history to it
@@ -213,19 +214,17 @@ const Edit: () => JSX.Element = () => {
     iFrameLoaded({ payload: { message: "iFrame is loaded" } });
   }, []);
 
-  const { sendToParent, status } = useSendMessageToParent(
-    "bar",
-    TARGET_ORIGINS
-  );
-
-  useReceiveMessage("foo", TARGET_ORIGINS, (send, payload) => {
-    console.log("Message from parent:", payload);
-    send({ status: "success", payload: { message: "iframe handled foo" } });
-  });
-
   useReceiveMessage("saveState", TARGET_ORIGINS, (send, payload) => {
+    // setMessagePayload((prevState: MessagePayload) => ({
+    //   ...prevState,
+    //   saveState: {
+    //     history: payload.History, // TODO: update Storm side for lowercase
+    //     hash: payload.Hash,
+    //   },
+    // }));
     console.log("Message from parent:", payload);
-    send({ status: "success", payload: { message: "got saveState data" } });
+    setSaveState(payload);
+    send({ status: "success", payload: { message: "saveState received" } });
   });
 
   const loadingMessage = !puckConfig
@@ -234,7 +233,7 @@ const Edit: () => JSX.Element = () => {
       ? "Loading data.."
       : "";
 
-  const isLoading = !puckData || !puckConfig || !messagePayload;
+  const isLoading = !puckData || !puckConfig || !messagePayload || !saveState;
 
   const progress: number =
     (100 * (!!puckConfig + !!puckData + !!messagePayload)) / 3;
@@ -246,23 +245,7 @@ const Edit: () => JSX.Element = () => {
   return (
     <>
       <DocumentProvider value={messagePayload?.entityDocumentData}>
-        <div>
-          <button
-            onClick={() => {
-              sendToParent({
-                payload: {
-                  message: "Hello from iframe",
-                  date: new Date().toLocaleString(),
-                },
-              });
-            }}
-          >
-            SEND TO PARENT
-          </button>
-        </div>
-        <div>Send to parent status: {status}</div>
-
-        {!isLoading && !!puckData && !!messagePayload ? (
+        {!isLoading ? (
           <>
             <Editor
               selectedTemplateId={messagePayload.templateId}

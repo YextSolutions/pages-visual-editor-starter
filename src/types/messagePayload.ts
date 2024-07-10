@@ -46,7 +46,6 @@ export type MessagePayload = {
   layouts: Layout[];
   role: string;
   templateId: string;
-  saveState?: SaveState;
   visualConfigurationData: string;
   visualConfigurationDataStatus: "successful" | "pending" | "error";
   entityDocumentData: any; // json object
@@ -99,13 +98,15 @@ export const convertRawMessageToObject = (
     layouts: layouts,
     role: messageParams.role,
     templateId: messageParams.templateId,
-    saveState: messageParams.saveState
-      ? {
-          history: jsonFromEscapedJsonString(messageParams.saveState.History),
-          hash: messageParams.saveState.Hash,
-        }
-      : undefined,
-    visualConfigurationData: JSON.parse(messageParams?.visualConfigData?.visualConfigurationData),
+    // saveState: messageParams.saveState
+    //   ? {
+    //       history: jsonFromEscapedJsonString(messageParams.saveState.History),
+    //       hash: messageParams.saveState.Hash,
+    //     }
+    //   : undefined,
+    visualConfigurationData: JSON.parse(
+      messageParams?.visualConfigData?.visualConfigurationData
+    ),
     visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
     entityDocumentData: messageParams?.entityDocumentData,
     entityDocumentDataStatus: messageParams.entityDocumentDataStatus,
