@@ -10,7 +10,7 @@ import {
   SetStateAction,
 } from "react";
 
-export type Payload = Record<string, unknown>;
+export type Payload = Record<string, any>;
 export type Status = "success" | "error";
 
 export type PostMessage = {

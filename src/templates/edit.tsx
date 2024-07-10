@@ -206,13 +206,13 @@ const Edit: () => JSX.Element = () => {
     iFrameLoaded({ payload: { message: "iFrame is loaded" } });
   }, []);
 
-  useReceiveMessage("saveState", TARGET_ORIGINS, (send, payload) => {
+  useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
     console.log("saveState from parent:", payload);
     setSaveState(payload);
     send({ status: "success", payload: { message: "saveState received" } });
   });
 
-  useReceiveMessage("payload", TARGET_ORIGINS, (send, payload) => {
+  useReceiveMessage("getPayload", TARGET_ORIGINS, (send, payload) => {
     console.log("payload from parent:", payload);
     const messagePayloadTemp: MessagePayload =
       convertRawMessageToObject(payload);
@@ -223,6 +223,11 @@ const Edit: () => JSX.Element = () => {
     setMessagePayload(messagePayloadTemp);
     send({ status: "success", payload: { message: "payload received" } });
   });
+
+  const { sendToParent: saveSaveState } = useSendMessageToParent(
+    "saveSaveState",
+    TARGET_ORIGINS
+  );
 
   const loadingMessage = !puckConfig
     ? "Loading configuration.."
@@ -257,6 +262,7 @@ const Edit: () => JSX.Element = () => {
               histories={histories}
               clearHistory={clearHistory}
               messagePayload={messagePayload}
+              saveSaveState={saveSaveState}
             />
           </>
         ) : (

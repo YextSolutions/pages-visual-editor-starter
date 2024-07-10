@@ -5,6 +5,7 @@ import { useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import { MessagePayload } from "../types/messagePayload";
 import { EntityFieldProvider } from "../components/EntityField";
+import { useSendMessageToParent } from "../hooks/useMessage";
 
 export interface EditorProps {
   selectedTemplateId: string;
@@ -22,6 +23,7 @@ export interface EditorProps {
     entityId?: number
   ) => void;
   messagePayload: MessagePayload;
+  saveSaveState: (data: any) => void;
 }
 
 // Render Puck editor
@@ -36,6 +38,7 @@ export const Editor = ({
   index,
   clearHistory,
   messagePayload,
+  saveSaveState,
 }: EditorProps) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
@@ -53,13 +56,14 @@ export const Editor = ({
       ) {
         historyIndex.current = index;
 
-        postParentMessage({
-          localChange: true,
-          hash: histories[index].id,
-          history: JSON.stringify(histories[index].data),
-          layoutId: messagePayload.layoutId,
-          entityId: messagePayload.entity?.id,
+        console.log("about to save saveState");
+        saveSaveState({
+          payload: {
+            hash: histories[index].id,
+            history: JSON.stringify(histories[index].data),
+          },
         });
+
         window.localStorage.setItem(
           getLocalStorageKey(
             role,
