@@ -214,6 +214,7 @@ const Edit: () => JSX.Element = () => {
     // The history stored has both "ui" and "data" keys, but PuckData
     // is only concerned with the "data" portion.
     setPuckData(jsonFromEscapedJsonString(saveState.History).data); // TODO - fix the payload
+    console.log("puck data set");
 
     // Check localStorage for existing Puck history
     const localHistoryArray = window.localStorage.getItem(
@@ -227,6 +228,7 @@ const Edit: () => JSX.Element = () => {
 
     // No localStorage
     if (!localHistoryArray) {
+      console.log("no localStorage");
       return;
     }
 
@@ -236,11 +238,13 @@ const Edit: () => JSX.Element = () => {
 
     // If local storage reset Puck history to it
     if (localHistoryIndex !== -1) {
+      console.log("resetting histories");
       setHistoryIndex(localHistoryIndex);
       setHistories(JSON.parse(localHistoryArray));
       return;
     }
 
+    console.log("clearing localStorage");
     // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
     clearLocalStorage(
       messagePayload.role,
