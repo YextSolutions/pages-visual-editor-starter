@@ -9,6 +9,7 @@ import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
 import {
   convertRawMessageToObject,
+  jsonFromEscapedJsonString,
   MessagePayload,
   SaveState,
 } from "../types/messagePayload";
@@ -97,6 +98,7 @@ const Edit: () => JSX.Element = () => {
     (messagePayload: MessagePayload) => {
       // Nothing in save_state table, start fresh from Content
       if (!saveState) {
+        console.log("not using save state");
         clearLocalStorage(
           messagePayload.role,
           messagePayload.templateId,
@@ -120,9 +122,10 @@ const Edit: () => JSX.Element = () => {
         return;
       }
 
+      console.log("using save state");
       // The history stored has both "ui" and "data" keys, but PuckData
       // is only concerned with the "data" portion.
-      setPuckData(saveState.History.data); // TODO - fix they payload
+      setPuckData(jsonFromEscapedJsonString(saveState.History).data); // TODO - fix the payload
 
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
@@ -140,7 +143,7 @@ const Edit: () => JSX.Element = () => {
       }
 
       const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-        (item: any) => item.id === saveState?.Hash // TODO - fix they payload
+        (item: any) => item.id === saveState?.Hash // TODO - fix the payload
       );
 
       // If local storage reset Puck history to it

@@ -114,6 +114,6 @@ export const convertRawMessageToObject = (
 };
 
 // TODO: Remove this when the frontend has been fixed to not string escape
-const jsonFromEscapedJsonString = (escapedJsonString: string) => {
+export const jsonFromEscapedJsonString = (escapedJsonString: string) => {
   return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
 };
