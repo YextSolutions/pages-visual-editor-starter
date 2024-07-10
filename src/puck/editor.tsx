@@ -56,7 +56,6 @@ export const Editor = ({
       ) {
         historyIndex.current = index;
 
-        console.log("about to save saveState");
         saveSaveState({
           payload: {
             hash: histories[index].id,

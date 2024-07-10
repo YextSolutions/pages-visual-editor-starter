@@ -86,10 +86,12 @@ const Edit: () => JSX.Element = () => {
     entityId?: number
   ) => {
     clearLocalStorage(role, templateId, layoutId, entityId);
-    postParentMessage({
-      clearLocalChanges: true,
-      layoutId: layoutId,
-      entityId: entityId,
+    deleteSaveState({
+      payload: {
+        clearLocalChanges: true,
+        layoutId: layoutId,
+        entityId: entityId,
+      },
     });
   };
 
@@ -226,6 +228,11 @@ const Edit: () => JSX.Element = () => {
 
   const { sendToParent: saveSaveState } = useSendMessageToParent(
     "saveSaveState",
+    TARGET_ORIGINS
+  );
+
+  const { sendToParent: deleteSaveState } = useSendMessageToParent(
+    "deleteSaveState",
     TARGET_ORIGINS
   );
 
