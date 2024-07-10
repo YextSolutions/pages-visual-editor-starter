@@ -109,7 +109,10 @@ const Edit: () => JSX.Element = () => {
   }, [messagePayload, saveState]);
 
   const loadPuckDataUsingHistory = useCallback(() => {
-    if (!messagePayload || saveStateStatus !== "success") {
+    if (
+      !messagePayload.visualConfigurationData ||
+      saveStateStatus !== "success"
+    ) {
       return;
     }
 
