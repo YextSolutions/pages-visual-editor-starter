@@ -175,7 +175,7 @@ const Edit: () => JSX.Element = () => {
   //   );
   // };
 
-  const loadPuckDataUsingHistory = useCallback(() => {
+  const loadPuckDataUsingHistory = () => {
     if (!messagePayload || !saveState) {
       return;
     }
@@ -251,55 +251,14 @@ const Edit: () => JSX.Element = () => {
       messagePayload.layoutId,
       messagePayload.entity?.id
     );
-  }, [
-    setHistories,
-    setHistoryIndex,
-    setPuckData,
-    setPuckDataStatus,
-    clearLocalStorage,
-    getLocalStorageKey,
-  ]);
+  };
 
   const postParentMessage = (message: any) => {
     for (const targetOrigin of TARGET_ORIGINS) {
+      console.log("posting message", message);
       window.parent.postMessage(message, targetOrigin);
     }
   };
-
-  useEffect(() => {
-    console.log("puckData", puckData);
-  }, [setPuckData, puckData]);
-
-  // useEffect(() => {
-  //   const handleParentMessage = (message: MessageEvent) => {
-  //     if (!TARGET_ORIGINS.includes(message.origin)) {
-  //       return;
-  //     }
-  //     if (typeof message.data === "object" && message.data.params) {
-  //       const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
-  //         message.data.params
-  //       );
-
-  //       const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
-  //       setPuckConfig(puckConfig);
-  //       setMessagePayload(messagePayloadTemp);
-  //       loadPuckDataUsingHistory(messagePayloadTemp);
-  //     }
-  //   };
-
-  //   const listenForParentMessages = () => {
-  //     window.addEventListener("message", handleParentMessage);
-  //   };
-
-  //   setMounted(true);
-  //   listenForParentMessages();
-  //   // is this necessary?
-  //   postParentMessage({ entityId: messagePayload?.entity?.id });
-
-  //   return () => {
-  //     window.removeEventListener("message", handleParentMessage);
-  //   };
-  // }, []);
 
   const { sendToParent: iFrameLoaded } = useSendMessageToParent(
     "iFrameLoaded",
