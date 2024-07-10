@@ -312,9 +312,8 @@ const Edit: () => JSX.Element = () => {
 
   useReceiveMessage("payload", TARGET_ORIGINS, (send, payload) => {
     console.log("payload from parent:", payload);
-    const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
-      payload.params
-    );
+    const messagePayloadTemp: MessagePayload =
+      convertRawMessageToObject(payload);
     console.log("payload after convert", messagePayloadTemp);
 
     const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
