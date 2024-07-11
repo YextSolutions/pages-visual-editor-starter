@@ -251,14 +251,18 @@ const Edit: () => JSX.Element = () => {
       ? "Loading data.."
       : "";
 
-  const isLoading = !puckData || !puckConfig || !messagePayload || !saveState;
+  const isLoading =
+    !puckData ||
+    !puckConfig ||
+    !messagePayload ||
+    saveStateStatus !== "success";
 
   const progress: number =
     (100 *
       (!!puckConfig +
         !!puckData +
         !!messagePayload +
-        (saveStateStatus !== "success"))) /
+        (saveStateStatus === "success"))) /
     4;
 
   if (typeof navigator === "undefined") {
