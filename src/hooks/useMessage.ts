@@ -129,6 +129,7 @@ export const useReceiveMessage = (
 ) => {
   const handleMessageAndSendResponse = (
     data: any,
+    origin: string,
     source: MessageEvent["source"]
   ) => {
     const { type, payload }: { type: string; payload: Payload } = data;
@@ -161,7 +162,7 @@ export const useReceiveMessage = (
 const useListenAndRespondMessage = (
   messageName: string,
   targetOrigins: string[],
-  callback: (data: any, source: MessageEvent["source"]) => void
+  callback: (data: any, origin: string, source: MessageEvent["source"]) => void
 ) => {
   const [origin, setOrigin] = useState<string>();
   const [source, setSource] = useState<MessageEvent["source"]>();
@@ -187,7 +188,7 @@ const useListenAndRespondMessage = (
         setSource(source);
         setOrigin(origin);
 
-        callback(data, source);
+        callback(data, origin, source);
       }
     },
     [messageName, targetOrigins, setSource, setOrigin, callback]
@@ -206,7 +207,7 @@ const useListenAndRespondMessage = (
  */
 const statusSetter = (setStatus: Dispatch<SetStateAction<MessageStatus>>) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  return (data: any, source: MessageEvent["source"]) => {
+  return (data: any, origin: string, source: MessageEvent["source"]) => {
     const { status }: { status: Status } = data;
     if (status === "success") {
       setStatus("success");
