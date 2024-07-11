@@ -145,7 +145,7 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
               {locationName}
             </Heading>
           </EntityField>
-          <EntityField displayName="Address" fieldId="address">
+          <EntityField displayName="City" fieldId="address">
             <Heading level={1} size={location.size} color={location.color}>
               {address.city}
             </Heading>

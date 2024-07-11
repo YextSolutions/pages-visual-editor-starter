@@ -33,7 +33,9 @@ export const EntityField = ({
     <TooltipProvider>
       <Tooltip open={tooltipsVisible && !!tooltipContent}>
         <TooltipTrigger asChild>
-          {children}
+          <div className={tooltipsVisible ? "outline-2 outline-dotted outline-[#5A58F2]" : ""}>
+            {children}
+          </div>
         </TooltipTrigger>
         <TooltipContent>
           <p>{tooltipContent}</p>

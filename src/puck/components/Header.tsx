@@ -1,6 +1,12 @@
 import "./puck.css";
 import { Data, usePuck, type History } from "@measured/puck";
-import { PanelLeft, PanelRight, RotateCcw, RotateCw } from "lucide-react";
+import {
+  PanelLeft,
+  PanelRight,
+  RotateCcw,
+  RotateCw,
+  RectangleEllipsis,
+} from "lucide-react";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -14,6 +20,7 @@ import {
 import { useCallback, useEffect } from "react";
 import { useDocument } from "../../hooks/useDocument";
 import { Button } from "../ui/button";
+import { useEntityField } from "../../components/EntityField";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -47,6 +54,7 @@ export const customHeader = (
     <header className="puck-header puck-css">
       <div className="header-left">
         <ToggleUIButtons />
+        <ToggleEntityFields />
       </div>
       <div className="header-center"></div>
       <div className="actions">
@@ -168,5 +176,14 @@ const ToggleUIButtons = () => {
         <PanelRight className="sm-icon" />
       </Button>
     </>
+  );
+};
+
+const ToggleEntityFields = () => {
+  const { toggleTooltips } = useEntityField();
+  return (
+    <Button variant="ghost" size="icon" onClick={toggleTooltips}>
+      <RectangleEllipsis className="sm-icon" />
+    </Button>
   );
 };
