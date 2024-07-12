@@ -41,75 +41,19 @@ export type SaveState = {
 };
 
 export type MessagePayload = {
-  entity?: Entity;
-  layoutId?: number;
-  layouts: Layout[];
   role: string;
   templateId: string;
-  // visualConfigurationData: string;
-  // visualConfigurationDataStatus: "successful" | "pending" | "error";
-  // entityDocumentData: any; // json object
-  // entityDocumentDataStatus: "successful" | "pending" | "error";
+  layoutId?: number;
+  entity?: Entity;
 };
 
 export const convertRawMessageToObject = (
   messageParams: any
 ): MessagePayload => {
-  const layouts: Layout[] = (messageParams.layouts || []).map((layout: any) => {
-    return {
-      id: layout.id,
-      externalId: layout.externalId,
-      name: layout.name,
-      templateId: layout.templateId,
-      visualConfiguration: jsonFromEscapedJsonString(
-        layout.visualConfiguration
-      ),
-      isDefault: layout.isDefault,
-      entityIds: layout.entityIds,
-      entityCount: layout.entityCount,
-    };
-  });
-
   return {
-    entity: messageParams.entity
-      ? {
-          id: messageParams.entity.internalId,
-          externalId: messageParams.entity.externalId,
-          name: messageParams.entity.name,
-          layoutIds: messageParams.entity.layoutIds,
-          visualConfigurations: (
-            messageParams.entity.c_visualConfigurations || []
-          ).map((visualConfig: any) => {
-            return {
-              template: visualConfig.template,
-              data: jsonFromEscapedJsonString(visualConfig.data),
-            };
-          }),
-          layouts: (messageParams.entity.c_pages_layouts || []).map(
-            (layout: any) => {
-              return {
-                id: layout.id,
-              };
-            }
-          ),
-        }
-      : undefined,
     layoutId: messageParams.layoutId,
-    layouts: layouts,
     role: messageParams.role,
     templateId: messageParams.templateId,
-    // saveState: messageParams.saveState
-    //   ? {
-    //       history: jsonFromEscapedJsonString(messageParams.saveState.History),
-    //       hash: messageParams.saveState.Hash,
-    //     }
-    //   : undefined,
-    // visualConfigurationData: JSON.parse(
-    //   messageParams?.visualConfigData?.visualConfigurationData
-    // ),
-    // visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
-    // entityDocumentData: messageParams?.entityDocumentData,
-    // entityDocumentDataStatus: messageParams.entityDocumentDataStatus,
   };
 };
 
