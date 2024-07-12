@@ -50,6 +50,7 @@ const Edit: () => JSX.Element = () => {
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [messagePayload, setMessagePayload] = useState<MessagePayload>();
+  const [entityDocument, setEntityDocument] = useState<any>(); //json data
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateStatus, setSaveStateStatus] = useState<Status>("pending");
 
@@ -223,6 +224,15 @@ const Edit: () => JSX.Element = () => {
     send({ status: "success", payload: { message: "saveState received" } });
   });
 
+  useReceiveMessage("getEntityDocument", TARGET_ORIGINS, (send, payload) => {
+    console.log("getEntityDocument from parent:", payload);
+    setEntityDocument(payload);
+    send({
+      status: "success",
+      payload: { message: "getEntityDocument received" },
+    });
+  });
+
   useReceiveMessage("getPayload", TARGET_ORIGINS, (send, payload) => {
     console.log("payload from parent:", payload);
     const messagePayloadTemp: MessagePayload =
@@ -255,6 +265,7 @@ const Edit: () => JSX.Element = () => {
     !puckData ||
     !puckConfig ||
     !messagePayload ||
+    !entityDocument ||
     saveStateStatus !== "success";
 
   const progress: number =
@@ -262,8 +273,9 @@ const Edit: () => JSX.Element = () => {
       (!!puckConfig +
         !!puckData +
         !!messagePayload +
+        !!entityDocument +
         (saveStateStatus === "success"))) /
-    4;
+    5;
 
   if (typeof navigator === "undefined") {
     return <></>;
@@ -273,27 +285,25 @@ const Edit: () => JSX.Element = () => {
 
   return (
     <>
-      <DocumentProvider value={messagePayload?.entityDocumentData}>
-        {!isLoading ? (
-          <>
-            <Editor
-              selectedTemplateId={messagePayload.templateId}
-              puckConfig={puckConfig}
-              puckData={puckData}
-              role={messagePayload.role}
-              isLoading={isLoading}
-              postParentMessage={postParentMessage}
-              index={historyIndex}
-              histories={histories}
-              clearHistory={clearHistory}
-              messagePayload={messagePayload}
-              saveSaveState={saveSaveState}
-            />
-          </>
-        ) : (
-          <LoadingScreen progress={progress} message={loadingMessage} />
-        )}
-      </DocumentProvider>
+      {!isLoading ? (
+        <DocumentProvider value={entityDocument}>
+          <Editor
+            selectedTemplateId={messagePayload.templateId}
+            puckConfig={puckConfig}
+            puckData={puckData}
+            role={messagePayload.role}
+            isLoading={isLoading}
+            postParentMessage={postParentMessage}
+            index={historyIndex}
+            histories={histories}
+            clearHistory={clearHistory}
+            messagePayload={messagePayload}
+            saveSaveState={saveSaveState}
+          />
+        </DocumentProvider>
+      ) : (
+        <LoadingScreen progress={progress} message={loadingMessage} />
+      )}
       <Toaster closeButton richColors />
     </>
   );

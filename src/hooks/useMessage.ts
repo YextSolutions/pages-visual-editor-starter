@@ -176,7 +176,7 @@ const useListenAndRespondMessage = (
   const onWatchEventHandler = useCallback(
     ({ origin, source, data }: MessageEvent) => {
       // Ignore React Dev Tools messages
-      if (data.source === "react-devtools-content-script") {
+      if (data.source?.startsWith("react-devtools")) {
         return;
       }
       if (!targetOrigins.includes(origin)) {
