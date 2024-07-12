@@ -111,7 +111,7 @@ const Edit: () => JSX.Element = () => {
 
   const loadPuckDataUsingHistory = useCallback(() => {
     if (
-      !messagePayload.visualConfigurationData ||
+      !messagePayload?.visualConfigurationData ||
       saveStateStatus !== "success"
     ) {
       return;
