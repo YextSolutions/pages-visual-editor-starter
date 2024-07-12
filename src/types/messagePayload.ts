@@ -46,8 +46,8 @@ export type MessagePayload = {
   layouts: Layout[];
   role: string;
   templateId: string;
-  visualConfigurationData: string;
-  visualConfigurationDataStatus: "successful" | "pending" | "error";
+  // visualConfigurationData: string;
+  // visualConfigurationDataStatus: "successful" | "pending" | "error";
   // entityDocumentData: any; // json object
   // entityDocumentDataStatus: "successful" | "pending" | "error";
 };
@@ -104,10 +104,10 @@ export const convertRawMessageToObject = (
     //       hash: messageParams.saveState.Hash,
     //     }
     //   : undefined,
-    visualConfigurationData: JSON.parse(
-      messageParams?.visualConfigData?.visualConfigurationData
-    ),
-    visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
+    // visualConfigurationData: JSON.parse(
+    //   messageParams?.visualConfigData?.visualConfigurationData
+    // ),
+    // visualConfigurationDataStatus: messageParams.visualConfigDataStatus,
     // entityDocumentData: messageParams?.entityDocumentData,
     // entityDocumentDataStatus: messageParams.entityDocumentDataStatus,
   };

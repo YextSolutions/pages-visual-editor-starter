@@ -50,9 +50,9 @@ const Edit: () => JSX.Element = () => {
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [messagePayload, setMessagePayload] = useState<MessagePayload>();
-  const [entityDocument, setEntityDocument] = useState<any>(); //json data
+  const [visualConfigurationData, setVisualConfigurationData] = useState<any>(); // json data
+  const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [saveState, setSaveState] = useState<SaveState>();
-  const [saveStateStatus, setSaveStateStatus] = useState<Status>("pending");
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -110,10 +110,7 @@ const Edit: () => JSX.Element = () => {
   }, [messagePayload, saveState]);
 
   const loadPuckDataUsingHistory = useCallback(() => {
-    if (
-      !messagePayload?.visualConfigurationData ||
-      saveStateStatus !== "success"
-    ) {
+    if (!visualConfigurationData || !saveState || !messagePayload) {
       return;
     }
 
@@ -126,22 +123,7 @@ const Edit: () => JSX.Element = () => {
         messagePayload.layoutId,
         messagePayload.entity?.id
       );
-      const payloadPuckData = messagePayload?.visualConfigurationData;
-      const payloadPuckDataStatus =
-        messagePayload?.visualConfigurationDataStatus;
-      console.log("messagePayload", messagePayload);
-      if (!payloadPuckData && payloadPuckDataStatus === "successful") {
-        throw new Error("Could not find VisualConfiguration to load");
-      }
-      if (payloadPuckDataStatus === "error") {
-        throw new Error("An error occurred while fetching visual config data");
-      }
-
-      console.log("payloadPuckData", payloadPuckData);
-      console.log("payloadPuckDataStatus", payloadPuckDataStatus);
-
-      setPuckData(payloadPuckData);
-      setPuckDataStatus(payloadPuckDataStatus);
+      setPuckData(visualConfigurationData);
       return;
     }
 
@@ -220,7 +202,6 @@ const Edit: () => JSX.Element = () => {
   useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
     console.log("saveState from parent:", payload);
     setSaveState(payload);
-    setSaveStateStatus("success");
     send({ status: "success", payload: { message: "saveState received" } });
   });
 
@@ -232,6 +213,19 @@ const Edit: () => JSX.Element = () => {
       payload: { message: "getEntityDocument received" },
     });
   });
+
+  useReceiveMessage(
+    "getVisualConfigurationData",
+    TARGET_ORIGINS,
+    (send, payload) => {
+      console.log("getVisualConfigurationData from parent:", payload);
+      setVisualConfigurationData(jsonFromEscapedJsonString(payload));
+      send({
+        status: "success",
+        payload: { message: "getVisualConfigurationData received" },
+      });
+    }
+  );
 
   useReceiveMessage("getPayload", TARGET_ORIGINS, (send, payload) => {
     console.log("payload from parent:", payload);
@@ -266,7 +260,8 @@ const Edit: () => JSX.Element = () => {
     !puckConfig ||
     !messagePayload ||
     !entityDocument ||
-    saveStateStatus !== "success";
+    !saveState ||
+    !visualConfigurationData;
 
   const progress: number =
     (100 *
@@ -274,8 +269,9 @@ const Edit: () => JSX.Element = () => {
         !!puckData +
         !!messagePayload +
         !!entityDocument +
-        (saveStateStatus === "success"))) /
-    5;
+        !!saveState +
+        !!visualConfigurationData)) /
+    6;
 
   if (typeof navigator === "undefined") {
     return <></>;
