@@ -45,11 +45,10 @@ type Status = "pending" | "error" | "success";
 // Render the editor
 const Edit: () => JSX.Element = () => {
   const [puckData, setPuckData] = useState<Data>();
-  const [puckDataStatus, setPuckDataStatus] = useState<Status>("pending");
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<Config>();
-  const [messagePayload, setMessagePayload] = useState<MessagePayload>();
+  const [messagePayload, setMessagePayload] = useState<any>();
   const [visualConfigurationData, setVisualConfigurationData] = useState<any>(); // json data
   const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [saveState, setSaveState] = useState<SaveState>();
@@ -103,11 +102,8 @@ const Edit: () => JSX.Element = () => {
       isFirstRender.current = false; // toggle flag after first render/mounting
       return;
     }
-    console.log(
-      "messagePayload or saveState changed, calling loadPuckDataUsingHistory"
-    );
     loadPuckDataUsingHistory(); // do something after state has updated
-  }, [messagePayload, saveState]);
+  }, [messagePayload, saveState, visualConfigurationData]);
 
   const loadPuckDataUsingHistory = useCallback(() => {
     if (!visualConfigurationData || !saveState || !messagePayload) {
@@ -178,7 +174,6 @@ const Edit: () => JSX.Element = () => {
     setHistories,
     setHistoryIndex,
     setPuckData,
-    setPuckDataStatus,
     clearLocalStorage,
     getLocalStorageKey,
   ]);
@@ -231,13 +226,9 @@ const Edit: () => JSX.Element = () => {
 
   useReceiveMessage("getPayload", TARGET_ORIGINS, (send, payload) => {
     console.log("payload from parent:", payload);
-    const messagePayloadTemp: MessagePayload =
-      convertRawMessageToObject(payload);
-    console.log("payload after convert", messagePayloadTemp);
-
-    const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
+    const puckConfig = puckConfigs.get(payload.templateId);
     setPuckConfig(puckConfig);
-    setMessagePayload(messagePayloadTemp);
+    setMessagePayload(payload);
     send({ status: "success", payload: { message: "payload received" } });
   });
 
@@ -274,12 +265,6 @@ const Edit: () => JSX.Element = () => {
         !!saveState +
         !!visualConfigurationData)) /
     6;
-
-  if (typeof navigator === "undefined") {
-    return <></>;
-  }
-
-  console.log("edit.tsx rendering");
 
   return (
     <>
