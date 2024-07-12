@@ -242,12 +242,6 @@ const Edit: () => JSX.Element = () => {
     TARGET_ORIGINS
   );
 
-  const loadingMessage = !puckConfig
-    ? "Loading configuration.."
-    : !puckData || puckDataStatus === "pending"
-      ? "Loading data.."
-      : "";
-
   const isLoading =
     !puckData ||
     !puckConfig ||
@@ -285,7 +279,7 @@ const Edit: () => JSX.Element = () => {
           />
         </DocumentProvider>
       ) : (
-        <LoadingScreen progress={progress} message={loadingMessage} />
+        <LoadingScreen progress={progress} />
       )}
       <Toaster closeButton richColors />
     </>
