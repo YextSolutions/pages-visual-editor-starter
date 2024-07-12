@@ -219,7 +219,7 @@ const Edit: () => JSX.Element = () => {
     TARGET_ORIGINS,
     (send, payload) => {
       console.log("getVisualConfigurationData from parent:", payload);
-      setVisualConfigurationData(jsonFromEscapedJsonString(payload));
+      setVisualConfigurationData(payload);
       send({
         status: "success",
         payload: { message: "getVisualConfigurationData received" },
