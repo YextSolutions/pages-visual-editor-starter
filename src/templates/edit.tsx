@@ -7,7 +7,11 @@ import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
 import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import { jsonFromEscapedJsonString, SaveState } from "../types/messagePayload";
+import {
+  jsonFromEscapedJsonString,
+  SaveState,
+  TemplateMetadata,
+} from "../types/messagePayload";
 import { type History, type Data, type Config } from "@measured/puck";
 import { useReceiveMessage, useSendMessageToParent } from "../hooks/useMessage";
 
@@ -35,15 +39,13 @@ const TARGET_ORIGINS = [
   "https://app.eu.yext.com",
 ];
 
-type Status = "pending" | "error" | "success";
-
 // Render the editor
 const Edit: () => JSX.Element = () => {
   const [puckData, setPuckData] = useState<Data>();
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [puckConfig, setPuckConfig] = useState<Config>();
-  const [messagePayload, setMessagePayload] = useState<any>();
+  const [templateMetadata, setTemplateMetadata] = useState<TemplateMetadata>();
   const [visualConfigurationData, setVisualConfigurationData] = useState<any>(); // json data
   const [visualConfigurationDataFetched, setVisualConfigurationDataFetched] =
     useState<boolean>(false); // needed because visualConfigurationData can be empty
@@ -95,60 +97,46 @@ const Edit: () => JSX.Element = () => {
       return;
     }
     loadPuckDataUsingHistory(); // do something after state has updated
-  }, [messagePayload, saveState, visualConfigurationData]);
+  }, [templateMetadata, saveState, visualConfigurationData]);
 
   const loadPuckDataUsingHistory = useCallback(() => {
     if (
       !visualConfigurationDataFetched ||
       !saveStateFetched ||
-      !messagePayload
+      !templateMetadata
     ) {
       return;
     }
-    console.log("load puck data using history");
 
     // Nothing in save_state table, start fresh from Content
     if (!saveState) {
-      console.log("not using save state");
       clearLocalStorage(
-        messagePayload.role,
-        messagePayload.templateId,
-        messagePayload.layoutId,
-        messagePayload.entity?.id
+        templateMetadata.role,
+        templateMetadata.templateId,
+        templateMetadata.layoutId,
+        templateMetadata.entity?.id
       );
-      console.log("setting puckData", visualConfigurationData);
+
       setPuckData(visualConfigurationData);
       return;
     }
 
-    console.log("using save state");
-    console.log("raw history", saveState.history);
-    console.log(
-      "escaped history",
-      jsonFromEscapedJsonString(saveState.history)
-    );
     // The history stored has both "ui" and "data" keys, but PuckData
     // is only concerned with the "data" portion.
-    console.log(
-      "setting puckData",
-      jsonFromEscapedJsonString(saveState.history).data
-    );
-    setPuckData(jsonFromEscapedJsonString(saveState.history).data); // TODO - fix the payload
-    console.log("puck data set");
+    setPuckData(jsonFromEscapedJsonString(saveState.history).data);
 
     // Check localStorage for existing Puck history
     const localHistoryArray = window.localStorage.getItem(
       getLocalStorageKey(
-        messagePayload.role,
-        messagePayload.templateId,
-        messagePayload.layoutId,
-        messagePayload.entity?.id
+        templateMetadata.role,
+        templateMetadata.templateId,
+        templateMetadata.layoutId,
+        templateMetadata.entity?.id
       )
     );
 
     // No localStorage
     if (!localHistoryArray) {
-      console.log("no localStorage");
       return;
     }
 
@@ -158,19 +146,17 @@ const Edit: () => JSX.Element = () => {
 
     // If local storage reset Puck history to it
     if (localHistoryIndex !== -1) {
-      console.log("resetting histories");
       setHistoryIndex(localHistoryIndex);
       setHistories(JSON.parse(localHistoryArray));
       return;
     }
 
-    console.log("clearing localStorage");
     // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
     clearLocalStorage(
-      messagePayload.role,
-      messagePayload.templateId,
-      messagePayload.layoutId,
-      messagePayload.entity?.id
+      templateMetadata.role,
+      templateMetadata.templateId,
+      templateMetadata.layoutId,
+      templateMetadata.entity?.id
     );
   }, [
     setHistories,
@@ -190,14 +176,12 @@ const Edit: () => JSX.Element = () => {
   }, []);
 
   useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
-    console.log("saveState from parent:", payload);
     setSaveState(payload);
     setSaveStateFetched(true);
     send({ status: "success", payload: { message: "saveState received" } });
   });
 
   useReceiveMessage("getEntityDocument", TARGET_ORIGINS, (send, payload) => {
-    console.log("getEntityDocument from parent:", payload);
     setEntityDocument(payload);
     send({
       status: "success",
@@ -209,10 +193,6 @@ const Edit: () => JSX.Element = () => {
     "getVisualConfigurationData",
     TARGET_ORIGINS,
     (send, payload) => {
-      console.log(
-        "getVisualConfigurationData from parent:",
-        jsonFromEscapedJsonString(payload.visualConfigurationData)
-      );
       setVisualConfigurationData(
         jsonFromEscapedJsonString(payload.visualConfigurationData)
       );
@@ -224,11 +204,10 @@ const Edit: () => JSX.Element = () => {
     }
   );
 
-  useReceiveMessage("getPayload", TARGET_ORIGINS, (send, payload) => {
-    console.log("payload from parent:", payload);
+  useReceiveMessage("getTemplateMetadata", TARGET_ORIGINS, (send, payload) => {
     const puckConfig = puckConfigs.get(payload.templateId);
     setPuckConfig(puckConfig);
-    setMessagePayload(payload);
+    setTemplateMetadata(payload);
     send({ status: "success", payload: { message: "payload received" } });
   });
 
@@ -250,7 +229,7 @@ const Edit: () => JSX.Element = () => {
   const isLoading =
     !puckData ||
     !puckConfig ||
-    !messagePayload ||
+    !templateMetadata ||
     !entityDocument ||
     !saveStateFetched ||
     !visualConfigurationDataFetched;
@@ -259,7 +238,7 @@ const Edit: () => JSX.Element = () => {
     (100 *
       (!!puckConfig +
         !!puckData +
-        !!messagePayload +
+        !!templateMetadata +
         !!entityDocument +
         saveStateFetched +
         visualConfigurationDataFetched)) /
@@ -270,15 +249,13 @@ const Edit: () => JSX.Element = () => {
       {!isLoading ? (
         <DocumentProvider value={entityDocument}>
           <Editor
-            selectedTemplateId={messagePayload.templateId}
             puckConfig={puckConfig}
             puckData={puckData}
-            role={messagePayload.role}
             isLoading={isLoading}
             index={historyIndex}
             histories={histories}
             clearHistory={clearHistory}
-            messagePayload={messagePayload}
+            templateMetadata={templateMetadata}
             saveState={saveState}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
