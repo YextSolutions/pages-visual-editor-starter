@@ -3,8 +3,9 @@ import "@measured/puck/puck.css";
 import { customHeader } from "./components/Header";
 import { useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import { SaveState, TemplateMetadata } from "../types/messagePayload";
+import { TemplateMetadata } from "../types/templateMetadata";
 import { EntityFieldProvider } from "../components/EntityField";
+import { SaveState } from "../types/saveState";
 
 export interface EditorProps {
   puckConfig: Config;
@@ -68,7 +69,7 @@ export const Editor = ({
               templateMetadata.role,
               templateMetadata.templateId,
               templateMetadata.layoutId,
-              templateMetadata.entity?.id
+              templateMetadata.entityId
             ),
             JSON.stringify(histories)
           );
@@ -89,7 +90,7 @@ export const Editor = ({
       templateMetadata.role,
       templateMetadata.templateId,
       templateMetadata.layoutId,
-      templateMetadata.entity?.id
+      templateMetadata.entityId
     );
   };
 

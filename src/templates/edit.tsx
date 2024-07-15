@@ -7,13 +7,10 @@ import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
 import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import {
-  jsonFromEscapedJsonString,
-  SaveState,
-  TemplateMetadata,
-} from "../types/messagePayload";
+import { TemplateMetadata } from "../types/templateMetadata";
 import { type History, type Data, type Config } from "@measured/puck";
 import { useReceiveMessage, useSendMessageToParent } from "../hooks/useMessage";
+import { SaveState } from "../types/saveState";
 
 export const Role = {
   GLOBAL: "global",
@@ -114,7 +111,7 @@ const Edit: () => JSX.Element = () => {
         templateMetadata.role,
         templateMetadata.templateId,
         templateMetadata.layoutId,
-        templateMetadata.entity?.id
+        templateMetadata.entityId
       );
 
       setPuckData(visualConfigurationData);
@@ -131,7 +128,7 @@ const Edit: () => JSX.Element = () => {
         templateMetadata.role,
         templateMetadata.templateId,
         templateMetadata.layoutId,
-        templateMetadata.entity?.id
+        templateMetadata.entityId
       )
     );
 
@@ -156,7 +153,7 @@ const Edit: () => JSX.Element = () => {
       templateMetadata.role,
       templateMetadata.templateId,
       templateMetadata.layoutId,
-      templateMetadata.entity?.id
+      templateMetadata.entityId
     );
   }, [
     setHistories,
@@ -271,3 +268,7 @@ const Edit: () => JSX.Element = () => {
 };
 
 export default Edit;
+
+const jsonFromEscapedJsonString = (escapedJsonString: string) => {
+  return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
+};
