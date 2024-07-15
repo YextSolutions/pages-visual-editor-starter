@@ -3,9 +3,8 @@ import "@measured/puck/puck.css";
 import { customHeader } from "./components/Header";
 import { useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import { MessagePayload } from "../types/messagePayload";
+import { MessagePayload, SaveState } from "../types/messagePayload";
 import { EntityFieldProvider } from "../components/EntityField";
-import { useSendMessageToParent } from "../hooks/useMessage";
 
 export interface EditorProps {
   selectedTemplateId: string;
@@ -13,7 +12,6 @@ export interface EditorProps {
   puckData: any; // json object
   role: string;
   isLoading: boolean;
-  postParentMessage: (args: any) => void;
   histories: Array<{ data: any; id: string }>;
   index: number;
   clearHistory: (
@@ -23,7 +21,10 @@ export interface EditorProps {
     entityId?: number
   ) => void;
   messagePayload: MessagePayload;
+  saveState: SaveState;
   saveSaveState: (data: any) => void;
+  saveVisualConfigData: (data: any) => void;
+  deleteSaveState: () => void;
 }
 
 // Render Puck editor
@@ -33,12 +34,14 @@ export const Editor = ({
   puckData,
   role,
   isLoading,
-  postParentMessage,
   histories,
   index,
   clearHistory,
   messagePayload,
+  saveState,
   saveSaveState,
+  saveVisualConfigData,
+  deleteSaveState,
 }: EditorProps) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
@@ -56,35 +59,37 @@ export const Editor = ({
       ) {
         historyIndex.current = index;
 
-        saveSaveState({
-          payload: {
-            hash: histories[index].id,
-            history: JSON.stringify(histories[index].data),
-          },
-        });
+        console.log("saveState hash", saveState.hash);
 
-        window.localStorage.setItem(
-          getLocalStorageKey(
-            role,
-            selectedTemplateId,
-            messagePayload.layoutId,
-            messagePayload.entity?.id
-          ),
-          JSON.stringify(histories)
-        );
+        if (saveState.hash !== histories[index].id) {
+          console.log("SAVING STATE");
+          saveSaveState({
+            payload: {
+              hash: histories[index].id,
+              history: JSON.stringify(histories[index].data),
+            },
+          });
+
+          window.localStorage.setItem(
+            getLocalStorageKey(
+              role,
+              selectedTemplateId,
+              messagePayload.layoutId,
+              messagePayload.entity?.id
+            ),
+            JSON.stringify(histories)
+          );
+        }
       }
-
+      console.log("NOT SAVING STATE");
       if (index === -1 && historyIndex.current !== index) {
+        console.log("DELETING SAVING STATE");
         historyIndex.current = index;
 
-        postParentMessage({
-          clearLocalChanges: true,
-          layoutId: messagePayload.layoutId,
-          entityId: messagePayload.entity?.id,
-        });
+        deleteSaveState();
       }
     },
-    [messagePayload, postParentMessage, getLocalStorageKey]
+    [messagePayload, getLocalStorageKey]
   );
 
   const handleClearLocalChanges = () => {
@@ -97,13 +102,9 @@ export const Editor = ({
   };
 
   const handleSave = async (data: Data) => {
-    const templateData = JSON.stringify(data);
-    postParentMessage({
-      saveVisualConfigData: true,
-      templateId: selectedTemplateId,
-      layoutId: messagePayload.layoutId,
-      entityId: messagePayload.entity?.id,
-      VisualConfigurationData: templateData,
+    console.log("handle save", data);
+    saveVisualConfigData({
+      payload: { visualConfigurationData: JSON.stringify(data) },
     });
   };
 

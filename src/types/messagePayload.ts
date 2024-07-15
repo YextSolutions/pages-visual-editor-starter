@@ -40,24 +40,13 @@ export type SaveState = {
   hash: string;
 };
 
-export type MessagePayload = {
+export type TemplateMetadata = {
   role: string;
   templateId: string;
   layoutId?: number;
   entity?: Entity;
 };
 
-export const convertRawMessageToObject = (
-  messageParams: any
-): MessagePayload => {
-  return {
-    layoutId: messageParams.layoutId,
-    role: messageParams.role,
-    templateId: messageParams.templateId,
-  };
-};
-
-// TODO: Remove this when the frontend has been fixed to not string escape
 export const jsonFromEscapedJsonString = (escapedJsonString: string) => {
   return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
 };

@@ -65,7 +65,7 @@ export const useSendMessageToIFrame = (
     statusSetter(setStatus)
   );
 
-  const sendToIFrame = (data: PostMessage) => {
+  const sendToIFrame = (data?: PostMessage) => {
     if (iframeRef.current) {
       setStatus("pending");
       for (const targetOrigin of targetOrigins) {
@@ -99,7 +99,7 @@ export const useSendMessageToParent = (
     statusSetter(setStatus)
   );
 
-  const sendToParent = (data: PostMessage) => {
+  const sendToParent = (data?: PostMessage) => {
     if (!window.parent) {
       throw new Error("Parent window has closed");
     }

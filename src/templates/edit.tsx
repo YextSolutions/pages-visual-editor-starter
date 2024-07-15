@@ -7,12 +7,7 @@ import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
 import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import {
-  convertRawMessageToObject,
-  jsonFromEscapedJsonString,
-  MessagePayload,
-  SaveState,
-} from "../types/messagePayload";
+import { jsonFromEscapedJsonString, SaveState } from "../types/messagePayload";
 import { type History, type Data, type Config } from "@measured/puck";
 import { useReceiveMessage, useSendMessageToParent } from "../hooks/useMessage";
 
@@ -50,8 +45,11 @@ const Edit: () => JSX.Element = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [messagePayload, setMessagePayload] = useState<any>();
   const [visualConfigurationData, setVisualConfigurationData] = useState<any>(); // json data
+  const [visualConfigurationDataFetched, setVisualConfigurationDataFetched] =
+    useState<boolean>(false); // needed because visualConfigurationData can be empty
   const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [saveState, setSaveState] = useState<SaveState>();
+  const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -87,13 +85,7 @@ const Edit: () => JSX.Element = () => {
     entityId?: number
   ) => {
     clearLocalStorage(role, templateId, layoutId, entityId);
-    deleteSaveState({
-      payload: {
-        clearLocalChanges: true,
-        layoutId: layoutId,
-        entityId: entityId,
-      },
-    });
+    deleteSaveState();
   };
 
   const isFirstRender = useRef(true);
@@ -106,9 +98,14 @@ const Edit: () => JSX.Element = () => {
   }, [messagePayload, saveState, visualConfigurationData]);
 
   const loadPuckDataUsingHistory = useCallback(() => {
-    if (!visualConfigurationData || !saveState || !messagePayload) {
+    if (
+      !visualConfigurationDataFetched ||
+      !saveStateFetched ||
+      !messagePayload
+    ) {
       return;
     }
+    console.log("load puck data using history");
 
     // Nothing in save_state table, start fresh from Content
     if (!saveState) {
@@ -119,19 +116,24 @@ const Edit: () => JSX.Element = () => {
         messagePayload.layoutId,
         messagePayload.entity?.id
       );
+      console.log("setting puckData", visualConfigurationData);
       setPuckData(visualConfigurationData);
       return;
     }
 
     console.log("using save state");
-    console.log("raw history", saveState.History);
+    console.log("raw history", saveState.history);
     console.log(
       "escaped history",
-      jsonFromEscapedJsonString(saveState.History)
+      jsonFromEscapedJsonString(saveState.history)
     );
     // The history stored has both "ui" and "data" keys, but PuckData
     // is only concerned with the "data" portion.
-    setPuckData(jsonFromEscapedJsonString(saveState.History).data); // TODO - fix the payload
+    console.log(
+      "setting puckData",
+      jsonFromEscapedJsonString(saveState.history).data
+    );
+    setPuckData(jsonFromEscapedJsonString(saveState.history).data); // TODO - fix the payload
     console.log("puck data set");
 
     // Check localStorage for existing Puck history
@@ -151,7 +153,7 @@ const Edit: () => JSX.Element = () => {
     }
 
     const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-      (item: any) => item.id === saveState?.Hash // TODO - fix the payload
+      (item: any) => item.id === saveState?.hash
     );
 
     // If local storage reset Puck history to it
@@ -178,13 +180,6 @@ const Edit: () => JSX.Element = () => {
     getLocalStorageKey,
   ]);
 
-  const postParentMessage = (message: any) => {
-    for (const targetOrigin of TARGET_ORIGINS) {
-      console.log("posting message", message);
-      window.parent.postMessage(message, targetOrigin);
-    }
-  };
-
   const { sendToParent: iFrameLoaded } = useSendMessageToParent(
     "iFrameLoaded",
     TARGET_ORIGINS
@@ -197,6 +192,7 @@ const Edit: () => JSX.Element = () => {
   useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
     console.log("saveState from parent:", payload);
     setSaveState(payload);
+    setSaveStateFetched(true);
     send({ status: "success", payload: { message: "saveState received" } });
   });
 
@@ -213,10 +209,14 @@ const Edit: () => JSX.Element = () => {
     "getVisualConfigurationData",
     TARGET_ORIGINS,
     (send, payload) => {
-      console.log("getVisualConfigurationData from parent:", payload);
+      console.log(
+        "getVisualConfigurationData from parent:",
+        jsonFromEscapedJsonString(payload.visualConfigurationData)
+      );
       setVisualConfigurationData(
         jsonFromEscapedJsonString(payload.visualConfigurationData)
       );
+      setVisualConfigurationDataFetched(true);
       send({
         status: "success",
         payload: { message: "getVisualConfigurationData received" },
@@ -242,13 +242,18 @@ const Edit: () => JSX.Element = () => {
     TARGET_ORIGINS
   );
 
+  const { sendToParent: saveVisualConfigData } = useSendMessageToParent(
+    "saveVisualConfigData",
+    TARGET_ORIGINS
+  );
+
   const isLoading =
     !puckData ||
     !puckConfig ||
     !messagePayload ||
     !entityDocument ||
-    !saveState ||
-    !visualConfigurationData;
+    !saveStateFetched ||
+    !visualConfigurationDataFetched;
 
   const progress: number =
     (100 *
@@ -256,8 +261,8 @@ const Edit: () => JSX.Element = () => {
         !!puckData +
         !!messagePayload +
         !!entityDocument +
-        !!saveState +
-        !!visualConfigurationData)) /
+        saveStateFetched +
+        visualConfigurationDataFetched)) /
     6;
 
   return (
@@ -270,12 +275,14 @@ const Edit: () => JSX.Element = () => {
             puckData={puckData}
             role={messagePayload.role}
             isLoading={isLoading}
-            postParentMessage={postParentMessage}
             index={historyIndex}
             histories={histories}
             clearHistory={clearHistory}
             messagePayload={messagePayload}
+            saveState={saveState}
             saveSaveState={saveSaveState}
+            saveVisualConfigData={saveVisualConfigData}
+            deleteSaveState={deleteSaveState}
           />
         </DocumentProvider>
       ) : (
