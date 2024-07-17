@@ -2,15 +2,15 @@ import "../index.css";
 import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
 import { DocumentProvider } from "../hooks/useDocument";
 import { Editor } from "../puck/editor";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
 import { Toaster } from "../puck/ui/Toaster";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import {
-  convertRawMessageToObject,
-  MessagePayload,
-} from "../types/messagePayload";
+import { TemplateMetadata } from "../types/templateMetadata";
+import { type History, type Data, type Config } from "@measured/puck";
+import { useReceiveMessage, useSendMessageToParent } from "../hooks/useMessage";
+import { SaveState } from "../types/saveState";
 
 export const Role = {
   GLOBAL: "global",
@@ -36,21 +36,19 @@ const TARGET_ORIGINS = [
   "https://app.eu.yext.com",
 ];
 
-// TODO: Import from Puck once it's exported
-export type History<D = any> = {
-  id: string;
-  data: D;
-};
-
 // Render the editor
 const Edit: () => JSX.Element = () => {
-  const [mounted, setMounted] = useState<boolean>(false);
-  const [puckData, setPuckData] = useState<any>({}); // json object
-  const [puckDataStatus, setPuckDataStatus] = useState<"successful" | "pending" | "error">("pending");
+  const [puckData, setPuckData] = useState<Data>();
   const [histories, setHistories] = useState<History<any>[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(0);
-  const [puckConfig, setPuckConfig] = useState<any>();
-  const [messagePayload, setMessagePayload] = useState<MessagePayload>();
+  const [puckConfig, setPuckConfig] = useState<Config>();
+  const [templateMetadata, setTemplateMetadata] = useState<TemplateMetadata>();
+  const [visualConfigurationData, setVisualConfigurationData] = useState<any>(); // json data
+  const [visualConfigurationDataFetched, setVisualConfigurationDataFetched] =
+    useState<boolean>(false); // needed because visualConfigurationData can be empty
+  const [entityDocument, setEntityDocument] = useState<any>(); // json data
+  const [saveState, setSaveState] = useState<SaveState>();
+  const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -86,162 +84,191 @@ const Edit: () => JSX.Element = () => {
     entityId?: number
   ) => {
     clearLocalStorage(role, templateId, layoutId, entityId);
-    postParentMessage({
-      clearLocalChanges: true,
-      layoutId: layoutId,
-      entityId: entityId,
-    });
+    deleteSaveState();
   };
 
-  const loadPuckDataUsingHistory = useCallback(
-    (messagePayload: MessagePayload) => {
-      // Nothing in save_state table, start fresh from Content
-      if (!messagePayload.saveState) {
-        clearLocalStorage(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        );
-        const payloadPuckData = messagePayload?.visualConfigurationData;
-        const payloadPuckDataStatus = messagePayload?.visualConfigurationDataStatus;
-        if (!payloadPuckData && payloadPuckDataStatus === "successful") {
-          throw new Error("Could not find VisualConfiguration to load");
-        }
-        if (payloadPuckDataStatus === "error") {
-          throw new Error("An error occurred while fetching visual config data");
-        }
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false; // toggle flag after first render/mounting
+      return;
+    }
+    loadPuckDataUsingHistory(); // do something after state has updated
+  }, [templateMetadata, saveState, visualConfigurationData]);
 
-        setPuckData(payloadPuckData);
-        setPuckDataStatus(payloadPuckDataStatus);
-        return;
-      }
+  const loadPuckDataUsingHistory = useCallback(() => {
+    if (
+      !visualConfigurationDataFetched ||
+      !saveStateFetched ||
+      !templateMetadata
+    ) {
+      return;
+    }
 
-      // The history stored has both "ui" and "data" keys, but PuckData
-      // is only concerned with the "data" portion.
-      setPuckData(messagePayload.saveState.history.data);
-
-      // Check localStorage for existing Puck history
-      const localHistoryArray = window.localStorage.getItem(
-        getLocalStorageKey(
-          messagePayload.role,
-          messagePayload.templateId,
-          messagePayload.layoutId,
-          messagePayload.entity?.id
-        )
-      );
-
-      // No localStorage
-      if (!localHistoryArray) {
-        return;
-      }
-
-      const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
-        (item: any) => item.id === messagePayload.saveState?.hash
-      );
-
-      // If local storage reset Puck history to it
-      if (localHistoryIndex !== -1) {
-        setHistoryIndex(localHistoryIndex);
-        setHistories(JSON.parse(localHistoryArray));
-        return;
-      }
-
-      // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
+    // Nothing in save_state table, start fresh from Content
+    if (!saveState) {
       clearLocalStorage(
-        messagePayload.role,
-        messagePayload.templateId,
-        messagePayload.layoutId,
-        messagePayload.entity?.id
+        templateMetadata.role,
+        templateMetadata.templateId,
+        templateMetadata.layoutId,
+        templateMetadata.entityId
       );
-    },
-    [
-      setHistories,
-      setHistoryIndex,
-      setPuckData,
-      setPuckDataStatus,
-      clearLocalStorage,
-      getLocalStorageKey,
-    ]
+
+      setPuckData(visualConfigurationData);
+      return;
+    }
+
+    // The history stored has both "ui" and "data" keys, but PuckData
+    // is only concerned with the "data" portion.
+    setPuckData(jsonFromEscapedJsonString(saveState.history).data);
+
+    // Check localStorage for existing Puck history
+    const localHistoryArray = window.localStorage.getItem(
+      getLocalStorageKey(
+        templateMetadata.role,
+        templateMetadata.templateId,
+        templateMetadata.layoutId,
+        templateMetadata.entityId
+      )
+    );
+
+    // No localStorage
+    if (!localHistoryArray) {
+      return;
+    }
+
+    const localHistoryIndex = JSON.parse(localHistoryArray).findIndex(
+      (item: any) => item.id === saveState?.hash
+    );
+
+    // If local storage reset Puck history to it
+    if (localHistoryIndex !== -1) {
+      setHistoryIndex(localHistoryIndex);
+      setHistories(JSON.parse(localHistoryArray));
+      return;
+    }
+
+    // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
+    clearLocalStorage(
+      templateMetadata.role,
+      templateMetadata.templateId,
+      templateMetadata.layoutId,
+      templateMetadata.entityId
+    );
+  }, [
+    setHistories,
+    setHistoryIndex,
+    setPuckData,
+    clearLocalStorage,
+    getLocalStorageKey,
+  ]);
+
+  const { sendToParent: iFrameLoaded } = useSendMessageToParent(
+    "iFrameLoaded",
+    TARGET_ORIGINS
   );
 
-  const postParentMessage = (message: any) => {
-    for (const targetOrigin of TARGET_ORIGINS) {
-      window.parent.postMessage(message, targetOrigin);
-    }
-  };
-
   useEffect(() => {
-    const handleParentMessage = (message: MessageEvent) => {
-      if (!TARGET_ORIGINS.includes(message.origin)) {
-        return;
-      }
-      if (typeof message.data === "object" && message.data.params) {
-        const messagePayloadTemp: MessagePayload = convertRawMessageToObject(
-          message.data.params
-        );
-
-        const puckConfig = puckConfigs.get(messagePayloadTemp.templateId);
-        setPuckConfig(puckConfig);
-        setMessagePayload(messagePayloadTemp);
-        loadPuckDataUsingHistory(messagePayloadTemp);
-      }
-    };
-
-    const listenForParentMessages = () => {
-      window.addEventListener("message", handleParentMessage);
-    };
-
-    setMounted(true);
-    listenForParentMessages();
-    // is this necessary?
-    postParentMessage({ entityId: messagePayload?.entity?.id });
-
-    return () => {
-      window.removeEventListener("message", handleParentMessage);
-    };
+    iFrameLoaded({ payload: { message: "iFrame is loaded" } });
   }, []);
 
-  const loadingMessage = !puckConfig
-    ? "Loading configuration.."
-    : !puckData || puckDataStatus === "pending"
-      ? "Loading data.."
-      : "";
+  useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
+    setSaveState(payload);
+    setSaveStateFetched(true);
+    send({ status: "success", payload: { message: "saveState received" } });
+  });
 
-  const isLoading = !puckData || !puckConfig || !messagePayload;
+  useReceiveMessage("getEntityDocument", TARGET_ORIGINS, (send, payload) => {
+    setEntityDocument(payload);
+    send({
+      status: "success",
+      payload: { message: "getEntityDocument received" },
+    });
+  });
+
+  useReceiveMessage(
+    "getVisualConfigurationData",
+    TARGET_ORIGINS,
+    (send, payload) => {
+      setVisualConfigurationData(
+        jsonFromEscapedJsonString(payload.visualConfigurationData)
+      );
+      setVisualConfigurationDataFetched(true);
+      send({
+        status: "success",
+        payload: { message: "getVisualConfigurationData received" },
+      });
+    }
+  );
+
+  useReceiveMessage("getTemplateMetadata", TARGET_ORIGINS, (send, payload) => {
+    const puckConfig = puckConfigs.get(payload.templateId);
+    setPuckConfig(puckConfig);
+    setTemplateMetadata(payload);
+    send({ status: "success", payload: { message: "payload received" } });
+  });
+
+  const { sendToParent: saveSaveState } = useSendMessageToParent(
+    "saveSaveState",
+    TARGET_ORIGINS
+  );
+
+  const { sendToParent: deleteSaveState } = useSendMessageToParent(
+    "deleteSaveState",
+    TARGET_ORIGINS
+  );
+
+  const { sendToParent: saveVisualConfigData } = useSendMessageToParent(
+    "saveVisualConfigData",
+    TARGET_ORIGINS
+  );
+
+  const isLoading =
+    !puckData ||
+    !puckConfig ||
+    !templateMetadata ||
+    !entityDocument ||
+    !saveStateFetched ||
+    !visualConfigurationDataFetched;
 
   const progress: number =
-    (100 * (!!puckConfig + !!puckData + !!messagePayload)) / 3;
-
-  if (!mounted || typeof navigator === "undefined") {
-    return <></>;
-  }
+    (100 *
+      (!!puckConfig +
+        !!puckData +
+        !!templateMetadata +
+        !!entityDocument +
+        saveStateFetched +
+        visualConfigurationDataFetched)) /
+    6;
 
   return (
     <>
-      <DocumentProvider value={messagePayload?.entityDocumentData}>
-        {!isLoading && !!puckData && !!messagePayload ? (
-          <>
-            <Editor
-              selectedTemplateId={messagePayload.templateId}
-              puckConfig={puckConfig}
-              puckData={puckData}
-              role={messagePayload.role}
-              isLoading={isLoading}
-              postParentMessage={postParentMessage}
-              index={historyIndex}
-              histories={histories}
-              clearHistory={clearHistory}
-              messagePayload={messagePayload}
-            />
-          </>
-        ) : (
-          <LoadingScreen progress={progress} message={loadingMessage} />
-        )}
-      </DocumentProvider>
+      {!isLoading ? (
+        <DocumentProvider value={entityDocument}>
+          <Editor
+            puckConfig={puckConfig}
+            puckData={puckData}
+            isLoading={isLoading}
+            index={historyIndex}
+            histories={histories}
+            clearHistory={clearHistory}
+            templateMetadata={templateMetadata}
+            saveState={saveState}
+            saveSaveState={saveSaveState}
+            saveVisualConfigData={saveVisualConfigData}
+            deleteSaveState={deleteSaveState}
+          />
+        </DocumentProvider>
+      ) : (
+        <LoadingScreen progress={progress} />
+      )}
       <Toaster closeButton richColors />
     </>
   );
 };
 
 export default Edit;
+
+const jsonFromEscapedJsonString = (escapedJsonString: string) => {
+  return JSON.parse(escapedJsonString.replace(/\\"/g, '"'));
+};

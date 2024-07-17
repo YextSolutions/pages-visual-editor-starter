@@ -1,21 +1,16 @@
-import { Puck, Data, Config, usePuck } from "@measured/puck";
+import { Puck, Data, Config, usePuck, type History } from "@measured/puck";
 import "@measured/puck/puck.css";
 import { customHeader } from "./components/Header";
 import { useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-import {
-  MessagePayload,
-} from "../types/messagePayload";
-import { type History } from "../templates/edit";
+import { TemplateMetadata } from "../types/templateMetadata";
 import { EntityFieldProvider } from "../components/EntityField";
+import { SaveState } from "../types/saveState";
 
 export interface EditorProps {
-  selectedTemplateId: string;
   puckConfig: Config;
   puckData: any; // json object
-  role: string;
   isLoading: boolean;
-  postParentMessage: (args: any) => void;
   histories: Array<{ data: any; id: string }>;
   index: number;
   clearHistory: (
@@ -24,25 +19,34 @@ export interface EditorProps {
     layoutId?: number,
     entityId?: number
   ) => void;
-  messagePayload: MessagePayload;
+  templateMetadata: TemplateMetadata;
+  saveState: SaveState;
+  saveSaveState: (data: any) => void;
+  saveVisualConfigData: (data: any) => void;
+  deleteSaveState: () => void;
 }
 
 // Render Puck editor
 export const Editor = ({
-  selectedTemplateId,
   puckConfig,
   puckData,
-  role,
   isLoading,
-  postParentMessage,
   histories,
   index,
   clearHistory,
-  messagePayload,
+  templateMetadata,
+  saveState,
+  saveSaveState,
+  saveVisualConfigData,
+  deleteSaveState,
 }: EditorProps) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
 
+  /**
+   * When the Puck history changes save it to localStorage and set a message
+   * to the parent which saves the state to the VES database.
+   */
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
       if (
@@ -52,54 +56,47 @@ export const Editor = ({
       ) {
         historyIndex.current = index;
 
-        postParentMessage({
-          localChange: true,
-          hash: histories[index].id,
-          history: JSON.stringify(histories[index].data),
-          layoutId: messagePayload.layoutId,
-          entityId: messagePayload.entity?.id,
-        });
-        window.localStorage.setItem(
-          getLocalStorageKey(
-            role,
-            selectedTemplateId,
-            messagePayload.layoutId,
-            messagePayload.entity?.id
-          ),
-          JSON.stringify(histories)
-        );
+        if (saveState.hash !== histories[index].id) {
+          saveSaveState({
+            payload: {
+              hash: histories[index].id,
+              history: JSON.stringify(histories[index].data),
+            },
+          });
+
+          window.localStorage.setItem(
+            getLocalStorageKey(
+              templateMetadata.role,
+              templateMetadata.templateId,
+              templateMetadata.layoutId,
+              templateMetadata.entityId
+            ),
+            JSON.stringify(histories)
+          );
+        }
       }
 
       if (index === -1 && historyIndex.current !== index) {
         historyIndex.current = index;
 
-        postParentMessage({
-          clearLocalChanges: true,
-          layoutId: messagePayload.layoutId,
-          entityId: messagePayload.entity?.id,
-        });
+        deleteSaveState();
       }
     },
-    [messagePayload, postParentMessage, getLocalStorageKey]
+    [templateMetadata, getLocalStorageKey]
   );
 
   const handleClearLocalChanges = () => {
     clearHistory(
-      messagePayload.role,
-      selectedTemplateId,
-      messagePayload.layoutId,
-      messagePayload.entity?.id
+      templateMetadata.role,
+      templateMetadata.templateId,
+      templateMetadata.layoutId,
+      templateMetadata.entityId
     );
   };
 
   const handleSave = async (data: Data) => {
-    const templateData = JSON.stringify(data);
-    postParentMessage({
-      saveVisualConfigData: true,
-      templateId: selectedTemplateId,
-      layoutId: messagePayload.layoutId,
-      entityId: messagePayload.entity?.id,
-      VisualConfigurationData: templateData
+    saveVisualConfigData({
+      payload: { visualConfigurationData: JSON.stringify(data) },
     });
   };
 

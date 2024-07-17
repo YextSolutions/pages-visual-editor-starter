@@ -1,6 +1,12 @@
 import "./puck.css";
-import { Data, usePuck } from "@measured/puck";
-import { PanelLeft, PanelRight, RotateCcw, RotateCw, RectangleEllipsis } from "lucide-react";
+import { Data, usePuck, type History } from "@measured/puck";
+import {
+  PanelLeft,
+  PanelRight,
+  RotateCcw,
+  RotateCw,
+  RectangleEllipsis,
+} from "lucide-react";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -13,7 +19,6 @@ import {
 } from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
 import { useDocument } from "../../hooks/useDocument";
-import { type History } from "../../templates/edit";
 import { Button } from "../ui/button";
 import { useEntityField } from "../../components/EntityField";
 
@@ -25,12 +30,22 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: (data: Data) => Promise<void>,
+  handleSaveData: (data: Data) => Promise<void>
 ) => {
   const entityDocument = useDocument();
   const {
-    history: { back, forward, histories, index, hasFuture, hasPast },
+    history: {
+      back,
+      forward,
+      histories,
+      index,
+      hasFuture,
+      hasPast,
+      setHistories,
+      setHistoryIndex,
+    },
   } = usePuck();
+
   useEffect(() => {
     handleHistoryChange(histories, index);
   }, [index, histories, handleHistoryChange]);
@@ -56,7 +71,11 @@ export const customHeader = (
         </Button>
         <ClearLocalChangesButton
           disabled={histories.length === 0}
-          onClearLocalChanges={handleClearLocalChanges}
+          onClearLocalChanges={() => {
+            handleClearLocalChanges();
+            setHistories([]);
+            setHistoryIndex(-1);
+          }}
         />
         <Button
           variant="outline"
@@ -163,12 +182,8 @@ const ToggleUIButtons = () => {
 const ToggleEntityFields = () => {
   const { toggleTooltips } = useEntityField();
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={toggleTooltips}
-    >
+    <Button variant="ghost" size="icon" onClick={toggleTooltips}>
       <RectangleEllipsis className="sm-icon" />
     </Button>
-  )
-}
+  );
+};
