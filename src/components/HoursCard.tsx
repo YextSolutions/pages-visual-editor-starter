@@ -92,7 +92,7 @@ const HoursCard = ({
     (document) => document?.hours ?? {}
   );
   const additionalHoursText: string = useDocument<LocationStream>(
-    (document) => document?.additionalHoursText ?? ""
+    (document) => document?.additionalHoursText ?? hours ? "" : "The Hours field is missing on this entity"
   );
 
   const css = `
