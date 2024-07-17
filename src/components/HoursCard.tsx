@@ -82,6 +82,8 @@ const hoursCardFields: Fields<HoursCardProps> = {
   },
 };
 
+const HOURS_MISSING_TEXT = "The Hours field is missing on this entity"
+
 const HoursCard = ({
   heading,
   startOfWeek,
@@ -92,7 +94,7 @@ const HoursCard = ({
     (document) => document?.hours ?? {}
   );
   const additionalHoursText: string = useDocument<LocationStream>(
-    (document) => document?.additionalHoursText ?? hours ? "" : "The Hours field is missing on this entity"
+    (document) => document?.additionalHoursText ?? ""
   );
 
   const css = `
@@ -117,6 +119,7 @@ const HoursCard = ({
           {heading.text}
         </Heading>
         <EntityField displayName="Hours" fieldId="hours">
+          {!hours ? <div>${HOURS_MISSING_TEXT}</div> : null}
           <HoursTable
             hours={hours as HoursType}
             startOfWeek={startOfWeek}
