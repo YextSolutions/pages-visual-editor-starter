@@ -1,13 +1,19 @@
-import { C_pages_layouts, C_visualConfigurations, C_visualLayouts } from "../types/autogen";
+import {
+  C_pages_layouts,
+  C_visualConfigurations,
+  C_visualLayouts,
+} from "../types/autogen";
 
 export function getTemplatePuckData(
-    entityConfigurations: C_visualConfigurations[],
-    entityLayoutConfigurations: C_pages_layouts[],
-    siteLayoutConfigurations: C_visualLayouts[],
-    templateName: string | undefined,
+  entityConfigurations: C_visualConfigurations[],
+  entityLayoutConfigurations: C_pages_layouts[],
+  siteLayoutConfigurations: C_visualLayouts[],
+  templateName: string | undefined,
 ): string {
   if (!templateName) {
-    throw new Error("Unable to parse puck data, template name must be defined in config.");
+    throw new Error(
+      "Unable to parse puck data, template name must be defined in config.",
+    );
   }
   // check base entity
   for (const entityConfiguration of entityConfigurations) {

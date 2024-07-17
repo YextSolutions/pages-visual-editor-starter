@@ -1,0 +1,14 @@
+{
+  "$id": "c_productPromo",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Product Promo",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "type": {
+    "stringType": {
+      "stereotype": "SIMPLE",
+      "maxLength": 100000
+    }
+  },
+  "typeId": "string"
+}

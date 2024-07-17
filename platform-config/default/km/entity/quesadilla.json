@@ -1,0 +1,46 @@
+{
+  "$id": "quesadilla",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_coverPhoto": {
+      "image": {
+        "height": 1260,
+        "sourceUrl": "https://s3-alpha-sig.figma.com/img/c19b/983a/aa8117d9e49d5aea6027d2e93a58515a?Expires\u003d1720396800\u0026Key-Pair-Id\u003dAPKAQ4GOSFWCVNEHN3O4\u0026Signature\u003dMbJ1mJGX7YSdaII-bT1j-y6kDIFBUdNdbMF~kwZXQjTWaDcZoHpk4yw~wEJwU4tVU39j0oPmHfjB~GzX5cAy1Jd1mxWlQMjw4ReDhgBcZikWHN~cWZddPVDC~~DH7VpRzucLlFgpNYfs1r4SeaFnM9sx3BDXqrBZ7BqHcyKGB0iWUBkLN4NxVCeRiC46WPH7NWhjuN57CA5LIx8txI4-qI726y-GS90TMFQ4MQpfDHhnhLnAYWnZB0f6BIFvaiYXqNHyEsNbuthWXt30NxoJfG7WT6VTLOVbkJalL6I1fMV8IQXTxi0H61xcYgW9GZRHkPwx5xKI2mkeeZhhDWYqkw__",
+        "thumbnails": [
+          {
+            "height": 1260,
+            "url": "https://a.mktgcdn.com/p/RKPadSazcHHB32D54e9fAvvfFFLjBsWb3X3tIIa4p_Y/900x1260.png",
+            "width": 900
+          },
+          {
+            "height": 867,
+            "url": "https://a.mktgcdn.com/p/RKPadSazcHHB32D54e9fAvvfFFLjBsWb3X3tIIa4p_Y/619x867.png",
+            "width": 619
+          },
+          {
+            "height": 450,
+            "url": "https://a.mktgcdn.com/p/RKPadSazcHHB32D54e9fAvvfFFLjBsWb3X3tIIa4p_Y/321x450.png",
+            "width": 321
+          },
+          {
+            "height": 274,
+            "url": "https://a.mktgcdn.com/p/RKPadSazcHHB32D54e9fAvvfFFLjBsWb3X3tIIa4p_Y/196x274.png",
+            "width": 196
+          }
+        ],
+        "url": "https://a.mktgcdn.com/p/RKPadSazcHHB32D54e9fAvvfFFLjBsWb3X3tIIa4p_Y/900x1260.png",
+        "width": 900
+      }
+    },
+    "c_description": "Don’t miss out on our limited-time quesadilla, packed with melted cheese, tender grilled steak, and a hint of zesty peppers, all perfectly toasted to golden perfection.",
+    "c_productCTA": {
+      "name": "Order Online"
+    },
+    "c_productPromo": "Limited time only!",
+    "name": "Quesadilla"
+  },
+  "entityType": "product",
+  "folder": "yext/root",
+  "labels": []
+}

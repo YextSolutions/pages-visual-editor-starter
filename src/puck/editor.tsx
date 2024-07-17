@@ -1,135 +1,106 @@
-import { Puck, Data, Config } from "@measured/puck";
+import { Puck, Data, Config, usePuck, type History } from "@measured/puck";
 import "@measured/puck/puck.css";
-import useUpdateEntityMutation from "../hooks/mutations/useUpdateEntityMutation";
-import {
-  customHeader,
-  customHeaderActions,
-} from "../components/puck-overrides/Header";
-import { toast } from "sonner";
-import { fetchEntity } from "../utils/api";
-import { Role } from "../templates/edit";
-import { useEffect, useState } from "react";
+import { customHeader } from "./components/Header";
+import { useState, useRef, useCallback } from "react";
 import { getLocalStorageKey } from "../utils/localStorageHelper";
-
-export type EntityDefinition = {
-  name: string;
-  externalId: string;
-  internalId: number;
-};
-
-export type LayoutDefinition = {
-  name: string;
-  externalId: string;
-  internalId: number;
-  visualConfiguration: VisualConfiguration;
-};
-
-export type VisualConfiguration = {
-  template: string;
-  data: string;
-};
-
-export type TemplateDefinition = {
-  name: string;
-  id: string;
-  entityTypes: string[];
-};
+import { TemplateMetadata } from "../types/templateMetadata";
+import { EntityFieldProvider } from "../components/EntityField";
+import { SaveState } from "../types/saveState";
 
 export interface EditorProps {
-  selectedTemplate: TemplateDefinition;
-  entityId: string;
-  layoutId: string;
   puckConfig: Config;
-  puckData: string;
-  role: string;
+  puckData: any; // json object
   isLoading: boolean;
+  histories: Array<{ data: any; id: string }>;
+  index: number;
+  clearHistory: (
+    role: string,
+    templateId: string,
+    layoutId?: number,
+    entityId?: number
+  ) => void;
+  templateMetadata: TemplateMetadata;
+  saveState: SaveState;
+  saveSaveState: (data: any) => void;
+  saveVisualConfigData: (data: any) => void;
+  deleteSaveState: () => void;
 }
-
-export const siteEntityVisualConfigField = "c_visualLayouts",
-  pageLayoutVisualConfigField = "c_visualConfiguration",
-  pageLayoutTypeId = "ce_pagesLayout",
-  baseEntityVisualConfigField = "c_visualConfigurations",
-  baseEntityPageLayoutsField = "c_pages_layouts";
 
 // Render Puck editor
 export const Editor = ({
-  selectedTemplate,
-  layoutId,
-  entityId,
   puckConfig,
   puckData,
-  role,
   isLoading,
+  histories,
+  index,
+  clearHistory,
+  templateMetadata,
+  saveState,
+  saveSaveState,
+  saveVisualConfigData,
+  deleteSaveState,
 }: EditorProps) => {
-  const toastId = "toast";
-  const mutation = useUpdateEntityMutation();
   const [canEdit, setCanEdit] = useState<boolean>(false);
+  const historyIndex = useRef<number>(-1);
 
-  useEffect(() => {
-    if (mutation.isPending) {
-      toast("Save in progress...", {
-        id: toastId,
-      });
-    } else if (mutation.isSuccess) {
-      toast.success("Save completed.", {
-        id: toastId,
-      });
-    } else if (mutation.isError) {
-      toast.error(`Error occured: ${mutation.error.message}`, {
-        id: toastId,
-      });
-    }
-  }, [mutation]);
+  /**
+   * When the Puck history changes save it to localStorage and set a message
+   * to the parent which saves the state to the VES database.
+   */
+  const handleHistoryChange = useCallback(
+    (histories: History[], index: number) => {
+      if (
+        index !== -1 &&
+        historyIndex.current !== index &&
+        histories.length > 0
+      ) {
+        historyIndex.current = index;
 
-  // Save the data to our site entity
-  const save = async (data: Data, role: string) => {
-    const templateData = JSON.stringify(data);
-    if (role === Role.INDIVIDUAL) {
-      // since we are updating a list, we must get the original data, append to it, then push
-      const response = await fetchEntity(entityId);
-      const entity = response.response;
-      const visualConfigs: VisualConfiguration[] =
-        entity[baseEntityVisualConfigField] ?? [];
-      const existingTemplate = visualConfigs.find(
-        (visualConfig: VisualConfiguration) =>
-          visualConfig.template === selectedTemplate.id
-      );
-      if (existingTemplate) {
-        existingTemplate.data = templateData;
-      } else {
-        visualConfigs.push({
-          template: selectedTemplate.id,
-          data: templateData,
-        });
+        if (saveState.hash !== histories[index].id) {
+          saveSaveState({
+            payload: {
+              hash: histories[index].id,
+              history: JSON.stringify(histories[index].data),
+            },
+          });
+
+          window.localStorage.setItem(
+            getLocalStorageKey(
+              templateMetadata.role,
+              templateMetadata.templateId,
+              templateMetadata.layoutId,
+              templateMetadata.entityId
+            ),
+            JSON.stringify(histories)
+          );
+        }
       }
-      window.localStorage.removeItem(
-        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
-      );
-      mutation.mutate({
-        entityId: entityId,
-        body: {
-          [baseEntityVisualConfigField]: visualConfigs,
-        },
-      });
-    } else if (role === Role.GLOBAL) {
-      // for global role, we save to the layout entity
-      const visualConfig: VisualConfiguration = {
-        data: templateData,
-        template: selectedTemplate.id,
-      };
-      window.localStorage.removeItem(
-        getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId)
-      );
-      mutation.mutate({
-        entityId: layoutId,
-        body: {
-          [pageLayoutVisualConfigField]: visualConfig,
-        },
-      });
-    }
+
+      if (index === -1 && historyIndex.current !== index) {
+        historyIndex.current = index;
+
+        deleteSaveState();
+      }
+    },
+    [templateMetadata, getLocalStorageKey]
+  );
+
+  const handleClearLocalChanges = () => {
+    clearHistory(
+      templateMetadata.role,
+      templateMetadata.templateId,
+      templateMetadata.layoutId,
+      templateMetadata.entityId
+    );
   };
 
-  const change = async (data: Data) => {
+  const handleSave = async (data: Data) => {
+    saveVisualConfigData({
+      payload: { visualConfigurationData: JSON.stringify(data) },
+    });
+  };
+
+  const change = async () => {
     if (isLoading) {
       return;
     }
@@ -137,34 +108,28 @@ export const Editor = ({
       setCanEdit(true);
       return;
     }
-
-    window.localStorage.setItem(
-      getLocalStorageKey(role, selectedTemplate.id, layoutId, entityId),
-      JSON.stringify(data)
-    );
   };
   return (
-    <div className="font-lato">
+    <EntityFieldProvider>
       <Puck
         config={puckConfig}
-        data={JSON.parse(puckData)}
-        onPublish={(data: Data) => save(data, role)}
+        data={puckData as Partial<Data>}
+        initialHistory={
+          index === -1 ? undefined : { histories: histories, index: index }
+        }
         onChange={change}
         overrides={{
-          headerActions: ({ children }) =>
-            customHeaderActions(
-              children,
-              selectedTemplate.id,
-              layoutId,
-              entityId,
-              role
-            ),
-          header: ({ actions }) =>
-            customHeader({
-              actions: actions,
-            }),
+          header: () => {
+            const { appState } = usePuck();
+            return customHeader(
+              handleClearLocalChanges,
+              handleHistoryChange,
+              appState.data,
+              handleSave
+            );
+          },
         }}
       />
-    </div>
+    </EntityFieldProvider>
   );
 };

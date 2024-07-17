@@ -1,0 +1,43 @@
+{
+  "$id": "veg-options-faq",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "answerV2": {
+      "json": {
+        "root": {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "Yes, we have a variety of vegetarian and vegan dishes available, including our popular veggie burger, salads, and plant-based breakfast items.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "type": "paragraph",
+              "version": 1
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "type": "root",
+          "version": 1
+        }
+      }
+    },
+    "name": "Do you offer vegetarian or vegan options?",
+    "question": "Do you offer vegetarian or vegan options?"
+  },
+  "entityType": "faq",
+  "folder": "yext/root",
+  "labels": []
+}

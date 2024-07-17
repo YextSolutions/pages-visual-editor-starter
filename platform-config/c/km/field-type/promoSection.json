@@ -1,0 +1,53 @@
+{
+  "$id": "c_promoSection",
+  "$schema": "https://schema.yext.com/config/km/field-type/v1",
+  "displayName": "Promo Section",
+  "type": {
+    "structType": {
+      "property": [
+        {
+          "name": "image",
+          "displayName": "Image",
+          "isRequired": false,
+          "typeId": "image",
+          "type": {
+            "imageType": {
+              "isSimpleImage": false,
+              "unconstrainedAspectRatioAllowed": true
+            }
+          }
+        },
+        {
+          "name": "title",
+          "displayName": "Title",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "SIMPLE",
+              "maxLength": 100000
+            }
+          }
+        },
+        {
+          "name": "description",
+          "displayName": "Description",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "MULTILINE",
+              "maxLength": 100000
+            }
+          }
+        },
+        {
+          "name": "cta",
+          "displayName": "cta",
+          "isRequired": false,
+          "typeId": "c_cta"
+        }
+      ]
+    }
+  }
+}

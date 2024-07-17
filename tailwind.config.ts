@@ -15,14 +15,6 @@ module.exports = {
     extend: {
       colors: {
         text: "black",
-        "brand-primary": "#1B78D0",
-        "brand-secondary": "#073866",
-        "brand-gray": {
-          100: "#F7F7F7",
-          200: "#EDEDED",
-          300: "#CCC",
-          400: "#767676",
-        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -51,10 +43,6 @@ module.exports = {
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
         },
       },
       borderRadius: {

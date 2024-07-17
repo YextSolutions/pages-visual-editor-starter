@@ -1,8 +1,0 @@
-{
-  "$id": "c_locationHero",
-  "$schema": "https://schema.yext.com/config/km/field/v1",
-  "displayName": "Location Hero",
-  "group": "NONE",
-  "localization": "PRIMARY_ONLY",
-  "typeId": "c_locationHero"
-}

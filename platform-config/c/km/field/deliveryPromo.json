@@ -1,0 +1,8 @@
+{
+  "$id": "c_deliveryPromo",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Delivery Promo",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "c_promoSection"
+}

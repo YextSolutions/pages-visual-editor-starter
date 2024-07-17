@@ -156,6 +156,36 @@ export const Hero: ComponentConfig<HeroProps> = {
           <CTA className="mt-4" {...cta} />
         </div>
       </div>
-    );
+    </Section>
+  );
+};
+
+export const HeroComponent: ComponentConfig<HeroProps> = {
+  fields: heroFields,
+  defaultProps: {
+    imageMode: "left",
+    name: {
+      size: "section",
+      color: "default",
+    },
+    location: {
+      size: "section",
+      color: "default",
+    },
+    cta1: {
+      variant: "default",
+    },
+    cta2: {
+      variant: "default",
+    },
   },
+  render: ({ imageMode, name, location, cta1, cta2 }) => (
+    <Hero
+      imageMode={imageMode}
+      name={name}
+      location={location}
+      cta1={cta1}
+      cta2={cta2}
+    />
+  ),
 };

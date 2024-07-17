@@ -1,0 +1,8 @@
+{
+  "$id": "c_faqSection",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "FAQ Section",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "typeId": "c_faqSection"
+}

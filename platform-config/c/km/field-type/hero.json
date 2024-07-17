@@ -6,18 +6,6 @@
     "structType": {
       "property": [
         {
-          "name": "title",
-          "displayName": "Title",
-          "isRequired": false,
-          "typeId": "string",
-          "type": {
-            "stringType": {
-              "stereotype": "SIMPLE",
-              "maxLength": 100000
-            }
-          }
-        },
-        {
           "name": "image",
           "displayName": "Image",
           "isRequired": false,
@@ -28,6 +16,18 @@
               "unconstrainedAspectRatioAllowed": true
             }
           }
+        },
+        {
+          "name": "cta1",
+          "displayName": "cta1",
+          "isRequired": false,
+          "typeId": "c_cta"
+        },
+        {
+          "name": "cta2",
+          "displayName": "cta2",
+          "isRequired": false,
+          "typeId": "c_cta"
         }
       ]
     }

@@ -1,8 +1,0 @@
-{
-  "$id": "c_locationCore",
-  "$schema": "https://schema.yext.com/config/km/field/v1",
-  "displayName": "Location Core",
-  "group": "NONE",
-  "localization": "PRIMARY_ONLY",
-  "typeId": "c_locationCore"
-}
