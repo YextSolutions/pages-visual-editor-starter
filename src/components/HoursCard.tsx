@@ -90,8 +90,8 @@ const HoursCard = ({
   collapseDays,
   showAdditionalHoursText,
 }: HoursCardProps) => {
-  const hours: Hours = useDocument<LocationStream>(
-    (document) => document?.hours ?? {}
+  const hours: Hours = useDocument<LocationStream>((document) =>
+      document?.hours
   );
   const additionalHoursText: string = useDocument<LocationStream>(
     (document) => document?.additionalHoursText ?? ""
@@ -119,12 +119,11 @@ const HoursCard = ({
           {heading.text}
         </Heading>
         <EntityField displayName="Hours" fieldId="hours">
-          {!hours ? <div>${HOURS_MISSING_TEXT}</div> : null}
-          <HoursTable
-            hours={hours as HoursType}
-            startOfWeek={startOfWeek}
-            collapseDays={collapseDays}
-          />
+          {hours ? <HoursTable
+              hours={hours as HoursType}
+              startOfWeek={startOfWeek}
+              collapseDays={collapseDays}
+          /> : <div>{HOURS_MISSING_TEXT}</div>}
         </EntityField>
         {additionalHoursText && showAdditionalHoursText && (
           <EntityField displayName="Hours Text" fieldId="additionalHoursText">
