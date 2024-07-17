@@ -56,7 +56,7 @@ export const Editor = ({
       ) {
         historyIndex.current = index;
 
-        if (saveState.hash !== histories[index].id) {
+        if (!saveState || saveState.hash !== histories[index].id) {
           saveSaveState({
             payload: {
               hash: histories[index].id,

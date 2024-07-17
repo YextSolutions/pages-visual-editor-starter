@@ -108,7 +108,7 @@ const FAQFields: Fields<FAQProps> = {
 
 const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
   const faq: C_faqSection = useDocument<LocationStream>(
-    (document) => document.c_faqSection
+    (document) => document.c_faqSection ?? {}
   );
 
   return (

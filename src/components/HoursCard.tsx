@@ -89,10 +89,10 @@ const HoursCard = ({
   showAdditionalHoursText,
 }: HoursCardProps) => {
   const hours: Hours = useDocument<LocationStream>(
-    (document) => document.hours
+    (document) => document?.hours ?? {}
   );
   const additionalHoursText: string = useDocument<LocationStream>(
-    (document) => document.additionalHoursText
+    (document) => document?.additionalHoursText ?? ""
   );
 
   const css = `
