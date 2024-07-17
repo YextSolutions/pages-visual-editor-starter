@@ -50,7 +50,7 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
 };
 
 const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
-  const address = useDocument<LocationStream>((document) => document.address);
+  const address = useDocument<LocationStream>((document) => document.address) ?? {};
   const phoneNumber = formatPhoneNumber(
     useDocument<LocationStream>((document) => document.mainPhone)
   );
