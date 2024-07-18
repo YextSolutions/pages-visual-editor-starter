@@ -7,6 +7,13 @@ import { TemplateMetadata } from "../types/templateMetadata";
 import { EntityFieldProvider } from "../components/EntityField";
 import { SaveState } from "../types/saveState";
 
+export const IsRunningLocally = (): boolean => {
+  if (!window?.location) {
+    return false;
+  }
+  return window.location.toString().includes("localhost");
+}
+
 export interface EditorProps {
   puckConfig: Config;
   puckData: any; // json object

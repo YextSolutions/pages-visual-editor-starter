@@ -21,6 +21,7 @@ import { useCallback, useEffect } from "react";
 import { useDocument } from "../../hooks/useDocument";
 import { Button } from "../ui/button";
 import { useEntityField } from "../../components/EntityField";
+import {IsRunningLocally} from "../editor";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -83,7 +84,7 @@ export const customHeader = (
         >
           Live Preview
         </Button>
-        {!window.location.toString().includes("localhost") &&
+        {!IsRunningLocally() &&
             <Button
                 variant="secondary"
                 disabled={histories.length === 0}
