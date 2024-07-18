@@ -117,7 +117,7 @@ const DeliveryPromo = ({
           imageMode === "right" && "lg:flex-row-reverse"
         )}
       >
-        {deliveryPromo.image && (
+        {deliveryPromo?.image && (
           <div className="w-full">
             <EntityField displayName="Image" fieldId="c_deliveryPromo.image">
               <Image
@@ -129,21 +129,21 @@ const DeliveryPromo = ({
           </div>
         )}
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0">
-          {deliveryPromo.title && (
+          {deliveryPromo?.title && (
             <EntityField displayName="Title" fieldId="c_deliveryPromo.title">
               <Heading size={promoTitle.size} color={promoTitle.color}>
                 {deliveryPromo.title}
               </Heading>
             </EntityField>
           )}
-          {deliveryPromo.description && (
+          {deliveryPromo?.description && (
             <EntityField displayName="Description" fieldId="c_deliveryPromo.description">
               <Body size={promoDescription.size} weight={promoDescription.weight}>
                 {deliveryPromo.description}
               </Body>
             </EntityField>
           )}
-          {deliveryPromo.cta && (
+          {deliveryPromo?.cta && (
             <EntityField displayName="CTA" fieldId="c_deliveryPromo.cta">
               <CTA
                 variant={promoCTA.variant}
