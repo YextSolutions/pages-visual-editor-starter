@@ -82,7 +82,7 @@ export const customHeader = (
           variant="outline"
           onClick={() => handleClick(entityDocument.slug)}
         >
-          Live Preview
+          View Page
         </Button>
         <Button
           variant="secondary"
