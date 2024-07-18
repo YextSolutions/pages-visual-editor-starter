@@ -83,16 +83,17 @@ export const customHeader = (
         >
           Live Preview
         </Button>
-        <Button
-          variant="secondary"
-          disabled={histories.length === 0}
-          onClick={async () => {
-            await handleSaveData(data);
-            handleClearLocalChanges();
-          }}
-        >
-          Publish
-        </Button>
+        {!window.location.toString().includes("localhost") &&
+            <Button
+                variant="secondary"
+                disabled={histories.length === 0}
+                onClick={async () => {
+                  await handleSaveData(data);
+                  handleClearLocalChanges();
+                }}
+            >
+              Publish
+            </Button>}
       </div>
     </header>
   );
