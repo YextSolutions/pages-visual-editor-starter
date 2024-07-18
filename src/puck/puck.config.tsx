@@ -14,10 +14,6 @@ import {
   FeaturedEventsProps,
   FeaturedEvents,
 } from "../components/FeaturedEvents";
-import {
-  NearbyLocations,
-  NearbyLocationsProps,
-} from "../components/NearbyLocations";
 import { ColumnsProps, ColumnsComponent } from "../components/Columns";
 
 // type ProductProps = {
@@ -35,7 +31,7 @@ type FinancialProfessionalProps = {
   ContactForm: ContactFormProps;
   Columns: ColumnsProps;
   InfoCard: InfoCardProps;
-  Services: ServicesProps;
+  // Services: ServicesProps;
   Divider: DividerProps;
   FeaturedEvents: FeaturedEventsProps;
 };
@@ -112,7 +108,7 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
         "Bio",
         "TeamGrid",
         "FeaturedBlogs",
-        "Services",
+        // "Services",
         "FeaturedEvents",
       ],
     },
