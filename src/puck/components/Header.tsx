@@ -21,6 +21,7 @@ import { useCallback, useEffect } from "react";
 import { useDocument } from "../../hooks/useDocument";
 import { Button } from "../ui/button";
 import { useEntityField } from "../../components/EntityField";
+import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -180,10 +181,20 @@ const ToggleUIButtons = () => {
 };
 
 const ToggleEntityFields = () => {
-  const { toggleTooltips } = useEntityField();
+  const { toggleTooltips, tooltipsVisible } = useEntityField();
   return (
-    <Button variant="ghost" size="icon" onClick={toggleTooltips}>
-      <RectangleEllipsis className="sm-icon" />
-    </Button>
+    <TooltipProvider>
+      <Tooltip open={tooltipsVisible}>
+        <TooltipTrigger asChild>
+          <Button variant="ghost" size="icon" onClick={toggleTooltips} className={tooltipsVisible ? "border-2 border-[#5A58F2] rounded-full" : ""}>
+            <RectangleEllipsis className="sm-icon" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          Hide Entity Fields
+          <TooltipArrow fill="bg-popover" />
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
