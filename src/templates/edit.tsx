@@ -1,7 +1,7 @@
 import "../index.css";
 import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
 import { DocumentProvider } from "../hooks/useDocument";
-import { Editor } from "../puck/editor";
+import { Editor, isRunningLocally } from "../puck/editor";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { puckConfigs } from "../puck/puck.config";
 import { LoadingScreen } from "../puck/components/LoadingScreen";
@@ -251,7 +251,7 @@ const Edit: () => JSX.Element = () => {
             isLoading={isLoading}
             index={historyIndex}
             histories={histories}
-            clearHistory={clearHistory}
+            clearHistory={!isRunningLocally() ? clearHistory : clearLocalStorage}
             templateMetadata={templateMetadata}
             saveState={saveState}
             saveSaveState={saveSaveState}
