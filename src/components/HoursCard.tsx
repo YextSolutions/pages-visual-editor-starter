@@ -116,13 +116,13 @@ const HoursCard = ({
         >
           {heading.text}
         </Heading>
-        <EntityField displayName="Hours" fieldId="hours">
+        {hours && <EntityField displayName="Hours" fieldId="hours">
           <HoursTable
-            hours={hours as HoursType}
-            startOfWeek={startOfWeek}
-            collapseDays={collapseDays}
+              hours={hours as HoursType}
+              startOfWeek={startOfWeek}
+              collapseDays={collapseDays}
           />
-        </EntityField>
+        </EntityField>}
         {additionalHoursText && showAdditionalHoursText && (
           <EntityField displayName="Hours Text" fieldId="additionalHoursText">
             <div className="mt-4">{additionalHoursText}</div>
