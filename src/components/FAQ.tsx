@@ -113,14 +113,14 @@ const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
 
   return (
     <Section className="flex flex-col justify-center bg-white components">
-      <Heading
-        level={1}
-        size={sectionTitle.size}
-        color={sectionTitle.color}
-        className="text-center"
+      {sectionTitle && <Heading
+          level={1}
+          size={sectionTitle.size}
+          color={sectionTitle.color}
+          className="text-center"
       >
         {sectionTitle.text}
-      </Heading>
+      </Heading>}
       <Accordion type="single" collapsible>
         {faq?.linkedFAQs && (
           <EntityField
