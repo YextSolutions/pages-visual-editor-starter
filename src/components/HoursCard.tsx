@@ -102,7 +102,7 @@ const HoursCard = ({
   `;
 
   return (
-    <Section
+    hours ? <Section
       className="flex flex-col justify-center components items-center"
       padding="small"
     >
@@ -129,7 +129,7 @@ const HoursCard = ({
           </EntityField>
         )}
       </div>
-    </Section>
+    </Section> : <EntityField displayName="Hours" fieldId="hours"><div/></EntityField>
   );
 };
 
