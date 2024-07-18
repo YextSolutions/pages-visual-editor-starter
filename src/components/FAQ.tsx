@@ -122,13 +122,13 @@ const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
         {sectionTitle.text}
       </Heading>
       <Accordion type="single" collapsible>
-        {faq.linkedFAQs && (
+        {faq?.linkedFAQs && (
           <EntityField
             displayName="Linked FAQs"
             fieldId="c_faqSection.linkedFAQs"
           >
             <div>
-              {faq.linkedFAQs.map((faqItem, index) => (
+              {faq?.linkedFAQs.map((faqItem, index) => (
                 <AccordionItem value={index + 1} key={index + 1}>
                   <AccordionTrigger>
                     <Heading
