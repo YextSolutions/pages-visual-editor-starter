@@ -1,9 +1,9 @@
 import { LinkedFinancialProfessional } from "../../types/autogen";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { CardHeader, CardTitle, CardContent, Card } from "../atoms/card";
 import { ChevronUp, CircleUserRound } from "lucide-react";
 import { Phone, Mail } from "lucide-react";
-import { Skeleton } from "../ui/skeleton";
 import { Image } from "@yext/pages-components";
+import { Skeleton } from "../atoms/skeleton";
 
 interface AdvisorCardProps {
   advisor: LinkedFinancialProfessional;

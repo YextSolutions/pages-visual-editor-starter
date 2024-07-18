@@ -1,7 +1,6 @@
 import { ComponentConfig } from "@measured/puck";
 import { useDocument } from "../hooks/useDocument";
 import { FinancialProfessionalStream } from "../types/autogen";
-
 import {
   Card,
   CardContent,
@@ -9,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "./atoms/card";
 
 export type AdvisorHeroProps = {};
 

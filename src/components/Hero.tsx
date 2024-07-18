@@ -4,7 +4,7 @@ import { useDocument } from "../hooks/useDocument";
 import { C_hero, FinancialProfessionalStream } from "../types/autogen";
 import { Mail, Phone } from "lucide-react";
 import { cn } from "../utils/cn";
-import { CTA, CTAProps } from "./ui/cta";
+import { CTAProps, CTA } from "./atoms/cta";
 
 export type HeroProps = {
   imageMode: "background" | "left" | "right";
@@ -156,36 +156,6 @@ export const Hero: ComponentConfig<HeroProps> = {
           <CTA className="mt-4" {...cta} />
         </div>
       </div>
-    </Section>
-  );
-};
-
-export const HeroComponent: ComponentConfig<HeroProps> = {
-  fields: heroFields,
-  defaultProps: {
-    imageMode: "left",
-    name: {
-      size: "section",
-      color: "default",
-    },
-    location: {
-      size: "section",
-      color: "default",
-    },
-    cta1: {
-      variant: "default",
-    },
-    cta2: {
-      variant: "default",
-    },
+    );
   },
-  render: ({ imageMode, name, location, cta1, cta2 }) => (
-    <Hero
-      imageMode={imageMode}
-      name={name}
-      location={location}
-      cta1={cta1}
-      cta2={cta2}
-    />
-  ),
 };

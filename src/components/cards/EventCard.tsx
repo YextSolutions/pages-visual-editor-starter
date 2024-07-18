@@ -1,8 +1,14 @@
 import { Image } from "@yext/pages-components";
 import { LinkedEvent } from "../../types/autogen";
-import { Card, CardContent, CardFooter, CardTitle } from "../ui/card";
-import { CTA } from "../ui/cta";
+import {
+  CardHeader,
+  CardTitle,
+  CardContent,
+  Card,
+  CardFooter,
+} from "../atoms/card";
 import { formatEventTime } from "../../utils/formatEventTime";
+import { CTA } from "../atoms/cta";
 
 interface EventCardProps {
   event: LinkedEvent;

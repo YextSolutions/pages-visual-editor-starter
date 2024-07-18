@@ -4,8 +4,8 @@ import { useDocument } from "../hooks/useDocument";
 import { C_advisorBio, FinancialProfessionalStream } from "../types/autogen";
 import { Section } from "./Section";
 import { backgroundColors } from "../puck/theme";
-import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
+import { Skeleton } from "./atoms/skeleton";
 
 export type BioProps = {
   backgroundColor: string;

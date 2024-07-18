@@ -6,10 +6,10 @@ import { backgroundColors } from "../puck/theme";
 import { cn } from "../utils/cn";
 import { C_locator, FinancialProfessionalStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
-import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
-import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
-import { CTA, CTAProps } from "./ui/cta";
+import { CTAProps, CTA } from "./atoms/cta";
+import { SectionTitleProps, SectionTitle } from "./atoms/sectionTitle";
+import { Skeleton } from "./atoms/skeleton";
 
 export type LocatorProps = {
   sectionTitle?: SectionTitleProps;

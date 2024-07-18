@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { CardHeader, CardTitle, CardContent, Card } from "../atoms/card";
 
 import { ComponentConfig } from "@measured/puck";
 

@@ -1,6 +1,6 @@
 import { HoursStatus } from "@yext/pages-components";
 import { AssociatedLocation } from "../../types/autogen";
-import { Card, CardContent, CardTitle } from "../ui/card";
+import { CardHeader, CardTitle, CardContent, Card } from "../atoms/card";
 
 interface LocationCardProps {
   location: AssociatedLocation;

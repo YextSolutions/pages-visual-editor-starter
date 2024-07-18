@@ -1,23 +1,23 @@
-import {ComponentConfig, Fields} from '@measured/puck';
-import {Heading, HeadingProps} from './atoms/heading';
-import {Body, BodyProps} from './atoms/body';
-import {CTA, CTAProps} from "./atoms/cta";
-import {Section} from "./atoms/section";
-import {cn} from "../utils/cn";
+import { ComponentConfig, Fields } from "@measured/puck";
+import { Heading, HeadingProps } from "./atoms/heading";
+import { Body, BodyProps } from "./atoms/body";
+import { CTA, CTAProps } from "./atoms/cta";
+import { Section } from "./atoms/section";
+import { cn } from "../utils/cn";
 import "./index.css";
 
-const PLACEHOLDER_IMAGE_URL = 'https://placehold.co/640x360';
+const PLACEHOLDER_IMAGE_URL = "https://placehold.co/640x360";
 
 export type PromoProps = {
-  imageMode: 'left' | 'right';
+  imageMode: "left" | "right";
   promoTitle: {
-    size: HeadingProps['size'];
-    color: HeadingProps['color'];
+    size: HeadingProps["size"];
+    color: HeadingProps["color"];
     text: string;
   };
   promoDescription: {
-    size: BodyProps['size'];
-    weight: BodyProps['weight'];
+    size: BodyProps["size"];
+    weight: BodyProps["weight"];
     text: string;
   };
   promoCta?: {
@@ -31,8 +31,8 @@ export type PromoProps = {
 };
 const promoFields: Fields<PromoProps> = {
   imageMode: {
-    label: 'Image Mode',
-    type: 'radio',
+    label: "Image Mode",
+    type: "radio",
     options: [
       { label: "Left", value: "left" },
       { label: "Right", value: "right" },
@@ -44,7 +44,7 @@ const promoFields: Fields<PromoProps> = {
     objectFields: {
       text: {
         label: "Text",
-        type: "text"
+        type: "text",
       },
       size: {
         label: "Size",
@@ -72,7 +72,7 @@ const promoFields: Fields<PromoProps> = {
     objectFields: {
       text: {
         label: "Text",
-        type: "textarea"
+        type: "textarea",
       },
       size: {
         label: "Size",
@@ -99,11 +99,11 @@ const promoFields: Fields<PromoProps> = {
     objectFields: {
       label: {
         label: "Label",
-        type: "text"
+        type: "text",
       },
       link: {
         label: "Link",
-        type: "text"
+        type: "text",
       },
       variant: {
         label: "Variant",
@@ -120,80 +120,87 @@ const promoFields: Fields<PromoProps> = {
     objectFields: {
       url: {
         label: "Promo Image Url",
-        type: "text"
+        type: "text",
       },
     },
   },
 };
 
-const Promo = ({imageMode, promoTitle, promoDescription, promoCta, image}: PromoProps) => {
-
+const Promo = ({
+  imageMode,
+  promoTitle,
+  promoDescription,
+  promoCta,
+  image,
+}: PromoProps) => {
   return (
-      <Section className='components'>
-        <div
-            className={cn(
-                "flex flex-col md:flex-row bg-white overflow-hidden rounded-[30px] md:gap-8",
-                imageMode === "right" && "md:flex-row-reverse",
-            )}
-        >
-          {image?.url && <img
-              src={image?.url}
-              alt={'image'} //TODO: add alt prop?
-              className='md:max-w-[60%]'
-          />}
-          <div className='flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0 w-full break-all'>
-            {promoTitle?.text && <Heading
-                size={promoTitle.size}
-                color={promoTitle.color}
-            >
+    <Section className="components">
+      <div
+        className={cn(
+          "flex flex-col md:flex-row bg-white overflow-hidden rounded-[30px] md:gap-8",
+          imageMode === "right" && "md:flex-row-reverse"
+        )}
+      >
+        {image?.url && (
+          <img
+            src={image?.url}
+            alt={"image"} //TODO: add alt prop?
+            className="md:max-w-[60%]"
+          />
+        )}
+        <div className="flex flex-col justify-center gap-y-4 md:gap-y-8 p-4 md:px-16 md:py-0 w-full break-all">
+          {promoTitle?.text && (
+            <Heading size={promoTitle.size} color={promoTitle.color}>
               {promoTitle.text}
-            </Heading>}
-            {promoDescription?.text && <Body
-                size={promoDescription.size}
-                weight={promoDescription.weight}
-            >
+            </Heading>
+          )}
+          {promoDescription?.text && (
+            <Body size={promoDescription.size} weight={promoDescription.weight}>
               {promoDescription.text}
-            </Body>}
-            {promoCta && <CTA
-                variant={promoCta.variant}
-                label={promoCta.label}
-                url={promoCta.link ?? '#'}
-            />}
-          </div>
+            </Body>
+          )}
+          {promoCta && (
+            <CTA
+              variant={promoCta.variant}
+              label={promoCta.label}
+              url={promoCta.link ?? "#"}
+            />
+          )}
         </div>
-      </Section>
+      </div>
+    </Section>
   );
 };
 
 export const PromoComponent: ComponentConfig<PromoProps> = {
   fields: promoFields,
   defaultProps: {
-    imageMode: 'right',
+    imageMode: "right",
     promoTitle: {
       text: "title",
-      size: 'section',
-      color: 'default',
+      size: "section",
+      color: "default",
     },
     promoDescription: {
       text: "description",
       size: "base",
       weight: "default",
     },
-    promoCTA: {
-      variant: 'default',
+    promoCta: {
+      variant: "default",
     },
     image: {
       url: PLACEHOLDER_IMAGE_URL,
-    }
+    },
   },
-  label: 'Promo',
-  render: ({imageMode, promoTitle, promoDescription, promoCta, image}) => (
-      <Promo
-          imageMode={imageMode}
-          promoTitle={promoTitle}
-          promoDescription={promoDescription}
-          promoCta={promoCta}
-          image={image}
-      />
+  label: "Promo",
+  render: ({ imageMode, promoTitle, promoDescription, promoCta, image }) => (
+    <Promo
+      imageMode={imageMode}
+      promoTitle={promoTitle}
+      promoDescription={promoDescription}
+      promoCta={promoCta}
+      image={image}
+    />
   ),
 };

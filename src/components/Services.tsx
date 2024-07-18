@@ -3,18 +3,19 @@ import { useDocument } from "../hooks/useDocument";
 import { FinancialProfessionalStream, LinkedService } from "../types/autogen";
 
 import { Section } from "./Section";
+
+import { ServiceCard } from "./cards/ServiceCard";
+import { backgroundColors } from "../puck/theme";
+import useEnvironment from "../hooks/useEnvironment";
+import { SectionTitle, SectionTitleProps } from "./atoms/sectionTitle";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
-} from "./ui/carousel";
-import { ServiceCard } from "./cards/ServiceCard";
-import { backgroundColors } from "../puck/theme";
-import { Skeleton } from "./ui/skeleton";
-import useEnvironment from "../hooks/useEnvironment";
-import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
+  CarouselPrevious,
+} from "./atoms/carousel";
+import { Skeleton } from "./atoms/skeleton";
 
 export type ServicesProps = {
   backgroundColor: string;

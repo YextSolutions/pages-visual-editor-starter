@@ -10,9 +10,9 @@ import { useDocument } from "../hooks/useDocument";
 import { Image } from "@yext/pages-components";
 import useScreenSizes from "../hooks/useScreenSizes";
 import { backgroundColors } from "../puck/theme";
-import { Skeleton } from "./ui/skeleton";
 import useEnvironment from "../hooks/useEnvironment";
-import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
+import { Skeleton } from "./atoms/skeleton";
+import { SectionTitle, SectionTitleProps } from "./atoms/sectionTitle";
 
 export type FeaturedBlogsProps = {
   sectionTitle?: SectionTitleProps;

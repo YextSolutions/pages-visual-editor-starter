@@ -1,13 +1,6 @@
 import { ComponentType, ReactElement } from "react";
 import { LinkedService } from "../../types/autogen";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+
 import {
   HeartHandshake,
   Landmark,
@@ -17,6 +10,7 @@ import {
   Scale,
   CircleHelp,
 } from "lucide-react";
+import { CardHeader, CardTitle, CardContent, Card } from "../atoms/card";
 
 const iconKeys = [
   "CHARITY",

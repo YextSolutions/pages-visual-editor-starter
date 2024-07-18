@@ -1,9 +1,4 @@
 import { ComponentConfig } from "@measured/puck";
-// import { cn } from "../../utils/cn";
-import { Image } from "@yext/pages-components";
-import { useDocument } from "../hooks/useDocument";
-import { FinancialProfessionalStream } from "../types/autogen";
-import useScreenSizes from "../hooks/useScreenSizes";
 import { Section } from "./Section";
 
 export type CalloutProps = {};

@@ -3,18 +3,19 @@ import { useDocument } from "../hooks/useDocument";
 import { AssociatedLocation, BranchStream } from "../types/autogen";
 
 import { Section } from "./Section";
+
+import { backgroundColors } from "../puck/theme";
+import useEnvironment from "../hooks/useEnvironment";
+import { LocationCard } from "./cards/LocationCard";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-} from "./ui/carousel";
-import { backgroundColors } from "../puck/theme";
-import { Skeleton } from "./ui/skeleton";
-import useEnvironment from "../hooks/useEnvironment";
-import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
-import { LocationCard } from "./cards/LocationCard";
+} from "./atoms/carousel";
+import { SectionTitleProps, SectionTitle } from "./atoms/sectionTitle";
+import { Skeleton } from "./atoms/skeleton";
 
 export type NearbyLocationsProps = {
   backgroundColor: string;

@@ -12,7 +12,7 @@ import { AdvisorCard, AdvisorCardSkeleton } from "./cards/AdvisorCard";
 import { backgroundColors } from "../puck/theme";
 import { cn } from "../utils/cn";
 import useEnvironment from "../hooks/useEnvironment";
-import { SectionTitle, SectionTitleProps } from "./ui/sectionTitle";
+import { SectionTitle, SectionTitleProps } from "./atoms/sectionTitle";
 
 export type TeamGridProps = {
   sectionTitle?: SectionTitleProps;

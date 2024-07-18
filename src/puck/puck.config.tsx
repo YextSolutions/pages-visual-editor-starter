@@ -7,7 +7,6 @@ import { Locator, LocatorProps } from "../components/Locator";
 import Root from "./root";
 import { BodyContainer, BodyContainerProps } from "../components/BodyContainer";
 import { ContactForm, ContactFormProps } from "../components/ContactForm";
-import { Columns, ColumnsProps } from "../components/Columns";
 import { InfoCard, InfoCardProps } from "../components/cards/InfoCard";
 import { ServicesProps, Services } from "../components/Services";
 import { Divider, DividerProps } from "../components/VerticalDivider";
@@ -19,24 +18,7 @@ import {
   NearbyLocations,
   NearbyLocationsProps,
 } from "../components/NearbyLocations";
-import { LocationCoreProps, LocationCore } from "../components/LocationCore";
-
-type BranchProps = {
-  Hero: HeroProps;
-  Bio: BioProps;
-  TeamGrid: TeamGridProps;
-  FeaturedBlogs: FeaturedBlogsProps;
-  Locator: LocatorProps;
-  BodyContainer: BodyContainerProps;
-  ContactForm: ContactFormProps;
-  Columns: ColumnsProps;
-  InfoCard: InfoCardProps;
-  Services: ServicesProps;
-  Divider: DividerProps;
-  FeaturedEvents: FeaturedEventsProps;
-  NearbyLocations: NearbyLocationsProps;
-  LocationCore: LocationCoreProps;
-};
+import { ColumnsProps, ColumnsComponent } from "../components/Columns";
 
 // type ProductProps = {
 //   Toggle: ToggleProps;
@@ -59,56 +41,45 @@ type FinancialProfessionalProps = {
 };
 
 // All the available components for locations
-export const branchConfig: Config<BranchProps> = {
-  components: {
-    Hero,
-    Bio,
-    TeamGrid,
-    FeaturedBlogs,
-    Locator,
-    BodyContainer,
-    ContactForm,
-    Columns,
-    InfoCard,
-    Services,
-    Divider,
-    FeaturedEvents,
-    NearbyLocations,
-    LocationCore,
-  },
-  categories: {
-    layouts: {
-      components: ["Columns", "BodyContainer", "InfoCard"],
-    },
-    core: {
-      components: [
-        "Hero",
-        "Bio",
-        "TeamGrid",
-        "FeaturedBlogs",
-        "Services",
-        "FeaturedEvents",
-        "NearbyLocations",
-        "LocationCore",
-      ],
-    },
-    forms: {
-      components: ["ContactForm"],
-    },
-    other: {
-      components: ["Locator"],
-    },
-  },
-  root: {
-    render: Root,
-  },
-};
-
-// All the available components for products
-// export const productConfig: Config<ProductProps> = {
+// export const branchConfig: Config<BranchProps> = {
 //   components: {
-//     Toggle,
 //     Hero,
+//     Bio,
+//     TeamGrid,
+//     FeaturedBlogs,
+//     Locator,
+//     BodyContainer,
+//     ContactForm,
+//     Columns,
+//     InfoCard,
+//     Services,
+//     Divider,
+//     FeaturedEvents,
+//     NearbyLocations,
+//     LocationCore,
+//   },
+//   categories: {
+//     layouts: {
+//       components: ["Columns", "BodyContainer", "InfoCard"],
+//     },
+//     core: {
+//       components: [
+//         "Hero",
+//         "Bio",
+//         "TeamGrid",
+//         "FeaturedBlogs",
+//         "Services",
+//         "FeaturedEvents",
+//         "NearbyLocations",
+//         "LocationCore",
+//       ],
+//     },
+//     forms: {
+//       components: ["ContactForm"],
+//     },
+//     other: {
+//       components: ["Locator"],
+//     },
 //   },
 //   root: {
 //     render: Root,
@@ -125,7 +96,7 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
     Locator,
     BodyContainer,
     ContactForm,
-    Columns,
+    Columns: ColumnsComponent,
     InfoCard,
     Services,
     Divider,
@@ -158,7 +129,5 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
 };
 
 export const puckConfigs = new Map<string, Config>([
-  ["ce_branch", branchConfig],
-  // ["product", productConfig],
   ["financialProfessional", financialProfessionalConfig],
 ]);
