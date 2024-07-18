@@ -99,6 +99,22 @@ const HoursCard = ({
       .is-today {
         font-weight: 700;
       }
+      
+      .HoursTable-row {
+        display: flex;
+        justify-content: space-between;
+        width: 18rem;
+      }
+
+      .HoursTable-day {
+        flex: 0 0 110px;
+      }
+
+      .HoursTable-intervals {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 auto;
+      }
   `;
 
   return (
