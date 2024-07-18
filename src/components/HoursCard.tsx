@@ -101,14 +101,6 @@ const HoursCard = ({
       }
   `;
 
-  const entityField = <EntityField displayName="Hours" fieldId="hours">
-    {hours && <HoursTable
-        hours={hours as HoursType}
-        startOfWeek={startOfWeek}
-        collapseDays={collapseDays}
-    />}
-  </EntityField>
-
   return (
     <Section
       className="flex flex-col justify-center components items-center"
@@ -124,7 +116,13 @@ const HoursCard = ({
         >
           {heading.text}
         </Heading>}
-        {entityField}
+        <EntityField displayName="Hours" fieldId="hours">
+          {hours && <HoursTable
+              hours={hours as HoursType}
+              startOfWeek={startOfWeek}
+              collapseDays={collapseDays}
+          />}
+        </EntityField>
         {additionalHoursText && showAdditionalHoursText && (
           <EntityField displayName="Hours Text" fieldId="additionalHoursText">
             <div className="mt-4">{additionalHoursText}</div>
