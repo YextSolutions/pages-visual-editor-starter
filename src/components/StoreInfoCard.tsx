@@ -50,7 +50,7 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
 };
 
 const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
-  const address = useDocument<LocationStream>((document) => document.address) ?? {};
+  const address = useDocument<LocationStream>((document) => document.address);
   const phoneNumber = formatPhoneNumber(
     useDocument<LocationStream>((document) => document.mainPhone)
   );
@@ -72,10 +72,10 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
           {heading.text}
         </Heading>
         <EntityField displayName="Address" fieldId="address">
-          <Address
-            address={address}
-            lines={[["line1"], ["line2", "city", "region", "postalCode"]]}
-          />
+          {address && <Address
+              address={address}
+              lines={[["line1"], ["line2", "city", "region", "postalCode"]]}
+          />}
         </EntityField>
         <div className="pt-2.5" />
         <Link

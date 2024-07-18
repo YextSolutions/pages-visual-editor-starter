@@ -2,7 +2,7 @@ import { ComponentConfig, Fields } from "@measured/puck";
 import { BodyProps } from "./atoms/body";
 import { CTAProps } from "./atoms/cta";
 import { Heading, HeadingProps } from "./atoms/heading";
-import {C_productSection, ComplexImage, Cta, LocationStream} from "../types/autogen";
+import { C_productSection, LocationStream } from "../types/autogen";
 import { useDocument } from "../hooks/useDocument";
 import { Section } from "./atoms/section";
 import { Card } from "./Card";
@@ -147,30 +147,9 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
   },
 };
 
-const PLACEHOLDER_PRODUCTS = {
-  sectionTitle: "title",
-  linkedProducts: [
-    {
-      name: "product",
-      c_productPromo: "promo",
-      c_description: "description",
-      c_coverPhoto: {
-        image: {
-          url: "https://placehold.co/1024x200",
-          width: 1024,
-          height: 200
-        }
-      },
-      c_productCTA: {
-        name: "call to action",
-      }
-    }
-  ]
-}
-
 const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
   const productSection: C_productSection = useDocument<LocationStream>(
-    (document) => document.c_productSection ?? PLACEHOLDER_PRODUCTS,
+    (document) => document.c_productSection ?? {},
   );
   return (
     <Section className="flex flex-col justify-center bg-white components">
@@ -189,7 +168,7 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
               gridTemplateColumns: `repeat(${productSection.linkedProducts.length}, 1fr)`,
             }}
           >
-            {productSection.linkedProducts.map((product, idx) => (
+            {productSection.linkedProducts?.map((product, idx) => (
               <div
                 key={idx}
                 style={{

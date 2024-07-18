@@ -82,8 +82,6 @@ const hoursCardFields: Fields<HoursCardProps> = {
   },
 };
 
-const HOURS_MISSING_TEXT = "The Hours field is missing on this entity"
-
 const HoursCard = ({
   heading,
   startOfWeek,
@@ -119,11 +117,11 @@ const HoursCard = ({
           {heading.text}
         </Heading>
         <EntityField displayName="Hours" fieldId="hours">
-          {hours ? <HoursTable
+          {hours && <HoursTable
               hours={hours as HoursType}
               startOfWeek={startOfWeek}
               collapseDays={collapseDays}
-          /> : <div>{HOURS_MISSING_TEXT}</div>}
+          />}
         </EntityField>
         {additionalHoursText && showAdditionalHoursText && (
           <EntityField displayName="Hours Text" fieldId="additionalHoursText">

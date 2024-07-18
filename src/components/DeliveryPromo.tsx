@@ -98,18 +98,6 @@ const deliveryPromoFields: Fields<DeliveryPromoProps> = {
   },
 };
 
-const PLACEHOLDER_DELIVERY_PROMO = {
-  title: "title",
-  description: "description",
-  image: {
-    image: {
-      url: "https://placehold.co/640x360",
-      width: 640,
-      height: 360
-    }
-  }
-}
-
 const DeliveryPromo = ({
   imageMode,
   promoTitle,
@@ -117,7 +105,7 @@ const DeliveryPromo = ({
   promoCTA,
 }: DeliveryPromoProps) => {
   const deliveryPromo: C_deliveryPromo = useDocument<LocationStream>(
-    (document) => document.c_deliveryPromo ?? PLACEHOLDER_DELIVERY_PROMO,
+    (document) => document.c_deliveryPromo ?? {},
   );
 
   return (
