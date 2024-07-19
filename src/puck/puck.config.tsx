@@ -36,6 +36,21 @@ type FinancialProfessionalProps = {
   FeaturedEvents: FeaturedEventsProps;
 };
 
+type PageProps = {
+  Hero: HeroProps;
+  Bio: BioProps;
+  TeamGrid: TeamGridProps;
+  FeaturedBlogs: FeaturedBlogsProps;
+  Locator: LocatorProps;
+  BodyContainer: BodyContainerProps;
+  ContactForm: ContactFormProps;
+  Columns: ColumnsProps;
+  InfoCard: InfoCardProps;
+  // Services: ServicesProps;
+  Divider: DividerProps;
+  FeaturedEvents: FeaturedEventsProps;
+};
+
 // All the available components for locations
 // export const branchConfig: Config<BranchProps> = {
 //   components: {
@@ -124,6 +139,48 @@ export const financialProfessionalConfig: Config<FinancialProfessionalProps> = {
   },
 };
 
+export const pageConfig: Config<PageProps> = {
+  components: {
+    Hero,
+    Bio,
+    TeamGrid,
+    FeaturedBlogs,
+    Locator,
+    BodyContainer,
+    ContactForm,
+    Columns: ColumnsComponent,
+    InfoCard,
+    Services,
+    Divider,
+    FeaturedEvents,
+  },
+  categories: {
+    layouts: {
+      components: ["Columns", "BodyContainer", "InfoCard", "Divider"],
+    },
+    core: {
+      components: [
+        "Hero",
+        "Bio",
+        "TeamGrid",
+        "FeaturedBlogs",
+        // "Services",
+        "FeaturedEvents",
+      ],
+    },
+    forms: {
+      components: ["ContactForm"],
+    },
+    other: {
+      components: ["Locator"],
+    },
+  },
+  root: {
+    render: Root,
+  },
+};
+
 export const puckConfigs = new Map<string, Config>([
   ["financialProfessional", financialProfessionalConfig],
+  ["page", pageConfig],
 ]);
