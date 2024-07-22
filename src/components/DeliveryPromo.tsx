@@ -3,7 +3,7 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { Body, BodyProps } from "./atoms/body";
 import { ButtonProps } from "./atoms/button";
 import { C_deliveryPromo, LocationStream } from "../types/autogen";
-import { useDocument } from "@yext/pages";
+import { useDocument } from "@yext/pages/util";
 import { Image } from "@yext/pages-components";
 import { CTA } from "./atoms/cta";
 import { Section } from "./atoms/section";

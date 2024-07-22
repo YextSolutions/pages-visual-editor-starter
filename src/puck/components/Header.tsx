@@ -18,7 +18,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
-import { useDocument } from "@yext/pages";
+import { useDocument } from "@yext/pages/util";
 import { Button } from "../ui/button";
 import { useEntityField } from "../../components/EntityField";
 import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";

@@ -4,7 +4,7 @@ import { BodyProps } from "./atoms/body";
 import { Section } from "./atoms/section";
 import { C_faqSection, LocationStream } from "../types/autogen";
 import { LexicalRichText } from "@yext/pages-components";
-import { useDocument } from "@yext/pages";
+import { useDocument } from "@yext/pages/util";
 import { Body } from "./atoms/body";
 import {
   Accordion,

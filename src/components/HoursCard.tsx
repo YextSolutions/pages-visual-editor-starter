@@ -1,5 +1,5 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "@yext/pages";
+import { useDocument } from "@yext/pages/util";
 import { LocationStream, Hours } from "../types/autogen";
 import {
   DayOfWeekNames,

@@ -3,7 +3,7 @@ import { BodyProps } from "./atoms/body";
 import { CTAProps } from "./atoms/cta";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { C_productSection, LocationStream } from "../types/autogen";
-import { useDocument } from "@yext/pages";
+import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
 import { Card } from "./Card";
 import { EntityField } from "./EntityField";

@@ -1,5 +1,5 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "@yext/pages";
+import { useDocument } from "@yext/pages/util";
 import { LocationStream } from "../types/autogen";
 import {Address, AddressType, getDirections} from "@yext/pages-components";
 import { Section } from "./atoms/section";
@@ -50,7 +50,8 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
 };
 
 const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
-  const {address, mainPhone: phoneNumber, emails} = useDocument<LocationStream>();
+  const {address, mainPhone, emails} = useDocument<LocationStream>();
+  const phoneNumber = formatPhoneNumber(mainPhone);
   const coordinates = getDirections(address as AddressType);
 
   return (
