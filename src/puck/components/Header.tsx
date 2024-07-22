@@ -31,7 +31,8 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: (data: Data) => Promise<void>
+  handleSaveData: (data: Data) => Promise<void>,
+  isDevMode: boolean
 ) => {
   const entityDocument = useDocument();
   const {
@@ -84,16 +85,16 @@ export const customHeader = (
         >
           View Page
         </Button>
-        <Button
-          variant="secondary"
-          disabled={histories.length === 0}
-          onClick={async () => {
-            await handleSaveData(data);
-            handleClearLocalChanges();
-          }}
+        {isDevMode ? null : <Button
+            variant="secondary"
+            disabled={histories.length === 0}
+            onClick={async () => {
+              await handleSaveData(data);
+              handleClearLocalChanges();
+            }}
         >
           Publish
-        </Button>
+        </Button>}
       </div>
     </header>
   );

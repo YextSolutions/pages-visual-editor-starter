@@ -126,7 +126,8 @@ export const Editor = ({
               handleClearLocalChanges,
               handleHistoryChange,
               appState.data,
-              handleSave
+              handleSave,
+              templateMetadata.isDevMode
             );
           },
         }}

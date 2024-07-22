@@ -251,7 +251,7 @@ const Edit: () => JSX.Element = () => {
             isLoading={isLoading}
             index={historyIndex}
             histories={histories}
-            clearHistory={templateMetadata?.isDev ? clearLocalStorage : clearHistory}
+            clearHistory={templateMetadata?.isDevMode ? clearLocalStorage : clearHistory}
             templateMetadata={templateMetadata}
             saveState={saveState}
             saveSaveState={saveSaveState}
