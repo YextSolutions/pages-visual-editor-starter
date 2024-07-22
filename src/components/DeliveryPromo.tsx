@@ -3,7 +3,7 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { Body, BodyProps } from "./atoms/body";
 import { ButtonProps } from "./atoms/button";
 import { C_deliveryPromo, LocationStream } from "../types/autogen";
-import { useDocument } from "../hooks/useDocument";
+import { useDocument } from "@yext/pages";
 import { Image } from "@yext/pages-components";
 import { CTA } from "./atoms/cta";
 import { Section } from "./atoms/section";
@@ -104,9 +104,7 @@ const DeliveryPromo = ({
   promoDescription,
   promoCTA,
 }: DeliveryPromoProps) => {
-  const deliveryPromo: C_deliveryPromo = useDocument<LocationStream>(
-    (document) => document.c_deliveryPromo
-  );
+  const {c_deliveryPromo: deliveryPromo} = useDocument<LocationStream>();
 
   return (
     <Section className="components">

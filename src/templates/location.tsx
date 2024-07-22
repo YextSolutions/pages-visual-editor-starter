@@ -7,10 +7,10 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
   HeadConfig,
+  DocumentProvider,
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../puck/puck.config";
-import { DocumentProvider } from "../hooks/useDocument";
 import { getTemplatePuckData } from "../utils/puckDataHelper";
 
 export const config: TemplateConfig = {

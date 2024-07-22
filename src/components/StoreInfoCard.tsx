@@ -1,7 +1,7 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "../hooks/useDocument";
+import { useDocument } from "@yext/pages";
 import { LocationStream } from "../types/autogen";
-import { Address, getDirections } from "@yext/pages-components";
+import {Address, AddressType, getDirections} from "@yext/pages-components";
 import { Section } from "./atoms/section";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { Link } from "@yext/pages-components";
@@ -50,12 +50,8 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
 };
 
 const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
-  const address = useDocument<LocationStream>((document) => document.address);
-  const phoneNumber = formatPhoneNumber(
-    useDocument<LocationStream>((document) => document.mainPhone)
-  );
-  const emails = useDocument<LocationStream>((document) => document.emails);
-  const coordinates = getDirections(address);
+  const {address, mainPhone: phoneNumber, emails} = useDocument<LocationStream>();
+  const coordinates = getDirections(address as AddressType);
 
   return (
     <Section
@@ -73,7 +69,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
         </Heading>
         <EntityField displayName="Address" fieldId="address">
           <Address
-            address={address}
+            address={address as AddressType}
             lines={[["line1"], ["line2", "city", "region", "postalCode"]]}
           />
         </EntityField>

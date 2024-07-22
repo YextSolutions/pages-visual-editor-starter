@@ -1,5 +1,5 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "../hooks/useDocument";
+import { useDocument } from "@yext/pages";
 import { LocationStream, Hours } from "../types/autogen";
 import {
   DayOfWeekNames,
@@ -88,12 +88,7 @@ const HoursCard = ({
   collapseDays,
   showAdditionalHoursText,
 }: HoursCardProps) => {
-  const hours: Hours = useDocument<LocationStream>(
-    (document) => document.hours
-  );
-  const additionalHoursText: string = useDocument<LocationStream>(
-    (document) => document.additionalHoursText
-  );
+  const {hours, additionalHoursText} = useDocument<LocationStream>();
 
   const css = `
       .is-today {

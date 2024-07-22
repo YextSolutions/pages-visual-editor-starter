@@ -4,7 +4,7 @@ import { BodyProps } from "./atoms/body";
 import { Section } from "./atoms/section";
 import { C_faqSection, LocationStream } from "../types/autogen";
 import { LexicalRichText } from "@yext/pages-components";
-import { useDocument } from "../hooks/useDocument";
+import { useDocument } from "@yext/pages";
 import { Body } from "./atoms/body";
 import {
   Accordion,
@@ -107,9 +107,7 @@ const FAQFields: Fields<FAQProps> = {
 };
 
 const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
-  const faq: C_faqSection = useDocument<LocationStream>(
-    (document) => document.c_faqSection
-  );
+  const {c_faqSection: faq} = useDocument<LocationStream>();
 
   return (
     <Section className="flex flex-col justify-center bg-white components">
