@@ -36,7 +36,7 @@
       "width": 1946
     },
     "c_visualConfiguration": {
-      "data": "{“root”:{},“content”:[],“zones”:{}}",
+      "data": "{\"root\":{},\"content\":[],\"zones\":{}}",
       "template": "location"
     },
     "name": "Store Page"

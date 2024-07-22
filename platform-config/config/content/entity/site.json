@@ -3,7 +3,7 @@
   "$schema": "https://schema.yext.com/config/km/entity/v1",
   "primaryLocale": "en",
   "content": {
-    "c_locationVisualConfiguration": "{“root”:{},“content”:[],“zones”:{}}",
+    "c_locationVisualConfiguration": "{\"root\":{},\"content\":[],\"zones\":{}}",
     "c_visualLayouts": [
       "locationVisualConfiguration"
     ],
