@@ -36,7 +36,7 @@
       "width": 1946
     },
     "c_visualConfiguration": {
-      "data": "{\"root\":{\"props\":{}},\"content\":[{\"type\":\"StoreInfoCard\",\"props\":{\"heading\":{\"text\":\"Information\",\"size\":\"subheading\",\"color\":\"default\"},\"id\":\"StoreInfoCard-82a98715-89c5-4ed1-84b1-02ed1ed8cb8e\"}},{\"type\":\"Promo\",\"props\":{\"imageMode\":\"right\",\"promoTitle\":{\"text\":\"title\",\"size\":\"section\",\"color\":\"default\"},\"promoDescription\":{\"text\":\"description\",\"size\":\"base\",\"weight\":\"default\"},\"promoCTA\":{\"variant\":\"default\"},\"image\":{\"url\":\"https://placehold.co/640x360\"},\"id\":\"Promo-913355dd-763f-4a66-a4c3-bd99a3ebb2b2\"}},{\"type\":\"Columns\",\"props\":{\"distribution\":\"auto\",\"columns\":[{},{}],\"id\":\"Columns-0f84c54a-ef26-4d3a-887f-40194ee9aeec\"}}],\"zones\":{\"Columns-0f84c54a-ef26-4d3a-887f-40194ee9aeec:column-0\":[],\"Columns-0f84c54a-ef26-4d3a-887f-40194ee9aeec:column-1\":[]}}",
+      "data": "{“root”:{},“content”:[],“zones”:{}}",
       "template": "location"
     },
     "name": "Store Page"
