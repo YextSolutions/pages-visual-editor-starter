@@ -13,6 +13,27 @@ export interface FinancialProfessionalStream {
   c_financialProfessionalVisualConfiguration: string;
 }
 
+export interface PageStream {
+  id: string;
+  name: string;
+  slug: string;
+  c_financialProfessionalVisualConfiguration: string;
+  contentBlocks: ContentBlock[];
+}
+
+export interface ContentBlock {
+  id: string;
+  name: string;
+  richTextDescriptionV2?: Record<string, any>;
+  c_featuredFile?: string;
+  c_featuredVideo?: string;
+}
+
+export interface FeaturedFile {
+  id: string;
+  name: string;
+}
+
 export interface Address {
   line1: string;
   line2?: string;

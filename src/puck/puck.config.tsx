@@ -1,4 +1,4 @@
-import type { Config } from "@measured/puck";
+import type { Config, Content } from "@measured/puck";
 import { Hero, HeroProps } from "../components/Hero";
 import { Bio, BioProps } from "../components/Bio";
 import { TeamGrid, TeamGridProps } from "../components/TeamGrid";
@@ -15,6 +15,8 @@ import {
   FeaturedEvents,
 } from "../components/FeaturedEvents";
 import { ColumnsProps, ColumnsComponent } from "../components/Columns";
+import { PromoProps, PromoComponent } from "../components/Promo";
+import { ContentBlockProps, ContentBlock } from "../components/ContentBlock";
 
 // type ProductProps = {
 //   Toggle: ToggleProps;
@@ -49,6 +51,8 @@ type PageProps = {
   // Services: ServicesProps;
   Divider: DividerProps;
   FeaturedEvents: FeaturedEventsProps;
+  Promo: PromoProps;
+  ContentBlock: ContentBlockProps;
 };
 
 // All the available components for locations
@@ -153,6 +157,8 @@ export const pageConfig: Config<PageProps> = {
     Services,
     Divider,
     FeaturedEvents,
+    Promo: PromoComponent,
+    ContentBlock,
   },
   categories: {
     layouts: {
@@ -172,7 +178,7 @@ export const pageConfig: Config<PageProps> = {
       components: ["ContactForm"],
     },
     other: {
-      components: ["Locator"],
+      components: ["Locator", "Promo", "ContentBlock"],
     },
   },
   root: {

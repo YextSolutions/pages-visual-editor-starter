@@ -18,7 +18,6 @@ export const config: TemplateConfig = {
   stream: {
     $id: "page-stream",
     filter: {
-      // savedFilterIds: ["1384352191"],
       entityTypes: ["ce_page"],
     },
     fields: [
@@ -30,8 +29,8 @@ export const config: TemplateConfig = {
       "photoGallery",
       "c_coverPhoto",
       "c_hero",
-    //   "c_visualConfigurations",
-    //   "c_pages_layouts.c_visualConfiguration",
+      "c_visualConfigurations",
+      "c_pages_layouts.c_visualConfiguration",
       "c_advisorBio",
       "c_servicesOffered.servicesOptions.id",
       "c_servicesOffered.servicesOptions.name",
@@ -55,6 +54,11 @@ export const config: TemplateConfig = {
       "c_insights.blogs.landingPageUrl",
       "c_insights.blogs.photoGallery",
       "c_locator",
+      "c_contentBlocks.id",
+      "c_contentBlocks.name",
+      "c_contentBlocks.richTextDescriptionV2",
+      "c_contentBlocks.c_featuredFile",
+      "c_contentBlocks.c_featuredVideo",
     ],
     localization: {
       locales: ["en"],
@@ -117,10 +121,7 @@ const Page: Template<TemplateRenderProps> = ({ document }) => {
   console.log(document);
   return (
     <DocumentProvider value={document}>
-      <Render
-        config={pageConfig as Config}
-        data={visualTemplate}
-      />
+      <Render config={pageConfig as Config} data={visualTemplate} />
     </DocumentProvider>
   );
 };
