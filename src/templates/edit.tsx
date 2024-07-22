@@ -51,12 +51,14 @@ const Edit: () => JSX.Element = () => {
 
   /**
    * Clears the user's localStorage and resets the current Puck history
+   * @param isDevMode
    * @param role
    * @param templateId
    * @param layoutId
    * @param entityId
    */
   const clearLocalStorage = (
+    isDevMode: boolean,
     role: string,
     templateId: string,
     layoutId?: number,
@@ -65,24 +67,26 @@ const Edit: () => JSX.Element = () => {
     setHistories([]);
     setHistoryIndex(-1);
     window.localStorage.removeItem(
-      getLocalStorageKey(role, templateId, layoutId, entityId)
+      getLocalStorageKey(isDevMode, role, templateId, layoutId, entityId)
     );
   };
 
   /**
    * Clears localStorage and resets the save data in the DB
+   * @param isDevMode
    * @param role
    * @param templateId
    * @param layoutId
    * @param entityId
    */
   const clearHistory = (
+    isDevMode: boolean,
     role: string,
     templateId: string,
     layoutId?: number,
     entityId?: number
   ) => {
-    clearLocalStorage(role, templateId, layoutId, entityId);
+    clearLocalStorage(isDevMode, role, templateId, layoutId, entityId);
     deleteSaveState();
   };
 
@@ -107,6 +111,7 @@ const Edit: () => JSX.Element = () => {
     // Nothing in save_state table, start fresh from Content
     if (!saveState) {
       clearLocalStorage(
+        templateMetadata.isDevMode,
         templateMetadata.role,
         templateMetadata.templateId,
         templateMetadata.layoutId,
@@ -124,6 +129,7 @@ const Edit: () => JSX.Element = () => {
     // Check localStorage for existing Puck history
     const localHistoryArray = window.localStorage.getItem(
       getLocalStorageKey(
+        templateMetadata.isDevMode,
         templateMetadata.role,
         templateMetadata.templateId,
         templateMetadata.layoutId,
@@ -149,6 +155,7 @@ const Edit: () => JSX.Element = () => {
 
     // otherwise start fresh - this user doesn't have localStorage that reflects the saved state
     clearLocalStorage(
+      templateMetadata.isDevMode,
       templateMetadata.role,
       templateMetadata.templateId,
       templateMetadata.layoutId,
@@ -250,7 +257,7 @@ const Edit: () => JSX.Element = () => {
             isLoading={isLoading}
             index={historyIndex}
             histories={histories}
-            clearHistory={clearHistory}
+            clearHistory={templateMetadata?.isDevMode ? clearLocalStorage : clearHistory}
             templateMetadata={templateMetadata}
             saveState={saveState}
             saveSaveState={saveSaveState}
