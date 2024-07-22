@@ -14,6 +14,7 @@ export interface EditorProps {
   histories: Array<{ data: any; id: string }>;
   index: number;
   clearHistory: (
+    isDevMode: boolean,
     role: string,
     templateId: string,
     layoutId?: number,
@@ -66,6 +67,7 @@ export const Editor = ({
 
           window.localStorage.setItem(
             getLocalStorageKey(
+              templateMetadata.isDevMode,
               templateMetadata.role,
               templateMetadata.templateId,
               templateMetadata.layoutId,
@@ -87,6 +89,7 @@ export const Editor = ({
 
   const handleClearLocalChanges = () => {
     clearHistory(
+      templateMetadata.isDevMode,
       templateMetadata.role,
       templateMetadata.templateId,
       templateMetadata.layoutId,
