@@ -49,7 +49,7 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
         {props.children}
       </Tag>
     );
-  },
+  }
 );
 Heading.displayName = "Heading";
 

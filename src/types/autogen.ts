@@ -1,4 +1,4 @@
-import { HoursType } from "@yext/pages-components";
+import { ComplexImageType, HoursType } from "@yext/pages-components";
 
 export interface SiteStream {
   c_locationVisualConfiguration: string;
@@ -18,20 +18,30 @@ export interface PageStream {
   name: string;
   slug: string;
   c_financialProfessionalVisualConfiguration: string;
-  contentBlocks: ContentBlock[];
+  c_contentBlocks?: ContentBlock[];
 }
 
 export interface ContentBlock {
   id: string;
   name: string;
   richTextDescriptionV2?: Record<string, any>;
-  c_featuredFile?: string;
+  c_featuredFile?: FeaturedFile;
   c_featuredVideo?: string;
 }
 
 export interface FeaturedFile {
   id: string;
   name: string;
+  file: File;
+  filePreviewImage: ComplexImageType;
+}
+
+export interface File {
+  mimeType: string;
+  name: string;
+  size: string;
+  sourceUrl: string;
+  url: string;
 }
 
 export interface Address {
