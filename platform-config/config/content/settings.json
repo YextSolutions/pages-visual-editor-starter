@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.yext.com/config/km/settings/v1",
+  "primaryEntityType": "location",
+  "entityTypeSettings": [
+    {
+      "entityType": "location",
+      "defaultFieldEligibilityGroup": "location.default",
+      "disabled": false
+    },
+    {
+      "entityType": "ce_site",
+      "defaultFieldEligibilityGroup": "ce_site.default",
+      "disabled": false
+    },
+    {
+      "entityType": "faq",
+      "disabled": false
+    },
+    {
+      "entityType": "ce_pagesLayout",
+      "defaultFieldEligibilityGroup": "ce_pagesLayout.default",
+      "disabled": false
+    },
+    {
+      "entityType": "product",
+      "defaultFieldEligibilityGroup": "product.default",
+      "disabled": false
+    }
+  ]
+}

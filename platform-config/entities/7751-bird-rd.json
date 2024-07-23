@@ -99,7 +99,6 @@
         }
       }
     },
-    "c_locationVisualConfiguration": "{\"root\":{},\"content\":[],\"zones\":{}}",
     "c_productSection": {
       "sectionTitle": "Featured Menu Items at [[name]] in [[address.city]]",
       "linkedProducts": [
