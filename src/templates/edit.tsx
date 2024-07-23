@@ -3,6 +3,15 @@ import {useState} from "react";
 import {Config} from "@measured/puck";
 import {puckConfigs} from "../puck/puck.config";
 
+// Editor is avaliable at /edit
+export const getPath: GetPath<TemplateProps> = () => {
+  return `edit`;
+};
+
+export const config: TemplateConfig = {
+  name: "edit",
+};
+
 // Render the editor
 const Edit: () => JSX.Element = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
@@ -20,12 +29,12 @@ const Edit: () => JSX.Element = () => {
   useReceiveMessage("getTemplateMetadata", TARGET_ORIGINS, (send, payload) => {
     const puckConfig = puckConfigs.get(payload.templateId);
     setPuckConfig(puckConfig);
-    setTemplateMetadata(payload);
+    setTemplateMetadata(payload as TemplateMetadata);
     send({ status: "success", payload: { message: "payload received" } });
   });
 
   return (
-    <Editor document={entityDocument} puckConfig={puckConfig} templateMetaData={templateMetadata}/>
+    <Editor document={entityDocument} puckConfig={puckConfig!} templateMetadata={templateMetadata!}/>
   );
 };
 
