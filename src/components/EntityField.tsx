@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import {
   Tooltip,
   TooltipArrow,
@@ -54,24 +54,6 @@ type EntityFieldContextProps = {
 const EntityFieldContext = createContext<EntityFieldContextProps | undefined>(
   undefined
 );
-
-export const EntityFieldProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [tooltipsVisible, setTooltipsVisible] = useState(false);
-
-  const toggleTooltips = () => {
-    setTooltipsVisible((prev: boolean) => !prev);
-  };
-
-  return (
-    <EntityFieldContext.Provider value={{ tooltipsVisible, toggleTooltips }}>
-      {children}
-    </EntityFieldContext.Provider>
-  );
-};
 
 export const useEntityField = () => {
   const context = useContext(EntityFieldContext);
