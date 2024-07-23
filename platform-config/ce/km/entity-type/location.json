@@ -1,7 +1,0 @@
-{
-  "$id": "ce_location",
-  "$schema": "https://schema.yext.com/config/km/entity-type/v2",
-  "description": "",
-  "displayName": "Custom Location (DO NOT USE)",
-  "pluralDisplayName": ""
-}
