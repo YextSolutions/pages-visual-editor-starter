@@ -14,6 +14,7 @@ export interface EditorProps {
   histories: Array<{ data: any; id: string }>;
   index: number;
   clearHistory: (
+    isDevMode: boolean,
     role: string,
     templateId: string,
     layoutId?: number,
@@ -56,7 +57,7 @@ export const Editor = ({
       ) {
         historyIndex.current = index;
 
-        if (saveState.hash !== histories[index].id) {
+        if (saveState?.hash !== histories[index].id) {
           saveSaveState({
             payload: {
               hash: histories[index].id,
@@ -66,6 +67,7 @@ export const Editor = ({
 
           window.localStorage.setItem(
             getLocalStorageKey(
+              templateMetadata.isDevMode,
               templateMetadata.role,
               templateMetadata.templateId,
               templateMetadata.layoutId,
@@ -87,6 +89,7 @@ export const Editor = ({
 
   const handleClearLocalChanges = () => {
     clearHistory(
+      templateMetadata.isDevMode,
       templateMetadata.role,
       templateMetadata.templateId,
       templateMetadata.layoutId,
@@ -126,7 +129,8 @@ export const Editor = ({
               handleClearLocalChanges,
               handleHistoryChange,
               appState.data,
-              handleSave
+              handleSave,
+              templateMetadata.isDevMode
             );
           },
         }}

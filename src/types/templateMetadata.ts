@@ -4,4 +4,5 @@ export type TemplateMetadata = {
   templateId: string;
   layoutId?: number;
   entityId?: number;
+  isDevMode: boolean;
 };
