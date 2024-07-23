@@ -48,6 +48,9 @@ export const config: TemplateConfig = {
       locales: ["en"],
     },
   },
+  additionalProperties: {
+    "isVETemplate": true
+  }
 };
 
 export const transformProps = async (data) => {
