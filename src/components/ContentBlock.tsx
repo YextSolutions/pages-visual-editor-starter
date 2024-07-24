@@ -7,6 +7,7 @@ import { ContentBlock as BlockType, PageStream } from "../types/autogen";
 import { Heading } from "./atoms/heading";
 import ContentBlockSelector from "../puck/fields/ContentBlockSelector";
 import { useMemo } from "react";
+import { Skeleton } from "./atoms/skeleton";
 
 export type ContentBlockProps = {
   blockId: string;
@@ -18,7 +19,7 @@ const promoFields: Fields<ContentBlockProps> = {
     type: "custom",
     label: "Block",
     render: ({ id, name, onChange, value }) => (
-      <FieldLabel label={name ?? id}>
+      <FieldLabel label={"Block"}>
         <ContentBlockSelector
           name={name}
           value={value}
@@ -35,11 +36,24 @@ interface ContentBlockDisplayProps {
 
 export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
   const fileImg = block?.c_featuredFile?.filePreviewImage;
+  const featuredVideoUrl = block?.c_featuredVideo?.video?.url;
 
   return (
     <Section className="components">
       <div className="sm:flex">
-        {fileImg && (
+        {featuredVideoUrl ? (
+          <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
+            <iframe
+              width="242"
+              height="185"
+              src={"https://www.youtube.com/embed/dQw4w9WgXcQ"}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="rounded-2xl"
+            ></iframe>
+          </div>
+        ) : fileImg ? (
           <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
             <Image
               className="flex-none rounded-2xl object-cover"
@@ -49,7 +63,7 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
               width={185}
             />
           </div>
-        )}
+        ) : null}
 
         <div>
           <Heading level={4}>{block.name}</Heading>
@@ -60,6 +74,18 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
           )}
         </div>
       </div>
+      {block.c_featuredFile?.label && (
+        <div className="mt-6">
+          <a
+            href={block.c_featuredFile.file.url}
+            target="_top"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline text-2xl font-semibold"
+          >
+            {block.c_featuredFile.label}
+          </a>
+        </div>
+      )}
     </Section>
   );
 };
@@ -82,9 +108,27 @@ export const ContentBlock: ComponentConfig<ContentBlockProps> = {
     }, [blockId, contentBlocks]);
 
     if (!block) {
-      return <> </>;
+      return <ContentBlockSkeleton />;
     }
 
     return <ContentBlockDisplay block={block} />;
   },
+};
+
+export const ContentBlockSkeleton = () => {
+  return (
+    <Section className="components">
+      <div className="sm:flex">
+        <Skeleton className="h-60 w-44 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4" />
+
+        <div>
+          <Skeleton className="h-8 w-32" />
+          <Skeleton className="h-4  mt-4 w-96" />
+          <Skeleton className="h-4 w-full mt-1" />
+          <Skeleton className="h-4 w-full mt-1" />
+          <Skeleton className="h-4 w-full mt-1" />
+        </div>
+      </div>
+    </Section>
+  );
 };

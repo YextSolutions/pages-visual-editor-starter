@@ -27,14 +27,20 @@ export interface ContentBlock {
   name: string;
   richTextDescriptionV2?: Record<string, any>;
   c_featuredFile?: FeaturedFile;
-  c_featuredVideo?: string;
+  c_featuredVideo?: FeaturedVideo;
 }
 
 export interface FeaturedFile {
   id: string;
-  name: string;
+  label: string;
   file: File;
   filePreviewImage: ComplexImageType;
+}
+
+export interface FeaturedVideo {
+  video: {
+    url: string;
+  };
 }
 
 export interface File {

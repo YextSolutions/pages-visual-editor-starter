@@ -45,7 +45,6 @@ const ContentBlockModal = ({
   };
 
   const onRadioChange = (blockId: string) => {
-    console.log("radio change: " + blockId);
     setSelectedBlockId(blockId);
   };
 
@@ -56,7 +55,6 @@ const ContentBlockModal = ({
   const onSubmit = () => {
     onOpenChange(false);
     if (selectedBlockId) {
-      console.log("Selected Block ID: " + selectedBlockId);
       onChange(selectedBlockId);
     }
   };
@@ -65,9 +63,15 @@ const ContentBlockModal = ({
     setShowPreview(false);
   };
 
+  const selectedBlockName = blocks?.find((block) => block.id === value)?.name;
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger>Open</DialogTrigger>
+      <Button className="max-w-64">
+        <DialogTrigger className="w-full truncate">
+          {initialId ? selectedBlockName : "Select Block"}
+        </DialogTrigger>
+      </Button>
       <DialogContent className="min-w-[1100px] overflow-hidden">
         <DialogHeader>
           <DialogTitle>Content Blocks</DialogTitle>
@@ -104,10 +108,7 @@ const ContentBlockModal = ({
                         >
                           Preview Block
                         </Button>
-                        <Button
-                          asChild
-                          className="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
-                        >
+                        <Button asChild>
                           <a
                             href={`https://www.yext.com/s/4189325/entity/edit3?entityIds=${block.uid}`}
                             target="_top"
