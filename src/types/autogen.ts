@@ -6,6 +6,18 @@ export interface SiteStream {
   c_financialProfessionalVisualConfiguration: string;
 }
 
+export interface NavItem {
+  navigationList?: {
+    title?: string;
+    pages?: string[];
+  };
+}
+
+export interface PageSiteStream {
+  c_header: NavItem[];
+  c_theme: string;
+}
+
 export interface FinancialProfessionalStream {
   id: string;
   name: string;
@@ -26,7 +38,7 @@ export interface PageStream {
   c_contentBlocks?: ContentBlock[];
   richTextDescriptionV2: RTFType;
   visualTemplate?: any;
-  _site?: SiteStream;
+  _site?: PageSiteStream;
 }
 
 export interface ContentBlock {

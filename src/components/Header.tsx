@@ -3,6 +3,7 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import SiteLogo from "./SiteLogo";
 import { useDocument } from "../hooks/useDocument";
+import { PageSiteStream, PageStream } from "../types/autogen";
 
 const navigation = [
   { name: "About Us", href: "#" },
@@ -14,7 +15,12 @@ const navigation = [
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { _site } = useDocument();
+  // Use the c_header and c_theme fields from the _site stream to render the header
+  const { c_header, c_theme }: PageSiteStream = useDocument<PageStream>(
+    (document) => document._site
+  );
+  console.log("this is the header: ", c_header);
+  console.log("this is the theme: ", c_theme);
 
   return (
     <header className="bg-white">
