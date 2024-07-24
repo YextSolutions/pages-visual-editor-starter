@@ -22,6 +22,7 @@ export interface PageStream {
 }
 
 export interface ContentBlock {
+  uid: string;
   id: string;
   name: string;
   richTextDescriptionV2?: Record<string, any>;

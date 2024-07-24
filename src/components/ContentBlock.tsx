@@ -6,8 +6,7 @@ import { useDocument } from "../hooks/useDocument";
 import { ContentBlock as BlockType, PageStream } from "../types/autogen";
 import { Heading } from "./atoms/heading";
 import ContentBlockSelector from "../puck/fields/ContentBlockSelector";
-
-const PLACEHOLDER_IMAGE_URL = "https://placehold.co/640x360";
+import { useMemo } from "react";
 
 export type ContentBlockProps = {
   blockId: string;
@@ -28,21 +27,12 @@ const promoFields: Fields<ContentBlockProps> = {
   },
 };
 
-const ContentBlockDisplay = ({ blockId }: ContentBlockProps) => {
-  const contentBlocks: BlockType[] | undefined = useDocument<PageStream>(
-    (document) => document.c_contentBlocks
-  );
+interface ContentBlockDisplayProps {
+  block: BlockType;
+}
 
-  // console.log(blockId);
-
-  // const block = contentBlocks?.find((block) => block.id === blockId);
-  const block = contentBlocks?.[0];
-
+export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
   const fileImg = block?.c_featuredFile?.filePreviewImage;
-
-  if (!block) {
-    return null;
-  }
 
   return (
     <Section className="components">
@@ -63,7 +53,6 @@ const ContentBlockDisplay = ({ blockId }: ContentBlockProps) => {
           <Heading level={4}>{block.name}</Heading>
           {block?.richTextDescriptionV2 && (
             <LexicalRichText
-              // this is correct
               serializedAST={JSON.stringify(block.richTextDescriptionV2.json)}
             />
           )}
@@ -76,5 +65,22 @@ const ContentBlockDisplay = ({ blockId }: ContentBlockProps) => {
 export const ContentBlock: ComponentConfig<ContentBlockProps> = {
   fields: promoFields,
   label: "Content Block",
-  render: ({ blockId }) => <ContentBlockDisplay blockId={blockId} />,
+  render: ({ blockId }) => {
+    const contentBlocks: BlockType[] | undefined = useDocument<PageStream>(
+      (document) => document.c_contentBlocks
+    );
+
+    console.log(blockId);
+    console.log(contentBlocks);
+
+    const block = useMemo(() => {
+      return contentBlocks?.find((block) => block.id === blockId);
+    }, [blockId, contentBlocks]);
+
+    if (!block) {
+      return <> </>;
+    }
+
+    return <ContentBlockDisplay block={block} />;
+  },
 };

@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.css";
-import ContentBlockModal from "./ContentBlockModal";
+import ContentBlockModal from "./SelectorModal";
 import { useState } from "react";
 
 const queryClient = new QueryClient();
