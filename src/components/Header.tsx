@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import SiteLogo from "./SiteLogo";
+import { useDocument } from "../hooks/useDocument";
 
 const navigation = [
   { name: "About Us", href: "#" },
@@ -12,6 +13,8 @@ const navigation = [
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { _site } = useDocument();
 
   return (
     <header className="bg-white">

@@ -13,6 +13,8 @@ siteStream:
   entityId: YEXT_PUBLIC_SITE_ENTITY_ID
   fields:
     - c_visualLayouts.c_visualConfiguration
+    - c_header
+    - c_theme
   localization:
     locales:
       - en

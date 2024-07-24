@@ -25,6 +25,8 @@ export interface PageStream {
   c_financialProfessionalVisualConfiguration: string;
   c_contentBlocks?: ContentBlock[];
   richTextDescriptionV2: RTFType;
+  visualTemplate?: any;
+  _site?: SiteStream;
 }
 
 export interface ContentBlock {
