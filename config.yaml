@@ -15,6 +15,7 @@ siteStream:
     - c_visualLayouts.c_visualConfiguration
     - c_header
     - c_theme
+    - name
   localization:
     locales:
       - en

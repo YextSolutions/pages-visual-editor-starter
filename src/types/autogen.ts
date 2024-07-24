@@ -14,6 +14,7 @@ export interface NavItem {
 }
 
 export interface PageSiteStream {
+  name: string;
   c_header: NavItem[];
   c_theme: string;
 }
