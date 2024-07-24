@@ -63,9 +63,9 @@ export const config: TemplateConfig = {
     localization: {
       locales: ["en"],
     },
-    additionalProperties: {
-      isVETemplate: true,
-    },
+  },
+  additionalProperties: {
+    isVETemplate: true,
   },
 };
 
