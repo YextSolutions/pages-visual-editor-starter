@@ -12,6 +12,7 @@ import {HoursCardComponent as HoursCard, HoursCardProps} from "../components/Hou
 import {PromoComponent as Promo, PromoProps} from "../components/Promo";
 import {FeaturedItemsComponent as FeaturedItems, FeaturedItemsProps} from "../components/FeaturedItems";
 
+import "@yext/visual-editor/style.css"
 
 type LocationProps = {
   Hero: HeroProps;
