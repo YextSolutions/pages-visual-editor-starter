@@ -55,6 +55,9 @@ export const config: TemplateConfig = {
       locales: ["en"],
     },
   },
+  additionalProperties: {
+    "isVETemplate": true
+  }
 };
 
 // Right now financial professional entity data isn't used

@@ -9,6 +9,7 @@ import {
 import { Section } from "./atoms/section";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { EntityField } from "./EntityField";
+import "../index.css";
 import "@yext/pages-components/style.css";
 
 export type HoursCardProps = {
@@ -95,18 +96,11 @@ const HoursCard = ({
     (document) => document.additionalHoursText
   );
 
-  const css = `
-      .is-today {
-        font-weight: 700;
-      }
-  `;
-
   return (
     <Section
       className="flex flex-col justify-center components items-center"
       padding="small"
     >
-      <style>{css}</style>
       <div>
         <Heading
           level={2}

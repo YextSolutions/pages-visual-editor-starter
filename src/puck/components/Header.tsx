@@ -5,7 +5,7 @@ import {
   PanelRight,
   RotateCcw,
   RotateCw,
-  RectangleEllipsis,
+  MessageSquareText,
 } from "lucide-react";
 import {
   AlertDialog,
@@ -31,7 +31,8 @@ export const customHeader = (
   handleClearLocalChanges: () => void,
   handleHistoryChange: (histories: History[], index: number) => void,
   data: Data,
-  handleSaveData: (data: Data) => Promise<void>
+  handleSaveData: (data: Data) => Promise<void>,
+  isDevMode: boolean
 ) => {
   const entityDocument = useDocument();
   const {
@@ -84,16 +85,16 @@ export const customHeader = (
         >
           View Page
         </Button>
-        <Button
-          variant="secondary"
-          disabled={histories.length === 0}
-          onClick={async () => {
-            await handleSaveData(data);
-            handleClearLocalChanges();
-          }}
+        {isDevMode ? null : <Button
+            variant="secondary"
+            disabled={histories.length === 0}
+            onClick={async () => {
+              await handleSaveData(data);
+              handleClearLocalChanges();
+            }}
         >
           Publish
-        </Button>
+        </Button>}
       </div>
     </header>
   );
@@ -184,14 +185,14 @@ const ToggleEntityFields = () => {
   const { toggleTooltips, tooltipsVisible } = useEntityField();
   return (
     <TooltipProvider>
-      <Tooltip open={tooltipsVisible}>
-        <TooltipTrigger asChild>
+      <Tooltip>
+        <TooltipTrigger>
           <Button variant="ghost" size="icon" onClick={toggleTooltips} className={tooltipsVisible ? "border-2 border-[#5A58F2] rounded-full" : ""}>
-            <RectangleEllipsis className="sm-icon" />
+            <MessageSquareText className="sm-icon" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          Hide Entity Fields
+          {tooltipsVisible ? "Hide Entity Fields" : "Show Entity Fields"}
           <TooltipArrow fill="bg-popover" />
         </TooltipContent>
       </Tooltip>

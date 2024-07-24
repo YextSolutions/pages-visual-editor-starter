@@ -14,6 +14,7 @@ export interface EditorProps {
   histories: Array<{ data: any; id: string }>;
   index: number;
   clearHistory: (
+    isDevMode: boolean,
     role: string,
     templateId: string,
     layoutId?: number,
@@ -66,6 +67,7 @@ export const Editor = ({
 
           window.localStorage.setItem(
             getLocalStorageKey(
+              templateMetadata.isDevMode,
               templateMetadata.role,
               templateMetadata.templateId,
               templateMetadata.layoutId,
@@ -87,6 +89,7 @@ export const Editor = ({
 
   const handleClearLocalChanges = () => {
     clearHistory(
+      templateMetadata.isDevMode,
       templateMetadata.role,
       templateMetadata.templateId,
       templateMetadata.layoutId,
@@ -113,7 +116,7 @@ export const Editor = ({
     <EntityFieldProvider>
       <Puck
         config={puckConfig}
-        data={puckData as Partial<Data>}
+        data={puckData as Partial<Data> ?? {"root":{},"content":[],"zones":{}}}
         initialHistory={
           index === -1 ? undefined : { histories: histories, index: index }
         }
@@ -125,7 +128,8 @@ export const Editor = ({
               handleClearLocalChanges,
               handleHistoryChange,
               appState.data,
-              handleSave
+              handleSave,
+              templateMetadata.isDevMode
             );
           },
         }}
