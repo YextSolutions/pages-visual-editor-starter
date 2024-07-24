@@ -9,7 +9,7 @@ import {
 import { Section } from "./atoms/section";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { EntityField } from "@yext/visual-editor";
-import "../index.css";
+import "./index.css";
 import "@yext/pages-components/style.css";
 
 export type HoursCardProps = {
