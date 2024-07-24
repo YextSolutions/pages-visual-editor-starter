@@ -11,6 +11,8 @@ import { useMemo } from "react";
 export type ContentBlockProps = {
   blockId: string;
 };
+
+// TODO: Content Selector on right side
 const promoFields: Fields<ContentBlockProps> = {
   blockId: {
     type: "custom",
@@ -62,6 +64,8 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
   );
 };
 
+// TODO: Entity fields
+// TODO: render videos
 export const ContentBlock: ComponentConfig<ContentBlockProps> = {
   fields: promoFields,
   label: "Content Block",
