@@ -10,6 +10,7 @@ import {Config} from "@measured/puck";
 import {puckConfigs} from "../puck/puck.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
 import {DocumentProvider} from "@yext/pages/util";
+import '@yext/visual-editor/style.css'
 
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
