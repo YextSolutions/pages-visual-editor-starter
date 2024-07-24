@@ -12,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./atoms/accordion";
-import { EntityField } from "./EntityField";
+import { EntityField } from "@yext/visual-editor";
 
 export type FAQProps = {
   sectionTitle: {
