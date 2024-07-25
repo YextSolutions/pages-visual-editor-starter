@@ -24,6 +24,7 @@ export interface EditorProps {
   saveState: SaveState;
   saveSaveState: (data: any) => void;
   saveVisualConfigData: (data: any) => void;
+  sendHistory: (data: any) => void;
 }
 
 // Render Puck editor
@@ -37,6 +38,7 @@ export const Editor = ({
   saveState,
   saveSaveState,
   saveVisualConfigData,
+  sendHistory,
 }: EditorProps) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
@@ -58,17 +60,21 @@ export const Editor = ({
           JSON.stringify(histories)
         );
 
-        if (templateMetadata.isDevMode) {
-          return;
-        }
-
         if (saveState?.hash !== histories[index].id) {
-          saveSaveState({
-            payload: {
-              hash: histories[index].id,
-              history: JSON.stringify(histories[index].data),
-            },
-          });
+          if (templateMetadata.isDevMode) {
+            sendHistory({
+              payload: {
+                history: JSON.stringify(histories[index].data),
+              },
+            })
+          } else {
+            saveSaveState({
+              payload: {
+                hash: histories[index].id,
+                history: JSON.stringify(histories[index].data),
+              },
+            });
+          }
         }
       }
     },

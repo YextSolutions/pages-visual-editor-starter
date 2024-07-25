@@ -211,9 +211,32 @@ const Edit: () => JSX.Element = () => {
     TARGET_ORIGINS
   );
 
+  const { sendToParent: sendHistory } = useSendMessageToParent(
+    "sendHistory",
+    TARGET_ORIGINS
+  );
+
   useEffect(() => {
     iFrameLoaded({ payload: { message: "iFrame is loaded" } });
   }, []);
+
+  useEffect(() => {
+    if (templateMetadata?.isDevMode) {
+      const localHistory = window.localStorage.getItem(
+        getLocalStorageKey(
+          templateMetadata.isDevMode,
+          templateMetadata.role,
+          templateMetadata.templateId,
+          templateMetadata.layoutId,
+          templateMetadata.entityId
+        )
+      );
+      const localHistoryArray = localHistory ? JSON.parse(localHistory) : [];
+      const historyToSend = JSON.stringify(localHistoryArray.length > 0 ? 
+        localHistoryArray[localHistoryArray.length-1].data : "");
+      sendHistory({ payload: { history: historyToSend } });
+    }
+  }, [templateMetadata]);
 
   useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
     setSaveState(payload);
@@ -300,6 +323,7 @@ const Edit: () => JSX.Element = () => {
             saveState={saveState!}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
+            sendHistory={sendHistory}
           />
         </DocumentProvider>
       ) : (
