@@ -215,6 +215,16 @@ const Edit: () => JSX.Element = () => {
     send({ status: "success", payload: { message: "payload received" } });
   });
 
+  const { sendToParent: pushPageSets } = useSendMessageToParent(
+      "pushPageSets", TARGET_ORIGINS
+  )
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && templateMetadata?.isDevMode) {
+      pushPageSets(pageSets);
+    }
+  }, [templateMetadata]);
+
   const { sendToParent: saveSaveState } = useSendMessageToParent(
     "saveSaveState",
     TARGET_ORIGINS
