@@ -21,7 +21,7 @@
         {
           "name": "data",
           "displayName": "Data",
-          "isRequired": true,
+          "isRequired": false,
           "typeId": "string",
           "type": {
             "stringType": {
