@@ -33,12 +33,13 @@ const ContentBlockModal = ({
   open,
   onOpenChange,
 }: ContentBlockSelectorProps) => {
-  const { data: blocks, error, isLoading } = useContentBlocks();
-  const entityId: string | undefined = useDocument<PageStream>(
-    (document) => document.id
+  const entityUid: string | undefined = useDocument<PageStream>(
+    (document) => document.uid
   );
 
-  console.log(entityId);
+  console.log(entityUid);
+
+  const { data: blocks } = useContentBlocks(entityUid);
 
   const [blockPreviewIdx, setBlockPreviewIdx] = useState<number | null>(null);
   const [selectedBlockId, setSelectedBlockId] = useState<string | undefined>(

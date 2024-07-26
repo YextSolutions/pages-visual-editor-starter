@@ -18,6 +18,7 @@ export interface RTFType {
 }
 
 export interface PageStream {
+  uid: string;
   id: string;
   name: string;
   slug: string;
