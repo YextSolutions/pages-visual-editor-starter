@@ -70,7 +70,7 @@ export const Editor = ({
         );
 
         if (templateMetadata.isDevMode) {
-          return;
+          // return;
         }
 
         console.log("saveState", saveState);
@@ -82,10 +82,10 @@ export const Editor = ({
               history: JSON.stringify(histories[index].data),
             },
           });
-          // setSaveState({
-          //   hash: histories[index].id,
-          //   history: JSON.stringify(histories[index]),
-          // });
+          setSaveState({
+            hash: histories[index].id,
+            history: JSON.stringify(histories[index]),
+          });
         }
       }
     },

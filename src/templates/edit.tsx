@@ -218,6 +218,7 @@ const Edit: () => JSX.Element = () => {
   }, []);
 
   useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
+    console.log("getSaveState");
     setSaveState(payload);
     setSaveStateFetched(true);
     send({ status: "success", payload: { message: "saveState received" } });
