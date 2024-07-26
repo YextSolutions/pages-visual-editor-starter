@@ -82,10 +82,10 @@ export const Editor = ({
               history: JSON.stringify(histories[index].data),
             },
           });
-          setSaveState({
-            hash: histories[index].id,
-            history: JSON.stringify(histories[index]),
-          });
+          // setSaveState({
+          //   hash: histories[index].id,
+          //   history: JSON.stringify(histories[index]),
+          // });
         }
       }
     },
