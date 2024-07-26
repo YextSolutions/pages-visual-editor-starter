@@ -49,6 +49,13 @@ const Edit: () => JSX.Element = () => {
   const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
+  const [pageSetsState, setPageSetsState] = useState<any>(undefined);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPageSetsState(pageSets);
+    }
+  })
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -221,9 +228,11 @@ const Edit: () => JSX.Element = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined" && templateMetadata?.isDevMode) {
-      pushPageSets(pageSets);
+      pushPageSets({
+        payload: pageSetsState,
+      });
     }
-  }, [templateMetadata]);
+  }, [templateMetadata?.isDevMode, pageSetsState]);
 
   const { sendToParent: saveSaveState } = useSendMessageToParent(
     "saveSaveState",
