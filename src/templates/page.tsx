@@ -18,7 +18,7 @@ export const config: TemplateConfig = {
   stream: {
     $id: "page-stream",
     filter: {
-      entityTypes: ["ce_page"],
+      savedFilterIds: ["1392569469"],
     },
     fields: [
       "id",
