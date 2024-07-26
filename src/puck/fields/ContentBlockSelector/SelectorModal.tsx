@@ -13,7 +13,8 @@ import { RadioGroup, RadioGroupItem } from "../../components/radio";
 import { ContentBlockDisplay } from "../../../components/ContentBlock";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import useQueryParameter from "../../../hooks/useQueryParam";
+import { useDocument } from "../../../hooks/useDocument";
+import { PageStream } from "../../../types/autogen";
 
 interface ContentBlockSelectorProps {
   initialId: string;
@@ -33,7 +34,11 @@ const ContentBlockModal = ({
   onOpenChange,
 }: ContentBlockSelectorProps) => {
   const { data: blocks, error, isLoading } = useContentBlocks();
-  const layoutId = useQueryParameter("layoutId");
+  const entityId: string | undefined = useDocument<PageStream>(
+    (document) => document.id
+  );
+
+  console.log(entityId);
 
   const [blockPreviewIdx, setBlockPreviewIdx] = useState<number | null>(null);
   const [selectedBlockId, setSelectedBlockId] = useState<string | undefined>(

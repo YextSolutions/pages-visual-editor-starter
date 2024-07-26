@@ -22,6 +22,7 @@ export const config: TemplateConfig = {
     },
     fields: [
       "id",
+      "uid",
       "name",
       "slug",
       "richTextDescriptionV2",
