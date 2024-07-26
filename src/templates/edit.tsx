@@ -115,6 +115,8 @@ const Edit: () => JSX.Element = () => {
       return;
     }
 
+    console.log("loadPuckDataUsingHistory");
+
     if (templateMetadata.isDevMode) {
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
