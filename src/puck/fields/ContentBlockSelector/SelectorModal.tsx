@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useContentBlocks } from "../../../hooks/useContentBlocks";
 import {
   Dialog,
@@ -12,7 +12,9 @@ import { ContentBlock } from "../../../types/autogen";
 import { Button } from "../../ui/button";
 import { RadioGroup, RadioGroupItem } from "../../components/radio";
 import { ContentBlockDisplay } from "../../../components/ContentBlock";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import useQueryParameter from "../../../hooks/useQueryParam";
 
 interface ContentBlockSelectorProps {
   initialId: string;
@@ -32,12 +34,71 @@ const ContentBlockModal = ({
   onOpenChange,
 }: ContentBlockSelectorProps) => {
   const { data: blocks, error, isLoading } = useContentBlocks();
+  const layoutId = useQueryParameter("layoutId");
+
+  console.log(layoutId);
 
   const [selectedBlockId, setSelectedBlockId] = useState<string | undefined>(
     initialId
   );
   const [previewBlock, setPreviewBlock] = useState<ContentBlock | undefined>();
   const [showPreview, setShowPreview] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [animationDirection, setAnimationDirection] = useState<
+    "left" | "right" | null
+  >(null);
+
+  const itemsPerPage = 6;
+  const totalPages = blocks ? Math.ceil(blocks.length / itemsPerPage) : 0;
+
+  const paginatedBlocks = useMemo(() => {
+    if (!blocks) return [];
+    return Array.from({ length: totalPages }, (_, i) =>
+      blocks.slice(i * itemsPerPage, (i + 1) * itemsPerPage)
+    );
+  }, [blocks, totalPages]);
+
+  const PageComponent = useMemo(() => {
+    return paginatedBlocks.map((page, index) => (
+      <ul role="list" key={index} className="divide-y divide-gray-100">
+        {page.map((block) => (
+          <li
+            key={block.id}
+            className="flex items-center justify-between gap-x-6 py-5"
+          >
+            <div className="min-w-0">
+              <div className="flex items-start gap-x-3">
+                <RadioGroupItem value={block.id} id={block.id} />
+                <label
+                  htmlFor={block.id}
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  {block.name}
+                </label>
+              </div>
+            </div>
+            <div className="flex flex-none items-center gap-x-4">
+              <Button
+                onClick={() => onPreviewBlock(block)}
+                className="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
+              >
+                Preview Block
+              </Button>
+              <Button asChild>
+                <a
+                  href={`https://www.yext.com/s/4189325/entity/edit3?entityIds=${block.uid}`}
+                  target="_top"
+                  rel="noopener noreferrer"
+                >
+                  Edit Block
+                </a>
+              </Button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    ));
+  }, [paginatedBlocks]);
 
   const onPreviewBlock = (block: ContentBlock) => {
     setPreviewBlock(block);
@@ -63,7 +124,45 @@ const ContentBlockModal = ({
     setShowPreview(false);
   };
 
+  const goToNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setAnimationDirection("left");
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const goToPreviousPage = () => {
+    if (currentPage > 0) {
+      setAnimationDirection("right");
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimationDirection(null), 300);
+    return () => clearTimeout(timer);
+  }, [currentPage]);
+
   const selectedBlockName = blocks?.find((block) => block.id === value)?.name;
+
+  const variants = {
+    enter: (direction: string) => {
+      return {
+        x: direction === "left" ? 1000 : -1000,
+        opacity: 0,
+      };
+    },
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: string) => {
+      return {
+        x: direction === "left" ? -1000 : 1000,
+        opacity: 0,
+      };
+    },
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -82,45 +181,25 @@ const ContentBlockModal = ({
               showPreview ? "-translate-x-full" : "translate-x-0"
             } flex`}
           >
-            <div className="w-full flex-shrink-0">
+            <div className="w-full flex-shrink-0 overflow-hidden">
               <RadioGroup value={selectedBlockId} onValueChange={onRadioChange}>
-                <ul role="list" className="divide-y divide-gray-100">
-                  {blocks?.map((block) => (
-                    <li
-                      key={block.id}
-                      className="flex items-center justify-between gap-x-6 py-5"
-                    >
-                      <div className="min-w-0">
-                        <div className="flex items-start gap-x-3">
-                          <RadioGroupItem value={block.id} id={block.id} />
-                          <label
-                            htmlFor={block.id}
-                            className="text-sm font-semibold leading-6 text-gray-900"
-                          >
-                            {block.name}
-                          </label>
-                        </div>
-                      </div>
-                      <div className="flex flex-none items-center gap-x-4">
-                        <Button
-                          onClick={() => onPreviewBlock(block)}
-                          className="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
-                        >
-                          Preview Block
-                        </Button>
-                        <Button asChild>
-                          <a
-                            href={`https://www.yext.com/s/4189325/entity/edit3?entityIds=${block.uid}`}
-                            target="_top"
-                            rel="noopener noreferrer"
-                          >
-                            Edit Block
-                          </a>
-                        </Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <AnimatePresence initial={false} custom={animationDirection}>
+                  <motion.div
+                    key={currentPage}
+                    custom={animationDirection}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.2 },
+                    }}
+                    className="absolute top-0 left-0 w-full"
+                  >
+                    {PageComponent[currentPage]}
+                  </motion.div>
+                </AnimatePresence>
               </RadioGroup>
             </div>
             <div className="w-full flex-shrink-0">
@@ -139,10 +218,32 @@ const ContentBlockModal = ({
             </Button>
           ) : (
             <>
-              <Button variant="secondary" onClick={onCancel}>
-                Cancel
-              </Button>
-              <Button onClick={onSubmit}>Confirm</Button>
+              <div className="flex justify-between w-full">
+                <Button
+                  onClick={goToPreviousPage}
+                  disabled={currentPage === 0}
+                  variant="outline"
+                >
+                  <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+                </Button>
+                <div>
+                  <Button
+                    variant="secondary"
+                    onClick={onCancel}
+                    className="mr-2"
+                  >
+                    Cancel
+                  </Button>
+                  <Button onClick={onSubmit}>Confirm</Button>
+                </div>
+                <Button
+                  onClick={goToNextPage}
+                  disabled={currentPage === totalPages - 1}
+                  variant="outline"
+                >
+                  Next <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
             </>
           )}
         </DialogFooter>
