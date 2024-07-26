@@ -49,6 +49,7 @@ export const Editor = ({
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
       console.log("handle history change");
+      console.log("index", index);
       if (histories.length > 0) {
         window.localStorage.setItem(
           getLocalStorageKey(
