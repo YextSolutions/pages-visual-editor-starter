@@ -68,8 +68,6 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
         <div>
           <Heading level={4}>{block.name}</Heading>
           {rtfString && <LexicalRichText serializedAST={rtfString} />}
-
-          {rtfString}
         </div>
       </div>
       {block.c_featuredFile?.label && (
