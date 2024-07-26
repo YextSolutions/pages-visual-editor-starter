@@ -51,6 +51,7 @@ export const Editor = ({
       console.log("handle history change");
       console.log("index", index);
       if (histories.length > 0) {
+        console.log("setting localStorage");
         window.localStorage.setItem(
           getLocalStorageKey(
             templateMetadata.isDevMode,
@@ -82,7 +83,7 @@ export const Editor = ({
         }
       }
     },
-    [templateMetadata, getLocalStorageKey, setSaveState]
+    [templateMetadata, getLocalStorageKey, saveState]
   );
 
   const handleClearLocalChanges = () => {
