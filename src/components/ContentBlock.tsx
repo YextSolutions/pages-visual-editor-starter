@@ -7,6 +7,9 @@ import { ContentBlock as BlockType, PageStream } from "../types/autogen";
 import { Heading } from "./atoms/heading";
 import ContentBlockSelector from "../puck/fields/ContentBlockSelector";
 import { Skeleton } from "./atoms/skeleton";
+import { useElementSize } from "@mantine/hooks";
+import { useEffect } from "react";
+import { cn } from "../utils/cn";
 
 export type ContentBlockProps = {
   blockId: string;
@@ -38,9 +41,11 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
   const featuredVideoUrl = block?.c_featuredVideo?.video?.url;
   const rtfString = JSON.stringify(block?.richTextDescriptionV2?.json);
 
+  const { ref, width, height } = useElementSize();
+
   return (
-    <Section className="components">
-      <div className="sm:flex">
+    <Section ref={ref} className="components">
+      <div className={cn("sm:flex", width < 700 && "sm:flex-col")}>
         {featuredVideoUrl ? (
           <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
             <iframe
@@ -65,7 +70,7 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
           </div>
         ) : null}
 
-        <div>
+        <div className={cn("", width < 700 && "sm:pt-4")}>
           <Heading level={4}>{block.name}</Heading>
           {rtfString && <LexicalRichText serializedAST={rtfString} />}
         </div>
