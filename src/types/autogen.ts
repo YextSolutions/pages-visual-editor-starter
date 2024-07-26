@@ -40,6 +40,7 @@ export interface PageStream {
   richTextDescriptionV2: RTFType;
   visualTemplate?: any;
   _site?: PageSiteStream;
+  c_linkedSites?: any;
 }
 
 export interface ContentBlock {

@@ -18,10 +18,27 @@ import { PageSiteStream, PageStream } from "../types/autogen";
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Use the name, c_header, and c_theme fields from the _site stream to render the header
-  const { name, c_header, c_theme }: PageSiteStream = useDocument<PageStream>(
-    (document) => document._site
-  );
+  // Once Site Stream is fixed, uncomment out this section -------------------------
+   
+  // // Use the name, c_header, and c_theme fields from the _site stream to render the header
+  // const { name, c_header, c_theme }: PageSiteStream = useDocument<PageStream>(
+  //   (document) => document._site
+  // );
+  //   ------------------------------------------------------------------------------
+
+
+  // Once Site Stream is fixed, delete everything below this ------------------------
+    const { c_linkedSites }: PageStream = useDocument<PageStream>(
+      (document) => document
+    ) 
+
+    const name = c_linkedSites[0].name;
+    const c_header = c_linkedSites[0].c_header;
+    const c_theme = c_linkedSites[0].c_theme;
+
+  // --------------------------------------------------------------------------------
+
+  console.log("this is the name: ", name);
   console.log("this is the header: ", c_header);
   console.log("this is the theme: ", c_theme);
 

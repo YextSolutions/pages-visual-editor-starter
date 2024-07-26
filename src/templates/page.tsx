@@ -61,6 +61,10 @@ export const config: TemplateConfig = {
       "c_contentBlocks.richTextDescriptionV2",
       "c_contentBlocks.c_featuredFile",
       "c_contentBlocks.c_featuredVideo",
+      "c_linkedSites.name",
+      "c_linkedSites.c_header",
+      "c_linkedSites.c_theme",
+      "c_linkedSites.c_visualLayouts.c_visualConfiguration",
     ],
     localization: {
       locales: ["en"],
