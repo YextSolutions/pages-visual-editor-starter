@@ -36,11 +36,19 @@ const TARGET_ORIGINS = [
   "https://app.eu.yext.com",
 ];
 
+export type PuckInitialHistory = {
+  histories: History<any>[];
+  index: number;
+};
+
 // Render the editor
 const Edit: () => JSX.Element = () => {
   const [puckData, setPuckData] = useState<Data>();
-  const [histories, setHistories] = useState<History<any>[]>([]);
-  const [historyIndex, setHistoryIndex] = useState<number>(0);
+  const [puckInitialHistory, setPuckInitialHistory] =
+    useState<PuckInitialHistory>({
+      histories: [],
+      index: -1,
+    });
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [templateMetadata, setTemplateMetadata] = useState<TemplateMetadata>();
   const [visualConfigurationData, setVisualConfigurationData] = useState<any>(); // json data
@@ -72,8 +80,6 @@ const Edit: () => JSX.Element = () => {
     layoutId?: number,
     entityId?: number
   ) => {
-    setHistories([]);
-    setHistoryIndex(-1);
     window.localStorage.removeItem(
       getLocalStorageKey(isDevMode, role, templateId, layoutId, entityId)
     );
@@ -116,6 +122,35 @@ const Edit: () => JSX.Element = () => {
       return;
     }
 
+    if (templateMetadata.isDevMode) {
+      // Check localStorage for existing Puck history
+      const localHistoryArray = window.localStorage.getItem(
+        getLocalStorageKey(
+          templateMetadata.isDevMode,
+          templateMetadata.role,
+          templateMetadata.templateId,
+          templateMetadata.layoutId,
+          templateMetadata.entityId
+        )
+      );
+
+      // Use localStorage directly if it exists
+      if (localHistoryArray) {
+        const localHistories = JSON.parse(localHistoryArray);
+        const localHistoryIndex = localHistories.length - 1;
+        setPuckInitialHistory({
+          histories: localHistories,
+          index: localHistoryIndex,
+        });
+        setPuckData(localHistories[localHistoryIndex].data.data);
+        return;
+      }
+
+      // Otherwise start from the data saved to Content
+      setPuckData(visualConfigurationData);
+      return;
+    }
+
     // Nothing in save_state table, start fresh from Content
     if (!saveState) {
       clearLocalStorage(
@@ -145,7 +180,7 @@ const Edit: () => JSX.Element = () => {
       )
     );
 
-    // No localStorage
+    // No localStorage, start from saveState
     if (!localHistoryArray) {
       return;
     }
@@ -156,8 +191,10 @@ const Edit: () => JSX.Element = () => {
 
     // If local storage reset Puck history to it
     if (localHistoryIndex !== -1) {
-      setHistoryIndex(localHistoryIndex);
-      setHistories(JSON.parse(localHistoryArray));
+      setPuckInitialHistory({
+        histories: JSON.parse(localHistoryArray),
+        index: localHistoryIndex,
+      });
       return;
     }
 
@@ -170,8 +207,7 @@ const Edit: () => JSX.Element = () => {
       templateMetadata.entityId
     );
   }, [
-    setHistories,
-    setHistoryIndex,
+    setPuckInitialHistory,
     setPuckData,
     clearLocalStorage,
     getLocalStorageKey,
@@ -275,14 +311,14 @@ const Edit: () => JSX.Element = () => {
             puckConfig={puckConfig}
             puckData={puckData}
             isLoading={isLoading}
-            index={historyIndex}
-            histories={histories}
-            clearHistory={templateMetadata?.isDevMode ? clearLocalStorage : clearHistory}
+            puckInitialHistory={puckInitialHistory}
+            clearHistory={
+              templateMetadata?.isDevMode ? clearLocalStorage : clearHistory
+            }
             templateMetadata={templateMetadata}
-            saveState={saveState}
+            saveState={saveState!}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
-            deleteSaveState={deleteSaveState}
           />
         </DocumentProvider>
       ) : (
