@@ -18,7 +18,7 @@ export const config: TemplateConfig = {
   stream: {
     $id: "page-stream",
     filter: {
-      savedFilterIds: ["1392569469"],
+      savedFilterIds: [YEXT_PUBLIC_PAGE_SAVED_FILTER_ID],
     },
     fields: [
       "id",
