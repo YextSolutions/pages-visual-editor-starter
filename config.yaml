@@ -10,7 +10,7 @@ livePreviewConfiguration:
   setupCommand: ":"
 siteStream:
   id: site-stream
-  entityId: site
+  entityId: YEXT_PUBLIC_SITE_ENTITY_ID
   fields:
     - c_visualLayouts.c_visualConfiguration
   localization:
