@@ -65,7 +65,7 @@ export const Editor = ({
           return;
         }
 
-        console.log("saveState.hash", saveState?.hash);
+        console.log("saveState", saveState);
         console.log("histories[index].id", histories[index].id);
         if (saveState?.hash !== histories[index].id) {
           saveSaveState({
@@ -76,7 +76,7 @@ export const Editor = ({
           });
           setSaveState({
             hash: histories[index].id,
-            history: histories[index].data,
+            history: JSON.stringify(histories[index]),
           });
         }
       }
