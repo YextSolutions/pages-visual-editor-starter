@@ -89,7 +89,7 @@ export const Editor = ({
         }
       }
     },
-    [templateMetadata, getLocalStorageKey, saveState]
+    [templateMetadata, getLocalStorageKey]
   );
 
   const handleClearLocalChanges = () => {
