@@ -74,7 +74,10 @@ export const Editor = ({
               history: JSON.stringify(histories[index].data),
             },
           });
-          setSaveState(histories[index].data);
+          setSaveState({
+            hash: histories[index].id,
+            history: histories[index].data,
+          });
         }
       }
     },
