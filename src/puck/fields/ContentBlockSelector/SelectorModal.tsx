@@ -8,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
-import { ContentBlock } from "../../../types/autogen";
 import { Button } from "../../ui/button";
 import { RadioGroup, RadioGroupItem } from "../../components/radio";
 import { ContentBlockDisplay } from "../../../components/ContentBlock";
@@ -36,12 +35,10 @@ const ContentBlockModal = ({
   const { data: blocks, error, isLoading } = useContentBlocks();
   const layoutId = useQueryParameter("layoutId");
 
-  console.log(layoutId);
-
+  const [blockPreviewIdx, setBlockPreviewIdx] = useState<number | null>(null);
   const [selectedBlockId, setSelectedBlockId] = useState<string | undefined>(
     initialId
   );
-  const [previewBlock, setPreviewBlock] = useState<ContentBlock | undefined>();
   const [showPreview, setShowPreview] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [animationDirection, setAnimationDirection] = useState<
@@ -56,12 +53,12 @@ const ContentBlockModal = ({
     return Array.from({ length: totalPages }, (_, i) =>
       blocks.slice(i * itemsPerPage, (i + 1) * itemsPerPage)
     );
-  }, [blocks, totalPages]);
+  }, [blocks, totalPages, open]);
 
   const PageComponent = useMemo(() => {
     return paginatedBlocks.map((page, index) => (
       <ul role="list" key={index} className="divide-y divide-gray-100">
-        {page.map((block) => (
+        {page.map((block, idx) => (
           <li
             key={block.id}
             className="flex items-center justify-between gap-x-6 py-5"
@@ -79,7 +76,7 @@ const ContentBlockModal = ({
             </div>
             <div className="flex flex-none items-center gap-x-4">
               <Button
-                onClick={() => onPreviewBlock(block)}
+                onClick={() => onPreviewBlock(idx)}
                 className="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
               >
                 Preview Block
@@ -100,8 +97,14 @@ const ContentBlockModal = ({
     ));
   }, [paginatedBlocks]);
 
-  const onPreviewBlock = (block: ContentBlock) => {
-    setPreviewBlock(block);
+  const getPreviewBlock = () => {
+    if (blockPreviewIdx === null || !blocks) return null;
+
+    return <ContentBlockDisplay block={blocks[blockPreviewIdx]} />;
+  };
+
+  const onPreviewBlock = (blockIdx: number) => {
+    setBlockPreviewIdx(blockIdx);
     setShowPreview(true);
   };
 
@@ -203,9 +206,9 @@ const ContentBlockModal = ({
               </RadioGroup>
             </div>
             <div className="w-full flex-shrink-0">
-              {previewBlock && (
+              {blocks && (
                 <div className="flex-grow overflow-auto">
-                  <ContentBlockDisplay block={previewBlock} />
+                  {getPreviewBlock()}
                 </div>
               )}
             </div>

@@ -13,12 +13,17 @@ export interface FinancialProfessionalStream {
   c_financialProfessionalVisualConfiguration: string;
 }
 
+export interface RTFType {
+  json: Record<string, any>;
+}
+
 export interface PageStream {
   id: string;
   name: string;
   slug: string;
   c_financialProfessionalVisualConfiguration: string;
   c_contentBlocks?: ContentBlock[];
+  richTextDescriptionV2: RTFType;
 }
 
 export interface ContentBlock {

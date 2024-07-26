@@ -56,8 +56,8 @@ export const config: TemplateConfig = {
     },
   },
   additionalProperties: {
-    "isVETemplate": true
-  }
+    isVETemplate: true,
+  },
 };
 
 // Right now financial professional entity data isn't used
@@ -112,7 +112,6 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 const FinancialProfessional: Template<TemplateRenderProps> = ({ document }) => {
   const { visualTemplate, name } = document;
-  console.log(document);
   return (
     <DocumentProvider value={document}>
       <Render

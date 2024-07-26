@@ -6,7 +6,6 @@ import { useDocument } from "../hooks/useDocument";
 import { ContentBlock as BlockType, PageStream } from "../types/autogen";
 import { Heading } from "./atoms/heading";
 import ContentBlockSelector from "../puck/fields/ContentBlockSelector";
-import { useMemo } from "react";
 import { Skeleton } from "./atoms/skeleton";
 
 export type ContentBlockProps = {
@@ -37,6 +36,7 @@ interface ContentBlockDisplayProps {
 export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
   const fileImg = block?.c_featuredFile?.filePreviewImage;
   const featuredVideoUrl = block?.c_featuredVideo?.video?.url;
+  const rtfString = JSON.stringify(block?.richTextDescriptionV2?.json);
 
   return (
     <Section className="components">
@@ -67,11 +67,9 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
 
         <div>
           <Heading level={4}>{block.name}</Heading>
-          {block?.richTextDescriptionV2 && (
-            <LexicalRichText
-              serializedAST={JSON.stringify(block.richTextDescriptionV2.json)}
-            />
-          )}
+          {rtfString && <LexicalRichText serializedAST={rtfString} />}
+
+          {rtfString}
         </div>
       </div>
       {block.c_featuredFile?.label && (
@@ -91,7 +89,6 @@ export const ContentBlockDisplay = ({ block }: ContentBlockDisplayProps) => {
 };
 
 // TODO: Entity fields
-// TODO: render videos
 export const ContentBlock: ComponentConfig<ContentBlockProps> = {
   fields: promoFields,
   label: "Content Block",
@@ -100,12 +97,7 @@ export const ContentBlock: ComponentConfig<ContentBlockProps> = {
       (document) => document.c_contentBlocks
     );
 
-    console.log(blockId);
-    console.log(contentBlocks);
-
-    const block = useMemo(() => {
-      return contentBlocks?.find((block) => block.id === blockId);
-    }, [blockId, contentBlocks]);
+    const block = contentBlocks?.find((block) => block.id === blockId);
 
     if (!block) {
       return <ContentBlockSkeleton />;

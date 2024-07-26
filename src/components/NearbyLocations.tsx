@@ -67,8 +67,6 @@ export const NearbyLocations: ComponentConfig<NearbyLocationsProps> = {
       (document) => document.c_associatedLocations?.associatedLocations
     );
 
-    console.log(locations);
-
     const isEditor = useEnvironment();
 
     if (!locations) {

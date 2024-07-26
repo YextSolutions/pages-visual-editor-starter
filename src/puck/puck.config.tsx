@@ -17,6 +17,7 @@ import {
 import { ColumnsProps, ColumnsComponent } from "../components/Columns";
 import { PromoProps, PromoComponent } from "../components/Promo";
 import { ContentBlockProps, ContentBlock } from "../components/ContentBlock";
+import { PageContentProps, PageContent } from "../components/PageContent";
 
 // type ProductProps = {
 //   Toggle: ToggleProps;
@@ -53,6 +54,7 @@ type PageProps = {
   FeaturedEvents: FeaturedEventsProps;
   Promo: PromoProps;
   ContentBlock: ContentBlockProps;
+  PageContent: PageContentProps;
 };
 
 // All the available components for locations
@@ -159,6 +161,7 @@ export const pageConfig: Config<PageProps> = {
     FeaturedEvents,
     Promo: PromoComponent,
     ContentBlock,
+    PageContent,
   },
   categories: {
     layouts: {
@@ -172,6 +175,7 @@ export const pageConfig: Config<PageProps> = {
         "FeaturedBlogs",
         // "Services",
         "FeaturedEvents",
+        "PageContent",
       ],
     },
     forms: {
