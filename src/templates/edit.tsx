@@ -300,6 +300,7 @@ const Edit: () => JSX.Element = () => {
             }
             templateMetadata={templateMetadata}
             saveState={saveState!}
+            setSaveState={setSaveState}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
           />

@@ -22,6 +22,7 @@ export interface EditorProps {
   ) => void;
   templateMetadata: TemplateMetadata;
   saveState: SaveState;
+  setSaveState: React.Dispatch<React.SetStateAction<SaveState | undefined>>;
   saveSaveState: (data: any) => void;
   saveVisualConfigData: (data: any) => void;
 }
@@ -35,6 +36,7 @@ export const Editor = ({
   clearHistory,
   templateMetadata,
   saveState,
+  setSaveState,
   saveSaveState,
   saveVisualConfigData,
 }: EditorProps) => {
@@ -72,10 +74,11 @@ export const Editor = ({
               history: JSON.stringify(histories[index].data),
             },
           });
+          setSaveState(histories[index].data);
         }
       }
     },
-    [templateMetadata, getLocalStorageKey]
+    [templateMetadata, getLocalStorageKey, setSaveState]
   );
 
   const handleClearLocalChanges = () => {
