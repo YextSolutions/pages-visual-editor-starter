@@ -22,7 +22,6 @@ export interface EditorProps {
   ) => void;
   templateMetadata: TemplateMetadata;
   saveState: SaveState;
-  setSaveState: React.Dispatch<React.SetStateAction<SaveState | undefined>>;
   saveSaveState: (data: any) => void;
   saveVisualConfigData: (data: any) => void;
 }
@@ -36,7 +35,6 @@ export const Editor = ({
   clearHistory,
   templateMetadata,
   saveState,
-  setSaveState,
   saveSaveState,
   saveVisualConfigData,
 }: EditorProps) => {
@@ -49,15 +47,13 @@ export const Editor = ({
    */
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
-      console.log("handle history change");
-      console.log("index", index);
       if (
         index !== -1 &&
         historyIndex.current !== index &&
         histories.length > 0
       ) {
         historyIndex.current = index;
-        console.log("setting localStorage");
+
         window.localStorage.setItem(
           getLocalStorageKey(
             templateMetadata.isDevMode,
@@ -70,11 +66,9 @@ export const Editor = ({
         );
 
         if (templateMetadata.isDevMode) {
-          // return;
+          return;
         }
 
-        console.log("saveState", saveState);
-        console.log("histories[index].id", histories[index].id);
         if (saveState?.hash !== histories[index].id) {
           saveSaveState({
             payload: {
@@ -82,10 +76,6 @@ export const Editor = ({
               history: JSON.stringify(histories[index].data),
             },
           });
-          // setSaveState({
-          //   hash: histories[index].id,
-          //   history: JSON.stringify(histories[index]),
-          // });
         }
       }
     },

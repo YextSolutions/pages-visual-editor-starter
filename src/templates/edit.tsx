@@ -115,8 +115,6 @@ const Edit: () => JSX.Element = () => {
       return;
     }
 
-    console.log("loadPuckDataUsingHistory");
-
     if (templateMetadata.isDevMode) {
       // Check localStorage for existing Puck history
       const localHistoryArray = window.localStorage.getItem(
@@ -218,7 +216,6 @@ const Edit: () => JSX.Element = () => {
   }, []);
 
   useReceiveMessage("getSaveState", TARGET_ORIGINS, (send, payload) => {
-    console.log("getSaveState");
     setSaveState(payload);
     setSaveStateFetched(true);
     send({ status: "success", payload: { message: "saveState received" } });
@@ -301,7 +298,6 @@ const Edit: () => JSX.Element = () => {
             }
             templateMetadata={templateMetadata}
             saveState={saveState!}
-            setSaveState={setSaveState}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
           />
