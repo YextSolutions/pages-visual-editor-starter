@@ -11,7 +11,7 @@ export type RootProps = {
 function Root({ children }: RootProps) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {children}
       <Footer />
     </>
