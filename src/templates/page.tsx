@@ -12,6 +12,7 @@ import { Config, Render } from "@measured/puck";
 import { pageConfig } from "../puck/puck.config";
 import { DocumentProvider } from "../hooks/useDocument";
 import { getTemplatePuckData } from "../utils/puckDataHelper";
+import { PageStream } from "../types/autogen";
 
 export const config: TemplateConfig = {
   name: "page",
@@ -60,6 +61,10 @@ export const config: TemplateConfig = {
       "c_contentBlocks.richTextDescriptionV2",
       "c_contentBlocks.c_featuredFile",
       "c_contentBlocks.c_featuredVideo",
+      "c_linkedSites.name",
+      "c_linkedSites.c_header",
+      "c_linkedSites.c_theme",
+      "c_linkedSites.c_visualLayouts.c_visualConfiguration",
     ],
     localization: {
       locales: ["en"],
@@ -120,8 +125,8 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return document.slug ? document.slug : `page/${document.id}`;
 };
 
-const Page: Template<TemplateRenderProps> = ({ document }) => {
-  const { visualTemplate, name } = document;
+const Page: Template<TemplateRenderProps<PageStream>> = ({ document }) => {
+  const { visualTemplate, _site } = document;
   console.log(document);
   return (
     <DocumentProvider value={document}>
