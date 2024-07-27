@@ -38,14 +38,12 @@ const Header = () => {
   // const name = c_linkedSites[0].name;
   const c_header = c_linkedSites?.[0].c_header;
   const c_theme = c_linkedSites?.[0].c_theme;
-  const navigation = c_header?.navigationList;
 
   // --------------------------------------------------------------------------------
 
   console.log("this is the name: ", name);
   console.log("this is the header: ", c_header);
   console.log("this is the theme: ", c_theme);
-  console.log("this is the navigation: ", navigation);
 
   const headerClass =
     c_theme === "2" ? "bg-gray-800 text-white" : "bg-white text-gray-900";
@@ -101,13 +99,13 @@ const Header = () => {
           className="mx-auto flex max-w-7xl justify-center p-6 lg:px-8"
         >
           <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-            {navigation?.map((navItem, index) => (
+            {c_header?.map((navItem, index) => (
               <Popover className="relative" key={index}>
                 <PopoverButton
                   className={`flex items-center gap-x-1 text-sm font-semibold leading-6 ${headerClass}`}
                 >
                   {navItem.title}
-                  {navItem.pages && navItem.pages.length > 0 && (
+                  {navItem.page && navItem.page.length > 0 && (
                     <ChevronDownIcon
                       aria-hidden="true"
                       className={`h-5 w-5 flex-none ${chevronClass}`}
@@ -115,19 +113,19 @@ const Header = () => {
                   )}
                 </PopoverButton>
 
-                {navItem.pages && navItem.pages.length > 0 && (
+                {navItem.page && navItem.page.length > 0 && (
                   <PopoverPanel
                     transition
                     className={`absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl ${headerClass} shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in`}
                   >
                     <div className="p-4">
-                      {navItem.pages.map((page, pageIndex) => (
+                      {navItem.page.map((page, pageIndex) => (
                         <a
                           key={pageIndex}
-                          href="#"
+                          href={page.slug}
                           className={`block rounded-lg p-3 text-sm font-semibold leading-6 ${navLinkClass}`}
                         >
-                          {page}
+                          {page.name}
                         </a>
                       ))}
                     </div>
@@ -176,27 +174,27 @@ const Header = () => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {navigation?.map((navItem, index) => (
+                {c_header?.map((navItem, index) => (
                   <Disclosure as="div" className="-mx-3" key={index}>
                     <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                       {navItem.title}
-                      {navItem.pages && navItem.pages.length > 0 && (
+                      {navItem.page && navItem.page.length > 0 && (
                         <ChevronDownIcon
                           aria-hidden="true"
                           className="h-5 w-5 flex-none group-data-[open]:rotate-180"
                         />
                       )}
                     </DisclosureButton>
-                    {navItem.pages && navItem.pages.length > 0 && (
+                    {navItem.page && navItem.page.length > 0 && (
                       <DisclosurePanel className="mt-2 space-y-2">
-                        {navItem.pages.map((page, pageIndex) => (
+                        {navItem.page.map((page, pageIndex) => (
                           <DisclosureButton
                             key={pageIndex}
                             as="a"
-                            href="#"
+                            href={page.slug}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
-                            {page}
+                            {page.name}
                           </DisclosureButton>
                         ))}
                       </DisclosurePanel>

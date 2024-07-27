@@ -6,16 +6,17 @@ export interface SiteStream {
   c_financialProfessionalVisualConfiguration: string;
 }
 
-export interface Navigation {
-  navigationList: {
-    title?: string;
-    pages?: string[];
+export interface NavItem {
+  title?: string;
+  page?: {
+    name: string;
+    slug: string;
   }[];
 }
 
 export interface PageSiteStream {
   name: string;
-  c_header: Navigation;
+  c_header: NavItem;
   c_theme: string;
 }
 
@@ -45,7 +46,7 @@ export interface PageStream {
 
 export interface LinkedSite {
   name: string;
-  c_header?: Navigation;
+  c_header?: NavItem[];
   c_theme?: string;
   c_linkedFinancialProfessional?: {
     name: string;
