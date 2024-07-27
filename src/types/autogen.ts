@@ -7,7 +7,7 @@ export interface SiteStream {
 }
 
 export interface NavItem {
-  navigationList?: {
+  navigationList: {
     title?: string;
     pages?: string[];
   };
@@ -40,7 +40,16 @@ export interface PageStream {
   richTextDescriptionV2: RTFType;
   visualTemplate?: any;
   _site?: PageSiteStream;
-  c_linkedSites?: any;
+  c_linkedSites?: LinkedSite[];
+}
+
+export interface LinkedSite {
+  name: string;
+  c_header?: NavItem[];
+  c_theme?: string;
+  c_linkedFinancialProfessional?: {
+    name: string;
+  }[];
 }
 
 export interface ContentBlock {
