@@ -63,7 +63,7 @@ const Edit: () => JSX.Element = () => {
     if (typeof window !== "undefined") {
       setDevPageSets(pageSets); // pageSets is a global variable set by pagesJS
     }
-  }, [])
+  }, []);
 
   /**
    * Clears the user's localStorage and resets the current Puck history
