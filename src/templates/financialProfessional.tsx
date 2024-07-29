@@ -55,6 +55,7 @@ export const config: TemplateConfig = {
       locales: ["en"],
     },
   },
+  // pageUrlField: "c_pagesURLFieldFinancialProfessional",
   additionalProperties: {
     isVETemplate: true,
   },
