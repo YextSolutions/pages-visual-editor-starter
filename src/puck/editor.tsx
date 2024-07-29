@@ -39,6 +39,7 @@ export const Editor = ({
   saveVisualConfigData,
 }: EditorProps) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
+  const historyIndex = useRef<number>(-1);
 
   /**
    * When the Puck history changes save it to localStorage and send a message
@@ -46,7 +47,13 @@ export const Editor = ({
    */
   const handleHistoryChange = useCallback(
     (histories: History[], index: number) => {
-      if (histories.length > 0) {
+      if (
+        index !== -1 &&
+        historyIndex.current !== index &&
+        histories.length > 0
+      ) {
+        historyIndex.current = index;
+
         window.localStorage.setItem(
           getLocalStorageKey(
             templateMetadata.isDevMode,
