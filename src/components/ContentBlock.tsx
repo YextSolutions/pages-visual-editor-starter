@@ -10,6 +10,7 @@ import { Skeleton } from "./atoms/skeleton";
 import { useElementSize } from "@mantine/hooks";
 import { useEffect } from "react";
 import { cn } from "../utils/cn";
+import useEnvironment from "../hooks/useEnvironment";
 
 export type ContentBlockProps = {
   blockId: string;
@@ -102,8 +103,20 @@ export const ContentBlock: ComponentConfig<ContentBlockProps> = {
 
     const block = contentBlocks?.find((block) => block.id === blockId);
 
+    const isEditor = useEnvironment();
+
+    // if (!block) {
+    //   return <ContentBlockSkeleton />;
+    // }
+
     if (!block) {
-      return <ContentBlockSkeleton />;
+      if (isEditor) {
+        return (
+          <ContentBlockSkeleton/>
+        );
+      } else {
+        return <></>;
+      }
     }
 
     return <ContentBlockDisplay block={block} />;
@@ -111,6 +124,7 @@ export const ContentBlock: ComponentConfig<ContentBlockProps> = {
 };
 
 export const ContentBlockSkeleton = () => {
+
   return (
     <Section className="components">
       <div className="flex flex-wrap overflow-hidden">
