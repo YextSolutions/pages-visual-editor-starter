@@ -49,6 +49,13 @@ export const config: TemplateConfig = {
       "c_insights.blogs.datePosted",
       "c_insights.blogs.landingPageUrl",
       "c_insights.blogs.photoGallery",
+      "c_linkedSites.name",
+      "c_linkedSites.c_header.title",
+      "c_linkedSites.c_header.page.name",
+      "c_linkedSites.c_header.page.slug",
+      "c_linkedSites.c_theme",
+      "c_linkedSites.c_visualLayouts.c_visualConfiguration",
+      "c_linkedSites.c_linkedFinancialProfessional.name",
       "c_locator",
     ],
     localization: {
