@@ -194,7 +194,7 @@ const ToggleEntityFields = () => {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button
             variant="ghost"
             size="icon"
