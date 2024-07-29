@@ -10,6 +10,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlinePhone } from "react-icons/hi";
 import { EntityField } from "./EntityField";
 import "@yext/pages-components/style.css";
+import {CardProps} from "./Card";
 
 export type StoreInfoCardProps = {
   heading: {
@@ -17,6 +18,7 @@ export type StoreInfoCardProps = {
     size: HeadingProps["size"];
     color: HeadingProps["color"];
   };
+  alignment: CardProps["alignment"];
 };
 
 const storeInfoCardFields: Fields<StoreInfoCardProps> = {
@@ -47,9 +49,17 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
       },
     },
   },
+  alignment: {
+    label: "Align card",
+    type: "radio",
+    options: [
+      { label: "Left", value: "items-start" },
+      { label: "Center", value: "items-center"},
+    ]
+  }
 };
 
-const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
+const StoreInfoCard = ({ heading, alignment }: StoreInfoCardProps) => {
   const address = useDocument<LocationStream>((document) => document.address);
   const phoneNumber = formatPhoneNumber(
     useDocument<LocationStream>((document) => document.mainPhone)
@@ -59,7 +69,7 @@ const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
 
   return (
     <Section
-      className="flex flex-col justify-center components items-center"
+      className={`flex flex-col justify-center components ${alignment}`}
       padding="small"
     >
       <div>
@@ -123,9 +133,10 @@ export const StoreInfoCardComponent: ComponentConfig<StoreInfoCardProps> = {
       size: "subheading",
       color: "default",
     },
+    alignment: "items-center"
   },
   label: "Store Info Card",
-  render: ({ heading }) => <StoreInfoCard heading={heading} />,
+  render: ({ heading, alignment }) => <StoreInfoCard heading={heading} alignment={alignment}/>,
 };
 
 function formatPhoneNumber(phoneNumberString?: string) {
