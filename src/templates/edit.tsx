@@ -60,9 +60,7 @@ const Edit: () => JSX.Element = () => {
   const [devPageSets, setDevPageSets] = useState<any>(undefined);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setDevPageSets(pageSets); // pageSets is a global variable set by pagesJS
-    }
+    setDevPageSets(pageSets); // pageSets is a global variable set by pagesJS
   }, []);
 
   /**
