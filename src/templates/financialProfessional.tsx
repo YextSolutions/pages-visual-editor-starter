@@ -18,7 +18,7 @@ export const config: TemplateConfig = {
   stream: {
     $id: "financialProfessional-stream",
     filter: {
-      savedFilterIds: [YEXT_PUBLIC_FIN_PRO_ID],
+      entityIds: [YEXT_PUBLIC_FIN_PRO_ID],
     },
     fields: [
       "id",
