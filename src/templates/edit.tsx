@@ -233,7 +233,7 @@ const Edit: () => JSX.Element = () => {
       );
       const localHistoryArray = localHistory ? JSON.parse(localHistory) : [];
       const historyToSend = JSON.stringify(localHistoryArray.length > 0 ? 
-        localHistoryArray[localHistoryArray.length-1].data : "");
+        localHistoryArray[localHistoryArray.length-1].data : {});
       sendHistory({ payload: { history: historyToSend } });
     }
   }, [templateMetadata]);
