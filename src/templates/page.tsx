@@ -65,6 +65,7 @@ export const config: TemplateConfig = {
       "c_linkedSites.c_header.title",
       "c_linkedSites.c_header.page.name",
       "c_linkedSites.c_header.page.slug",
+      "c_linkedSites.c_header.page.c_pageTitle",
       "c_linkedSites.c_theme",
       "c_linkedSites.c_visualLayouts.c_visualConfiguration",
       "c_linkedSites.c_linkedFinancialProfessional.name",
