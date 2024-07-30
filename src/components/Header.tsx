@@ -31,9 +31,8 @@ const Header = () => {
   //   ------------------------------------------------------------------------------ ***
 
   // Once Site Stream is fixed, delete everything below this ------------------------ **
-  const { c_linkedSites, name, meta, c_pageTitle }: PageStream = useDocument<PageStream>(
-    (document) => document
-  );
+  const { c_linkedSites, name, meta, c_pageTitle }: PageStream =
+    useDocument<PageStream>((document) => document);
 
   // const name = c_linkedSites[0].name;
   const c_header = c_linkedSites?.[0].c_header;
@@ -58,7 +57,8 @@ const Header = () => {
   const overlayClass = c_theme === "2" ? "bg-gray-800 bg-opacity-50" : "";
 
   // Determine what to display based on entityType and c_pageTitle
-  const displayTitle = meta.entityType.id === "ce_page" && c_pageTitle ? c_pageTitle : name;
+  const displayTitle =
+    meta.entityType.id === "ce_page" && c_pageTitle ? c_pageTitle : name;
 
   return (
     <header>
@@ -92,19 +92,16 @@ const Header = () => {
         </div>
       </div>
 
-    {/* if entity type === "page" && c_pageTitle is not null
+      {/* if entity type === "page" && c_pageTitle is not null
       display c_pageTitle
     else
       display name */}
-
-      
 
       {c_theme === "1" && (
         <div className="text-center text-2xl font-bold p-2 lg:text-4xl">
           {displayTitle}
         </div>
       )}
-      
 
       <div className={`nav-section ${headerClass}`}>
         <nav
@@ -138,7 +135,7 @@ const Header = () => {
                           href={page.slug}
                           className={`block rounded-lg p-3 text-sm font-semibold leading-6 ${navLinkClass}`}
                         >
-                          {page.name}
+                          {page.c_pageTitle ? page.c_pageTitle : page.name}
                         </a>
                       ))}
                     </div>
@@ -159,7 +156,9 @@ const Header = () => {
           <div
             className={`absolute inset-0 flex items-center justify-center ${overlayClass}`}
           >
-            <span className="text-4xl font-bold text-white">{displayTitle}</span>
+            <span className="text-4xl font-bold text-white">
+              {displayTitle}
+            </span>
           </div>
         )}
       </div>
@@ -207,7 +206,7 @@ const Header = () => {
                             href={page.slug}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                           >
-                            {page.name}
+                            {page.c_pageTitle ? page.c_pageTitle : page.name}
                           </DisclosureButton>
                         ))}
                       </DisclosurePanel>
