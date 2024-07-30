@@ -59,10 +59,10 @@ const Edit: () => JSX.Element = () => {
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
 
   const hasParent = () => {
-    if (!window.parent) {
+    if (window.parent) {
       return false
     }
-    return false
+    return true
   }
 
   /**
