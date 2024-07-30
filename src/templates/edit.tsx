@@ -43,10 +43,6 @@ export type PuckInitialHistory = {
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
-  if (!window.parent) {
-    window.location.href = "/404.html";
-  }
-
   const [puckData, setPuckData] = useState<Data>();
   const [puckInitialHistory, setPuckInitialHistory] =
     useState<PuckInitialHistory>({
@@ -61,6 +57,13 @@ const Edit: () => JSX.Element = () => {
   const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
+
+  const hasParent = () => {
+    if (!window.parent) {
+      return false
+    }
+    return true
+  }
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -304,6 +307,7 @@ const Edit: () => JSX.Element = () => {
             saveState={saveState!}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
+            hasParent={hasParent}
           />
         </DocumentProvider>
       ) : (

@@ -24,6 +24,7 @@ export interface EditorProps {
   saveState: SaveState;
   saveSaveState: (data: any) => void;
   saveVisualConfigData: (data: any) => void;
+  hasParent: () => boolean;
 }
 
 // Render Puck editor
@@ -37,9 +38,14 @@ export const Editor = ({
   saveState,
   saveSaveState,
   saveVisualConfigData,
+  hasParent,
 }: EditorProps) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const historyIndex = useRef<number>(-1);
+
+  if (!hasParent) {
+    window.location.href = "/404";
+  }
 
   /**
    * When the Puck history changes save it to localStorage and send a message
