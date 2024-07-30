@@ -43,6 +43,10 @@ export type PuckInitialHistory = {
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
+  if (!window.parent) {
+    window.location.href = "/404.html";
+  }
+
   const [puckData, setPuckData] = useState<Data>();
   const [puckInitialHistory, setPuckInitialHistory] =
     useState<PuckInitialHistory>({
