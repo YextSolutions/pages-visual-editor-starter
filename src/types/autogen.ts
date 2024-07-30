@@ -11,6 +11,7 @@ export interface NavItem {
   page?: {
     name: string;
     slug: string;
+    c_pageTitle?: string;
   }[];
 }
 

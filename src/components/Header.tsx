@@ -132,7 +132,7 @@ const Header = () => {
                       {navItem.page.map((page, pageIndex) => (
                         <a
                           key={pageIndex}
-                          href={page.slug}
+                          href={`/${page.slug}`}
                           className={`block rounded-lg p-3 text-sm font-semibold leading-6 ${navLinkClass}`}
                         >
                           {page.c_pageTitle ? page.c_pageTitle : page.name}
