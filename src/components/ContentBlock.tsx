@@ -10,6 +10,7 @@ import { Skeleton } from "./atoms/skeleton";
 import { useElementSize } from "@mantine/hooks";
 import { useEffect } from "react";
 import { cn } from "../utils/cn";
+import useEnvironment from "../hooks/useEnvironment";
 
 export type ContentBlockProps = {
   blockId: string;
@@ -102,8 +103,20 @@ export const ContentBlock: ComponentConfig<ContentBlockProps> = {
 
     const block = contentBlocks?.find((block) => block.id === blockId);
 
+    const isEditor = useEnvironment();
+
+    // if (!block) {
+    //   return <ContentBlockSkeleton />;
+    // }
+
     if (!block) {
-      return <ContentBlockSkeleton />;
+      if (isEditor) {
+        return (
+          <ContentBlockSkeleton/>
+        );
+      } else {
+        return <></>;
+      }
     }
 
     return <ContentBlockDisplay block={block} />;
@@ -111,19 +124,21 @@ export const ContentBlock: ComponentConfig<ContentBlockProps> = {
 };
 
 export const ContentBlockSkeleton = () => {
+
   return (
     <Section className="components">
-      <div className="sm:flex">
-        <Skeleton className="h-60 w-44 mb-4 flex-shrink-0 sm:mb-0 sm:mr-4" />
+      <div className="flex flex-wrap overflow-hidden">
+        <Skeleton className="h-60 w-auto mb-4 flex-shrink-0 sm:mb-0 sm:mr-4" />
 
-        <div>
-          <Skeleton className="h-8 w-32" />
-          <Skeleton className="h-4  mt-4 w-96" />
-          <Skeleton className="h-4 w-full mt-1" />
-          <Skeleton className="h-4 w-full mt-1" />
-          <Skeleton className="h-4 w-full mt-1" />
+        <div className="flex flex-col flex-grow space-y-3">
+          <Skeleton className="h-8 w-32 mb-4" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-full" />
         </div>
       </div>
     </Section>
+
   );
 };

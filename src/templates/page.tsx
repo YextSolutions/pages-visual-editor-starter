@@ -68,11 +68,13 @@ export const config: TemplateConfig = {
       "c_linkedSites.c_theme",
       "c_linkedSites.c_visualLayouts.c_visualConfiguration",
       "c_linkedSites.c_linkedFinancialProfessional.name",
+      "c_pageTitle",
     ],
     localization: {
       locales: ["en"],
     },
   },
+  // pageUrlField: "c_pagesURLFieldPage",
   additionalProperties: {
     isVETemplate: true,
   },

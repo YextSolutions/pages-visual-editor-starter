@@ -22,16 +22,16 @@ import { PageSiteStream, PageStream } from "../types/autogen";
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Once Site Stream is fixed, uncomment out this section -------------------------
+  // Once Site Stream is fixed, uncomment out this section ------------------------- ***
 
   // // Use the name, c_header, and c_theme fields from the _site stream to render the header
   // const { name, c_header, c_theme }: PageSiteStream = useDocument<PageStream>(
   //   (document) => document._site
   // );
-  //   ------------------------------------------------------------------------------
+  //   ------------------------------------------------------------------------------ ***
 
-  // Once Site Stream is fixed, delete everything below this ------------------------
-  const { c_linkedSites, name }: PageStream = useDocument<PageStream>(
+  // Once Site Stream is fixed, delete everything below this ------------------------ **
+  const { c_linkedSites, name, meta, c_pageTitle }: PageStream = useDocument<PageStream>(
     (document) => document
   );
 
@@ -39,11 +39,13 @@ const Header = () => {
   const c_header = c_linkedSites?.[0].c_header;
   const c_theme = c_linkedSites?.[0].c_theme;
 
-  // --------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------- **
 
+  console.log("this is the meta: ", meta);
   console.log("this is the name: ", name);
   console.log("this is the header: ", c_header);
   console.log("this is the theme: ", c_theme);
+  console.log("this is the page title: ", c_pageTitle);
 
   const headerClass =
     c_theme === "2" ? "bg-gray-800 text-white" : "bg-white text-gray-900";
@@ -54,6 +56,9 @@ const Header = () => {
   const buttonClass = c_theme === "2" ? "text-white" : "text-gray-700";
   const chevronClass = c_theme === "2" ? "text-gray-300" : "text-gray-400";
   const overlayClass = c_theme === "2" ? "bg-gray-800 bg-opacity-50" : "";
+
+  // Determine what to display based on entityType and c_pageTitle
+  const displayTitle = meta.entityType.id === "ce_page" && c_pageTitle ? c_pageTitle : name;
 
   return (
     <header>
@@ -87,11 +92,19 @@ const Header = () => {
         </div>
       </div>
 
+    {/* if entity type === "page" && c_pageTitle is not null
+      display c_pageTitle
+    else
+      display name */}
+
+      
+
       {c_theme === "1" && (
         <div className="text-center text-2xl font-bold p-2 lg:text-4xl">
-          {name}
+          {displayTitle}
         </div>
       )}
+      
 
       <div className={`nav-section ${headerClass}`}>
         <nav
@@ -146,7 +159,7 @@ const Header = () => {
           <div
             className={`absolute inset-0 flex items-center justify-center ${overlayClass}`}
           >
-            <span className="text-4xl font-bold text-white">{name}</span>
+            <span className="text-4xl font-bold text-white">{displayTitle}</span>
           </div>
         )}
       </div>

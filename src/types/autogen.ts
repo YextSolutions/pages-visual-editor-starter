@@ -34,8 +34,10 @@ export interface RTFType {
 export interface PageStream {
   uid: string;
   id: string;
+  meta: any;
   name: string;
   slug: string;
+  c_pageTitle?: string;
   c_financialProfessionalVisualConfiguration: string;
   c_contentBlocks?: ContentBlock[];
   richTextDescriptionV2: RTFType;

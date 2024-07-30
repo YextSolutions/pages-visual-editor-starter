@@ -37,6 +37,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.4",
     "framer-motion": "^11.3.17",
+    "lexical": "^0.12.6",
     "lucide-react": "^0.378.0",
     "next-themes": "^0.3.0",
     "npm": "^10.7.0",
