@@ -17,7 +17,7 @@ import { PageStream } from "../types/autogen";
 export const config: TemplateConfig = {
   name: "page",
   stream: {
-    $id: "Corporate Page",
+    $id: "page-stream",
     filter: {
       savedFilterIds: [YEXT_PUBLIC_PAGE_SAVED_FILTER_ID],
     },

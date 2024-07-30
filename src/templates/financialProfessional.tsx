@@ -14,7 +14,7 @@ import { DocumentProvider } from "../hooks/useDocument";
 import { getTemplatePuckData } from "../utils/puckDataHelper";
 
 export const config: TemplateConfig = {
-  name: "Home Page",
+  name: "financialProfessional",
   stream: {
     $id: "financialProfessional-stream",
     filter: {
