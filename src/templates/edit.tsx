@@ -62,7 +62,7 @@ const Edit: () => JSX.Element = () => {
     if (!window.parent) {
       return false
     }
-    return true
+    return false
   }
 
   /**
