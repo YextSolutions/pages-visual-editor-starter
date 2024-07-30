@@ -211,8 +211,8 @@ const Edit: () => JSX.Element = () => {
     TARGET_ORIGINS
   );
 
-  const { sendToParent: sendHistory } = useSendMessageToParent(
-    "sendHistory",
+  const { sendToParent: sendDevSaveStateData } = useSendMessageToParent(
+    "sendDevSaveStateData",
     TARGET_ORIGINS
   );
 
@@ -233,8 +233,8 @@ const Edit: () => JSX.Element = () => {
       );
       const localHistoryArray = localHistory ? JSON.parse(localHistory) : [];
       const historyToSend = JSON.stringify(localHistoryArray.length > 0 ? 
-        localHistoryArray[localHistoryArray.length-1].data : {});
-      sendHistory({ payload: { history: historyToSend } });
+        localHistoryArray[localHistoryArray.length-1].data.data : {});
+        sendDevSaveStateData({ payload: { devSaveStateData: historyToSend } });
     }
   }, [templateMetadata]);
 
@@ -323,7 +323,7 @@ const Edit: () => JSX.Element = () => {
             saveState={saveState!}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
-            sendHistory={sendHistory}
+            sendDevSaveStateData={sendDevSaveStateData}
           />
         </DocumentProvider>
       ) : (
