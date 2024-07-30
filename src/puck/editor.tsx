@@ -71,7 +71,7 @@ export const Editor = ({
           if (templateMetadata.isDevMode) {
             sendDevSaveStateData({
               payload: {
-                devSaveStateData: JSON.stringify(histories[index].data.data),
+                devSaveStateData: JSON.stringify(histories[index].data?.data),
               },
             })
           } else {
