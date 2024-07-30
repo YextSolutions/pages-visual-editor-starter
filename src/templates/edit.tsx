@@ -58,11 +58,11 @@ const Edit: () => JSX.Element = () => {
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
 
-  const hasParent = () => {
-    if (window.parent) {
-      return false
+  if (typeof window !== "undefined") {
+    if (!window.parent) {
+      window.location.href = "/404.html";
+      return;
     }
-    return true
   }
 
   /**
@@ -307,7 +307,6 @@ const Edit: () => JSX.Element = () => {
             saveState={saveState!}
             saveSaveState={saveSaveState}
             saveVisualConfigData={saveVisualConfigData}
-            hasParent={hasParent}
           />
         </DocumentProvider>
       ) : (
