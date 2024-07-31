@@ -57,6 +57,17 @@ const Edit: () => JSX.Element = () => {
   const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
+  const [devPageSets, setDevPageSets] = useState<any>(undefined);
+
+  useEffect(() => {
+    if (templateMetadata?.isDevMode) {
+      try {
+        setDevPageSets(pageSets); // pageSets is a global variable set by pagesJS
+      } catch (ignored) {
+        console.warn("pageSets are not defined");
+      }
+    }
+  }, [templateMetadata?.isDevMode]);
 
   /**
    * Clears the user's localStorage and resets the current Puck history
@@ -250,6 +261,18 @@ const Edit: () => JSX.Element = () => {
     setTemplateMetadata(payload);
     send({ status: "success", payload: { message: "payload received" } });
   });
+
+  const { sendToParent: pushPageSets } = useSendMessageToParent(
+      "pushPageSets", TARGET_ORIGINS
+  )
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && templateMetadata?.isDevMode && devPageSets) {
+      pushPageSets({
+        payload: devPageSets,
+      });
+    }
+  }, [templateMetadata?.isDevMode, devPageSets]);
 
   const { sendToParent: saveSaveState } = useSendMessageToParent(
     "saveSaveState",
