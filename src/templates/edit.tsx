@@ -63,7 +63,7 @@ const Edit: () => JSX.Element = () => {
     if (window.parent.name) {
       setHasParent(true);
     }
-  }, [hasParent]);
+  }, [setHasParent]);
 
   const redirectTo404 = () => {
     if (typeof window !== "undefined") {
