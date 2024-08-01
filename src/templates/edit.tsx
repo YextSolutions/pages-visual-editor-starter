@@ -63,7 +63,7 @@ const Edit: () => JSX.Element = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       console.log(window.parent);
-      console.log(window.parent.location);
+      console.log(window.parent[2].location.ancestorOrigins);
       const ancestors = window.parent.location.ancestorOrigins;
       if (ancestors.length === 0) {
         setHasParent(false);
@@ -75,7 +75,7 @@ const Edit: () => JSX.Element = () => {
 
   const redirectTo404 = () => {
     if (typeof window !== "undefined") {
-      window.location.href = "/404.html";
+      //window.location.href = "/404.html";
     }
   }
 
