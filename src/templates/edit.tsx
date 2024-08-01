@@ -60,11 +60,15 @@ const Edit: () => JSX.Element = () => {
   const [devPageSets, setDevPageSets] = useState<any>(undefined);
   const [hasParent, setHasParent] = useState<boolean>(true);
 
-  console.log(hasParent)
   useEffect(() => {
-    console.log(window.parent);
+    console.log(window.parent.location.ancestorOrigins);
     if (typeof window !== "undefined") {
-      if (window.parent) {
+      const ancestors = window.parent.location.ancestorOrigins
+      if (ancestors.length == 0) {
+        console.log("here1");
+        setHasParent(false);
+      } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
+        console.log("here");
         setHasParent(false);
       }
     }
