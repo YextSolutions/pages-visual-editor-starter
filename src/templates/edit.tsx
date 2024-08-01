@@ -58,6 +58,20 @@ const Edit: () => JSX.Element = () => {
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
   const [devPageSets, setDevPageSets] = useState<any>(undefined);
+  const [hasParent, setHasParent] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log(window.parent);
+    if (window.parent.name) {
+      setHasParent(true);
+    }
+  }, []);
+
+  const redirectTo404 = () => {
+    if (typeof window !== "undefined") {
+      window.location.href = "/404.html";
+    }
+  }
 
   useEffect(() => {
     if (templateMetadata?.isDevMode) {
@@ -350,7 +364,11 @@ const Edit: () => JSX.Element = () => {
           />
         </DocumentProvider>
       ) : (
-        <LoadingScreen progress={progress} />
+        hasParent ?
+         (
+          <LoadingScreen progress={progress} />
+        ) : 
+        redirectTo404()
       )}
       <Toaster closeButton richColors />
     </>
