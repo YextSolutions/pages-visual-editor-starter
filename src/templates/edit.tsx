@@ -62,6 +62,7 @@ const Edit: () => JSX.Element = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      console.log(window.parent.location);
       const ancestors = window.parent.location.ancestorOrigins;
       if (ancestors.length === 0) {
         setHasParent(false);
