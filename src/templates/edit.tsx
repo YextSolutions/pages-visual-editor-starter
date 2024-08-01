@@ -60,15 +60,18 @@ const Edit: () => JSX.Element = () => {
   const [devPageSets, setDevPageSets] = useState<any>(undefined);
   const [hasParent, setHasParent] = useState<boolean>(true);
 
+  console.log(hasParent)
   useEffect(() => {
     console.log(window.parent);
-    if (!window.parent.name) {
-      setHasParent(false);
+    if (typeof window !== "undefined") {
+      if (!window.parent.name) {
+        setHasParent(false);
+      }
     }
   }, []);
 
   const redirectTo404 = () => {
-    if (typeof window !== "undefined" && !hasParent) {
+    if (typeof window !== "undefined") {
       window.location.href = "/404.html";
     }
   }
