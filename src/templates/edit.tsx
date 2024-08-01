@@ -61,14 +61,11 @@ const Edit: () => JSX.Element = () => {
   const [hasParent, setHasParent] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log(window.parent.location.ancestorOrigins);
     if (typeof window !== "undefined") {
-      const ancestors = window.parent.location.ancestorOrigins
-      if (ancestors.length == 0) {
-        console.log("here1");
+      const ancestors = window.parent.location.ancestorOrigins;
+      if (ancestors.length === 0) {
         setHasParent(false);
       } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
-        console.log("here");
         setHasParent(false);
       }
     }
