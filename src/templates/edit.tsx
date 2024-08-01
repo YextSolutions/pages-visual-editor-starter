@@ -68,7 +68,7 @@ const Edit: () => JSX.Element = () => {
   }, []);
 
   const redirectTo404 = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !hasParent) {
       window.location.href = "/404.html";
     }
   }
@@ -364,7 +364,7 @@ const Edit: () => JSX.Element = () => {
           />
         </DocumentProvider>
       ) : (
-        hasParent ?
+        hasParent && typeof window !== "undefined" ?
          (
           <LoadingScreen progress={progress} />
         ) : 
