@@ -368,7 +368,7 @@ const Edit: () => JSX.Element = () => {
          (
           <LoadingScreen progress={progress} />
         ) : 
-        redirectTo404()
+        !hasParent && redirectTo404()
       )}
       <Toaster closeButton richColors />
     </>
