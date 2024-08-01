@@ -61,7 +61,7 @@ const Edit: () => JSX.Element = () => {
   const [hasParent, setHasParent] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(window.parent);
+    console.log("parent: " + window.parent);
     if (window.parent.name) {
       setHasParent(true);
     }
