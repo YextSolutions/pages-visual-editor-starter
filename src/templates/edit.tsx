@@ -58,12 +58,12 @@ const Edit: () => JSX.Element = () => {
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
   const [devPageSets, setDevPageSets] = useState<any>(undefined);
-  const [hasParent, setHasParent] = useState<boolean>(false);
+  const [hasParent, setHasParent] = useState<boolean>(true);
 
   useEffect(() => {
     console.log(window.parent);
-    if (window.parent) {
-      setHasParent(true);
+    if (!window.parent.name) {
+      setHasParent(false);
     }
   }, []);
 
