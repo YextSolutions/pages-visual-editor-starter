@@ -64,7 +64,7 @@ const Edit: () => JSX.Element = () => {
   useEffect(() => {
     console.log(window.parent);
     if (typeof window !== "undefined") {
-      if (!window.parent) {
+      if (window.parent) {
         setHasParent(false);
       }
     }
