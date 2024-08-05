@@ -75,7 +75,7 @@ const Edit: () => JSX.Element = () => {
 
   const redirectTo404 = () => {
     if (typeof window !== "undefined") {
-      window.location.href = "/404.html";
+      //window.location.href = "/404.html";
     }
   }
 
