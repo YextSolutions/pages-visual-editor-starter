@@ -70,7 +70,9 @@ const Edit: () => JSX.Element = () => {
         setHasParent(false);
         console.log("here1?");
       } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
-        console.log(ancestors[0]);
+        console.log(!ancestors[0].includes("pagescdn"));
+        console.log(!ancestors[0].includes("yext.com"));
+        console.log(ancestors[0][0]);
         console.log("here?");
         setHasParent(false);
       }
