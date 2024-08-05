@@ -62,18 +62,10 @@ const Edit: () => JSX.Element = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      console.log(window);
-      console.log(window.location);
-      console.log(window.location.ancestorOrigins);
       const ancestors = window.location.ancestorOrigins;
       if (ancestors.length === 0) {
         setHasParent(false);
-        console.log("here1?");
-      } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
-        console.log(!ancestors[0].includes("pagescdn"));
-        console.log(!ancestors[0].includes("yext.com"));
-        console.log(ancestors[0][0]);
-        console.log("here?");
+      } else if (!ancestors[0].includes("pagescdn") && !ancestors[0].includes("yext.com")) {
         setHasParent(false);
       }
     }
@@ -81,7 +73,7 @@ const Edit: () => JSX.Element = () => {
 
   const redirectTo404 = () => {
     if (typeof window !== "undefined") {
-      //window.location.href = "/404.html";
+      window.location.href = "/404.html";
     }
   }
 
