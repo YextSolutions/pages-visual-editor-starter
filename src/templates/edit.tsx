@@ -41,7 +41,7 @@ export type PuckInitialHistory = {
   index: number;
 };
 
-type ParentStatus = "loaded" | "null" | "pending";
+type ParentStatus = "loaded" | "pending";
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
@@ -66,9 +66,9 @@ const Edit: () => JSX.Element = () => {
     if (typeof window !== "undefined") {
       const ancestors = window.location.ancestorOrigins;
       if (ancestors.length === 0) {
-        setParentStatus("null");
+        window.location.assign("/404.html");
       } else if (!ancestors[0].includes("pagescdn") && !ancestors[0].includes("yext.com")) {
-        setParentStatus("null");
+        window.location.assign("/404.html");
       } else {
         setParentStatus("loaded");
       }
@@ -367,11 +367,7 @@ const Edit: () => JSX.Element = () => {
         </DocumentProvider>
       ) : 
       (
-        parentStatus === "loaded" ?
-         (
-          <LoadingScreen progress={progress} />
-        ) : 
-        parentStatus === "null" && window.location.assign("/404.html")
+        parentStatus === "loaded" && <LoadingScreen progress={progress} />
       )}
       <Toaster closeButton richColors />
     </>
