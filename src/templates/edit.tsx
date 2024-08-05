@@ -68,7 +68,10 @@ const Edit: () => JSX.Element = () => {
       const ancestors = window.location.ancestorOrigins;
       if (ancestors.length === 0) {
         setHasParent(false);
+        console.log("here1?");
       } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
+        console.log(ancestors[0]);
+        console.log("here?");
         setHasParent(false);
       }
     }
