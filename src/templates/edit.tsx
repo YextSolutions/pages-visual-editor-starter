@@ -62,14 +62,15 @@ const Edit: () => JSX.Element = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      console.log(window);
       console.log(window.parent);
-      console.log(window.parent[2].location.ancestorOrigins);
-      const ancestors = window.parent[2].location.ancestorOrigins;
-      if (ancestors.length === 0) {
-        setHasParent(false);
-      } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
-        setHasParent(false);
-      }
+      //console.log(window.parent[2].location.ancestorOrigins);
+      // const ancestors = window.parent[2].location.ancestorOrigins;
+      // if (ancestors.length === 0) {
+      //   setHasParent(false);
+      // } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
+      //   setHasParent(false);
+      // }
     }
   }, []);
 
