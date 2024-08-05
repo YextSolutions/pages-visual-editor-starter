@@ -367,13 +367,23 @@ const Edit: () => JSX.Element = () => {
             sendDevSaveStateData={sendDevSaveStateData}
           />
         </DocumentProvider>
-      ) : (
-        hasParent && typeof window !== "undefined" ?
-         (
-          <LoadingScreen progress={progress} />
-        ) : 
-        !hasParent && redirectTo404()
-      )}
+      ) : 
+      (
+        // hasParent && typeof window !== "undefined" ?
+        //  (
+        //   <LoadingScreen progress={progress} />
+        // ) : 
+        // !hasParent && redirectTo404()
+        useEffect(() => {
+          if (typeof window !== "undefined" && !hasParent) {
+            window.location.href = "/404.html";
+          }
+          if (typeof window !== "undefined" && hasParent) {
+            <LoadingScreen progress={progress} />
+          }
+        }, [hasParent])
+      )
+      }
       <Toaster closeButton richColors />
     </>
   );
