@@ -41,11 +41,7 @@ export type PuckInitialHistory = {
   index: number;
 };
 
-const ParentStatus = {
-  LOADED: "loaded",
-  NULL: "null",
-  PENDING: "pending",
-}
+type ParentStatus = "loaded" | "null" | "pending";
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
@@ -64,24 +60,20 @@ const Edit: () => JSX.Element = () => {
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
   const [devPageSets, setDevPageSets] = useState<any>(undefined);
-  const [parentStatus, setParentStatus] = useState<string>(ParentStatus.PENDING);
+  const [parentStatus, setParentStatus] = useState<ParentStatus>("pending");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const ancestors = window.location.ancestorOrigins;
       if (ancestors.length === 0) {
-        setParentStatus(ParentStatus.NULL);
+        setParentStatus("null");
       } else if (!ancestors[0].includes("pagescdn") && !ancestors[0].includes("yext.com")) {
-        setParentStatus(ParentStatus.NULL);
+        setParentStatus("null");
       } else {
-        setParentStatus(ParentStatus.LOADED);
+        setParentStatus("loaded");
       }
     }
   }, []);
-
-  const redirectTo404 = () => {
-    window.location.href = "/404.html";
-  }
 
   useEffect(() => {
     if (templateMetadata?.isDevMode) {
@@ -375,11 +367,11 @@ const Edit: () => JSX.Element = () => {
         </DocumentProvider>
       ) : 
       (
-        parentStatus === ParentStatus.LOADED ?
+        parentStatus === "loaded" ?
          (
           <LoadingScreen progress={progress} />
         ) : 
-        parentStatus === ParentStatus.NULL && redirectTo404()
+        parentStatus === "null" && window.location.assign("/404.html")
       )}
       <Toaster closeButton richColors />
     </>
