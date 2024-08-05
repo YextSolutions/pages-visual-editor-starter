@@ -64,19 +64,18 @@ const Edit: () => JSX.Element = () => {
     if (typeof window !== "undefined") {
       console.log(window);
       console.log(window.parent);
-      //console.log(window.parent[2].location.ancestorOrigins);
-      // const ancestors = window.parent[2].location.ancestorOrigins;
-      // if (ancestors.length === 0) {
-      //   setHasParent(false);
-      // } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
-      //   setHasParent(false);
-      // }
+      const ancestors = window.location.ancestorOrigins;
+      if (ancestors.length === 0) {
+        setHasParent(false);
+      } else if (!ancestors[0].includes("pagescdn") || !ancestors[0].includes("yext.com")) {
+        setHasParent(false);
+      }
     }
   }, []);
 
   const redirectTo404 = () => {
     if (typeof window !== "undefined") {
-      //window.location.href = "/404.html";
+      window.location.href = "/404.html";
     }
   }
 
