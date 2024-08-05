@@ -58,15 +58,13 @@ const Edit: () => JSX.Element = () => {
   const [saveState, setSaveState] = useState<SaveState>();
   const [saveStateFetched, setSaveStateFetched] = useState<boolean>(false); // needed because saveState can be empty
   const [devPageSets, setDevPageSets] = useState<any>(undefined);
-  const [hasParent, setHasParent] = useState<boolean>(true);
+  const [hasParent, setHasParent] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const ancestors = window.location.ancestorOrigins;
-      if (ancestors.length === 0) {
-        setHasParent(false);
-      } else if (!ancestors[0].includes("pagescdn") && !ancestors[0].includes("yext.com")) {
-        setHasParent(false);
+      if  (ancestors[0].includes("pagescdn") || ancestors[0].includes("yext.com")) {
+        setHasParent(true);
       }
     }
   }, []);
