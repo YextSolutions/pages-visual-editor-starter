@@ -29,6 +29,7 @@ export type CardProps = {
     link?: string;
     variant?: CTAProps["variant"];
   };
+  alignment: "items-start" | "items-center";
 };
 
 const cardFields: Fields<CardProps> = {
@@ -144,12 +145,20 @@ const cardFields: Fields<CardProps> = {
       },
     },
   },
+  alignment: {
+    label: "Align card",
+    type: "radio",
+    options: [
+      { label: "Left", value: "items-start" },
+      { label: "Center", value: "items-center"},
+    ]
+  }
 };
 
-export const Card = ({ image, heading, subheading, body, cta }: CardProps) => {
+export const Card = ({ image, heading, subheading, body, cta, alignment }: CardProps) => {
   return (
     <Section
-      className="flex flex-col justify-center bg-white components"
+      className={`flex flex-col justify-center bg-white components ${alignment}`}
       padding="small"
     >
       {image?.url && (
@@ -210,14 +219,16 @@ export const CardComponent: ComponentConfig<CardProps> = {
       size: "base",
       weight: "default",
     },
+    alignment: "items-center"
   },
-  render: ({ image, heading, subheading, body, cta }) => (
+  render: ({ image, heading, subheading, body, cta, alignment }) => (
     <Card
       image={image}
       heading={heading}
       subheading={subheading}
       body={body}
       cta={cta}
+      alignment={alignment}
     />
   ),
 };

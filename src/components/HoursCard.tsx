@@ -11,6 +11,7 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { EntityField } from "@yext/visual-editor";
 import "./index.css";
 import "@yext/pages-components/style.css";
+import {CardProps} from "./Card";
 
 export type HoursCardProps = {
   heading: {
@@ -21,6 +22,7 @@ export type HoursCardProps = {
   startOfWeek: keyof DayOfWeekNames | "today";
   collapseDays: boolean;
   showAdditionalHoursText: boolean;
+  alignment: CardProps["alignment"];
 };
 
 const hoursCardFields: Fields<HoursCardProps> = {
@@ -81,6 +83,14 @@ const hoursCardFields: Fields<HoursCardProps> = {
       { label: "No", value: false },
     ],
   },
+  alignment: {
+    label: "Align card",
+    type: "radio",
+    options: [
+      { label: "Left", value: "items-start" },
+      { label: "Center", value: "items-center"},
+    ]
+  }
 };
 
 const HoursCard = ({
@@ -88,12 +98,13 @@ const HoursCard = ({
   startOfWeek,
   collapseDays,
   showAdditionalHoursText,
+  alignment,
 }: HoursCardProps) => {
   const {hours, additionalHoursText} = useDocument<LocationStream>();
 
   return (
     <Section
-      className="flex flex-col justify-center components items-center"
+      className={`flex flex-col justify-center components ${alignment}`}
       padding="small"
     >
       <div>
@@ -133,14 +144,16 @@ export const HoursCardComponent: ComponentConfig<HoursCardProps> = {
     startOfWeek: "today",
     collapseDays: false,
     showAdditionalHoursText: true,
+    alignment: "items-center",
   },
   label: "Hours Card",
-  render: ({ heading, startOfWeek, collapseDays, showAdditionalHoursText }) => (
+  render: ({ heading, startOfWeek, collapseDays, showAdditionalHoursText , alignment}) => (
     <HoursCard
       heading={heading}
       startOfWeek={startOfWeek}
       collapseDays={collapseDays}
       showAdditionalHoursText={showAdditionalHoursText}
+      alignment={alignment}
     />
   ),
 };
