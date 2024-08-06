@@ -58,7 +58,7 @@ export const transformProps = async (data) => {
   const entityConfigurations = document.c_visualConfigurations ?? [];
   const entityLayoutConfigurations = document.c_pages_layouts ?? [];
   const siteLayoutConfigurations = document._site?.c_visualLayouts;
-  resolveVisualEditorData(entityConfigurations, entityLayoutConfigurations, siteLayoutConfigurations, "location");
+  return resolveVisualEditorData(entityConfigurations, entityLayoutConfigurations, siteLayoutConfigurations, "location");
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
