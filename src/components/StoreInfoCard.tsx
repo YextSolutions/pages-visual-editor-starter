@@ -59,7 +59,7 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
   }
 };
 
-const StoreInfoCard = ({ heading }: StoreInfoCardProps) => {
+const StoreInfoCard = ({ heading, alignment }: StoreInfoCardProps) => {
   const {address, mainPhone, emails} = useDocument<LocationStream>();
   const phoneNumber = formatPhoneNumber(mainPhone);
   const coordinates = getDirections(address as AddressType);
