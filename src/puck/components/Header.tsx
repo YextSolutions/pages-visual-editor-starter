@@ -28,6 +28,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { Switch } from "../ui/switch";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -195,16 +196,8 @@ const ToggleEntityFields = () => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTooltips}
-            className={
-              tooltipsVisible ? "border-2 border-[#5A58F2] rounded-full" : ""
-            }
-          >
-            <MessageSquareText className="sm-icon" />
-          </Button>
+          <Switch onCheckedChange={toggleTooltips} />
+          <p>Entity Fields</p>
         </TooltipTrigger>
         <TooltipContent>
           {tooltipsVisible ? "Hide Entity Fields" : "Show Entity Fields"}
