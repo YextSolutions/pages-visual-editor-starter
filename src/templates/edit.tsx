@@ -10,7 +10,6 @@ import {puckConfigs} from "../puck/puck.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
 import {DocumentProvider} from "@yext/pages/util";
 import '@yext/visual-editor/style.css'
-import '@measured/puck/puck.css'
 
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
@@ -26,7 +25,6 @@ const Edit: () => JSX.Element = () => {
   const [puckConfig, setPuckConfig] = useState<Config>();
   const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [templateMetadata, setTemplateMetadata] = useState<TemplateMetadata>();
-  console.log('render edit.tsx VE starter')
 
   useReceiveMessage("getEntityDocument", TARGET_ORIGINS, (send, payload) => {
     setEntityDocument(payload);
