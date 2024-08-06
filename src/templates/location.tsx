@@ -58,6 +58,7 @@ export const transformProps = async (data) => {
   const entityConfigurations = document.c_visualConfigurations ?? [];
   const entityLayoutConfigurations = document.c_pages_layouts ?? [];
   const siteLayoutConfigurations = document._site?.c_visualLayouts;
+  console.log(`_site: ${JSON.stringify(document._site ?? {})}`);
   try {
     const templateData = getTemplatePuckData(
       entityConfigurations,
