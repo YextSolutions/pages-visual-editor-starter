@@ -118,10 +118,15 @@ const heroFields: Fields<HeroProps> = {
 };
 
 const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
-  const hero: C_hero = useDocument<LocationStream>((document) => document.c_hero);
+  const hero: C_hero = useDocument<LocationStream>(
+    (document) => document.c_hero
+  );
   const address = useDocument<LocationStream>((document) => document.address);
   const locationName = useDocument<LocationStream>((document) => document.name);
   const hours = useDocument<LocationStream>((document) => document.hours);
+
+  const doc = useDocument<LocationStream>((document) => document);
+  console.log(doc);
 
   return (
     <Section className="components">
