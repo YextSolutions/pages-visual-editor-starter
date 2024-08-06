@@ -58,7 +58,7 @@ export const transformProps = async (data) => {
   const entityConfigurations = document.c_visualConfigurations ?? [];
   const entityLayoutConfigurations = document.c_pages_layouts ?? [];
   const siteLayoutConfigurations = document._site?.c_visualLayouts;
-  console.log(`_site: ${JSON.stringify(document._site ?? {})}`);
+  console.log(`the _site is: ${JSON.stringify(document._site ?? {})}`);
   try {
     const templateData = getTemplatePuckData(
       entityConfigurations,
@@ -108,6 +108,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 };
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
+  console.log(`the _site is: ${JSON.stringify(document._site ?? {})}`);
   const { visualTemplate } = document;
   return (
     <DocumentProvider value={document}>
