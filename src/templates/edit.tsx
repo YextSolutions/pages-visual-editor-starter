@@ -3,9 +3,8 @@ import {
   useReceiveMessage,
   TARGET_ORIGINS,
   TemplateMetadata,
-  useSendMessageToParent
 } from "@yext/visual-editor";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Config} from "@measured/puck";
 import {puckConfigs} from "../puck/puck.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
@@ -27,14 +26,6 @@ const Edit: () => JSX.Element = () => {
   const [entityDocument, setEntityDocument] = useState<any>(); // json data
   const [templateMetadata, setTemplateMetadata] = useState<TemplateMetadata>();
   console.log('render edit.tsx VE starter')
-  const { sendToParent: iFrameLoaded } = useSendMessageToParent(
-      "iFrameLoaded",
-      TARGET_ORIGINS
-  );
-
-  useEffect(() => {
-    iFrameLoaded({ payload: { message: "iFrame is loaded" } });
-  }, []);
 
   useReceiveMessage("getEntityDocument", TARGET_ORIGINS, (send, payload) => {
     setEntityDocument(payload);
@@ -52,11 +43,9 @@ const Edit: () => JSX.Element = () => {
   });
 
   return (
-      !entityDocument || !templateMetadata || !puckConfig?
-      <p>loading</p>:
-          <DocumentProvider value={entityDocument}>
-            <Editor document={entityDocument} puckConfig={puckConfig!} templateMetadata={templateMetadata!}/>
-          </DocumentProvider>
+    <DocumentProvider value={entityDocument}>
+      <Editor document={entityDocument} puckConfig={puckConfig!} templateMetadata={templateMetadata!}/>
+    </DocumentProvider>
   );
 };
 
