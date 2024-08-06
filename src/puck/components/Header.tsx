@@ -21,7 +21,13 @@ import { useCallback, useEffect } from "react";
 import { useDocument } from "@yext/pages/util";
 import { Button } from "../ui/button";
 import { useEntityField } from "../../components/EntityField";
-import { Tooltip, TooltipArrow, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import {
+  Tooltip,
+  TooltipArrow,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 const handleClick = (slug: string) => {
   window.open(`/${slug}`, "_blank");
@@ -85,16 +91,18 @@ export const customHeader = (
         >
           View Page
         </Button>
-        {isDevMode ? null : <Button
+        {!isDevMode && (
+          <Button
             variant="secondary"
             disabled={histories.length === 0}
             onClick={async () => {
               await handleSaveData(data);
               handleClearLocalChanges();
             }}
-        >
-          Publish
-        </Button>}
+          >
+            Publish
+          </Button>
+        )}
       </div>
     </header>
   );
@@ -186,8 +194,15 @@ const ToggleEntityFields = () => {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
-          <Button variant="ghost" size="icon" onClick={toggleTooltips} className={tooltipsVisible ? "border-2 border-[#5A58F2] rounded-full" : ""}>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTooltips}
+            className={
+              tooltipsVisible ? "border-2 border-[#5A58F2] rounded-full" : ""
+            }
+          >
             <MessageSquareText className="sm-icon" />
           </Button>
         </TooltipTrigger>
