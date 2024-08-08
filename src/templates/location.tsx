@@ -11,7 +11,7 @@ import {
 import { DocumentProvider } from "@yext/pages/util";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../puck/puck.config";
-import {resolveVisualEditorData} from "@yext/visual-editor";
+import { resolveVisualEditorData } from "@yext/visual-editor";
 
 export const config: TemplateConfig = {
   name: "location",
@@ -49,12 +49,12 @@ export const config: TemplateConfig = {
     },
   },
   additionalProperties: {
-    "isVETemplate": true
-  }
+    isVETemplate: true,
+  },
 };
 
 export const transformProps = async (data) => {
-  return resolveVisualEditorData(data, "location")
+  return resolveVisualEditorData(data, "location");
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
