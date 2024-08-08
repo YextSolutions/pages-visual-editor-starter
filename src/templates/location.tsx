@@ -49,7 +49,7 @@ export const config: TemplateConfig = {
     },
   },
   additionalProperties: {
-    "isVETemplate": true,
+    isVETemplate: true,
   },
 };
 
