@@ -11,7 +11,7 @@ import {
 import { DocumentProvider } from "@yext/pages/util";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../puck/puck.config";
-import { getTemplatePuckData } from "../utils/puckDataHelper";
+import { resolveVisualEditorData } from "@yext/visual-editor";
 
 export const config: TemplateConfig = {
   name: "location",
@@ -49,34 +49,12 @@ export const config: TemplateConfig = {
     },
   },
   additionalProperties: {
-    "isVETemplate": true
-  }
+    isVETemplate: true,
+  },
 };
 
 export const transformProps = async (data) => {
-  const { document } = data;
-  const entityConfigurations = document.c_visualConfigurations ?? [];
-  const entityLayoutConfigurations = document.c_pages_layouts ?? [];
-  const siteLayoutConfigurations = document._site?.c_visualLayouts;
-  try {
-    const templateData = getTemplatePuckData(
-      entityConfigurations,
-      entityLayoutConfigurations,
-      siteLayoutConfigurations,
-      config.name,
-    );
-    const visualTemplate = JSON.parse(templateData);
-    return {
-      ...data,
-      document: {
-        ...document,
-        visualTemplate,
-      },
-    };
-  } catch (error) {
-    console.error("Failed to parse visualTemplate: " + error);
-    return data;
-  }
+  return resolveVisualEditorData(data, "location");
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
