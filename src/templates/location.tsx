@@ -1,4 +1,4 @@
-import "../index.css";
+import "@yext/visual-editor/style.css";
 import {
   Template,
   GetPath,

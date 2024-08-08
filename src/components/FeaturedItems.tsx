@@ -6,7 +6,7 @@ import { C_productSection, LocationStream } from "../types/autogen";
 import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
 import { Card } from "./Card";
-import { EntityField } from "./EntityField";
+import { EntityField } from "@yext/visual-editor";
 
 export type FeaturedItemsProps = {
   heading: {

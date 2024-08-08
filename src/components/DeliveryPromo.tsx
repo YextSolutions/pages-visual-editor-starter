@@ -8,7 +8,7 @@ import { Image } from "@yext/pages-components";
 import { CTA } from "./atoms/cta";
 import { Section } from "./atoms/section";
 import { cn } from "../utils/cn";
-import { EntityField } from "./EntityField";
+import { EntityField } from "@yext/visual-editor";
 import "./index.css";
 
 export type DeliveryPromoProps = {

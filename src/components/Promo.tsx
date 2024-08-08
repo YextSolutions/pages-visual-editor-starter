@@ -179,7 +179,7 @@ export const PromoComponent: ComponentConfig<PromoProps> = {
       size: "base",
       weight: "default",
     },
-    promoCTA: {
+    promoCta: {
       variant: 'default',
     },
     image: {

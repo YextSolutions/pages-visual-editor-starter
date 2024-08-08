@@ -8,7 +8,7 @@ import { Link } from "@yext/pages-components";
 import { IconContext } from "react-icons";
 import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlinePhone } from "react-icons/hi";
-import { EntityField } from "./EntityField";
+import { EntityField } from "@yext/visual-editor";
 import "@yext/pages-components/style.css";
 import {CardProps} from "./Card";
 

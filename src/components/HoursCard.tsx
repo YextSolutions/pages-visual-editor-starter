@@ -8,8 +8,8 @@ import {
 } from "@yext/pages-components";
 import { Section } from "./atoms/section";
 import { Heading, HeadingProps } from "./atoms/heading";
-import { EntityField } from "./EntityField";
-import "../index.css";
+import { EntityField } from "@yext/visual-editor";
+import "./index.css";
 import "@yext/pages-components/style.css";
 import {CardProps} from "./Card";
 

@@ -7,7 +7,7 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { CTA } from "./atoms/cta";
 import { ButtonProps } from "./atoms/button";
 import { cn } from "../utils/cn";
-import { EntityField } from "./EntityField";
+import { EntityField } from "@yext/visual-editor";
 import "./index.css";
 
 export type HeroProps = {
