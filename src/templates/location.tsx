@@ -54,19 +54,7 @@ export const config: TemplateConfig = {
 };
 
 export const transformProps = async (data) => {
-  const { document } = data;
-  const entityConfigurations = document.c_visualConfigurations ?? [];
-  const entityLayoutConfigurations = document.c_pages_layouts ?? [];
-  const siteLayoutConfigurations = document._site?.c_visualLayouts;
-  const visualEditorData = resolveVisualEditorData(entityConfigurations, entityLayoutConfigurations, siteLayoutConfigurations, "location");
-  const visualTemplate = JSON.parse(visualEditorData);
-  return {
-    ...data,
-    document: {
-      ...document,
-      visualTemplate,
-    },
-  };
+  return resolveVisualEditorData(data, "location")
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
