@@ -1,11 +1,7 @@
 import {
   Editor,
-  useReceiveMessage,
-  TARGET_ORIGINS,
-  TemplateMetadata,
+  useDocumentProvider,
 } from "@yext/visual-editor";
-import {useState} from "react";
-import {Config} from "@measured/puck";
 import {puckConfigs} from "../puck/puck.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
 import {DocumentProvider} from "@yext/pages/util";
@@ -22,28 +18,11 @@ export const config: TemplateConfig = {
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
-  const [puckConfig, setPuckConfig] = useState<Config>();
-  const [entityDocument, setEntityDocument] = useState<any>(); // json data
-  const [templateMetadata, setTemplateMetadata] = useState<TemplateMetadata>();
-
-  useReceiveMessage("getEntityDocument", TARGET_ORIGINS, (send, payload) => {
-    setEntityDocument(payload);
-    send({
-      status: "success",
-      payload: { message: "getEntityDocument received" },
-    });
-  });
-
-  useReceiveMessage("getTemplateMetadata", TARGET_ORIGINS, (send, payload) => {
-    const puckConfig = puckConfigs.get(payload.templateId);
-    setPuckConfig(puckConfig);
-    setTemplateMetadata(payload as TemplateMetadata);
-    send({ status: "success", payload: { message: "payload received" } });
-  });
+  const entityDocument = useDocumentProvider();
 
   return (
     <DocumentProvider value={entityDocument}>
-      <Editor document={entityDocument} puckConfig={puckConfig!} templateMetadata={templateMetadata!}/>
+      <Editor document={entityDocument} puckConfigs={puckConfigs} />
     </DocumentProvider>
   );
 };
