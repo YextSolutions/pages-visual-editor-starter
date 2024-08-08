@@ -3,7 +3,7 @@ import { BodyProps } from "./atoms/body";
 import { CTAProps } from "./atoms/cta";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { C_productSection, LocationStream } from "../types/autogen";
-import { useDocument } from "../hooks/useDocument";
+import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
 import { Card } from "./Card";
 import { EntityField } from "./EntityField";
@@ -148,9 +148,7 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
 };
 
 const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
-  const productSection: C_productSection = useDocument<LocationStream>(
-    (document) => document.c_productSection,
-  );
+  const {c_productSection: productSection} = useDocument<LocationStream>();
   return (
     <Section className="flex flex-col justify-center bg-white components">
       {productSection.sectionTitle && (

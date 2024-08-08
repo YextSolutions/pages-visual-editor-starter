@@ -1,6 +1,6 @@
 import "../index.css";
 import { GetPath, TemplateConfig, TemplateProps } from "@yext/pages";
-import { DocumentProvider } from "../hooks/useDocument";
+import { DocumentProvider } from "@yext/pages/util";
 import { Editor } from "../puck/editor";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { puckConfigs } from "../puck/puck.config";

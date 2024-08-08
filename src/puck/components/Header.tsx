@@ -18,7 +18,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/AlertDialog";
 import { useCallback, useEffect } from "react";
-import { useDocument } from "../../hooks/useDocument";
+import { useDocument } from "@yext/pages/util";
 import { Button } from "../ui/button";
 import { useEntityField } from "../../components/EntityField";
 import {
@@ -40,7 +40,7 @@ export const customHeader = (
   handleSaveData: (data: Data) => Promise<void>,
   isDevMode: boolean
 ) => {
-  const entityDocument = useDocument();
+  const entityDocument = useDocument<any>();
   const {
     history: {
       back,

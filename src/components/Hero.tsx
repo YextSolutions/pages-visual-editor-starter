@@ -1,6 +1,6 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { C_hero, LocationStream } from "../types/autogen";
-import { useDocument } from "../hooks/useDocument";
+import { LocationStream } from "../types/autogen";
+import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
 import { Heading, HeadingProps } from "./atoms/heading";
@@ -118,17 +118,19 @@ const heroFields: Fields<HeroProps> = {
 };
 
 const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
-  const hero: C_hero = useDocument<LocationStream>((document) => document.c_hero);
-  const address = useDocument<LocationStream>((document) => document.address);
-  const locationName = useDocument<LocationStream>((document) => document.name);
-  const hours = useDocument<LocationStream>((document) => document.hours);
+  const {
+    hours,
+    address,
+    name: locationName,
+    c_hero: hero,
+  } = useDocument<LocationStream>();
 
   return (
     <Section className="components">
       <div
         className={cn(
           "flex flex-col gap-x-10 md:flex-row",
-          imageMode === "right" && "md:flex-row-reverse"
+          imageMode === "right" && "md:flex-row-reverse",
         )}
       >
         {hero?.image && (
