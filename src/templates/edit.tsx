@@ -2,7 +2,7 @@ import {
   Editor,
   useDocumentProvider,
 } from "@yext/visual-editor";
-import {puckConfigs} from "../puck/puck.config";
+import {puckConfigs} from "../ve.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
 import {DocumentProvider} from "@yext/pages/util";
 import '@yext/visual-editor/style.css'
