@@ -33,7 +33,7 @@ const Columns = ({ columns, distribution }: ColumnsProps) => {
                   : "",
             }}
           >
-            <DropZone zone={`column-${idx}`} allow={["HoursCard", "StoreInfoCard", "Card"]} />
+            <DropZone zone={`column-${idx}`} disallow={["Hero", "DeliveryPromo", "Promo"]} />
           </div>
         ))}
       </div>
