@@ -71,14 +71,10 @@ export const locationConfig: Config<LocationProps> = {
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type ProductProps = {
-  Hero: HeroProps;
-};
+type ProductProps = {};
 
 export const productConfig: Config<ProductProps> = {
-  components: {
-    Hero,
-  },
+  components: {},
   root: {},
 };
 
