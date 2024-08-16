@@ -130,7 +130,7 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
       <div
         className={cn(
           "flex flex-col gap-x-10 md:flex-row",
-          imageMode === "right" && "md:flex-row-reverse"
+          imageMode === "right" && "md:flex-row-reverse",
         )}
       >
         {hero?.image && (
@@ -147,13 +147,11 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
               {locationName}
             </Heading>
           </EntityField>
-          {address && (
-            <EntityField displayName="City" fieldId="address">
-              <Heading level={1} size={location.size} color={location.color}>
-                {address?.city}
-              </Heading>
-            </EntityField>
-          )}
+          <EntityField displayName="City" fieldId="address">
+            <Heading level={1} size={location.size} color={location.color}>
+              {address?.city}
+            </Heading>
+          </EntityField>
           {hours && (
             <EntityField displayName="Hours" fieldId="hours">
               <HoursStatus className="font-semibold" hours={hours} />
