@@ -25,6 +25,7 @@ export const config: TemplateConfig = {
       "slug",
       "c_visualConfigurations",
       "c_pages_layouts.c_visualConfiguration",
+      "c_coverPhoto",
     ],
     localization: {
       locales: ["en"],
