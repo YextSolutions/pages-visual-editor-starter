@@ -1,11 +1,8 @@
-import {
-  Editor,
-  useDocumentProvider,
-} from "@yext/visual-editor";
-import {puckConfigs} from "../puck/puck.config";
-import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
-import {DocumentProvider} from "@yext/pages/util";
-import '@yext/visual-editor/style.css'
+import { Editor, useDocumentProvider } from "@yext/visual-editor";
+import { GetPath, TemplateProps, TemplateConfig } from "@yext/pages";
+import { DocumentProvider } from "@yext/pages/util";
+import "@yext/visual-editor/style.css";
+import { puckConfigs } from "../ve.config";
 
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
