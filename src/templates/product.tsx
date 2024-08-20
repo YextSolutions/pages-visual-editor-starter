@@ -32,8 +32,7 @@ export const config: TemplateConfig = {
   },
   additionalProperties: {
     isVETemplate: true,
-    isDraft: true,
-  }
+  },
 };
 
 export const transformProps = async (data: TemplateRenderProps) => {
@@ -46,7 +45,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   return {
     title: document.name,
     charset: "UTF-8",
-    viewport: "width=device-width, initial-scale=1"
+    viewport: "width=device-width, initial-scale=1",
   };
 };
 
