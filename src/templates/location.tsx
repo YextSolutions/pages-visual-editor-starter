@@ -18,8 +18,7 @@ export const config: TemplateConfig = {
   stream: {
     $id: "location-stream",
     filter: {
-      // entityTypes: ["location"],
-      savedFilterIds: ["1395144792"],
+      entityTypes: ["location"],
     },
     fields: [
       "id",
