@@ -35,9 +35,20 @@ type ProductProps = {};
 
 export const productConfig: Config<ProductProps> = {
   components: {
-    ProductHero: ProductHeroComponent,
+    // ProductHero: ProductHeroComponent,
   },
-  root: {},
+  root: {
+    render: ({ children }) => {
+      return (
+        <>
+          <Header />
+          {children}
+          <Footer />
+        </>
+      );
+    },
+    fields: {},
+  },
 };
 
 type LocationProps = {

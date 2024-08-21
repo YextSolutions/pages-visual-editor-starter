@@ -3,27 +3,21 @@ import { Body } from "../atoms/body";
 import { Heading } from "../atoms/heading";
 import { Section } from "../atoms/section";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import { useDocument } from "@yext/pages/util";
+import { ProductStream } from "../../types/autogen";
+import { Image } from "@yext/pages-components";
 
-export type ProductHeroProps = {
-  name: string;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
-};
+export type ProductHeroProps = {};
 
-const productHeroFields: Fields<ProductHeroProps> = {
-  name: { type: "text", label: "Product Name" },
-  description: { type: "textarea", label: "Description" },
-  imageSrc: { type: "text", label: "Image URL" },
-  imageAlt: { type: "text", label: "Image Alt Text" },
-};
+const productHeroFields: Fields<ProductHeroProps> = {};
 
-const ProductHero: React.FC<ProductHeroProps> = ({
-  name,
-  description,
-  imageSrc,
-  imageAlt,
-}) => {
+const ProductHero: React.FC<ProductHeroProps> = () => {
+  const { name, c_coverPhoto, c_description, price } =
+    useDocument<ProductStream>();
+
+  console.log("description", c_description);
+  console.log("price", price);
+
   return (
     <Section className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -46,9 +40,9 @@ const ProductHero: React.FC<ProductHeroProps> = ({
               </Body> */}
             </div>
 
-            <div className="mt-4 space-y-6">
+            {/* <div className="mt-4 space-y-6">
               <Body size="base">{description}</Body>
-            </div>
+            </div> */}
 
             <div className="mt-6 flex items-center">
               <CheckIcon
@@ -63,15 +57,13 @@ const ProductHero: React.FC<ProductHeroProps> = ({
         </div>
 
         {/* Product image */}
-        <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
-            <img
-              alt={imageAlt}
-              src={imageSrc}
-              className="h-full w-full object-cover object-center"
-            />
+        {c_coverPhoto && (
+          <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
+            <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+              <Image image={c_coverPhoto} />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Product form */}
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
@@ -89,14 +81,6 @@ const ProductHero: React.FC<ProductHeroProps> = ({
 
 export const ProductHeroComponent: ComponentConfig<ProductHeroProps> = {
   fields: productHeroFields,
-  defaultProps: {
-    name: "Everyday Ruck Snack",
-    description:
-      "Don't compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-04-featured-product-shot.jpg",
-    imageAlt:
-      "Model wearing light green backpack with black canvas straps and front zipper pouch.",
-  },
+  defaultProps: {},
   render: (props) => <ProductHero {...props} />,
 };
