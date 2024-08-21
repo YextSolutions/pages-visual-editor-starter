@@ -1,22 +1,111 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { Body } from "../atoms/body";
-import { Heading } from "../atoms/heading";
+import { Body, BodyProps } from "../atoms/body";
+import { Heading, HeadingProps } from "../atoms/heading";
 import { Section } from "../atoms/section";
-import { CheckIcon } from "@heroicons/react/24/outline";
 import { useDocument } from "@yext/pages/util";
 import { ProductStream } from "../../types/autogen";
 import { Image } from "@yext/pages-components";
+import { EntityField } from "@yext/visual-editor";
 
-export type ProductHeroProps = {};
+export type ProductHeroProps = {
+  name: {
+    size: HeadingProps["size"];
+    color: HeadingProps["color"];
+  };
+  price: {
+    size: BodyProps["size"];
+    weight: BodyProps["weight"];
+  };
+  description: {
+    size: BodyProps["size"];
+    weight: BodyProps["weight"];
+  };
+};
 
-const productHeroFields: Fields<ProductHeroProps> = {};
+const productHeroFields: Fields<ProductHeroProps> = {
+  name: {
+    type: "object",
+    label: "Product Name",
+    objectFields: {
+      size: {
+        label: "Size",
+        type: "radio",
+        options: [
+          { label: "Page", value: "page" },
+          { label: "Section", value: "section" },
+          { label: "Subheading", value: "subheading" },
+        ],
+      },
+      color: {
+        label: "Color",
+        type: "radio",
+        options: [
+          { label: "Default", value: "default" },
+          { label: "Primary", value: "primary" },
+          { label: "Secondary", value: "secondary" },
+        ],
+      },
+    },
+  },
+  price: {
+    type: "object",
+    label: "Price",
+    objectFields: {
+      size: {
+        label: "Size",
+        type: "radio",
+        options: [
+          { label: "Small", value: "small" },
+          { label: "Base", value: "base" },
+          { label: "Large", value: "large" },
+        ],
+      },
+      weight: {
+        label: "Weight",
+        type: "radio",
+        options: [
+          { label: "Default", value: "default" },
+          { label: "Bold", value: "bold" },
+        ],
+      },
+    },
+  },
+  description: {
+    type: "object",
+    label: "Description",
+    objectFields: {
+      size: {
+        label: "Size",
+        type: "radio",
+        options: [
+          { label: "Small", value: "small" },
+          { label: "Base", value: "base" },
+          { label: "Large", value: "large" },
+        ],
+      },
+      weight: {
+        label: "Weight",
+        type: "radio",
+        options: [
+          { label: "Default", value: "default" },
+          { label: "Bold", value: "bold" },
+        ],
+      },
+    },
+  },
+};
 
-const ProductHero: React.FC<ProductHeroProps> = () => {
-  const { name, c_coverPhoto, c_description, price } =
-    useDocument<ProductStream>();
-
-  console.log("description", c_description);
-  console.log("price", price);
+const ProductHero: React.FC<ProductHeroProps> = ({
+  name,
+  price,
+  description,
+}) => {
+  const {
+    name: productName,
+    c_coverPhoto,
+    c_description,
+    price: productPrice,
+  } = useDocument<ProductStream>();
 
   return (
     <Section className="bg-white">
@@ -24,56 +113,42 @@ const ProductHero: React.FC<ProductHeroProps> = () => {
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
           <div className="mt-4">
-            <Heading level={1} size="section" color="default">
-              {name}
-            </Heading>
+            <EntityField displayName="Product Name" fieldId="name">
+              <Heading level={1} size={name.size} color={name.color}>
+                {productName}
+              </Heading>
+            </EntityField>
           </div>
 
           <section aria-labelledby="information-heading" className="mt-4">
-            <h2 id="information-heading" className="sr-only">
-              Product information
-            </h2>
-
             <div className="flex items-center">
-              {/* <Body size="large" weight="bold">
-                {price}
-              </Body> */}
+              <EntityField displayName="Price" fieldId="price">
+                <Body size={price.size} weight={price.weight}>
+                  ${productPrice.value}
+                </Body>
+              </EntityField>
             </div>
 
-            {/* <div className="mt-4 space-y-6">
-              <Body size="base">{description}</Body>
-            </div> */}
-
-            <div className="mt-6 flex items-center">
-              <CheckIcon
-                aria-hidden="true"
-                className="h-5 w-5 flex-shrink-0 text-green-500"
-              />
-              <Body size="small" className="ml-2 text-gray-500">
-                In stock and ready to ship
-              </Body>
+            <div className="mt-4 space-y-6">
+              <EntityField displayName="Description" fieldId="c_description">
+                <Body size={description.size} weight={description.weight}>
+                  {c_description}
+                </Body>
+              </EntityField>
             </div>
           </section>
         </div>
 
         {/* Product image */}
         {c_coverPhoto && (
-          <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-            <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
-              <Image image={c_coverPhoto} />
+          <EntityField displayName="Cover Photo" fieldId="c_coverPhoto">
+            <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
+              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+                <Image image={c_coverPhoto} />
+              </div>
             </div>
-          </div>
+          </EntityField>
         )}
-
-        {/* Product form */}
-        <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
-          <section aria-labelledby="options-heading">
-            <h2 id="options-heading" className="sr-only">
-              Product options
-            </h2>
-            {/* Form content can be added here if needed */}
-          </section>
-        </div>
       </div>
     </Section>
   );
@@ -81,6 +156,19 @@ const ProductHero: React.FC<ProductHeroProps> = () => {
 
 export const ProductHeroComponent: ComponentConfig<ProductHeroProps> = {
   fields: productHeroFields,
-  defaultProps: {},
+  defaultProps: {
+    name: {
+      size: "section",
+      color: "default",
+    },
+    price: {
+      size: "large",
+      weight: "bold",
+    },
+    description: {
+      size: "base",
+      weight: "default",
+    },
+  },
   render: (props) => <ProductHero {...props} />,
 };
