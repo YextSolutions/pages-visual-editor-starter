@@ -55,6 +55,6 @@ export const locationConfig: Config<LocationProps> = {
   },
 };
 
-export const puckConfigs = new Map<string, Config<any>>([
+export const componentRegistry = new Map<string, Config<any>>([
   ["location", locationConfig],
 ]);
