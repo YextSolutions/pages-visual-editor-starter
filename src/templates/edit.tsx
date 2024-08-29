@@ -1,6 +1,6 @@
 import {
   Editor,
-  useDocumentProvider,
+  usePlatformBridgeDocument,
 } from "@yext/visual-editor";
 import {componentRegistry} from "../ve.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
@@ -18,7 +18,7 @@ export const config: TemplateConfig = {
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
-  const entityDocument = useDocumentProvider();
+  const entityDocument = usePlatformBridgeDocument();
 
   return (
     <DocumentProvider value={entityDocument}>
