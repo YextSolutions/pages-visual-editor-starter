@@ -5,7 +5,6 @@ import {
 import {componentRegistry} from "../ve.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
 import {DocumentProvider} from "@yext/pages/util";
-import '@yext/visual-editor/style.css'
 
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
