@@ -30,7 +30,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface ButtonProps
@@ -43,14 +43,39 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
-       <Comp
-          className={cn(buttonVariants({ variant, size, className }))}
-          ref={ref}
-          {...props}
-        />
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
     );
-  },
+  }
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+const buttonFields = {
+  variant: {
+    label: "Variant",
+    type: "radio",
+    options: [
+      { label: "Default", value: "default" },
+      { label: "Secondary", value: "secondary" },
+      { label: "Destructive", value: "destructive" },
+      { label: "Outline", value: "outline" },
+      { label: "Ghost", value: "ghost" },
+      { label: "Link", value: "link" },
+    ],
+  },
+  size: {
+    label: "Size",
+    type: "radio",
+    options: [
+      { label: "Default", value: "default" },
+      { label: "Small", value: "sm" },
+      { label: "Large", value: "lg" },
+      { label: "Icon", value: "icon" },
+    ],
+  },
+} as const;
+
+export { Button, buttonVariants, buttonFields };

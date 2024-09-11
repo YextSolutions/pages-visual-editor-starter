@@ -5,7 +5,7 @@ import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
 import { Heading, headingFields, HeadingProps } from "./atoms/heading";
 import { CTA } from "./atoms/cta";
-import { ButtonProps } from "./atoms/button";
+import { ButtonProps, buttonFields } from "./atoms/button";
 import { cn } from "../utils/cn";
 import { EntityField } from "@yext/visual-editor";
 import "./index.css";
@@ -40,32 +40,12 @@ const heroFields: Fields<HeroProps> = {
   cta1: {
     type: "object",
     label: "CTA 1",
-    objectFields: {
-      variant: {
-        label: "Variant",
-        type: "radio",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Secondary", value: "secondary" },
-          { label: "Link", value: "link" },
-        ],
-      },
-    },
+    objectFields: buttonFields,
   },
   cta2: {
     type: "object",
     label: "CTA 2",
-    objectFields: {
-      variant: {
-        label: "Variant",
-        type: "radio",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Secondary", value: "secondary" },
-          { label: "Link", value: "link" },
-        ],
-      },
-    },
+    objectFields: buttonFields,
   },
 };
 

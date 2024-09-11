@@ -7,7 +7,7 @@ const headingVariants = cva("font-bold", {
   variants: {
     size: {
       page: "text-5xl",
-      section: "text-[34px]",
+      section: "text-3xl",
       subheading: "text-2xl",
     },
     color: {
@@ -53,7 +53,7 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
 );
 Heading.displayName = "Heading";
 
-export const headingFields = {
+const headingFields = {
   size: {
     label: "Size",
     type: "radio" as const,
@@ -75,4 +75,4 @@ export const headingFields = {
   },
 };
 
-export { Heading, headingVariants };
+export { Heading, headingVariants, headingFields };
