@@ -3,9 +3,9 @@ import logo from "../assets/logo.png";
 import "./index.css";
 
 const navigation: CTA[] = [
-  { link: "/", label: "Restaurants" },
-  { link: "/", label: "Blog" },
-  { link: "/", label: "Support" },
+  { link: "#", label: "Restaurants" },
+  { link: "#", label: "Blog" },
+  { link: "#", label: "Support" },
 ];
 
 const Header = () => {
