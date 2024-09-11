@@ -3,7 +3,7 @@ import { LocationStream } from "../types/autogen";
 import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
-import { Heading, HeadingProps } from "./atoms/heading";
+import { Heading, headingFields, HeadingProps } from "./atoms/heading";
 import { CTA } from "./atoms/cta";
 import { ButtonProps } from "./atoms/button";
 import { cn } from "../utils/cn";
@@ -12,20 +12,10 @@ import "./index.css";
 
 export type HeroProps = {
   imageMode: "left" | "right";
-  name: {
-    size: HeadingProps["size"];
-    color: HeadingProps["color"];
-  };
-  location: {
-    size: HeadingProps["size"];
-    color: HeadingProps["color"];
-  };
-  cta1: {
-    variant: ButtonProps["variant"];
-  };
-  cta2: {
-    variant: ButtonProps["variant"];
-  };
+  name: HeadingProps;
+  location: HeadingProps;
+  cta1: ButtonProps;
+  cta2: ButtonProps;
 };
 
 const heroFields: Fields<HeroProps> = {
@@ -40,50 +30,12 @@ const heroFields: Fields<HeroProps> = {
   name: {
     type: "object",
     label: "Location Name",
-    objectFields: {
-      size: {
-        label: "Size",
-        type: "radio",
-        options: [
-          { label: "Page", value: "page" },
-          { label: "Section", value: "section" },
-          { label: "Subheading", value: "subheading" },
-        ],
-      },
-      color: {
-        label: "Color",
-        type: "radio",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Primary", value: "primary" },
-          { label: "Secondary", value: "secondary" },
-        ],
-      },
-    },
+    objectFields: headingFields,
   },
   location: {
     type: "object",
     label: "Location",
-    objectFields: {
-      size: {
-        label: "Size",
-        type: "radio",
-        options: [
-          { label: "Page", value: "page" },
-          { label: "Section", value: "section" },
-          { label: "Subheading", value: "subheading" },
-        ],
-      },
-      color: {
-        label: "Color",
-        type: "radio",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Primary", value: "primary" },
-          { label: "Secondary", value: "secondary" },
-        ],
-      },
-    },
+    objectFields: headingFields,
   },
   cta1: {
     type: "object",
@@ -130,7 +82,7 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
       <div
         className={cn(
           "flex flex-col gap-x-10 md:flex-row",
-          imageMode === "right" && "md:flex-row-reverse",
+          imageMode === "right" && "md:flex-row-reverse"
         )}
       >
         {hero?.image && (

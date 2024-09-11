@@ -49,8 +49,30 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
         {props.children}
       </Tag>
     );
-  },
+  }
 );
 Heading.displayName = "Heading";
+
+export const headingFields = {
+  size: {
+    label: "Size",
+    type: "radio" as const,
+    options: [
+      { label: "Page", value: "page" },
+      { label: "Section", value: "section" },
+      { label: "Subheading", value: "subheading" },
+    ],
+  },
+  color: {
+    label: "Color",
+    type: "radio" as const,
+    options: [
+      { label: "Primary", value: "primary" },
+      { label: "Secondary", value: "secondary" },
+      { label: "Accent", value: "accent" },
+      { label: "Default", value: "default" },
+    ],
+  },
+};
 
 export { Heading, headingVariants };
