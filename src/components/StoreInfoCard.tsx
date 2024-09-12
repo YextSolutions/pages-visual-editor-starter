@@ -104,7 +104,7 @@ const StoreInfoCard = ({ heading, alignment }: StoreInfoCardProps) => {
                 {emails.map((email: any) => (
                   <div
                     className="pt-2.5 gap-x-1.5 flex flex-row items-center"
-                    key="email"
+                    key={email}
                   >
                     <MdOutlineEmail />
                     <Link
