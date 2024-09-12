@@ -42,12 +42,12 @@ export const locationConfig: Config<LocationProps> = {
     FeaturedItems,
   },
   root: {
-    render: ({ children }) => {
+    render: ({ children, puck: {isEditing} }) => {
       return (
         <>
-          <Header />
+          <Header isEditing={isEditing} />
           {children}
-          <Footer />
+          <Footer isEditing={isEditing} />
         </>
       );
     },
