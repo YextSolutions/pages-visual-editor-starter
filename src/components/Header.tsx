@@ -8,18 +8,24 @@ const navigation: CTA[] = [
   { link: "#", label: "Support" },
 ];
 
-const Header = () => {
-  return <HeaderLayout links={navigation} logo={logo} />;
+type HeaderProps = {
+  isEditing: boolean;
+}
+
+const Header = (props: HeaderProps) => {
+  const { isEditing } = props;
+  return <HeaderLayout links={navigation} logo={logo} isEditing={isEditing} />;
 };
 
 type HeaderLayoutProps = {
+  isEditing: boolean;
   links: CTA[];
   logo?: string;
   logoLink?: string;
 };
 
 const HeaderLayout = (props: HeaderLayoutProps) => {
-  const { logo } = props;
+  const { logo, isEditing } = props;
 
   return (
     <header className=" w-full bg-white components">
@@ -32,7 +38,7 @@ const HeaderLayout = (props: HeaderLayoutProps) => {
                 key={item.label?.toString()}
                 className="cursor-pointer font-bold text-primary hover:text-primary/90"
               >
-                <Link cta={item} eventName={`link${idx}`} />
+                <Link cta={item} eventName={`link${idx}`} style={{pointerEvents: isEditing && "none"}} />
               </li>
             ))}
           </ul>
