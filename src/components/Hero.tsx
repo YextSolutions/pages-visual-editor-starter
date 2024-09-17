@@ -29,6 +29,8 @@ import {
   YextSchemaField,
 } from "@yext/visual-editor";
 import "./index.css";
+import { TemplateConfig } from "@yext/pages/*";
+import { config } from "../templates/location";
 
 export type HeroProps = {
   imageMode: "left" | "right";
@@ -62,17 +64,20 @@ type Only<T, U> = {
 };
 type Either<T, U> = Only<T, U> | Only<U, T>;
 
-// type RenderEntityFieldProps<T> = Parameters<CustomField<T>["render"]>[0];
-type AllowList = {
-  allowList: string[];
+type ConfigFields<T extends Record<string, any>> = T["stream"]["fields"];
+
+type AllowList<T extends Record<string, any>> = {
+  allowList: ConfigFields<T>[number][];
 };
-type DisallowList = {
-  disallowList: string[];
+
+type DisallowList<T extends Record<string, any>> = {
+  disallowList: ConfigFields<T>[number][];
 };
+
 type EntityFieldTypesFilter = { types: EntityFieldTypes[] };
-type RenderEntityFieldFilter = Either<
+type RenderEntityFieldFilter<T extends Record<string, any>> = Either<
   EntityFieldTypesFilter,
-  Either<AllowList, DisallowList>
+  Either<AllowList<T>, DisallowList<T>>
 >;
 
 type EntityFieldTypes = "type.string" | "type.image" | `c_${string}`;
@@ -191,89 +196,46 @@ const getEntityTypeToFieldNames = (
   }, new Map<string, string[]>());
 };
 
-const getFilteredEntityFields = (filter?: RenderEntityFieldFilter) => {
-  const entityFields = useEntityFields();
-  console.log("entityFields", entityFields);
-  console.log(
-    "entityFieldNames",
-    entityFields.stream.schema.fields.flatMap(getEntityFieldNames)
-  );
-  console.log(
-    "entityTypeToNames",
-    getEntityTypeToFieldNames(entityFields.stream.schema.fields, {
-      includeSubfields: true,
-    })
-  );
-
-  let filteredEntityFields = entityFields.stream.expression.fields
-    // filter to top level fields for now, though this is only based on the dot in the stream field, not the true schema
-    .filter((field) => field.children === undefined)
-    .filter((field) => !DEFAULT_DISALLOWED_ENTITY_FIELDS.includes(field.name));
-
-  if (filter?.allowList) {
-    filteredEntityFields = filteredEntityFields.filter((field) =>
-      filter.allowList.includes(field.name)
-    );
-  }
-
-  if (filter?.disallowList) {
-    filteredEntityFields = filteredEntityFields.filter(
-      (field) => !filter.disallowList.includes(field.name)
-    );
-  }
-
-  if (filter?.types) {
-    // TODO: Do this on the Go side
-    const typeToFieldNames = entityFields.stream.schema.fields.reduce(
-      (prev: Map<string, string[]>, field) => {
-        if (field.definition.isList) {
-          return prev;
-        }
-        const typeName =
-          field.definition.typeName || field.definition.typeRegistryId;
-        if (!prev.has(typeName)) {
-          return prev.set(typeName, [field.definition.name]);
-        }
-
-        prev.get(typeName)?.push(field.definition.name);
-
-        return prev;
-      },
-      new Map<string, string[]>()
-    );
-    console.log("typeToFieldNames", typeToFieldNames);
-
-    filter.types.forEach((type) => {
-      filteredEntityFields = filteredEntityFields.filter((field) =>
-        typeToFieldNames.get(type)?.includes(field.name)
-      );
-    });
-  }
-
-  return filteredEntityFields;
-};
-
 type RenderProps = Parameters<CustomField<any>["render"]>[0];
 
-type RenderEntityFields<T extends RenderProps> = {
+type RenderEntityFields<
+  T extends RenderProps,
+  U extends Record<string, any>,
+> = {
   renderProps: RenderProps;
   fieldName: keyof T["value"];
   objectFields?: ObjectField<any>["objectFields"];
-  filter?: RenderEntityFieldFilter;
+  filter?: RenderEntityFieldFilter<U>;
 };
 
-const renderEntityFields = <T extends RenderProps>(
-  props: RenderEntityFields<T>
+const renderEntityFields = <
+  T extends RenderProps,
+  U extends Record<string, any>,
+>(
+  props: RenderEntityFields<T, U>
 ) => {
   console.log("renderProps", props.renderProps);
-  const filteredEntityFields = getFilteredEntityFields(props.filter);
+  const entityFields = useEntityFields();
+  const filteredEntityFields =
+    entityFields.stream.schema.fields.flatMap(getEntityFieldNames);
+  console.log("entityFieldNames", filteredEntityFields);
+  console.log(
+    "entityTypeToNames",
+    getEntityTypeToFieldNames(
+      filteredEntityFields.flatMap((x) => x.schemaField),
+      { includeSubfields: true }
+    )
+  );
 
   const objectFields = {} as any;
   objectFields[props.fieldName] = {
     label: "Entity Field",
     type: "select",
-    options: filteredEntityFields.map((field) => {
-      return { label: field.name, value: field.name };
+    options: filteredEntityFields.map((entityFieldNameToSchema) => {
+      return {
+        label: entityFieldNameToSchema.name,
+        value: entityFieldNameToSchema.name,
+      };
     }),
   };
 
@@ -309,7 +271,7 @@ const heroFields: Fields<HeroProps> = {
     type: "custom",
     label: "Location Name",
     render: (props) =>
-      renderEntityFields<typeof props>({
+      renderEntityFields<typeof props, typeof config>({
         renderProps: props,
         fieldName: "entityField",
         objectFields: {
@@ -333,7 +295,8 @@ const heroFields: Fields<HeroProps> = {
           },
         },
         filter: {
-          types: ["type.string"],
+          // types: ["type.image"],
+          allowList: ["id", "c_deliveryPromo"],
         },
       }),
   },
