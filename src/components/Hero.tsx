@@ -74,11 +74,12 @@ type DisallowList<T extends Record<string, any>> = {
   disallowList: ConfigFields<T>[number][];
 };
 
-type EntityFieldTypesFilter = { types: EntityFieldTypes[] };
-type RenderEntityFieldFilter<T extends Record<string, any>> = Either<
-  EntityFieldTypesFilter,
-  Either<AllowList<T>, DisallowList<T>>
->;
+type EntityFieldTypesFilter = {
+  types?: EntityFieldTypes[];
+  includeSubfields?: boolean;
+};
+type RenderEntityFieldFilter<T extends Record<string, any>> =
+  EntityFieldTypesFilter & Either<AllowList<T>, DisallowList<T>>;
 
 type EntityFieldTypes = "type.string" | "type.image" | `c_${string}`;
 
@@ -105,11 +106,6 @@ type EntityFieldNameAndSchema = {
 const getEntityFieldNames = (
   schemaField: YextSchemaField
 ): EntityFieldNameAndSchema[] => {
-  const entityFieldNames: EntityFieldNameAndSchema[] = [];
-  if (DEFAULT_DISALLOWED_ENTITY_FIELDS.includes(schemaField.name)) {
-    return entityFieldNames;
-  }
-
   return walkSubfields(schemaField, "");
 };
 
@@ -196,6 +192,58 @@ const getEntityTypeToFieldNames = (
   }, new Map<string, string[]>());
 };
 
+export const getFilteredEntityFields = <T extends Record<string, any>>(
+  filter?: RenderEntityFieldFilter<T>
+) => {
+  const entityFields = useEntityFields();
+
+  console.log("entityFields", entityFields);
+
+  let filteredEntityFields = entityFields.stream.schema.fields
+    // filter to top level fields for now, though this is only based on the dot in the stream field, not the true schema
+    .filter((field) => !DEFAULT_DISALLOWED_ENTITY_FIELDS.includes(field.name));
+
+  if (filter?.allowList) {
+    filteredEntityFields = filteredEntityFields.filter((field) =>
+      filter.allowList.includes(field.name)
+    );
+  }
+
+  if (filter?.disallowList) {
+    filteredEntityFields = filteredEntityFields.filter(
+      (field) => !filter.disallowList.includes(field.name)
+    );
+  }
+
+  if (filter?.types) {
+    const typeToFieldNames = getEntityTypeToFieldNames(filteredEntityFields, {
+      includeSubfields: true,
+    });
+
+    filter.types.forEach((type) => {
+      filteredEntityFields = filteredEntityFields.filter((field) =>
+        typeToFieldNames.get(type)?.includes(field.name)
+      );
+    });
+  }
+
+  if (filter?.includeSubfields) {
+    const filterEntitySubFields: YextSchemaField[] = [];
+    for (const yextSchemaField of filteredEntityFields) {
+      const entityFieldNames = getEntityFieldNames(yextSchemaField);
+      for (const entityFieldName of entityFieldNames) {
+        filterEntitySubFields.push({
+          ...entityFieldName.schemaField,
+          name: entityFieldName.name,
+        });
+      }
+    }
+    filteredEntityFields = filterEntitySubFields;
+  }
+
+  return filteredEntityFields;
+};
+
 type RenderProps = Parameters<CustomField<any>["render"]>[0];
 
 type RenderEntityFields<
@@ -216,16 +264,18 @@ const renderEntityFields = <
 ) => {
   console.log("renderProps", props.renderProps);
   const entityFields = useEntityFields();
-  const filteredEntityFields =
+  const entityFieldNames =
     entityFields.stream.schema.fields.flatMap(getEntityFieldNames);
-  console.log("entityFieldNames", filteredEntityFields);
+  console.log("entityFieldNames", entityFieldNames);
   console.log(
     "entityTypeToNames",
     getEntityTypeToFieldNames(
-      filteredEntityFields.flatMap((x) => x.schemaField),
+      entityFieldNames.flatMap((x) => x.schemaField),
       { includeSubfields: true }
     )
   );
+  const filteredEntityFields = getFilteredEntityFields<U>(props.filter);
+  console.log("filteredEntityFields", filteredEntityFields);
 
   const objectFields = {} as any;
   objectFields[props.fieldName] = {
@@ -296,7 +346,8 @@ const heroFields: Fields<HeroProps> = {
         },
         filter: {
           // types: ["type.image"],
-          allowList: ["id", "c_deliveryPromo"],
+          allowList: ["c_productSection"],
+          includeSubfields: true,
         },
       }),
   },
