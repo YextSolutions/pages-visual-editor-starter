@@ -7,6 +7,18 @@
     "structType": {
       "property": [
         {
+          "name": "siteId",
+          "displayName": "SiteId",
+          "isRequired": false,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "SIMPLE",
+              "maxLength": 100000
+            }
+          }
+        },
+        {
           "name": "template",
           "displayName": "Template",
           "isRequired": true,
