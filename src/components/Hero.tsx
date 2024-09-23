@@ -5,6 +5,7 @@ import {
   FieldLabel,
   Fields,
   ObjectField,
+  SelectField,
 } from "@measured/puck";
 import { LocationStream } from "../types/autogen";
 import { useDocument } from "@yext/pages/util";
@@ -23,21 +24,30 @@ import { cn } from "../utils/cn";
 import {
   EntityField,
   useEntityFields,
-  YextEntityField,
-  YextEntityFields,
-  YextFieldDefinition,
   YextSchemaField,
 } from "@yext/visual-editor";
 import "./index.css";
-import { TemplateConfig } from "@yext/pages/*";
 import { config } from "../templates/location";
+import { Unlock } from "lucide-react";
+
+import "./entityField.css";
+
+export type EntityField = {
+  name: string;
+  value: string;
+};
 
 export type HeroProps = {
   imageMode: "left" | "right";
+  custom: {
+    entityField: EntityField;
+    value: string;
+  };
   title: {
     size: HeadingProps["size"];
     color: HeadingProps["color"];
     entityField: string;
+    titleValue: string;
   };
   hours: {
     entityField: string;
@@ -262,50 +272,313 @@ const renderEntityFields = <
 >(
   props: RenderEntityFields<T, U>
 ) => {
-  console.log("renderProps", props.renderProps);
-  const entityFields = useEntityFields();
-  const entityFieldNames =
-    entityFields.stream.schema.fields.flatMap(getEntityFieldNames);
-  console.log("entityFieldNames", entityFieldNames);
-  console.log(
-    "entityTypeToNames",
-    getEntityTypeToFieldNames(
-      entityFieldNames.flatMap((x) => x.schemaField),
-      { includeSubfields: true }
-    )
-  );
+  // console.log("renderProps", props);
+  // const entityFields = useEntityFields();
+  // const entityFieldNames =
+  //   entityFields.stream.schema.fields.flatMap(getEntityFieldNames);
+  // console.log("entityFieldNames", entityFieldNames);
+  // console.log(
+  //   "entityTypeToNames",
+  //   getEntityTypeToFieldNames(
+  //     entityFieldNames.flatMap((x) => x.schemaField),
+  //     { includeSubfields: true }
+  //   )
+  // );
   const filteredEntityFields = getFilteredEntityFields<U>(props.filter);
-  console.log("filteredEntityFields", filteredEntityFields);
+  // console.log("filteredEntityFields", filteredEntityFields);
 
-  const objectFields = {} as any;
-  objectFields[props.fieldName] = {
-    label: "Entity Field",
-    type: "select",
-    options: filteredEntityFields.map((entityFieldNameToSchema) => {
-      return {
-        label: entityFieldNameToSchema.name,
-        value: entityFieldNameToSchema.name,
-      };
-    }),
-  };
+  // const objectFields = {} as any;
+  // objectFields[props.fieldName] = {
+  //   // props.fieldName is "entityField"
+  //   label: "Entity Field",
+  //   type: "select",
+  //   options: filteredEntityFields.map((entityFieldNameToSchema) => {
+  //     return {
+  //       label: entityFieldNameToSchema.name,
+  //       value: entityFieldNameToSchema.name,
+  //     };
+  //   }),
+  // };
+  // objectFields["titleValue"] = {
+  //   label: "Title",
+  //   type: "text",
+  // };
 
   return (
     <>
       <FieldLabel label={props.renderProps.field.label!}>
         <AutoField
+          // readOnly={true}
+          field={{
+            type: "select",
+            label: "Entity Field",
+            options: filteredEntityFields.map((entityFieldNameToSchema) => {
+              return {
+                label: entityFieldNameToSchema.name,
+                value: entityFieldNameToSchema.name,
+              };
+            }),
+          }}
+          onChange={(value) => props.renderProps.onChange(value)}
+          value={props.renderProps.value}
+        />
+        <AutoField
+          readOnly={props.renderProps.readOnly}
+          field={{
+            label: "Title",
+            type: "text",
+          }}
+          onChange={(value) => props.renderProps.onChange(value)}
+          value={props.renderProps.value}
+        />
+        <AutoField
           field={{
             type: "object",
             objectFields: {
-              ...objectFields,
+              // ...objectFields,
               ...props.objectFields,
             },
           }}
+          // readOnly={true}
           onChange={(value) => props.renderProps.onChange(value)}
           value={props.renderProps.value}
         />
       </FieldLabel>
     </>
   );
+};
+
+type RenderYextEntityFieldSelectorProps<T extends Record<string, any>> = {
+  // renderProps: RenderProps;
+  // fieldName: keyof T["value"];
+  // objectFields?: ObjectField<any>["objectFields"];
+  label?: string;
+  filter?: RenderEntityFieldFilter<T>;
+};
+
+// export const YextEntityFieldSelector = <T extends RenderProps>(
+//   props: RenderYextEntityFieldSelectorProps<T>
+// ) => {
+//   return {
+//     type: "object",
+//     // label: "foo",
+//     objectFields: {
+//       name: {
+//         type: "custom",
+//         label: props.label,
+//         render: ({
+//           field,
+//           value,
+//           onChange,
+//           readOnly,
+//           id,
+//           name,
+//         }: RenderProps) => {
+//           console.log("field", field);
+//           console.log("value", value);
+//           console.log("readOnly", readOnly);
+//           console.log("id", id);
+//           console.log("name", name);
+
+//           const filteredEntityFields = getFilteredEntityFields(props.filter);
+
+//           const document = useDocument();
+//           console.log(document);
+
+//           return (
+//             <>
+//               <FieldLabel
+//                 label={field.label || "Label is undefined"}
+//                 readOnly={readOnly}
+//               >
+//                 <AutoField
+//                   field={{
+//                     type: "select",
+//                     label: "foo",
+//                     options: [
+//                       { value: "", label: "Select a Content field" },
+//                       ...filteredEntityFields.map((entityFieldNameToSchema) => {
+//                         return {
+//                           label: entityFieldNameToSchema.name,
+//                           value: entityFieldNameToSchema.name,
+//                         };
+//                       }),
+//                     ],
+//                   }}
+//                   onChange={(value) => {
+//                     console.log("onchange value", value);
+//                     onChange({
+//                       name: value as unknown as string, // hack because the option value is a string so it comes back as a string even though TS thinks it's an object
+//                       value: resolveProp(document, value as unknown as string),
+//                     });
+//                     // onChange(value);
+//                   }}
+//                   // value={value.name}
+//                   value={value}
+//                   readOnly={readOnly}
+//                 />
+//                 {value && (
+//                   <button
+//                     type="button"
+//                     className={"entityField"}
+//                     onClick={() => {
+//                       // onChange({ name: "", value: value.value });
+//                       onChange("");
+//                     }}
+//                     disabled={readOnly}
+//                   >
+//                     <span className="entityField-unlock-icon">
+//                       <Unlock size={16} />
+//                     </span>
+//                     <span>Use a constant value</span>
+//                   </button>
+//                 )}
+//               </FieldLabel>
+//               {/* <FieldLabel
+//                 label={"Constant Value"}
+//                 icon={"hi"}
+//                 readOnly={readOnly}
+//               >
+//                 <AutoField
+//                   readOnly={readOnly}
+//                   onChange={(value) =>
+//                     onChange({
+//                       name: "",
+//                       value: value,
+//                     })
+//                   }
+//                   value={value.value}
+//                   field={{
+//                     type: "text",
+//                     label: "foo",
+//                   }}
+//                 />
+//               </FieldLabel> */}
+//             </>
+//           );
+//         },
+//       },
+//       // resolveProp(document, value as unknown as string)
+//       value: {
+//         label: "Constant Value",
+//         type: "custom",
+//         render: ({
+//           field,
+//           value,
+//           onChange,
+//           readOnly,
+//           id,
+//           name,
+//         }: RenderProps) => {
+//           const document = useDocument();
+//           console.log(document);
+
+//           console.log("value field", field);
+//           console.log("value value", value);
+//           console.log("value readOnly", readOnly);
+//           console.log("value id", id);
+//           console.log("value name", name);
+
+//           return (
+//             <FieldLabel
+//               label={"Constant Value"}
+//               icon={"hi"}
+//               readOnly={readOnly}
+//             >
+//               <AutoField
+//                 readOnly={readOnly}
+//                 onChange={(value) => onChange(value)}
+//                 value={resolveProp(document, value)}
+//                 field={{
+//                   type: "text",
+//                   label: "foo",
+//                 }}
+//               />
+//             </FieldLabel>
+//           );
+//         },
+//       },
+//     },
+//   };
+// };
+
+export const YextEntityFieldSelector = <T extends RenderProps>(
+  props: RenderYextEntityFieldSelectorProps<T>
+) => {
+  return {
+    type: "custom",
+    label: props.label,
+    render: ({ field, value, onChange, readOnly, id, name }: RenderProps) => {
+      const filteredEntityFields = getFilteredEntityFields(props.filter);
+      const document = useDocument();
+
+      return (
+        <>
+          <FieldLabel
+            label={field.label || "Label is undefined"}
+            readOnly={readOnly === "name"}
+          >
+            <AutoField
+              field={{
+                type: "select",
+                options: [
+                  { value: "", label: "Select a Content field" },
+                  ...filteredEntityFields.map((entityFieldNameToSchema) => {
+                    return {
+                      label: entityFieldNameToSchema.name,
+                      value: entityFieldNameToSchema.name,
+                    };
+                  }),
+                ],
+              }}
+              onChange={(value) => {
+                onChange({
+                  name: value as unknown as string, // hack because the option value is a string so it comes back as a string even though TS thinks it's an object
+                  value: resolveProp(document, value as unknown as string),
+                });
+              }}
+              value={value.name}
+              readOnly={readOnly === "name"}
+            />
+            {value.name && (
+              <button
+                type="button"
+                className={"entityField"}
+                onClick={() => {
+                  onChange({ name: "", value: value.value });
+                }}
+                disabled={readOnly === "name"}
+              >
+                <span className="entityField-unlock-icon">
+                  <Unlock size={16} />
+                </span>
+                <span>Use a constant value</span>
+              </button>
+            )}
+          </FieldLabel>
+          <FieldLabel
+            label={readOnly === "value" ? "Value" : "Constant Value"}
+            readOnly={readOnly === "value"}
+            className="entityField-value"
+          >
+            <AutoField
+              readOnly={readOnly === "value"}
+              onChange={(value) =>
+                onChange({
+                  name: "",
+                  value: value,
+                })
+              }
+              value={value.value}
+              field={{
+                type: "text",
+              }}
+            />
+          </FieldLabel>
+        </>
+      );
+    },
+  };
 };
 
 const heroFields: Fields<HeroProps> = {
@@ -317,7 +590,132 @@ const heroFields: Fields<HeroProps> = {
       { label: "Right", value: "right" },
     ],
   },
+  custom: {
+    type: "object",
+    label: "Location Name",
+    objectFields: {
+      entityField: YextEntityFieldSelector<typeof config>({
+        label: "Entity Field",
+        filter: {
+          types: ["type.string"],
+          includeSubfields: true,
+        },
+      }),
+    },
+    //   {
+    //     type: "custom",
+    //     label: "Entity Field",
+    //     render: ({ field, value, onChange, readOnly, id, name }) => {
+    //       console.log("field", field);
+    //       console.log("value", value);
+    //       console.log("readOnly", readOnly);
+    //       console.log("id", id);
+    //       console.log("name", name);
+
+    //       const filteredEntityFields = getFilteredEntityFields({
+    //         types: ["type.string"],
+    //         includeSubfields: true,
+    //       });
+
+    //       const document = useDocument();
+    //       console.log(document);
+
+    //       return (
+    //         <FieldLabel
+    //           label={field.label || "Label is undefined"}
+    //           readOnly={readOnly}
+    //         >
+    //           <AutoField
+    //             field={{
+    //               type: "select",
+    //               label: "foo",
+    //               options: [
+    //                 { value: "", label: "Select a Content field" },
+    //                 ...filteredEntityFields.map((entityFieldNameToSchema) => {
+    //                   return {
+    //                     label: entityFieldNameToSchema.name,
+    //                     value: entityFieldNameToSchema.name,
+    //                   };
+    //                 }),
+    //               ],
+    //             }}
+    //             onChange={(value) => {
+    //               console.log("onchange value", value);
+    //               onChange({
+    //                 name: value as unknown as string, // hack because the option value is a string so it comes back as a string even though TS thinks it's an object
+    //                 value: resolveProp(document, value as unknown as string),
+    //               });
+    //             }}
+    //             value={value.name}
+    //             readOnly={readOnly}
+    //           />
+    //           {value.name && (
+    //             <button
+    //               type="button"
+    //               className={"entityField"}
+    //               onClick={() => {
+    //                 onChange({ name: "", value: "" });
+    //               }}
+    //               disabled={readOnly}
+    //             >
+    //               <span className="entityField-unlock-icon">
+    //                 <Unlock size={16} />
+    //               </span>
+    //               <span>Use a constant value</span>
+    //             </button>
+    //           )}
+    //         </FieldLabel>
+    //       );
+    //     },
+    //   },
+    //   value: {
+    //     type: "text",
+    //     label: "Value",
+    //   },
+    // },
+
+    // render: ({ field, value, onChange }) => {
+    //   console.log("field", field);
+    //   return (
+    //     <AutoField
+    //       field={{ type: "text", label: "foo" }}
+    //       onChange={(value) => onChange(value)}
+    //       value={value}
+    //     />
+    //   );
+    // },
+  },
   title: {
+    //   type: "object",
+    //   label: "Location Name",
+    //   objectFields: {
+    //     entityField: {
+    //       label: "Entity Field",
+    //       type: "text",
+    //     },
+    //     titleValue: {
+    //       label: "Title Value",
+    //       type: "text",
+    //     },
+    //     size: {
+    //       label: "Size",
+    //       type: "radio",
+    //       options: [
+    //         { label: "Page", value: "page" },
+    //         { label: "Section", value: "section" },
+    //         { label: "Subheading", value: "subheading" },
+    //       ],
+    //     },
+    //     color: {
+    //       label: "Color",
+    //       type: "radio",
+    //       options: [
+    //         { label: "Default", value: "default" },
+    //         { label: "Primary", value: "primary" },
+    //         { label: "Secondary", value: "secondary" },
+    //       ],
+    //     },
+    //   },
     type: "custom",
     label: "Location Name",
     render: (props) =>
@@ -432,8 +830,7 @@ const heroFields: Fields<HeroProps> = {
 //   cta2: Cta;
 // }
 
-const resolveProp = <T,>(entityField: string): T => {
-  const document = useDocument() as any;
+const resolveProp = <T,>(document: any, entityField: string): T => {
   // return constant value first if it exists
   return document[entityField] || (entityField as T);
 };
@@ -446,6 +843,7 @@ const Hero = ({
   location,
   cta1,
   cta2,
+  custom,
 }: HeroProps) => {
   const {
     address,
@@ -480,7 +878,8 @@ const Hero = ({
             </Heading> */}
             <Heading level={2} size={title.size} color={title.color}>
               {/* <EntityFieldRenderer field={name.entityField} type="STRING" /> */}
-              {resolveProp<string>(title.entityField)}
+              {/* {resolveProp<string>(document, title.entityField)} */}
+              {custom.entityField.value}
             </Heading>
           </EntityField>
           <EntityField displayName="City" fieldId="address">
@@ -488,14 +887,14 @@ const Hero = ({
               {address?.city}
             </Heading>
           </EntityField>
-          {hours && (
+          {/* {hours && (
             <EntityField displayName="Hours" fieldId="hours">
               <HoursStatus
                 className="font-semibold"
                 hours={resolveProp<HoursType>(hours.entityField)}
               />
             </EntityField>
-          )}
+          )} */}
           {/* {imageData && (
             <EntityField displayName="Image" fieldId="image">
               <Image className="font-semibold" image={imageData} />
@@ -528,38 +927,6 @@ const Hero = ({
   );
 };
 
-type EntityFieldRenderer = {
-  field: any;
-  type: "STRING";
-};
-
-// TODO: what do we render when the field doesn't exist?
-// 1. render nothing
-// 2. somehow show an error? not sure this is possible
-// 3. should this even be a component or should users implement this themselves? It's only good for simple string fields atm
-// 4. how to render complete fields?
-const EntityFieldRenderer = ({ field, type }: EntityFieldRenderer) => {
-  const document = useDocument() as any;
-  // return constant value first if it exists
-  return document[field] || field;
-
-  // if (fieldValue) {
-  //   switch (type) {
-  //     case "STRING": {
-  //       if (typeof fieldValue !== "string") {
-  //         return (
-  //           <div>
-  //             CANNOT RENDER {field} as {type}
-  //           </div>
-  //         );
-  //       }
-  //       return fieldValue;
-  //     }
-  //   }
-  // }
-  // return <></>;
-};
-
 export const HeroComponent: ComponentConfig<HeroProps> = {
   fields: heroFields,
   defaultProps: {
@@ -585,43 +952,47 @@ export const HeroComponent: ComponentConfig<HeroProps> = {
     cta2: {
       variant: "default",
     },
+    custom: {
+      entityField: {
+        name: "",
+        value: "",
+      },
+      value: "default value",
+    },
   },
-  // resolveData: async ({ props }) => {
-  //   const data = {
-  //     props: { ...props },
-  //     readOnly: {},
-  //   };
+  resolveData: ({ props }, { changed }) => {
+    if (!props.custom?.entityField?.name) {
+      return {
+        props,
+        readOnly: {
+          "custom.entityField": false,
+        },
+      };
+    }
 
-  //   console.log("data in resolveData", data);
+    if (!changed.custom) {
+      return { props };
+    }
 
-  //   if (props.name) {
-  //     // this is where fetchentitydocument is called
-  //     // const document = useDocument() as any;
-  //     // const name = document[props.name];
-  //     // const fields = await getEntityFieldsList("address");
-  //     // const field = fields.find(
-  //     //   (field) => field.fieldId === props.addressField
-  //     // );
-  //     // const value = field?.value as AddressType;
-  //     // if (field) {
-  //     //   data.props = {
-  //     //     ...value,
-  //     //     addressField: props.addressField,
-  //     //     id: props.id,
-  //     //   };
-  //     //   data.readOnly = {
-  //     //     line1: true,
-  //     //     city: true,
-  //     //     region: true,
-  //     //     postalCode: true,
-  //     //     countryCode: true,
-  //     //   };
-  //     // }
-  //   }
+    console.log("!!!!", props.custom?.entityField);
 
-  //   return data;
-  // },
-  render: ({ imageMode, title, hours, image, location, cta1, cta2 }) => (
+    return {
+      props,
+      readOnly: {
+        "custom.entityField": "value",
+      },
+    };
+  },
+  render: ({
+    imageMode,
+    title,
+    hours,
+    image,
+    location,
+    cta1,
+    cta2,
+    custom,
+  }) => (
     <Hero
       imageMode={imageMode}
       title={title}
@@ -630,6 +1001,7 @@ export const HeroComponent: ComponentConfig<HeroProps> = {
       location={location}
       cta1={cta1}
       cta2={cta2}
+      custom={custom}
     />
   ),
 };
