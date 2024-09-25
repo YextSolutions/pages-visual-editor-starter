@@ -130,7 +130,7 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
       <div
         className={cn(
           "flex flex-col gap-x-10 md:flex-row",
-          imageMode === "right" && "md:flex-row-reverse",
+          imageMode === "right" && "md:flex-row-reverse"
         )}
       >
         {hero?.image && (
