@@ -31,6 +31,10 @@ import {
   HeadingTextProps,
 } from "./components/text/HeadingText";
 import "@yext/visual-editor/style.css";
+import {
+  SectionWrapperComponent as Section,
+  SectionWrapperProps,
+} from "./components/layout/Section";
 
 type LocationProps = {
   Hero: HeroProps;
@@ -44,10 +48,18 @@ type LocationProps = {
   Promo: PromoProps;
   FeaturedItems: FeaturedItemsProps;
   HeadingText: HeadingTextProps;
+  Section: SectionWrapperProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
+  // categories: {
+  //   layout: {
+  //     components: {
+  //       Section,
+  //     },
+  //   },
+  // },
   components: {
     Hero,
     Columns,
@@ -60,6 +72,7 @@ export const locationConfig: Config<LocationProps> = {
     Promo,
     FeaturedItems,
     HeadingText,
+    Section,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {

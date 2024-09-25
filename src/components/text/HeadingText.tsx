@@ -66,7 +66,7 @@ const HeadingTextComponent: ComponentConfig<HeadingTextProps> = {
     size: "section",
     color: "default",
   },
-  label: "Example Component",
+  label: "Heading Text",
   // resolveData: (props, changed) =>
   //   resolveYextEntityField<HeadingTextProps>("myField", props, changed),
   render: (props) => <HeadingText {...props} />,
