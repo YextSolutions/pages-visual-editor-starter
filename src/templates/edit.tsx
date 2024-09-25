@@ -1,6 +1,8 @@
 import {
   Editor,
+  EntityFieldsProvider,
   usePlatformBridgeDocument,
+  usePlatformBridgeEntityFields,
 } from "@yext/visual-editor";
 import {componentRegistry} from "../ve.config";
 import {GetPath, TemplateProps, TemplateConfig} from "@yext/pages";
@@ -18,10 +20,13 @@ export const config: TemplateConfig = {
 // Render the editor
 const Edit: () => JSX.Element = () => {
   const entityDocument = usePlatformBridgeDocument();
+  const entityFields = usePlatformBridgeEntityFields();
 
   return (
     <DocumentProvider value={entityDocument}>
-      <Editor document={entityDocument} componentRegistry={componentRegistry} />
+      <EntityFieldsProvider entityFields={entityFields}>
+        <Editor document={entityDocument} componentRegistry={componentRegistry} />
+      </EntityFieldsProvider>
     </DocumentProvider>
   );
 };
