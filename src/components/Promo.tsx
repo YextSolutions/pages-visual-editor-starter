@@ -5,6 +5,10 @@ import {CTA, CTAProps} from "./atoms/cta";
 import {Section} from "./atoms/section";
 import {cn} from "../utils/cn";
 import "./index.css";
+import { EntityFieldType, resolveYextEntityField, YextEntityFieldSelector } from '@yext/visual-editor';
+import { config } from '../templates/location';
+import { useDocument } from '@yext/pages/util';
+import { LocationStream } from '../types/autogen';
 
 const PLACEHOLDER_IMAGE_URL = 'https://placehold.co/640x360';
 
@@ -13,12 +17,12 @@ export type PromoProps = {
   promoTitle: {
     size: HeadingProps['size'];
     color: HeadingProps['color'];
-    text: string;
+    text: EntityFieldType;
   };
   promoDescription: {
     size: BodyProps['size'];
     weight: BodyProps['weight'];
-    text: string;
+    text: EntityFieldType;
   };
   promoCta?: {
     label?: string;
@@ -42,10 +46,12 @@ const promoFields: Fields<PromoProps> = {
     type: "object",
     label: "Promo Title",
     objectFields: {
-      text: {
-        label: "Text",
-        type: "text"
-      },
+      text: YextEntityFieldSelector<typeof config>({
+        label: "Entity Field",
+        filter: {
+          types: ["type.string"]
+        }
+      }),
       size: {
         label: "Size",
         type: "radio",
@@ -70,10 +76,12 @@ const promoFields: Fields<PromoProps> = {
     type: "object",
     label: "Promo Description",
     objectFields: {
-      text: {
-        label: "Text",
-        type: "textarea"
-      },
+      text: YextEntityFieldSelector<typeof config>({
+        label: "Entity Field",
+        filter: {
+          types: ["type.string"]
+        }
+      }),
       size: {
         label: "Size",
         type: "radio",
@@ -127,7 +135,7 @@ const promoFields: Fields<PromoProps> = {
 };
 
 const Promo = ({imageMode, promoTitle, promoDescription, promoCta, image}: PromoProps) => {
-
+  const document = useDocument<LocationStream>();
   return (
       <Section className='components'>
         <div
@@ -146,13 +154,13 @@ const Promo = ({imageMode, promoTitle, promoDescription, promoCta, image}: Promo
                 size={promoTitle.size}
                 color={promoTitle.color}
             >
-              {promoTitle.text}
+              {resolveYextEntityField(document, promoTitle.text)}
             </Heading>}
             {promoDescription?.text && <Body
                 size={promoDescription.size}
                 weight={promoDescription.weight}
             >
-              {promoDescription.text}
+              {resolveYextEntityField(document, promoDescription.text)}
             </Body>}
             {promoCta && <CTA
                 variant={promoCta.variant}
@@ -170,12 +178,18 @@ export const PromoComponent: ComponentConfig<PromoProps> = {
   defaultProps: {
     imageMode: 'right',
     promoTitle: {
-      text: "title",
+      text: {
+        fieldName: "",
+        staticValue: "Title"
+      },
       size: 'section',
       color: 'default',
     },
     promoDescription: {
-      text: "description",
+      text: {
+        fieldName: "",
+        staticValue: "Description"
+      },
       size: "base",
       weight: "default",
     },

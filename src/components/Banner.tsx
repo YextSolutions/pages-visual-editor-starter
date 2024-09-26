@@ -1,8 +1,12 @@
+import { EntityFieldType, resolveYextEntityField, YextEntityFieldSelector } from "@yext/visual-editor";
 import { BodyProps, Body } from "./atoms/body";
 import { ComponentConfig, Fields } from "@measured/puck";
+import { config } from "../templates/location";
+import { useDocument } from "@yext/pages/util";
+import { LocationStream } from "../types/autogen";
 
 export type BannerProps = {
-  text: string;
+  text: EntityFieldType;
   textAlignment: "justify-end" | "justify-start" | "justify-center";
   textSize: BodyProps["size"];
   fontWeight: BodyProps["weight"];
@@ -11,10 +15,12 @@ export type BannerProps = {
 };
 
 const bannerFields: Fields<BannerProps> = {
-  text: {
-    type: "text",
-    label: "Text",
-  },
+  text: YextEntityFieldSelector<typeof config>({
+    label: "Entity Field",
+    filter: {
+      types: ["type.string"],
+    }
+  }),
   textAlignment: {
     label: "Text Alignment",
     type: "radio",
@@ -69,11 +75,12 @@ const Banner = ({
   textColor,
   backgroundColor,
 }: BannerProps) => {
+  const document = useDocument<LocationStream>();
   return (
     <div className={`Banner ${backgroundColor} components px-4 md:px-20 py-6`}>
       <div className={`flex ${textAlignment} items-center`}>
         <Body color={textColor} weight={fontWeight} size={textSize}>
-          {text}
+          {resolveYextEntityField(document, text)}
         </Body>
       </div>
     </div>
@@ -83,7 +90,10 @@ const Banner = ({
 export const BannerComponent: ComponentConfig<BannerProps> = {
   fields: bannerFields,
   defaultProps: {
-    text: "Banner Text",
+    text: {
+      fieldName: "",
+      staticValue: "Banner Text",
+    },
     textAlignment: "justify-center",
     textSize: "base",
     fontWeight: "default",
