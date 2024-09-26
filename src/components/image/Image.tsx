@@ -10,26 +10,20 @@ import {
   ImageType,
   Image as YextImage,
 } from "@yext/pages-components";
+import { config } from "../../templates/location";
 
 export type ImageProps = {
   image: EntityFieldType;
 };
 
 const headingTextFields: Fields<ImageProps> = {
-  image: {
-    type: "object",
-    label: "Image",
-    objectFields: {
-      //@ts-expect-error ts(2322)
-      entityField: YextEntityFieldSelector<typeof config>({
-        label: "Entity Field",
-        filter: {
-          types: ["type.image"],
-          includeSubfields: true,
-        },
-      }),
+  image: YextEntityFieldSelector<typeof config>({
+    label: "Entity Field",
+    filter: {
+      types: ["type.image"],
+      includeSubfields: true,
     },
-  },
+  }),
 };
 
 const Image = ({ image }: ImageProps) => {
