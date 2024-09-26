@@ -1,5 +1,5 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { LocationStream } from "../types/autogen";
+import { C_hero, LocationStream } from "../types/autogen";
 import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
@@ -7,10 +7,17 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { CTA } from "./atoms/cta";
 import { ButtonProps } from "./atoms/button";
 import { cn } from "../utils/cn";
-import { EntityField } from "@yext/visual-editor";
+import {
+  EntityField,
+  EntityFieldType,
+  resolveYextEntityField,
+  YextEntityFieldSelector,
+} from "@yext/visual-editor";
 import "./index.css";
+import { config } from "../templates/location";
 
 export type HeroProps = {
+  hero: EntityFieldType;
   imageMode: "left" | "right";
   name: {
     size: HeadingProps["size"];
@@ -29,6 +36,12 @@ export type HeroProps = {
 };
 
 const heroFields: Fields<HeroProps> = {
+  hero: YextEntityFieldSelector<typeof config>({
+    label: "Hero",
+    filter: {
+      types: ["c_hero"],
+    },
+  }),
   imageMode: {
     label: "Image Mode",
     type: "radio",
@@ -117,20 +130,24 @@ const heroFields: Fields<HeroProps> = {
   },
 };
 
-const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
-  const {
-    hours,
-    address,
-    name: locationName,
-    c_hero: hero,
-  } = useDocument<LocationStream>();
+const Hero = ({
+  imageMode,
+  name,
+  location,
+  cta1,
+  cta2,
+  hero: heroField,
+}: HeroProps) => {
+  const document = useDocument<LocationStream>();
+  const { hours, address, name: locationName } = document;
+  const hero = resolveYextEntityField<C_hero>(document, heroField);
 
   return (
     <Section className="components">
       <div
         className={cn(
           "flex flex-col gap-x-10 md:flex-row",
-          imageMode === "right" && "md:flex-row-reverse",
+          imageMode === "right" && "md:flex-row-reverse"
         )}
       >
         {hero?.image && (
@@ -187,6 +204,10 @@ const Hero = ({ imageMode, name, location, cta1, cta2 }: HeroProps) => {
 export const HeroComponent: ComponentConfig<HeroProps> = {
   fields: heroFields,
   defaultProps: {
+    hero: {
+      fieldName: "c_hero",
+      staticValue: "",
+    },
     imageMode: "left",
     name: {
       size: "section",
@@ -203,13 +224,5 @@ export const HeroComponent: ComponentConfig<HeroProps> = {
       variant: "default",
     },
   },
-  render: ({ imageMode, name, location, cta1, cta2 }) => (
-    <Hero
-      imageMode={imageMode}
-      name={name}
-      location={location}
-      cta1={cta1}
-      cta2={cta2}
-    />
-  ),
+  render: (props) => <Hero {...props} />,
 };

@@ -2,7 +2,7 @@ import { ComponentConfig, Fields } from "@measured/puck";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { BodyProps } from "./atoms/body";
 import { Section } from "./atoms/section";
-import { C_faqSection, LocationStream } from "../types/autogen";
+import { LocationStream } from "../types/autogen";
 import { LexicalRichText } from "@yext/pages-components";
 import { useDocument } from "@yext/pages/util";
 import { Body } from "./atoms/body";
@@ -107,18 +107,20 @@ const FAQFields: Fields<FAQProps> = {
 };
 
 const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
-  const {c_faqSection: faq} = useDocument<LocationStream>();
+  const { c_faqSection: faq } = useDocument<LocationStream>();
 
   return (
     <Section className="flex flex-col justify-center bg-white components">
-      {sectionTitle && <Heading
+      {sectionTitle && (
+        <Heading
           level={1}
           size={sectionTitle.size}
           color={sectionTitle.color}
           className="text-center"
-      >
-        {sectionTitle.text}
-      </Heading>}
+        >
+          {sectionTitle.text}
+        </Heading>
+      )}
       <Accordion type="single" collapsible>
         {faq?.linkedFAQs && (
           <EntityField
@@ -174,7 +176,5 @@ export const FAQComponent: ComponentConfig<FAQProps> = {
       weight: "default",
     },
   },
-  render: ({ sectionTitle, question, answer }) => (
-    <FAQCard sectionTitle={sectionTitle} question={question} answer={answer} />
-  ),
+  render: (props) => <FAQCard {...props} />,
 };

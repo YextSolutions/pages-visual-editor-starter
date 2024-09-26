@@ -1,7 +1,7 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { useDocument } from "@yext/pages/util";
 import { LocationStream } from "../types/autogen";
-import {Address, AddressType, getDirections} from "@yext/pages-components";
+import { Address, AddressType, getDirections } from "@yext/pages-components";
 import { Section } from "./atoms/section";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { Link } from "@yext/pages-components";
@@ -10,7 +10,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlinePhone } from "react-icons/hi";
 import { EntityField } from "@yext/visual-editor";
 import "@yext/pages-components/style.css";
-import {CardProps} from "./Card";
+import { CardProps } from "./Card";
 
 export type StoreInfoCardProps = {
   heading: {
@@ -54,13 +54,13 @@ const storeInfoCardFields: Fields<StoreInfoCardProps> = {
     type: "radio",
     options: [
       { label: "Left", value: "items-start" },
-      { label: "Center", value: "items-center"},
-    ]
-  }
+      { label: "Center", value: "items-center" },
+    ],
+  },
 };
 
 const StoreInfoCard = ({ heading, alignment }: StoreInfoCardProps) => {
-  const {address, mainPhone, emails} = useDocument<LocationStream>();
+  const { address, mainPhone, emails } = useDocument<LocationStream>();
   const phoneNumber = formatPhoneNumber(mainPhone);
   const coordinates = getDirections(address as AddressType);
 
@@ -130,10 +130,10 @@ export const StoreInfoCardComponent: ComponentConfig<StoreInfoCardProps> = {
       size: "subheading",
       color: "default",
     },
-    alignment: "items-center"
+    alignment: "items-center",
   },
   label: "Store Info Card",
-  render: ({ heading, alignment }) => <StoreInfoCard heading={heading} alignment={alignment}/>,
+  render: (props) => <StoreInfoCard {...props} />,
 };
 
 function formatPhoneNumber(phoneNumberString?: string) {

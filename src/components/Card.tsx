@@ -4,13 +4,25 @@ import { CTA, CTAProps } from "./atoms/cta";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { Section } from "./atoms/section";
 import "./index.css";
+import {
+  EntityFieldType,
+  resolveYextEntityField,
+  YextEntityFieldSelector,
+} from "@yext/visual-editor";
+import { config } from "../templates/location";
+import { LocationStream, Cta, ComplexImage } from "../types/autogen";
+import { useDocument } from "@yext/pages/util";
 
 export type CardProps = {
-  image?: {
-    url?: string;
+  image: {
+    photo: {
+      entityField: EntityFieldType;
+    };
   };
   heading: {
-    text: string;
+    text: {
+      entityField: EntityFieldType;
+    };
     size: HeadingProps["size"];
     color: HeadingProps["color"];
   };
@@ -20,13 +32,14 @@ export type CardProps = {
     weight: BodyProps["weight"];
   };
   body: {
-    text: string;
+    text: {
+      entityField: EntityFieldType;
+    };
     size: BodyProps["size"];
     weight: BodyProps["weight"];
   };
-  cta?: {
-    label?: string;
-    link?: string;
+  cta: {
+    entityField: EntityFieldType;
     variant?: CTAProps["variant"];
   };
   alignment: "items-start" | "items-center";
@@ -35,10 +48,19 @@ export type CardProps = {
 const cardFields: Fields<CardProps> = {
   image: {
     type: "object",
+    label: "Image",
     objectFields: {
-      url: { 
-        label: "Url",
-        type: "text" 
+      photo: {
+        type: "object",
+        label: "Entity Field",
+        objectFields: {
+          entityField: YextEntityFieldSelector<typeof config>({
+            label: "Photo",
+            filter: {
+              types: ["type.image"],
+            },
+          }),
+        },
       },
     },
   },
@@ -46,9 +68,17 @@ const cardFields: Fields<CardProps> = {
     type: "object",
     label: "Heading",
     objectFields: {
-      text: { 
-        label: "Text",
-        type: "text" 
+      text: {
+        type: "object",
+        label: "Entity Field",
+        objectFields: {
+          entityField: YextEntityFieldSelector<typeof config>({
+            label: "Heading Text",
+            filter: {
+              types: ["type.string"],
+            },
+          }),
+        },
       },
       size: {
         label: "Size",
@@ -73,9 +103,9 @@ const cardFields: Fields<CardProps> = {
     type: "object",
     label: "Subheading",
     objectFields: {
-      text: { 
+      text: {
         label: "Text",
-        type: "text" 
+        type: "text",
       },
       size: {
         label: "Size",
@@ -100,9 +130,17 @@ const cardFields: Fields<CardProps> = {
     type: "object",
     label: "Body",
     objectFields: {
-      text: { 
-        label: "Text",
-        type: "textarea" 
+      text: {
+        type: "object",
+        label: "Entity Field",
+        objectFields: {
+          entityField: YextEntityFieldSelector<typeof config>({
+            label: "Body Text",
+            filter: {
+              types: ["type.string"],
+            },
+          }),
+        },
       },
       size: {
         label: "Size",
@@ -127,14 +165,12 @@ const cardFields: Fields<CardProps> = {
     type: "object",
     label: "CTA",
     objectFields: {
-      label: { 
-        label: "Label",
-        type: "text" 
-      },
-      link: { 
-        label: "Link",
-        type: "text" 
-      },
+      entityField: YextEntityFieldSelector<typeof config>({
+        label: "Entity Field",
+        filter: {
+          types: ["c_cta"],
+        },
+      }),
       variant: {
         label: "Variant",
         type: "radio",
@@ -150,12 +186,27 @@ const cardFields: Fields<CardProps> = {
     type: "radio",
     options: [
       { label: "Left", value: "items-start" },
-      { label: "Center", value: "items-center"},
-    ]
-  }
+      { label: "Center", value: "items-center" },
+    ],
+  },
 };
 
-export const Card = ({ image, heading, subheading, body, cta, alignment }: CardProps) => {
+export const Card = ({
+  image: imageField,
+  heading,
+  subheading,
+  body,
+  cta: ctaField,
+  alignment,
+}: CardProps) => {
+  const document = useDocument<LocationStream>();
+  // The null checks on the following lines are only necessary when upgrading a pre-existing field to use a mappable entity field
+  const image = resolveYextEntityField<ComplexImage>(
+    document,
+    imageField?.photo?.entityField
+  )?.image;
+  const cta = resolveYextEntityField<Cta>(document, ctaField?.entityField);
+
   return (
     <Section
       className={`flex flex-col justify-center bg-white components ${alignment}`}
@@ -177,7 +228,7 @@ export const Card = ({ image, heading, subheading, body, cta, alignment }: CardP
       )}
       <div className="flex flex-col gap-y-3 p-8">
         <Heading level={2} size={heading.size} color={heading.color}>
-          {heading.text}
+          {resolveYextEntityField(document, heading.text.entityField)}
         </Heading>
         <Body
           className="line-clamp-1"
@@ -186,15 +237,15 @@ export const Card = ({ image, heading, subheading, body, cta, alignment }: CardP
         >
           {subheading.text}
         </Body>
-        <Body 
-          className="line-clamp-5"
-          weight={body.weight}
-          size={body.size}
-        >
-          {body.text}
+        <Body className="line-clamp-5" weight={body.weight} size={body.size}>
+          {resolveYextEntityField(document, body.text.entityField)}
         </Body>
         {cta && (
-          <CTA variant={cta.variant} label={cta.label} url={cta.link ?? "#"} />
+          <CTA
+            variant={ctaField.variant}
+            label={cta.name}
+            url={cta.link ?? "#"}
+          />
         )}
       </div>
     </Section>
@@ -204,8 +255,21 @@ export const Card = ({ image, heading, subheading, body, cta, alignment }: CardP
 export const CardComponent: ComponentConfig<CardProps> = {
   fields: cardFields,
   defaultProps: {
+    image: {
+      photo: {
+        entityField: {
+          fieldName: "",
+          staticValue: "",
+        },
+      },
+    },
     heading: {
-      text: "heading",
+      text: {
+        entityField: {
+          fieldName: "",
+          staticValue: "Heading Text",
+        },
+      },
       size: "section",
       color: "default",
     },
@@ -215,20 +279,22 @@ export const CardComponent: ComponentConfig<CardProps> = {
       weight: "default",
     },
     body: {
-      text: "body",
+      text: {
+        entityField: {
+          fieldName: "",
+          staticValue: "Body Text",
+        },
+      },
       size: "base",
       weight: "default",
     },
-    alignment: "items-center"
+    cta: {
+      entityField: {
+        fieldName: "",
+        staticValue: "",
+      },
+    },
+    alignment: "items-center",
   },
-  render: ({ image, heading, subheading, body, cta, alignment }) => (
-    <Card
-      image={image}
-      heading={heading}
-      subheading={subheading}
-      body={body}
-      cta={cta}
-      alignment={alignment}
-    />
-  ),
+  render: (props) => <Card {...props} />,
 };
