@@ -13,7 +13,7 @@ import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
 import { resolveVisualEditorData } from "@yext/visual-editor";
 
-export const config: TemplateConfig = {
+export const config = {
   name: "location",
   stream: {
     $id: "location-stream",
@@ -51,7 +51,7 @@ export const config: TemplateConfig = {
   additionalProperties: {
     isVETemplate: true,
   },
-};
+} as const satisfies TemplateConfig;
 
 export const transformProps = async (data) => {
   return resolveVisualEditorData(data, "location");
