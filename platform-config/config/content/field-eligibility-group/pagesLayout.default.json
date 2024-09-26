@@ -1,8 +1,8 @@
 {
-  "$id": "ce_pagesLayout.default",
+  "$id": "pagesLayout.default",
   "$schema": "https://schema.yext.com/config/km/field-eligibility-group/v1",
   "name": "Pages Layout-default",
-  "entityType": "ce_pagesLayout",
+  "entityType": "pagesLayout",
   "fields": [
     "c_entities",
     "c_layoutImage",
