@@ -1,11 +1,10 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { BodyProps } from "./atoms/body";
-import { CTAProps } from "./atoms/cta";
+import { Body, BodyProps } from "./atoms/body";
+import { CTA, CTAProps } from "./atoms/cta";
 import { Heading, HeadingProps } from "./atoms/heading";
-import { C_productSection, LocationStream } from "../types/autogen";
+import { LocationStream } from "../types/autogen";
 import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
-import { Card } from "./Card";
 import { EntityField } from "@yext/visual-editor";
 
 export type FeaturedItemsProps = {
@@ -148,11 +147,14 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
 };
 
 const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
-  const {c_productSection: productSection} = useDocument<LocationStream>();
+  const { c_productSection: productSection } = useDocument<LocationStream>();
   return (
     <Section className="flex flex-col justify-center bg-white components">
       {productSection.sectionTitle && (
-        <EntityField displayName="Product Section Title" fieldId="c_productSection.sectionTitle">
+        <EntityField
+          displayName="Product Section Title"
+          fieldId="c_productSection.sectionTitle"
+        >
           <Heading size={heading.size} color={heading.color}>
             {productSection.sectionTitle}
           </Heading>
@@ -174,7 +176,7 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
                   flexDirection: "column",
                 }}
               >
-                <Card
+                <FeaturedItemCard
                   cta={{
                     label: product.c_productCTA?.name,
                     link: product.c_productCTA?.link,
@@ -230,8 +232,80 @@ export const FeaturedItemsComponent: ComponentConfig<FeaturedItemsProps> = {
       },
     },
   },
-  label: 'Featured Items',
-  render: ({ heading, cards }) => (
-    <FeaturedItems heading={heading} cards={cards} />
-  ),
+  label: "Featured Items",
+  render: (props) => <FeaturedItems {...props} />,
+};
+
+type FeaturedItemCardProps = {
+  image?: {
+    url?: string;
+  };
+  heading: {
+    text: string;
+    size: HeadingProps["size"];
+    color: HeadingProps["color"];
+  };
+  subheading: {
+    text: string;
+    size: BodyProps["size"];
+    weight: BodyProps["weight"];
+  };
+  body: {
+    text: string;
+    size: BodyProps["size"];
+    weight: BodyProps["weight"];
+  };
+  cta?: {
+    label?: string;
+    link?: string;
+    variant?: CTAProps["variant"];
+  };
+};
+
+const FeaturedItemCard = ({
+  image,
+  heading,
+  subheading,
+  body,
+  cta,
+}: FeaturedItemCardProps) => {
+  return (
+    <Section
+      className={`flex flex-col justify-center bg-white components`}
+      padding="small"
+    >
+      {image?.url && (
+        <div
+          style={{
+            backgroundImage: `url('${image?.url}')`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            height: 200,
+            width: "100%",
+          }}
+        />
+      )}
+      <div className="flex flex-col gap-y-3 p-8">
+        <Heading level={2} size={heading.size} color={heading.color}>
+          {heading.text}
+        </Heading>
+        <Body
+          className="line-clamp-1"
+          weight={subheading.weight}
+          size={subheading.size}
+        >
+          {subheading.text}
+        </Body>
+        <Body className="line-clamp-5" weight={body.weight} size={body.size}>
+          {body.text}
+        </Body>
+        {cta && (
+          <CTA variant={cta.variant} label={cta.label} url={cta.link ?? "#"} />
+        )}
+      </div>
+    </Section>
+  );
 };

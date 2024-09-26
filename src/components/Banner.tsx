@@ -1,4 +1,8 @@
-import { EntityFieldType, resolveYextEntityField, YextEntityFieldSelector } from "@yext/visual-editor";
+import {
+  EntityFieldType,
+  resolveYextEntityField,
+  YextEntityFieldSelector,
+} from "@yext/visual-editor";
 import { BodyProps, Body } from "./atoms/body";
 import { ComponentConfig, Fields } from "@measured/puck";
 import { config } from "../templates/location";
@@ -19,7 +23,7 @@ const bannerFields: Fields<BannerProps> = {
     label: "Entity Field",
     filter: {
       types: ["type.string"],
-    }
+    },
   }),
   textAlignment: {
     label: "Text Alignment",
@@ -100,21 +104,5 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
     textColor: "default",
     backgroundColor: "bg-white",
   },
-  render: ({
-    text,
-    textAlignment,
-    textSize,
-    fontWeight,
-    textColor,
-    backgroundColor,
-  }) => (
-    <Banner
-      text={text}
-      textAlignment={textAlignment}
-      textSize={textSize}
-      fontWeight={fontWeight}
-      textColor={textColor}
-      backgroundColor={backgroundColor}
-    />
-  ),
+  render: (props) => <Banner {...props} />,
 };

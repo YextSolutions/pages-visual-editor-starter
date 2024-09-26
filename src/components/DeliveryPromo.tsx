@@ -2,7 +2,7 @@ import { ComponentConfig, Fields } from "@measured/puck";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { Body, BodyProps } from "./atoms/body";
 import { ButtonProps } from "./atoms/button";
-import { C_deliveryPromo, LocationStream } from "../types/autogen";
+import { LocationStream } from "../types/autogen";
 import { useDocument } from "@yext/pages/util";
 import { Image } from "@yext/pages-components";
 import { CTA } from "./atoms/cta";
@@ -104,7 +104,7 @@ const DeliveryPromo = ({
   promoDescription,
   promoCTA,
 }: DeliveryPromoProps) => {
-  const {c_deliveryPromo: deliveryPromo} = useDocument<LocationStream>();
+  const { c_deliveryPromo: deliveryPromo } = useDocument<LocationStream>();
 
   return (
     <Section className="components">
@@ -135,8 +135,14 @@ const DeliveryPromo = ({
             </EntityField>
           )}
           {deliveryPromo?.description && (
-            <EntityField displayName="Description" fieldId="c_deliveryPromo.description">
-              <Body size={promoDescription.size} weight={promoDescription.weight}>
+            <EntityField
+              displayName="Description"
+              fieldId="c_deliveryPromo.description"
+            >
+              <Body
+                size={promoDescription.size}
+                weight={promoDescription.weight}
+              >
                 {deliveryPromo.description}
               </Body>
             </EntityField>
@@ -173,12 +179,5 @@ export const DeliveryPromoComponent: ComponentConfig<DeliveryPromoProps> = {
     },
   },
   label: "Delivery Promo",
-  render: ({ imageMode, promoTitle, promoDescription, promoCTA }) => (
-    <DeliveryPromo
-      imageMode={imageMode}
-      promoTitle={promoTitle}
-      promoDescription={promoDescription}
-      promoCTA={promoCTA}
-    />
-  ),
+  render: (props) => <DeliveryPromo {...props} />,
 };

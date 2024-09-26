@@ -7,7 +7,12 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { CTA } from "./atoms/cta";
 import { ButtonProps } from "./atoms/button";
 import { cn } from "../utils/cn";
-import { EntityField, EntityFieldType, resolveYextEntityField, YextEntityFieldSelector } from "@yext/visual-editor";
+import {
+  EntityField,
+  EntityFieldType,
+  resolveYextEntityField,
+  YextEntityFieldSelector,
+} from "@yext/visual-editor";
 import "./index.css";
 import { config } from "../templates/location";
 
@@ -35,7 +40,7 @@ const heroFields: Fields<HeroProps> = {
     label: "Hero",
     filter: {
       types: ["c_hero"],
-    }
+    },
   }),
   imageMode: {
     label: "Image Mode",
@@ -125,18 +130,24 @@ const heroFields: Fields<HeroProps> = {
   },
 };
 
-const Hero = ({ imageMode, name, location, cta1, cta2, hero: heroField }: HeroProps) => {
+const Hero = ({
+  imageMode,
+  name,
+  location,
+  cta1,
+  cta2,
+  hero: heroField,
+}: HeroProps) => {
   const document = useDocument<LocationStream>();
   const { hours, address, name: locationName } = document;
   const hero = resolveYextEntityField<C_hero>(document, heroField);
-
 
   return (
     <Section className="components">
       <div
         className={cn(
           "flex flex-col gap-x-10 md:flex-row",
-          imageMode === "right" && "md:flex-row-reverse",
+          imageMode === "right" && "md:flex-row-reverse"
         )}
       >
         {hero?.image && (
@@ -213,14 +224,5 @@ export const HeroComponent: ComponentConfig<HeroProps> = {
       variant: "default",
     },
   },
-  render: ({ hero, imageMode, name, location, cta1, cta2 }) => (
-    <Hero
-      hero={hero}
-      imageMode={imageMode}
-      name={name}
-      location={location}
-      cta1={cta1}
-      cta2={cta2}
-    />
-  ),
+  render: (props) => <Hero {...props} />,
 };

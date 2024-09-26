@@ -33,7 +33,10 @@ const Columns = ({ columns, distribution }: ColumnsProps) => {
                   : "",
             }}
           >
-            <DropZone zone={`column-${idx}`} allow={["HoursCard", "StoreInfoCard", "Card"]} />
+            <DropZone
+              zone={`column-${idx}`}
+              allow={["HoursCard", "StoreInfoCard", "Card"]}
+            />
           </div>
         ))}
       </div>
@@ -58,7 +61,7 @@ const columnsFields: Fields<ColumnsProps> = {
   columns: {
     type: "array",
     getItemSummary: (col, id) =>
-      `Column ${id + 1}, span ${
+      `Column ${(id ?? 0) + 1}, span ${
         col.span ? Math.max(Math.min(col.span, 12), 1) : "auto"
       }`,
     arrayFields: {
@@ -78,7 +81,5 @@ export const ColumnsComponent: ComponentConfig<ColumnsProps> = {
     distribution: "auto",
     columns: [{}, {}],
   },
-  render: ({ columns, distribution }) => (
-    <Columns columns={columns} distribution={distribution} />
-  ),
+  render: (props) => <Columns {...props} />,
 };

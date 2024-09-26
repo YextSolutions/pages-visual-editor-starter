@@ -1,17 +1,13 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { useDocument } from "@yext/pages/util";
-import { LocationStream, Hours } from "../types/autogen";
-import {
-  DayOfWeekNames,
-  HoursTable,
-  HoursType,
-} from "@yext/pages-components";
+import { LocationStream } from "../types/autogen";
+import { DayOfWeekNames, HoursTable, HoursType } from "@yext/pages-components";
 import { Section } from "./atoms/section";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { EntityField } from "@yext/visual-editor";
 import "./index.css";
 import "@yext/pages-components/style.css";
-import {CardProps} from "./Card";
+import { CardProps } from "./Card";
 
 export type HoursCardProps = {
   heading: {
@@ -88,9 +84,9 @@ const hoursCardFields: Fields<HoursCardProps> = {
     type: "radio",
     options: [
       { label: "Left", value: "items-start" },
-      { label: "Center", value: "items-center"},
-    ]
-  }
+      { label: "Center", value: "items-center" },
+    ],
+  },
 };
 
 const HoursCard = ({
@@ -100,7 +96,7 @@ const HoursCard = ({
   showAdditionalHoursText,
   alignment,
 }: HoursCardProps) => {
-  const {hours, additionalHoursText} = useDocument<LocationStream>();
+  const { hours, additionalHoursText } = useDocument<LocationStream>();
 
   return (
     <Section
@@ -116,13 +112,15 @@ const HoursCard = ({
         >
           {heading.text}
         </Heading>
-        {hours && <EntityField displayName="Hours" fieldId="hours">
-          <HoursTable
+        {hours && (
+          <EntityField displayName="Hours" fieldId="hours">
+            <HoursTable
               hours={hours as HoursType}
               startOfWeek={startOfWeek}
               collapseDays={collapseDays}
-          />
-        </EntityField>}
+            />
+          </EntityField>
+        )}
         {additionalHoursText && showAdditionalHoursText && (
           <EntityField displayName="Hours Text" fieldId="additionalHoursText">
             <div className="mt-4">{additionalHoursText}</div>
@@ -147,13 +145,5 @@ export const HoursCardComponent: ComponentConfig<HoursCardProps> = {
     alignment: "items-center",
   },
   label: "Hours Card",
-  render: ({ heading, startOfWeek, collapseDays, showAdditionalHoursText , alignment}) => (
-    <HoursCard
-      heading={heading}
-      startOfWeek={startOfWeek}
-      collapseDays={collapseDays}
-      showAdditionalHoursText={showAdditionalHoursText}
-      alignment={alignment}
-    />
-  ),
+  render: (props) => <HoursCard {...props} />,
 };
