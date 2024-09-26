@@ -21,7 +21,6 @@ const headingTextFields: Fields<ImageProps> = {
     label: "Entity Field",
     filter: {
       types: ["type.image"],
-      includeSubfields: true,
     },
   }),
 };

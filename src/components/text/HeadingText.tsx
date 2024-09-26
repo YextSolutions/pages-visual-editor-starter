@@ -6,6 +6,7 @@ import {
   resolveYextEntityField,
 } from "@yext/visual-editor";
 import { useDocument } from "@yext/pages/util";
+import { config } from "../../templates/location";
 export type HeadingTextProps = {
   text: EntityFieldType;
   size: HeadingProps["size"];
@@ -13,20 +14,12 @@ export type HeadingTextProps = {
 };
 
 const headingTextFields: Fields<HeadingTextProps> = {
-  text: {
-    type: "object",
-    label: "Heading",
-    objectFields: {
-      //@ts-expect-error ts(2322)
-      entityField: YextEntityFieldSelector<typeof config>({
-        label: "Entity Field",
-        filter: {
-          types: ["type.string"],
-          includeSubfields: true,
-        },
-      }),
+  text: YextEntityFieldSelector<typeof config>({
+    label: "Entity Field",
+    filter: {
+      types: ["type.string"],
     },
-  },
+  }),
   size: {
     label: "Size",
     type: "radio",
