@@ -190,7 +190,7 @@ const cardFields: Fields<CardProps> = {
 export const Card = ({ image: imageField, heading, subheading, body, cta: ctaField, alignment }: CardProps) => {
   const document = useDocument<LocationStream>();
   // The null checks on the following lines are only necessary when upgrading a pre-existing field to use a mappable entity field
-  const image = resolveYextEntityField<ComplexImage>(document, imageField?.photo?.entityField ?? undefined)?.image
+  const image = resolveYextEntityField<ComplexImage>(document, imageField?.photo?.entityField)?.image
   const cta = resolveYextEntityField<Cta>(document, ctaField?.entityField)
   
   return (
