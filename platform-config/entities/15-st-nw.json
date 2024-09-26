@@ -99,7 +99,7 @@
         }
       }
     },
-    "c_pages_layouts": [],
+    "pagesLayouts": [],
     "c_productSection": {
       "sectionTitle": "Featured Menu Items at [[name]] in [[address.city]]",
       "linkedProducts": [

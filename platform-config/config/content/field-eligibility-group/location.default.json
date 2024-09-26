@@ -8,9 +8,9 @@
     "c_faqSection",
     "c_hero",
     "c_locationVisualConfiguration",
-    "c_pages_layouts",
+    "pagesLayouts",
     "c_productSection",
-    "c_visualConfigurations"
+    "visualConfigurations"
   ],
   "required": []
 }

@@ -1,5 +1,5 @@
 {
-  "$id": "c_visualLayouts",
+  "$id": "defaultLayouts",
   "$schema": "https://schema.yext.com/config/km/field/v1",
   "displayName": "VisualLayouts",
   "group": "NONE",

@@ -10,7 +10,7 @@
       "typeId": "entityReference",
       "type": {
         "entityReferenceType": {
-          "relatedFieldId": "c_pages_layouts",
+          "relatedFieldId": "pagesLayouts",
           "type": "TWO_WAY"
         }
       }

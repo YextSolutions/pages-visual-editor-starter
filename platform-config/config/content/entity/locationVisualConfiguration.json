@@ -35,7 +35,7 @@
       "url": "https://a.mktgcdn.com/p/J11egz30MK2H_QpuIChtwGqGkk5msS8UGVPUk7xJ3vw/1946x338.png",
       "width": 1946
     },
-    "c_visualConfiguration": {
+    "visualConfiguration": {
       "data": "{\"root\":{},\"content\":[],\"zones\":{}}",
       "template": "location"
     },

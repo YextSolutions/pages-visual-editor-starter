@@ -1,5 +1,5 @@
 {
-  "$id": "c_visualConfiguration",
+  "$id": "visualConfiguration",
   "$schema": "https://schema.yext.com/config/km/field-type/v1",
   "description": "Template and puck visual data configuration. Used by layouts and entities.",
   "displayName": "Visual Configuration",

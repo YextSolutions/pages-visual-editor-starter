@@ -7,10 +7,10 @@
     "c_coverPhoto",
     "c_description",
     "c_hero",
-    "c_pages_layouts",
+    "pagesLayouts",
     "c_productCTA",
     "c_productPromo",
-    "c_visualConfigurations"
+    "visualConfigurations"
   ],
   "required": []
 }

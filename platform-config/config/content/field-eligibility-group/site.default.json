@@ -5,7 +5,7 @@
   "entityType": "ce_site",
   "fields": [
     "c_locationVisualConfiguration",
-    "c_visualLayouts"
+    "defaultLayouts"
   ],
   "required": []
 }

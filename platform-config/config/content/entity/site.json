@@ -4,7 +4,7 @@
   "primaryLocale": "en",
   "content": {
     "c_locationVisualConfiguration": "{\"root\":{},\"content\":[],\"zones\":{}}",
-    "c_visualLayouts": [
+    "defaultLayouts": [
       "locationVisualConfiguration"
     ],
     "name": "Site"

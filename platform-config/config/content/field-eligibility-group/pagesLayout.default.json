@@ -6,7 +6,7 @@
   "fields": [
     "c_entities",
     "c_layoutImage",
-    "c_visualConfiguration"
+    "visualConfiguration"
   ],
   "required": []
 }
