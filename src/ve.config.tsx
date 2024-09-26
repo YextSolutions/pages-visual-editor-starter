@@ -31,14 +31,26 @@ import {
   HeadingTextProps,
 } from "./components/text/HeadingText";
 import "@yext/visual-editor/style.css";
+import { SectionWrapperComponent as Section } from "./components/layout/Section";
 import {
-  SectionWrapperComponent as Section,
-  SectionWrapperProps,
-} from "./components/layout/Section";
+  ContainerComponent as Container,
+  ContainerProps,
+} from "./components/layout/Container";
+import { ImageProps, ImageComponent as Image } from "./components/image/Image";
 
 type LocationProps = {
-  Hero: HeroProps;
+  // Layout
   Columns: ColumnsProps;
+  Container: ContainerProps;
+
+  // Text
+  HeadingText: HeadingTextProps;
+
+  // Image
+  Image: ImageProps;
+
+  // Content
+  Hero: HeroProps;
   Card: CardProps;
   FAQ: FAQProps;
   DeliveryPromo: DeliveryPromoProps;
@@ -47,19 +59,38 @@ type LocationProps = {
   StoreInfoCard: StoreInfoCardProps;
   Promo: PromoProps;
   FeaturedItems: FeaturedItemsProps;
-  HeadingText: HeadingTextProps;
-  Section: SectionWrapperProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
-  // categories: {
-  //   layout: {
-  //     components: {
-  //       Section,
-  //     },
-  //   },
-  // },
+  categories: {
+    layout: {
+      title: "Layout",
+      components: ["Columns", "Container"],
+    },
+    text: {
+      title: "Text",
+      components: ["HeadingText"],
+    },
+    image: {
+      title: "Image",
+      components: ["Image"],
+    },
+    content: {
+      title: "Content",
+      components: [
+        "Hero",
+        "Card",
+        "FAQ",
+        "DeliveryPromo",
+        "Banner",
+        "HoursCard",
+        "StoreInfoCard",
+        "Promo",
+        "FeaturedItems",
+      ],
+    },
+  },
   components: {
     Hero,
     Columns,
@@ -73,6 +104,8 @@ export const locationConfig: Config<LocationProps> = {
     FeaturedItems,
     HeadingText,
     Section,
+    Container,
+    Image,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {

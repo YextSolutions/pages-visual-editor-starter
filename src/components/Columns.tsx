@@ -1,15 +1,16 @@
-import { ComponentConfig, DropZone, Fields } from "@measured/puck";
-import { Section } from "./atoms/section";
+import { ComponentConfig, Fields } from "@measured/puck";
 import "./index.css";
+import { Section } from "./atoms/section";
 
 export type ColumnsProps = {
   distribution: "auto" | "manual";
   columns: {
     span?: number;
   }[];
+  renderDropZone?: any;
 };
 
-const Columns = ({ columns, distribution }: ColumnsProps) => {
+const Columns = ({ columns, distribution, renderDropZone }: ColumnsProps) => {
   return (
     <Section>
       <div
@@ -33,7 +34,7 @@ const Columns = ({ columns, distribution }: ColumnsProps) => {
                   : "",
             }}
           >
-            <DropZone zone={`column-${idx}`} allow={["HoursCard", "StoreInfoCard", "Card"]} />
+            {renderDropZone({ zone: `column-${idx}` })}
           </div>
         ))}
       </div>
@@ -58,9 +59,7 @@ const columnsFields: Fields<ColumnsProps> = {
   columns: {
     type: "array",
     getItemSummary: (col, id) =>
-      `Column ${id + 1}, span ${
-        col.span ? Math.max(Math.min(col.span, 12), 1) : "auto"
-      }`,
+      `Column ${id + 1}, span ${col.span ? Math.max(Math.min(col.span, 12), 1) : "auto"}`,
     arrayFields: {
       span: {
         label: "Span (1-12)",
@@ -78,7 +77,11 @@ export const ColumnsComponent: ComponentConfig<ColumnsProps> = {
     distribution: "auto",
     columns: [{}, {}],
   },
-  render: ({ columns, distribution }) => (
-    <Columns columns={columns} distribution={distribution} />
+  render: ({ columns, distribution, puck: { renderDropZone } }) => (
+    <Columns
+      renderDropZone={renderDropZone}
+      columns={columns}
+      distribution={distribution}
+    />
   ),
 };
