@@ -1,0 +1,19 @@
+{
+  "$id": "contactUsPagesLayout",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "assignedEntities": [
+      "7751-bird-rd"
+    ],
+    "name": "Contact Us Page",
+    "visualConfiguration": {
+      "data": "{\"root\":{\"props\":{}},\"content\":[{\"type\":\"Hero\",\"props\":{\"hero\":{\"fieldName\":\"c_hero\",\"staticValue\":\"\"},\"imageMode\":\"left\",\"name\":{\"size\":\"section\",\"color\":\"default\"},\"location\":{\"size\":\"section\",\"color\":\"default\"},\"cta1\":{\"variant\":\"default\"},\"cta2\":{\"variant\":\"default\"},\"id\":\"Hero-4f12d1dc-a0fd-4964-b95d-3c78bdb1c71f\"}},{\"type\":\"FAQ\",\"props\":{\"sectionTitle\":{\"text\":\"Frequently Asked Questions Test\",\"size\":\"section\",\"color\":\"default\"},\"question\":{\"size\":\"subheading\",\"color\":\"primary\"},\"answer\":{\"size\":\"base\",\"weight\":\"default\"},\"id\":\"FAQ-45d8a4ac-dff1-4dd3-878b-a57210b5b86b\"}},{\"type\":\"Promo\",\"props\":{\"imageMode\":\"right\",\"promoTitle\":{\"text\":{\"fieldName\":\"c_deliveryPromo.title\",\"staticValue\":\"Promo\"},\"size\":\"section\",\"color\":\"default\"},\"promoDescription\":{\"text\":{\"fieldName\":\"c_deliveryPromo.description\",\"staticValue\":\"\"},\"size\":\"small\",\"weight\":\"default\"},\"promoCta\":{\"variant\":\"default\",\"label\":\"Learn More\",\"link\":\"https://gooogle.com\"},\"image\":{\"url\":\"https://placehold.co/640x360\"},\"id\":\"Promo-5b41c755-4053-4ef7-ae31-6b66731a236b\"}},{\"type\":\"Banner\",\"props\":{\"text\":\"Banner Text\",\"textAlignment\":\"justify-center\",\"textSize\":\"base\",\"fontWeight\":\"default\",\"textColor\":\"default\",\"backgroundColor\":\"bg-white\",\"id\":\"Banner-500b0fd9-d427-4340-9669-5525f8a5d3b0\"}}],\"zones\":{}}",
+      "pageSet": "location",
+      "siteId": "140871"
+    }
+  },
+  "entityType": "pagesLayout",
+  "folder": "yext/root",
+  "labels": []
+}

@@ -1,0 +1,428 @@
+{
+  "$id": "ce_location",
+  "$schema": "https://schema.yext.com/config/km/field-presentation/v1",
+  "entityType": "location",
+  "displayName": "Location",
+  "presentationEntries": [
+    {
+      "displayName": "Content",
+      "entryType": "DIVIDER"
+    },
+    {
+      "displayName": "Core Information",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "name",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "categories",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "address",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "addressHidden"
+        },
+        {
+          "id": "mainPhone",
+          "visibleOnAdd": true
+        },
+        {
+          "id": "entityId",
+          "visibleOnAdd": true
+        }
+      ]
+    },
+    {
+      "displayName": "Components",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "c_hero"
+        },
+        {
+          "id": "c_productSection"
+        },
+        {
+          "id": "c_faqSection"
+        },
+        {
+          "id": "c_deliveryPromo"
+        }
+      ]
+    },
+    {
+      "displayName": "Business Details",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "description"
+        },
+        {
+          "id": "hours"
+        },
+        {
+          "id": "additionalHoursText"
+        },
+        {
+          "id": "phoneticName"
+        },
+        {
+          "id": "paymentOptions"
+        },
+        {
+          "id": "priceRange"
+        },
+        {
+          "id": "geomodifier"
+        },
+        {
+          "id": "pickupAndDeliveryServices"
+        },
+        {
+          "id": "neighborhood"
+        },
+        {
+          "id": "blackOwnedBusiness"
+        },
+        {
+          "id": "what3WordsAddress"
+        },
+        {
+          "id": "covidMessaging"
+        },
+        {
+          "id": "proofOfVaccinationRequired"
+        },
+        {
+          "id": "fullyVaccinatedStaff"
+        },
+        {
+          "id": "featuredMessage"
+        }
+      ]
+    },
+    {
+      "displayName": "Contact, Websites, and Apps",
+      "displayNameTranslations": [
+        {
+          "localeCode": "en",
+          "value": "Contact, Websites and Apps"
+        }
+      ],
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "emails"
+        },
+        {
+          "id": "menuUrl"
+        },
+        {
+          "id": "orderUrl"
+        },
+        {
+          "id": "reservationUrl"
+        },
+        {
+          "id": "deliveryUrl"
+        },
+        {
+          "id": "websiteUrl"
+        },
+        {
+          "id": "localPhone"
+        },
+        {
+          "id": "alternatePhone"
+        },
+        {
+          "id": "tollFreePhone"
+        },
+        {
+          "id": "mobilePhone"
+        },
+        {
+          "id": "fax"
+        },
+        {
+          "id": "ttyPhone"
+        },
+        {
+          "id": "iosAppUrl"
+        },
+        {
+          "id": "androidAppUrl"
+        },
+        {
+          "id": "covid19InformationUrl"
+        }
+      ]
+    },
+    {
+      "displayName": "Media",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "logo"
+        },
+        {
+          "id": "photoGallery"
+        },
+        {
+          "id": "videos"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Social Media",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "twitterHandle"
+        },
+        {
+          "id": "facebookPageUrl"
+        },
+        {
+          "id": "instagramHandle"
+        },
+        {
+          "id": "linkedInUrl"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Enhanced Content Lists",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "productLists"
+        },
+        {
+          "id": "bios"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Additional Attributes",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "yearEstablished"
+        },
+        {
+          "id": "products"
+        },
+        {
+          "id": "services"
+        },
+        {
+          "id": "specialities"
+        },
+        {
+          "id": "associations"
+        },
+        {
+          "id": "brands"
+        },
+        {
+          "id": "languages"
+        },
+        {
+          "id": "keywords"
+        }
+      ]
+    },
+    {
+      "displayName": "Landing Pages",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "landingPageUrl"
+        }
+      ]
+    },
+    {
+      "displayName": "Additional Hours",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Accessibility",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "onlineServiceHours"
+        },
+        {
+          "id": "seniorHours"
+        },
+        {
+          "id": "accessHours"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Order Pickup",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "pickupHours"
+        },
+        {
+          "id": "driveThroughHours"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Food and Drink",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "kitchenHours"
+        },
+        {
+          "id": "brunchHours"
+        },
+        {
+          "id": "happyHours"
+        },
+        {
+          "id": "dineInHours"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Takeout and Delivery",
+      "displayNameTranslations": [
+        {
+          "localeCode": "en",
+          "value": "Takeaway and Delivery"
+        }
+      ],
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "takeoutHours"
+        },
+        {
+          "id": "deliveryHours"
+        }
+      ]
+    },
+    {
+      "displayName": "Publisher Specific",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Google Business Profile Fields",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "googleWebsiteOverride"
+        }
+      ]
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Apple Fields",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "appleCompanyId"
+        },
+        {
+          "id": "appleCompanyIdDqe"
+        },
+        {
+          "id": "appleBusinessId"
+        },
+        {
+          "id": "appleBusinessIdDqe"
+        },
+        {
+          "id": "appleBusinessDescription"
+        },
+        {
+          "id": "appleCoverPhoto"
+        },
+        {
+          "id": "appleActionLinks"
+        }
+      ]
+    },
+    {
+      "displayName": "Other",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Internal Use Only",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "closed"
+        },
+        {
+          "id": "folder"
+        },
+        {
+          "id": "labels"
+        },
+        {
+          "id": "bingRelationshipType"
+        },
+        {
+          "id": "bingParentLocation"
+        },
+        {
+          "id": "isoRegionCode"
+        },
+        {
+          "id": "deliverListingsWithoutGeocode"
+        },
+        {
+          "id": "timezone"
+        },
+        {
+          "id": "slug"
+        }
+      ]
+    },
+    {
+      "displayName": "Settings",
+      "entryType": "DIVIDER"
+    },
+    {
+      "defaultCollapsed": true,
+      "displayName": "Knowledge Assistant",
+      "entryType": "SECTION",
+      "fields": [
+        {
+          "id": "primaryConversationContact"
+        },
+        {
+          "id": "holidayHoursConversationEnabled"
+        },
+        {
+          "id": "reviewResponseConversationEnabled"
+        },
+        {
+          "id": "nudgeEnabled"
+        }
+      ]
+    }
+  ]
+}
