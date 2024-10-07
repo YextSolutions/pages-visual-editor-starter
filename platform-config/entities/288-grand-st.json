@@ -169,6 +169,9 @@
       }
     },
     "name": "Galaxy Grill",
+    "pageLayouts": [
+      "storePagesLayout"
+    ],
     "slug": "locations/[[entityId]]",
     "timezone": "America/New_York"
   },

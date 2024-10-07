@@ -7,10 +7,7 @@
     "c_deliveryPromo",
     "c_faqSection",
     "c_hero",
-    "c_locationVisualConfiguration",
-    "c_pages_layouts",
-    "c_productSection",
-    "c_visualConfigurations"
+    "c_productSection"
   ],
   "required": []
 }
