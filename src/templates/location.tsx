@@ -11,7 +11,7 @@ import {
 import { DocumentProvider } from "@yext/pages/util";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
-import { resolveVisualEditorData } from "@yext/visual-editor";
+import { applyTheme, resolveVisualEditorData } from "@yext/visual-editor";
 
 export const config = {
   name: "location",
@@ -73,6 +73,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         },
       },
     ],
+    other: applyTheme(document),
   };
 };
 
