@@ -6,6 +6,9 @@
     "defaultLayouts": [
       "storePagesLayout"
     ],
+    "c_theme": [
+      "default-theme"
+    ],
     "name": "Site"
   },
   "entityType": "site",

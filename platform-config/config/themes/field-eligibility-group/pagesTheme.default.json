@@ -1,0 +1,11 @@
+{
+  "$id": "ce_pagesTheme.default",
+  "$schema": "https://schema.yext.com/config/km/field-eligibility-group/v1",
+  "name": "Pages Theme-default",
+  "entityType": "ce_pagesTheme",
+  "fields": [
+    "c_sites",
+    "c_themeConfiguration"
+  ],
+  "required": []
+}

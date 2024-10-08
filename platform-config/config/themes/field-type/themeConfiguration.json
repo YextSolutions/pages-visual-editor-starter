@@ -1,0 +1,23 @@
+{
+  "$id": "c_themeConfiguration",
+  "$schema": "https://schema.yext.com/config/km/field-type/v1",
+  "displayName": "Theme Configuration",
+  "type": {
+    "structType": {
+      "property": [
+        {
+          "name": "data",
+          "displayName": "Data",
+          "isRequired": true,
+          "typeId": "string",
+          "type": {
+            "stringType": {
+              "stereotype": "MULTILINE",
+              "maxLength": 100000
+            }
+          }
+        }
+      ]
+    }
+  }
+}

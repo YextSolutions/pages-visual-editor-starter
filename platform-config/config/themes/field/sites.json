@@ -1,0 +1,19 @@
+{
+  "$id": "c_sites",
+  "$schema": "https://schema.yext.com/config/km/field/v1",
+  "displayName": "Sites",
+  "group": "NONE",
+  "localization": "PRIMARY_ONLY",
+  "type": {
+    "listType": {
+      "typeId": "entityReference",
+      "type": {
+        "entityReferenceType": {
+          "relatedFieldId": "c_theme",
+          "type": "TWO_WAY"
+        }
+      }
+    }
+  },
+  "typeId": "list"
+}

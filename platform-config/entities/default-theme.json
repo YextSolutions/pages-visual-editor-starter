@@ -1,0 +1,15 @@
+{
+  "$id": "default-theme",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "c_sites": [
+      "site"
+    ],
+    "c_themeConfiguration": {"data": "{}"},
+    "name": "Default Theme"
+  },
+  "entityType": "ce_pagesTheme",
+  "folder": "yext/root",
+  "labels": []
+}

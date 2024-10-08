@@ -1,0 +1,7 @@
+{
+  "$id": "ce_pagesTheme",
+  "$schema": "https://schema.yext.com/config/km/entity-type/v2",
+  "description": "Use this entity type to store theme data for Pages in Theme Manager.",
+  "displayName": "Pages Theme",
+  "pluralDisplayName": "Pages Themes"
+}

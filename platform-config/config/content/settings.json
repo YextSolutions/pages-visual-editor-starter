@@ -9,6 +9,7 @@
     },
     {
       "entityType": "site",
+      "defaultFieldEligibilityGroup": "site.default",
       "disabled": false
     },
     {
@@ -22,6 +23,11 @@
     {
       "entityType": "product",
       "defaultFieldEligibilityGroup": "product.default",
+      "disabled": false
+    },
+    {
+      "entityType": "ce_pagesTheme",
+      "defaultFieldEligibilityGroup": "ce_pagesTheme.default",
       "disabled": false
     }
   ]
