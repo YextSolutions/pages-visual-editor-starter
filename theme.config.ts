@@ -12,22 +12,6 @@ export const themeConfig: ThemeConfig = {
       },
     },
   },
-  text: {
-    label: "Text",
-    styles: {
-      lg: {
-        label: "Large",
-        styles: {
-          fontSize: {
-            label: "Font Size",
-            type: "number",
-            plugin: "text",
-            default: "12pt",
-          },
-        },
-      },
-    },
-  },
   colors: {
     label: "Colors",
     styles: {
