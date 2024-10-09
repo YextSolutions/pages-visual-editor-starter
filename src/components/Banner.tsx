@@ -97,6 +97,7 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
     text: {
       field: "",
       constantValue: "Banner Text",
+      constantValueEnabled: true
     },
     textAlignment: "justify-center",
     textSize: "base",

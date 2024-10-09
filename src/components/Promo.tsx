@@ -193,6 +193,7 @@ export const PromoComponent: ComponentConfig<PromoProps> = {
       text: {
         field: "",
         constantValue: "Title",
+        constantValueEnabled: true
       },
       size: "section",
       color: "default",
@@ -201,6 +202,7 @@ export const PromoComponent: ComponentConfig<PromoProps> = {
       text: {
         field: "",
         constantValue: "Description",
+        constantValueEnabled: true
       },
       size: "base",
       weight: "default",

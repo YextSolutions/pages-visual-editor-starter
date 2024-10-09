@@ -260,6 +260,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
         entityField: {
           field: "",
           constantValue: "",
+          constantValueEnabled: true
         },
       },
     },
@@ -268,6 +269,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
         entityField: {
           field: "",
           constantValue: "Heading Text",
+          constantValueEnabled: true
         },
       },
       size: "section",
@@ -283,6 +285,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
         entityField: {
           field: "",
           constantValue: "Body Text",
+          constantValueEnabled: true
         },
       },
       size: "base",
@@ -292,6 +295,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
       entityField: {
         field: "",
         constantValue: "",
+        constantValueEnabled: true
       },
     },
     alignment: "items-center",
