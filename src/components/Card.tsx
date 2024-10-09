@@ -259,8 +259,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
       photo: {
         entityField: {
           field: "",
-          constantValue: "",
-          constantValueEnabled: true
+          constantValue: ""
         },
       },
     },
@@ -294,8 +293,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
     cta: {
       entityField: {
         field: "",
-        constantValue: "",
-        constantValueEnabled: true
+        constantValue: ""
       },
     },
     alignment: "items-center",
