@@ -1,5 +1,5 @@
 import {
-  EntityFieldType,
+  YextEntityField,
   resolveYextEntityField,
   YextEntityFieldSelector,
 } from "@yext/visual-editor";
@@ -10,7 +10,7 @@ import { useDocument } from "@yext/pages/util";
 import { LocationStream } from "../types/autogen";
 
 export type BannerProps = {
-  text: EntityFieldType;
+  text: YextEntityField;
   textAlignment: "justify-end" | "justify-start" | "justify-center";
   textSize: BodyProps["size"];
   fontWeight: BodyProps["weight"];
@@ -95,8 +95,8 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
   fields: bannerFields,
   defaultProps: {
     text: {
-      fieldName: "",
-      staticValue: "Banner Text",
+      field: "",
+      constantValue: "Banner Text",
     },
     textAlignment: "justify-center",
     textSize: "base",

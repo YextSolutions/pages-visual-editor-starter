@@ -5,7 +5,7 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { Section } from "./atoms/section";
 import "./index.css";
 import {
-  EntityFieldType,
+  YextEntityField,
   resolveYextEntityField,
   YextEntityFieldSelector,
 } from "@yext/visual-editor";
@@ -16,12 +16,12 @@ import { useDocument } from "@yext/pages/util";
 export type CardProps = {
   image: {
     photo: {
-      entityField: EntityFieldType;
+      entityField: YextEntityField;
     };
   };
   heading: {
     text: {
-      entityField: EntityFieldType;
+      entityField: YextEntityField;
     };
     size: HeadingProps["size"];
     color: HeadingProps["color"];
@@ -33,13 +33,13 @@ export type CardProps = {
   };
   body: {
     text: {
-      entityField: EntityFieldType;
+      entityField: YextEntityField;
     };
     size: BodyProps["size"];
     weight: BodyProps["weight"];
   };
   cta: {
-    entityField: EntityFieldType;
+    entityField: YextEntityField;
     variant?: CTAProps["variant"];
   };
   alignment: "items-start" | "items-center";
@@ -258,16 +258,16 @@ export const CardComponent: ComponentConfig<CardProps> = {
     image: {
       photo: {
         entityField: {
-          fieldName: "",
-          staticValue: "",
+          field: "",
+          constantValue: "",
         },
       },
     },
     heading: {
       text: {
         entityField: {
-          fieldName: "",
-          staticValue: "Heading Text",
+          field: "",
+          constantValue: "Heading Text",
         },
       },
       size: "section",
@@ -281,8 +281,8 @@ export const CardComponent: ComponentConfig<CardProps> = {
     body: {
       text: {
         entityField: {
-          fieldName: "",
-          staticValue: "Body Text",
+          field: "",
+          constantValue: "Body Text",
         },
       },
       size: "base",
@@ -290,8 +290,8 @@ export const CardComponent: ComponentConfig<CardProps> = {
     },
     cta: {
       entityField: {
-        fieldName: "",
-        staticValue: "",
+        field: "",
+        constantValue: "",
       },
     },
     alignment: "items-center",
