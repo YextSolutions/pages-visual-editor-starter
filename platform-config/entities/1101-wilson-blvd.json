@@ -68,6 +68,7 @@
       "image": {
         "image": {
           "height": 2592,
+          "sourceUrl": "https://pyxis.nymag.com/v1/imgs/d67/fdf/fdb45e46378f93c15bbfcf545ecd8cbb8b-how-to-build-a-brooklyn-diner-2024-lede-.rhorizontal.w1100.jpg",
           "thumbnails": [
             {
               "height": 2592,
@@ -173,7 +174,11 @@
       }
     },
     "mainPhone": "+17577017560",
+    "mobilePhone": "+14125264629",
     "name": "Galaxy Grill",
+    "pageLayouts": [
+      "contactUsPagesLayout"
+    ],
     "slug": "locations/[[entityId]]",
     "timezone": "America/New_York"
   },

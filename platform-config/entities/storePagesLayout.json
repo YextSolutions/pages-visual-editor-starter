@@ -1,0 +1,15 @@
+{
+  "$id": "storePagesLayout",
+  "$schema": "https://schema.yext.com/config/km/entity/v1",
+  "primaryLocale": "en",
+  "content": {
+    "name": "Store Pages",
+    "visualConfiguration": {
+      "data": "{\"content\":[{\"type\":\"Hero\",\"props\":{\"hero\":{\"fieldName\":\"c_hero\",\"staticValue\":\"\"},\"imageMode\":\"left\",\"name\":{\"size\":\"section\",\"color\":\"default\"},\"location\":{\"size\":\"section\",\"color\":\"default\"},\"cta1\":{\"variant\":\"default\"},\"cta2\":{\"variant\":\"default\"},\"id\":\"Hero-2ca1face-3f56-41b1-ab54-dae73c086f11\"}},{\"type\":\"Columns\",\"props\":{\"distribution\":\"auto\",\"columns\":[{},{}],\"id\":\"Columns-176b44c4-166b-4585-a18b-932c3458e1b6\"}},{\"type\":\"FeaturedItems\",\"props\":{\"heading\":{\"size\":\"section\",\"color\":\"default\"},\"cards\":{\"heading\":{\"size\":\"section\",\"color\":\"default\"},\"subheading\":{\"size\":\"small\",\"weight\":\"default\"},\"body\":{\"size\":\"base\",\"weight\":\"default\"}},\"id\":\"FeaturedItems-09121600-0255-43fa-b8fe-6121acaccc77\"}},{\"type\":\"DeliveryPromo\",\"props\":{\"imageMode\":\"right\",\"promoTitle\":{\"size\":\"section\",\"color\":\"default\"},\"promoDescription\":{\"size\":\"base\",\"weight\":\"default\"},\"promoCTA\":{\"variant\":\"default\"},\"id\":\"DeliveryPromo-6fb934d5-09f1-4872-88a0-fb71b69b3134\"}},{\"type\":\"FAQ\",\"props\":{\"sectionTitle\":{\"text\":\"Frequently Asked Questions\",\"size\":\"section\",\"color\":\"default\"},\"question\":{\"size\":\"subheading\",\"color\":\"default\"},\"answer\":{\"size\":\"base\",\"weight\":\"default\"},\"id\":\"FAQ-714e777a-3f1b-479a-aba1-77ff7ffbcf2d\"}}],\"root\":{},\"zones\":{\"Columns-176b44c4-166b-4585-a18b-932c3458e1b6:column-0\":[{\"type\":\"HoursCard\",\"props\":{\"heading\":{\"text\":\"Hours\",\"size\":\"subheading\",\"color\":\"default\"},\"startOfWeek\":\"today\",\"collapseDays\":false,\"showAdditionalHoursText\":true,\"alignment\":\"items-center\",\"id\":\"HoursCard-53f07baa-03c6-4e74-954a-d86abcb2b064\"}}],\"Columns-176b44c4-166b-4585-a18b-932c3458e1b6:column-1\":[{\"type\":\"StoreInfoCard\",\"props\":{\"heading\":{\"text\":\"Information\",\"size\":\"subheading\",\"color\":\"default\"},\"alignment\":\"items-center\",\"id\":\"StoreInfoCard-feaaccf5-a148-4c4a-ba28-399457c06dcc\"}}]}}",
+      "pageSet": "location",
+      "siteId": "${{siteId}}"
+    }
+  },
+  "entityType": "pagesLayout",
+  "labels": []
+}
