@@ -4,8 +4,6 @@
 
 .components {
   --border: 214 100% 39%;
-  --primary: 0 68% 51%;
-  --primary-foreground: 0 0% 100%;
   --secondary: 11 100% 26%;
   --secondary-foreground: 0 0% 100%;
   --destructive: 0 100% 50%;
@@ -18,7 +16,6 @@
   --muted: 210 40% 96.1%;
   --muted-foreground: 215.4 16.3% 46.9%;
   --background: 0 0% 100%;
-  --foreground: 0 2% 11%;
   --popover: 225 7% 12%;
   --popover-foreground: 0 0% 100%;
 }
