@@ -44,6 +44,10 @@ import {
 } from "./components/HoursStatus";
 
 import "@yext/visual-editor/style.css";
+import {
+  FlexContainerComponent as FlexContainer,
+  FlexContainerProps,
+} from "./components/FlexContainer";
 
 type LocationProps = {
   Hero: HeroProps;
@@ -60,6 +64,7 @@ type LocationProps = {
   ImageWrapper: ImageWrapperProps;
   CTAWrapper: CTAWrapperProps;
   HoursStatusWrapper: HoursStatusWrapperProps;
+  FlexContainer: FlexContainerProps;
 };
 
 // All the available components for locations
@@ -79,6 +84,7 @@ export const locationConfig: Config<LocationProps> = {
     ImageWrapper,
     CTAWrapper,
     HoursStatusWrapper,
+    FlexContainer,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {

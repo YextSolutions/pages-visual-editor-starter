@@ -27,10 +27,7 @@ const hoursStatusWrapperFields: Fields<HoursStatusWrapperProps> = {
       types: ["type.hours"],
     },
   }),
-  className: {
-    type: "text",
-    label: "Additional CSS Classes",
-  },
+
   showDayNames: {
     type: "radio",
     label: "Show Day Names",

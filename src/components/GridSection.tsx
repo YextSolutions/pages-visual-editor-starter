@@ -33,10 +33,17 @@ const columnVariants = cva("flex flex-col", {
       medium: "gap-4",
       large: "gap-8",
     },
+    padding: {
+      none: "",
+      small: "p-2",
+      medium: "p-4",
+      large: "p-8",
+    },
   },
   defaultVariants: {
     verticalAlignment: "start",
     verticalSpacing: "medium",
+    padding: "none",
   },
 });
 
@@ -77,22 +84,28 @@ const GridSection = React.forwardRef<HTMLDivElement, GridSectionProps>(
           }}
           {...props}
         >
-          {columns.map(({ span, verticalAlignment, verticalSpacing }, idx) => (
-            <div
-              key={idx}
-              className={cn(
-                columnVariants({ verticalAlignment, verticalSpacing })
-              )}
-              style={{
-                gridColumn:
-                  span && distribution === "manual"
-                    ? `span ${Math.max(Math.min(span, 12), 1)}`
-                    : "",
-              }}
-            >
-              {renderDropZone({ zone: `column-${idx}` })}
-            </div>
-          ))}
+          {columns.map(
+            ({ span, verticalAlignment, verticalSpacing, padding }, idx) => (
+              <div
+                key={idx}
+                className={cn(
+                  columnVariants({
+                    verticalAlignment,
+                    verticalSpacing,
+                    padding,
+                  })
+                )}
+                style={{
+                  gridColumn:
+                    span && distribution === "manual"
+                      ? `span ${Math.max(Math.min(span, 12), 1)}`
+                      : "",
+                }}
+              >
+                {renderDropZone({ zone: `column-${idx}` })}
+              </div>
+            )
+          )}
         </div>
       </Section>
     );
@@ -139,6 +152,15 @@ const gridSectionFields: Fields<GridSectionProps> = {
           { value: "large", label: "Large" },
         ],
       },
+      padding: {
+        type: "select",
+        options: [
+          { value: "none", label: "None" },
+          { value: "small", label: "Small" },
+          { value: "medium", label: "Medium" },
+          { value: "large", label: "Large" },
+        ],
+      },
     },
   },
   horizontalSpacing: {
@@ -156,8 +178,16 @@ export const GridSectionComponent: ComponentConfig<GridSectionProps> = {
   defaultProps: {
     distribution: "auto",
     columns: [
-      { verticalAlignment: "start", verticalSpacing: "medium" },
-      { verticalAlignment: "start", verticalSpacing: "medium" },
+      {
+        verticalAlignment: "start",
+        verticalSpacing: "medium",
+        padding: "none",
+      },
+      {
+        verticalAlignment: "start",
+        verticalSpacing: "medium",
+        padding: "none",
+      },
     ],
     horizontalSpacing: "medium",
   },
