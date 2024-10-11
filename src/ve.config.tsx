@@ -1,22 +1,53 @@
 import type { Config } from "@measured/puck";
 import { HeroComponent as Hero, HeroProps } from "./components/Hero";
-import { ColumnsComponent as Columns, ColumnsProps } from "./components/Columns";
+import {
+  GridSectionComponent as GridSection,
+  GridSectionProps,
+} from "./components/GridSection";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { CardComponent as Card, CardProps } from "./components/Card";
-import { StoreInfoCardComponent as StoreInfoCard, StoreInfoCardProps } from "./components/StoreInfoCard";
+import {
+  StoreInfoCardComponent as StoreInfoCard,
+  StoreInfoCardProps,
+} from "./components/StoreInfoCard";
 import { FAQComponent as FAQ, FAQProps } from "./components/FAQ";
-import {DeliveryPromoComponent as DeliveryPromo, DeliveryPromoProps} from "./components/DeliveryPromo";
+import {
+  DeliveryPromoComponent as DeliveryPromo,
+  DeliveryPromoProps,
+} from "./components/DeliveryPromo";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
-import {HoursCardComponent as HoursCard, HoursCardProps} from "./components/HoursCard";
-import {PromoComponent as Promo, PromoProps} from "./components/Promo";
-import {FeaturedItemsComponent as FeaturedItems, FeaturedItemsProps} from "./components/FeaturedItems";
+import {
+  HoursCardComponent as HoursCard,
+  HoursCardProps,
+} from "./components/HoursCard";
+import { PromoComponent as Promo, PromoProps } from "./components/Promo";
+import {
+  FeaturedItemsComponent as FeaturedItems,
+  FeaturedItemsProps,
+} from "./components/FeaturedItems";
+import {
+  HeadingWrapperComponent as HeadingWrapper,
+  HeadingWrapperProps,
+} from "./components/HeadingWrapper";
+import {
+  ImageWrapperComponent as ImageWrapper,
+  ImageWrapperProps,
+} from "./components/Image";
+import {
+  CTAWrapperComponent as CTAWrapper,
+  CTAWrapperProps,
+} from "./components/CtaWrapper";
+import {
+  HoursStatusWrapperComponent as HoursStatusWrapper,
+  HoursStatusWrapperProps,
+} from "./components/HoursStatus";
 
-import "@yext/visual-editor/style.css"
+import "@yext/visual-editor/style.css";
 
 type LocationProps = {
   Hero: HeroProps;
-  Columns: ColumnsProps;
+  GridSection: GridSectionProps;
   Card: CardProps;
   FAQ: FAQProps;
   DeliveryPromo: DeliveryPromoProps;
@@ -25,13 +56,17 @@ type LocationProps = {
   StoreInfoCard: StoreInfoCardProps;
   Promo: PromoProps;
   FeaturedItems: FeaturedItemsProps;
+  HeadingWrapper: HeadingWrapperProps;
+  ImageWrapper: ImageWrapperProps;
+  CTAWrapper: CTAWrapperProps;
+  HoursStatusWrapper: HoursStatusWrapperProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
     Hero,
-    Columns,
+    GridSection,
     Card,
     FAQ,
     DeliveryPromo,
@@ -40,9 +75,13 @@ export const locationConfig: Config<LocationProps> = {
     StoreInfoCard,
     Promo,
     FeaturedItems,
+    HeadingWrapper,
+    ImageWrapper,
+    CTAWrapper,
+    HoursStatusWrapper,
   },
   root: {
-    render: ({ children, puck: {isEditing} }) => {
+    render: ({ children, puck: { isEditing } }) => {
       return (
         <>
           <Header isEditing={isEditing} />

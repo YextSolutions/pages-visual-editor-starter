@@ -44,6 +44,7 @@ export const config = {
       "mainPhone",
       "emails",
       "c_deliveryPromo",
+      "c_testImage",
     ],
     localization: {
       locales: ["en"],
