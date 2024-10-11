@@ -1,19 +1,11 @@
 import {
-  applyTheme,
   Editor,
   EntityFieldsProvider,
   usePlatformBridgeDocument,
   usePlatformBridgeEntityFields,
 } from "@yext/visual-editor";
 import { componentRegistry } from "../ve.config";
-import {
-  GetPath,
-  TemplateProps,
-  TemplateConfig,
-  HeadConfig,
-  TemplateRenderProps,
-  GetHeadConfig,
-} from "@yext/pages";
+import { GetPath, TemplateProps, TemplateConfig } from "@yext/pages";
 import { DocumentProvider } from "@yext/pages/util";
 import { themeConfig } from "../../theme.config";
 
@@ -24,14 +16,6 @@ export const getPath: GetPath<TemplateProps> = () => {
 
 export const config: TemplateConfig = {
   name: "edit",
-};
-
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  document,
-}): HeadConfig => {
-  return {
-    other: applyTheme(document, themeConfig),
-  };
 };
 
 // Render the editor
