@@ -176,9 +176,6 @@
     "mainPhone": "+17577017560",
     "mobilePhone": "+14125264629",
     "name": "Galaxy Grill",
-    "pageLayouts": [
-      "contactUsPagesLayout"
-    ],
     "slug": "locations/[[entityId]]",
     "timezone": "America/New_York"
   },
