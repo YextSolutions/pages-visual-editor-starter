@@ -1,10 +1,10 @@
 {
-  "$id": "site",
+  "$id": "site-${{siteId}}",
   "$schema": "https://schema.yext.com/config/km/entity/v1",
   "primaryLocale": "en",
   "content": {
     "defaultLayouts": [
-      "storePagesLayout"
+      "storePagesLayout-${{siteId}}"
     ],
     "name": "Site"
   },
