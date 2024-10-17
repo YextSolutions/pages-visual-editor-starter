@@ -150,7 +150,7 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
   const { c_productSection: productSection } = useDocument<LocationStream>();
   return (
     <Section className="flex flex-col justify-center bg-white components">
-      {productSection.sectionTitle && (
+      {productSection && productSection.sectionTitle && (
         <EntityField
           displayName="Product Section Title"
           fieldId="c_productSection.sectionTitle"
@@ -160,7 +160,7 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
           </Heading>
         </EntityField>
       )}
-      {productSection.linkedProducts && (
+      {productSection && productSection.linkedProducts && (
         <EntityField displayName="Linked Entities" fieldId="product">
           <div
             className="flex flex-col min-h-0 min-w-0 gap-6 md:grid md:grid-cols-12"
