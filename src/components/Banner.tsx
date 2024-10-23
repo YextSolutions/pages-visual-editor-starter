@@ -2,11 +2,11 @@ import {
   YextEntityField,
   resolveYextEntityField,
   YextEntityFieldSelector,
+  useDocument,
 } from "@yext/visual-editor";
 import { BodyProps, Body } from "./atoms/body";
 import { ComponentConfig, Fields } from "@measured/puck";
 import { config } from "../templates/location";
-import { useDocument } from "@yext/pages/util";
 import { LocationStream } from "../types/autogen";
 
 export type BannerProps = {

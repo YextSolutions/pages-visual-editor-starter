@@ -1,6 +1,6 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { C_hero, LocationStream } from "../types/autogen";
-import { useDocument } from "@yext/pages/util";
+import { useDocument } from "@yext/visual-editor";
 import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
 import { Heading, HeadingProps } from "./atoms/heading";

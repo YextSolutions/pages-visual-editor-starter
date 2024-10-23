@@ -11,7 +11,7 @@ import {
   YextEntityFieldSelector,
 } from "@yext/visual-editor";
 import { config } from "../templates/location";
-import { useDocument } from "@yext/pages/util";
+import { useDocument } from "@yext/visual-editor";
 import { LocationStream } from "../types/autogen";
 
 const PLACEHOLDER_IMAGE_URL = "https://placehold.co/640x360";

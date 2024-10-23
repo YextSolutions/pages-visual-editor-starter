@@ -1,5 +1,5 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "@yext/pages/util";
+import { useDocument } from "@yext/visual-editor";
 import { LocationStream } from "../types/autogen";
 import { Address, AddressType, getDirections } from "@yext/pages-components";
 import { Section } from "./atoms/section";

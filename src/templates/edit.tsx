@@ -1,5 +1,6 @@
 import {
   applyTheme,
+  DocumentProvider,
   Editor,
   EntityFieldsProvider,
   usePlatformBridgeDocument,
@@ -14,7 +15,6 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
 } from "@yext/pages";
-import { DocumentProvider } from "@yext/pages/util";
 import { themeConfig } from "../../theme.config";
 
 // Editor is avaliable at /edit
