@@ -11,6 +11,7 @@ import { BannerComponent as Banner, BannerProps } from "./components/Banner";
 import {HoursCardComponent as HoursCard, HoursCardProps} from "./components/HoursCard";
 import {PromoComponent as Promo, PromoProps} from "./components/Promo";
 import {FeaturedItemsComponent as FeaturedItems, FeaturedItemsProps} from "./components/FeaturedItems";
+import {ImageWrapperComponent as ImageWrapper, ImageWrapperProps} from "@yext/visual-editor";
 
 import "@yext/visual-editor/style.css"
 
@@ -25,6 +26,7 @@ type LocationProps = {
   StoreInfoCard: StoreInfoCardProps;
   Promo: PromoProps;
   FeaturedItems: FeaturedItemsProps;
+  ImageWrapper: ImageWrapperProps;
 };
 
 // All the available components for locations
@@ -40,6 +42,7 @@ export const locationConfig: Config<LocationProps> = {
     StoreInfoCard,
     Promo,
     FeaturedItems,
+    ImageWrapper,
   },
   root: {
     render: ({ children, puck: {isEditing} }) => {
@@ -55,6 +58,6 @@ export const locationConfig: Config<LocationProps> = {
   },
 };
 
-export const componentRegistry = new Map<string, Config<any>>([
+export const componentRegistry = new Map<string, Config<LocationProps>>([
   ["location", locationConfig],
 ]);
