@@ -12,6 +12,8 @@ import {HoursCardComponent as HoursCard, HoursCardProps} from "./components/Hour
 import {PromoComponent as Promo, PromoProps} from "./components/Promo";
 import {FeaturedItemsComponent as FeaturedItems, FeaturedItemsProps} from "./components/FeaturedItems";
 
+import {HeadingWrapperComponent, HeadingWrapperProps } from "@yext/pages-components";
+
 import "@yext/visual-editor/style.css"
 
 type LocationProps = {
@@ -25,6 +27,7 @@ type LocationProps = {
   StoreInfoCard: StoreInfoCardProps;
   Promo: PromoProps;
   FeaturedItems: FeaturedItemsProps;
+  HeadingWrapperComponent: HeadingWrapperProps
 };
 
 // All the available components for locations
@@ -40,13 +43,14 @@ export const locationConfig: Config<LocationProps> = {
     StoreInfoCard,
     Promo,
     FeaturedItems,
+    HeadingWrapperComponent,
   },
   root: {
     render: ({ children, puck: {isEditing} }) => {
       return (
         <>
           <Header isEditing={isEditing} />
-          {children}
+            {children}
           <Footer isEditing={isEditing} />
         </>
       );
