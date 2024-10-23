@@ -3,12 +3,11 @@ import { Heading, HeadingProps } from "./atoms/heading";
 import { Body, BodyProps } from "./atoms/body";
 import { ButtonProps } from "./atoms/button";
 import { LocationStream } from "../types/autogen";
-import { useDocument } from "@yext/pages/util";
 import { Image } from "@yext/pages-components";
 import { CTA } from "./atoms/cta";
 import { Section } from "./atoms/section";
 import { cn } from "../utils/cn";
-import { EntityField } from "@yext/visual-editor";
+import { EntityField, useDocument } from "@yext/visual-editor";
 import "./index.css";
 
 export type DeliveryPromoProps = {

@@ -3,9 +3,8 @@ import { Body, BodyProps } from "./atoms/body";
 import { CTA, CTAProps } from "./atoms/cta";
 import { Heading, HeadingProps } from "./atoms/heading";
 import { LocationStream } from "../types/autogen";
-import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
-import { EntityField } from "@yext/visual-editor";
+import { EntityField, useDocument } from "@yext/visual-editor";
 
 export type FeaturedItemsProps = {
   heading: {

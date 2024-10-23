@@ -1,5 +1,4 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "@yext/pages/util";
 import { LocationStream } from "../types/autogen";
 import { Address, AddressType, getDirections } from "@yext/pages-components";
 import { Section } from "./atoms/section";
@@ -8,7 +7,7 @@ import { Link } from "@yext/pages-components";
 import { IconContext } from "react-icons";
 import { MdOutlineEmail } from "react-icons/md";
 import { HiOutlinePhone } from "react-icons/hi";
-import { EntityField } from "@yext/visual-editor";
+import { EntityField, useDocument } from "@yext/visual-editor";
 import "@yext/pages-components/style.css";
 import { CardProps } from "./Card";
 
