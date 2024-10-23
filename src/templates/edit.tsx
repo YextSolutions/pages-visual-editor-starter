@@ -14,7 +14,7 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
 } from "@yext/pages";
-import { DocumentProvider } from "@yext/pages/util";
+import { DocumentProvider } from "@yext/visual-editor/util";
 import { themeConfig } from "../../theme.config";
 
 // Editor is avaliable at /edit
