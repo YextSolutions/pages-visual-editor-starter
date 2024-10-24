@@ -1,17 +1,6 @@
 import { ThemeConfig } from "@yext/visual-editor";
 
 export const themeConfig: ThemeConfig = {
-  borderRadius: {
-    label: "Border Radius",
-    styles: {
-      lg: {
-        label: "Radius",
-        type: "number",
-        plugin: "borderRadius",
-        default: 20,
-      },
-    },
-  },
   colors: {
     label: "Colors",
     styles: {
@@ -70,6 +59,17 @@ export const themeConfig: ThemeConfig = {
           { value: "#808080", label: "Grey" },
         ],
         default: "#808080",
+      },
+    },
+  },
+  borderRadius: {
+    label: "Border Radius",
+    styles: {
+      lg: {
+        label: "Radius",
+        type: "number",
+        plugin: "borderRadius",
+        default: 20,
       },
     },
   },

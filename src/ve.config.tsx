@@ -3,11 +3,14 @@ import type { Config } from "@measured/puck";
 import {
   BodyTextComponent as BodyText,
   BodyTextProps,
-  HeadingTextComponent as HeadingText,
-  HeadingTextProps,
   ImageWrapperComponent as ImageWrapper,
   ImageWrapperProps,
 } from "@yext/visual-editor";
+
+import {
+  HeadingTextComponent as HeadingText,
+  HeadingTextProps
+} from "./components/HeadingText";
 
 import { HeroComponent as Hero, HeroProps } from "./components/Hero";
 import {
