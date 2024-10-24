@@ -8,7 +8,7 @@ export const themeConfig: ThemeConfig = {
         label: "Radius",
         type: "number",
         plugin: "borderRadius",
-        default: "20px",
+        default: 20,
       },
     },
   },
@@ -16,26 +16,26 @@ export const themeConfig: ThemeConfig = {
     label: "Colors",
     styles: {
       foreground: {
-        label: "Foreground",
+        label: "Footer",
         plugin: "colors",
         type: "select",
         options: [
           { value: "#000000", label: "Black" },
-          { value: "hsl(0 68% 51%)", label: "Red" },
+          { value: "#808080", label: "Grey" },
         ],
-        default: "hsl(0 68% 51%)",
+        default: "#808080",
       },
       primary: {
         label: "Primary",
         styles: {
           DEFAULT: {
-            label: "Default",
+            label: "Main",
             plugin: "colors",
             type: "color",
             default: "hsl(0 68% 51%)",
           },
           foreground: {
-            label: "Foreground",
+            label: "Accent",
             plugin: "colors",
             type: "color",
             default: "hsl(0 0% 100%)",
