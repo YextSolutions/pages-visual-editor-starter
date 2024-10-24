@@ -1,4 +1,14 @@
 import type { Config } from "@measured/puck";
+
+import {
+  BodyTextComponent as BodyText,
+  BodyTextProps,
+  HeadingTextComponent as HeadingText,
+  HeadingTextProps,
+  ImageWrapperComponent as ImageWrapper,
+  ImageWrapperProps,
+} from "@yext/visual-editor";
+
 import { HeroComponent as Hero, HeroProps } from "./components/Hero";
 import {
   GridSectionComponent as GridSection,
@@ -27,14 +37,6 @@ import {
   FeaturedItemsProps,
 } from "./components/FeaturedItems";
 import {
-  HeadingWrapperComponent as HeadingWrapper,
-  HeadingWrapperProps,
-} from "./components/HeadingWrapper";
-import {
-  ImageWrapperComponent as ImageWrapper,
-  ImageWrapperProps,
-} from "./components/Image";
-import {
   CTAWrapperComponent as CTAWrapper,
   CTAWrapperProps,
 } from "./components/CtaWrapper";
@@ -60,7 +62,8 @@ type LocationProps = {
   StoreInfoCard: StoreInfoCardProps;
   Promo: PromoProps;
   FeaturedItems: FeaturedItemsProps;
-  HeadingWrapper: HeadingWrapperProps;
+  BodyText: BodyTextProps;
+  HeadingText: HeadingTextProps;
   ImageWrapper: ImageWrapperProps;
   CTAWrapper: CTAWrapperProps;
   HoursStatusWrapper: HoursStatusWrapperProps;
@@ -80,7 +83,8 @@ export const locationConfig: Config<LocationProps> = {
     StoreInfoCard,
     Promo,
     FeaturedItems,
-    HeadingWrapper,
+    BodyText,
+    HeadingText,
     ImageWrapper,
     CTAWrapper,
     HoursStatusWrapper,

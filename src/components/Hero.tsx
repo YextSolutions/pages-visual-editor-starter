@@ -1,6 +1,5 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { C_hero, LocationStream } from "../types/autogen";
-import { useDocument } from "@yext/pages/util";
 import { Section } from "./atoms/section";
 import { HoursStatus, Image } from "@yext/pages-components";
 import { Heading, HeadingProps } from "./atoms/heading";
@@ -12,6 +11,7 @@ import {
   YextEntityField,
   resolveYextEntityField,
   YextEntityFieldSelector,
+  useDocument,
 } from "@yext/visual-editor";
 import "./index.css";
 import { config } from "../templates/location";

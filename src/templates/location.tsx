@@ -8,10 +8,9 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
-import { DocumentProvider } from "@yext/pages/util";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
-import { resolveVisualEditorData, applyTheme } from "@yext/visual-editor";
+import { resolveVisualEditorData, applyTheme, DocumentProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 
 export const config = {

@@ -1,11 +1,11 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { HoursStatus } from "@yext/pages-components";
-import { useDocument } from "@yext/pages/util";
 import {
   EntityField,
   resolveYextEntityField,
   YextEntityField,
   YextEntityFieldSelector,
+  useDocument,
 } from "@yext/visual-editor";
 import { cn } from "../utils/cn";
 import { config } from "../templates/location";

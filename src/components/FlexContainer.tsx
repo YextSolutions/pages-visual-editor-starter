@@ -1,7 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ComponentConfig, Fields } from "@measured/puck";
-import { Section } from "./atoms/section";
 import { cn } from "../utils/cn";
 
 const flexContainerVariants = cva("flex", {
