@@ -8,7 +8,7 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
-import { DocumentProvider } from "@yext/pages/util";
+import { DocumentProvider } from "@yext/visual-editor";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
 import { resolveVisualEditorData, applyTheme } from "@yext/visual-editor";
