@@ -81,7 +81,7 @@ const HoursStatusWrapper: React.FC<HoursStatusWrapperProps> = ({
     <EntityField displayName="Hours" fieldId={hoursField.field}>
       <HoursStatus
         hours={hours}
-        className={cn("font-semibold", className)}
+        className={cn("font-semibold mb-2", className)}
         showDayNames={showDayNames}
         showCurrentStatus={showCurrentStatus}
         dayOfWeekFormat={dayOfWeekFormat}
