@@ -174,9 +174,6 @@
     },
     "mainPhone": "+13014588348",
     "name": "Galaxy Grill",
-    "pageLayouts": [
-      "contactUsPagesLayout"
-    ],
     "slug": "locations/[[entityId]]",
     "timezone": "America/New_York"
   },
