@@ -115,6 +115,7 @@ const flexContainerFields: Fields<FlexContainerProps> = {
 };
 
 export const FlexContainerComponent: ComponentConfig<FlexContainerProps> = {
+  label: "Flex Container",
   fields: flexContainerFields,
   defaultProps: {
     direction: "column",

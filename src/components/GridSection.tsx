@@ -174,6 +174,7 @@ const gridSectionFields: Fields<GridSectionProps> = {
 };
 
 export const GridSectionComponent: ComponentConfig<GridSectionProps> = {
+  label: "Grid Section",
   fields: gridSectionFields,
   defaultProps: {
     distribution: "auto",

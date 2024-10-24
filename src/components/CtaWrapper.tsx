@@ -59,6 +59,7 @@ const CTAWrapper: React.FC<CTAWrapperProps> = ({
 };
 
 export const CTAWrapperComponent: ComponentConfig<CTAWrapperProps> = {
+  label: "Call to Action",
   fields: ctaWrapperFields,
   defaultProps: {
     label: "Click me",

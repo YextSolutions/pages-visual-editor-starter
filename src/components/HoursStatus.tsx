@@ -93,6 +93,7 @@ const HoursStatusWrapper: React.FC<HoursStatusWrapperProps> = ({
 
 export const HoursStatusWrapperComponent: ComponentConfig<HoursStatusWrapperProps> =
   {
+    label: "Hours Status",
     fields: hoursStatusWrapperFields,
     defaultProps: {
       hours: {
