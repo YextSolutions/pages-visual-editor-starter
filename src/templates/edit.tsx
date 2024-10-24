@@ -14,7 +14,7 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
 } from "@yext/pages";
-import { DocumentProvider } from "@yext/pages/util";
+import { DocumentProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 
 // Editor is avaliable at /edit
@@ -29,14 +29,16 @@ export const config: TemplateConfig = {
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
 }): HeadConfig => {
+  const theme = applyTheme(document, themeConfig);
+  console.log(theme);
   return {
-    other: applyTheme(document, themeConfig),
+    other: theme,
   };
 };
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
-  const entityDocument = usePlatformBridgeDocument();
+  const entityDocument = usePlatformBridgeDocument(); 
   const entityFields = usePlatformBridgeEntityFields();
 
   return (
