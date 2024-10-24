@@ -92,6 +92,7 @@ const Banner = ({
 };
 
 export const BannerComponent: ComponentConfig<BannerProps> = {
+  label: "Banner",
   fields: bannerFields,
   defaultProps: {
     text: {

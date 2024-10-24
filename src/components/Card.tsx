@@ -253,6 +253,7 @@ export const Card = ({
 };
 
 export const CardComponent: ComponentConfig<CardProps> = {
+  label: "Card",
   fields: cardFields,
   defaultProps: {
     image: {
