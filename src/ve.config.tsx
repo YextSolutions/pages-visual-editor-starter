@@ -3,9 +3,12 @@ import type { Config } from "@measured/puck";
 import {
   BodyTextComponent as BodyText,
   BodyTextProps,
+} from "@yext/visual-editor";
+
+import {
   ImageWrapperComponent as ImageWrapper,
   ImageWrapperProps,
-} from "@yext/visual-editor";
+} from "./components/Image.js";
 
 import {
   HeadingTextComponent as HeadingText,
