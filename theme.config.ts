@@ -7,6 +7,7 @@ const getColorOptions = () => {
     { label: "Accent", value: "var(--colors-accent)" },
     { label: "Text", value: "var(--colors-text)" },
     { label: "Background", value: "var(--colors-background)" },
+    { label: "Foreground", value: "var(--colors-foreground)" },
   ];
 };
 
