@@ -5,8 +5,8 @@ import { cva, type VariantProps } from "class-variance-authority";
 const headingVariants = cva("py-2", {
   variants: {
     level: {
-      1: "font-heading1 text-heading1-fontSize ve-text-heading1-color",
-      2: "font-heading2 text-heading2-fontSize ve-text-heading2-color",
+      1: "font-heading1 text-heading1-fontSize text-heading1-color",
+      2: "font-heading2 text-heading2-fontSize text-heading2-color",
       3: "font-heading3 text-heading3-fontSize text-heading3-color",
       4: "font-heading4 text-heading4-fontSize text-heading4-color",
       5: "font-heading5 text-heading5-fontSize text-heading5-color",
