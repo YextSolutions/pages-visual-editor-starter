@@ -248,20 +248,6 @@ export const themeConfig: ThemeConfig = {
         options: getColorOptions(),
         default: "var(--colors-foreground)",
       },
-      "button-secondary": {
-        label: "Button Primary",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-secondary)",
-      },
-      "button-secondary-foreground": {
-        label: "Button Primary Foreground",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-foreground)",
-      },
     },
   },
   backgroundColor: {
@@ -279,11 +265,11 @@ export const themeConfig: ThemeConfig = {
   borderRadius: {
     label: "Border Radius",
     styles: {
-      button: {
+      lg: {
         label: "Button",
         type: "number",
         plugin: "borderRadius",
-        default: 0,
+        default: 20,
       },
     },
   },
