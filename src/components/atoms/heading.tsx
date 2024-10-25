@@ -26,10 +26,10 @@ const headingVariants = cva("components py-2", {
     },
     color: {
       default: "",
-      primary: "text-header-primary",
-      secondary: "text-header-secondary",
-      accent: "text-header-accent",
-      text: "text-header-text",
+      primary: "text-primary",
+      secondary: "text-secondary",
+      accent: "text-accent",
+      text: "text-text",
     },
     transform: {
       none: "",
