@@ -1,21 +1,21 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { CTA, CTAProps } from "./atoms/cta";
 import { cn } from "../utils/cn";
+import { resolveYextEntityField, useDocument, YextEntityField, YextEntityFieldSelector } from "@yext/visual-editor";
+import { config } from "../templates/location";
+import { Cta, LocationStream } from "../types/autogen";
 
 export interface CTAWrapperProps extends CTAProps {
-  label: string;
-  url: string;
+  entityField: YextEntityField
 }
 
 const ctaWrapperFields: Fields<CTAWrapperProps> = {
-  label: {
-    type: "text",
-    label: "CTA Label",
-  },
-  url: {
-    type: "text",
-    label: "CTA URL",
-  },
+  entityField: YextEntityFieldSelector<typeof config>({
+    label: "Entity Field",
+    filter: {
+      types: ["c_cta"],
+    },
+  }),
   variant: {
     type: "select",
     label: "Variant",
@@ -23,35 +23,25 @@ const ctaWrapperFields: Fields<CTAWrapperProps> = {
       { label: "Default", value: "default" },
       { label: "Secondary", value: "secondary" },
       { label: "Outline", value: "outline" },
-      { label: "Ghost", value: "ghost" },
       { label: "Link", value: "link" },
-    ],
-  },
-  size: {
-    type: "select",
-    label: "Size",
-    options: [
-      { label: "Default", value: "default" },
-      { label: "Small", value: "sm" },
-      { label: "Large", value: "lg" },
     ],
   },
 };
 
 const CTAWrapper: React.FC<CTAWrapperProps> = ({
-  label,
-  url,
+  entityField,
   variant,
-  size,
   className,
   ...rest
 }) => {
+  const document = useDocument<LocationStream>();
+  const cta = resolveYextEntityField<Cta>(document, entityField);
+
   return (
     <CTA
-      label={label}
-      url={url}
+      label={cta?.name}
+      url={cta?.link ?? "#"}
       variant={variant}
-      size={size}
       className={cn(className)}
       {...rest}
     />
@@ -62,10 +52,11 @@ export const CTAWrapperComponent: ComponentConfig<CTAWrapperProps> = {
   label: "Call to Action",
   fields: ctaWrapperFields,
   defaultProps: {
-    label: "Click me",
-    url: "#",
+    entityField: {
+      field: "",
+      constantValue: ""
+    },
     variant: "default",
-    size: "default",
   },
   render: (props) => <CTAWrapper {...props} />,
 };
