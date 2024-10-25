@@ -8,10 +8,10 @@ import {
   YextEntityField,
   resolveYextEntityField,
   YextEntityFieldSelector,
+  useDocument,
 } from "@yext/visual-editor";
 import { config } from "../templates/location";
 import { LocationStream, Cta, ComplexImage } from "../types/autogen";
-import { useDocument } from "@yext/pages/util";
 
 export type CardProps = {
   image: {
@@ -253,6 +253,7 @@ export const Card = ({
 };
 
 export const CardComponent: ComponentConfig<CardProps> = {
+  label: "Card",
   fields: cardFields,
   defaultProps: {
     image: {

@@ -8,7 +8,6 @@ export default {
     extend: themeResolver(
       {
         borderRadius: {
-          lg: `var(--radius)`,
           md: `calc(var(--borderRadius-lg) - 2px)`,
           sm: "calc(var(--borderRadius-lg) - 4px)",
         },

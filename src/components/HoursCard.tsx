@@ -1,10 +1,9 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "@yext/pages/util";
 import { LocationStream } from "../types/autogen";
 import { DayOfWeekNames, HoursTable, HoursType } from "@yext/pages-components";
 import { Section } from "./atoms/section";
 import { Heading, HeadingProps } from "./atoms/heading";
-import { EntityField } from "@yext/visual-editor";
+import { EntityField, useDocument } from "@yext/visual-editor";
 import "./index.css";
 import "@yext/pages-components/style.css";
 import { CardProps } from "./Card";
