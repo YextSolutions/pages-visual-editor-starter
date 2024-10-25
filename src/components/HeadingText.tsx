@@ -59,6 +59,7 @@ const headingTextFields: Fields<HeadingTextProps> = {
     ],
   },
   color: {
+    label: "Font Color",
     type: "select",
     options: [
       { label: "Default", value: "default" },
@@ -70,6 +71,7 @@ const headingTextFields: Fields<HeadingTextProps> = {
     ],
   },
   transform: {
+    label: "Text Transform",
     type: "select",
     options: [
       { value: "none", label: "None" },
