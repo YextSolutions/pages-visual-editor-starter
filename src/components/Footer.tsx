@@ -20,9 +20,9 @@ const navigation: CTA[] = [
 
 type FooterProps = {
   isEditing: boolean;
-}
+};
 
-const Footer = (props : FooterProps) => {
+const Footer = (props: FooterProps) => {
   const { isEditing } = props;
   return (
     <FooterLayout
@@ -90,7 +90,7 @@ const FooterLayout = (props: FooterLayoutProps) => {
   ].filter((link) => link.link);
 
   return (
-    <footer className="bg-foreground p-4 text-white components">
+    <footer className="bg-footer p-4 text-white components">
       <div className="mb-4 flex flex-col-reverse md:flex-row md:justify-between">
         <div className="flex flex-col space-y-4 pt-4 md:grid md:grid-cols-2 md:grid-rows-4 md:gap-y-4 md:space-y-0 md:pt-0">
           {footerLinks.map((link, i) => (
@@ -99,7 +99,7 @@ const FooterLayout = (props: FooterLayoutProps) => {
               cta={link}
               className="font-bold hover:underline md:px-4"
               eventName={`link${i}`}
-              style={{pointerEvents: isEditing && "none"}}
+              style={{ pointerEvents: isEditing && "none" }}
             />
           ))}
         </div>
@@ -110,11 +110,11 @@ const FooterLayout = (props: FooterLayoutProps) => {
                 key={i}
                 href={socialLink.link}
                 className="hover:text-gray-300"
-                style={{pointerEvents: isEditing && "none"}}
+                style={{ pointerEvents: isEditing && "none" }}
               >
                 {socialLink.label}
               </Link>
-            ) : null,
+            ) : null
           )}
         </div>
       </div>
