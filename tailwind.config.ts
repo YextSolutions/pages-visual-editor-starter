@@ -8,8 +8,8 @@ export default {
     extend: themeResolver(
       {
         borderRadius: {
-          md: `calc(var(--borderRadius-lg) - 2px)`,
-          sm: "calc(var(--borderRadius-lg) - 4px)",
+          md: `var(--borderRadius-lg)`,
+          sm: "var(--borderRadius-lg)",
         },
         keyframes: {
           "accordion-down": {
@@ -26,22 +26,13 @@ export default {
           "accordion-up": "accordion-up 0.2s ease-out",
         },
         colors: {
-          text: "black",
-          "brand-primary": "#1B78D0",
-          "brand-secondary": "#073866",
-          "brand-gray": {
-            100: "#F7F7F7",
-            200: "#EDEDED",
-            300: "#CCC",
-            400: "#767676",
+          popover: {
+            DEFAULT: "hsl(var(--popover))",
+            foreground: "hsl(var(--popover-foreground))",
           },
-          border: "hsl(var(--border))",
-          input: "hsl(var(--input))",
-          ring: "hsl(var(--ring))",
-          background: "hsl(var(--background))",
-          secondary: {
-            DEFAULT: "hsl(var(--secondary))",
-            foreground: "hsl(var(--secondary-foreground))",
+          card: {
+            DEFAULT: "hsl(var(--card))",
+            foreground: "hsl(var(--card-foreground))",
           },
           destructive: {
             DEFAULT: "hsl(var(--destructive))",
@@ -51,18 +42,9 @@ export default {
             DEFAULT: "hsl(var(--muted))",
             foreground: "hsl(var(--muted-foreground))",
           },
-          accent: {
-            DEFAULT: "hsl(var(--accent))",
-            foreground: "hsl(var(--accent-foreground))",
-          },
-          popover: {
-            DEFAULT: "hsl(var(--popover))",
-            foreground: "hsl(var(--popover-foreground))",
-          },
-          card: {
-            DEFAULT: "hsl(var(--card))",
-            foreground: "hsl(var(--card-foreground))",
-          },
+          border: "hsl(var(--border))",
+          input: "hsl(var(--input))",
+          ring: "hsl(var(--ring))",
         },
         container: {
           center: true,

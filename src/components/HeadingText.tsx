@@ -1,12 +1,12 @@
 import * as React from "react";
 import { ComponentConfig, Fields } from "@measured/puck";
-import { Heading, HeadingProps, headingVariants } from "./atoms/heading1.js";
+import { Heading, HeadingProps, headingVariants } from "./atoms/heading.js";
 import {
   EntityField,
   YextEntityField,
   YextEntityFieldSelector,
   resolveYextEntityField,
-  useDocument
+  useDocument,
 } from "@yext/visual-editor";
 
 export interface HeadingTextProps extends HeadingProps {
@@ -14,17 +14,17 @@ export interface HeadingTextProps extends HeadingProps {
 }
 
 const HeadingText = React.forwardRef<HTMLHeadingElement, HeadingTextProps>(
-    ({ text, ...headingProps }, ref) => {
-      const document = useDocument();
+  ({ text, ...headingProps }, ref) => {
+    const document = useDocument();
 
-      return (
-          <EntityField fieldId={text.field}>
-            <Heading ref={ref} {...headingProps}>
-              {resolveYextEntityField(document, text)}
-            </Heading>
-          </EntityField>
-      );
-    }
+    return (
+      <EntityField fieldId={text.field}>
+        <Heading ref={ref} {...headingProps}>
+          {resolveYextEntityField(document, text)}
+        </Heading>
+      </EntityField>
+    );
+  }
 );
 
 HeadingText.displayName = "HeadingText";
@@ -58,12 +58,8 @@ const headingTextFields: Fields<HeadingTextProps> = {
       { label: "Black", value: "black" },
     ],
   },
-  // size: {
-  //   label: "Text Size",
-  //   type: "number",
-  //   min: 1,
-  // },
   color: {
+    label: "Font Color",
     type: "select",
     options: [
       { label: "Default", value: "default" },
@@ -75,6 +71,7 @@ const headingTextFields: Fields<HeadingTextProps> = {
     ],
   },
   transform: {
+    label: "Text Transform",
     type: "select",
     options: [
       { value: "none", label: "None" },
@@ -96,8 +93,8 @@ export const HeadingTextComponent: ComponentConfig<HeadingTextProps> = {
     },
     content: "Heading",
     level: 2,
-    weight: "bold",
-    color: "primary",
+    weight: "default",
+    color: "default",
     transform: "none",
   },
   render: (props) => <HeadingText {...props} />,

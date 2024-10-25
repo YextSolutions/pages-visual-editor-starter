@@ -9,7 +9,7 @@ import {
 
 import {
   HeadingTextComponent as HeadingText,
-  HeadingTextProps
+  HeadingTextProps,
 } from "./components/HeadingText";
 
 import { HeroComponent as Hero, HeroProps } from "./components/Hero";
