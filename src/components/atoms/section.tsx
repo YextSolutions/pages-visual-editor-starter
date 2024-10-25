@@ -28,7 +28,7 @@ export interface SectionProps
 const Section = React.forwardRef<HTMLDivElement, SectionProps>(
   ({ className, padding, maxWidth, ...props }, ref) => {
     return (
-      <div className="bg-[#F9FAFB]">
+      <div className="components bg-main">
         <div
           className={cn(sectionVariants({ padding, maxWidth, className }))}
           ref={ref}
@@ -38,7 +38,7 @@ const Section = React.forwardRef<HTMLDivElement, SectionProps>(
         </div>
       </div>
     );
-  },
+  }
 );
 Section.displayName = "Section";
 

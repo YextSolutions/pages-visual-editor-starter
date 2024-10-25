@@ -4,6 +4,21 @@ import { ComponentConfig, Fields } from "@measured/puck";
 import { Section } from "./atoms/section";
 import { cn } from "../utils/cn";
 
+const backgroundVariants = cva("components", {
+  variants: {
+    backgroundColor: {
+      default: "bg-grid",
+      primary: "bg-primary",
+      secondary: "bg-secondary",
+      accent: "bg-accent",
+      background: "bg-background",
+    },
+  },
+  defaultVariants: {
+    backgroundColor: "default",
+  },
+});
+
 const gridSectionVariants = cva(
   "components flex flex-col min-h-0 min-w-0 md:grid md:grid-cols-12",
   {
@@ -53,7 +68,8 @@ export interface ColumnProps extends VariantProps<typeof columnVariants> {
 
 export interface GridSectionProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof gridSectionVariants> {
+    VariantProps<typeof gridSectionVariants>,
+    VariantProps<typeof backgroundVariants> {
   distribution: "auto" | "manual";
   columns: ColumnProps[];
   renderDropZone?: any;
@@ -67,12 +83,13 @@ const GridSection = React.forwardRef<HTMLDivElement, GridSectionProps>(
       columns,
       horizontalSpacing,
       renderDropZone,
+      backgroundColor,
       ...props
     },
     ref
   ) => {
     return (
-      <Section>
+      <Section className={backgroundVariants({ backgroundColor })}>
         <div
           className={cn(gridSectionVariants({ horizontalSpacing, className }))}
           ref={ref}
@@ -171,6 +188,18 @@ const gridSectionFields: Fields<GridSectionProps> = {
       { value: "large", label: "Large" },
     ],
   },
+  backgroundColor: {
+    type: "select",
+    options: [
+      { label: "Default", value: "default" },
+      { label: "Primary", value: "primary" },
+      { label: "Secondary", value: "secondary" },
+      { label: "Accent", value: "accent" },
+      { label: "Text", value: "text" },
+      { label: "Foreground", value: "foreground" },
+      { label: "Background", value: "background" },
+    ],
+  },
 };
 
 export const GridSectionComponent: ComponentConfig<GridSectionProps> = {
@@ -190,13 +219,20 @@ export const GridSectionComponent: ComponentConfig<GridSectionProps> = {
         padding: "none",
       },
     ],
+    backgroundColor: "default",
     horizontalSpacing: "medium",
   },
-  render: ({ columns, distribution, puck: { renderDropZone } }) => (
+  render: ({
+    columns,
+    distribution,
+    backgroundColor,
+    puck: { renderDropZone },
+  }) => (
     <GridSection
       renderDropZone={renderDropZone}
       columns={columns}
       distribution={distribution}
+      backgroundColor={backgroundColor}
     />
   ),
 };

@@ -30,6 +30,8 @@ const headingVariants = cva("components py-2", {
       secondary: "text-secondary",
       accent: "text-accent",
       text: "text-text",
+      foreground: "text-foreground",
+      background: "text-background",
     },
     transform: {
       none: "",

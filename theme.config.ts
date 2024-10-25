@@ -260,6 +260,13 @@ export const themeConfig: ThemeConfig = {
         options: getColorOptions(),
         default: "var(--colors-background)",
       },
+      grid: {
+        label: "Grid Background",
+        type: "select",
+        plugin: "backgroundColor",
+        options: getColorOptions(),
+        default: "var(--colors-background)",
+      },
     },
   },
   borderRadius: {
@@ -295,7 +302,7 @@ export const themeConfig: ThemeConfig = {
       grid: {
         label: "Grid Section",
         type: "number",
-        plugin: "maxWidth",
+        plugin: "padding",
         default: 10,
       },
     },
