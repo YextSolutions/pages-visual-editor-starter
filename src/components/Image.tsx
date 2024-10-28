@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ComponentConfig, Fields } from "@measured/puck";
-import {Image, ImageProps, ImageType} from "@yext/pages-components";
+import { Image, ImageProps, ImageType } from "@yext/pages-components";
 import {
   EntityField,
   YextEntityField,
@@ -10,7 +10,7 @@ import {
 } from "@yext/visual-editor";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
-import {config} from "../templates/location";
+import { config } from "../templates/location";
 
 const PLACEHOLDER_IMAGE_URL = "https://placehold.co/640x360";
 

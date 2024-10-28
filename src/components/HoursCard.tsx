@@ -78,7 +78,7 @@ const HoursCard = ({
 
   return (
     <Section
-      className={`flex flex-col justify-center components ${alignment}`}
+      className={`flex flex-col justify-center components ${alignment} font-body-fontWeight text-body-fontSize text-body-color`}
       padding={padding}
     >
       <div>

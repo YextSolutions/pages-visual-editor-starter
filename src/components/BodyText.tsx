@@ -1,51 +1,45 @@
 import * as React from "react";
 import { ComponentConfig, Fields } from "@measured/puck";
-import { Heading, HeadingProps, headingVariants } from "./atoms/heading.js";
+import { Body, BodyProps, bodyVariants } from "./atoms/body.js";
 import {
-  EntityField,
   YextEntityField,
   YextEntityFieldSelector,
-  resolveYextEntityField,
   useDocument,
+  EntityField,
+  resolveYextEntityField,
 } from "@yext/visual-editor";
 
-export interface HeadingTextProps extends HeadingProps {
+export interface BodyTextProps extends BodyProps {
   text: YextEntityField<string>;
 }
 
-const HeadingText = React.forwardRef<HTMLHeadingElement, HeadingTextProps>(
-  ({ text, ...headingProps }, ref) => {
+const BodyText = React.forwardRef<HTMLParagraphElement, BodyTextProps>(
+  ({ text, ...bodyProps }, ref) => {
     const document = useDocument();
 
     return (
       <EntityField
-        displayName={"Heading " + headingProps.level}
+        displayName="Body"
         fieldId={text.constantValueEnabled ? "constant value" : text.field}
       >
-        <Heading ref={ref} {...headingProps}>
+        <Body ref={ref} {...bodyProps}>
           {resolveYextEntityField(document, text)}
-        </Heading>
+        </Body>
       </EntityField>
     );
   }
 );
 
-HeadingText.displayName = "HeadingText";
+BodyText.displayName = "BodyText";
 
-const headingTextFields: Fields<HeadingTextProps> = {
+const bodyTextFields: Fields<BodyTextProps> = {
   text: YextEntityFieldSelector({
     label: "Entity Field",
     filter: {
       types: ["type.string"],
     },
   }),
-  level: {
-    type: "number",
-    label: "Heading Level",
-    min: 1,
-    max: 6,
-  },
-  weight: {
+  fontWeight: {
     label: "Font Weight",
     type: "select",
     options: [
@@ -62,7 +56,7 @@ const headingTextFields: Fields<HeadingTextProps> = {
     ],
   },
   color: {
-    label: "Font Color",
+    label: "Color",
     type: "select",
     options: [
       { label: "Default", value: "default" },
@@ -74,34 +68,32 @@ const headingTextFields: Fields<HeadingTextProps> = {
       { label: "Foreground", value: "foreground" },
     ],
   },
-  transform: {
+  textTransform: {
     label: "Text Transform",
     type: "select",
     options: [
-      { value: "none", label: "None" },
-      { value: "lowercase", label: "Lowercase" },
-      { value: "uppercase", label: "Uppercase" },
-      { value: "capitalize", label: "Capitalize" },
+      { label: "None", value: "none" },
+      { label: "Uppercase", value: "uppercase" },
+      { label: "Lowercase", value: "lowercase" },
+      { label: "Capitalize", value: "capitalize" },
     ],
   },
 };
 
-export const HeadingTextComponent: ComponentConfig<HeadingTextProps> = {
-  label: "Heading Text",
-  fields: headingTextFields,
+export const BodyTextComponent: ComponentConfig<BodyTextProps> = {
+  label: "Body Text",
+  fields: bodyTextFields,
   defaultProps: {
     text: {
       field: "",
       constantValue: "Text",
       constantValueEnabled: true,
     },
-    content: "Heading",
-    level: 2,
-    weight: "default",
+    fontWeight: "default",
     color: "default",
-    transform: "none",
+    textTransform: "none",
   },
-  render: (props) => <HeadingText {...props} />,
+  render: (props) => <BodyText {...props} />,
 };
 
-export { HeadingText, headingVariants };
+export { BodyText, bodyVariants };

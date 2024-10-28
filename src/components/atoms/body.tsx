@@ -3,28 +3,40 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
 // Define the variants for the body component
-const bodyVariants = cva("font-bold", {
+const bodyVariants = cva("components text-body-fontSize", {
   variants: {
-    size: {
-      small: "text-sm",
-      base: "text-base",
-      large: "text-lg",
-    },
-    weight: {
-      default: "font-normal",
+    fontWeight: {
+      default: "font-body-fontWeight",
+      thin: "font-thin",
+      extralight: "font-extralight",
+      light: "font-light",
+      normal: "font-normal",
+      medium: "font-medium",
+      semibold: "font-semibold",
       bold: "font-bold",
+      extrabold: "font-extrabold",
+      black: "font-black",
     },
     color: {
-      default: "text-default",
+      default: "text-body-color",
       primary: "text-primary",
       secondary: "text-secondary",
-      gray: "text-slate-700"
-    }
+      accent: "text-accent",
+      text: "text-text",
+      background: "text-primary-background",
+      foreground: "text-foreground-background",
+    },
+    textTransform: {
+      none: "",
+      uppercase: "uppercase",
+      lowercase: "lowercase",
+      capitalize: "capitalize",
+    },
   },
   defaultVariants: {
-    size: "base",
-    weight: "default",
+    fontWeight: "default",
     color: "default",
+    textTransform: "none",
   },
 });
 
@@ -34,19 +46,25 @@ export interface BodyProps
     VariantProps<typeof bodyVariants> {}
 
 const Body = React.forwardRef<HTMLParagraphElement, BodyProps>(
-  ({ className, size, weight, color, ...props }, ref) => {
+  ({ className, fontWeight, color, textTransform, ...props }, ref) => {
     return (
       <p
-        className={cn(bodyVariants({ size, weight, color, className }))}
+        className={cn(
+          bodyVariants({
+            fontWeight,
+            color,
+            textTransform,
+            className,
+          })
+        )}
         ref={ref}
         {...props}
       >
         {props.children}
       </p>
     );
-  },
+  }
 );
-
 Body.displayName = "Body";
 
 export { Body, bodyVariants };

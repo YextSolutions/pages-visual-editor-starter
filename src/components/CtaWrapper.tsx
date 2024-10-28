@@ -2,6 +2,7 @@ import { ComponentConfig, Fields } from "@measured/puck";
 import { CTA, CTAProps } from "./atoms/cta";
 import { cn } from "../utils/cn";
 import {
+  EntityField,
   resolveYextEntityField,
   useDocument,
   YextEntityField,
@@ -43,13 +44,20 @@ const CTAWrapper: React.FC<CTAWrapperProps> = ({
   const cta = resolveYextEntityField<Cta>(document, entityField);
 
   return (
-    <CTA
-      label={cta?.name}
-      url={cta?.link ?? "#"}
-      variant={variant}
-      className={cn(className)}
-      {...rest}
-    />
+    <EntityField
+      displayName="CTA"
+      fieldId={
+        entityField.constantValueEnabled ? "constant value" : entityField.field
+      }
+    >
+      <CTA
+        label={cta?.name}
+        url={cta?.link ?? "#"}
+        variant={variant}
+        className={cn(className)}
+        {...rest}
+      />
+    </EntityField>
   );
 };
 
@@ -62,7 +70,7 @@ export const CTAWrapperComponent: ComponentConfig<CTAWrapperProps> = {
       constantValue: {
         label: "Call to Action",
         variant: "primary",
-        size: "default"
+        size: "default",
       },
     },
     variant: "primary",
