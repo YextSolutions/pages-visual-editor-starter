@@ -118,7 +118,9 @@ const TextList: React.FC<TextListProps> = ({
     textListField
   );
   if (!resolvedTextList) {
-    resolvedTextList = ["Sample text 1", "Sample text 2"];
+    resolvedTextList = ["Sample text 1", "Sample text 2", "Sample text 3"];
+  } else if (!Array.isArray(resolvedTextList)) {
+    resolvedTextList = [resolvedTextList];
   }
 
   const dynamicStyles = {
@@ -144,7 +146,7 @@ export const TextListComponent: ComponentConfig<TextListProps> = {
   fields: textListFields,
   defaultProps: {
     list: {
-      field: "textList",
+      field: "",
       constantValue: "",
     },
   },
