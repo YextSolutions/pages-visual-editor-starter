@@ -1,12 +1,17 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { CTA, CTAProps } from "./atoms/cta";
 import { cn } from "../utils/cn";
-import { resolveYextEntityField, useDocument, YextEntityField, YextEntityFieldSelector } from "@yext/visual-editor";
+import {
+  resolveYextEntityField,
+  useDocument,
+  YextEntityField,
+  YextEntityFieldSelector,
+} from "@yext/visual-editor";
 import { config } from "../templates/location";
 import { Cta, LocationStream } from "../types/autogen";
 
 export interface CTAWrapperProps extends CTAProps {
-  entityField: YextEntityField
+  entityField: YextEntityField;
 }
 
 const ctaWrapperFields: Fields<CTAWrapperProps> = {
@@ -20,7 +25,7 @@ const ctaWrapperFields: Fields<CTAWrapperProps> = {
     type: "select",
     label: "Variant",
     options: [
-      { label: "Default", value: "default" },
+      { label: "Primary", value: "primary" },
       { label: "Secondary", value: "secondary" },
       { label: "Outline", value: "outline" },
       { label: "Link", value: "link" },
@@ -54,9 +59,9 @@ export const CTAWrapperComponent: ComponentConfig<CTAWrapperProps> = {
   defaultProps: {
     entityField: {
       field: "",
-      constantValue: ""
+      constantValue: "",
     },
-    variant: "default",
+    variant: "primary",
   },
   render: (props) => <CTAWrapper {...props} />,
 };
