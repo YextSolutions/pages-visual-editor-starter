@@ -12,7 +12,7 @@ import { config } from "../templates/location";
 import { LocationStream } from "../types/autogen";
 
 export interface HoursStatusWrapperProps {
-  hours: YextEntityField;
+  hours: YextEntityField<any>;
   className?: string;
   showDayNames?: boolean;
   showCurrentStatus?: boolean;
@@ -21,7 +21,7 @@ export interface HoursStatusWrapperProps {
 }
 
 const hoursStatusWrapperFields: Fields<HoursStatusWrapperProps> = {
-  hours: YextEntityFieldSelector<typeof config>({
+  hours: YextEntityFieldSelector<typeof config, any>({
     label: "Hours",
     filter: {
       types: ["type.hours"],

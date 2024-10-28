@@ -17,7 +17,7 @@ import "./index.css";
 import { config } from "../templates/location";
 
 export type HeroProps = {
-  hero: YextEntityField;
+  hero: YextEntityField<any>;
   imageMode: "left" | "right";
   name: {
     size: HeadingProps["size"];
@@ -36,7 +36,7 @@ export type HeroProps = {
 };
 
 const heroFields: Fields<HeroProps> = {
-  hero: YextEntityFieldSelector<typeof config>({
+  hero: YextEntityFieldSelector<typeof config, any>({
     label: "Hero",
     filter: {
       types: ["c_hero"],

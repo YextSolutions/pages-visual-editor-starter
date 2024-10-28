@@ -10,7 +10,7 @@ import {
 } from "@yext/visual-editor";
 
 export interface HeadingTextProps extends HeadingProps {
-  text: YextEntityField;
+  text: YextEntityField<string>;
 }
 
 const HeadingText = React.forwardRef<HTMLHeadingElement, HeadingTextProps>(

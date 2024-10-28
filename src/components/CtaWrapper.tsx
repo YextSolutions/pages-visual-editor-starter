@@ -11,11 +11,11 @@ import { config } from "../templates/location";
 import { Cta, LocationStream } from "../types/autogen";
 
 export interface CTAWrapperProps extends CTAProps {
-  entityField: YextEntityField;
+  entityField: YextEntityField<CTAProps>;
 }
 
 const ctaWrapperFields: Fields<CTAWrapperProps> = {
-  entityField: YextEntityFieldSelector<typeof config>({
+  entityField: YextEntityFieldSelector<typeof config, CTAProps>({
     label: "Entity Field",
     filter: {
       types: ["c_cta"],
@@ -59,7 +59,11 @@ export const CTAWrapperComponent: ComponentConfig<CTAWrapperProps> = {
   defaultProps: {
     entityField: {
       field: "",
-      constantValue: "",
+      constantValue: {
+        label: "Call to Action",
+        variant: "primary",
+        size: "default"
+      },
     },
     variant: "primary",
   },

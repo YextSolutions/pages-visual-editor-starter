@@ -48,7 +48,7 @@ const textListVariants = cva("ve-list-inside", {
 
 export interface TextListProps
   extends VariantProps<typeof textListVariants> {
-  list: YextEntityField;
+  list: YextEntityField<string[]>;
   textSize?: number;
 }
 
@@ -147,7 +147,7 @@ export const TextListComponent: ComponentConfig<TextListProps> = {
   defaultProps: {
     list: {
       field: "",
-      constantValue: "",
+      constantValue: [],
     },
   },
   render: (props) => <TextList {...props} />,

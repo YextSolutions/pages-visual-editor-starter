@@ -12,16 +12,17 @@ import {
 } from "@yext/visual-editor";
 import { config } from "../templates/location";
 import { LocationStream, Cta, ComplexImage } from "../types/autogen";
+import {ImageType} from "@yext/pages-components";
 
 export type CardProps = {
   image: {
     photo: {
-      entityField: YextEntityField;
+      entityField: YextEntityField<ImageType>;
     };
   };
   heading: {
     text: {
-      entityField: YextEntityField;
+      entityField: YextEntityField<string>;
     };
     size: HeadingProps["size"];
     color: HeadingProps["color"];
@@ -33,13 +34,13 @@ export type CardProps = {
   };
   body: {
     text: {
-      entityField: YextEntityField;
+      entityField: YextEntityField<string>;
     };
     size: BodyProps["size"];
     weight: BodyProps["weight"];
   };
   cta: {
-    entityField: YextEntityField;
+    entityField: YextEntityField<CTAProps>;
     variant?: CTAProps["variant"];
   };
   alignment: "items-start" | "items-center";
@@ -294,7 +295,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
     cta: {
       entityField: {
         field: "",
-        constantValue: ""
+        constantValue: {}
       },
     },
     alignment: "items-center",

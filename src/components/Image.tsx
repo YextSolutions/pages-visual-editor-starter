@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ComponentConfig, Fields } from "@measured/puck";
-import { Image, ImageProps } from "@yext/pages-components";
+import {Image, ImageProps, ImageType} from "@yext/pages-components";
 import {
   EntityField,
   YextEntityField,
@@ -10,6 +10,9 @@ import {
 } from "@yext/visual-editor";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
+import {config} from "../templates/location";
+
+const PLACEHOLDER_IMAGE_URL = "https://placehold.co/640x360";
 
 const imageWrapperVariants = cva("", {
   variants: {
@@ -42,11 +45,11 @@ const imageWrapperVariants = cva("", {
 
 export interface ImageWrapperProps
   extends VariantProps<typeof imageWrapperVariants> {
-  image: YextEntityField;
+  image: YextEntityField<ImageType>;
 }
 
 const imageWrapperFields: Fields<ImageWrapperProps> = {
-  image: YextEntityFieldSelector<any>({
+  image: YextEntityFieldSelector<typeof config, ImageType>({
     label: "Image",
     filter: {
       types: ["type.image"],
@@ -121,7 +124,12 @@ export const ImageWrapperComponent: ComponentConfig<ImageWrapperProps> = {
   defaultProps: {
     image: {
       field: "primaryPhoto",
-      constantValue: "",
+      constantValue: {
+        alternateText: "",
+        height: 360,
+        width: 640,
+        url: PLACEHOLDER_IMAGE_URL,
+      },
     },
     size: "medium",
     aspectRatio: "auto",
