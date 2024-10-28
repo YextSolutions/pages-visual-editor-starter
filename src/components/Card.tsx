@@ -11,8 +11,9 @@ import {
   useDocument,
 } from "@yext/visual-editor";
 import { config } from "../templates/location";
-import { LocationStream, Cta, ComplexImage } from "../types/autogen";
-import {ImageType} from "@yext/pages-components";
+import { LocationStream, Cta } from "../types/autogen";
+import {ImageType, Image, ImageProps} from "@yext/pages-components";
+import * as React from "react";
 
 export type CardProps = {
   image: {
@@ -55,7 +56,7 @@ const cardFields: Fields<CardProps> = {
         type: "object",
         label: "Entity Field",
         objectFields: {
-          entityField: YextEntityFieldSelector<typeof config>({
+          entityField: YextEntityFieldSelector<typeof config, ImageType>({
             label: "Photo",
             filter: {
               types: ["type.image"],
@@ -73,7 +74,7 @@ const cardFields: Fields<CardProps> = {
         type: "object",
         label: "Entity Field",
         objectFields: {
-          entityField: YextEntityFieldSelector<typeof config>({
+          entityField: YextEntityFieldSelector<typeof config, string>({
             label: "Heading Text",
             filter: {
               types: ["type.string"],
@@ -135,7 +136,7 @@ const cardFields: Fields<CardProps> = {
         type: "object",
         label: "Entity Field",
         objectFields: {
-          entityField: YextEntityFieldSelector<typeof config>({
+          entityField: YextEntityFieldSelector<typeof config, string>({
             label: "Body Text",
             filter: {
               types: ["type.string"],
@@ -166,7 +167,7 @@ const cardFields: Fields<CardProps> = {
     type: "object",
     label: "CTA",
     objectFields: {
-      entityField: YextEntityFieldSelector<typeof config>({
+      entityField: YextEntityFieldSelector<typeof config, string>({
         label: "Entity Field",
         filter: {
           types: ["c_cta"],
@@ -202,10 +203,10 @@ export const Card = ({
 }: CardProps) => {
   const document = useDocument<LocationStream>();
   // The null checks on the following lines are only necessary when upgrading a pre-existing field to use a mappable entity field
-  const image = resolveYextEntityField<ComplexImage>(
+  const resolvedImage = resolveYextEntityField<ImageProps["image"]>(
     document,
     imageField?.photo?.entityField
-  )?.image;
+  );
   const cta = resolveYextEntityField<Cta>(document, ctaField?.entityField);
 
   return (
@@ -213,20 +214,9 @@ export const Card = ({
       className={`flex flex-col justify-center bg-white components ${alignment}`}
       padding="small"
     >
-      {image?.url && (
-        <div
-          style={{
-            backgroundImage: `url('${image?.url}')`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            borderTopLeftRadius: 24,
-            borderTopRightRadius: 24,
-            height: 200,
-            width: "100%",
-          }}
-        />
-      )}
+      {!!resolvedImage &&
+          <Image image={resolvedImage} className="w-full h-full object-cover" />
+      }
       <div className="flex flex-col gap-y-3 p-8">
         <Heading level={2} size={heading.size} color={heading.color}>
           {resolveYextEntityField(document, heading.text.entityField)}
@@ -261,7 +251,11 @@ export const CardComponent: ComponentConfig<CardProps> = {
       photo: {
         entityField: {
           field: "",
-          constantValue: ""
+          constantValue: {
+            width: 1000,
+            height: 200,
+            url: "https://placehold.co/1000x200"
+          }
         },
       },
     },
