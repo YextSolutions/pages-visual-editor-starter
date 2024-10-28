@@ -70,13 +70,14 @@ const Address = ({
 }: AddressProps) => {
   const document = useDocument<LocationStream>();
   const address = resolveYextEntityField<AddressEntity>(document, addressField);
-  console.log("address", address);
+  console.log(1);
   const coordinates = getDirections(
     address as AddressType,
     undefined,
     undefined,
     { provider: getDirectionsProvider }
   );
+  console.log(coordinates);
 
   return (
     <Section
@@ -95,14 +96,17 @@ const Address = ({
               address={address as AddressType}
               lines={[["line1"], ["line2", "city", "region", "postalCode"]]}
             />
-            <Link
-              cta={{
-                link: coordinates,
-                label: "Get Directions",
-                linkType: "URL",
-              }}
-              className="font-bold text-primary no-underline hover:underline md:px-4;"
-            />
+            {coordinates && (
+              <Link
+                cta={{
+                  link: coordinates,
+                  label: "Get Directions",
+                  linkType: "URL",
+                }}
+                target="_blank"
+                className="font-bold text-primary no-underline hover:underline md:px-4;"
+              />
+            )}
           </EntityField>
         </div>
       )}
@@ -121,6 +125,7 @@ export const AddressComponent: ComponentConfig<AddressProps> = {
       constantValue: {
         line1: "",
         city: "",
+        region: "",
         postalCode: "",
         countryCode: "",
       },

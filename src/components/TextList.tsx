@@ -10,27 +10,28 @@ import {
 import { cn } from "../utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const textListVariants = cva("ve-list-inside", {
+const textListVariants = cva("list-inside text-font-fontSize p-8", {
   variants: {
     fontWeight: {
-      default: "",
-      thin: "ve-font-thin",
-      extralight: "ve-font-extralight",
-      light: "ve-font-light",
-      normal: "ve-font-normal",
-      medium: "ve-font-medium",
-      semibold: "ve-font-semibold",
-      bold: "ve-font-bold",
-      extrabold: "ve-font-extrabold",
-      black: "ve-font-black",
+      default: "font-body-fontWeight",
+      thin: "font-thin",
+      extralight: "font-extralight",
+      light: "font-light",
+      normal: "font-normal",
+      medium: "font-medium",
+      semibold: "font-semibold",
+      bold: "font-bold",
+      extrabold: "font-extrabold",
+      black: "font-black",
     },
     color: {
-      default: "",
+      default: "text-body-color",
       primary: "text-primary",
       secondary: "text-secondary",
       accent: "text-accent",
       text: "text-text",
-      background: "text-primary-background",
+      background: "text-background",
+      foreground: "text-foreground",
     },
     textTransform: {
       none: "",
@@ -38,16 +39,22 @@ const textListVariants = cva("ve-list-inside", {
       lowercase: "ve-lowercase",
       capitalize: "ve-capitalize",
     },
+    padding: {
+      default: "px-4 py-16 md:px-8",
+      none: "p-0",
+      small: "px-4 py-8 md:px-8",
+      large: "px-[200px] py-24 md:px-8",
+    },
   },
   defaultVariants: {
+    padding: "none",
     fontWeight: "default",
     color: "default",
     textTransform: "none",
   },
 });
 
-export interface TextListProps
-  extends VariantProps<typeof textListVariants> {
+export interface TextListProps extends VariantProps<typeof textListVariants> {
   list: YextEntityField<string[]>;
   textSize?: number;
 }
@@ -57,14 +64,9 @@ const textListFields: Fields<TextListProps> = {
     label: "Entity Field",
     filter: {
       types: ["type.string"],
-      // includeListsOnly: true, // TODO: Uncomment this once the VE library package has been updated
+      includeListsOnly: true,
     },
   }),
-  textSize: {
-    label: "Text Size",
-    type: "number",
-    min: 1,
-  },
   fontWeight: {
     label: "Font Weight",
     type: "select",
@@ -79,6 +81,16 @@ const textListFields: Fields<TextListProps> = {
       { label: "Bold", value: "bold" },
       { label: "Extrabold", value: "extrabold" },
       { label: "Black", value: "black" },
+    ],
+  },
+  padding: {
+    label: "Padding",
+    type: "radio",
+    options: [
+      { label: "None", value: "none" },
+      { label: "Small", value: "small" },
+      { label: "Medium", value: "default" },
+      { label: "Large", value: "large" },
     ],
   },
   color: {
@@ -107,34 +119,31 @@ const textListFields: Fields<TextListProps> = {
 
 const TextList: React.FC<TextListProps> = ({
   list: textListField,
-  textSize,
+  padding,
   fontWeight,
   color,
   textTransform,
 }) => {
   const document = useDocument();
-  let resolvedTextList: any = resolveYextEntityField(
-    document,
-    textListField
-  );
+  let resolvedTextList: any = resolveYextEntityField(document, textListField);
   if (!resolvedTextList) {
     resolvedTextList = ["Sample text 1", "Sample text 2", "Sample text 3"];
   } else if (!Array.isArray(resolvedTextList)) {
     resolvedTextList = [resolvedTextList];
   }
 
-  const dynamicStyles = {
-    fontSize: textSize ? textSize + "px" : undefined,
-  };
-
   return (
     <EntityField displayName="Text List" fieldId={textListField.field}>
       <ul
-        className={cn(textListVariants({ fontWeight, color, textTransform }))}
-        style={dynamicStyles ?? ""}
+        className={cn(
+          textListVariants({ padding, fontWeight, color, textTransform }),
+          "list-disc"
+        )}
       >
         {resolvedTextList.map((text: any, index: any) => (
-          <li key={index} className="ve-mb-2">{text}</li>
+          <li key={index} className="mb-2">
+            {text}
+          </li>
         ))}
       </ul>
     </EntityField>
@@ -145,6 +154,7 @@ export const TextListComponent: ComponentConfig<TextListProps> = {
   label: "Text List",
   fields: textListFields,
   defaultProps: {
+    padding: "none",
     list: {
       field: "",
       constantValue: [],

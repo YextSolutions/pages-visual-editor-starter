@@ -46,6 +46,7 @@ export const config = {
       "additionalHoursText",
       "mainPhone",
       "emails",
+      "services",
       "c_deliveryPromo",
       "c_testImage",
     ],
