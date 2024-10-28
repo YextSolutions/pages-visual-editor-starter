@@ -70,14 +70,12 @@ const Address = ({
 }: AddressProps) => {
   const document = useDocument<LocationStream>();
   const address = resolveYextEntityField<AddressEntity>(document, addressField);
-  console.log(1);
   const coordinates = getDirections(
     address as AddressType,
     undefined,
     undefined,
     { provider: getDirectionsProvider }
   );
-  console.log(coordinates);
 
   return (
     <Section
