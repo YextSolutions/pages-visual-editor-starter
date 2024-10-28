@@ -1,53 +1,22 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { LocationStream } from "../types/autogen";
 import { DayOfWeekNames, HoursTable, HoursType } from "@yext/pages-components";
-import { Section } from "./atoms/section";
-import { Heading, HeadingProps } from "./atoms/heading";
+import { Section, sectionVariants } from "./atoms/section";
 import { EntityField, useDocument } from "@yext/visual-editor";
 import "./index.css";
 import "@yext/pages-components/style.css";
 import { CardProps } from "./Card";
+import { VariantProps } from "class-variance-authority";
 
 export type HoursCardProps = {
-  heading: {
-    text: string;
-    size: HeadingProps["size"];
-    color: HeadingProps["color"];
-  };
   startOfWeek: keyof DayOfWeekNames | "today";
   collapseDays: boolean;
   showAdditionalHoursText: boolean;
   alignment: CardProps["alignment"];
+  padding: VariantProps<typeof sectionVariants>["padding"];
 };
 
 const hoursCardFields: Fields<HoursCardProps> = {
-  heading: {
-    type: "object",
-    label: "Heading",
-    objectFields: {
-      text: {
-        label: "Text",
-        type: "text",
-      },
-      size: {
-        label: "Size",
-        type: "radio",
-        options: [
-          { label: "Section", value: "section" },
-          { label: "Subheading", value: "subheading" },
-        ],
-      },
-      color: {
-        label: "Color",
-        type: "radio",
-        options: [
-          { label: "Default", value: "default" },
-          { label: "Primary", value: "primary" },
-          { label: "Secondary", value: "secondary" },
-        ],
-      },
-    },
-  },
   startOfWeek: {
     label: "Start of the week",
     type: "radio",
@@ -86,31 +55,33 @@ const hoursCardFields: Fields<HoursCardProps> = {
       { label: "Center", value: "items-center" },
     ],
   },
+  padding: {
+    label: "Padding",
+    type: "radio",
+    options: [
+      { label: "None", value: "none" },
+      { label: "Small", value: "small" },
+      { label: "Medium", value: "default" },
+      { label: "Large", value: "large" },
+    ],
+  },
 };
 
 const HoursCard = ({
-  heading,
   startOfWeek,
   collapseDays,
   showAdditionalHoursText,
   alignment,
+  padding,
 }: HoursCardProps) => {
   const { hours, additionalHoursText } = useDocument<LocationStream>();
 
   return (
     <Section
       className={`flex flex-col justify-center components ${alignment}`}
-      padding="small"
+      padding={padding}
     >
       <div>
-        <Heading
-          level={2}
-          size={heading.size}
-          className={"mb-4"}
-          color={heading.color}
-        >
-          {heading.text}
-        </Heading>
         {hours && (
           <EntityField displayName="Hours" fieldId="hours">
             <HoursTable
@@ -133,15 +104,11 @@ const HoursCard = ({
 export const HoursCardComponent: ComponentConfig<HoursCardProps> = {
   fields: hoursCardFields,
   defaultProps: {
-    heading: {
-      text: "Hours",
-      size: "subheading",
-      color: "default",
-    },
     startOfWeek: "today",
     collapseDays: false,
     showAdditionalHoursText: true,
     alignment: "items-center",
+    padding: "none",
   },
   label: "Hours Card",
   render: (props) => <HoursCard {...props} />,
