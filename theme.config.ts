@@ -296,14 +296,14 @@ export const themeConfig: ThemeConfig = {
       },
     },
   },
-  padding: {
-    label: "Vertical Padding",
+  gap: {
+    label: "Vertical Spacing",
     styles: {
       grid: {
         label: "Grid Section",
         type: "number",
-        plugin: "padding",
-        default: 10,
+        plugin: "gap",
+        default: 8,
       },
     },
   },

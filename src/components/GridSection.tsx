@@ -10,17 +10,26 @@ const backgroundVariants = cva("components", {
       default: "bg-grid",
       primary: "bg-primary",
       secondary: "bg-secondary",
+      text: "bg-text",
       accent: "bg-accent",
       background: "bg-background",
+      foreground: "bg-foreground",
+    },
+    maxContentWidth: {
+      default: "max-w-grid",
+      lg: "max-w-[1024px]",
+      xl: "max-w-[1280px]",
+      xxl: "max-w-[1536px]",
     },
   },
   defaultVariants: {
     backgroundColor: "default",
+    maxContentWidth: "default",
   },
 });
 
 const gridSectionVariants = cva(
-  "components flex flex-col min-h-0 min-w-0 md:grid md:grid-cols-12",
+  "components flex flex-col min-h-0 min-w-0 md:grid md:grid-cols-12 mx-auto",
   {
     variants: {
       horizontalSpacing: {
@@ -44,6 +53,7 @@ const columnVariants = cva("flex flex-col", {
       spaceBetween: "justify-between",
     },
     verticalSpacing: {
+      default: "gap-grid",
       small: "gap-2",
       medium: "gap-4",
       large: "gap-8",
@@ -82,6 +92,7 @@ const GridSection = React.forwardRef<HTMLDivElement, GridSectionProps>(
       distribution,
       columns,
       horizontalSpacing,
+      maxContentWidth,
       renderDropZone,
       backgroundColor,
       ...props
@@ -89,9 +100,16 @@ const GridSection = React.forwardRef<HTMLDivElement, GridSectionProps>(
     ref
   ) => {
     return (
-      <Section className={backgroundVariants({ backgroundColor })}>
+      <Section
+        className={backgroundVariants({ maxContentWidth, backgroundColor })}
+      >
         <div
-          className={cn(gridSectionVariants({ horizontalSpacing, className }))}
+          className={cn(
+            gridSectionVariants({
+              horizontalSpacing,
+              className,
+            })
+          )}
           ref={ref}
           style={{
             gridTemplateColumns:
@@ -153,6 +171,7 @@ const gridSectionFields: Fields<GridSectionProps> = {
         max: 12,
       },
       verticalAlignment: {
+        label: "Vertical Alignment",
         type: "select",
         options: [
           { value: "start", label: "Start" },
@@ -162,14 +181,17 @@ const gridSectionFields: Fields<GridSectionProps> = {
         ],
       },
       verticalSpacing: {
+        label: "Vertical Spacing",
         type: "select",
         options: [
+          { value: "default", label: "Default" },
           { value: "small", label: "Small" },
           { value: "medium", label: "Medium" },
           { value: "large", label: "Large" },
         ],
       },
       padding: {
+        label: "Padding",
         type: "select",
         options: [
           { value: "none", label: "None" },
@@ -181,6 +203,7 @@ const gridSectionFields: Fields<GridSectionProps> = {
     },
   },
   horizontalSpacing: {
+    label: "Horizontal Spacing",
     type: "select",
     options: [
       { value: "small", label: "Small" },
@@ -188,7 +211,18 @@ const gridSectionFields: Fields<GridSectionProps> = {
       { value: "large", label: "Large" },
     ],
   },
+  maxContentWidth: {
+    label: "Maximum Content Width",
+    type: "select",
+    options: [
+      { value: "default", label: "Default" },
+      { value: "lg", label: "LG" },
+      { value: "xl", label: "XL" },
+      { value: "xxl", label: "2XL" },
+    ],
+  },
   backgroundColor: {
+    label: "Background Color",
     type: "select",
     options: [
       { label: "Default", value: "default" },
@@ -221,11 +255,13 @@ export const GridSectionComponent: ComponentConfig<GridSectionProps> = {
     ],
     backgroundColor: "default",
     horizontalSpacing: "medium",
+    maxContentWidth: "default",
   },
   render: ({
     columns,
     distribution,
     backgroundColor,
+    maxContentWidth,
     puck: { renderDropZone },
   }) => (
     <GridSection
@@ -233,6 +269,7 @@ export const GridSectionComponent: ComponentConfig<GridSectionProps> = {
       columns={columns}
       distribution={distribution}
       backgroundColor={backgroundColor}
+      maxContentWidth={maxContentWidth}
     />
   ),
 };
