@@ -33,9 +33,9 @@ const gridSectionVariants = cva(
   {
     variants: {
       horizontalSpacing: {
-        small: "gap-2 md:gap-4",
-        medium: "gap-8 md:gap-12",
-        large: "gap-12 md:gap-16",
+        small: "gap-x-2 md:gap-x-4",
+        medium: "gap-x-8 md:gap-x-12",
+        large: "gap-x-12 md:gap-x-16",
       },
     },
     defaultVariants: {
@@ -53,10 +53,10 @@ const columnVariants = cva("flex flex-col", {
       spaceBetween: "justify-between",
     },
     verticalSpacing: {
-      default: "gap-grid",
-      small: "gap-2",
-      medium: "gap-4",
-      large: "gap-8",
+      default: "gap-y-grid",
+      small: "gap-y-2",
+      medium: "gap-y-4",
+      large: "gap-y-8",
     },
     padding: {
       none: "",

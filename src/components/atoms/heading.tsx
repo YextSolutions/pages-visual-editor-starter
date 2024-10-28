@@ -2,7 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 // Define the variants for the heading component
-const headingVariants = cva("components py-2", {
+const headingVariants = cva("components", {
   variants: {
     level: {
       1: "font-heading1-fontWeight text-heading1-fontSize text-heading1-color",
