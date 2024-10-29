@@ -27,12 +27,17 @@ const flexContainerVariants = cva("flex", {
       medium: "gap-4",
       large: "gap-8",
     },
+    wrap: {
+      wrap: "flex-wrap",
+      nowrap: "flex-nowrap",
+    },
   },
   defaultVariants: {
     direction: "column",
     alignment: "start",
     justification: "start",
     spacing: "medium",
+    wrap: "wrap",
   },
 });
 
@@ -79,6 +84,7 @@ FlexContainer.displayName = "FlexContainer";
 
 const flexContainerFields: Fields<FlexContainerProps> = {
   direction: {
+    label: "Direction",
     type: "select",
     options: [
       { value: "row", label: "Horizontal" },
@@ -86,6 +92,7 @@ const flexContainerFields: Fields<FlexContainerProps> = {
     ],
   },
   alignment: {
+    label: "Alignment",
     type: "select",
     options: [
       { value: "start", label: "Start" },
@@ -95,6 +102,7 @@ const flexContainerFields: Fields<FlexContainerProps> = {
     ],
   },
   justification: {
+    label: "Justification",
     type: "select",
     options: [
       { value: "start", label: "Start" },
@@ -105,11 +113,20 @@ const flexContainerFields: Fields<FlexContainerProps> = {
     ],
   },
   spacing: {
+    label: "Spacing",
     type: "select",
     options: [
       { value: "small", label: "Small" },
       { value: "medium", label: "Medium" },
       { value: "large", label: "Large" },
+    ],
+  },
+  wrap: {
+    label: "Wrap",
+    type: "select",
+    options: [
+      { value: "nowrap", label: "No Wrap" },
+      { value: "wrap", label: "Wrap" },
     ],
   },
 };
@@ -122,6 +139,7 @@ export const FlexContainerComponent: ComponentConfig<FlexContainerProps> = {
     alignment: "start",
     justification: "start",
     spacing: "medium",
+    wrap: "nowrap",
   },
   render: ({
     direction,
