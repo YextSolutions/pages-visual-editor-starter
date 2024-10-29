@@ -15,6 +15,7 @@ import mailIcon from "../assets/mail_outline.svg";
 const emailListVariants = cva("list-inside text-font-fontSize p-8", {
   variants: {
     fontSize: {
+      default: "text-base",
       xs: "text-xs",
       sm: "text-sm",
       medium: "text-base",
@@ -46,25 +47,11 @@ const emailListVariants = cva("list-inside text-font-fontSize p-8", {
       background: "text-background",
       foreground: "text-foreground",
     },
-    textTransform: {
-      none: "",
-      uppercase: "ve-uppercase",
-      lowercase: "ve-lowercase",
-      capitalize: "ve-capitalize",
-    },
-    padding: {
-      default: "",
-      small: "px-4 py-8 md:px-8",
-      medium: "px-4 py-16 md:px-8",
-      large: "px-[200px] py-24 md:px-8",
-    },
   },
   defaultVariants: {
-    padding: "default",
-    fontSize: "medium",
+    fontSize: "default",
     fontWeight: "default",
     color: "default",
-    textTransform: "none",
   },
 });
 
@@ -87,6 +74,7 @@ const EmailListFields: Fields<EmailListProps> = {
     label: "Font Size",
     type: "select",
     options: [
+      { label: "Default", value: "default" },
       { label: "Extra Small", value: "xs" },
       { label: "Small", value: "sm" },
       { label: "Medium", value: "medium" },
@@ -114,16 +102,6 @@ const EmailListFields: Fields<EmailListProps> = {
       { label: "Black", value: "black" },
     ],
   },
-  padding: {
-    label: "Padding",
-    type: "radio",
-    options: [
-      { label: "Default", value: "default" },
-      { label: "Small", value: "small" },
-      { label: "Medium", value: "medium" },
-      { label: "Large", value: "large" },
-    ],
-  },
   color: {
     label: "Color",
     type: "select",
@@ -134,16 +112,6 @@ const EmailListFields: Fields<EmailListProps> = {
       { label: "Accent", value: "accent" },
       { label: "Text", value: "text" },
       { label: "Background", value: "background" },
-    ],
-  },
-  textTransform: {
-    label: "Text Transform",
-    type: "select",
-    options: [
-      { label: "None", value: "none" },
-      { label: "Uppercase", value: "uppercase" },
-      { label: "Lowercase", value: "lowercase" },
-      { label: "Capitalize", value: "capitalize" },
     ],
   },
   includeHyperlink: {
@@ -164,11 +132,9 @@ const EmailListFields: Fields<EmailListProps> = {
 
 const EmailList: React.FC<EmailListProps> = ({
   list: emailListField,
-  padding,
   fontSize,
   fontWeight,
   color,
-  textTransform,
   includeHyperlink,
   listLength,
 }) => {
@@ -184,7 +150,7 @@ const EmailList: React.FC<EmailListProps> = ({
     <EntityField displayName="Email List" fieldId={emailListField.field}>
       <ul
         className={cn(
-          emailListVariants({ padding, fontSize, fontWeight, color, textTransform }),
+          emailListVariants({ fontSize, fontWeight, color }),
           `${includeHyperlink ? "text-blue-600 dark:text-blue-500 hover:underline" : ""}`
         )}
       >
