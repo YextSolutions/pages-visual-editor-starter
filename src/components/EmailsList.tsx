@@ -185,12 +185,15 @@ const EmailList: React.FC<EmailListProps> = ({
       <ul
         className={cn(
           emailListVariants({ padding, fontSize, fontWeight, color, textTransform }),
-          `list-image-[url(${mailIcon})]${includeHyperlink ? " text-blue-600 dark:text-blue-500 hover:underline" : ""}`
+          `${includeHyperlink ? "text-blue-600 dark:text-blue-500 hover:underline" : ""}`
         )}
       >
         {resolvedEmailList.map((text: any, index: any) => (
-          <li key={index} className={`mb-2`}>
-            {includeHyperlink ? <a href={text}>{text}</a> : text}
+          <li key={index} className={`mb-2 flex items-center`}>
+            <img className={'m-2'} src={mailIcon}/>
+            <span>
+              {includeHyperlink ? <a href={text}>{text}</a> : text}
+            </span>
           </li>
         ))}
       </ul>
