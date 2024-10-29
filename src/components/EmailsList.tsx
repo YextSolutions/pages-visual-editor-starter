@@ -53,14 +53,15 @@ const emailListVariants = cva("list-inside text-font-fontSize p-8", {
       capitalize: "ve-capitalize",
     },
     padding: {
-      default: "px-4 py-16 md:px-8",
-      none: "p-0",
+      default: "",
       small: "px-4 py-8 md:px-8",
+      medium: "px-4 py-16 md:px-8",
       large: "px-[200px] py-24 md:px-8",
     },
   },
   defaultVariants: {
-    padding: "none",
+    padding: "default",
+    fontSize: "medium",
     fontWeight: "default",
     color: "default",
     textTransform: "none",
@@ -117,9 +118,9 @@ const EmailListFields: Fields<EmailListProps> = {
     label: "Padding",
     type: "radio",
     options: [
-      { label: "None", value: "none" },
+      { label: "Default", value: "default" },
       { label: "Small", value: "small" },
-      { label: "Medium", value: "default" },
+      { label: "Medium", value: "medium" },
       { label: "Large", value: "large" },
     ],
   },
@@ -149,8 +150,8 @@ const EmailListFields: Fields<EmailListProps> = {
     label: "Include Hyperlink",
     type: "radio",
     options: [
-      { label: "True", value: true },
-      { label: "False", value: false },
+      { label: "Yes", value: true },
+      { label: "No", value: false },
     ],
   },
   listLength: {
@@ -178,7 +179,6 @@ const EmailList: React.FC<EmailListProps> = ({
   } else if (!Array.isArray(resolvedEmailList)) {
     resolvedEmailList = [resolvedEmailList];
   }
-  resolvedEmailList.length = Math.min(resolvedEmailList.length, listLength);
 
   return (
     <EntityField displayName="Email List" fieldId={emailListField.field}>
@@ -188,7 +188,7 @@ const EmailList: React.FC<EmailListProps> = ({
           `${includeHyperlink ? "text-blue-600 dark:text-blue-500 hover:underline" : ""}`
         )}
       >
-        {resolvedEmailList.map((text: any, index: any) => (
+        {resolvedEmailList.slice(0, Math.min(resolvedEmailList.length, listLength)).map((text: any, index: any) => (
           <li key={index} className={`mb-2 flex items-center`}>
             <img className={'m-2'} src={mailIcon}/>
             <span>
@@ -205,8 +205,6 @@ export const EmailListComponent: ComponentConfig<EmailListProps> = {
   label: "Emails",
   fields: EmailListFields,
   defaultProps: {
-    padding: "none",
-    fontSize: "medium",
     list: {
       field: "",
       constantValue: [],
