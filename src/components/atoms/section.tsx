@@ -31,7 +31,7 @@ const Section = React.forwardRef<HTMLDivElement, SectionProps>(
     return (
       <div className="components bg-main">
         <div
-          className={cn(sectionVariants({ padding, maxWidth, className }))}
+          className={cn(sectionVariants({ padding, maxWidth }), className)}
           ref={ref}
           {...props}
         >

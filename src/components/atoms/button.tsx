@@ -4,22 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
 
 const buttonVariants = cva(
-  "py-4 components inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ",
+  "py-4 components inline-flex items-center justify-center whitespace-nowrap rounded-button-borderRadius text-button-fontSize font-button-fontWeight ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ",
   {
     variants: {
       variant: {
         primary:
-          "bg-button-primary text-button-primary-foreground hover:bg-button-secondary active:bg-button-primary-foreground active:text-button-primary active:border-button-primary focus:border-2",
+          "bg-palette-primary text-palette-secondary border-2 border-palette-primary hover:border-palette-secondary focus:border-palette-secondary active:bg-palette-secondary active:text-palette-primary active:border-palette-primary",
         secondary:
-          "bg-button-primary-foreground text-button-primary border-2 border-button-primary hover:bg-button-primary hover:text-button-primary-foreground active:bg-button-secondary active:text-button-secondary-foreground focus:border-2",
+          "bg-palette-secondary text-palette-primary border-2 border-palette-secondary hover:border-palette-primary focus:border-palette-primary active:bg-palette-primary active:text-palette-secondary active:border-palette-secondary",
         outline:
-          "border-button-primary bg-background hover:bg-accent hover:text-button-primary",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border-palette-primary bg-palette-background border-2 hover:border-palette-background focus:border-palette-background active:bg-palette-primary active:text-palette-background",
+        link: "text-palette-primary underline-offset-4 underline hover:no-underline",
       },
       size: {
-        default: "w-full md:w-fit h-10 rounded-md px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        default: "w-full md:w-fit h-10 px-4 py-2",
+        sm: "h-9 px-3",
+        lg: "h-11 px-8",
         icon: "h-10 w-10",
       },
     },

@@ -19,12 +19,11 @@ const bodyVariants = cva("components text-body-fontSize", {
     },
     color: {
       default: "text-body-color",
-      primary: "text-primary",
-      secondary: "text-secondary",
-      accent: "text-accent",
-      text: "text-text",
-      background: "text-primary-background",
-      foreground: "text-foreground-background",
+      primary: "text-palette-primary",
+      secondary: "text-palette-secondary",
+      accent: "text-palette-accent",
+      text: "text-palette-text",
+      background: "text-palette-background",
     },
     textTransform: {
       none: "",

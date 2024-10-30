@@ -2,12 +2,11 @@ import { ThemeConfig } from "@yext/visual-editor";
 
 const getColorOptions = () => {
   return [
-    { label: "Primary", value: "var(--colors-primary)" },
-    { label: "Secondary", value: "var(--colors-secondary)" },
-    { label: "Accent", value: "var(--colors-accent)" },
-    { label: "Text", value: "var(--colors-text)" },
-    { label: "Background", value: "var(--colors-background)" },
-    { label: "Foreground", value: "var(--colors-foreground)" },
+    { label: "Primary", value: "var(--colors-palette-primary)" },
+    { label: "Secondary", value: "var(--colors-palette-secondary)" },
+    { label: "Accent", value: "var(--colors-palette-accent)" },
+    { label: "Text", value: "var(--colors-palette-text)" },
+    { label: "Background", value: "var(--colors-palette-background)" },
   ];
 };
 
@@ -26,122 +25,8 @@ const getWeightOptions = () => {
 };
 
 export const themeConfig: ThemeConfig = {
-  fontSize: {
-    label: "Text Size",
-    styles: {
-      "heading1-fontSize": {
-        label: "Heading 1",
-        type: "number",
-        plugin: "fontSize",
-        default: 24,
-      },
-      "heading2-fontSize": {
-        label: "Heading 2",
-        type: "number",
-        plugin: "fontSize",
-        default: 24,
-      },
-      "heading3-fontSize": {
-        label: "Heading 3",
-        type: "number",
-        plugin: "fontSize",
-        default: 24,
-      },
-      "heading4-fontSize": {
-        label: "Heading 4",
-        type: "number",
-        plugin: "fontSize",
-        default: 24,
-      },
-      "heading5-fontSize": {
-        label: "Heading 5",
-        type: "number",
-        plugin: "fontSize",
-        default: 24,
-      },
-      "heading6-fontSize": {
-        label: "Heading 6",
-        type: "number",
-        plugin: "fontSize",
-        default: 24,
-      },
-      "button-fontSize": {
-        label: "Button",
-        type: "number",
-        plugin: "fontSize",
-        default: 12,
-      },
-      "body-fontSize": {
-        label: "Body",
-        type: "number",
-        plugin: "fontSize",
-        default: 12,
-      },
-    },
-  },
-  fontWeight: {
-    label: "Font Weight",
-    styles: {
-      "heading1-fontWeight": {
-        label: "Heading 1",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "700",
-      },
-      "heading2-fontWeight": {
-        label: "Heading 2",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "700",
-      },
-      "heading3-fontWeight": {
-        label: "Heading 3",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "600",
-      },
-      "heading4-fontWeight": {
-        label: "Heading 4",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "600",
-      },
-      "heading5-fontWeight": {
-        label: "Heading 5",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "400",
-      },
-      "heading6-fontWeight": {
-        label: "Heading 6",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "400",
-      },
-      "body-fontWeight": {
-        label: "Body",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "400",
-      },
-      "button-fontWeight": {
-        label: "Button",
-        type: "select",
-        plugin: "fontWeight",
-        options: getWeightOptions(),
-        default: "400",
-      },
-    },
-  },
-  colors: {
-    label: "Color",
+  palette: {
+    label: "Color Palette",
     styles: {
       primary: {
         label: "Primary",
@@ -170,121 +55,197 @@ export const themeConfig: ThemeConfig = {
       background: {
         label: "Background",
         type: "color",
-        default: "#F7F7F7",
         plugin: "colors",
-      },
-      foreground: {
-        label: "Foreground",
-        type: "color",
-        plugin: "color",
         default: "#000000",
-      },
-      footer: {
-        label: "Footer",
-        type: "color",
-        plugin: "color",
-        default: "#000000",
-      },
-      "heading1-color": {
-        label: "Heading 1",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-primary)",
-      },
-      "heading2-color": {
-        label: "Heading 2",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-primary)",
-      },
-      "heading3-color": {
-        label: "Heading 3",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-primary)",
-      },
-      "heading4-color": {
-        label: "Heading 4",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-primary)",
-      },
-      "heading5-color": {
-        label: "Heading 5",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-primary)",
-      },
-      "heading6-color": {
-        label: "Heading 6",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-primary)",
-      },
-      "body-color": {
-        label: "Body",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-text)",
-      },
-      "button-primary": {
-        label: "Button Primary",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-primary)",
-      },
-      "button-primary-foreground": {
-        label: "Button Primary Foreground",
-        type: "select",
-        plugin: "color",
-        options: getColorOptions(),
-        default: "var(--colors-foreground)",
       },
     },
   },
-  backgroundColor: {
-    label: "Background Color",
+  heading1: {
+    label: "Heading 1",
     styles: {
-      main: {
-        label: "Background Color",
-        type: "select",
-        plugin: "backgroundColor",
-        options: getColorOptions(),
-        default: "var(--colors-background)",
-      },
-      grid: {
-        label: "Grid Background",
-        type: "select",
-        plugin: "backgroundColor",
-        options: getColorOptions(),
-        default: "var(--colors-background)",
-      },
-    },
-  },
-  borderRadius: {
-    label: "Border Radius",
-    styles: {
-      lg: {
-        label: "Button",
+      fontSize: {
+        label: "Font Size",
         type: "number",
-        plugin: "borderRadius",
-        default: 20,
+        plugin: "fontSize",
+        default: 24,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "700",
+      },
+      color: {
+        label: "Text Color",
+        type: "select",
+        plugin: "colors",
+        options: getColorOptions(),
+        default: "var(--colors-palette-primary)",
       },
     },
   },
-  maxWidth: {
-    label: "Max Width",
+  heading2: {
+    label: "Heading 2",
     styles: {
-      grid: {
-        label: "Grid Section",
+      fontSize: {
+        label: "Font Size",
+        type: "number",
+        plugin: "fontSize",
+        default: 24,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "700",
+      },
+      color: {
+        label: "Text Color",
+        type: "select",
+        plugin: "colors",
+        options: getColorOptions(),
+        default: "var(--colors-palette-primary)",
+      },
+    },
+  },
+  heading3: {
+    label: "Heading 3",
+    styles: {
+      fontSize: {
+        label: "Font Size",
+        type: "number",
+        plugin: "fontSize",
+        default: 24,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "700",
+      },
+      color: {
+        label: "Text Color",
+        type: "select",
+        plugin: "colors",
+        options: getColorOptions(),
+        default: "var(--colors-palette-primary)",
+      },
+    },
+  },
+  heading4: {
+    label: "Heading 4",
+    styles: {
+      fontSize: {
+        label: "Font Size",
+        type: "number",
+        plugin: "fontSize",
+        default: 24,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "700",
+      },
+      color: {
+        label: "Text Color",
+        type: "select",
+        plugin: "colors",
+        options: getColorOptions(),
+        default: "var(--colors-palette-secondary)",
+      },
+    },
+  },
+  heading5: {
+    label: "Heading 5",
+    styles: {
+      fontSize: {
+        label: "Font Size",
+        type: "number",
+        plugin: "fontSize",
+        default: 24,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "700",
+      },
+      color: {
+        label: "Text Color",
+        type: "select",
+        plugin: "colors",
+        options: getColorOptions(),
+        default: "var(--colors-palette-secondary)",
+      },
+    },
+  },
+  heading6: {
+    label: "Heading 6",
+    styles: {
+      fontSize: {
+        label: "Font Size",
+        type: "number",
+        plugin: "fontSize",
+        default: 24,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "700",
+      },
+      color: {
+        label: "Text Color",
+        type: "select",
+        plugin: "colors",
+        options: getColorOptions(),
+        default: "var(--colors-palette-secondary)",
+      },
+    },
+  },
+  body: {
+    label: "Body Text",
+    styles: {
+      fontSize: {
+        label: "Font Size",
+        type: "number",
+        plugin: "fontSize",
+        default: 12,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "400",
+      },
+      color: {
+        label: "Text Color",
+        plugin: "colors",
+        type: "select",
+        options: getColorOptions(),
+        default: "var(--colors-palette-text)",
+      },
+    },
+  },
+  grid: {
+    label: "Grid Section",
+    styles: {
+      verticalSpacing: {
+        label: "Vertical Spacing",
+        type: "number",
+        plugin: "gap",
+        default: 8,
+      },
+      maxWidth: {
+        label: "Maximum Width",
         type: "select",
         plugin: "maxWidth",
         options: [
@@ -294,16 +255,36 @@ export const themeConfig: ThemeConfig = {
         ],
         default: "1280px",
       },
+      backgroundColor: {
+        label: "Background Color",
+        type: "select",
+        plugin: "backgroundColor",
+        options: getColorOptions(),
+        default: "var(--colors-palette-background)",
+      },
     },
   },
-  gap: {
-    label: "Vertical Spacing",
+  button: {
+    label: "Button",
     styles: {
-      grid: {
-        label: "Grid Section",
+      borderRadius: {
+        label: "Border Radius",
         type: "number",
-        plugin: "gap",
-        default: 8,
+        plugin: "borderRadius",
+        default: 20,
+      },
+      fontWeight: {
+        label: "Font Weight",
+        type: "select",
+        plugin: "fontWeight",
+        options: getWeightOptions(),
+        default: "400",
+      },
+      fontSize: {
+        label: "Font Size",
+        type: "number",
+        plugin: "fontSize",
+        default: 12,
       },
     },
   },

@@ -102,7 +102,7 @@ const Address = ({
                   linkType: "URL",
                 }}
                 target="_blank"
-                className="font-bold text-primary underline hover:no-underline md:px-4;"
+                className="font-bold text-palette-primary underline hover:no-underline md:px-4;"
               />
             )}
           </EntityField>

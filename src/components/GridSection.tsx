@@ -7,16 +7,15 @@ import { cn } from "../utils/cn";
 const backgroundVariants = cva("components", {
   variants: {
     backgroundColor: {
-      default: "bg-grid",
-      primary: "bg-primary",
-      secondary: "bg-secondary",
-      text: "bg-text",
-      accent: "bg-accent",
-      background: "bg-background",
-      foreground: "bg-foreground",
+      default: "bg-grid-backgroundColor",
+      primary: "bg-palette-primary",
+      secondary: "bg-palette-secondary",
+      accent: "bg-palette-accent",
+      text: "bg-palette-text",
+      background: "bg-palette-background",
     },
     maxContentWidth: {
-      default: "max-w-grid",
+      default: "max-w-grid-maxWidth",
       lg: "max-w-[1024px]",
       xl: "max-w-[1280px]",
       xxl: "max-w-[1536px]",
@@ -29,7 +28,7 @@ const backgroundVariants = cva("components", {
 });
 
 const gridSectionVariants = cva(
-  "components flex flex-col min-h-0 min-w-0 md:grid md:grid-cols-12 mx-auto",
+  "components flex flex-col min-h-0 min-w-0 md:grid md:grid-cols-12 mx-auto gap-y-grid-verticalSpacing",
   {
     variants: {
       horizontalSpacing: {
@@ -53,7 +52,7 @@ const columnVariants = cva("flex flex-col", {
       spaceBetween: "justify-between",
     },
     verticalSpacing: {
-      default: "gap-y-grid",
+      default: "gap-y-grid-verticalSpacing",
       small: "gap-y-2",
       medium: "gap-y-4",
       large: "gap-y-8",
@@ -230,7 +229,6 @@ const gridSectionFields: Fields<GridSectionProps> = {
       { label: "Secondary", value: "secondary" },
       { label: "Accent", value: "accent" },
       { label: "Text", value: "text" },
-      { label: "Foreground", value: "foreground" },
       { label: "Background", value: "background" },
     ],
   },

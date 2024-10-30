@@ -10,7 +10,7 @@ import {
 import { cn } from "../utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const textListVariants = cva("list-inside text-font-fontSize p-8", {
+const textListVariants = cva("list-inside text-body-FontSize p-8", {
   variants: {
     fontWeight: {
       default: "font-body-fontWeight",
@@ -25,19 +25,18 @@ const textListVariants = cva("list-inside text-font-fontSize p-8", {
       black: "font-black",
     },
     color: {
-      default: "text-body-color",
-      primary: "text-primary",
-      secondary: "text-secondary",
-      accent: "text-accent",
-      text: "text-text",
-      background: "text-background",
-      foreground: "text-foreground",
+      default: "text-palette-body-color",
+      primary: "text-palette-primary",
+      secondary: "text-palette-secondary",
+      accent: "text-palette-accent",
+      text: "text-palette-text",
+      background: "text-palette-background",
     },
     textTransform: {
       none: "",
-      uppercase: "ve-uppercase",
-      lowercase: "ve-lowercase",
-      capitalize: "ve-capitalize",
+      uppercase: "uppercase",
+      lowercase: "lowercase",
+      capitalize: "capitalize",
     },
     padding: {
       default: "px-4 py-16 md:px-8",
