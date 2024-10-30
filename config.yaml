@@ -10,7 +10,7 @@ livePreviewConfiguration:
   setupCommand: ":"
 siteStream:
   id: site-stream
-  entityId: site
+  entityId: ve-site
   fields:
     - defaultLayouts.visualConfiguration
     - pagesTheme.themeConfiguration
