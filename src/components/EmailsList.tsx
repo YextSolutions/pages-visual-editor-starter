@@ -11,11 +11,10 @@ import { cn } from "../utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 import mailIcon from "../assets/mail_outline.svg";
 
-
-const emailListVariants = cva("list-inside text-font-fontSize p-8", {
+const emailListVariants = cva("list-inside p-8", {
   variants: {
     fontSize: {
-      default: "text-base",
+      default: "text-body-fontSize",
       xs: "text-xs",
       sm: "text-sm",
       medium: "text-base",
@@ -40,12 +39,12 @@ const emailListVariants = cva("list-inside text-font-fontSize p-8", {
     },
     color: {
       default: "text-body-color",
-      primary: "text-primary",
-      secondary: "text-secondary",
-      accent: "text-accent",
-      text: "text-text",
-      background: "text-background",
-      foreground: "text-foreground",
+      primary: "text-palette-primary",
+      secondary: "text-palette-secondary",
+      accent: "text-palette-accent",
+      text: "text-palette-text",
+      background: "text-palette-background",
+      foreground: "text-palette-foreground",
     },
   },
   defaultVariants: {
@@ -141,7 +140,11 @@ const EmailList: React.FC<EmailListProps> = ({
   const document = useDocument();
   let resolvedEmailList: any = resolveYextEntityField(document, emailListField);
   if (!resolvedEmailList) {
-    resolvedEmailList = ["sample_email1@gmail.com", "sample_email2@yahoo.com", "sample_email3@msn.com"];
+    resolvedEmailList = [
+      "sample_email1@gmail.com",
+      "sample_email2@yahoo.com",
+      "sample_email3@msn.com",
+    ];
   } else if (!Array.isArray(resolvedEmailList)) {
     resolvedEmailList = [resolvedEmailList];
   }
@@ -154,14 +157,14 @@ const EmailList: React.FC<EmailListProps> = ({
           `${includeHyperlink ? "text-blue-600 dark:text-blue-500 hover:underline" : ""}`
         )}
       >
-        {resolvedEmailList.slice(0, Math.min(resolvedEmailList.length, listLength)).map((text: any, index: any) => (
-          <li key={index} className={`mb-2 flex items-center`}>
-            <img className={'m-2'} src={mailIcon}/>
-            <span>
-              {includeHyperlink ? <a href={text}>{text}</a> : text}
-            </span>
-          </li>
-        ))}
+        {resolvedEmailList
+          .slice(0, Math.min(resolvedEmailList.length, listLength))
+          .map((text: any, index: any) => (
+            <li key={index} className={`mb-2 flex items-center`}>
+              <img className={"m-2"} src={mailIcon} />
+              <span>{includeHyperlink ? <a href={text}>{text}</a> : text}</span>
+            </li>
+          ))}
       </ul>
     </EntityField>
   );
@@ -176,7 +179,7 @@ export const EmailListComponent: ComponentConfig<EmailListProps> = {
       constantValue: [],
     },
     includeHyperlink: true,
-    listLength: 5
+    listLength: 5,
   },
   render: (props) => <EmailList {...props} />,
 };

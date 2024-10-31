@@ -26,12 +26,12 @@ const phoneVariants = cva("components", {
     },
     color: {
       default: "text-body-color",
-      primary: "text-primary",
-      secondary: "text-secondary",
-      accent: "text-accent",
-      text: "text-text",
-      background: "text-background",
-      foreground: "text-foreground",
+      primary: "text-palette-primary",
+      secondary: "text-palette-secondary",
+      accent: "text-palette-accent",
+      text: "text-palette-text",
+      background: "text-palette-background",
+      foreground: "text-palette-foreground",
     },
   },
   defaultVariants: {
@@ -46,20 +46,20 @@ export interface PhoneProps extends VariantProps<typeof phoneVariants> {
 }
 
 /*
-  * formatUsPhoneNumber formats a US phone number into one of the following forms,
-  * depending on whether the number includes the +1 area code:
-  * +1 (123) 456-7890 or (123) 456-7890. If the number is not a US phone number,
-  * it returns the original phone number string unchanged.
-  */
+ * formatUsPhoneNumber formats a US phone number into one of the following forms,
+ * depending on whether the number includes the +1 area code:
+ * +1 (123) 456-7890 or (123) 456-7890. If the number is not a US phone number,
+ * it returns the original phone number string unchanged.
+ */
 const formatUsPhoneNumber = (phoneNumberString: string): string => {
-  const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+  const cleaned = ("" + phoneNumberString).replace(/\D/g, "");
   const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
   if (match) {
-    const intlCode = (match[1] ? '+1 ' : '');
-    return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+    const intlCode = match[1] ? "+1 " : "";
+    return [intlCode, "(", match[2], ") ", match[3], "-", match[4]].join("");
   }
   return phoneNumberString;
-}
+};
 
 const PhoneFields: Fields<PhoneProps> = {
   phone: YextEntityFieldSelector({
@@ -119,9 +119,7 @@ const Phone: React.FC<PhoneProps> = ({
   return (
     <EntityField displayName="Phone" fieldId={phone.field}>
       <p
-        className={cn(
-          phoneVariants({ fontWeight, color })
-        )}
+        className={cn(phoneVariants({ fontWeight, color }))}
         style={dynamicStyles ?? ""}
       >
         {formatUsPhoneNumber(resolvedPhone)}
