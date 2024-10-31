@@ -64,6 +64,11 @@ import {
   TextListComponent as TextList,
   TextListProps,
 } from "./components/TextList.js";
+import {EmailListComponent as EmailList, EmailListProps} from "./components/EmailsList";
+import {
+  PhoneComponent as Phone,
+  PhoneProps,
+} from "./components/Phone.js";
 
 type LocationProps = {
   // Hero: HeroProps;
@@ -84,6 +89,8 @@ type LocationProps = {
   FlexContainer: FlexContainerProps;
   Address: AddressProps;
   TextList: TextListProps;
+  EmailList: EmailListProps;
+  Phone: PhoneProps;
 };
 
 // All the available components for locations
@@ -99,6 +106,8 @@ export const locationConfig: Config<LocationProps> = {
     HoursStatusWrapper,
     ImageWrapper,
     TextList,
+    EmailList,
+    Phone,
     // Hero,
     // Card,
     // FAQ,
