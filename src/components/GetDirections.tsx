@@ -17,6 +17,7 @@ import "./index.css";
 import "@yext/pages-components/style.css";
 import { config } from "../templates/location";
 import { CardProps } from "./Card";
+import { VariantProps } from "class-variance-authority";
 import { Button, ButtonProps} from "./atoms/button"
 
 export type GetDirectionsProps = {
@@ -25,6 +26,7 @@ export type GetDirectionsProps = {
   variant: ButtonProps["variant"];
   size: ButtonProps["size"];
   alignment: CardProps["alignment"];
+  padding: VariantProps<typeof sectionVariants>["padding"];
 }
 
 const getDirectionsFields: Fields<GetDirectionsProps> = {
@@ -69,12 +71,23 @@ const getDirectionsFields: Fields<GetDirectionsProps> = {
       { label: "Center", value: "items-center" },
     ],
   },
+  padding: {
+    label: "Padding",
+    type: "radio",
+    options: [
+      { label: "None", value: "none" },
+      { label: "Small", value: "small" },
+      { label: "Medium", value: "default" },
+      { label: "Large", value: "large" },
+    ],
+  },
 };
 
 const GetDirections = ({
   variant,
   size,
   alignment,
+  padding,
   coordinate: coordinateField,
   getDirectionsProvider,
 }: GetDirectionsProps) => {
@@ -95,6 +108,7 @@ const GetDirections = ({
   return (
     <Section
       className={`flex flex-col justify-center components ${alignment} font-body-fontWeight text-body-fontSize text-body-color`}
+      padding={padding}
     >
       <Button asChild variant={variant} size={size}>
         <Link 
@@ -115,6 +129,7 @@ export const GetDirectionsComponent: ComponentConfig<GetDirectionsProps> = {
     variant: "primary",
     size: "default",
     alignment: "items-start",
+    padding: "none",
     getDirectionsProvider: "google",
     coordinate: {
       field: "yextDisplayCoordinate",
