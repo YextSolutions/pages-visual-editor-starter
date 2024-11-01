@@ -72,7 +72,7 @@ import {
 import {
   GetDirectionsProps,
   GetDirectionsComponent as GetDirections,
-} from "./components/Address.js";
+} from "./components/GetDirections.js";
 
 type LocationProps = {
   // Hero: HeroProps;
