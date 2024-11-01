@@ -69,6 +69,10 @@ import {
   PhoneComponent as Phone,
   PhoneProps,
 } from "./components/Phone.js";
+import {
+  GetDirectionsProps,
+  GetDirectionsComponent as GetDirections,
+} from "./components/Address.js";
 
 type LocationProps = {
   // Hero: HeroProps;
@@ -91,6 +95,7 @@ type LocationProps = {
   TextList: TextListProps;
   EmailList: EmailListProps;
   Phone: PhoneProps;
+  GetDirections: GetDirectionsProps,
 };
 
 // All the available components for locations
@@ -108,6 +113,7 @@ export const locationConfig: Config<LocationProps> = {
     TextList,
     EmailList,
     Phone,
+    GetDirections,
     // Hero,
     // Card,
     // FAQ,
