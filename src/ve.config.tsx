@@ -65,7 +65,7 @@ export const locationConfig: Config<LocationProps> = {
       return (
         <AnalyticsProvider
           apiKey={YEXT_PUBLIC_API_KEY}
-          templateData={fetchedDocument}
+          templateData={templateData}
           currency={"USD"}
           enableDebugging={true}
         >
