@@ -64,7 +64,7 @@ export const locationConfig: Config<LocationProps> = {
     render: ({ children, puck: { isEditing } }) => {
       return (
         <AnalyticsProvider
-          apiKey={YEXT_PUBLIC_ANALYTICS_API_KEY}
+          apiKey={YEXT_PUBLIC_API_KEY}
           templateData={fetchedDocument}
           currency={"USD"}
           enableDebugging={true}
