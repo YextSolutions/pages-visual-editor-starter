@@ -1,5 +1,6 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { LocationStream } from "../types/autogen";
+import { Section, sectionVariants } from "./atoms/section";
 import {
   getDirections,
   GetDirectionsConfig,
@@ -73,6 +74,7 @@ const getDirectionsFields: Fields<GetDirectionsProps> = {
 const GetDirections = ({
   variant,
   size,
+  alignment,
   coordinate: coordinateField,
   getDirectionsProvider,
 }: GetDirectionsProps) => {
@@ -91,15 +93,19 @@ const GetDirections = ({
   );
 
   return (
-    <Button asChild variant={variant} size={size}>
-      <Link 
-        cta={{
-          link: searchQuery,
-          label: "Get Directions",
-          linkType: "URL",
-        }}
-      />
-    </Button>
+    <Section
+      className={`flex flex-col justify-center components ${alignment} font-body-fontWeight text-body-fontSize text-body-color`}
+    >
+      <Button asChild variant={variant} size={size}>
+        <Link 
+          cta={{
+            link: searchQuery,
+            label: "Get Directions",
+            linkType: "URL",
+          }}
+        />
+      </Button>
+    </Section>
   );
 };
 
