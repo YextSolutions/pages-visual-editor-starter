@@ -15,6 +15,7 @@ import {
 import "./index.css";
 import "@yext/pages-components/style.css";
 import { config } from "../templates/location";
+import { CardProps } from "./Card";
 import { Button, ButtonProps} from "./atoms/button"
 
 export type GetDirectionsProps = {
@@ -22,6 +23,7 @@ export type GetDirectionsProps = {
   getDirectionsProvider: GetDirectionsConfig["provider"];
   variant: ButtonProps["variant"];
   size: ButtonProps["size"];
+  alignment: CardProps["alignment"];
 }
 
 const getDirectionsFields: Fields<GetDirectionsProps> = {
@@ -56,6 +58,14 @@ const getDirectionsFields: Fields<GetDirectionsProps> = {
       { label: "Small", value: "small" },
       { label: "Large", value: "large" },
       { label: "Icon", value: "icon" },
+    ],
+  },
+  alignment: {
+    label: "Align card",
+    type: "radio",
+    options: [
+      { label: "Left", value: "items-start" },
+      { label: "Center", value: "items-center" },
     ],
   },
 };
@@ -98,6 +108,7 @@ export const GetDirectionsComponent: ComponentConfig<GetDirectionsProps> = {
   defaultProps: {
     variant: "primary",
     size: "default",
+    alignment: "items-start",
     getDirectionsProvider: "google",
     coordinate: {
       field: "yextDisplayCoordinate",
