@@ -49,6 +49,7 @@ export const config = {
       "services",
       "c_deliveryPromo",
       "c_testImage",
+      "yextDisplayCoordinate",
     ],
     localization: {
       locales: ["en"],

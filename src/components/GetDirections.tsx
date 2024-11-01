@@ -67,7 +67,13 @@ const GetDirections = ({
   getDirectionsProvider,
 }: GetDirectionsProps) => {
   const document = useDocument<LocationStream>();
-  const coordinate = resolveYextEntityField<Coordinate>(document, coordinateField);
+  let coordinate = resolveYextEntityField<Coordinate>(document, coordinateField);
+  if (!coordinate) {
+    coordinate = {latitude: 0, longitude: 0};
+  }
+
+  console.log(coordinate);
+  
   const searchQuery = getDirections(
     undefined,
     undefined,
