@@ -6,7 +6,6 @@ import {
   Link,
   Coordinate,
 } from "@yext/pages-components";
-import { Section, sectionVariants } from "./atoms/section";
 import {
   resolveYextEntityField,
   useDocument,
@@ -15,16 +14,15 @@ import {
 } from "@yext/visual-editor";
 import "./index.css";
 import "@yext/pages-components/style.css";
-import { CardProps } from "./Card";
-import { VariantProps } from "class-variance-authority";
 import { config } from "../templates/location";
+import { Button, ButtonProps} from "./atoms/button"
 
 export type GetDirectionsProps = {
   coordinate: YextEntityField<Coordinate>;
   getDirectionsProvider: GetDirectionsConfig["provider"];
-  alignment: CardProps["alignment"];
-  padding: VariantProps<typeof sectionVariants>["padding"];
-};
+  variant: ButtonProps["variant"];
+  size: ButtonProps["size"];
+}
 
 const getDirectionsFields: Fields<GetDirectionsProps> = {
   coordinate: YextEntityFieldSelector<typeof config, Coordinate>({
@@ -40,40 +38,40 @@ const getDirectionsFields: Fields<GetDirectionsProps> = {
       { label: "Bing", value: "bing" },
     ],
   },
-  alignment: {
-    label: "Align card",
+  variant: {
+    label: "Variant",
     type: "radio",
     options: [
-      { label: "Left", value: "items-start" },
-      { label: "Center", value: "items-center" },
+      { label: "Primary", value: "primary" },
+      { label: "Secondary", value: "secondary" },
+      { label: "Outline", value: "outline" },
+      { label: "Link", value: "link" },
     ],
   },
-  padding: {
-    label: "Padding",
+  size: {
+    label: "Size",
     type: "radio",
     options: [
-      { label: "None", value: "none" },
+      { label: "Default", value: "defaut" },
       { label: "Small", value: "small" },
-      { label: "Medium", value: "default" },
       { label: "Large", value: "large" },
+      { label: "Icon", value: "icon" },
     ],
   },
 };
 
 const GetDirections = ({
-  alignment,
-  padding,
+  variant,
+  size,
   coordinate: coordinateField,
   getDirectionsProvider,
 }: GetDirectionsProps) => {
   const document = useDocument<LocationStream>();
   let coordinate = resolveYextEntityField<Coordinate>(document, coordinateField);
   if (!coordinate) {
-    coordinate = {latitude: 0, longitude: 0};
+   console.warn("yextDisplayCoordinate is not present in the stream");
   }
 
-  console.log(coordinate);
-  
   const searchQuery = getDirections(
     undefined,
     undefined,
@@ -83,30 +81,23 @@ const GetDirections = ({
   );
 
   return (
-    <Section
-      className={`flex flex-col justify-center components ${alignment} font-body-fontWeight text-body-fontSize text-body-color`}
-      padding={padding}
-    >
-      {searchQuery && (
-              <Link
-                cta={{
-                  link: searchQuery,
-                  label: "Get Directions",
-                  linkType: "URL",
-                }}
-                target="_blank"
-                className="font-bold text-primary underline hover:no-underline md:px-4;"
-              />
-            )}
-    </Section>
+    <Button asChild variant={variant} size={size}>
+      <Link 
+        cta={{
+          link: searchQuery,
+          label: "Get Directions",
+          linkType: "URL",
+        }}
+      />
+    </Button>
   );
 };
 
 export const GetDirectionsComponent: ComponentConfig<GetDirectionsProps> = {
   fields: getDirectionsFields,
   defaultProps: {
-    alignment: "items-start",
-    padding: "none",
+    variant: "primary",
+    size: "default",
     getDirectionsProvider: "google",
     coordinate: {
       field: "yextDisplayCoordinate",
