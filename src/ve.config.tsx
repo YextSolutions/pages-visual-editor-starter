@@ -11,6 +11,8 @@ import {
   EmailsProps,
   FlexContainerComponent as FlexContainer,
   FlexContainerProps,
+  GetDirectionsComponent as GetDirections,
+  GetDirectionsProps,
   GridSectionComponent as GridSection,
   GridSectionProps,
   HeadingTextComponent as HeadingText,
@@ -42,6 +44,7 @@ type LocationProps = {
   TextList: TextListProps;
   Emails: EmailsProps;
   Phone: PhoneProps;
+  GetDirections: GetDirectionsProps,
 };
 
 // All the available components for locations
@@ -51,6 +54,7 @@ export const locationConfig: Config<LocationProps> = {
     BodyText,
     CTA,
     FlexContainer,
+    GetDirections,
     GridSection,
     HeadingText,
     HoursCard,
