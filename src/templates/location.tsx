@@ -34,6 +34,7 @@ export const config = {
       "name",
       "hours",
       "address",
+      "yextDisplayCoordinate",
       "c_productSection.sectionTitle",
       "c_productSection.linkedProducts.name",
       "c_productSection.linkedProducts.c_productPromo",
@@ -49,7 +50,6 @@ export const config = {
       "services",
       "c_deliveryPromo",
       "c_testImage",
-      "yextDisplayCoordinate",
     ],
     localization: {
       locales: ["en"],
