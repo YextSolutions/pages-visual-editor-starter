@@ -10,7 +10,7 @@ const navigation: CTA[] = [
 
 type HeaderProps = {
   isEditing: boolean;
-}
+};
 
 const Header = (props: HeaderProps) => {
   const { isEditing } = props;
@@ -36,9 +36,13 @@ const HeaderLayout = (props: HeaderLayoutProps) => {
             {props.links.map((item: CTA, idx) => (
               <li
                 key={item.label?.toString()}
-                className="cursor-pointer font-bold text-primary hover:text-primary/90"
+                className="cursor-pointer font-bold text-palette-primary hover:text-palette-secondary"
               >
-                <Link cta={item} eventName={`link${idx}`} style={{pointerEvents: isEditing && "none"}} />
+                <Link
+                  cta={item}
+                  eventName={`link${idx}`}
+                  style={{ pointerEvents: isEditing && "none" }}
+                />
               </li>
             ))}
           </ul>
