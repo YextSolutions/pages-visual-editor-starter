@@ -101,15 +101,9 @@
     },
     "c_productSection": {
       "sectionTitle": "Featured Menu Items at [[name]] in [[address.city]]",
-      "linkedProducts": [
-        "signature-burger",
-        "quesadilla",
-        "breakfast-tacos"
-      ]
+      "linkedProducts": ["signature-burger", "quesadilla", "breakfast-tacos"]
     },
-    "categoryIds": [
-      "1322912"
-    ],
+    "categoryIds": ["1322912"],
     "hours": {
       "friday": {
         "openIntervals": [
@@ -169,10 +163,9 @@
       }
     },
     "name": "Galaxy Grill",
-    "pageLayouts": [
-      "storePagesLayout"
-    ],
+    "pageLayouts": ["storePagesLayout"],
     "slug": "locations/[[entityId]]",
+    "services": ["Delivery", "Catering", "Carry Out", "Dine In"],
     "timezone": "America/New_York"
   },
   "entityType": "location",
