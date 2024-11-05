@@ -28,6 +28,14 @@ import {
 } from "@yext/visual-editor";
 import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
+import {
+  DEStaticComponentWrapperProps,
+  DEStaticComponentWrapperComponent as DEStaticComponent,
+} from "./components/DEStaticComponent.js";
+import {
+  DEEntityComponentWrapperComponent as DEEntityComponent,
+  DEComponentProps,
+} from "./components/DEEntityComponent.js";
 
 type LocationProps = {
   GridSection: GridSectionProps;
@@ -42,6 +50,8 @@ type LocationProps = {
   TextList: TextListProps;
   Emails: EmailsProps;
   Phone: PhoneProps;
+  DEStaticComponent: DEStaticComponentWrapperProps;
+  DEEntityComponent: DEComponentProps;
 };
 
 // All the available components for locations
@@ -59,6 +69,8 @@ export const locationConfig: Config<LocationProps> = {
     TextList,
     Emails,
     Phone,
+    DEStaticComponent,
+    DEEntityComponent,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
