@@ -103,18 +103,10 @@
     },
     "c_productSection": {
       "sectionTitle": "Featured Menu Items at [[name]] in [[address.city]]",
-      "linkedProducts": [
-        "signature-burger",
-        "quesadilla",
-        "breakfast-tacos"
-      ]
+      "linkedProducts": ["signature-burger", "quesadilla", "breakfast-tacos"]
     },
-    "categoryIds": [
-      "777"
-    ],
-    "emails": [
-      "yext@gmail.com"
-    ],
+    "categoryIds": ["777"],
+    "emails": ["yext@gmail.com"],
     "hours": {
       "friday": {
         "openIntervals": [
@@ -176,9 +168,8 @@
     "mainPhone": "+17577017560",
     "mobilePhone": "+14125264629",
     "name": "Galaxy Grill",
-    "pageLayouts": [
-      "contactUsPagesLayout"
-    ],
+    "pageLayouts": ["contactUsPagesLayout"],
+    "services": ["Delivery", "Catering", "Carry Out", "Dine In"],
     "slug": "locations/[[entityId]]",
     "timezone": "America/New_York"
   },
