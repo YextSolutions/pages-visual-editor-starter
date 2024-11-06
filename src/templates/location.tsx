@@ -48,6 +48,7 @@ export const config = {
       "emails",
       "services",
       "c_deliveryPromo",
+      "c_testCTA",
     ],
     localization: {
       locales: ["en"],

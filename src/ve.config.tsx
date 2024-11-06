@@ -23,6 +23,8 @@ import {
   PhoneProps,
   TextListComponent as TextList,
   TextListProps,
+  CTAWrapperComponent as CTAWrapper,
+  CTAWrapperProps,
   useDocument,
 } from "@yext/visual-editor";
 import { Header } from "./components/Header.js";
@@ -45,6 +47,7 @@ type LocationProps = {
   // Emails: EmailsProps;
   // Phone: PhoneProps;
   AnalyticsCTA: YextCTAProps;
+  CTAWrapper: CTAWrapperProps;
 };
 
 // All the available components for locations
@@ -62,6 +65,7 @@ export const locationConfig: Config<LocationProps> = {
     // TextList,
     // Emails,
     // Phone,
+    CTAWrapper,
     AnalyticsCTA,
   },
   root: {
@@ -77,7 +81,7 @@ export const locationConfig: Config<LocationProps> = {
           apiKey={YEXT_PUBLIC_API_KEY}
           templateData={templateData}
           currency={"USD"}
-          enableDebugging={true}
+          enableDebugging={YEXT_PUBLIC_ENV === "dev"}
         >
           <Header isEditing={isEditing} />
           {children}
