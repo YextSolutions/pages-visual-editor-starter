@@ -1,5 +1,5 @@
 import type { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "@yext/pages/util";
+import { useDocument } from "@yext/visual-editor";
 import {
   EntityField,
   resolveYextEntityField,
@@ -67,7 +67,10 @@ const DEEntityComponentWrapper: React.FC<DEComponentProps> = ({
   const document = useDocument<LocationStream>();
   return (
     <div className="w-full border flex justify-start p-4">
-      {resolveYextEntityField(document, name)}
+      {label}{" "}
+      <h1 className={`text-${level} font-${fontWeight}`}>
+        : {resolveYextEntityField(document, name)}
+      </h1>
     </div>
   );
 };
@@ -79,12 +82,12 @@ export const DEEntityComponentWrapperComponent: ComponentConfig<DEComponentProps
     defaultProps: {
       name: {
         field: "",
-        constantValue: "Sample Entity Text",
+        constantValue: "Sample Heading",
         constantValueEnabled: true,
       },
       content: "Heading",
       level: "base",
-      label: "Sample Text",
+      label: "Label",
       fontWeight: "normal",
     },
     render: (props) => <DEEntityComponentWrapper {...props} />,
