@@ -25,9 +25,11 @@ import {
   PhoneProps,
   TextListComponent as TextList,
   TextListProps,
+  useDocument,
 } from "@yext/visual-editor";
 import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
+import { AnalyticsProvider } from "@yext/pages-components";
 
 type LocationProps = {
   GridSection: GridSectionProps;
@@ -62,6 +64,12 @@ export const locationConfig: Config<LocationProps> = {
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
+      const fetchedDocument = useDocument<any>();
+
+      const templateData = {
+        document: { ...fetchedDocument, __: "location" },
+      };
+
       return (
         <AnalyticsProvider
           apiKey={YEXT_PUBLIC_API_KEY}
