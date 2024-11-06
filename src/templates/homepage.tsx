@@ -22,7 +22,7 @@ export const config = {
   stream: {
     $id: "homepage-stream",
     filter: {
-      entityTypes: ["home-bank"],
+      entityIds: ["home-bank"],
     },
     fields: [
       "id",
