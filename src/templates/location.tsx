@@ -34,6 +34,7 @@ export const config = {
       "name",
       "hours",
       "address",
+      "yextDisplayCoordinate",
       "c_productSection.sectionTitle",
       "c_productSection.linkedProducts.name",
       "c_productSection.linkedProducts.c_productPromo",
