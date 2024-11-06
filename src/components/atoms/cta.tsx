@@ -1,18 +1,21 @@
 import { Link, LinkType } from "@yext/pages-components";
-import { Button, ButtonProps } from "./button";
+import { cn } from "../../utils/cn";
 
-export interface CTAProps
+export interface YextCTAProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   link: string;
-  variant?: ButtonProps["variant"];
-  size?: ButtonProps["size"];
   linkType: LinkType;
 }
 
-const CTA = ({ label, link, variant, size, className, linkType }: CTAProps) => {
+const YextCTA = ({ label, link, className, linkType }: YextCTAProps) => {
   return (
-    <Button asChild className={className} variant={variant} size={size}>
+    <button
+      className={cn(
+        "flex items-center gap-2 bg-red-500 text-white p-4 rounded-md",
+        className
+      )}
+    >
       <Link
         cta={{
           label,
@@ -20,10 +23,10 @@ const CTA = ({ label, link, variant, size, className, linkType }: CTAProps) => {
           linkType: linkType ?? "URL",
         }}
       />
-    </Button>
+    </button>
   );
 };
 
-CTA.displayName = "CTA";
+YextCTA.displayName = "YextCTA";
 
-export { CTA };
+export { YextCTA };

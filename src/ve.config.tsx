@@ -5,8 +5,6 @@ import {
   AddressProps,
   BodyTextComponent as BodyText,
   BodyTextProps,
-  CTAWrapperComponent as CTA,
-  CTAWrapperProps,
   EmailsComponent as Emails,
   EmailsProps,
   FlexContainerComponent as FlexContainer,
@@ -30,37 +28,41 @@ import {
 import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
 import { AnalyticsProvider } from "@yext/pages-components";
+import { YextCTAProps } from "./components/atoms/cta.js";
+import { AnalyticsCTA } from "./components/AnalyticsCTA.js";
 
 type LocationProps = {
   GridSection: GridSectionProps;
-  HoursCard: HoursCardProps;
-  BodyText: BodyTextProps;
-  HeadingText: HeadingTextProps;
-  ImageWrapper: ImageWrapperProps;
-  CTA: CTAWrapperProps;
-  HoursStatus: HoursStatusProps;
+  // HoursCard: HoursCardProps;
+  // BodyText: BodyTextProps;
+  // HeadingText: HeadingTextProps;
+  // ImageWrapper: ImageWrapperProps;
+  // CTA: CTAWrapperProps;
+  // HoursStatus: HoursStatusProps;
   FlexContainer: FlexContainerProps;
-  Address: AddressProps;
-  TextList: TextListProps;
-  Emails: EmailsProps;
-  Phone: PhoneProps;
+  // Address: AddressProps;
+  // TextList: TextListProps;
+  // Emails: EmailsProps;
+  // Phone: PhoneProps;
+  AnalyticsCTA: YextCTAProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
-    Address,
-    BodyText,
-    CTA,
+    // Address,
+    // BodyText,
+    // AnalyticsCTA,
     FlexContainer,
     GridSection,
-    HeadingText,
-    HoursCard,
-    HoursStatus,
-    ImageWrapper,
-    TextList,
-    Emails,
-    Phone,
+    // HeadingText,
+    // HoursCard,
+    // HoursStatus,
+    // ImageWrapper,
+    // TextList,
+    // Emails,
+    // Phone,
+    AnalyticsCTA,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
