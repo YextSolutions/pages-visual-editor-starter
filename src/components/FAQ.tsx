@@ -84,7 +84,7 @@ const FAQFields: Fields<FAQProps> = {
     objectFields: {
       fontSize: NumberFieldWithDefaultOption({
         label: "Font Size",
-        defaultCustomValue: 48,
+        defaultCustomValue: 16,
       }),
       weight: {
         label: "Weight",
