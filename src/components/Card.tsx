@@ -11,7 +11,9 @@ import {
   Heading,
   HeadingProps,
   Section,
-  useDocument
+  useDocument,
+  NumberOrDefault,
+  NumberFieldWithDefaultOption,
 } from "@yext/visual-editor";
 import { config } from "../templates/location";
 import { LocationStream, Cta, ComplexImage } from "../types/autogen";
@@ -26,19 +28,19 @@ export type CardProps = {
     text: {
       entityField: YextEntityField<string>;
     };
-    size: HeadingProps["size"];
+    fontSize: NumberOrDefault;
     color: HeadingProps["color"];
   };
   subheading: {
     text: string;
-    size: BodyProps["size"];
+    fontSize: NumberOrDefault;
     weight: BodyProps["weight"];
   };
   body: {
     text: {
       entityField: YextEntityField<string>;
     };
-    size: BodyProps["size"];
+    fontSize: NumberOrDefault;
     weight: BodyProps["weight"];
   };
   cta: {
@@ -83,14 +85,10 @@ const cardFields: Fields<CardProps> = {
           }),
         },
       },
-      size: {
-        label: "Size",
-        type: "radio",
-        options: [
-          { label: "Section", value: "section" },
-          { label: "Subheading", value: "subheading" },
-        ],
-      },
+      fontSize: NumberFieldWithDefaultOption({
+        label: "Font Size",
+        defaultCustomValue: 24,
+      }),
       color: {
         label: "Color",
         type: "radio",
@@ -110,15 +108,10 @@ const cardFields: Fields<CardProps> = {
         label: "Text",
         type: "text",
       },
-      size: {
-        label: "Size",
-        type: "radio",
-        options: [
-          { label: "Small", value: "small" },
-          { label: "Base", value: "base" },
-          { label: "Large", value: "large" },
-        ],
-      },
+      fontSize: NumberFieldWithDefaultOption({
+        label: "Font Size",
+        defaultCustomValue: 16,
+      }),
       weight: {
         label: "Weight",
         type: "radio",
@@ -145,15 +138,10 @@ const cardFields: Fields<CardProps> = {
           }),
         },
       },
-      size: {
-        label: "Size",
-        type: "radio",
-        options: [
-          { label: "Small", value: "small" },
-          { label: "Base", value: "base" },
-          { label: "Large", value: "large" },
-        ],
-      },
+      fontSize: NumberFieldWithDefaultOption({
+        label: "Font Size",
+        defaultCustomValue: 16,
+      }),
       weight: {
         label: "Weight",
         type: "radio",
@@ -206,7 +194,7 @@ export const Card = ({
   // The null checks on the following lines are only necessary when upgrading a pre-existing field to use a mappable entity field
   const image = resolveYextEntityField<ComplexImage>(
     document,
-    imageField?.photo?.entityField
+    imageField?.photo?.entityField,
   )?.image;
   const cta = resolveYextEntityField<Cta>(document, ctaField?.entityField);
 
@@ -230,17 +218,38 @@ export const Card = ({
         />
       )}
       <div className="flex flex-col gap-y-3 p-8">
-        <Heading level={2} size={heading.size} color={heading.color}>
+        <Heading
+          level={2}
+          style={{
+            fontSize:
+              heading.fontSize === "default"
+                ? undefined
+                : heading.fontSize + "px",
+          }}
+          color={heading.color}
+        >
           {resolveYextEntityField(document, heading.text.entityField)}
         </Heading>
         <Body
           className="line-clamp-1"
           weight={subheading.weight}
-          size={subheading.size}
+          style={{
+            fontSize:
+              subheading.fontSize === "default"
+                ? undefined
+                : subheading.fontSize + "px",
+          }}
         >
           {subheading.text}
         </Body>
-        <Body className="line-clamp-5" weight={body.weight} size={body.size}>
+        <Body
+          className="line-clamp-5"
+          weight={body.weight}
+          style={{
+            fontSize:
+              body.fontSize === "default" ? undefined : body.fontSize + "px",
+          }}
+        >
           {resolveYextEntityField(document, body.text.entityField)}
         </Body>
         {cta && (
@@ -262,7 +271,7 @@ export const CardComponent: ComponentConfig<CardProps> = {
       photo: {
         entityField: {
           field: "",
-          constantValue: ""
+          constantValue: "",
         },
       },
     },
@@ -271,15 +280,15 @@ export const CardComponent: ComponentConfig<CardProps> = {
         entityField: {
           field: "",
           constantValue: "Heading Text",
-          constantValueEnabled: true
+          constantValueEnabled: true,
         },
       },
-      size: "section",
+      fontSize: "default",
       color: "default",
     },
     subheading: {
       text: "subheading",
-      size: "small",
+      fontSize: "default",
       weight: "default",
     },
     body: {
@@ -287,16 +296,16 @@ export const CardComponent: ComponentConfig<CardProps> = {
         entityField: {
           field: "",
           constantValue: "Body Text",
-          constantValueEnabled: true
+          constantValueEnabled: true,
         },
       },
-      size: "base",
+      fontSize: "default",
       weight: "default",
     },
     cta: {
       entityField: {
         field: "",
-        constantValue: ""
+        constantValue: "",
       },
     },
     alignment: "items-center",

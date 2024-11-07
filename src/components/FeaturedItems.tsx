@@ -1,23 +1,35 @@
 import { ComponentConfig, Fields } from "@measured/puck";
 import { LocationStream } from "../types/autogen";
-import { EntityField, Body, BodyProps, CTA, CTAProps, Heading, HeadingProps, Section, useDocument } from "@yext/visual-editor";
+import {
+  EntityField,
+  Body,
+  BodyProps,
+  CTA,
+  CTAProps,
+  Heading,
+  HeadingProps,
+  Section,
+  useDocument,
+  NumberOrDefault,
+  NumberFieldWithDefaultOption,
+} from "@yext/visual-editor";
 
 export type FeaturedItemsProps = {
   heading: {
-    size: HeadingProps["size"];
+    fontSize: NumberOrDefault;
     color: HeadingProps["color"];
   };
   cards: {
     heading: {
-      size: HeadingProps["size"];
+      fontSize: NumberOrDefault;
       color: HeadingProps["color"];
     };
     subheading: {
-      size: BodyProps["size"];
+      fontSize: NumberOrDefault;
       weight: BodyProps["weight"];
     };
     body: {
-      size: BodyProps["size"];
+      fontSize: NumberOrDefault;
       weight: BodyProps["weight"];
     };
     cta?: {
@@ -31,14 +43,10 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
     type: "object",
     label: "Heading",
     objectFields: {
-      size: {
-        label: "Size",
-        type: "radio",
-        options: [
-          { label: "Section", value: "section" },
-          { label: "Subheading", value: "subheading" },
-        ],
-      },
+      fontSize: NumberFieldWithDefaultOption({
+        label: "Font Size",
+        defaultCustomValue: 48,
+      }),
       color: {
         label: "Color",
         type: "radio",
@@ -58,14 +66,10 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
         type: "object",
         label: "Heading",
         objectFields: {
-          size: {
-            label: "Size",
-            type: "radio",
-            options: [
-              { label: "Section", value: "section" },
-              { label: "Subheading", value: "subheading" },
-            ],
-          },
+          fontSize: NumberFieldWithDefaultOption({
+            label: "Font Size",
+            defaultCustomValue: 24,
+          }),
           color: {
             label: "Color",
             type: "radio",
@@ -81,15 +85,10 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
         type: "object",
         label: "Subheading",
         objectFields: {
-          size: {
-            label: "Size",
-            type: "radio",
-            options: [
-              { label: "Small", value: "small" },
-              { label: "Base", value: "base" },
-              { label: "Large", value: "large" },
-            ],
-          },
+          fontSize: NumberFieldWithDefaultOption({
+            label: "Font Size",
+            defaultCustomValue: 16,
+          }),
           weight: {
             label: "Weight",
             type: "radio",
@@ -104,15 +103,10 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
         type: "object",
         label: "Body",
         objectFields: {
-          size: {
-            label: "Size",
-            type: "radio",
-            options: [
-              { label: "Small", value: "small" },
-              { label: "Base", value: "base" },
-              { label: "Large", value: "large" },
-            ],
-          },
+          fontSize: NumberFieldWithDefaultOption({
+            label: "Font Size",
+            defaultCustomValue: 16,
+          }),
           weight: {
             label: "Weight",
             type: "radio",
@@ -150,7 +144,15 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
           displayName="Product Section Title"
           fieldId="c_productSection.sectionTitle"
         >
-          <Heading size={heading.size} color={heading.color}>
+          <Heading
+            style={{
+              fontSize:
+                heading.fontSize === "default"
+                  ? undefined
+                  : heading.fontSize + "px",
+            }}
+            color={heading.color}
+          >
             {productSection.sectionTitle}
           </Heading>
         </EntityField>
@@ -179,17 +181,17 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
                   }}
                   heading={{
                     text: product.name,
-                    size: cards.heading.size,
+                    size: cards.heading.fontSize,
                     color: cards.heading.color,
                   }}
                   subheading={{
                     text: product.c_productPromo,
-                    size: cards.subheading.size,
+                    size: cards.subheading.fontSize,
                     weight: cards.subheading.weight,
                   }}
                   body={{
                     text: product.c_description ?? "",
-                    size: cards.body.size,
+                    size: cards.body.fontSize,
                     weight: cards.body.weight,
                   }}
                   image={{
@@ -209,20 +211,20 @@ export const FeaturedItemsComponent: ComponentConfig<FeaturedItemsProps> = {
   fields: featuredItemsFields,
   defaultProps: {
     heading: {
-      size: "section",
+      fontSize: "default",
       color: "default",
     },
     cards: {
       heading: {
-        size: "section",
+        fontSize: "default",
         color: "default",
       },
       subheading: {
-        size: "small",
+        fontSize: "default",
         weight: "default",
       },
       body: {
-        size: "base",
+        fontSize: "default",
         weight: "default",
       },
     },
@@ -237,17 +239,17 @@ type FeaturedItemCardProps = {
   };
   heading: {
     text: string;
-    size: HeadingProps["size"];
+    size: NumberOrDefault;
     color: HeadingProps["color"];
   };
   subheading: {
     text: string;
-    size: BodyProps["size"];
+    size: NumberOrDefault;
     weight: BodyProps["weight"];
   };
   body: {
     text: string;
-    size: BodyProps["size"];
+    size: NumberOrDefault;
     weight: BodyProps["weight"];
   };
   cta?: {
@@ -284,17 +286,35 @@ const FeaturedItemCard = ({
         />
       )}
       <div className="flex flex-col gap-y-3 p-8">
-        <Heading level={2} size={heading.size} color={heading.color}>
+        <Heading
+          level={2}
+          style={{
+            fontSize:
+              heading.size === "default" ? undefined : heading.size + "px",
+          }}
+          color={heading.color}
+        >
           {heading.text}
         </Heading>
         <Body
           className="line-clamp-1"
           weight={subheading.weight}
-          size={subheading.size}
+          style={{
+            fontSize:
+              subheading.size === "default"
+                ? undefined
+                : subheading.size + "px",
+          }}
         >
           {subheading.text}
         </Body>
-        <Body className="line-clamp-5" weight={body.weight} size={body.size}>
+        <Body
+          className="line-clamp-5"
+          weight={body.weight}
+          style={{
+            fontSize: body.size === "default" ? undefined : body.size + "px",
+          }}
+        >
           {body.text}
         </Body>
         {cta && (
