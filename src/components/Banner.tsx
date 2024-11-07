@@ -5,8 +5,8 @@ import {
   Body,
   BodyProps,
   useDocument,
-    NumberOrDefault,
-  NumberFieldWithDefaultOption
+  NumberOrDefault,
+  NumberFieldWithDefaultOption,
 } from "@yext/visual-editor";
 import { ComponentConfig, Fields } from "@measured/puck";
 import { config } from "../templates/location";
@@ -81,12 +81,13 @@ const Banner = ({
   return (
     <div className={`Banner ${backgroundColor} components px-4 md:px-20 py-6`}>
       <div className={`flex ${textAlignment} items-center`}>
-        <Body color={textColor} weight={fontWeight}                       style={{
-          fontSize:
-              fontSize === "default"
-                  ? undefined
-                  : fontSize + "px",
-        }}>
+        <Body
+          color={textColor}
+          weight={fontWeight}
+          style={{
+            fontSize: fontSize === "default" ? undefined : fontSize + "px",
+          }}
+        >
           {resolveYextEntityField(document, text)}
         </Body>
       </div>
@@ -100,7 +101,7 @@ export const BannerComponent: ComponentConfig<BannerProps> = {
     text: {
       field: "",
       constantValue: "Banner Text",
-      constantValueEnabled: true
+      constantValueEnabled: true,
     },
     textAlignment: "justify-center",
     fontSize: "default",
