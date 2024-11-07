@@ -16,7 +16,7 @@ export type BannerProps = {
   textSize: BodyProps["size"];
   fontWeight: BodyProps["weight"];
   textColor: BodyProps["color"];
-  backgroundColor: "bg-white" | "palette-primary" | "palette-secondary";
+  backgroundColor: "bg-white" | "bg-palette-primary" | "bg-palette-secondary";
 };
 
 const bannerFields: Fields<BannerProps> = {
@@ -66,8 +66,8 @@ const bannerFields: Fields<BannerProps> = {
     type: "radio",
     options: [
       { label: "Default", value: "bg-white" },
-      { label: "Primary", value: "palette-primary" },
-      { label: "Secondary", value: "palette-secondary" },
+      { label: "Primary", value: "bg-palette-primary" },
+      { label: "Secondary", value: "bg-palette-secondary" },
     ],
   },
 };
