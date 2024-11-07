@@ -81,7 +81,7 @@ export const locationConfig: Config<LocationProps> = {
           apiKey={YEXT_PUBLIC_API_KEY}
           templateData={templateData}
           currency={"USD"}
-          enableDebugging={true}
+          // enableDebugging={true}
         >
           <Header isEditing={isEditing} />
           {children}
