@@ -2,6 +2,9 @@ import { Link, CTA } from "@yext/pages-components";
 import logo from "../assets/logo.png";
 import "./index.css";
 
+import { useDocument as usePagesUseDocument } from "@yext/pages/util";
+import { useProserveTemplateData } from "../utils/proserveUseTemplateData";
+
 const navigation: CTA[] = [
   { link: "#", label: "Restaurants" },
   { link: "#", label: "Blog" },
@@ -26,6 +29,14 @@ type HeaderLayoutProps = {
 
 const HeaderLayout = (props: HeaderLayoutProps) => {
   const { logo, isEditing } = props;
+
+  // const pagesTemplateData = usePagesUseDocument<any>();
+  // console.log("pages Provider Data");
+  // console.log(pagesTemplateData);
+
+  // const proserveTemplateData = useProserveTemplateData();
+  // console.log("proserve Provider Data");
+  // console.log(proserveTemplateData);
 
   return (
     <header className=" w-full bg-white components">

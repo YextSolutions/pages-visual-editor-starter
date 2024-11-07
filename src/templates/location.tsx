@@ -8,6 +8,7 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
+import { DocumentProvider as PagesDocumentProvider } from "@yext/pages/util";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
 import {
@@ -15,7 +16,9 @@ import {
   applyTheme,
   DocumentProvider,
 } from "@yext/visual-editor";
+
 import { themeConfig } from "../../theme.config";
+import { ProserveTemplateDataProvider } from "../utils/proserveUseTemplateData";
 
 export const config = {
   name: "location",
@@ -91,12 +94,17 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
       }-${document.id.toString()}`;
 };
 
-const Location: Template<TemplateRenderProps> = ({ document }) => {
+const Location: Template<TemplateRenderProps> = (data) => {
+  const { document } = data;
   const { visualTemplate } = document;
   return (
+    // <ProserveTemplateDataProvider value={data}>
     <DocumentProvider value={document}>
+      {/* <PagesDocumentProvider value={document}> */}
       <Render config={locationConfig as Config} data={visualTemplate} />
+      {/* </PagesDocumentProvider> */}
     </DocumentProvider>
+    // </ProserveTemplateDataProvider>
   );
 };
 

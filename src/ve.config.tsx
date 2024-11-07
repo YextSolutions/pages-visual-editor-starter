@@ -25,7 +25,7 @@ import {
   TextListProps,
   CTAWrapperComponent as CTAWrapper,
   CTAWrapperProps,
-  useDocument,
+  useDocument as useVeDocument,
 } from "@yext/visual-editor";
 import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
@@ -70,16 +70,18 @@ export const locationConfig: Config<LocationProps> = {
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
-      const fetchedDocument = useDocument<any>();
+      const fetchedDocument = useVeDocument<any>();
 
-      const templateData = {
+      const veTemplateData = {
         document: { ...fetchedDocument, __: "location" },
       };
+      console.log("ve Provider Data");
+      console.log(veTemplateData);
 
       return (
         <AnalyticsProvider
           apiKey={YEXT_PUBLIC_API_KEY}
-          templateData={templateData}
+          templateData={veTemplateData}
           currency={"USD"}
           // enableDebugging={true}
         >
