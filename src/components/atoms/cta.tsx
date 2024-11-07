@@ -24,6 +24,16 @@ const YextCTA = ({
   currency,
   amount,
 }: YextCTAProps) => {
+  const labelText = [
+    linkType && `linkType: ${linkType}`,
+    eventName && `eventName: ${eventName}`,
+    obfuscate !== undefined && `obfuscate: ${obfuscate}`,
+    scope && `scope: ${scope}`,
+    currency && `currency: ${currency}`,
+    amount !== undefined && `amount: ${amount}`,
+  ]
+    .filter(Boolean)
+    .join(", ");
   return (
     <button
       className={cn(
@@ -33,7 +43,7 @@ const YextCTA = ({
     >
       <Link
         cta={{
-          label,
+          label: labelText,
           link: link ?? "",
           linkType: linkType ?? "URL",
         }}
