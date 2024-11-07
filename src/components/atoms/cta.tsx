@@ -6,9 +6,24 @@ export interface YextCTAProps
   label: string;
   link: string;
   linkType: LinkType;
+  eventName?: string;
+  obfuscate?: boolean;
+  scope?: string;
+  currency?: string;
+  amount?: number;
 }
 
-const YextCTA = ({ label, link, className, linkType }: YextCTAProps) => {
+const YextCTA = ({
+  label,
+  link,
+  className,
+  linkType,
+  eventName,
+  obfuscate,
+  scope,
+  currency,
+  amount,
+}: YextCTAProps) => {
   return (
     <button
       className={cn(
@@ -22,6 +37,11 @@ const YextCTA = ({ label, link, className, linkType }: YextCTAProps) => {
           link: link ?? "",
           linkType: linkType ?? "URL",
         }}
+        eventName={eventName}
+        obfuscate={obfuscate}
+        scope={scope}
+        currency={currency}
+        amount={amount}
       />
     </button>
   );

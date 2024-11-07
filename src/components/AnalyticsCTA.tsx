@@ -19,6 +19,30 @@ const ctaFields: Fields<YextCTAProps> = {
       { label: "Phone", value: "Phone" },
     ],
   },
+  eventName: {
+    label: "Event Name",
+    type: "text",
+  },
+  obfuscate: {
+    label: "Obfuscate",
+    type: "radio",
+    options: [
+      { label: "Yes", value: true },
+      { label: "No", value: false },
+    ],
+  },
+  scope: {
+    label: "Scope",
+    type: "text",
+  },
+  currency: {
+    label: "Currency",
+    type: "text",
+  },
+  amount: {
+    label: "Amount",
+    type: "number",
+  },
 };
 
 export const AnalyticsCTA: ComponentConfig<YextCTAProps> = {
