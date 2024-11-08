@@ -1,6 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "default",
+  "style": "yext",
   "rsc": false,
   "tsx": true,
   "tailwind": {

@@ -7,10 +7,6 @@
     "jsx": "react-jsx",
     "outDir": "./dist",
     "module": "esnext",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
   },
   "include": ["src", "global.d.ts", "theme.config.ts"]
 }
