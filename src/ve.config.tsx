@@ -72,18 +72,11 @@ export const locationConfig: Config<LocationProps> = {
     render: ({ children, puck: { isEditing } }) => {
       const fetchedDocument = useDocument<any>();
 
-      const veTemplateData = {
-        document: { ...fetchedDocument, __: "location" },
-      };
-      // console.log("ve Provider Data");
-      // console.log(veTemplateData);
-
       return (
         <AnalyticsProvider
           apiKey={YEXT_PUBLIC_API_KEY}
           templateData={fetchedDocument}
           currency={"USD"}
-          // enableDebugging={true}
         >
           <Header isEditing={isEditing} />
           {children}
