@@ -33,6 +33,8 @@ export const config = {
       "pageLayouts.visualConfiguration",
       "name",
       "hours",
+      "dineInHours",
+      "driveThroughHours",
       "address",
       "yextDisplayCoordinate",
       "c_productSection.sectionTitle",
