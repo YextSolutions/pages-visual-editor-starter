@@ -36,6 +36,7 @@ import {
   DEEntityComponentWrapperComponent as DEEntityComponent,
   DEComponentProps,
 } from "./components/DEEntityComponent.js";
+import { Hero, HeroProps } from "./components/Hero.js";
 
 type LocationProps = {
   GridSection: GridSectionProps;
@@ -52,6 +53,7 @@ type LocationProps = {
   Phone: PhoneProps;
   DEStaticComponent: DEStaticComponentWrapperProps;
   DEEntityComponent: DEComponentProps;
+  Hero: HeroProps;
 };
 
 // All the available components for locations
@@ -65,6 +67,7 @@ export const locationConfig: Config<LocationProps> = {
     Emails,
     FlexContainer,
     GridSection,
+    Hero,
     HeadingText,
     HoursCard,
     HoursStatus,
