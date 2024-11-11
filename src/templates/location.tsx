@@ -38,6 +38,8 @@ export const config = {
       "mainPhone",
       "emails",
       "services",
+      "c_backgroundImage",
+      "c_primaryCTA",
     ],
     localization: {
       locales: ["en"],

@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "pages dev",
     "prod": "pages prod",
-    "build": "pages build"
+    "build": "pages build",
+    "clean": "rm -rf .artifact-output .yext/ dist/ localData sites-rendered-output"
   },
   "engines": {
     "node": "^18.4.0 || >=20.2.0"
