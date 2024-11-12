@@ -286,6 +286,20 @@ export const themeConfig: ThemeConfig = {
         plugin: "fontSize",
         default: 12,
       },
+      backgroundColor: {
+        label: "Background Color",
+        type: "select",
+        plugin: "backgroundColor",
+        options: getColorOptions(),
+        default: "var(--colors-palette-background)",
+      },
+      textColor: {
+        label: "Text Color",
+        plugin: "colors",
+        type: "select",
+        options: getColorOptions(),
+        default: "var(--colors-palette-text)",
+      },
     },
   },
 };
