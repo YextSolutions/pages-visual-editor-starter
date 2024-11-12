@@ -165,6 +165,132 @@
         ]
       }
     },
+    "dineInHours": {
+      "friday": {
+        "openIntervals": [
+          {
+            "end": "13:00",
+            "start": "11:00"
+          },
+          {
+            "end": "20:00",
+            "start": "17:00"
+          }
+        ]
+      },
+      "monday": {
+        "isClosed": true
+      },
+      "saturday": {
+        "openIntervals": [
+          {
+            "end": "13:00",
+            "start": "11:00"
+          },
+          {
+            "end": "20:00",
+            "start": "17:00"
+          }
+        ]
+      },
+      "sunday": {
+        "openIntervals": [
+          {
+            "end": "13:00",
+            "start": "11:00"
+          },
+          {
+            "end": "20:00",
+            "start": "17:00"
+          }
+        ]
+      },
+      "thursday": {
+        "openIntervals": [
+          {
+            "end": "13:00",
+            "start": "11:00"
+          },
+          {
+            "end": "20:00",
+            "start": "17:00"
+          }
+        ]
+      },
+      "tuesday": {
+        "isClosed": true
+      },
+      "wednesday": {
+        "openIntervals": [
+          {
+            "end": "13:00",
+            "start": "11:00"
+          },
+          {
+            "end": "20:00",
+            "start": "17:00"
+          }
+        ]
+      }
+    },
+    "driveThroughHours": {
+      "friday": {
+        "openIntervals": [
+          {
+            "end": "21:00",
+            "start": "16:00"
+          }
+        ]
+      },
+      "monday": {
+        "openIntervals": [
+          {
+            "end": "21:00",
+            "start": "16:00"
+          }
+        ]
+      },
+      "saturday": {
+        "openIntervals": [
+          {
+            "end": "21:00",
+            "start": "16:00"
+          }
+        ]
+      },
+      "sunday": {
+        "openIntervals": [
+          {
+            "end": "21:00",
+            "start": "16:00"
+          }
+        ]
+      },
+      "thursday": {
+        "openIntervals": [
+          {
+            "end": "21:00",
+            "start": "16:00"
+          }
+        ]
+      },
+      "tuesday": {
+        "openIntervals": [
+          {
+            "end": "21:00",
+            "start": "16:00"
+          }
+        ]
+      },
+      "wednesday": {
+        "openIntervals": [
+          {
+            "end": "21:00",
+            "start": "16:00"
+          }
+        ]
+      }
+    },
     "mainPhone": "+17577017560",
     "mobilePhone": "+14125264629",
     "name": "Galaxy Grill",
