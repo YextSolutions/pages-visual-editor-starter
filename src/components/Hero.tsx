@@ -141,7 +141,7 @@ const defaults: Fields<HeroProps> = {
  *  - Add a headshot
  *  - Create Carousel Hero
  *  - Give an option to add secondary CTA
- *  - 
+ *  - Add an announcement bar (between header and hero - https://www.salesforce.com/in/)
  * 
  * 
  */
