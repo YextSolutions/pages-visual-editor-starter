@@ -4,6 +4,7 @@ import {
   CTA,
   ImageProps,
   ImageType,
+  Image,
 } from "@yext/pages-components";
 import { format_phone } from "../utils/reusableFunctions";
 import { Mail, Phone } from "lucide-react";
@@ -22,6 +23,8 @@ interface HeroProps {
   //@ts-ignore
   backgroundImage: YextEntityField;
   contentAlignment: string;
+  //@ts-ignore
+  photo: YextEntityField;
   blurBackground?: boolean;
   //@ts-ignore
   title: YextEntityField;
@@ -92,6 +95,13 @@ const defaults: Fields<HeroProps> = {
       types: ["type.image"],
     },
   }),
+  //@ts-ignore
+  photo: YextEntityFieldSelector<typeof config>({
+    label: "Image",
+    filter: {
+      types: ["type.image"],
+    },
+  }),
   blurBackground: {
     label: "Blur Background?",
     type: "radio",
@@ -156,7 +166,7 @@ const defaults: Fields<HeroProps> = {
  *
  *  ✔ Should be able to change the hero details placements
  *  ✔ Fix CTA top spacing
- *  - Add a headshot
+ *  ✔ Add a headshot
  *  - Create Carousel Hero
  *  - Give an option to add secondary CTA
  *  - Add an announcement bar (between header and hero - https://www.salesforce.com/in/)
@@ -176,11 +186,16 @@ const HeroCard = ({
   blurBackground = false,
   cta: ctaField,
   contentAlignment,
+  photo: photoField,
 }: HeroProps) => {
   const document = useDocument();
   const backgroundField = resolveYextEntityField<ImageProps["image"]>(
     document,
     backgroundImageField
+  ) as ImageType;
+  const photo = resolveYextEntityField<ImageProps["image"]>(
+    document,
+    photoField
   ) as ImageType;
   const address = resolveYextEntityField<AddressType>(
     document,
@@ -215,9 +230,19 @@ const HeroCard = ({
           <header
             className={`${contentAlignment} p-12 h-full gap-4 w-full top-0 left-0 z-2 flex flex-col md:flex-row items-center mx-auto`}
           >
+            {photo && (
+              <figure className="grid place-items-center h-full">
+                <Image
+                  image={photo}
+                  className="!w-32 md:!w-56 !h-56 !max-w-none rounded-full"
+                />
+              </figure>
+            )}
             <section className="text-center space-y-4">
               <h1 className="text-2xl md:text-4xl">{title}</h1>
-              <address className="text-base md:text-lg mb-4 space-y-2 not-italic flex flex-col justify-center items-center">
+              <address
+                className={`text-base md:text-lg mb-4 space-y-2 not-italic flex flex-col justify-center ${photo ? `items-baseline` : `items-center`}`}
+              >
                 <Address
                   className="space-y-2"
                   address={address}
@@ -252,7 +277,7 @@ const HeroCard = ({
                 <Cta
                   cta={cta}
                   ctaType="primaryCta"
-                  additionalClasses="mx-auto"
+                  additionalClasses={photo ? `mr-auto` : `mx-auto`}
                 />
               )}
             </section>
@@ -269,6 +294,10 @@ const Hero: ComponentConfig<HeroProps> = {
     bannerBackgroundColor: "black",
     showBackgroundImage: false,
     backgroundImage: {
+      field: "primaryPhoto",
+      constantValue: "",
+    },
+    photo: {
       field: "primaryPhoto",
       constantValue: "",
     },

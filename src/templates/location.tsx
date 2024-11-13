@@ -40,6 +40,7 @@ export const config = {
       "services",
       "c_backgroundImage",
       "c_primaryCTA",
+      "c_testPhoto",
     ],
     localization: {
       locales: ["en"],
