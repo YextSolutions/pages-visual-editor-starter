@@ -10,6 +10,7 @@ import { format_phone } from "../utils/reusableFunctions";
 import { Mail, Phone } from "lucide-react";
 import { ComponentConfig, FieldLabel, Fields } from "@measured/puck";
 import {
+  EntityField,
   resolveYextEntityField,
   useDocument,
   YextEntityField,
@@ -249,16 +250,25 @@ const HeroCard = ({
                   lines={[["line1"], ["city", ",", "region", "postalCode"]]}
                 />
                 {mainPhone && (
-                  <a
-                    href={`tel:${mainPhone}`}
-                    className="flex gap-1 text-center items-center"
+                  <EntityField
+                    displayName="Body"
+                    fieldId={
+                      mainPhoneField.constantValueEnabled
+                        ? "constant value"
+                        : mainPhoneField.field
+                    }
                   >
-                    <Phone
-                      className="md:h-5 md:w-5 h-4 w-4"
-                      aria-hidden="true"
-                    />
-                    {format_phone(mainPhone)}
-                  </a>
+                    <a
+                      href={`tel:${mainPhone}`}
+                      className="flex gap-1 text-center items-center"
+                    >
+                      <Phone
+                        className="md:h-5 md:w-5 h-4 w-4"
+                        aria-hidden="true"
+                      />
+                      {format_phone(mainPhone)}
+                    </a>
+                  </EntityField>
                 )}
                 {emails?.[0] && (
                   <a
@@ -317,7 +327,11 @@ const Hero: ComponentConfig<HeroProps> = {
         linkType: "",
       },
     },
-    mainPhone: { field: "", constantValue: "" },
+    mainPhone: {
+      field: "",
+      constantValue: "1234567890",
+      constantValueEnabled: false,
+    },
     emails: { field: "", constantValue: [""] },
   },
   //@ts-expect-error
