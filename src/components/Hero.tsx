@@ -239,7 +239,9 @@ const HeroCard = ({
                 />
               </figure>
             )}
-            <section className="text-center space-y-4">
+            <section
+              className={`${photo ? `text-start` : `text-center`} space-y-4`}
+            >
               <h1 className="text-2xl md:text-4xl">{title}</h1>
               <address
                 className={`text-base md:text-lg mb-4 space-y-2 not-italic flex flex-col justify-center ${photo ? `items-baseline` : `items-center`}`}
@@ -304,6 +306,7 @@ const Hero: ComponentConfig<HeroProps> = {
     bannerBackgroundColor: "black",
     showBackgroundImage: false,
     backgroundImage: {
+      label: "Background Image",
       field: "primaryPhoto",
       constantValue: "",
     },

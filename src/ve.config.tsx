@@ -37,10 +37,7 @@ import {
   DEComponentProps,
 } from "./components/DEEntityComponent.js";
 import { Hero, HeroProps } from "./components/Hero.js";
-import {
-  PhoneTest as DE_Phone,
-  PhoneTestProps,
-} from "./components/phoneTest.js";
+
 type LocationProps = {
   GridSection: GridSectionProps;
   HoursCard: HoursCardProps;
@@ -57,13 +54,11 @@ type LocationProps = {
   DEStaticComponent: DEStaticComponentWrapperProps;
   DEEntityComponent: DEComponentProps;
   Hero: HeroProps;
-  DE_Phone: PhoneTestProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
-    DE_Phone,
     Address,
     BodyText,
     CTA,
