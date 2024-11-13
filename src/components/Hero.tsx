@@ -21,6 +21,7 @@ interface HeroProps {
   bannerBackgroundColor: string;
   //@ts-ignore
   backgroundImage: YextEntityField;
+  contentAlignment: string;
   blurBackground?: boolean;
   //@ts-ignore
   title: YextEntityField;
@@ -48,6 +49,24 @@ const defaults: Fields<HeroProps> = {
       {
         label: "No",
         value: false,
+      },
+    ],
+  },
+  contentAlignment: {
+    label: "Align Content",
+    type: "radio",
+    options: [
+      {
+        label: "Left",
+        value: "justify-start",
+      },
+      {
+        label: "Center",
+        value: "justify-center",
+      },
+      {
+        label: "Right",
+        value: "justify-end",
       },
     ],
   },
@@ -133,17 +152,16 @@ const defaults: Fields<HeroProps> = {
   }),
 };
 
-
 /**
- * 
- *  - Should be able to change the hero details placements 
- *  - Fix CTA top spacing
+ *
+ *  ✔ Should be able to change the hero details placements
+ *  ✔ Fix CTA top spacing
  *  - Add a headshot
  *  - Create Carousel Hero
  *  - Give an option to add secondary CTA
  *  - Add an announcement bar (between header and hero - https://www.salesforce.com/in/)
- * 
- * 
+ *
+ *
  */
 
 const HeroCard = ({
@@ -157,6 +175,7 @@ const HeroCard = ({
   emails: emailsField,
   blurBackground = false,
   cta: ctaField,
+  contentAlignment,
 }: HeroProps) => {
   const document = useDocument();
   const backgroundField = resolveYextEntityField<ImageProps["image"]>(
@@ -187,14 +206,16 @@ const HeroCard = ({
           : undefined,
       }}
     >
-      <figcaption className="h-full w-full absolute top-0 left-0 z-2">
+      <figcaption className="h-full w-full top-0 left-0 z-2">
         <div
           className={`${
             blurBackground && showBackgroundImage && "bg-black bg-opacity-65"
-          } w-full absolute flex items-center justify-center flex-col h-full !text-white`}
+          } w-full flex items-center flex-col h-full !text-white`}
         >
-          <header className="py-12 h-full gap-4 w-full absolute top-0 left-0 z-2 flex flex-col md:flex-row justify-center items-center mx-auto">
-            <section className="text-center space-y-2">
+          <header
+            className={`${contentAlignment} p-12 h-full gap-4 w-full top-0 left-0 z-2 flex flex-col md:flex-row items-center mx-auto`}
+          >
+            <section className="text-center space-y-4">
               <h1 className="text-2xl md:text-4xl">{title}</h1>
               <address className="text-base md:text-lg mb-4 space-y-2 not-italic flex flex-col justify-center items-center">
                 <Address
@@ -251,6 +272,7 @@ const Hero: ComponentConfig<HeroProps> = {
       field: "primaryPhoto",
       constantValue: "",
     },
+    contentAlignment: "Left",
     title: { label: "Hello", field: "", constantValue: "" },
     subTitle: { field: "", constantValue: "" },
     blurBackground: false,
