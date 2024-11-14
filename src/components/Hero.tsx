@@ -362,10 +362,6 @@ const Hero: ComponentConfig<HeroProps> = {
   },
 
   resolveFields(data, { changed, lastFields, fields }: any) {
-    console.log(
-      !changed.showBackgroundImage || !changed.showAddressPhoneAndEmails
-    );
-
     if (!changed.showBackgroundImage && !changed.showAddressPhoneAndEmails)
       return lastFields;
     if (!data.props.showBackgroundImage) {
