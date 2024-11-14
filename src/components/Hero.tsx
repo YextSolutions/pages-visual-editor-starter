@@ -26,6 +26,7 @@ interface HeroProps {
   blurBackground?: boolean;
   title: YextEntityField<string>;
   subTitle: YextEntityField<string>;
+  showAddressPhoneAndEmails: boolean;
   address: YextEntityField<AddressType>;
   mainPhone: YextEntityField<string>;
   emails: YextEntityField<string[]>;
@@ -35,6 +36,27 @@ interface HeroProps {
 const defaults: Fields<HeroProps> = {
   showBackgroundImage: {
     label: "Show background Image",
+    type: "radio",
+    options: [
+      {
+        label: "Yes",
+        value: true,
+      },
+      {
+        label: "No",
+        value: false,
+      },
+    ],
+  },
+  //@ts-ignore
+  backgroundImage: YextEntityFieldSelector<typeof config>({
+    label: "Background Image",
+    filter: {
+      types: ["type.image"],
+    },
+  }),
+  blurBackground: {
+    label: "Blur Background?",
     type: "radio",
     options: [
       {
@@ -81,34 +103,6 @@ const defaults: Fields<HeroProps> = {
     ),
   },
   //@ts-ignore
-  backgroundImage: YextEntityFieldSelector<typeof config>({
-    label: "Image",
-    filter: {
-      types: ["type.image"],
-    },
-  }),
-  //@ts-ignore
-  photo: YextEntityFieldSelector<typeof config>({
-    label: "Image",
-    filter: {
-      types: ["type.image"],
-    },
-  }),
-  blurBackground: {
-    label: "Blur Background?",
-    type: "radio",
-    options: [
-      {
-        label: "Yes",
-        value: true,
-      },
-      {
-        label: "No",
-        value: false,
-      },
-    ],
-  },
-  //@ts-ignore
   title: YextEntityFieldSelector<typeof config>({
     label: "Title",
     filter: {
@@ -122,6 +116,27 @@ const defaults: Fields<HeroProps> = {
       types: ["type.string"],
     },
   }),
+  //@ts-ignore
+  photo: YextEntityFieldSelector<typeof config>({
+    label: "Photo",
+    filter: {
+      types: ["type.image"],
+    },
+  }),
+  showAddressPhoneAndEmails: {
+    label: "Show Address, Phone and Email",
+    type: "radio",
+    options: [
+      {
+        label: "Yes",
+        value: true,
+      },
+      {
+        label: "No",
+        value: false,
+      },
+    ],
+  },
   // @ts-ignore
   address: YextEntityFieldSelector<typeof config>({
     label: "Address",
@@ -136,13 +151,7 @@ const defaults: Fields<HeroProps> = {
       types: ["type.phone"],
     },
   }),
-  //@ts-ignore
-  cta: YextEntityFieldSelector<typeof config>({
-    label: "CTA",
-    filter: {
-      types: ["type.cta"],
-    },
-  }),
+
   //@ts-ignore
   emails: YextEntityFieldSelector<typeof config>({
     label: "Emails",
@@ -150,6 +159,13 @@ const defaults: Fields<HeroProps> = {
       types: ["type.string"],
       allowList: ["emails"],
       includeListsOnly: true,
+    },
+  }),
+  //@ts-ignore
+  cta: YextEntityFieldSelector<typeof config>({
+    label: "CTA",
+    filter: {
+      types: ["type.cta"],
     },
   }),
 };
@@ -234,6 +250,7 @@ const HeroCard = ({
               className={`${photo ? `text-start` : `text-center`} space-y-4`}
             >
               <h1 className="text-2xl md:text-4xl">{title}</h1>
+              {subTitle && <p className="text-lg">{subTitle}</p>}
               <address
                 className={`text-base md:text-lg mb-4 space-y-2 not-italic flex flex-col justify-center ${photo ? `items-baseline` : `items-center`}`}
               >
@@ -318,6 +335,7 @@ const Hero: ComponentConfig<HeroProps> = {
     title: { field: "", constantValue: "" },
     subTitle: { field: "", constantValue: "" },
     blurBackground: false,
+    showAddressPhoneAndEmails: false,
     address: {
       field: "",
       constantValue: {
@@ -344,19 +362,32 @@ const Hero: ComponentConfig<HeroProps> = {
   },
 
   resolveFields(data, { changed, lastFields, fields }: any) {
-    if (!changed.showBackgroundImage) return lastFields;
+    console.log(
+      !changed.showBackgroundImage || !changed.showAddressPhoneAndEmails
+    );
+
+    if (!changed.showBackgroundImage && !changed.showAddressPhoneAndEmails)
+      return lastFields;
     if (!data.props.showBackgroundImage) {
       return {
         ...fields,
         backgroundImage: undefined,
         blurBackground: undefined,
       };
-    } else {
-      return {
-        ...fields,
-        bannerBackgroundColor: undefined,
+    }
+    let updatedFields = {
+      ...fields,
+      bannerBackgroundColor: undefined,
+    };
+    if (!data.props.showAddressPhoneAndEmails) {
+      updatedFields = {
+        ...updatedFields,
+        mainPhone: undefined,
+        address: undefined,
+        emails: undefined,
       };
     }
+    return updatedFields;
   },
   render: (props) => <HeroCard {...props} />,
 };
