@@ -1,7 +1,6 @@
 import {
   Address,
   AddressType,
-  CTA,
   ImageProps,
   ImageType,
   Image,
@@ -16,29 +15,21 @@ import {
   YextEntityField,
   YextEntityFieldSelector,
 } from "@yext/visual-editor";
-import Cta from "./cta";
+import Cta, { CTAProps } from "./cta";
 
 interface HeroProps {
   showBackgroundImage?: boolean;
   bannerBackgroundColor: string;
-  //@ts-ignore
-  backgroundImage: YextEntityField;
+  backgroundImage: YextEntityField<ImageType>;
   contentAlignment: string;
-  //@ts-ignore
-  photo: YextEntityField;
+  photo: YextEntityField<ImageType>;
   blurBackground?: boolean;
-  //@ts-ignore
-  title: YextEntityField;
-  //@ts-ignore
-  subTitle: YextEntityField;
-  //@ts-ignore
-  address: YextEntityField;
-  //@ts-ignore
-  mainPhone: YextEntityField;
-  //@ts-ignore
+  title: YextEntityField<string>;
+  subTitle: YextEntityField<string>;
+  address: YextEntityField<AddressType>;
+  mainPhone: YextEntityField<string>;
   emails: YextEntityField<string[]>;
-  //@ts-ignore
-  cta: YextEntityField;
+  cta: YextEntityField<CTAProps>;
 }
 
 const defaults: Fields<HeroProps> = {
@@ -206,7 +197,7 @@ const HeroCard = ({
   const subTitle = resolveYextEntityField<string>(document, subTitleField);
   const mainPhone = resolveYextEntityField<string>(document, mainPhoneField);
   const emails = resolveYextEntityField<string[]>(document, emailsField);
-  const cta = resolveYextEntityField<CTA>(document, ctaField);
+  const cta = resolveYextEntityField<CTAProps>(document, ctaField);
 
   return (
     <figure
@@ -246,11 +237,13 @@ const HeroCard = ({
               <address
                 className={`text-base md:text-lg mb-4 space-y-2 not-italic flex flex-col justify-center ${photo ? `items-baseline` : `items-center`}`}
               >
-                <Address
-                  className="space-y-2"
-                  address={address}
-                  lines={[["line1"], ["city", ",", "region", "postalCode"]]}
-                />
+                {address && (
+                  <Address
+                    className="space-y-2"
+                    address={address}
+                    lines={[["line1"], ["city", ",", "region", "postalCode"]]}
+                  />
+                )}
                 {mainPhone && (
                   <EntityField
                     displayName="Body"
@@ -306,28 +299,40 @@ const Hero: ComponentConfig<HeroProps> = {
     bannerBackgroundColor: "black",
     showBackgroundImage: false,
     backgroundImage: {
-      label: "Background Image",
       field: "primaryPhoto",
-      constantValue: "",
+      constantValue: {
+        height: 0,
+        width: 0,
+        url: "",
+      },
     },
     photo: {
       field: "primaryPhoto",
-      constantValue: "",
+      constantValue: {
+        height: 0,
+        width: 0,
+        url: "",
+      },
     },
     contentAlignment: "Left",
-    title: { label: "Hello", field: "", constantValue: "" },
+    title: { field: "", constantValue: "" },
     subTitle: { field: "", constantValue: "" },
     blurBackground: false,
     address: {
-      field: "address",
-      constantValue: "",
+      field: "",
+      constantValue: {
+        line1: "",
+        city: "",
+        postalCode: "",
+        countryCode: "",
+      },
     },
     cta: {
       field: "",
       constantValue: {
-        label: "",
-        link: "",
-        linkType: "",
+        label: "Sample CTA",
+        link: "https://yext.com",
+        linkType: "URL",
       },
     },
     mainPhone: {
@@ -337,8 +342,8 @@ const Hero: ComponentConfig<HeroProps> = {
     },
     emails: { field: "", constantValue: [""] },
   },
-  //@ts-expect-error
-  resolveFields(data, { changed, lastFields, fields }) {
+
+  resolveFields(data, { changed, lastFields, fields }: any) {
     if (!changed.showBackgroundImage) return lastFields;
     if (!data.props.showBackgroundImage) {
       return {
@@ -352,7 +357,6 @@ const Hero: ComponentConfig<HeroProps> = {
         bannerBackgroundColor: undefined,
       };
     }
-    return fields;
   },
   render: (props) => <HeroCard {...props} />,
 };

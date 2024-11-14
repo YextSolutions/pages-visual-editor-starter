@@ -97,8 +97,6 @@ const ImageWrapper: React.FC<ImageWrapperProps> = ({
     imageField
   );
 
-  console.log(resolvedImage);
-
   if (!resolvedImage) {
     return null;
   }
