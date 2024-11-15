@@ -1,0 +1,9 @@
+{
+  "templates": [
+    {
+      "name": "Location",
+      "description": "Use this template to generate pages for each of your Locations.",
+      "exampleSiteUrl": ""
+    }
+  ]
+}
