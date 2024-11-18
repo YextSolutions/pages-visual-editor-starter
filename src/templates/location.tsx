@@ -52,6 +52,7 @@ export const config = {
       "c_relatedBlogs.datePosted",
       "frequentlyAskedQuestions.question",
       "frequentlyAskedQuestions.answer",
+      "description",
     ],
     localization: {
       locales: ["en"],
