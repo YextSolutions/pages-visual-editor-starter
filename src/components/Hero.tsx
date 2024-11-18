@@ -316,7 +316,7 @@ const Hero: ComponentConfig<HeroProps> = {
     bannerBackgroundColor: "black",
     showBackgroundImage: false,
     backgroundImage: {
-      field: "primaryPhoto",
+      field: "",
       constantValue: {
         height: 0,
         width: 0,
@@ -324,7 +324,7 @@ const Hero: ComponentConfig<HeroProps> = {
       },
     },
     photo: {
-      field: "primaryPhoto",
+      field: "",
       constantValue: {
         height: 0,
         width: 0,

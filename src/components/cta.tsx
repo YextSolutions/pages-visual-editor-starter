@@ -17,8 +17,9 @@ const Cta = ({ cta, ctaType, additionalClasses }: _CTAProps) => {
     <Link
       className={`${additionalClasses && additionalClasses} border-2 text-sm md:text-base p-2 flex justify-center md:w-[220px] rounded-md ${ctaType}`}
       cta={{
-        url: cta.link,
+        link: cta.link,
         label: cta.label,
+        linkType: cta.linkType,
       }}
     />
   );
