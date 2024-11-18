@@ -8,6 +8,7 @@ import {
   YextEntityFieldSelector,
 } from "@yext/visual-editor";
 import { CTAProps } from "./cta";
+import { toTitleCaseWithRules } from "../utils/reusableFunctions";
 
 interface BlogsCardProps {
   linkedArticles: {
@@ -22,14 +23,26 @@ interface BlogsCardProps {
     slug?: string;
   }[];
   layoutType: "Layout 1" | "Layout 2";
+  sectionTitle: string;
+  sectionDescription: string;
 }
 
 interface BlogsWithStaticDataProps {
+  sectionTitle: string;
+  sectionDescription: string;
   layout: "Layout 1" | "Layout 2";
   blogs: YextEntityField<any>;
 }
 
 const defaults: Fields<BlogsWithStaticDataProps> = {
+  sectionTitle: {
+    label: "Section Title",
+    type: "text",
+  },
+  sectionDescription: {
+    label: "Section Description",
+    type: "textarea",
+  },
   layout: {
     label: "Blog Layout",
     type: "radio",
@@ -51,6 +64,8 @@ const defaults: Fields<BlogsWithStaticDataProps> = {
 const BlogsSelector = ({
   layout,
   blogs: blogsField,
+  sectionTitle,
+  sectionDescription,
 }: BlogsWithStaticDataProps) => {
   const document = useDocument();
   const blogs = resolveYextEntityField<BlogsCardProps["linkedArticles"]>(
@@ -62,7 +77,12 @@ const BlogsSelector = ({
     <>
       {blogs && (
         <EntityField fieldId="c_relatedBlogs">
-          <BlogsLayout linkedArticles={blogs} layoutType={layout} />
+          <BlogsLayout
+            linkedArticles={blogs}
+            layoutType={layout}
+            sectionTitle={sectionTitle}
+            sectionDescription={sectionDescription}
+          />
         </EntityField>
       )}
     </>
@@ -72,6 +92,8 @@ const BlogsSelector = ({
 const BlogsWithStaticData: ComponentConfig<BlogsWithStaticDataProps> = {
   fields: defaults,
   defaultProps: {
+    sectionTitle: "Sample title",
+    sectionDescription: "Sample Description",
     layout: "Layout 1",
     blogs: {
       field: "c_relatedBlogs",
@@ -230,7 +252,12 @@ const BlogsWithStaticData: ComponentConfig<BlogsWithStaticDataProps> = {
 BlogsWithStaticData.label = "Blogs with Static Data";
 export { BlogsWithStaticData, BlogsWithStaticDataProps };
 
-const BlogsLayout = ({ linkedArticles, layoutType }: BlogsCardProps) => (
+const BlogsLayout = ({
+  linkedArticles,
+  layoutType,
+  sectionTitle,
+  sectionDescription,
+}: BlogsCardProps) => (
   <section className="bg-white py-24 sm:py-32">
     <div className="mx-auto max-w-7xl px-6 lg:px-8">
       <header
@@ -241,11 +268,9 @@ const BlogsLayout = ({ linkedArticles, layoutType }: BlogsCardProps) => (
         }`}
       >
         <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
-          From the blog
+          {toTitleCaseWithRules(sectionTitle)}
         </h2>
-        <p className="mt-2 text-lg text-gray-1200">
-          Learn how to grow your business with our expert advice.
-        </p>
+        <p className="mt-2 text-lg text-gray-1200">{sectionDescription}</p>
       </header>
       <div
         className={`mt-16 ${

@@ -47,3 +47,44 @@ export const getRandomObjects = (blogs: any) => {
   const shuffled = blogs.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, 4);
 };
+
+export const toTitleCaseWithRules = (str: string) => {
+  const minorWords = [
+    "a",
+    "an",
+    "the",
+    "and",
+    "but",
+    "or",
+    "nor",
+    "for",
+    "so",
+    "yet",
+    "at",
+    "by",
+    "for",
+    "in",
+    "of",
+    "off",
+    "on",
+    "out",
+    "over",
+    "to",
+    "up",
+    "with",
+  ];
+
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word, index, arr) => {
+      if (index === 0 || index === arr.length - 1) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      if (!minorWords.includes(word)) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      return word;
+    })
+    .join(" ");
+};

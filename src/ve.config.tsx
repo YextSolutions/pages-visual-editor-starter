@@ -47,19 +47,12 @@ import {
   BlogsWithStaticDataProps,
   BlogsWithStaticData as BlogsStaticData,
 } from "./components/BlogsWithStaticData.js";
+import {
+  DescriptionSection as Description,
+  DescriptionProps,
+} from "./components/DescriptionSection.js";
+
 type LocationProps = {
-  GridSection: GridSectionProps;
-  HoursCard: HoursCardProps;
-  BodyText: BodyTextProps;
-  HeadingText: HeadingTextProps;
-  ImageWrapper: ImageWrapperProps;
-  CTA: CTAWrapperProps;
-  HoursStatus: HoursStatusProps;
-  FlexContainer: FlexContainerProps;
-  Address: AddressProps;
-  TextList: TextListProps;
-  Emails: EmailsProps;
-  Phone: PhoneProps;
   DEStaticComponent: DEStaticComponentWrapperProps;
   DEEntityComponent: DEComponentProps;
   Hero: HeroProps;
@@ -67,30 +60,20 @@ type LocationProps = {
   FAQComponent: FAQProps;
   FAQsStaticData: FAQsWithStaticFAQsProps;
   BlogsStaticData: BlogsWithStaticDataProps;
+  Description: DescriptionProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
+    Hero,
     FAQsStaticData,
     FAQComponent,
+    Description,
     BlogsStaticData,
-    Address,
     Blogs,
-    BodyText,
-    CTA,
     DEEntityComponent,
     DEStaticComponent,
-    Emails,
-    FlexContainer,
-    GridSection,
-    Hero,
-    HeadingText,
-    HoursCard,
-    HoursStatus,
-    ImageWrapper,
-    Phone,
-    TextList,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {

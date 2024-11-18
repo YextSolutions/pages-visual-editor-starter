@@ -12,18 +12,31 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { Minus, Plus } from "lucide-react";
+import { toTitleCaseWithRules } from "../utils/reusableFunctions";
 
 interface FAQsWithStaticFAQssProps {
   faqs: { question: string; answer: string }[];
   layoutType: "Layout 1" | "Layout 2" | "Layout 3";
+  sectionTitle: string;
+  sectionDescription: string;
 }
 
 export interface FAQsWithStaticFAQsProps {
   layout: "Layout 1" | "Layout 2" | "Layout 3";
   faqs: YextEntityField<any>;
+  sectionTitle: string;
+  sectionDescription: string;
 }
 
 const FAQsWithStaticFAQsFields: Fields<FAQsWithStaticFAQsProps> = {
+  sectionTitle: {
+    label: "Section Title",
+    type: "text",
+  },
+  sectionDescription: {
+    label: "Section Description",
+    type: "textarea",
+  },
   layout: {
     label: "Layout",
     type: "radio",
@@ -46,6 +59,8 @@ const FAQsWithStaticFAQsFields: Fields<FAQsWithStaticFAQsProps> = {
 const FAQsWithStaticFAQsCard = ({
   layout,
   faqs: faqsField,
+  sectionTitle,
+  sectionDescription,
 }: FAQsWithStaticFAQsProps) => {
   const document = useDocument<any>();
   const faqs = resolveYextEntityField<FAQsWithStaticFAQssProps["faqs"]>(
@@ -60,7 +75,12 @@ const FAQsWithStaticFAQsCard = ({
           fieldId="frequentlyAskedQuestions"
           constantValueEnabled={true}
         >
-          <FAQsWithStaticFAQsLayout faqs={faqs} layoutType={layout} />
+          <FAQsWithStaticFAQsLayout
+            faqs={faqs}
+            layoutType={layout}
+            sectionTitle={sectionTitle}
+            sectionDescription={sectionDescription}
+          />
         </EntityField>
       )}
     </>
@@ -71,6 +91,8 @@ export const FAQsWithStaticFAQsComponent: ComponentConfig<FAQsWithStaticFAQsProp
   {
     fields: FAQsWithStaticFAQsFields,
     defaultProps: {
+      sectionTitle: "Sample title",
+      sectionDescription: "Sample Description",
       layout: "Layout 1",
       faqs: {
         field: "frequentlyAskedQuestions",
@@ -98,6 +120,8 @@ FAQsWithStaticFAQsComponent.label = "FAQs With Static Data";
 const FAQsWithStaticFAQsLayout = ({
   faqs,
   layoutType,
+  sectionTitle,
+  sectionDescription,
 }: FAQsWithStaticFAQssProps) => (
   <section aria-labelledby="faq-heading" className="bg-white py-24 sm:py-32">
     <header className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -109,19 +133,10 @@ const FAQsWithStaticFAQsLayout = ({
             : ""
         }`}
       >
-        Frequently asked questions
+        {toTitleCaseWithRules(sectionTitle)}
       </h2>
       {layoutType === "Layout 1" && (
-        <p className="mt-4 text-base text-gray-600">
-          Can’t find the answer you’re looking for? Reach out to our{" "}
-          <a
-            href="#"
-            className="font-semibold text-indigo-600 hover:text-indigo-500"
-          >
-            customer support
-          </a>{" "}
-          team.
-        </p>
+        <p className="mt-4 text-base text-gray-600">{sectionDescription}</p>
       )}
     </header>
     <dl
