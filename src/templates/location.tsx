@@ -48,6 +48,7 @@ export const config = {
       "c_relatedBlogs.c_primaryCTA",
       "c_relatedBlogs.c_category",
       "c_relatedBlogs.c_author",
+      "c_relatedBlogs.slug",
       "c_relatedBlogs.datePosted",
       "frequentlyAskedQuestions.question",
       "frequentlyAskedQuestions.answer",

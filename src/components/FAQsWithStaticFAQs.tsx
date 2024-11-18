@@ -1,5 +1,11 @@
 import { ComponentConfig, Fields } from "@measured/puck";
-import { useDocument } from "@yext/visual-editor";
+import {
+  EntityField,
+  resolveYextEntityField,
+  useDocument,
+  YextEntityField,
+  YextEntityFieldSelector,
+} from "@yext/visual-editor";
 import {
   Disclosure,
   DisclosureButton,
@@ -7,18 +13,19 @@ import {
 } from "@headlessui/react";
 import { Minus, Plus } from "lucide-react";
 
-interface FAQsProps {
+interface FAQsWithStaticFAQssProps {
   faqs: { question: string; answer: string }[];
   layoutType: "Layout 1" | "Layout 2" | "Layout 3";
 }
 
-export interface FAQProps {
+export interface FAQsWithStaticFAQsProps {
   layout: "Layout 1" | "Layout 2" | "Layout 3";
+  faqs: YextEntityField<any>;
 }
 
-const FAQFields: Fields<FAQProps> = {
+const FAQsWithStaticFAQsFields: Fields<FAQsWithStaticFAQsProps> = {
   layout: {
-    label: "FAQs Layout",
+    label: "Layout",
     type: "radio",
     options: [
       { label: "Layout 1", value: "Layout 1" },
@@ -26,23 +33,72 @@ const FAQFields: Fields<FAQProps> = {
       { label: "Layout 3", value: "Layout 3" },
     ],
   },
+  //@ts-expect-error
+  faqs: YextEntityFieldSelector<typeof config>({
+    label: "FAQs",
+    filter: {
+      types: ["frequentlyAskedQuestions"],
+      allowList: ["frequentlyAskedQuestions"],
+    },
+  }),
 };
 
-const FAQCard = ({ layout }: FAQProps) => {
-  const { frequentlyAskedQuestions } = useDocument<any>();
+const FAQsWithStaticFAQsCard = ({
+  layout,
+  faqs: faqsField,
+}: FAQsWithStaticFAQsProps) => {
+  const document = useDocument<any>();
+  const faqs = resolveYextEntityField<FAQsWithStaticFAQssProps["faqs"]>(
+    document,
+    faqsField
+  );
 
-  return <FAQLayout faqs={frequentlyAskedQuestions} layoutType={layout} />;
+  return (
+    <>
+      {faqs && (
+        <EntityField
+          fieldId="frequentlyAskedQuestions"
+          constantValueEnabled={true}
+        >
+          <FAQsWithStaticFAQsLayout faqs={faqs} layoutType={layout} />
+        </EntityField>
+      )}
+    </>
+  );
 };
 
-export const FAQComponent: ComponentConfig<FAQProps> = {
-  fields: FAQFields,
-  defaultProps: {
-    layout: "Layout 1",
-  },
-  render: (props) => <FAQCard {...props} />,
-};
+export const FAQsWithStaticFAQsComponent: ComponentConfig<FAQsWithStaticFAQsProps> =
+  {
+    fields: FAQsWithStaticFAQsFields,
+    defaultProps: {
+      layout: "Layout 1",
+      faqs: {
+        field: "frequentlyAskedQuestions",
+        constantValueEnabled: true,
+        constantValue: [
+          {
+            question: "Sample Question",
+            answer: "Answer",
+          },
+          {
+            question: "Sample Question",
+            answer: "Answer",
+          },
+          {
+            question: "Sample Question",
+            answer: "Answer",
+          },
+        ],
+      },
+    },
+    render: (props) => <FAQsWithStaticFAQsCard {...props} />,
+  };
+FAQsWithStaticFAQsComponent.label = "FAQs With Static Data";
 
-const FAQLayout = ({ faqs, layoutType }: FAQsProps) => (
+const FAQsWithStaticFAQsLayout = ({
+  faqs,
+  layoutType,
+}: FAQsWithStaticFAQssProps) => (
   <section aria-labelledby="faq-heading" className="bg-white py-24 sm:py-32">
     <header className="mx-auto max-w-7xl px-6 lg:px-8">
       <h2

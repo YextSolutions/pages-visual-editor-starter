@@ -39,6 +39,14 @@ import {
 import { Hero, HeroProps } from "./components/Hero.js";
 import { Blogs, BlogsProps } from "./components/Blogs.js";
 import { FAQComponent, FAQProps } from "./components/FAQs.js";
+import {
+  FAQsWithStaticFAQsComponent as FAQsStaticData,
+  FAQsWithStaticFAQsProps,
+} from "./components/FAQsWithStaticFAQs.js";
+import {
+  BlogsWithStaticDataProps,
+  BlogsWithStaticData as BlogsStaticData,
+} from "./components/BlogsWithStaticData.js";
 type LocationProps = {
   GridSection: GridSectionProps;
   HoursCard: HoursCardProps;
@@ -57,12 +65,16 @@ type LocationProps = {
   Hero: HeroProps;
   Blogs: BlogsProps;
   FAQComponent: FAQProps;
+  FAQsStaticData: FAQsWithStaticFAQsProps;
+  BlogsStaticData: BlogsWithStaticDataProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
+    FAQsStaticData,
     FAQComponent,
+    BlogsStaticData,
     Address,
     Blogs,
     BodyText,
