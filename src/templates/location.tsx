@@ -16,6 +16,7 @@ import {
   DocumentProvider,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
+import { buildSchema } from "../utils/buildSchema";
 
 export const config = {
   name: "location",
@@ -81,7 +82,9 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         },
       },
     ],
-    other: applyTheme(document, themeConfig),
+    other: [applyTheme(document, themeConfig), buildSchema(document)].join(
+      "\n"
+    ),
   };
 };
 
