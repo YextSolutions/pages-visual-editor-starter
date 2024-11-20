@@ -55,7 +55,8 @@ const defaults: Fields<BlogsWithStaticDataProps> = {
   blogs: YextEntityFieldSelector<typeof config>({
     label: "Blogs Field",
     filter: {
-      types: ["c_relatedBlogs"],
+      types: ["type.entity_reference"],
+      includeListsOnly: true,
       allowList: ["c_relatedBlogs"],
     },
   }),
