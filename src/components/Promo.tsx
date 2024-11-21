@@ -287,6 +287,10 @@ export const PromoComponent: ComponentConfig<PromoProps> = {
   label: "Promo",
   fields: promoFields,
   defaultProps: {
+    promo: {
+      field: "",
+      constantValue: {},
+    },
     orientation: "left",
     title: {
       text: {
