@@ -5,8 +5,7 @@ import {
   Body,
   BodyProps,
   useDocument,
-  NumberOrDefault,
-  NumberFieldWithDefaultOption,
+  FontSizeSelector,
 } from "@yext/visual-editor";
 import { ComponentConfig, Fields } from "@measured/puck";
 import { config } from "../templates/location";
@@ -15,8 +14,8 @@ import { LocationStream } from "../types/autogen";
 export type BannerProps = {
   text: YextEntityField<string>;
   textAlignment: "justify-end" | "justify-start" | "justify-center";
-  fontSize: NumberOrDefault;
-  fontWeight: BodyProps["weight"];
+  fontSize: BodyProps["fontSize"];
+  fontWeight: BodyProps["fontWeight"];
   textColor: BodyProps["color"];
   backgroundColor: "bg-white" | "bg-palette-primary" | "bg-palette-secondary";
 };
@@ -37,10 +36,7 @@ const bannerFields: Fields<BannerProps> = {
       { label: "Right", value: "justify-end" },
     ],
   },
-  fontSize: NumberFieldWithDefaultOption({
-    label: "Font Size",
-    defaultCustomValue: 16,
-  }),
+  fontSize: FontSizeSelector(),
   fontWeight: {
     label: "Font Weight",
     type: "radio",
@@ -83,10 +79,8 @@ const Banner = ({
       <div className={`flex ${textAlignment} items-center`}>
         <Body
           color={textColor}
-          weight={fontWeight}
-          style={{
-            fontSize: fontSize === "default" ? undefined : fontSize + "px",
-          }}
+          fontWeight={fontWeight}
+          fontSize={fontSize}
         >
           {resolveYextEntityField(document, text)}
         </Body>

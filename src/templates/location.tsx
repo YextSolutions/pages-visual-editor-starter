@@ -13,7 +13,7 @@ import { locationConfig } from "../ve.config";
 import {
   resolveVisualEditorData,
   applyTheme,
-  DocumentProvider,
+  VisualEditorProvider,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 
@@ -94,9 +94,9 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 const Location: Template<TemplateRenderProps> = ({ document }) => {
   const { visualTemplate } = document;
   return (
-    <DocumentProvider value={document}>
+    <VisualEditorProvider document={document}>
       <Render config={locationConfig as Config} data={visualTemplate} />
-    </DocumentProvider>
+    </VisualEditorProvider>
   );
 };
 
