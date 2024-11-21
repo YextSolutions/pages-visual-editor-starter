@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "pages dev",
     "prod": "pages prod",
-    "build": "pages build"
+    "build": "pages build",
+    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn add"
   },
   "engines": {
     "node": "^18.4.0 || >=20.2.0"
@@ -18,7 +19,7 @@
     "@heroicons/react": "^2.1.5",
     "@mantine/core": "^7.10.1",
     "@mantine/hooks": "^7.10.1",
-    "@measured/puck": "0.16.2-canary.a1988b5",
+    "@measured/puck": "0.16.3-canary.5ba9399",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-progress": "^1.0.3",
