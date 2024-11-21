@@ -10,27 +10,26 @@ import {
   HeadingProps,
   Section,
   useDocument,
-  NumberOrDefault,
-  NumberFieldWithDefaultOption,
+  FontSizeSelector,
 } from "@yext/visual-editor";
 
 export type FeaturedItemsProps = {
   heading: {
-    fontSize: NumberOrDefault;
+    fontSize: HeadingProps["fontSize"];
     color: HeadingProps["color"];
   };
   cards: {
     heading: {
-      fontSize: NumberOrDefault;
+      fontSize: HeadingProps["fontSize"];
       color: HeadingProps["color"];
     };
     subheading: {
-      fontSize: NumberOrDefault;
-      weight: BodyProps["weight"];
+      fontSize: BodyProps["fontSize"];
+      weight: BodyProps["fontWeight"];
     };
     body: {
-      fontSize: NumberOrDefault;
-      weight: BodyProps["weight"];
+      fontSize: BodyProps["fontSize"];
+      weight: BodyProps["fontWeight"];
     };
     cta?: {
       variant: CTAProps["variant"];
@@ -43,10 +42,7 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
     type: "object",
     label: "Heading",
     objectFields: {
-      fontSize: NumberFieldWithDefaultOption({
-        label: "Font Size",
-        defaultCustomValue: 48,
-      }),
+      fontSize: FontSizeSelector(),
       color: {
         label: "Color",
         type: "radio",
@@ -66,10 +62,7 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
         type: "object",
         label: "Heading",
         objectFields: {
-          fontSize: NumberFieldWithDefaultOption({
-            label: "Font Size",
-            defaultCustomValue: 24,
-          }),
+          fontSize: FontSizeSelector(),
           color: {
             label: "Color",
             type: "radio",
@@ -85,10 +78,7 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
         type: "object",
         label: "Subheading",
         objectFields: {
-          fontSize: NumberFieldWithDefaultOption({
-            label: "Font Size",
-            defaultCustomValue: 16,
-          }),
+          fontSize: FontSizeSelector(),
           weight: {
             label: "Weight",
             type: "radio",
@@ -103,10 +93,7 @@ const featuredItemsFields: Fields<FeaturedItemsProps> = {
         type: "object",
         label: "Body",
         objectFields: {
-          fontSize: NumberFieldWithDefaultOption({
-            label: "Font Size",
-            defaultCustomValue: 16,
-          }),
+          fontSize: FontSizeSelector(),
           weight: {
             label: "Weight",
             type: "radio",
@@ -145,13 +132,8 @@ const FeaturedItems = ({ heading, cards }: FeaturedItemsProps) => {
           fieldId="c_productSection.sectionTitle"
         >
           <Heading
-            style={{
-              fontSize:
-                heading.fontSize === "default"
-                  ? undefined
-                  : heading.fontSize + "px",
-            }}
             color={heading.color}
+            fontSize={heading.fontSize}
           >
             {productSection.sectionTitle}
           </Heading>
@@ -239,18 +221,18 @@ type FeaturedItemCardProps = {
   };
   heading: {
     text: string;
-    size: NumberOrDefault;
+    size: HeadingProps["fontSize"];
     color: HeadingProps["color"];
   };
   subheading: {
     text: string;
-    size: NumberOrDefault;
-    weight: BodyProps["weight"];
+    size: BodyProps["fontSize"];
+    weight: BodyProps["fontWeight"];
   };
   body: {
     text: string;
-    size: NumberOrDefault;
-    weight: BodyProps["weight"];
+    size: BodyProps["fontSize"];
+    weight: BodyProps["fontWeight"];
   };
   cta?: {
     label?: string;
@@ -288,37 +270,27 @@ const FeaturedItemCard = ({
       <div className="flex flex-col gap-y-3 p-8">
         <Heading
           level={2}
-          style={{
-            fontSize:
-              heading.size === "default" ? undefined : heading.size + "px",
-          }}
           color={heading.color}
+          fontSize={heading.size}
         >
           {heading.text}
         </Heading>
         <Body
           className="line-clamp-1"
-          weight={subheading.weight}
-          style={{
-            fontSize:
-              subheading.size === "default"
-                ? undefined
-                : subheading.size + "px",
-          }}
+          fontWeight={subheading.weight}
+          fontSize={subheading.size}
         >
           {subheading.text}
         </Body>
         <Body
           className="line-clamp-5"
-          weight={body.weight}
-          style={{
-            fontSize: body.size === "default" ? undefined : body.size + "px",
-          }}
+          fontWeight={body.weight}
+          fontSize={body.size}
         >
           {body.text}
         </Body>
         {cta && (
-          <CTA variant={cta.variant} label={cta.label} url={cta.link ?? "#"} />
+          <CTA variant={cta.variant} label={cta.label} link={cta.link ?? "#"} />
         )}
       </div>
     </Section>
