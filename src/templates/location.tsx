@@ -52,6 +52,7 @@ export const config = {
       "emails",
       "services",
       "c_deliveryPromo",
+      "c_locationPromo",
     ],
     localization: {
       locales: ["en"],
