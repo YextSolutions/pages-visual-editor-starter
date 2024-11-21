@@ -17,8 +17,8 @@ import {
   GridSectionProps,
   HeadingText,
   HeadingTextProps,
-  HoursCard,
-  HoursCardProps,
+  HoursTable,
+  HoursTableProps,
   HoursStatus,
   HoursStatusProps,
   ImageWrapper,
@@ -28,16 +28,19 @@ import {
   TextList,
   TextListProps,
 } from "@yext/visual-editor";
-import { BannerComponent as Banner, BannerProps} from "./components/Banner";
-import { CardComponent as Card, CardProps} from "./components/Card";
-import { FAQComponent as FAQ, FAQProps} from "./components/FAQ";
-import { FeaturedItemsComponent as FeaturedItems, FeaturedItemsProps } from "./components/FeaturedItems";
+import { BannerComponent as Banner, BannerProps } from "./components/Banner";
+import { CardComponent as Card, CardProps } from "./components/Card";
+import { FAQComponent as FAQ, FAQProps } from "./components/FAQ";
+import {
+  FeaturedItemsComponent as FeaturedItems,
+  FeaturedItemsProps,
+} from "./components/FeaturedItems";
 import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
 
 type LocationProps = {
   GridSection: GridSectionProps;
-  HoursCard: HoursCardProps;
+  HoursTable: HoursTableProps;
   BodyText: BodyTextProps;
   HeadingText: HeadingTextProps;
   ImageWrapper: ImageWrapperProps;
@@ -48,11 +51,11 @@ type LocationProps = {
   TextList: TextListProps;
   Emails: EmailsProps;
   Phone: PhoneProps;
-  GetDirections: GetDirectionsProps,
-  Banner: BannerProps,
-  Card: CardProps,
-  FAQ: FAQProps,
-  FeaturedItems: FeaturedItemsProps,
+  GetDirections: GetDirectionsProps;
+  Banner: BannerProps;
+  Card: CardProps;
+  FAQ: FAQProps;
+  FeaturedItems: FeaturedItemsProps;
 };
 
 // All the available components for locations
@@ -65,7 +68,7 @@ export const locationConfig: Config<LocationProps> = {
     GetDirections,
     GridSection,
     HeadingText,
-    HoursCard,
+    HoursTable,
     HoursStatus,
     ImageWrapper,
     TextList,
@@ -74,7 +77,7 @@ export const locationConfig: Config<LocationProps> = {
     Banner,
     Card,
     FAQ,
-    FeaturedItems
+    FeaturedItems,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
