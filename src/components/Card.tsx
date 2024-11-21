@@ -12,8 +12,7 @@ import {
   HeadingProps,
   Section,
   useDocument,
-  NumberOrDefault,
-  NumberFieldWithDefaultOption,
+  FontSizeSelector,
 } from "@yext/visual-editor";
 import { config } from "../templates/location";
 import { LocationStream, Cta, ComplexImage } from "../types/autogen";
@@ -28,20 +27,20 @@ export type CardProps = {
     text: {
       entityField: YextEntityField<string>;
     };
-    fontSize: NumberOrDefault;
+    fontSize: HeadingProps["fontSize"];
     color: HeadingProps["color"];
   };
   subheading: {
     text: string;
-    fontSize: NumberOrDefault;
-    weight: BodyProps["weight"];
+    fontSize: BodyProps["fontSize"];
+    weight: BodyProps["fontWeight"];
   };
   body: {
     text: {
       entityField: YextEntityField<string>;
     };
-    fontSize: NumberOrDefault;
-    weight: BodyProps["weight"];
+    fontSize: BodyProps["fontSize"];
+    weight: BodyProps["fontWeight"];
   };
   cta: {
     entityField: YextEntityField<string>;
@@ -85,10 +84,7 @@ const cardFields: Fields<CardProps> = {
           }),
         },
       },
-      fontSize: NumberFieldWithDefaultOption({
-        label: "Font Size",
-        defaultCustomValue: 24,
-      }),
+      fontSize: FontSizeSelector(),
       color: {
         label: "Color",
         type: "radio",
@@ -108,10 +104,7 @@ const cardFields: Fields<CardProps> = {
         label: "Text",
         type: "text",
       },
-      fontSize: NumberFieldWithDefaultOption({
-        label: "Font Size",
-        defaultCustomValue: 16,
-      }),
+      fontSize: FontSizeSelector(),
       weight: {
         label: "Weight",
         type: "radio",
@@ -138,10 +131,7 @@ const cardFields: Fields<CardProps> = {
           }),
         },
       },
-      fontSize: NumberFieldWithDefaultOption({
-        label: "Font Size",
-        defaultCustomValue: 16,
-      }),
+      fontSize: FontSizeSelector(),
       weight: {
         label: "Weight",
         type: "radio",
@@ -220,35 +210,22 @@ export const Card = ({
       <div className="flex flex-col gap-y-3 p-8">
         <Heading
           level={2}
-          style={{
-            fontSize:
-              heading.fontSize === "default"
-                ? undefined
-                : heading.fontSize + "px",
-          }}
           color={heading.color}
+          fontSize={heading.fontSize}
         >
           {resolveYextEntityField(document, heading.text.entityField)}
         </Heading>
         <Body
           className="line-clamp-1"
-          weight={subheading.weight}
-          style={{
-            fontSize:
-              subheading.fontSize === "default"
-                ? undefined
-                : subheading.fontSize + "px",
-          }}
+          fontWeight={subheading.weight}
+          fontSize={subheading.fontSize}
         >
           {subheading.text}
         </Body>
         <Body
           className="line-clamp-5"
-          weight={body.weight}
-          style={{
-            fontSize:
-              body.fontSize === "default" ? undefined : body.fontSize + "px",
-          }}
+          fontWeight={body.weight}
+          fontSize={body.fontSize}
         >
           {resolveYextEntityField(document, body.text.entityField)}
         </Body>
@@ -256,7 +233,7 @@ export const Card = ({
           <CTA
             variant={ctaField.variant}
             label={cta.name}
-            url={cta.link ?? "#"}
+            link={cta.link ?? "#"}
           />
         )}
       </div>

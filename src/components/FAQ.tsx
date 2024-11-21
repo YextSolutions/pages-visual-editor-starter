@@ -15,23 +15,22 @@ import {
   HeadingProps,
   Section,
   useDocument,
-  NumberOrDefault,
-  NumberFieldWithDefaultOption,
+  FontSizeSelector,
 } from "@yext/visual-editor";
 
 export type FAQProps = {
   sectionTitle: {
     text: string;
-    fontSize: NumberOrDefault;
+    fontSize: HeadingProps["fontSize"];
     color: HeadingProps["color"];
   };
   question: {
-    fontSize: NumberOrDefault;
+    fontSize: HeadingProps["fontSize"];
     color: HeadingProps["color"];
   };
   answer: {
-    fontSize: NumberOrDefault;
-    weight: BodyProps["weight"];
+    fontSize: BodyProps["fontSize"];
+    weight: BodyProps["fontWeight"];
   };
 };
 
@@ -44,10 +43,7 @@ const FAQFields: Fields<FAQProps> = {
         label: "Text",
         type: "text",
       },
-      fontSize: NumberFieldWithDefaultOption({
-        label: "Font Size",
-        defaultCustomValue: 48,
-      }),
+      fontSize: FontSizeSelector(),
       color: {
         label: "Color",
         type: "radio",
@@ -63,10 +59,7 @@ const FAQFields: Fields<FAQProps> = {
     type: "object",
     label: "Question",
     objectFields: {
-      fontSize: NumberFieldWithDefaultOption({
-        label: "Font Size",
-        defaultCustomValue: 48,
-      }),
+      fontSize: FontSizeSelector(),
       color: {
         label: "Color",
         type: "radio",
@@ -82,10 +75,7 @@ const FAQFields: Fields<FAQProps> = {
     type: "object",
     label: "Answer",
     objectFields: {
-      fontSize: NumberFieldWithDefaultOption({
-        label: "Font Size",
-        defaultCustomValue: 16,
-      }),
+      fontSize: FontSizeSelector(),
       weight: {
         label: "Weight",
         type: "radio",
@@ -105,15 +95,10 @@ const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
     <Section className="flex flex-col justify-center bg-white components">
       {sectionTitle && (
         <Heading
-          style={{
-            fontSize:
-              sectionTitle.fontSize === "default"
-                ? undefined
-                : sectionTitle.fontSize + "px",
-          }}
           level={1}
           color={sectionTitle.color}
           className="text-center"
+          fontSize={sectionTitle.fontSize}
         >
           {sectionTitle.text}
         </Heading>
@@ -130,26 +115,16 @@ const FAQCard = ({ sectionTitle, question, answer }: FAQProps) => {
                   <AccordionTrigger>
                     <Heading
                       level={1}
-                      style={{
-                        fontSize:
-                          question.fontSize === "default"
-                            ? undefined
-                            : question.fontSize + "px",
-                      }}
                       color={question.color}
+                      fontSize={question.fontSize}
                     >
                       {faqItem.question}
                     </Heading>
                   </AccordionTrigger>
                   <AccordionContent>
                     <Body
-                      style={{
-                        fontSize:
-                          answer.fontSize === "default"
-                            ? undefined
-                            : answer.fontSize + "px",
-                      }}
-                      weight={answer.weight}
+                      fontWeight={answer.weight}
+                      fontSize={answer.fontSize}
                     >
                       <LexicalRichText
                         nodeClassNames={{

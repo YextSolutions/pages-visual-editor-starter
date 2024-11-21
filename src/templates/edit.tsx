@@ -1,10 +1,9 @@
 import {
   applyTheme,
   Editor,
-  EntityFieldsProvider,
   usePlatformBridgeDocument,
   usePlatformBridgeEntityFields,
-  DocumentProvider,
+  VisualEditorProvider,
 } from "@yext/visual-editor";
 import { componentRegistry } from "../ve.config";
 import {
@@ -16,6 +15,7 @@ import {
   GetHeadConfig,
 } from "@yext/pages";
 import { themeConfig } from "../../theme.config";
+import tailwindConfig from "../../tailwind.config";
 
 // Editor is avaliable at /edit
 export const getPath: GetPath<TemplateProps> = () => {
@@ -40,15 +40,17 @@ const Edit: () => JSX.Element = () => {
   const entityFields = usePlatformBridgeEntityFields();
 
   return (
-    <DocumentProvider value={entityDocument}>
-      <EntityFieldsProvider entityFields={entityFields}>
-        <Editor
-          document={entityDocument}
-          componentRegistry={componentRegistry}
-          themeConfig={themeConfig}
-        />
-      </EntityFieldsProvider>
-    </DocumentProvider>
+    <VisualEditorProvider
+      document={entityDocument}
+      entityFields={entityFields}
+      tailwindConfig={tailwindConfig}
+    >
+      <Editor
+        document={entityDocument}
+        componentRegistry={componentRegistry}
+        themeConfig={themeConfig}
+      />
+    </VisualEditorProvider>
   );
 };
 
