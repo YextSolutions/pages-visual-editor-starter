@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "pages dev",
     "prod": "pages prod",
-    "build": "pages build"
+    "build": "pages build",
+    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn add"
   },
   "engines": {
     "node": "^18.4.0 || >=20.2.0"
@@ -18,7 +19,7 @@
     "@heroicons/react": "^2.1.5",
     "@mantine/core": "^7.10.1",
     "@mantine/hooks": "^7.10.1",
-    "@measured/puck": "0.16.2-canary.a1988b5",
+    "@measured/puck": "0.16.3-canary.5ba9399",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-progress": "^1.0.3",
@@ -47,7 +48,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "^1.2.0-beta.3",
     "@yext/pages-components": "^1.0.3",
-    "@yext/visual-editor": "0.0.16",
+    "@yext/visual-editor": "0.0.17",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
