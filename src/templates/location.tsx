@@ -30,8 +30,6 @@ export const config = {
       "uid",
       "meta",
       "slug",
-      "visualConfigurations",
-      "pageLayouts.visualConfiguration",
       "name",
       "hours",
       "dineInHours",
