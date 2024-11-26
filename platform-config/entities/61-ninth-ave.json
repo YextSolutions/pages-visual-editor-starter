@@ -289,7 +289,6 @@
       }
     },
     "name": "Galaxy Grill",
-    "pageLayouts": ["storePagesLayout"],
     "services": ["Delivery", "Catering", "Carry Out", "Dine In"],
     "slug": "locations/[[entityId]]",
     "timezone": "America/New_York"
