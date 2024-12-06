@@ -13,7 +13,10 @@ siteStream:
   entityId: ve-site
   fields:
     - defaultLayouts.visualConfiguration
-    - pagesTheme.themeConfiguration
+    - pagesTheme.themeConfiguration    
+    - c_header
+    - c_footer
+    - c_image
   localization:
     locales:
       - en
