@@ -11,9 +11,6 @@ livePreviewConfiguration:
 siteStream:
   id: site-stream
   entityId: site
-  fields:
-    - defaultLayouts.visualConfiguration
-    - pagesTheme.themeConfiguration
   localization:
     locales:
       - en
