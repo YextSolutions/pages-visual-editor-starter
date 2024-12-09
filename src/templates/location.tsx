@@ -10,11 +10,7 @@ import {
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
-import {
-  resolveVisualEditorData,
-  applyTheme,
-  VisualEditorProvider,
-} from "@yext/visual-editor";
+import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 
@@ -62,10 +58,6 @@ export const config = {
   },
 } as const satisfies TemplateConfig;
 
-export const transformProps = async (data: any) => {
-  return resolveVisualEditorData(data, "location");
-};
-
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
 }): HeadConfig => {
@@ -97,10 +89,9 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 };
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
-  const { visualTemplate } = document;
   return (
     <VisualEditorProvider document={document}>
-      <Render config={locationConfig as Config} data={visualTemplate} />
+      <Render config={locationConfig as Config} data={document.__.layout} />
     </VisualEditorProvider>
   );
 };
