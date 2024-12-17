@@ -8,15 +8,6 @@ buildConfiguration:
       - .npmrc
 livePreviewConfiguration:
   setupCommand: ":"
-siteStream:
-  id: site-stream
-  entityId: site
-  fields:
-    - defaultLayouts.visualConfiguration
-    - pagesTheme.themeConfiguration
-  localization:
-    locales:
-      - en
 # authentication:
 #   policyName: auth-policy
 #   includePaths:
