@@ -11,7 +11,7 @@ import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
 import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
-// import { buildSchema } from "../utils/buildSchema";
+import { buildSchema } from "../utils/buildSchema";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
@@ -29,12 +29,15 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         },
       },
     ],
-    other: applyTheme(document, themeConfig),
+    other: [applyTheme(document, themeConfig), buildSchema(document)].join(
+      "\n"
+    ),
   };
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  if (!document?.address?.region) {
+  if (!document?.__?.layout) {
+    // temporary: guard for generated repo-based static page
     return `static-${Math.floor(Math.random() * (10000 - 1))}`;
   }
   return document.slug
@@ -45,10 +48,11 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 };
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
-  console.log("document in template", document);
+  // temporary: guard for generated repo-based static page
   if (!document?.__?.layout) {
-    return <p>Location static page.</p>;
+    return <></>;
   }
+
   return (
     <VisualEditorProvider document={document}>
       <Render config={locationConfig as Config} data={document.__.layout} />
