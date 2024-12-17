@@ -45,6 +45,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 };
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
+  console.log("document in template", document);
   if (!document?.__?.layout) {
     return <p>Location static page.</p>;
   }
