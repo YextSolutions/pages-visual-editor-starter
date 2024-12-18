@@ -46,7 +46,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
   if (!document?.__?.layout) {
-    return <p>Location static page.</p>;
+    return <p>Location static page is static and not using the in-platform pageset.</p>;
   }
   return (
     <VisualEditorProvider document={document}>
