@@ -11,11 +11,11 @@ import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
 import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
-// import { buildSchema } from "../utils/buildSchema";
+import { buildSchema } from "../utils/buildSchema";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  document,
-}): HeadConfig => {
+                                                                    document,
+                                                                  }): HeadConfig => {
   return {
     title: document.name,
     charset: "UTF-8",
@@ -29,29 +29,34 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         },
       },
     ],
-    other: applyTheme(document, themeConfig),
+    other: [applyTheme(document, themeConfig), buildSchema(document)].join(
+        "\n"
+    ),
   };
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  if (!document?.address?.region) {
+  if (!document?.__?.layout) {
+    // temporary: guard for generated repo-based static page
     return `static-${Math.floor(Math.random() * (10000 - 1))}`;
   }
   return document.slug
-    ? document.slug
-    : `${document.locale}/${document.address.region}/${document.address.city}/${
-        document.address.line1
+      ? document.slug
+      : `${document.locale}/${document.address.region}/${document.address.city}/${
+          document.address.line1
       }-${document.id.toString()}`;
 };
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
+  // temporary: guard for generated repo-based static page
   if (!document?.__?.layout) {
-    return <p>Location static page is static and not using the in-platform pageset.</p>;
+    return <>i am static</>;
   }
+
   return (
-    <VisualEditorProvider document={document}>
-      <Render config={locationConfig as Config} data={document.__.layout} />
-    </VisualEditorProvider>
+      <VisualEditorProvider document={document}>
+        <Render config={locationConfig as Config} data={document.__.layout} />
+      </VisualEditorProvider>
   );
 };
 
