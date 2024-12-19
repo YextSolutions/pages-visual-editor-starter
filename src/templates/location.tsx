@@ -55,7 +55,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
 
   return (
     <VisualEditorProvider document={document}>
-      <Render config={locationConfig as Config} data={document.__.layout} />
+      <Render
+        config={locationConfig as Config}
+        data={JSON.parse(document.__.layout)}
+      />
     </VisualEditorProvider>
   );
 };
