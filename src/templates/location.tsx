@@ -49,9 +49,11 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
   // temporary: guard for generated repo-based static page
+  console.log("document in template", document)
   if (!document?.__?.layout) {
     return <></>;
   }
+  console.log("actually returning")
 
   return (
     <VisualEditorProvider document={document}>
