@@ -1,4 +1,4 @@
-import type { Config } from "@measured/puck";
+import { DropZone, type Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
 import {
   Address,
@@ -27,6 +27,8 @@ import {
   PhoneProps,
   TextList,
   TextListProps,
+  Header,
+  HeaderProps,
 } from "@yext/visual-editor";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
 import { CardComponent as Card, CardProps } from "./components/Card";
@@ -35,7 +37,6 @@ import {
   FeaturedItemsComponent as FeaturedItems,
   FeaturedItemsProps,
 } from "./components/FeaturedItems";
-import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
 
 type LocationProps = {
@@ -56,11 +57,13 @@ type LocationProps = {
   Card: CardProps;
   FAQ: FAQProps;
   FeaturedItems: FeaturedItemsProps;
+  Header: HeaderProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
+    Header,
     Address,
     BodyText,
     CTA,
@@ -80,16 +83,16 @@ export const locationConfig: Config<LocationProps> = {
     FeaturedItems,
   },
   root: {
-    render: ({ children, puck: { isEditing } }) => {
+    render: ({ puck: { isEditing } }) => {
       return (
         <>
-          <Header isEditing={isEditing} />
-          {children}
+          <DropZone zone="header" allow={["Header"]} />
+          <DropZone zone="content" disallow={["Header", "Footer"]} />
+          {/* <DropZone zone="footer" allow={["Footer"]} /> */}
           <Footer isEditing={isEditing} />
         </>
       );
     },
-    fields: {},
   },
 };
 

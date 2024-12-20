@@ -318,6 +318,30 @@ export const themeConfig: ThemeConfig = {
       },
     },
   },
+  header: {
+    label: "Grid Section",
+    styles: {
+      backgroundColor: {
+        label: "Background Color",
+        type: "select",
+        plugin: "backgroundColor",
+        options: getColorOptions(),
+        default: "var(--colors-palette-background)",
+      },
+    },
+  },
+  footer: {
+    label: "Grid Section",
+    styles: {
+      backgroundColor: {
+        label: "Background Color",
+        type: "select",
+        plugin: "backgroundColor",
+        options: getColorOptions(),
+        default: "var(--colors-palette-background)",
+      },
+    },
+  },
   button: {
     label: "Button",
     styles: {
