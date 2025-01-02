@@ -5,6 +5,8 @@ import {
   AddressProps,
   BodyText,
   BodyTextProps,
+  Card,
+  CardProps,
   CTAWrapper as CTA,
   CTAWrapperProps,
   Emails,
@@ -29,7 +31,6 @@ import {
   TextListProps,
 } from "@yext/visual-editor";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
-import { CardComponent as Card, CardProps } from "./components/Card";
 import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
 
