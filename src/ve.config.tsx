@@ -32,11 +32,6 @@ import {
 } from "@yext/visual-editor";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
 import { CardComponent as Card, CardProps } from "./components/Card";
-import { FAQComponent as FAQ, FAQProps } from "./components/FAQ";
-import {
-  FeaturedItemsComponent as FeaturedItems,
-  FeaturedItemsProps,
-} from "./components/FeaturedItems";
 import { Footer } from "./components/Footer.js";
 
 type LocationProps = {
@@ -55,32 +50,28 @@ type LocationProps = {
   GetDirections: GetDirectionsProps;
   Banner: BannerProps;
   Card: CardProps;
-  FAQ: FAQProps;
-  FeaturedItems: FeaturedItemsProps;
   Header: HeaderProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
-    Header,
     Address,
+    Banner,
     BodyText,
+    Card,
     CTA,
+    Emails,
     FlexContainer,
     GetDirections,
     GridSection,
+    Header,
     HeadingText,
     HoursTable,
     HoursStatus,
     ImageWrapper,
-    TextList,
-    Emails,
     Phone,
-    Banner,
-    Card,
-    FAQ,
-    FeaturedItems,
+    TextList,
   },
   root: {
     render: ({ puck: { isEditing } }) => {
