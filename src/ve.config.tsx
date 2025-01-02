@@ -30,11 +30,6 @@ import {
 } from "@yext/visual-editor";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
 import { CardComponent as Card, CardProps } from "./components/Card";
-import { FAQComponent as FAQ, FAQProps } from "./components/FAQ";
-import {
-  FeaturedItemsComponent as FeaturedItems,
-  FeaturedItemsProps,
-} from "./components/FeaturedItems";
 import { Header } from "./components/Header.js";
 import { Footer } from "./components/Footer.js";
 
@@ -54,8 +49,6 @@ type LocationProps = {
   GetDirections: GetDirectionsProps;
   Banner: BannerProps;
   Card: CardProps;
-  FAQ: FAQProps;
-  FeaturedItems: FeaturedItemsProps;
 };
 
 // All the available components for locations
@@ -76,8 +69,6 @@ export const locationConfig: Config<LocationProps> = {
     Phone,
     Banner,
     Card,
-    FAQ,
-    FeaturedItems,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
