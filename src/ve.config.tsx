@@ -27,6 +27,8 @@ import {
   PhoneProps,
   TextList,
   TextListProps,
+  Promo,
+  PromoProps,
 } from "@yext/visual-editor";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
 import { CardComponent as Card, CardProps } from "./components/Card";
@@ -49,6 +51,7 @@ type LocationProps = {
   GetDirections: GetDirectionsProps;
   Banner: BannerProps;
   Card: CardProps;
+  Promo: PromoProps;
 };
 
 // All the available components for locations
@@ -69,6 +72,7 @@ export const locationConfig: Config<LocationProps> = {
     Phone,
     Banner,
     Card,
+    Promo,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
