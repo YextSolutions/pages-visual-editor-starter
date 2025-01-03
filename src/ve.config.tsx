@@ -1,4 +1,4 @@
-import type { Config } from "@measured/puck";
+import { DropZone, type Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
 import {
   Address,
@@ -27,64 +27,65 @@ import {
   PhoneProps,
   TextList,
   TextListProps,
-  Promo,
-  PromoProps,
+  Header,
+  HeaderProps,
+  Footer,
+  FooterProps,
 } from "@yext/visual-editor";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
 import { CardComponent as Card, CardProps } from "./components/Card";
-import { Header } from "./components/Header.js";
-import { Footer } from "./components/Footer.js";
 
 type LocationProps = {
-  GridSection: GridSectionProps;
-  HoursTable: HoursTableProps;
-  BodyText: BodyTextProps;
-  HeadingText: HeadingTextProps;
-  ImageWrapper: ImageWrapperProps;
-  CTA: CTAWrapperProps;
-  HoursStatus: HoursStatusProps;
-  FlexContainer: FlexContainerProps;
   Address: AddressProps;
-  TextList: TextListProps;
-  Emails: EmailsProps;
-  Phone: PhoneProps;
-  GetDirections: GetDirectionsProps;
   Banner: BannerProps;
+  BodyText: BodyTextProps;
   Card: CardProps;
-  Promo: PromoProps;
+  CTA: CTAWrapperProps;
+  Emails: EmailsProps;
+  FlexContainer: FlexContainerProps;
+  Footer: FooterProps;
+  GetDirections: GetDirectionsProps;
+  GridSection: GridSectionProps;
+  Header: HeaderProps;
+  HeadingText: HeadingTextProps;
+  HoursTable: HoursTableProps;
+  HoursStatus: HoursStatusProps;
+  ImageWrapper: ImageWrapperProps;
+  Phone: PhoneProps;
+  TextList: TextListProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
     Address,
+    Banner,
     BodyText,
+    Card,
     CTA,
+    Emails,
     FlexContainer,
+    Footer,
     GetDirections,
     GridSection,
+    Header,
     HeadingText,
     HoursTable,
     HoursStatus,
     ImageWrapper,
-    TextList,
-    Emails,
     Phone,
-    Banner,
-    Card,
-    Promo,
+    TextList,
   },
   root: {
-    render: ({ children, puck: { isEditing } }) => {
+    render: () => {
       return (
         <>
-          <Header isEditing={isEditing} />
-          {children}
-          <Footer isEditing={isEditing} />
+          <DropZone zone="header" allow={["Header"]} />
+          <DropZone zone="content" disallow={["Header", "Footer"]} />
+          <DropZone zone="footer" allow={["Footer"]} />
         </>
       );
     },
-    fields: {},
   },
 };
 
