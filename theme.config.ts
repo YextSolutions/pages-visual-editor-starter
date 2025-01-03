@@ -318,6 +318,30 @@ export const themeConfig: ThemeConfig = {
       },
     },
   },
+  header: {
+    label: "Header",
+    styles: {
+      backgroundColor: {
+        label: "Background Color",
+        type: "select",
+        plugin: "backgroundColor",
+        options: getColorOptions(),
+        default: "var(--colors-palette-background)",
+      },
+    },
+  },
+  footer: {
+    label: "Footer",
+    styles: {
+      backgroundColor: {
+        label: "Background Color",
+        type: "select",
+        plugin: "backgroundColor",
+        options: getColorOptions(),
+        default: "var(--colors-palette-background)",
+      },
+    },
+  },
   button: {
     label: "Button",
     styles: {
@@ -331,7 +355,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Weight",
         type: "select",
         plugin: "fontWeight",
-        options: fontWeightOptions(),
+        options: fontWeightOptions("--fontFamily-body-fontFamily"),
         default: "400",
       },
       fontSize: {
