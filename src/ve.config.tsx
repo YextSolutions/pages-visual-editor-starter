@@ -5,6 +5,8 @@ import {
   AddressProps,
   BodyText,
   BodyTextProps,
+  Card,
+  CardProps,
   CTAWrapper as CTA,
   CTAWrapperProps,
   Emails,
@@ -33,7 +35,6 @@ import {
   FooterProps,
 } from "@yext/visual-editor";
 import { BannerComponent as Banner, BannerProps } from "./components/Banner";
-import { CardComponent as Card, CardProps } from "./components/Card";
 
 type LocationProps = {
   Address: AddressProps;
