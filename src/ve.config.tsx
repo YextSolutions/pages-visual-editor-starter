@@ -3,6 +3,8 @@ import "@yext/visual-editor/style.css";
 import {
   Address,
   AddressProps,
+  Banner,
+  BannerProps,
   BodyText,
   BodyTextProps,
   Card,
@@ -34,7 +36,6 @@ import {
   Footer,
   FooterProps,
 } from "@yext/visual-editor";
-import { BannerComponent as Banner, BannerProps } from "./components/Banner";
 
 type LocationProps = {
   Address: AddressProps;
