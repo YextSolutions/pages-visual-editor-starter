@@ -41,11 +41,12 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
     // temporary: guard for generated repo-based static page
     return `static-${Math.floor(Math.random() * (10000 - 1))}`;
   }
+  const localePath = document.locale !== "en" ? `${document.locale}/` : "";
   return document.address
-    ? `${document.locale}/${document.address.region}/${document.address.city}/${
+    ? `${localePath}${document.address.region}/${document.address.city}/${
         document.address.line1
       }-${document.id.toString()}`
-    : `${document.locale}/${document.id.toString()}`;
+    : document.id.toString();
 };
 
 const Location: Template<TemplateRenderProps> = (props) => {
