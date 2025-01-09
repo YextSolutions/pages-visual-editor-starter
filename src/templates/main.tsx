@@ -41,11 +41,11 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
     // temporary: guard for generated repo-based static page
     return `static-${Math.floor(Math.random() * (10000 - 1))}`;
   }
-  return document.slug
-    ? document.slug
-    : `${document.locale}/${document.address.region}/${document.address.city}/${
+  return document.address
+    ? `${document.locale}/${document.address.region}/${document.address.city}/${
         document.address.line1
-      }-${document.id.toString()}`;
+      }-${document.id.toString()}`
+    : `${document.locale}/${document.id.toString()}`;
 };
 
 const Location: Template<TemplateRenderProps> = (props) => {
