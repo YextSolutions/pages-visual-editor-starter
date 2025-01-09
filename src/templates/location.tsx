@@ -2,7 +2,6 @@ import "@yext/visual-editor/style.css";
 import {
   Template,
   GetPath,
-  TemplateConfig,
   TemplateProps,
   TemplateRenderProps,
   GetHeadConfig,
@@ -10,59 +9,9 @@ import {
 } from "@yext/pages";
 import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
-import {
-  resolveVisualEditorData,
-  applyTheme,
-  VisualEditorProvider,
-} from "@yext/visual-editor";
+import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
-
-export const config = {
-  name: "location",
-  stream: {
-    $id: "location-stream",
-    filter: {
-      entityTypes: ["location"],
-    },
-    fields: [
-      "id",
-      "uid",
-      "meta",
-      "slug",
-      "name",
-      "hours",
-      "dineInHours",
-      "driveThroughHours",
-      "address",
-      "yextDisplayCoordinate",
-      "c_productSection.sectionTitle",
-      "c_productSection.linkedProducts.name",
-      "c_productSection.linkedProducts.c_productPromo",
-      "c_productSection.linkedProducts.c_description",
-      "c_productSection.linkedProducts.c_coverPhoto",
-      "c_productSection.linkedProducts.c_productCTA",
-      "c_hero",
-      "c_faqSection.linkedFAQs.question",
-      "c_faqSection.linkedFAQs.answerV2",
-      "additionalHoursText",
-      "mainPhone",
-      "emails",
-      "services",
-      "c_deliveryPromo",
-    ],
-    localization: {
-      locales: ["en"],
-    },
-  },
-  additionalProperties: {
-    isVETemplate: true,
-  },
-} as const satisfies TemplateConfig;
-
-export const transformProps = async (data: any) => {
-  return resolveVisualEditorData(data, "location");
-};
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
@@ -87,6 +36,10 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  if (!document?.__?.layout) {
+    // temporary: guard for generated repo-based static page
+    return `static-${Math.floor(Math.random() * (10000 - 1))}`;
+  }
   return document.slug
     ? document.slug
     : `${document.locale}/${document.address.region}/${document.address.city}/${
@@ -95,10 +48,17 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 };
 
 const Location: Template<TemplateRenderProps> = ({ document }) => {
-  const { visualTemplate } = document;
+  // temporary: guard for generated repo-based static page
+  if (!document?.__?.layout) {
+    return <></>;
+  }
+
   return (
     <VisualEditorProvider document={document}>
-      <Render config={locationConfig as Config} data={visualTemplate} />
+      <Render
+        config={locationConfig as Config}
+        data={JSON.parse(document.__.layout)}
+      />
     </VisualEditorProvider>
   );
 };

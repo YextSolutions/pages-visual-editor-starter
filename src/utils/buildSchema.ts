@@ -1,4 +1,4 @@
-import { SchemaWrapper, LocalBusiness, FAQPage } from "@yext/pages-components";
+import { SchemaWrapper, LocalBusiness } from "@yext/pages-components";
 
 export function buildSchema(document: Record<string, any>) {
   const localBusiness = document.address && {
@@ -7,12 +7,8 @@ export function buildSchema(document: Record<string, any>) {
     makesOffer: document.services,
   };
 
-  const faqs =
-    document.c_faqSection?.linkedFAQs &&
-    FAQPage(document.c_faqSection.linkedFAQs);
-
   const json = {
-    "@graph": [localBusiness, faqs].filter(Boolean),
+    "@graph": [localBusiness].filter(Boolean),
   };
 
   return SchemaWrapper(json);
