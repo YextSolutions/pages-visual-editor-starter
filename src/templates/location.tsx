@@ -12,6 +12,7 @@ import { locationConfig } from "../ve.config";
 import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
+import { AnalyticsProvider } from "@yext/pages-components";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
@@ -47,19 +48,27 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
       }-${document.id.toString()}`;
 };
 
-const Location: Template<TemplateRenderProps> = ({ document }) => {
+const Location: Template<TemplateRenderProps> = (props) => {
+  const { document } = props;
   // temporary: guard for generated repo-based static page
   if (!document?.__?.layout) {
     return <></>;
   }
 
   return (
-    <VisualEditorProvider document={document}>
-      <Render
-        config={locationConfig as Config}
-        data={JSON.parse(document.__.layout)}
-      />
-    </VisualEditorProvider>
+    <AnalyticsProvider
+      // @ts-expect-error ts(2304) the api key will be populated
+      apiKey={YEXT_PUBLIC_EVENTS_API_KEY}
+      templateData={props}
+      currency="USD"
+    >
+      <VisualEditorProvider document={document}>
+        <Render
+          config={locationConfig as Config}
+          data={JSON.parse(document.__.layout)}
+        />
+      </VisualEditorProvider>
+    </AnalyticsProvider>
   );
 };
 
