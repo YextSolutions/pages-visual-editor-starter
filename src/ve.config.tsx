@@ -1,5 +1,6 @@
 import { DropZone, type Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
+import "./index.css";
 import {
   Address,
   AddressProps,
