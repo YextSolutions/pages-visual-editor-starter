@@ -84,7 +84,7 @@ export const locationConfig: Config<LocationProps> = {
       return (
         <>
           <DropZone zone="header" allow={["Header"]} />
-          <DropZone zone="content" disallow={["Header", "Footer"]} />
+          <DropZone zone="default-zone" disallow={["Header", "Footer"]} />
           <DropZone zone="footer" allow={["Footer"]} />
         </>
       );
