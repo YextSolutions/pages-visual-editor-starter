@@ -46,7 +46,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
     ? `${localePath}${document.address.region}/${document.address.city}/${
         document.address.line1
       }-${document.id.toString()}`
-    : document.id.toString();
+    : `${localePath}${document.id.toString()}`;
 };
 
 const Location: Template<TemplateRenderProps> = (props) => {
