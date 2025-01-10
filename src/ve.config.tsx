@@ -1,4 +1,4 @@
-import { DropZone, type Config } from "@measured/puck";
+import { type Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
 import "./index.css";
 import {
@@ -80,14 +80,8 @@ export const locationConfig: Config<LocationProps> = {
     TextList,
   },
   root: {
-    render: () => {
-      return (
-        <>
-          <DropZone zone="header" allow={["Header"]} />
-          <DropZone zone="content" disallow={["Header", "Footer"]} />
-          <DropZone zone="footer" allow={["Footer"]} />
-        </>
-      );
+    render: ({ children }) => {
+      return <>{children}</>;
     },
   },
 };
