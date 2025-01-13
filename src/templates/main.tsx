@@ -11,7 +11,7 @@ import { Render } from "@measured/puck";
 import { mainConfig } from "../ve.config";
 import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
-// import { buildSchema } from "../utils/buildSchema";
+import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
