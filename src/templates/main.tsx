@@ -11,7 +11,7 @@ import { Config, Render } from "@measured/puck";
 import { locationConfig } from "../ve.config";
 import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
-import { buildSchema } from "../utils/buildSchema";
+// import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
@@ -37,7 +37,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
-  return "abc";
+  // return "abc";
   if (!document?.__?.layout) {
     // temporary: guard for generated repo-based static page
     return `static-${Math.floor(Math.random() * (10000 - 1))}`;
