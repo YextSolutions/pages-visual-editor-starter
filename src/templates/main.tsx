@@ -7,8 +7,8 @@ import {
   GetHeadConfig,
   HeadConfig,
 } from "@yext/pages";
-import { Config, Render } from "@measured/puck";
-import { locationConfig } from "../ve.config";
+import { Render } from "@measured/puck";
+import { mainConfig } from "../ve.config";
 import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
@@ -64,10 +64,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       currency="USD"
     >
       <VisualEditorProvider document={document}>
-        <Render
-          config={locationConfig as Config}
-          data={JSON.parse(document.__.layout)}
-        />
+        <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
     </AnalyticsProvider>
   );

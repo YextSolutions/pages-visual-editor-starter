@@ -38,7 +38,7 @@ import {
   FooterProps,
 } from "@yext/visual-editor";
 
-type LocationProps = {
+type MainProps = {
   Address: AddressProps;
   Banner: BannerProps;
   BodyText: BodyTextProps;
@@ -59,7 +59,7 @@ type LocationProps = {
 };
 
 // All the available components for locations
-export const locationConfig: Config<LocationProps> = {
+export const mainConfig: Config<MainProps> = {
   components: {
     Address,
     Banner,
@@ -87,5 +87,5 @@ export const locationConfig: Config<LocationProps> = {
 };
 
 export const componentRegistry = new Map<string, Config<any>>([
-  ["location", locationConfig],
+  ["main", mainConfig],
 ]);
