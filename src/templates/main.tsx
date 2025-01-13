@@ -1,17 +1,17 @@
 import "@yext/visual-editor/style.css";
-import {
-  Template,
-  GetPath,
-  TemplateProps,
-  TemplateRenderProps,
-  GetHeadConfig,
-  HeadConfig,
-} from "@yext/pages";
+// import {
+//   Template,
+//   GetPath,
+//   TemplateProps,
+//   TemplateRenderProps,
+//   GetHeadConfig,
+//   HeadConfig,
+// } from "@yext/pages";
 import { Render } from "@measured/puck";
 import { mainConfig } from "../ve.config";
 import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
-import { buildSchema } from "../utils/buildSchema";
+// import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
@@ -50,25 +50,25 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
     : `${localePath}${document.id.toString()}`;
 };
 
-const Location: Template<TemplateRenderProps> = (props) => {
-  const { document } = props;
-  // temporary: guard for generated repo-based static page
-  if (!document?.__?.layout) {
-    return <></>;
-  }
+// const Location: Template<TemplateRenderProps> = (props) => {
+//   const { document } = props;
+//   // temporary: guard for generated repo-based static page
+//   if (!document?.__?.layout) {
+//     return <></>;
+//   }
 
-  return (
-    <AnalyticsProvider
-      // @ts-expect-error ts(2304) the api key will be populated
-      apiKey={YEXT_PUBLIC_EVENTS_API_KEY}
-      templateData={props}
-      currency="USD"
-    >
-      <VisualEditorProvider document={document}>
-        <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
-      </VisualEditorProvider>
-    </AnalyticsProvider>
-  );
-};
+//   return (
+//     <AnalyticsProvider
+//       // @ts-expect-error ts(2304) the api key will be populated
+//       apiKey={YEXT_PUBLIC_EVENTS_API_KEY}
+//       templateData={props}
+//       currency="USD"
+//     >
+//       <VisualEditorProvider document={document}>
+//         <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
+//       </VisualEditorProvider>
+//     </AnalyticsProvider>
+//   );
+// };
 
 export default Location;
