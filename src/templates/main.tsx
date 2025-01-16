@@ -9,7 +9,11 @@ import {
 } from "@yext/pages";
 import { Render } from "@measured/puck";
 import { mainConfig } from "../ve.config";
-import { applyTheme, VisualEditorProvider } from "@yext/visual-editor";
+import {
+  applyTheme,
+  VisualEditorProvider,
+  normalizeSlug,
+} from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
@@ -41,12 +45,17 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
     // temporary: guard for generated repo-based static page
     return `static-${Math.floor(Math.random() * (10000 - 1))}`;
   }
+
+  if (document.slug) {
+    return document.slug;
+  }
+
   const localePath = document.locale !== "en" ? `${document.locale}/` : "";
-  return document.address
-    ? `${localePath}${document.address.region}/${document.address.city}/${
-        document.address.line1
-      }-${document.id.toString()}`
-    : `${localePath}${document.id.toString()}`;
+  const path = document.address
+    ? `${localePath}${document.address.region}/${document.address.city}/${document.address.line1}`
+    : `${localePath}${document.id}`;
+
+  return normalizeSlug(path);
 };
 
 const Location: Template<TemplateRenderProps> = (props) => {
