@@ -88,4 +88,5 @@ export const mainConfig: Config<MainProps> = {
 
 export const componentRegistry = new Map<string, Config<any>>([
   ["main", mainConfig],
+  ["dev", mainConfig]
 ]);
