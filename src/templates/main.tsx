@@ -64,6 +64,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
   if (!document?.__?.layout) {
     return <></>;
   }
+  console.log("document", document);
 
   return (
     <AnalyticsProvider
@@ -73,10 +74,10 @@ const Location: Template<TemplateRenderProps> = (props) => {
       currency="USD"
     >
       <VisualEditorProvider document={document}>
-        <h1>
+        {/* <h1>
           document.__.theme.siteAttributes is:
           {document.__.theme.siteAttributes}
-        </h1>
+        </h1> */}
         <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
     </AnalyticsProvider>
