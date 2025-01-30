@@ -74,10 +74,10 @@ const Location: Template<TemplateRenderProps> = (props) => {
       currency="USD"
     >
       <VisualEditorProvider document={document}>
-        {/* <h1>
+        <h1>
           document.__.theme.siteAttributes is:
-          {document.__.theme.siteAttributes}
-        </h1> */}
+          {JSON.parse(document.__.theme).siteAttributes}
+        </h1>
         <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
     </AnalyticsProvider>
