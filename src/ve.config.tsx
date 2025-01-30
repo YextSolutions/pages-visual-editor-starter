@@ -2,8 +2,6 @@ import { type Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
 import "./index.css";
 import {
-  Address,
-  AddressProps,
   Banner,
   BannerProps,
   BodyText,
@@ -37,6 +35,7 @@ import {
   Footer,
   FooterProps,
 } from "@yext/visual-editor";
+import { Address, AddressProps } from "./components/Address";
 
 type MainProps = {
   Address: AddressProps;
