@@ -9,7 +9,7 @@
     "dev": "pages dev",
     "prod": "pages prod",
     "build": "pages build",
-    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn add"
+    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add"
   },
   "engines": {
     "node": "^18.4.0 || >=20.2.0"
