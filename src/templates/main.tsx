@@ -76,7 +76,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       <VisualEditorProvider document={document}>
         <h1>
           document.__.theme.siteAttributes is:
-          {JSON.parse(document.__.theme).siteAttributes}
+          {JSON.stringify(JSON.parse(document.__.theme).siteAttributes)}
         </h1>
         <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
