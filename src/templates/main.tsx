@@ -13,6 +13,7 @@ import {
   applyTheme,
   VisualEditorProvider,
   normalizeSlug,
+  applyAnalytics,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
