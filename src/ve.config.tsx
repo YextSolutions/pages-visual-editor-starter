@@ -30,6 +30,8 @@ import {
   ImageWrapperProps,
   Phone,
   PhoneProps,
+  Promo,
+  PromoProps,
   TextList,
   TextListProps,
   Header,
@@ -55,6 +57,7 @@ type MainProps = {
   HoursStatus: HoursStatusProps;
   ImageWrapper: ImageWrapperProps;
   Phone: PhoneProps;
+  Promo: PromoProps;
   TextList: TextListProps;
 };
 
@@ -77,6 +80,7 @@ export const mainConfig: Config<MainProps> = {
     HoursStatus,
     ImageWrapper,
     Phone,
+    Promo,
     TextList,
   },
   root: {
