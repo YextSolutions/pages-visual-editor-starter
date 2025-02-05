@@ -366,16 +366,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: [
-          { label: "XS (12px)", value: "12px" },
-          { label: "SM (14px)", value: "14px" },
-          { label: "Base (16px)", value: "16px" },
-          { label: "LG (18px)", value: "18px" },
-          { label: "XL (20px)", value: "20px" },
-          { label: "2XL (24px)", value: "24px" },
-          { label: "3XL (30px)", value: "30px" },
-          { label: "4XL (36px)", value: "36px" },
-        ],
+        options: getFontSizeOptions(false),
         default: "12px",
       },
       backgroundColor: {
