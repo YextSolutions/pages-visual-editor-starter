@@ -1,79 +1,64 @@
 import type { Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
 import {
-  AddressComponent as Address,
+  Address as Address,
   AddressProps,
-  BodyTextComponent as BodyText,
+  BodyText as BodyText,
   BodyTextProps,
-  CTAWrapperComponent as CTA,
+  CTAWrapper as CTA,
   CTAWrapperProps,
-  EmailsComponent as Emails,
+  Emails as Emails,
   EmailsProps,
-  FlexContainerComponent as FlexContainer,
+  FlexContainer as FlexContainer,
   FlexContainerProps,
-  GridSectionComponent as GridSection,
+  GridSection as GridSection,
   GridSectionProps,
-  HeadingTextComponent as HeadingText,
+  HeadingText as HeadingText,
   HeadingTextProps,
-  HoursCardComponent as HoursCard,
-  HoursCardProps,
-  HoursStatusComponent as HoursStatus,
+  HoursTable as HoursTable,
+  HoursTableProps,
+  HoursStatus as HoursStatus,
   HoursStatusProps,
-  ImageWrapperComponent as ImageWrapper,
+  ImageWrapper as ImageWrapper,
   ImageWrapperProps,
-  PhoneComponent as Phone,
+  Phone as Phone,
   PhoneProps,
-  TextListComponent as TextList,
+  TextList as TextList,
   TextListProps,
 } from "@yext/visual-editor";
-import { Header } from "./components/Header.js";
-import { Footer } from "./components/Footer.js";
-import {
-  DEStaticComponentWrapperProps,
-  DEStaticComponentWrapperComponent as DEStaticComponent,
-} from "./components/DEStaticComponent.js";
-import {
-  DEEntityComponentWrapperComponent as DEEntityComponent,
-  DEComponentProps,
-} from "./components/DEEntityComponent.js";
-import { Hero, HeroProps } from "./components/Hero.js";
-import { Blogs, BlogsProps } from "./components/Blogs.js";
-import { FAQComponent, FAQProps } from "./components/FAQs.js";
-import {
-  FAQsWithStaticFAQsComponent as FAQsStaticData,
-  FAQsWithStaticFAQsProps,
-} from "./components/FAQsWithStaticFAQs.js";
-import {
-  BlogsWithStaticDataProps,
-  BlogsWithStaticData as BlogsStaticData,
-} from "./components/BlogsWithStaticData.js";
-import {
-  DescriptionSection as Description,
-  DescriptionProps,
-} from "./components/DescriptionSection.js";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 type LocationProps = {
-  DEStaticComponent: DEStaticComponentWrapperProps;
-  DEEntityComponent: DEComponentProps;
-  Hero: HeroProps;
-  Blogs: BlogsProps;
-  FAQComponent: FAQProps;
-  FAQsStaticData: FAQsWithStaticFAQsProps;
-  BlogsStaticData: BlogsWithStaticDataProps;
-  Description: DescriptionProps;
+  GridSection: GridSectionProps;
+  HoursTable: HoursTableProps;
+  BodyText: BodyTextProps;
+  HeadingText: HeadingTextProps;
+  ImageWrapper: ImageWrapperProps;
+  CTA: CTAWrapperProps;
+  HoursStatus: HoursStatusProps;
+  FlexContainer: FlexContainerProps;
+  Address: AddressProps;
+  TextList: TextListProps;
+  Emails: EmailsProps;
+  Phone: PhoneProps;
 };
 
 // All the available components for locations
 export const locationConfig: Config<LocationProps> = {
   components: {
-    Hero,
-    FAQsStaticData,
-    FAQComponent,
-    Description,
-    BlogsStaticData,
-    Blogs,
-    DEEntityComponent,
-    DEStaticComponent,
+    Address,
+    BodyText,
+    CTA,
+    Emails,
+    FlexContainer,
+    GridSection,
+    HeadingText,
+    HoursTable,
+    HoursStatus,
+    ImageWrapper,
+    Phone,
+    TextList,
   },
   root: {
     render: ({ children, puck: { isEditing } }) => {
