@@ -22,7 +22,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
 }): HeadConfig => {
   return {
-    title: document.name,
+    title: document.title ?? document.name,
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
@@ -31,6 +31,13 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         attributes: {
           rel: "icon",
           type: "image/x-icon",
+        },
+      },
+      {
+        type: "meta",
+        attributes: {
+          name: "description",
+          content: document.description ?? "",
         },
       },
     ],
