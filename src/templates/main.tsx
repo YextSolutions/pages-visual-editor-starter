@@ -19,9 +19,7 @@ import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-                                                                    document,
-                                                                  }): HeadConfig => {
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
   let title = "";
   let description = "";
   if (document?.__?.layout) {
