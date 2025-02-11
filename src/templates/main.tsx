@@ -21,8 +21,15 @@ import { AnalyticsProvider } from "@yext/pages-components";
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
 }): HeadConfig => {
+  let title = document.name;
+  let description = "";
+  if (document?.__?.layout) {
+    const layout = JSON.parse(document.__.layout);
+    title = layout.title ? layout.title : document.name;
+    description = layout.description ? layout.description : "";
+  }
   return {
-    title: document.name,
+    title: title,
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
@@ -33,6 +40,13 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
           type: "image/x-icon",
         },
       },
+      {
+        type: "meta",
+        attributes: {
+          name: "description",
+          content: description
+        }
+      }
     ],
     other: [applyTheme(document, themeConfig), buildSchema(document)].join(
       "\n"
