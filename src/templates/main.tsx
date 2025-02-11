@@ -13,6 +13,7 @@ import {
   applyTheme,
   VisualEditorProvider,
   normalizeSlug,
+  applyAnalytics,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
@@ -34,7 +35,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         },
       },
     ],
-    other: [applyTheme(document, themeConfig), buildSchema(document)].join(
+    other: [applyTheme(document, themeConfig), buildSchema(document), applyAnalytics(document)].join(
       "\n"
     ),
   };
