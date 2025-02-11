@@ -13,14 +13,14 @@ import {
   applyTheme,
   VisualEditorProvider,
   normalizeSlug,
-  getMetaData,
+  getPageMetadata,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
-  const { title, description } = getMetaData(document);
+  const { title, description } = getPageMetadata(document);
   return {
     title: title,
     charset: "UTF-8",
