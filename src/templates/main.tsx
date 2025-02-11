@@ -13,20 +13,14 @@ import {
   applyTheme,
   VisualEditorProvider,
   normalizeSlug,
-  resolveYextEntityField,
+  getMetaData,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
-  let title = "";
-  let description = "";
-  if (document?.__?.layout) {
-    const layout = JSON.parse(document.__.layout);
-    title = resolveYextEntityField(document, layout.root.title) ?? "";
-    description = resolveYextEntityField(document, layout.root.description) ?? "";
-  }
+  const { title, description } = getMetaData(document);
   return {
     title: title,
     charset: "UTF-8",
@@ -48,7 +42,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }):
       },
     ],
     other: [applyTheme(document, themeConfig), buildSchema(document)].join(
-      "\n"
+        "\n"
     ),
   };
 };
