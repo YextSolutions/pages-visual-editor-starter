@@ -6,6 +6,7 @@ import {
   constructFontSelectOptions,
   getFontSizeOptions,
   getBorderRadiusOptions,
+  getSpacingOptions,
 } from "@yext/visual-editor";
 
 const getColorOptions = () => {
@@ -298,8 +299,8 @@ export const themeConfig: ThemeConfig = {
       },
     },
   },
-  grid: {
-    label: "Grid Section",
+  pageSection: {
+    label: "Page Section",
     styles: {
       maxWidth: {
         label: "Maximum Width",
@@ -318,6 +319,27 @@ export const themeConfig: ThemeConfig = {
         plugin: "backgroundColor",
         options: getColorOptions(),
         default: "var(--colors-palette-background)",
+      },
+      gap: {
+        label: "Gap",
+        type: "select",
+        plugin: "gap",
+        options: getSpacingOptions(),
+        default: "0px",
+      },
+      verticalPadding: {
+        label: "Vertical Padding",
+        type: "select",
+        plugin: "padding",
+        options: getSpacingOptions(),
+        default: "0px",
+      },
+      horizontalPadding: {
+        label: "Horizontal Padding",
+        type: "select",
+        plugin: "padding",
+        options: getSpacingOptions(),
+        default: "0px",
       },
     },
   },

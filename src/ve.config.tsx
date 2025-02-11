@@ -14,12 +14,12 @@ import {
   CTAWrapperProps,
   Emails,
   EmailsProps,
-  FlexContainer,
-  FlexContainerProps,
+  Flex,
+  FlexProps,
   GetDirections,
   GetDirectionsProps,
-  GridSection,
-  GridSectionProps,
+  Grid,
+  GridProps,
   HeadingText,
   HeadingTextProps,
   HoursTable,
@@ -45,10 +45,10 @@ type MainProps = {
   Card: CardProps;
   CTA: CTAWrapperProps;
   Emails: EmailsProps;
-  FlexContainer: FlexContainerProps;
+  Flex: FlexProps;
   Footer: FooterProps;
   GetDirections: GetDirectionsProps;
-  GridSection: GridSectionProps;
+  Grid: GridProps;
   Header: HeaderProps;
   HeadingText: HeadingTextProps;
   HoursTable: HoursTableProps;
@@ -67,10 +67,10 @@ export const mainConfig: Config<MainProps> = {
     Card,
     CTA,
     Emails,
-    FlexContainer,
+    Flex,
     Footer,
     GetDirections,
-    GridSection,
+    Grid,
     Header,
     HeadingText,
     HoursTable,
