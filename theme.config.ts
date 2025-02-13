@@ -4,6 +4,9 @@ import {
   FontRegistry,
   getFontWeightOptions,
   constructFontSelectOptions,
+  getFontSizeOptions,
+  getBorderRadiusOptions,
+  getSpacingOptions,
 } from "@yext/visual-editor";
 
 const getColorOptions = () => {
@@ -70,9 +73,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 48,
+        options: getFontSizeOptions(),
+        default: "48px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -102,9 +106,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 24,
+        options: getFontSizeOptions(),
+        default: "24px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -134,9 +139,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 24,
+        options: getFontSizeOptions(),
+        default: "24px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -166,9 +172,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 24,
+        options: getFontSizeOptions(),
+        default: "24px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -198,9 +205,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 24,
+        options: getFontSizeOptions(),
+        default: "24px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -230,9 +238,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 24,
+        options: getFontSizeOptions(),
+        default: "24px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -262,9 +271,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 16,
+        options: getFontSizeOptions(),
+        default: "16px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -289,23 +299,17 @@ export const themeConfig: ThemeConfig = {
       },
     },
   },
-  grid: {
-    label: "Grid Section",
+  pageSection: {
+    label: "Page Section",
     styles: {
-      verticalSpacing: {
-        label: "Vertical Spacing",
-        type: "number",
-        plugin: "gap",
-        default: 8,
-      },
       maxWidth: {
         label: "Maximum Width",
         type: "select",
         plugin: "maxWidth",
         options: [
-          { label: "2XL", value: "1536px" },
-          { label: "XL", value: "1280px" },
-          { label: "LG", value: "1024px" },
+          { label: "2XL (1536px)", value: "1536px" },
+          { label: "XL (1280px)", value: "1280px" },
+          { label: "LG (1024px)", value: "1024px" },
         ],
         default: "1280px",
       },
@@ -315,6 +319,27 @@ export const themeConfig: ThemeConfig = {
         plugin: "backgroundColor",
         options: getColorOptions(),
         default: "var(--colors-palette-background)",
+      },
+      gap: {
+        label: "Gap",
+        type: "select",
+        plugin: "gap",
+        options: getSpacingOptions(),
+        default: "0px",
+      },
+      verticalPadding: {
+        label: "Vertical Padding",
+        type: "select",
+        plugin: "padding",
+        options: getSpacingOptions(),
+        default: "0px",
+      },
+      horizontalPadding: {
+        label: "Horizontal Padding",
+        type: "select",
+        plugin: "padding",
+        options: getSpacingOptions(),
+        default: "0px",
       },
     },
   },
@@ -347,9 +372,10 @@ export const themeConfig: ThemeConfig = {
     styles: {
       borderRadius: {
         label: "Border Radius",
-        type: "number",
+        type: "select",
         plugin: "borderRadius",
-        default: 20,
+        options: getBorderRadiusOptions(),
+        default: "16px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -360,9 +386,10 @@ export const themeConfig: ThemeConfig = {
       },
       fontSize: {
         label: "Font Size",
-        type: "number",
+        type: "select",
         plugin: "fontSize",
-        default: 12,
+        options: getFontSizeOptions(false),
+        default: "12px",
       },
       backgroundColor: {
         label: "Background Color",
