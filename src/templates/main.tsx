@@ -13,17 +13,17 @@ import {
   applyTheme,
   VisualEditorProvider,
   normalizeSlug,
+  getPageMetadata,
   applyAnalytics,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  document,
-}): HeadConfig => {
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
+  const { title, description } = getPageMetadata(document);
   return {
-    title: document.name,
+    title: title,
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
@@ -32,6 +32,13 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         attributes: {
           rel: "icon",
           type: "image/x-icon",
+        },
+      },
+      {
+        type: "meta",
+        attributes: {
+          name: "description",
+          content: description,
         },
       },
     ],
