@@ -80,7 +80,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       templateData={props}
       currency="USD"
     >
-      <VisualEditorProvider document={document}>
+      <VisualEditorProvider document={{...document, relativePrefixToRoot: props.relativePrefixToRoot}}>
         <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
     </AnalyticsProvider>
