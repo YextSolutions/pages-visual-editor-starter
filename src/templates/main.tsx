@@ -75,8 +75,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
 
   return (
     <AnalyticsProvider
-      // @ts-expect-error ts(2304) the api key will be populated
-      apiKey={YEXT_PUBLIC_EVENTS_API_KEY}
+      apiKey={document?._env?.YEXT_PUBLIC_EVENTS_API_KEY}
       templateData={props}
       currency="USD"
     >
