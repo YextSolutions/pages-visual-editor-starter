@@ -73,8 +73,6 @@ const Location: Template<TemplateRenderProps> = (props) => {
     return <></>;
   }
 
-  console.log("document:\n", document);
-
   return (
     <AnalyticsProvider
       apiKey={document?._env?.YEXT_PUBLIC_EVENTS_API_KEY}
