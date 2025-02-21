@@ -12,15 +12,15 @@ siteStream:
   id: site-stream
   entityId: site
   fields:
-    - site_favicon
-    - business_logo
-    - twitter_handle
-    - facebook_page_url
-    - instagram_handle
-    - linkedin_url
-    - pinterest_url
-    - tiktok_url
-    - youtube_channel_url
+    - favicon
+    - logo
+    - twitterHandle
+    - facebookPageUrl
+    - instagramHandle
+    - linkedInUrl
+    - pinterestUrl
+    - tikTokUrl
+    - youTubeChannelUrl
     - header
     - footer
   localization:
