@@ -12,17 +12,17 @@ siteStream:
   id: site-stream
   entityId: site
   fields:
-    - entity.site_favicon
-    - location.business_logo
-    - location.twitter_handle
-    - location.facebook_page_url
-    - location.instagram_handle
-    - entity.linkedin_url
-    - entity.pinterest_url
-    - entity.tiktok_url
-    - entity.youtube_channel_url
-    - entity.header
-    - entity.footer
+    - site_favicon
+    - business_logo
+    - twitter_handle
+    - facebook_page_url
+    - instagram_handle
+    - linkedin_url
+    - pinterest_url
+    - tiktok_url
+    - youtube_channel_url
+    - header
+    - footer
   localization:
     locales:
       - en
