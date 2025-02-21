@@ -6,7 +6,6 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
   HeadConfig,
-  Tag,
   TagType,
 } from "@yext/pages";
 import { Render } from "@measured/puck";
@@ -22,7 +21,9 @@ import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
+  document,
+}): HeadConfig => {
   const { title, description } = getPageMetadata(document);
   const faviconUrl = document?._site?.favicon?.url;
 
@@ -45,18 +46,24 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }):
           content: description,
         },
       },
-      ...(faviconUrl ? [{
-        type: "link" as TagType,
-        attributes: {
-          rel: "icon",
-          type: "image/x-icon",
-          href: faviconUrl,
-        },
-      }] : []),
+      ...(faviconUrl
+        ? [
+            {
+              type: "link" as TagType,
+              attributes: {
+                rel: "icon",
+                type: "image/x-icon",
+                href: faviconUrl,
+              },
+            },
+          ]
+        : []),
     ],
-    other: [applyAnalytics(document), applyTheme(document, themeConfig), buildSchema(document)].join(
-      "\n"
-    ),
+    other: [
+      applyAnalytics(document),
+      applyTheme(document, themeConfig),
+      buildSchema(document),
+    ].join("\n"),
   };
 };
 
