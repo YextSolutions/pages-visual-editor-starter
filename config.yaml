@@ -8,6 +8,24 @@ buildConfiguration:
       - .npmrc
 livePreviewConfiguration:
   setupCommand: ":"
+siteStream:
+  id: site-stream
+  entityId: site
+  fields:
+    - entity.site_favicon
+    - location.business_logo
+    - location.twitter_handle
+    - location.facebook_page_url
+    - location.instagram_handle
+    - entity.linkedin_url
+    - entity.pinterest_url
+    - entity.tiktok_url
+    - entity.youtube_channel_url
+    - entity.header
+    - entity.footer
+  localization:
+    locales:
+      - en
 # authentication:
 #   policyName: auth-policy
 #   includePaths:
