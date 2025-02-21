@@ -22,7 +22,7 @@ import { AnalyticsProvider } from "@yext/pages-components";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
   const { title, description } = getPageMetadata(document);
-  const faviconUrl = document?._site?.favicon;
+  const faviconUrl = document?._site?.favicon?.url;
   return {
     title: title,
     charset: "UTF-8",
