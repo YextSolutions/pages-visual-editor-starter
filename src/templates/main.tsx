@@ -6,6 +6,8 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
   HeadConfig,
+  Tag,
+  TagType,
 } from "@yext/pages";
 import { Render } from "@measured/puck";
 import { mainConfig } from "../ve.config";
@@ -23,6 +25,7 @@ import { AnalyticsProvider } from "@yext/pages-components";
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
   const { title, description } = getPageMetadata(document);
   const faviconUrl = document?._site?.favicon?.url;
+
   return {
     title: title,
     charset: "UTF-8",
@@ -42,14 +45,14 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }):
           content: description,
         },
       },
-      {
-        type: "link",
+      ...(faviconUrl ? [{
+        type: "link" as TagType,
         attributes: {
           rel: "icon",
           type: "image/x-icon",
           href: faviconUrl,
         },
-      },
+      }] : []),
     ],
     other: [applyAnalytics(document), applyTheme(document, themeConfig), buildSchema(document)].join(
       "\n"
