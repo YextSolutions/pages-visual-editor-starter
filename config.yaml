@@ -21,6 +21,7 @@ siteStream:
     - pinterestUrl
     - tikTokUrl
     - youTubeChannelUrl
+    - copyrightMessage
     - header
     - footer
   localization:
