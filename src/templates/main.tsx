@@ -39,13 +39,17 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
           type: "image/x-icon",
         },
       },
-      {
-        type: "meta",
-        attributes: {
-          name: "description",
-          content: description ?? "",
-        },
-      },
+      ...(description
+          ? [
+            {
+              type: "meta" as TagType,
+              attributes: {
+                name: "description",
+                content: description,
+              },
+            },
+          ]
+          : []),
       ...(faviconUrl
         ? [
             {
