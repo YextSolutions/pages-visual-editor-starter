@@ -43,7 +43,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta",
         attributes: {
           name: "description",
-          content: description,
+          content: description ?? "",
         },
       },
       ...(faviconUrl
