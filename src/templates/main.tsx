@@ -6,6 +6,7 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
   HeadConfig,
+  TagType,
 } from "@yext/pages";
 import { Render } from "@measured/puck";
 import { mainConfig } from "../ve.config";
@@ -20,8 +21,12 @@ import { themeConfig } from "../../theme.config";
 import { buildSchema } from "../utils/buildSchema";
 import { AnalyticsProvider } from "@yext/pages-components";
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }): HeadConfig => {
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
+  document,
+}): HeadConfig => {
   const { title, description } = getPageMetadata(document);
+  const faviconUrl = document?._site?.favicon?.url;
+
   return {
     title: title,
     charset: "UTF-8",
@@ -41,10 +46,24 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({ document }):
           content: description,
         },
       },
+      ...(faviconUrl
+        ? [
+            {
+              type: "link" as TagType,
+              attributes: {
+                rel: "icon",
+                type: "image/x-icon",
+                href: faviconUrl,
+              },
+            },
+          ]
+        : []),
     ],
-    other: [applyAnalytics(document), applyTheme(document, themeConfig), buildSchema(document)].join(
-      "\n"
-    ),
+    other: [
+      applyAnalytics(document),
+      applyTheme(document, themeConfig),
+      buildSchema(document),
+    ].join("\n"),
   };
 };
 
@@ -75,8 +94,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
 
   return (
     <AnalyticsProvider
-      // @ts-expect-error ts(2304) the api key will be populated
-      apiKey={YEXT_PUBLIC_EVENTS_API_KEY}
+      apiKey={document?._env?.YEXT_PUBLIC_EVENTS_API_KEY}
       templateData={props}
       currency="USD"
     >
