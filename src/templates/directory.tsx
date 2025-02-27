@@ -89,7 +89,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return normalizeSlug(path);
 };
 
-const Location: Template<TemplateRenderProps> = (props) => {
+const Directory: Template<TemplateRenderProps> = (props) => {
   const { document } = props;
   // temporary: guard for generated repo-based static page
   if (!document?.__?.layout) {
@@ -109,4 +109,4 @@ const Location: Template<TemplateRenderProps> = (props) => {
   );
 };
 
-export default Location;
+export default Directory;

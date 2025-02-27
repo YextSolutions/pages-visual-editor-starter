@@ -6,20 +6,28 @@ import {
   AddressProps,
   Banner,
   BannerProps,
+  Breadcrumbs,
+  BreadcrumbsProps,
   BodyText,
   BodyTextProps,
   Card,
   CardProps,
   CTAWrapper as CTA,
   CTAWrapperProps,
+  Directory,
+  DirectoryProps,
   Emails,
   EmailsProps,
   Flex,
   FlexProps,
+  Footer,
+  FooterProps,
   GetDirections,
   GetDirectionsProps,
   Grid,
   GridProps,
+  Header,
+  HeaderProps,
   HeadingText,
   HeadingTextProps,
   HoursTable,
@@ -34,12 +42,6 @@ import {
   PromoProps,
   TextList,
   TextListProps,
-  Header,
-  HeaderProps,
-  Footer,
-  FooterProps,
-  Breadcrumbs,
-  BreadcrumbsProps,
 } from "@yext/visual-editor";
 
 type MainProps = {
@@ -62,6 +64,13 @@ type MainProps = {
   Phone: PhoneProps;
   Promo: PromoProps;
   TextList: TextListProps;
+};
+
+type DirectoryProps = {
+  Breadcrumbs: BreadcrumbsProps;
+  Directory: DirectoryProps;
+  Footer: FooterProps;
+  Header: HeaderProps;
 };
 
 // All the available components for locations
@@ -94,6 +103,21 @@ export const mainConfig: Config<MainProps> = {
   },
 };
 
+export const directoryConfig: Config<DirectoryProps> = {
+  components: {
+    Breadcrumbs,
+    Directory,
+    Footer,
+    Header,
+  },
+  root: {
+    render: ({ children }) => {
+      return <>{children}</>;
+    },
+  },
+};
+
 export const componentRegistry = new Map<string, Config<any>>([
   ["main", mainConfig],
+  ["directory", directoryConfig],
 ]);
