@@ -66,7 +66,7 @@ type MainProps = {
   TextList: TextListProps;
 };
 
-type DirectoryProps = {
+type DirectoryConfigProps = {
   Breadcrumbs: BreadcrumbsProps;
   Directory: DirectoryProps;
   Footer: FooterProps;
@@ -103,7 +103,7 @@ export const mainConfig: Config<MainProps> = {
   },
 };
 
-export const directoryConfig: Config<DirectoryProps> = {
+export const directoryConfig: Config<DirectoryConfigProps> = {
   components: {
     Breadcrumbs,
     Directory,
