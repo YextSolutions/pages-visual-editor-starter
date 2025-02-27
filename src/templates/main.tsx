@@ -72,6 +72,11 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  if (!document?.__?.layout) {
+    // temporary: guard for generated repo-based static page
+    return `static-${Math.floor(Math.random() * (10000 - 1))}`;
+  }
+
   if (document.slug) {
     return document.slug;
   }
@@ -84,8 +89,13 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return normalizeSlug(path);
 };
 
-const Location: Template<TemplateRenderProps> = (props) => {
+const Main: Template<TemplateRenderProps> = (props) => {
   const { document } = props;
+
+  // temporary: guard for generated repo-based static page
+  if (!document?.__?.layout) {
+    return <></>;
+  }
 
   return (
     <AnalyticsProvider
@@ -100,4 +110,4 @@ const Location: Template<TemplateRenderProps> = (props) => {
   );
 };
 
-export default Location;
+export default Main;

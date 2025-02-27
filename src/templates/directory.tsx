@@ -9,7 +9,7 @@ import {
   TagType,
 } from "@yext/pages";
 import { Render } from "@measured/puck";
-import { mainConfig } from "../ve.config";
+import { directoryConfig } from "../ve.config";
 import {
   applyTheme,
   VisualEditorProvider,
@@ -72,6 +72,11 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  if (!document?.__?.layout) {
+    // temporary: guard for generated repo-based static page
+    return `static-${Math.floor(Math.random() * (10000 - 1))}`;
+  }
+  
   if (document.slug) {
     return document.slug;
   }
@@ -87,6 +92,11 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 const Directory: Template<TemplateRenderProps> = (props) => {
   const { document } = props;
 
+    // temporary: guard for generated repo-based static page
+    if (!document?.__?.layout) {
+      return <></>;
+    }
+
   return (
     <AnalyticsProvider
       apiKey={document?._env?.YEXT_PUBLIC_EVENTS_API_KEY}
@@ -94,7 +104,7 @@ const Directory: Template<TemplateRenderProps> = (props) => {
       currency="USD"
     >
       <VisualEditorProvider templateProps={props}>
-        <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
+        <Render config={directoryConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
     </AnalyticsProvider>
   );
