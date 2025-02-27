@@ -102,7 +102,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       templateData={props}
       currency="USD"
     >
-      <VisualEditorProvider document={document}>
+      <VisualEditorProvider templateProps={props}>
         <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
     </AnalyticsProvider>
