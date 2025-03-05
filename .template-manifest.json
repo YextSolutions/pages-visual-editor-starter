@@ -12,7 +12,7 @@
       "description": "Use this template to generate pages for each of your Directory entities.",
       "exampleSiteUrl": "",
       "layoutRequired": true,
-      "defaultLayoutData": "{\"root\": {}, \"zones\": {}, \"content\": {}}"
+      "defaultLayoutData": "{\"root\": {}, \"zones\": {}, \"content\": []}"
     }
   ]
 }
