@@ -34,7 +34,9 @@ const AnalyticsTest: Module = () => {
       templateData={templateData}
       productionDomains={["jwartofskyanalyticstest.com"]}
     >
-      <WidgetInterior></WidgetInterior>
+      <WidgetInterior>
+        tomato
+      </WidgetInterior>
     </AnalyticsProvider>
   )
 }
