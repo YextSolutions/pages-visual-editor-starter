@@ -27,6 +27,11 @@ siteStream:
   localization:
     locales:
       - en
+responseHeaders:
+  - pathPattern: ^modules/analyticsTest.*
+    headerKey: Access-Control-Allow-Origin
+    headerValues:
+      - "*"
 # authentication:
 #   policyName: auth-policy
 #   includePaths:
