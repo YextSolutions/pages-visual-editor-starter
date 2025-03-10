@@ -5,8 +5,8 @@ import "./index.css";
 
 const templateData: ModuleProps = {
   document: {
-    businessId: "REPLACE_ME",
-    siteId: "REPLACE_ME",
+    businessId: "1000146856",
+    siteId: "63558",
     __: {
       name: "analyticsTest",
       staticPage: true
