@@ -32,7 +32,7 @@ const AnalyticsTest: Module = () => {
       apiKey={YEXT_PUBLIC_SEARCH_EXPERIENCE_API_KEY}
       currency="USD"
       templateData={templateData}
-      productionDomains={["jwartofskyanalyticstest.com"]}
+      productionDomains={["jwartofskyturtlehead2.pagesdev.yextengtest.com"]}
     >
       <WidgetInterior>
         tomato
