@@ -40,7 +40,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         },
       },
       ...(description
-        ? [
+          ? [
             {
               type: "meta" as TagType,
               attributes: {
@@ -49,7 +49,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
               },
             },
           ]
-        : []),
+          : []),
       ...(faviconUrl
         ? [
             {
@@ -89,9 +89,8 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return normalizeSlug(path);
 };
 
-const Main: Template<TemplateRenderProps> = (props) => {
+const Location: Template<TemplateRenderProps> = (props) => {
   const { document } = props;
-
   // temporary: guard for generated repo-based static page
   if (!document?.__?.layout) {
     return <></>;
@@ -110,4 +109,4 @@ const Main: Template<TemplateRenderProps> = (props) => {
   );
 };
 
-export default Main;
+export default Location;
