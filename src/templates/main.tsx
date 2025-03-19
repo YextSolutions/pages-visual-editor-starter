@@ -91,6 +91,7 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 const Main: Template<TemplateRenderProps> = (props) => {
   const { document } = props;
+  console.log("document", document);
 
   // temporary: guard for generated repo-based static page
   if (!document?.__?.layout) {
