@@ -51,7 +51,6 @@ type MainProps = {
   Breadcrumbs: BreadcrumbsProps;
   Card: CardProps;
   CTA: CTAWrapperProps;
-  Directory: DirectoryProps;
   Emails: EmailsProps;
   Flex: FlexProps;
   Footer: FooterProps;
@@ -86,7 +85,6 @@ const components: Config<MainProps>["components"] = {
   TextList,
   Header,
   Footer,
-  Directory,
   Breadcrumbs,
 };
 
@@ -132,6 +130,28 @@ export const mainConfig: Config<MainProps> = {
   },
 };
 
+type DirectoryConfigProps = {
+  Breadcrumbs: BreadcrumbsProps;
+  Directory: DirectoryProps;
+  Footer: FooterProps;
+  Header: HeaderProps;
+};
+
+export const directoryConfig: Config<DirectoryConfigProps> = {
+  components: {
+    Breadcrumbs,
+    Directory,
+    Footer,
+    Header,
+  },
+  root: {
+    render: ({ children }) => {
+      return <>{children}</>;
+    },
+  },
+};
+
 export const componentRegistry = new Map<string, Config<any>>([
-  ["dev", mainConfig],
+  ["main", mainConfig],
+  ["directory", directoryConfig],
 ]);
