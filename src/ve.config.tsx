@@ -6,28 +6,20 @@ import {
   AddressProps,
   Banner,
   BannerProps,
-  Breadcrumbs,
-  BreadcrumbsProps,
   BodyText,
   BodyTextProps,
   Card,
   CardProps,
   CTAWrapper as CTA,
   CTAWrapperProps,
-  Directory,
-  DirectoryProps,
   Emails,
   EmailsProps,
   Flex,
   FlexProps,
-  Footer,
-  FooterProps,
   GetDirections,
   GetDirectionsProps,
   Grid,
   GridProps,
-  Header,
-  HeaderProps,
   HeadingText,
   HeadingTextProps,
   HoursTable,
@@ -38,10 +30,18 @@ import {
   ImageWrapperProps,
   Phone,
   PhoneProps,
-  Promo,
-  PromoProps,
   TextList,
   TextListProps,
+  Header,
+  HeaderProps,
+  Footer,
+  FooterProps,
+  Breadcrumbs,
+  BreadcrumbsProps,
+  Directory,
+  DirectoryProps,
+  Promo,
+  PromoProps,
 } from "@yext/visual-editor";
 
 type MainProps = {
@@ -51,6 +51,7 @@ type MainProps = {
   Breadcrumbs: BreadcrumbsProps;
   Card: CardProps;
   CTA: CTAWrapperProps;
+  Directory: DirectoryProps;
   Emails: EmailsProps;
   Flex: FlexProps;
   Footer: FooterProps;
@@ -66,49 +67,63 @@ type MainProps = {
   TextList: TextListProps;
 };
 
-type DirectoryConfigProps = {
-  Breadcrumbs: BreadcrumbsProps;
-  Directory: DirectoryProps;
-  Footer: FooterProps;
-  Header: HeaderProps;
+const components: Config<MainProps>["components"] = {
+  Banner,
+  Card,
+  Promo,
+  Flex,
+  Grid,
+  Address,
+  BodyText,
+  CTA,
+  Emails,
+  GetDirections,
+  HeadingText,
+  HoursStatus,
+  HoursTable,
+  ImageWrapper,
+  Phone,
+  TextList,
+  Header,
+  Footer,
+  Directory,
+  Breadcrumbs,
 };
+
+const pageSections: (keyof MainProps)[] = ["Banner", "Card", "Promo"];
+
+const layoutBlocks: (keyof MainProps)[] = ["Flex", "Grid"];
+
+const contentBlocks: (keyof MainProps)[] = [
+  "Address",
+  "BodyText",
+  "CTA",
+  "Emails",
+  "GetDirections",
+  "HeadingText",
+  "HoursStatus",
+  "HoursTable",
+  "ImageWrapper",
+  "Phone",
+  "TextList",
+];
 
 // All the available components for locations
 export const mainConfig: Config<MainProps> = {
-  components: {
-    Address,
-    Banner,
-    BodyText,
-    Breadcrumbs,
-    Card,
-    CTA,
-    Emails,
-    Flex,
-    Footer,
-    GetDirections,
-    Grid,
-    Header,
-    HeadingText,
-    HoursTable,
-    HoursStatus,
-    ImageWrapper,
-    Phone,
-    Promo,
-    TextList,
-  },
-  root: {
-    render: ({ children }) => {
-      return <>{children}</>;
+  components,
+  categories: {
+    pageSections: {
+      title: "Page Sections",
+      components: pageSections,
     },
-  },
-};
-
-export const directoryConfig: Config<DirectoryConfigProps> = {
-  components: {
-    Breadcrumbs,
-    Directory,
-    Footer,
-    Header,
+    layoutBlocks: {
+      title: "Layout Blocks",
+      components: layoutBlocks,
+    },
+    contentBlocks: {
+      title: "Content Blocks",
+      components: contentBlocks,
+    },
   },
   root: {
     render: ({ children }) => {
@@ -118,6 +133,5 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
 };
 
 export const componentRegistry = new Map<string, Config<any>>([
-  ["main", mainConfig],
-  ["directory", directoryConfig],
+  ["dev", mainConfig],
 ]);
