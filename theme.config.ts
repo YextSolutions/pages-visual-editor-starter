@@ -91,7 +91,7 @@ export const themeConfig: ThemeConfig = {
         type: "select",
         plugin: "fontSize",
         options: ThemeOptions.FONT_SIZE,
-        default: "40px",
+        default: "36px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -117,7 +117,7 @@ export const themeConfig: ThemeConfig = {
         type: "select",
         plugin: "fontSize",
         options: ThemeOptions.FONT_SIZE,
-        default: "32px",
+        default: "30px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -143,7 +143,7 @@ export const themeConfig: ThemeConfig = {
         type: "select",
         plugin: "fontSize",
         options: ThemeOptions.FONT_SIZE,
-        default: "20px",
+        default: "24px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -169,7 +169,7 @@ export const themeConfig: ThemeConfig = {
         type: "select",
         plugin: "fontSize",
         options: ThemeOptions.FONT_SIZE,
-        default: "18px",
+        default: "20px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -195,7 +195,7 @@ export const themeConfig: ThemeConfig = {
         type: "select",
         plugin: "fontSize",
         options: ThemeOptions.FONT_SIZE,
-        default: "24px",
+        default: "18px",
       },
       fontWeight: {
         label: "Font Weight",
