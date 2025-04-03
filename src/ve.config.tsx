@@ -88,7 +88,12 @@ const components: Config<MainProps>["components"] = {
   Breadcrumbs,
 };
 
-const pageSections: (keyof MainProps)[] = ["Banner", "Card", "Promo"];
+const pageSections: (keyof MainProps)[] = [
+  "Banner",
+  "Breadcrumbs",
+  "Card",
+  "Promo",
+];
 
 const layoutBlocks: (keyof MainProps)[] = ["Flex", "Grid"];
 
