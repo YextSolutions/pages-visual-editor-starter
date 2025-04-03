@@ -4,10 +4,7 @@ import {
   FontRegistry,
   getFontWeightOptions,
   constructFontSelectOptions,
-  getFontSizeOptions,
-  getSpacingOptions,
-  letterSpacingOptions,
-  textTransformOptions,
+  ThemeOptions,
 } from "@yext/visual-editor";
 
 const fonts: FontRegistry = {
@@ -67,7 +64,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "24px",
       },
       fontWeight: {
@@ -93,7 +90,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "24px",
       },
       fontWeight: {
@@ -119,7 +116,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "24px",
       },
       fontWeight: {
@@ -145,7 +142,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "24px",
       },
       fontWeight: {
@@ -171,7 +168,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "24px",
       },
       fontWeight: {
@@ -197,7 +194,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "24px",
       },
       fontWeight: {
@@ -223,7 +220,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "16px",
       },
       fontWeight: {
@@ -255,8 +252,8 @@ export const themeConfig: ThemeConfig = {
         label: "Top/Bottom Padding",
         type: "select",
         plugin: "padding",
-        options: getSpacingOptions(),
-        default: "0px",
+        options: ThemeOptions.SPACING,
+        default: "32px",
       },
     },
   },
@@ -274,7 +271,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "16px",
       },
       fontWeight: {
@@ -288,14 +285,14 @@ export const themeConfig: ThemeConfig = {
         label: "Text Transform",
         type: "select",
         plugin: "textTransform",
-        options: textTransformOptions,
+        options: ThemeOptions.TEXT_TRANSFORM,
         default: "none",
       },
       letterSpacing: {
         label: "Letter Spacing",
         type: "select",
         plugin: "letterSpacing",
-        options: letterSpacingOptions,
+        options: ThemeOptions.LETTER_SPACING,
         default: "0em",
       },
     },
@@ -314,7 +311,7 @@ export const themeConfig: ThemeConfig = {
         label: "Font Size",
         type: "select",
         plugin: "fontSize",
-        options: getFontSizeOptions(),
+        options: ThemeOptions.FONT_SIZE,
         default: "16px",
       },
       fontWeight: {
@@ -328,14 +325,14 @@ export const themeConfig: ThemeConfig = {
         label: "Text Transform",
         type: "select",
         plugin: "textTransform",
-        options: textTransformOptions,
+        options: ThemeOptions.TEXT_TRANSFORM,
         default: "none",
       },
       letterSpacing: {
         label: "Letter Spacing",
         type: "select",
         plugin: "letterSpacing",
-        options: letterSpacingOptions,
+        options: ThemeOptions.LETTER_SPACING,
         default: "0em",
       },
       caret: {
