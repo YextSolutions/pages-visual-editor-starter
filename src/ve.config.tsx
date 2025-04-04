@@ -42,6 +42,10 @@ import {
   DirectoryProps,
   Promo,
   PromoProps,
+  CollectionSection,
+  CollectionSectionProps,
+  ExampleRepeatableItemProps,
+  ExampleRepeatableItemComponent,
 } from "@yext/visual-editor";
 
 type MainProps = {
@@ -64,6 +68,8 @@ type MainProps = {
   Phone: PhoneProps;
   Promo: PromoProps;
   TextList: TextListProps;
+  CollectionSection: CollectionSectionProps;
+  ExampleRepeatableItemComponent: ExampleRepeatableItemProps;
 };
 
 const components: Config<MainProps>["components"] = {
@@ -86,14 +92,19 @@ const components: Config<MainProps>["components"] = {
   Header,
   Footer,
   Breadcrumbs,
+  CollectionSection,
+  ExampleRepeatableItemComponent,
 };
 
 const pageSections: (keyof MainProps)[] = [
   "Banner",
   "Breadcrumbs",
   "Card",
+  "CollectionSection",
   "Promo",
 ];
+
+const cards: (keyof MainProps)[] = ["ExampleRepeatableItemComponent"];
 
 const layoutBlocks: (keyof MainProps)[] = ["Flex", "Grid"];
 
@@ -118,6 +129,10 @@ export const mainConfig: Config<MainProps> = {
     pageSections: {
       title: "Page Sections",
       components: pageSections,
+    },
+    cards: {
+      title: "Cards",
+      components: cards,
     },
     layoutBlocks: {
       title: "Layout Blocks",
