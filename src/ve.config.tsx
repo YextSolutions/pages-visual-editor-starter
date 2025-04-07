@@ -42,6 +42,10 @@ import {
   DirectoryProps,
   Promo,
   PromoProps,
+  FAQsSection,
+  FAQsSectionProps,
+  MapboxStaticMap,
+  MapboxStaticProps
 } from "@yext/visual-editor";
 
 type MainProps = {
@@ -64,6 +68,8 @@ type MainProps = {
   Phone: PhoneProps;
   Promo: PromoProps;
   TextList: TextListProps;
+  FAQsSection: FAQsSectionProps;
+  MapboxStaticMap: MapboxStaticProps;
 };
 
 const components: Config<MainProps>["components"] = {
@@ -86,6 +92,8 @@ const components: Config<MainProps>["components"] = {
   Header,
   Footer,
   Breadcrumbs,
+  FAQsSection,
+  MapboxStaticMap
 };
 
 const pageSections: (keyof MainProps)[] = [
