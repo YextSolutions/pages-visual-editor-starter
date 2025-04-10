@@ -91,7 +91,7 @@ export const themeConfig: ThemeConfig = {
         type: "select",
         plugin: "fontSize",
         options: ThemeOptions.FONT_SIZE,
-        default: "36px",
+        default: "40px",
       },
       fontWeight: {
         label: "Font Weight",
@@ -117,7 +117,7 @@ export const themeConfig: ThemeConfig = {
         type: "select",
         plugin: "fontSize",
         options: ThemeOptions.FONT_SIZE,
-        default: "30px",
+        default: "32px",
       },
       fontWeight: {
         label: "Font Weight",
