@@ -42,10 +42,28 @@ import {
   DirectoryProps,
   Promo,
   PromoProps,
+  MapboxStaticMap,
+  MapboxStaticProps,
+  Testimonials,
+  TestimonialsProps,
+  NearbyLocations,
+  NearbyLocationsProps,
+  ProductsSection,
+  ProductsSectionProps,
+  People,
+  PeopleProps,
   FAQsSection,
   FAQsSectionProps,
-  MapboxStaticMap,
-  MapboxStaticProps
+  Events,
+  EventsProps,
+  HeroSectionProps,
+  HeroSection,
+  PhotoGallerySectionProps,
+  PhotoGallerySection,
+  CoreInfoSectionProps,
+  CoreInfoSection,
+  InsightsSection,
+  InsightsSectionProps,
 } from "@yext/visual-editor";
 
 type MainProps = {
@@ -54,53 +72,80 @@ type MainProps = {
   BodyText: BodyTextProps;
   Breadcrumbs: BreadcrumbsProps;
   Card: CardProps;
+  CoreInfoSection: CoreInfoSectionProps;
   CTA: CTAWrapperProps;
   Emails: EmailsProps;
+  Events: EventsProps;
+  FAQsSection: FAQsSectionProps;
   Flex: FlexProps;
   Footer: FooterProps;
   GetDirections: GetDirectionsProps;
   Grid: GridProps;
   Header: HeaderProps;
   HeadingText: HeadingTextProps;
+  HeroSection: HeroSectionProps;
   HoursTable: HoursTableProps;
   HoursStatus: HoursStatusProps;
+  InsightsSection: InsightsSectionProps;
   ImageWrapper: ImageWrapperProps;
+  NearbyLocations: NearbyLocationsProps;
+  MapboxStaticMap: MapboxStaticProps;
+  People: PeopleProps;
   Phone: PhoneProps;
+  PhotoGallerySection: PhotoGallerySectionProps;
+  ProductsSection: ProductsSectionProps;
   Promo: PromoProps;
   TextList: TextListProps;
-  FAQsSection: FAQsSectionProps;
-  MapboxStaticMap: MapboxStaticProps;
+  Testimonials: TestimonialsProps;
 };
 
 const components: Config<MainProps>["components"] = {
-  Banner,
-  Card,
-  Promo,
-  Flex,
-  Grid,
   Address,
+  Banner,
   BodyText,
+  Breadcrumbs,
+  Card,
   CTA,
+  CoreInfoSection,
   Emails,
+  Events,
+  FAQsSection,
+  Flex,
+  Footer,
   GetDirections,
+  Grid,
+  Header,
   HeadingText,
+  HeroSection,
   HoursStatus,
   HoursTable,
   ImageWrapper,
+  InsightsSection,
+  MapboxStaticMap,
+  NearbyLocations,
+  People,
   Phone,
-  TextList,
-  Header,
-  Footer,
-  Breadcrumbs,
-  FAQsSection,
-  MapboxStaticMap
+  PhotoGallerySection,
+  ProductsSection,
+  Promo,
+  Testimonials,
+  TextList,  
 };
 
 const pageSections: (keyof MainProps)[] = [
   "Banner",
   "Breadcrumbs",
   "Card",
+  "CoreInfoSection",
+  "Events",
+  "FAQsSection",
+  "HeroSection",
+  "InsightsSection",
+  "PhotoGallerySection",
+  "ProductsSection",
   "Promo",
+  "People",
+  "Testimonials",
 ];
 
 const layoutBlocks: (keyof MainProps)[] = ["Flex", "Grid"];
@@ -115,6 +160,7 @@ const contentBlocks: (keyof MainProps)[] = [
   "HoursStatus",
   "HoursTable",
   "ImageWrapper",
+  "MapboxStaticMap",
   "Phone",
   "TextList",
 ];
