@@ -39,8 +39,6 @@ const Edit: () => JSX.Element = () => {
   const entityDocument = usePlatformBridgeDocument();
   const entityFields = usePlatformBridgeEntityFields();
 
-  console.log(entityDocument);
-
   return (
     <VisualEditorProvider
       templateProps={{
