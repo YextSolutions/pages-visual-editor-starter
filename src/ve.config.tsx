@@ -8,12 +8,8 @@ import {
   LayoutBlockCategory,
   CardCategory,
   ContentBlockCategory,
-  LayoutBlockCategoryComponents,
-  CardCategoryComponents,
   ContentBlockCategoryComponents,
   OtherCategoryComponents,
-  LayoutBlockCategoryProps,
-  CardCategoryProps,
   ContentBlockCategoryProps,
   OtherCategoryProps,
   DirectoryCategoryComponents,
@@ -22,15 +18,11 @@ import {
 
 interface MainProps
   extends PageSectionCategoryProps,
-    LayoutBlockCategoryProps,
-    CardCategoryProps,
     ContentBlockCategoryProps,
     OtherCategoryProps {}
 
 const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
-  ...LayoutBlockCategoryComponents,
-  ...CardCategoryComponents,
   ...ContentBlockCategoryComponents,
   ...OtherCategoryComponents,
 };
@@ -42,14 +34,6 @@ export const mainConfig: Config<MainProps> = {
     pageSections: {
       title: "Page Sections",
       components: PageSectionCategory,
-    },
-    layoutBlocks: {
-      title: "Layout Blocks",
-      components: LayoutBlockCategory,
-    },
-    cardBlocks: {
-      title: "Cards",
-      components: CardCategory,
     },
     contentBlocks: {
       title: "Content Blocks",
