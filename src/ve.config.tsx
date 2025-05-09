@@ -18,8 +18,8 @@ import {
   OtherCategoryProps,
   DirectoryCategoryComponents,
   DirectoryCategoryProps,
-  LocatorComponent,
-  LocatorProps,
+  LocatorCategoryComponents,
+  LocatorCategoryProps,
 } from "@yext/visual-editor";
 
 interface MainProps
@@ -27,8 +27,7 @@ interface MainProps
     LayoutBlockCategoryProps,
     CardCategoryProps,
     ContentBlockCategoryProps,
-    OtherCategoryProps,
-    LocatorProps {}
+    OtherCategoryProps {}
 
 const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
@@ -36,7 +35,6 @@ const components: Config<MainProps>["components"] = {
   ...CardCategoryComponents,
   ...ContentBlockCategoryComponents,
   ...OtherCategoryComponents,
-  ...LocatorComponent
 };
 
 // All the available components for locations
@@ -99,12 +97,12 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
 };
 
 interface LocatorConfigProps
-  extends LocatorProps,
+  extends LocatorCategoryProps,
     OtherCategoryProps {}
 
 export const locatorConfig: Config<LocatorConfigProps> = {
   components: {
-    ...LocatorComponent,
+    ...LocatorCategoryComponents,
     ...OtherCategoryComponents,
   },
   root: {
