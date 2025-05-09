@@ -20,7 +20,6 @@ interface MainProps
 const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
   ...OtherCategoryComponents,
-  ...LocatorComponent
 };
 
 // All the available components for locations
