@@ -18,6 +18,8 @@ import {
   OtherCategoryProps,
   DirectoryCategoryComponents,
   DirectoryCategoryProps,
+  LocatorComponent,
+  LocatorProps,
 } from "@yext/visual-editor";
 
 interface MainProps
@@ -25,7 +27,8 @@ interface MainProps
     LayoutBlockCategoryProps,
     CardCategoryProps,
     ContentBlockCategoryProps,
-    OtherCategoryProps {}
+    OtherCategoryProps,
+    LocatorProps {}
 
 const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
@@ -33,6 +36,7 @@ const components: Config<MainProps>["components"] = {
   ...CardCategoryComponents,
   ...ContentBlockCategoryComponents,
   ...OtherCategoryComponents,
+  ...LocatorComponent
 };
 
 // All the available components for locations
@@ -94,7 +98,29 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
   },
 };
 
+interface LocatorConfigProps
+  extends LocatorProps,
+    OtherCategoryProps {}
+
+export const locatorConfig: Config<LocatorConfigProps> = {
+  components: {
+    ...LocatorComponent,
+    ...OtherCategoryComponents,
+  },
+  root: {
+    render: () => {
+      return (
+        <DropZone
+          zone="default-zone"
+          style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+        />
+      );
+    },
+  },
+};
+
 export const componentRegistry = new Map<string, Config<any>>([
   ["main", mainConfig],
   ["directory", directoryConfig],
+  ["locator", locatorConfig],
 ]);
