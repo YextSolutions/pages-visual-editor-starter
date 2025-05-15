@@ -19,8 +19,6 @@ import {
   getPageMetadata,
   applyAnalytics,
   applyHeaderScript,
-  migrate,
-  migrationRegistry,
 } from "@yext/visual-editor";
 import { themeConfig } from "../../theme.config";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
@@ -150,14 +148,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       currency="USD"
     >
       <VisualEditorProvider templateProps={props}>
-        <Render
-          config={mainConfig}
-          data={migrate(
-            JSON.parse(document.__.layout),
-            migrationRegistry,
-            mainConfig
-          )}
-        />
+        <Render config={mainConfig} data={JSON.parse(document.__.layout)} />
       </VisualEditorProvider>
     </AnalyticsProvider>
   );
