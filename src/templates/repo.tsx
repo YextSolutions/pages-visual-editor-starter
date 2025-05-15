@@ -66,7 +66,7 @@ export const config: TemplateConfig = {
       locales: ["en"],
     },
     transform: {
-      expandOptionFields: ["c_exampleOption"],
+      replaceOptionValuesWithDisplayNames: ["c_exampleOption"],
     },
   },
   additionalProperties: {
