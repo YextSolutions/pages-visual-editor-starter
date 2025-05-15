@@ -11,9 +11,7 @@ import {
   DirectoryCategoryProps,
 } from "@yext/visual-editor";
 
-interface MainProps
-  extends PageSectionCategoryProps,
-    OtherCategoryProps {}
+interface MainProps extends PageSectionCategoryProps, OtherCategoryProps {}
 
 const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
@@ -64,5 +62,6 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
 
 export const componentRegistry = new Map<string, Config<any>>([
   ["main", mainConfig],
+  ["repoLocations", mainConfig],
   ["directory", directoryConfig],
 ]);
