@@ -62,6 +62,6 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
 
 export const componentRegistry = new Map<string, Config<any>>([
   ["main", mainConfig],
-  ["repoLocations", mainConfig],
+  ["repo", mainConfig],
   ["directory", directoryConfig],
 ]);
