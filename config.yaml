@@ -1,0 +1,33 @@
+buildConfiguration:
+  buildCommand: npm run build
+  installDependenciesStep:
+    command: npm install
+    requiredFiles:
+      - package.json
+      - package-lock.json
+      - .npmrc
+livePreviewConfiguration:
+  setupCommand: ":"
+siteStream:
+  id: site-stream
+  entityId: entity-id
+  fields:
+    - favicon
+    - logo
+    - twitterHandle
+    - facebookPageUrl
+    - instagramHandle
+    - linkedInUrl
+    - pinterestUrl
+    - tikTokUrl
+    - youTubeChannelUrl
+    - copyrightMessage
+    - header
+    - footer
+  localization:
+    locales:
+      - en
+# authentication:
+#   policyName: auth-policy
+#   includePaths:
+#     - /edit

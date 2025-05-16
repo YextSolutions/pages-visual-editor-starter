@@ -1,0 +1,15 @@
+node_modules/
+sites-rendered-output/
+localData/
+dist/
+.yext
+.yextrc
+.artifact-output
+.env
+!.env.local
+sites-config/features.json
+functions/functionMetadata.json
+*.local
+.idea/*
+
+.DS_Store
