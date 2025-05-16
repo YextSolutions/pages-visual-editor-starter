@@ -57,7 +57,7 @@ export const config: TemplateConfig = {
       // "c_exampleProducts.cta.label",
       // "c_exampleProducts.cta.link",
       // "c_exampleProducts.cta.linkType",
-      "c_exampleInsights",
+      // "c_exampleInsights",
       "c_exampleOption",
       // "photoGallery",
       // These fields will be used in Module 5 of the Hitchhikers Pages Track: https://hitchhikers.yext.com/tracks/pages-development/pgs605-create-directory/01-yext-directory-manager/
