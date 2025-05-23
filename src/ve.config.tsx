@@ -9,6 +9,8 @@ import {
   OtherCategoryProps,
   DirectoryCategoryComponents,
   DirectoryCategoryProps,
+  LocatorCategoryComponents,
+  LocatorCategoryProps,
 } from "@yext/visual-editor";
 
 interface MainProps extends PageSectionCategoryProps, OtherCategoryProps {}
@@ -60,8 +62,30 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
   },
 };
 
+interface LocatorConfigProps
+  extends LocatorCategoryProps,
+    OtherCategoryProps {}
+
+export const locatorConfig: Config<LocatorConfigProps> = {
+  components: {
+    ...LocatorCategoryComponents,
+    ...OtherCategoryComponents,
+  },
+  root: {
+    render: () => {
+      return (
+        <DropZone
+          zone="default-zone"
+          style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+        />
+      );
+    },
+  },
+};
+
 export const componentRegistry = new Map<string, Config<any>>([
   ["main", mainConfig],
   ["repo", mainConfig],
   ["directory", directoryConfig],
+  ["locator", locatorConfig],
 ]);
