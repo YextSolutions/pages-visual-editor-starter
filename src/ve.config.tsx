@@ -62,9 +62,7 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
   },
 };
 
-interface LocatorConfigProps
-  extends LocatorCategoryProps,
-    OtherCategoryProps {}
+interface LocatorConfigProps extends LocatorCategoryProps, OtherCategoryProps {}
 
 export const locatorConfig: Config<LocatorConfigProps> = {
   components: {
@@ -84,7 +82,7 @@ export const locatorConfig: Config<LocatorConfigProps> = {
 };
 
 export const componentRegistry = new Map<string, Config<any>>([
-  ["main", mainConfig],
+  // ["main", mainConfig],
   ["repo", mainConfig],
   ["directory", directoryConfig],
   ["locator", locatorConfig],
