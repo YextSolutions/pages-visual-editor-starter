@@ -148,7 +148,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
 
   return (
     <AnalyticsProvider
-      apiKey={document?._env?.YEXT_PUBLIC_EVENTS_API_KEY}
+      apiKey={document?._env?.YEXT_PUBLIC_VISUAL_EDITOR_APP_API_KEY}
       templateData={props}
       currency="USD"
     >
