@@ -47,18 +47,18 @@ export const config: TemplateConfig = {
       "services",
       // "c_exampleProducts.image",
       // "c_exampleProducts.name",
-      "c_exampleProducts.products.description.html",
-      "c_exampleEvents.events.description.html",
-      "c_exampleFAQs.faqs.answer.html",
-      "c_exampleInsights.insights.description.html",
-      "c_examplePromo.description.html",
-      "c_exampleTestimonials.testimonials.description.html",
+      // "c_exampleProducts.products.description.html",
+      // "c_exampleEvents.events.description.html",
+      // "c_exampleFAQs.faqs.answer.html",
+      // "c_exampleInsights.insights.description.html",
+      // "c_examplePromo.description.html",
+      // "c_exampleTestimonials.testimonials.description.html",
       // "c_exampleProducts.category",
       // "c_exampleProducts.cta.label",
       // "c_exampleProducts.cta.link",
       // "c_exampleProducts.cta.linkType",
       // "c_exampleInsights",
-      "c_exampleOption",
+      // "c_exampleOption",
       // "photoGallery",
       // These fields will be used in Module 5 of the Hitchhikers Pages Track: https://hitchhikers.yext.com/tracks/pages-development/pgs605-create-directory/01-yext-directory-manager/
       // "dm_directoryParents_us_directory.name",
@@ -70,9 +70,9 @@ export const config: TemplateConfig = {
     localization: {
       locales: ["en"],
     },
-    transform: {
-      replaceOptionValuesWithDisplayNames: ["c_exampleOption"],
-    },
+    // transform: {
+    //   replaceOptionValuesWithDisplayNames: ["c_exampleOption"],
+    // },
   },
   additionalProperties: {
     isVETemplate: true,

@@ -10,7 +10,7 @@ livePreviewConfiguration:
   setupCommand: ":"
 siteStream:
   id: site-stream
-  entityId: site-63829
+  entityId: site-157341
   fields:
     - favicon
     - logo
