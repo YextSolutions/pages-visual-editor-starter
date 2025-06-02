@@ -28,7 +28,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@types/node": "^20.12.3",
     "@yext/search-headless-react": "^2.5.0",
-    "@yext/search-ui-react": "https://github.com/anguyen-yext2/visual-editor-artifacts/raw/refs/heads/main/yext-search-ui-react-1.8.16.tgz",
+    "@yext/search-ui-react": "https://github.com/anguyen-yext2/visual-editor-artifacts/raw/refs/heads/main/yext-search-ui-react-1.8.17.tgz",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.4.0",
     "clsx": "^2.1.1",
