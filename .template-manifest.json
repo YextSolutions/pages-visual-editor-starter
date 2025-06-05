@@ -67,14 +67,14 @@
     },
     {
       "name": "directory",
-      "description": "Use this template to generate pages for each of your Directory entities.",
+      "description": "Use this template to generate pages for each of your Locations.",
       "exampleSiteUrl": "",
       "layoutRequired": true,
       "defaultLayoutData": "{\"root\": {},\"zones\": {},\"content\": [{\"type\": \"Header\",\"props\": {\"id\": \"Header-9e558fc0-1d91-4f7f-b394-c5ecb75f548e\"}},{\"type\": \"Directory\",\"props\": {\"id\": \"Directory-f885711c-028d-4d86-ac16-db2caecfdddf\"}},{\"type\": \"Footer\",\"props\": {\"id\": \"Footer-f1a0374c-8d3c-4e08-ac0b-694ba9890811\"}}]}"
     },
     {
       "name": "locator",
-      "description": "Use this template to generate pages for each of your Locator entities.",
+      "description": "Use this template to generate pages for your Locators.",
       "exampleSiteUrl": "",
       "layoutRequired": true,
       "defaultLayoutData": "{\"root\": {},\"zones\": {},\"content\": [{\"type\":\"Locator\",\"props\":{\"id\":\"Locator-2ae506f4-a3ee-46ea-b5f9-e4c3236243a7\",\"mapStyle\":\"mapbox://styles/mapbox/streets-v12\"}}]}"
