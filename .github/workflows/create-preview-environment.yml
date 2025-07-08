@@ -38,7 +38,7 @@ jobs:
         # This installs the visual-editor dev release from the specified PR using pkg.pr.new
         run: |
           echo "Installing package from: ${{ steps.payload.outputs.package_url }}"
-          npm install ${{ steps.payload.outputs.package_url }}
+          npm install --force ${{ steps.payload.outputs.package_url }}
           echo "Package installed successfully"
 
       - name: 'Commit and push the new branch'
