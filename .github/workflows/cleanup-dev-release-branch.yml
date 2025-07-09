@@ -16,7 +16,6 @@ jobs:
         run: |
           echo "pr_number=${{ github.event.client_payload.pr_number }}" >> $GITHUB_OUTPUT
           echo "branch_name=${{ github.event.client_payload.branch_name }}" >> $GITHUB_OUTPUT
-          echo "sanitized_branch_name=${{ github.event.client_payload.sanitized_branch_name }}" >> $GITHUB_OUTPUT
           echo "pr_title=${{ github.event.client_payload.pr_title }}" >> $GITHUB_OUTPUT
           echo "pr_url=${{ github.event.client_payload.pr_url }}" >> $GITHUB_OUTPUT
           echo "author=${{ github.event.client_payload.author }}" >> $GITHUB_OUTPUT
