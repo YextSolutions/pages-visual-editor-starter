@@ -1,0 +1,35 @@
+name: 'Cleanup Dev Release Branch'
+
+on:
+  repository_dispatch:
+    types: [dev-release-cleanup]
+
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 'Extract data from payload'
+        id: payload
+        run: |
+          echo "pr_number=${{ github.event.client_payload.pr_number }}" >> $GITHUB_OUTPUT
+          echo "branch_name=${{ github.event.client_payload.branch_name }}" >> $GITHUB_OUTPUT
+          echo "sanitized_branch_name=${{ github.event.client_payload.sanitized_branch_name }}" >> $GITHUB_OUTPUT
+          echo "pr_title=${{ github.event.client_payload.pr_title }}" >> $GITHUB_OUTPUT
+          echo "pr_url=${{ github.event.client_payload.pr_url }}" >> $GITHUB_OUTPUT
+          echo "author=${{ github.event.client_payload.author }}" >> $GITHUB_OUTPUT
+          echo "action=${{ github.event.client_payload.action }}" >> $GITHUB_OUTPUT
+
+      - name: 'Delete dev release branch'
+        run: |
+          BRANCH_TO_DELETE="${{ steps.payload.outputs.branch_name }}"
+          echo "Deleting dev release branch: $BRANCH_TO_DELETE"
+          echo "Associated with PR #${{ steps.payload.outputs.pr_number }}: ${{ steps.payload.outputs.pr_title }}"
+          echo "Action: ${{ steps.payload.outputs.action }}"
+          
+          # Delete the branch from remote
+          git push origin --delete "$BRANCH_TO_DELETE" || echo "Branch may not exist or already be deleted"
+          
+          echo "Dev release branch cleanup completed" 
