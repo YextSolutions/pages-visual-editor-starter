@@ -11,20 +11,16 @@ jobs:
       contents: write
 
     steps:
-      - name: 'Extract data from payload'
-        id: payload
-        run: |
-          echo "pr_number=${{ github.event.client_payload.pr_number }}" >> $GITHUB_OUTPUT
-          echo "branch_name=${{ github.event.client_payload.branch_name }}" >> $GITHUB_OUTPUT
-          echo "pr_title=${{ github.event.client_payload.pr_title }}" >> $GITHUB_OUTPUT
-
       - name: 'Delete dev release branch'
+        env:
+          PR_NUMBER: ${{ github.event.client_payload.pr_number }}
+          BRANCH_NAME: ${{ github.event.client_payload.branch_name }}
+          PR_TITLE: ${{ github.event.client_payload.pr_title }}
         run: |
-          BRANCH_TO_DELETE="${{ steps.payload.outputs.branch_name }}"
-          echo "Deleting dev release branch: $BRANCH_TO_DELETE"
-          echo "Associated with PR #${{ steps.payload.outputs.pr_number }}: ${{ steps.payload.outputs.pr_title }}"
+          echo "Deleting dev release branch: $BRANCH_NAME"
+          echo "Associated with PR #$PR_NUMBER: $PR_TITLE"
           
           # Delete the branch from remote
-          git push origin --delete "$BRANCH_TO_DELETE" || echo "Branch was already deleted or never existed."
+          git push origin --delete "$BRANCH_NAME" || echo "Branch was already deleted or never existed."
           
           echo "Dev release branch cleanup completed" 
