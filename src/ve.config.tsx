@@ -11,14 +11,22 @@ import {
   DirectoryCategoryProps,
   LocatorCategoryComponents,
   LocatorCategoryProps,
+  DeprecatedCategoryComponents,
+  DeprecatedCategoryProps,
+  DeprecatedCategory,
+  OtherCategory,
+  DirectoryCategory,
+  LocatorCategory,
 } from "@yext/visual-editor";
 
 interface MainProps
   extends PageSectionCategoryProps,
+    DeprecatedCategoryProps,
     OtherCategoryProps {}
 
 const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
+  ...DeprecatedCategoryComponents,
   ...OtherCategoryComponents,
 };
 
@@ -29,6 +37,14 @@ export const mainConfig: Config<MainProps> = {
     pageSections: {
       title: "Page Sections",
       components: PageSectionCategory,
+    },
+    other: {
+      title: "Other",
+      components: OtherCategory,
+    },
+    deprecatedComponents: {
+      visible: false,
+      components: DeprecatedCategory,
     },
   },
   root: {
@@ -45,12 +61,27 @@ export const mainConfig: Config<MainProps> = {
 
 interface DirectoryConfigProps
   extends DirectoryCategoryProps,
+    DeprecatedCategoryProps,
     OtherCategoryProps {}
 
 export const directoryConfig: Config<DirectoryConfigProps> = {
   components: {
     ...DirectoryCategoryComponents,
+    ...DeprecatedCategoryComponents,
     ...OtherCategoryComponents,
+  },
+  categories: {
+    directoryComponents: {
+      title: "Directory",
+      components: [...DirectoryCategory, ...OtherCategory],
+    },
+    deprecatedComponents: {
+      visible: false,
+      components: DeprecatedCategory,
+    },
+    other: {
+      visible: false,
+    },
   },
   root: {
     render: () => {
@@ -66,12 +97,27 @@ export const directoryConfig: Config<DirectoryConfigProps> = {
 
 interface LocatorConfigProps
   extends LocatorCategoryProps,
+    DeprecatedCategoryProps,
     OtherCategoryProps {}
 
 export const locatorConfig: Config<LocatorConfigProps> = {
   components: {
     ...LocatorCategoryComponents,
+    ...DeprecatedCategoryComponents,
     ...OtherCategoryComponents,
+  },
+  categories: {
+    locatorComponents: {
+      title: "Locator",
+      components: [...LocatorCategory, ...OtherCategory],
+    },
+    deprecatedComponents: {
+      visible: false,
+      components: DeprecatedCategory,
+    },
+    other: {
+      visible: false,
+    },
   },
   root: {
     render: () => {

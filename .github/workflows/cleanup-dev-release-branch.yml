@@ -1,0 +1,26 @@
+name: 'Cleanup Dev Release Branch'
+
+on:
+  repository_dispatch:
+    types: [dev-release-cleanup]
+
+jobs:
+  delete-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 'Delete dev release branch'
+        env:
+          PR_NUMBER: ${{ github.event.client_payload.pr_number }}
+          BRANCH_NAME: ${{ github.event.client_payload.branch_name }}
+          PR_TITLE: ${{ github.event.client_payload.pr_title }}
+        run: |
+          echo "Deleting dev release branch: $BRANCH_NAME"
+          echo "Associated with PR #$PR_NUMBER: $PR_TITLE"
+          
+          # Delete the branch from remote
+          git push origin --delete "$BRANCH_NAME" || echo "Branch was already deleted or never existed."
+          
+          echo "Dev release branch cleanup completed" 
