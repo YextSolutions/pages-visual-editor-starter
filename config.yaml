@@ -10,7 +10,7 @@ livePreviewConfiguration:
   setupCommand: ":"
 siteStream:
   id: site-stream
-  entityId: entity-id
+  entityId: jwartofskyDev
   fields:
     - favicon
     - logo
@@ -27,6 +27,8 @@ siteStream:
   localization:
     locales:
       - en
+      - zh_hans_hk
+      - zh_hans_us
 # authentication:
 #   policyName: auth-policy
 #   includePaths:
