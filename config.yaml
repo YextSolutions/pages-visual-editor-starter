@@ -27,7 +27,7 @@ siteStream:
   localization:
     locales:
       - en
-      - zh_hans_hk
+      - zh-hans-hk
       - zh_hans_us
 # authentication:
 #   policyName: auth-policy
