@@ -69,11 +69,11 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     other: [
       applyAnalytics(document),
       applyHeaderScript(document),
-      () => {
-        console.log("applyingTheme", document);
-        return applyTheme(document, themeConfig);
-      },
+      applyTheme(document, themeConfig),
       SchemaWrapper(document._schema),
+      () => {
+        console.log("head config document", document);
+      },
     ].join("\n"),
   };
 };
