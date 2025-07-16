@@ -29,6 +29,7 @@ siteStream:
       - en
       - zh-hans-hk
       - zh_hans_us
+      - fr_ca
 # authentication:
 #   policyName: auth-policy
 #   includePaths:
