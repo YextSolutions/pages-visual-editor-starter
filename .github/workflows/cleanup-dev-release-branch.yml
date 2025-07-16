@@ -11,6 +11,9 @@ jobs:
       contents: write
 
     steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+
       - name: 'Delete dev release branch'
         env:
           PR_NUMBER: ${{ github.event.client_payload.pr_number }}
