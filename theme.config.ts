@@ -281,6 +281,13 @@ export const themeConfig: ThemeConfig = {
         options: fontWeightOptions("--fontFamily-button-fontFamily"),
         default: "400",
       },
+      borderRadius: {
+        label: "Border Radius",
+        type: "select",
+        plugin: "borderRadius",
+        options: ThemeOptions.BUTTON_BORDER_RADIUS,
+        default: "4px",
+      },
       textTransform: {
         label: "Text Transform",
         type: "select",
@@ -344,6 +351,18 @@ export const themeConfig: ThemeConfig = {
           { label: "No", value: "none" },
         ],
         default: "block",
+      },
+    },
+  },
+  image: {
+    label: "Image",
+    styles: {
+      borderRadius: {
+        label: "Border Radius",
+        type: "select",
+        plugin: "borderRadius",
+        options: ThemeOptions.IMAGE_BORDER_RADIUS,
+        default: "0px",
       },
     },
   },
