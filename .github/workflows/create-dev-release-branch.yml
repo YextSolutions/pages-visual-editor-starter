@@ -19,7 +19,17 @@ jobs:
       - name: 'Create new branch from PR number'
         env:
           BRANCH_NAME: ${{ github.event.client_payload.branch_name }}
-        run: git checkout -b "$BRANCH_NAME"
+        run: |
+          # Check if branch already exists remotely
+          if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            echo "Branch $BRANCH_NAME already exists, checking it out and pulling latest"
+            git fetch origin "$BRANCH_NAME"
+            git checkout "$BRANCH_NAME"
+            git pull origin "$BRANCH_NAME"
+          else
+            echo "Creating new branch $BRANCH_NAME"
+            git checkout -b "$BRANCH_NAME"
+          fi
 
       - name: 'Setup Node.js'
         uses: actions/setup-node@v4
@@ -44,5 +54,10 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "feat: update visual-editor for PR #$PR_NUMBER - $PR_TITLE"
-          git push --set-upstream origin "$BRANCH_NAME" 
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "feat: update visual-editor for PR #$PR_NUMBER - $PR_TITLE"
+            git push origin "$BRANCH_NAME"
+          fi 
