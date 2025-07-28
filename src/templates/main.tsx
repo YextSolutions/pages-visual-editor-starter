@@ -102,6 +102,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
         : mainConfig,
     [additionalLayoutComponents]
   );
+  console.log('>>>filteredConfig: ', filteredConfig);
 
   return (
     <AnalyticsProvider
@@ -111,11 +112,11 @@ const Location: Template<TemplateRenderProps> = (props) => {
     >
       <VisualEditorProvider templateProps={props}>
         <Render
-          config={filteredConfig}
+          config={mainConfig}
           data={migrate(
             JSON.parse(document.__.layout),
             migrationRegistry,
-            filteredConfig
+            mainConfig
           )}
         />
       </VisualEditorProvider>
