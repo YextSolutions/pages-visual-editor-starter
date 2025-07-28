@@ -1,4 +1,4 @@
-import { DropZone, type Config } from "@measured/puck";
+import { DefaultComponentProps, DropZone, type Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
 import "./index.css";
 import {
@@ -136,3 +136,60 @@ export const componentRegistry = new Map<string, Config<any>>([
   ["directory", directoryConfig],
   ["locator", locatorConfig],
 ]);
+
+const gatedLayoutComponents: string[] = [
+  "CustomCodeSection",
+  "GridSection",
+];
+
+export const filterComponentsFromConfig = <T extends DefaultComponentProps>(
+  config: Config<T>,
+  additionalLayoutComponents?: string[],
+): Config<T> => {
+  // Filter components object
+  const filteredComponents = Object.fromEntries(
+    Object.entries(config.components).filter(
+      ([key]) =>
+        !gatedLayoutComponents.includes(key) ||
+        additionalLayoutComponents?.includes(key),
+    ),
+  ) as Config<T>["components"];
+
+  // Filter categories by removing gated components that are not present in the additional components list from their components arrays
+  const filteredCategories = Object.fromEntries(
+    Object.entries(config.categories || {}).map(([categoryKey, category]) => [
+      categoryKey,
+      {
+        ...category,
+        components: (category.components || []).filter(
+          (componentName) =>
+            !gatedLayoutComponents.includes(componentName as string) ||
+            additionalLayoutComponents?.includes(componentName as string),
+        ),
+      },
+    ]),
+  );
+
+  return {
+    ...config,
+    components: filteredComponents,
+    categories: filteredCategories,
+  };
+};
+
+// Utility to filter components from a registry
+export const filterComponentsFromRegistry = (
+  registry: Map<string, Config<any>>,
+  registryKey: string,
+  additionalLayoutComponents?: string[],
+): Map<string, Config<any>> => {
+  const newRegistry = new Map(registry);
+  const config = newRegistry.get(registryKey);
+  if (config) {
+    newRegistry.set(
+      registryKey,
+      filterComponentsFromConfig(config, additionalLayoutComponents),
+    );
+  }
+  return newRegistry;
+};
