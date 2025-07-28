@@ -139,7 +139,7 @@ export const componentRegistry = new Map<string, Config<any>>([
 
 const gatedLayoutComponents: string[] = [
   "CustomCodeSection",
-  "GridSection",
+  // "GridSection",
 ];
 
 export const filterComponentsFromConfig = <T extends DefaultComponentProps>(
