@@ -99,7 +99,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
             mainConfig,
             additionalLayoutComponents
           )
-        : migrationRegistry,
+        : mainConfig,
     [additionalLayoutComponents]
   );
 
