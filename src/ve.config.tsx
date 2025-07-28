@@ -138,7 +138,7 @@ export const componentRegistry = new Map<string, Config<any>>([
 ]);
 
 const gatedLayoutComponents: string[] = [
-  "CustomCodeSection",
+  // "CustomCodeSection",
   // "GridSection",
 ];
 
