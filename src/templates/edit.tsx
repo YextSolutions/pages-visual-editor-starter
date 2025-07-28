@@ -53,6 +53,7 @@ const Edit: () => JSX.Element = () => {
         : componentRegistry,
     [additionalLayoutComponents]
   );
+  console.log('>>>filteredRegistry: ', filteredRegistry);
 
   return (
     <VisualEditorProvider
@@ -64,7 +65,7 @@ const Edit: () => JSX.Element = () => {
     >
       <Editor
         document={entityDocument}
-        componentRegistry={filteredRegistry}
+        componentRegistry={componentRegistry}
         themeConfig={themeConfig}
       />
     </VisualEditorProvider>
