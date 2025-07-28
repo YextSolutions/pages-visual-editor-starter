@@ -144,14 +144,14 @@ const gatedLayoutComponents: string[] = [
 
 export const filterComponentsFromConfig = <T extends DefaultComponentProps>(
   config: Config<T>,
-  additionalLayoutComponents: string[],
+  additionalLayoutComponents?: string[],
 ): Config<T> => {
   // Filter components object
   const filteredComponents = Object.fromEntries(
     Object.entries(config.components).filter(
       ([key]) =>
         !gatedLayoutComponents.includes(key) ||
-        additionalLayoutComponents.includes(key),
+        additionalLayoutComponents?.includes(key),
     ),
   ) as Config<T>["components"];
 
@@ -164,7 +164,7 @@ export const filterComponentsFromConfig = <T extends DefaultComponentProps>(
         components: (category.components || []).filter(
           (componentName) =>
             !gatedLayoutComponents.includes(componentName as string) ||
-            additionalLayoutComponents.includes(componentName as string),
+            additionalLayoutComponents?.includes(componentName as string),
         ),
       },
     ]),
@@ -181,7 +181,7 @@ export const filterComponentsFromConfig = <T extends DefaultComponentProps>(
 export const filterComponentsFromRegistry = (
   registry: Map<string, Config<any>>,
   registryKey: string,
-  additionalLayoutComponents: string[],
+  additionalLayoutComponents?: string[],
 ): Map<string, Config<any>> => {
   const newRegistry = new Map(registry);
   const config = newRegistry.get(registryKey);
