@@ -40,8 +40,9 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 const Edit: () => JSX.Element = () => {
   const entityDocument = usePlatformBridgeDocument();
   const entityFields = usePlatformBridgeEntityFields();
+  const additionalLayoutComponents =
+    entityDocument?._additionalLayoutComponents;
 
-  const additionalLayoutComponents = entityDocument?._additionalLayoutComponents;
   const filteredRegistry = React.useMemo(
     () =>
       additionalLayoutComponents
@@ -53,7 +54,6 @@ const Edit: () => JSX.Element = () => {
         : componentRegistry,
     [additionalLayoutComponents]
   );
-  console.log('>>>filteredRegistry: ', filteredRegistry);
 
   return (
     <VisualEditorProvider
@@ -65,7 +65,7 @@ const Edit: () => JSX.Element = () => {
     >
       <Editor
         document={entityDocument}
-        componentRegistry={componentRegistry}
+        componentRegistry={filteredRegistry}
         themeConfig={themeConfig}
       />
     </VisualEditorProvider>

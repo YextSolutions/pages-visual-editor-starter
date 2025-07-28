@@ -11,7 +11,7 @@ import {
   TagType,
 } from "@yext/pages";
 import { Render } from "@measured/puck";
-import { mainConfig, filterComponentsFromConfig } from "../ve.config";
+import { mainConfig, filterComponentsFromConfig, filterComponentsFromRegistry } from "../ve.config";
 import {
   applyTheme,
   VisualEditorProvider,
@@ -92,6 +92,20 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 const Location: Template<TemplateRenderProps> = (props) => {
   const { document } = props;
   const additionalLayoutComponents = document?._additionalLayoutComponents;
+
+  console.log(">>>add: ", additionalLayoutComponents);
+  const filteredRegistry = React.useMemo(
+    () =>
+      additionalLayoutComponents
+        ? filterComponentsFromRegistry(
+            migrationRegistry,
+            "main",
+            additionalLayoutComponents
+          )
+        : migrationRegistry,
+    [additionalLayoutComponents]
+  );
+
   const filteredConfig = React.useMemo(
     () =>
       additionalLayoutComponents
@@ -99,10 +113,12 @@ const Location: Template<TemplateRenderProps> = (props) => {
             mainConfig,
             additionalLayoutComponents
           )
-        : mainConfig,
+        : migrationRegistry,
     [additionalLayoutComponents]
   );
-  console.log('>>>filteredConfig: ', filteredConfig);
+  
+  console.log(">>>main: ", migrationRegistry, filteredRegistry);
+  console.log(">>>mainConfig: ", mainConfig, filteredConfig);
 
   return (
     <AnalyticsProvider
@@ -112,11 +128,11 @@ const Location: Template<TemplateRenderProps> = (props) => {
     >
       <VisualEditorProvider templateProps={props}>
         <Render
-          config={mainConfig}
+          config={filteredConfig}
           data={migrate(
             JSON.parse(document.__.layout),
             migrationRegistry,
-            mainConfig
+            filteredConfig
           )}
         />
       </VisualEditorProvider>
