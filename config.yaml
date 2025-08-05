@@ -10,7 +10,7 @@ livePreviewConfiguration:
   setupCommand: ":"
 siteStream:
   id: site-stream
-  entityId: jwartofsky-dev
+  entityId: jwartofskydevsite
   fields:
     - favicon
     - logo
