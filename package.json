@@ -28,7 +28,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@types/node": "^20.12.3",
     "@yext/search-headless-react": "^2.5.4",
-    "@yext/search-ui-react": "^1.9.1",
+    "@yext/search-ui-react": "^1.9.3",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.4.0",
     "clsx": "^2.1.1",
