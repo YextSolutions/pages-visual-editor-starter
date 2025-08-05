@@ -17,6 +17,9 @@ import {
   OtherCategory,
   DirectoryCategory,
   LocatorCategory,
+  AdvancedCoreInfoCategoryProps,
+  AdvancedCoreInfoCategoryComponents,
+  AdvancedCoreInfoCategory,
 } from "@yext/visual-editor";
 
 interface MainProps
@@ -28,6 +31,7 @@ const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
   ...DeprecatedCategoryComponents,
   ...OtherCategoryComponents,
+  ...AdvancedCoreInfoCategoryComponents,
 };
 
 // All the available components for locations
@@ -35,7 +39,7 @@ export const mainConfig: Config<MainProps> = {
   components,
   categories: {
     pageSections: {
-      title: "Page Sections",
+      title: "Page Sections test",
       components: PageSectionCategory,
     },
     other: {
@@ -45,6 +49,10 @@ export const mainConfig: Config<MainProps> = {
     deprecatedComponents: {
       visible: false,
       components: DeprecatedCategory,
+    },
+    coreInformation: {
+      title: "Core Information",
+      components: AdvancedCoreInfoCategory,
     },
   },
   root: {
