@@ -39,7 +39,7 @@ export const mainConfig: Config<MainProps> = {
   components,
   categories: {
     pageSections: {
-      title: "Page Sections test",
+      title: "Page Sections",
       components: PageSectionCategory,
     },
     other: {
