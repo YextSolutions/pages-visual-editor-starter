@@ -41,7 +41,7 @@
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "@yext/visual-editor": "https://github.com/jwartofsky-yext/publicAssets/releases/download/v1.0.2/fixDirectory2.tgz"
+    "@yext/visual-editor": "https://github.com/jwartofsky-yext/publicAssets/releases/download/v1.0.3/throwInGetPath.tgz"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
