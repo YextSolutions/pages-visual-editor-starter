@@ -24,6 +24,10 @@ interface ExtraProps {
   ContactModule: ContactModuleProps;
 }
 
+const ExtraComponents = {
+  ContactModule,
+}
+
 interface MainProps
   extends PageSectionCategoryProps,
     DeprecatedCategoryProps,
@@ -52,6 +56,10 @@ export const mainConfig: Config<MainProps> = {
     deprecatedComponents: {
       visible: false,
       components: DeprecatedCategory,
+    },
+    extra: {
+      title: "Extra",
+      components: Object.keys(ExtraComponents) as (keyof ExtraProps)[],
     },
   },
   root: {
@@ -139,6 +147,7 @@ export const locatorConfig: Config<LocatorConfigProps> = {
 };
 
 export const componentRegistry = new Map<string, Config<any>>([
+  ["edit", mainConfig],
   ["main", mainConfig],
   ["directory", directoryConfig],
   ["locator", locatorConfig],

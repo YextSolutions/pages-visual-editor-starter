@@ -52,7 +52,7 @@
     "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.2.4",
-    "@yext/pages-components": "^1.1.9",
+    "@yext/pages-components": "https://github.com/jwartofsky-yext/publicAssets/releases/download/v1.0.9/useIframeWindow2.tgz",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
