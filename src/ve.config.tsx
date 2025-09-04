@@ -1,6 +1,7 @@
 import { DropZone, type Config } from "@measured/puck";
 import "@yext/visual-editor/style.css";
 import "./index.css";
+import { ContactModule, ContactModuleProps } from "./components/ContactModule";
 import {
   PageSectionCategory,
   PageSectionCategoryComponents,
@@ -19,15 +20,21 @@ import {
   LocatorCategory,
 } from "@yext/visual-editor";
 
+interface ExtraProps {
+  ContactModule: ContactModuleProps;
+}
+
 interface MainProps
   extends PageSectionCategoryProps,
     DeprecatedCategoryProps,
+      ExtraProps,
     OtherCategoryProps {}
 
 const components: Config<MainProps>["components"] = {
   ...PageSectionCategoryComponents,
   ...DeprecatedCategoryComponents,
   ...OtherCategoryComponents,
+  ContactModule,
 };
 
 // All the available components for locations
