@@ -5,13 +5,13 @@ import {
   defaultThemeConfig,
   VisualEditorComponentsContentPath,
 } from "@yext/visual-editor";
-import { ComponentsContentPath as SearchUiComponentsContentPath } from "@yext/search-ui-react";
+import { ComponentsContentPath as SearchUIComponentsContentPath } from "@yext/search-ui-react";
 
 export default {
   content: [
     "./src/**/*.{html,js,jsx,ts,tsx}",
     VisualEditorComponentsContentPath,
-    SearchUiComponentsContentPath,
+    SearchUIComponentsContentPath,
   ],
   theme: {
     extend: themeResolver(defaultThemeTailwindExtensions, defaultThemeConfig),
