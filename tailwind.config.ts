@@ -1,19 +1,21 @@
 import type { Config } from "tailwindcss";
-import { themeConfig } from "./theme.config";
 import {
   themeResolver,
+  defaultThemeConfig,
   defaultThemeTailwindExtensions,
+  VisualEditorComponentsContentPath,
 } from "@yext/visual-editor";
-import {ComponentsContentPath as SearchUiComponentsContentPath} from "@yext/search-ui-react";
+import { ComponentsContentPath as SearchUIComponentsContentPath } from "@yext/search-ui-react";
+
 
 export default {
   content: [
     "./src/**/*.{html,js,jsx,ts,tsx}",
-    "./node_modules/@yext/visual-editor/dist/**/*.js",
-    SearchUiComponentsContentPath
+    VisualEditorComponentsContentPath,
+    SearchUIComponentsContentPath,
   ],
   theme: {
-    extend: themeResolver(defaultThemeTailwindExtensions, themeConfig),
+    extend: themeResolver(defaultThemeTailwindExtensions, defaultThemeConfig),
   },
   plugins: [],
 } satisfies Config;
