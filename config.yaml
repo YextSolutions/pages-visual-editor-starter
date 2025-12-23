@@ -27,7 +27,6 @@ siteStream:
   localization:
     locales:
       - en
-# authentication:
-#   policyName: auth-policy
-#   includePaths:
-#     - /edit
+sitemap:
+  excludeList:
+    - edit
