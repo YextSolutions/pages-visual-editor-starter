@@ -38,13 +38,13 @@ export const config: TemplateConfig = {
   name: "edit",
 };
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  document,
-}): HeadConfig => {
-  return {
-    other: fullStorySnippet + applyTheme(document, "./", defaultThemeConfig),
-  };
-};
+// export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
+//   document,
+// }): HeadConfig => {
+//   return {
+//     other: fullStorySnippet + applyTheme(document, "./", defaultThemeConfig),
+//   };
+// };
 
 // Render the editor
 const Edit: () => JSX.Element = () => {
