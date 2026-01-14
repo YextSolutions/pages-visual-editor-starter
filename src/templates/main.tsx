@@ -121,13 +121,13 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
 
   logDataSize("After Migration", migratedData);
 
-  const resolvedData = await resolveAllData(migratedData, mainConfig, {
-    streamDocument: document,
-  });
+  // const resolvedData = await resolveAllData(migratedData, mainConfig, {
+  //   streamDocument: document,
+  // });
 
-  logDataSize("After Data Resolution", resolvedData);
+  // logDataSize("After Data Resolution", resolvedData);
 
-  return { ...props, data: resolvedData };
+  return { ...props, data: migratedData };
 };
 
 const Location: Template<TemplateRenderProps> = (props) => {

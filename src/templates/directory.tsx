@@ -103,33 +103,33 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return normalizeSlug(path);
 };
 
-// export const transformProps: TransformProps<TemplateProps> = async (props) => {
-//   const { document } = props;
+export const transformProps: TransformProps<TemplateProps> = async (props) => {
+  const { document } = props;
 
-//   const logDataSize = (label: string, data: any) => {
-//     const size = Buffer.byteLength(JSON.stringify(data)) / 1024 / 1024;
-//     console.log(`[Data Size - ${label}] approx ${size.toFixed(2)} MB`);
-//   };
+  const logDataSize = (label: string, data: any) => {
+    const size = Buffer.byteLength(JSON.stringify(data)) / 1024 / 1024;
+    console.log(`[Data Size - ${label}] approx ${size.toFixed(2)} MB`);
+  };
 
-//   logDataSize("Before Migration", document);
+  logDataSize("Before Migration", document);
 
-//   const migratedData = migrate(
-//     JSON.parse(document.__.layout),
-//     migrationRegistry,
-//     directoryConfig,
-//     document
-//   );
+  const migratedData = migrate(
+    JSON.parse(document.__.layout),
+    migrationRegistry,
+    directoryConfig,
+    document
+  );
 
-//   logDataSize("After Migration", migratedData);
+  logDataSize("After Migration", migratedData);
 
-//   const resolvedData = await resolveAllData(migratedData, directoryConfig, {
-//     streamDocument: document,
-//   });
+  // const resolvedData = await resolveAllData(migratedData, directoryConfig, {
+  //   streamDocument: document,
+  // });
 
-//   logDataSize("After Data Resolution", resolvedData);
+  // logDataSize("After Data Resolution", resolvedData);
 
-//   return { ...props, data: resolvedData };
-// };
+  return { ...props, data: migratedData };
+};
 
 const Directory: Template<TemplateRenderProps> = (props) => {
   const { document, data } = props;
