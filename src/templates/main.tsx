@@ -105,37 +105,30 @@ export const getPath: GetPath<TemplateProps> = ({
 export const transformProps: TransformProps<TemplateProps> = async (props) => {
   const { document } = props;
 
-  // Helper to log memory in MB
-  const logMemory = (label: string) => {
-    const used = process.memoryUsage();
-    console.log(`[Memory - ${label}] 
-      Heap Used: ${Math.round(used.heapUsed / 1024 / 1024)}MB, 
-      Heap Total: ${Math.round(used.heapTotal / 1024 / 1024)}MB, 
-      RSS: ${Math.round(used.rss / 1024 / 1024)}MB`);
+  const logDataSize = (label: string, data: any) => {
+    const size = Buffer.byteLength(JSON.stringify(data)) / 1024 / 1024;
+    console.log(`[Data Size - ${label}] approx ${size.toFixed(2)} MB`);
   };
 
-  logMemory("Start transformProps");
+  logDataSize("Before Migration", document);
 
-  // 1. Trace the Migration
   const migratedData = migrate(
     JSON.parse(document.__.layout),
     migrationRegistry,
     mainConfig,
     document
   );
-  logMemory("After Migrate");
+
+  logDataSize("After Migration", migratedData);
 
   // 2. Trace the Data Resolution (Usually the heaviest part)
   const resolvedData = await resolveAllData(migratedData, mainConfig, {
     streamDocument: document,
   });
-  logMemory("After resolveAllData");
 
-  // 3. Trace Translations
-  const updatedData = resolvedData;
-  logMemory("End transformProps");
+  logDataSize("After Data Resolution", resolvedData);
 
-  return { ...props, data: updatedData };
+  return { ...props, data: resolvedData };
 };
 
 const Location: Template<TemplateRenderProps> = (props) => {
