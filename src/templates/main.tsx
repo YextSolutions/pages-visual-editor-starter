@@ -50,17 +50,17 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
           type: "image/x-icon",
         },
       },
-      // ...(data.document.siteDomain
-      //   ? [
-      //       {
-      //         type: "link" as TagType,
-      //         attributes: {
-      //           rel: "canonical",
-      //           href: getCanonicalUrl(data),
-      //         },
-      //       },
-      //     ]
-      //   : []),
+      ...(data.document.siteDomain
+        ? [
+            {
+              type: "link" as TagType,
+              attributes: {
+                rel: "canonical",
+                href: getCanonicalUrl(data),
+              },
+            },
+          ]
+        : []),
       ...(description
         ? [
             {
