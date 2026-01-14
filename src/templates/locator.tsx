@@ -15,21 +15,19 @@ import { Render, resolveAllData } from "@measured/puck";
 import {
   applyTheme,
   VisualEditorProvider,
+  normalizeSlug,
   getPageMetadata,
   applyAnalytics,
   applyHeaderScript,
-  applyCertifiedFacts,
+  defaultThemeConfig,
+  locatorConfig,
+  getSchema,
+  getCanonicalUrl,
   migrate,
   migrationRegistry,
-  filterComponentsFromConfig,
-  resolvePageSetUrlTemplate,
-  defaultThemeConfig,
-  mainConfig,
-  getSchema,
-  injectTranslations,
-  getCanonicalUrl,
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
+import mapboxPackageJson from "mapbox-gl/package.json";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
   data: TemplateRenderProps
@@ -91,16 +89,19 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
       applyHeaderScript(document),
       applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
       SchemaWrapper(schema),
-      applyCertifiedFacts(document),
     ].join("\n"),
   };
 };
 
-export const getPath: GetPath<TemplateProps> = ({
-  document,
-  relativePrefixToRoot,
-}) => {
-  return resolvePageSetUrlTemplate(document, relativePrefixToRoot);
+export const getPath: GetPath<TemplateProps> = ({ document }) => {
+  if (document.slug) {
+    return document.slug;
+  }
+
+  const localePath = document.locale !== "en" ? `${document.locale}/` : "";
+  const path = `${localePath}${document.id}`;
+
+  return normalizeSlug(path);
 };
 
 export const transformProps: TransformProps<TemplateProps> = async (props) => {
@@ -108,41 +109,45 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
   const migratedData = migrate(
     JSON.parse(document.__.layout),
     migrationRegistry,
-    mainConfig,
+    locatorConfig,
     document
   );
-  const updatedData = await injectTranslations(
-    await resolveAllData(migratedData, mainConfig, {
-      streamDocument: document,
-    })
-  );
+  const updatedData = await resolveAllData(migratedData, locatorConfig, {
+    streamDocument: document,
+  });
 
   return { ...props, data: updatedData };
 };
 
-const Location: Template<TemplateRenderProps> = (props) => {
+const Locator: Template<TemplateRenderProps> = (props) => {
   const { document, data } = props;
-  const filteredConfig = filterComponentsFromConfig(
-    mainConfig,
-    document?._additionalLayoutComponents,
-    document?._additionalLayoutCategories
-  );
 
   return (
-    <AnalyticsProvider
-      apiKey={document?._env?.YEXT_PUBLIC_VISUAL_EDITOR_APP_API_KEY}
-      templateData={props}
-      currency="USD"
-    >
-      <VisualEditorProvider templateProps={props}>
-        <Render
-          config={filteredConfig}
-          data={data}
-          metadata={{ streamDocument: document }}
-        />
-      </VisualEditorProvider>
-    </AnalyticsProvider>
+    <>
+      <script
+        id="mapbox-script"
+        src={`https://api.mapbox.com/mapbox-gl-js/v${mapboxPackageJson.version}/mapbox-gl.js`}
+      />
+      <link
+        id="mapbox-stylesheet"
+        rel="stylesheet"
+        href={`https://api.mapbox.com/mapbox-gl-js/v${mapboxPackageJson.version}/mapbox-gl.css`}
+      />
+      <AnalyticsProvider
+        apiKey={document?._env?.YEXT_PUBLIC_VISUAL_EDITOR_APP_API_KEY}
+        templateData={props}
+        currency="USD"
+      >
+        <VisualEditorProvider templateProps={props}>
+          <Render
+            config={locatorConfig}
+            data={data}
+            metadata={{ streamDocument: document }}
+          />
+        </VisualEditorProvider>
+      </AnalyticsProvider>
+    </>
   );
 };
 
-export default Location;
+export default Locator;

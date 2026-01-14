@@ -24,7 +24,6 @@ import {
   defaultThemeConfig,
   directoryConfig,
   getSchema,
-  injectTranslations,
   getCanonicalUrl,
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
@@ -106,17 +105,36 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 
 export const transformProps: TransformProps<TemplateProps> = async (props) => {
   const { document } = props;
+
+  // Helper to log memory in MB
+  const logMemory = (label: string) => {
+    const used = process.memoryUsage();
+    console.log(`[Memory - ${label}] 
+      Heap Used: ${Math.round(used.heapUsed / 1024 / 1024)}MB, 
+      Heap Total: ${Math.round(used.heapTotal / 1024 / 1024)}MB, 
+      RSS: ${Math.round(used.rss / 1024 / 1024)}MB`);
+  };
+
+  logMemory("Start transformProps");
+
+  // 1. Trace the Migration
   const migratedData = migrate(
     JSON.parse(document.__.layout),
     migrationRegistry,
     directoryConfig,
     document
   );
-  const updatedData = await injectTranslations(
-    await resolveAllData(migratedData, directoryConfig, {
-      streamDocument: document,
-    })
-  );
+  logMemory("After Migrate");
+
+  // 2. Trace the Data Resolution (Usually the heaviest part)
+  const resolvedData = await resolveAllData(migratedData, directoryConfig, {
+    streamDocument: document,
+  });
+  logMemory("After resolveAllData");
+
+  // 3. Trace Translations
+  const updatedData = resolvedData;
+  logMemory("End transformProps");
 
   return { ...props, data: updatedData };
 };
