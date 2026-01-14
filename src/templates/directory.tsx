@@ -83,12 +83,12 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
           ]
         : []),
     ],
-    other: [
-      applyAnalytics(document),
-      applyHeaderScript(document),
-      applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
-      SchemaWrapper(schema),
-    ].join("\n"),
+    // other: [
+    //   applyAnalytics(document),
+    //   applyHeaderScript(document),
+    //   applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
+    //   SchemaWrapper(schema),
+    // ].join("\n"),
   };
 };
 

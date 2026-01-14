@@ -85,13 +85,13 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
           ]
         : []),
     ],
-    other: [
-      applyAnalytics(document),
-      applyHeaderScript(document),
-      applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
-      SchemaWrapper(schema),
-      applyCertifiedFacts(document),
-    ].join("\n"),
+    // other: [
+    //   applyAnalytics(document),
+    //   applyHeaderScript(document),
+    //   applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
+    //   SchemaWrapper(schema),
+    //   applyCertifiedFacts(document),
+    // ].join("\n"),
   };
 };
 
@@ -132,11 +132,11 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
 
 const Location: Template<TemplateRenderProps> = (props) => {
   const { document, data } = props;
-  const filteredConfig = filterComponentsFromConfig(
-    mainConfig,
-    document?._additionalLayoutComponents,
-    document?._additionalLayoutCategories
-  );
+  // const filteredConfig = filterComponentsFromConfig(
+  //   mainConfig,
+  //   document?._additionalLayoutComponents,
+  //   document?._additionalLayoutCategories
+  // );
 
   return (
     <AnalyticsProvider
@@ -146,7 +146,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
     >
       <VisualEditorProvider templateProps={props}>
         <Render
-          config={filteredConfig}
+          config={mainConfig}
           data={data}
           metadata={{ streamDocument: document }}
         />
