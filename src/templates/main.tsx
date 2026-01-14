@@ -30,70 +30,70 @@ import {
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
 
-// export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
-//   data: TemplateRenderProps
-// ): HeadConfig => {
-//   const { document, relativePrefixToRoot } = data;
-//   const { title, description } = getPageMetadata(document);
-//   // const schema = getSchema(data);
-//   const faviconUrl = document?._favicon ?? document?._site?.favicon?.url;
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
+  data: TemplateRenderProps
+): HeadConfig => {
+  const { document, relativePrefixToRoot } = data;
+  const { title, description } = getPageMetadata(document);
+  const schema = getSchema(data);
+  const faviconUrl = document?._favicon ?? document?._site?.favicon?.url;
 
-//   return {
-//     title: title,
-//     charset: "UTF-8",
-//     viewport: "width=device-width, initial-scale=1",
-//     tags: [
-//       {
-//         type: "link" as TagType,
-//         attributes: {
-//           rel: "icon",
-//           type: "image/x-icon",
-//         },
-//       },
-//       // ...(data.document.siteDomain
-//       //   ? [
-//       //       {
-//       //         type: "link" as TagType,
-//       //         attributes: {
-//       //           rel: "canonical",
-//       //           href: getCanonicalUrl(data),
-//       //         },
-//       //       },
-//       //     ]
-//       //   : []),
-//       ...(description
-//         ? [
-//             {
-//               type: "meta" as TagType,
-//               attributes: {
-//                 name: "description",
-//                 content: description,
-//               },
-//             },
-//           ]
-//         : []),
-//       ...(faviconUrl
-//         ? [
-//             {
-//               type: "link" as TagType,
-//               attributes: {
-//                 rel: "icon",
-//                 type: "image/x-icon",
-//                 href: faviconUrl,
-//               },
-//             },
-//           ]
-//         : []),
-//     ],
-//     // other: [
-//     //   applyAnalytics(document),
-//     //   applyHeaderScript(document),
-//     //   applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
-//     //   SchemaWrapper(schema),
-//     //   applyCertifiedFacts(document),
-//     // ].join("\n"),
-//   };
-// };
+  return {
+    title: title,
+    charset: "UTF-8",
+    viewport: "width=device-width, initial-scale=1",
+    tags: [
+      {
+        type: "link" as TagType,
+        attributes: {
+          rel: "icon",
+          type: "image/x-icon",
+        },
+      },
+      ...(data.document.siteDomain
+        ? [
+            {
+              type: "link" as TagType,
+              attributes: {
+                rel: "canonical",
+                href: getCanonicalUrl(data),
+              },
+            },
+          ]
+        : []),
+      ...(description
+        ? [
+            {
+              type: "meta" as TagType,
+              attributes: {
+                name: "description",
+                content: description,
+              },
+            },
+          ]
+        : []),
+      ...(faviconUrl
+        ? [
+            {
+              type: "link" as TagType,
+              attributes: {
+                rel: "icon",
+                type: "image/x-icon",
+                href: faviconUrl,
+              },
+            },
+          ]
+        : []),
+    ],
+    other: [
+      applyAnalytics(document),
+      applyHeaderScript(document),
+      applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
+      SchemaWrapper(schema),
+      applyCertifiedFacts(document),
+    ].join("\n"),
+  };
+};
 
 export const getPath: GetPath<TemplateProps> = ({
   document,
@@ -113,22 +113,20 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
   );
 
 
-  // const resolvedData = await resolveAllData(migratedData, mainConfig, {
-  //   streamDocument: document,
-  // });
+  const resolvedData = await resolveAllData(migratedData, mainConfig, {
+    streamDocument: document,
+  });
 
-  // logDataSize("After Data Resolution", resolvedData);
-
-  return { ...props, data: migratedData };
+  return { ...props, data: resolvedData };
 };
 
 const Location: Template<TemplateRenderProps> = (props) => {
   const { document, data } = props;
-  // const filteredConfig = filterComponentsFromConfig(
-  //   mainConfig,
-  //   document?._additionalLayoutComponents,
-  //   document?._additionalLayoutCategories
-  // );
+  const filteredConfig = filterComponentsFromConfig(
+    mainConfig,
+    document?._additionalLayoutComponents,
+    document?._additionalLayoutCategories
+  );
 
   return (
     <AnalyticsProvider
@@ -138,7 +136,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
     >
       <VisualEditorProvider templateProps={props}>
         <Render
-          config={mainConfig}
+          config={filteredConfig}
           data={data}
           metadata={{ streamDocument: document }}
         />

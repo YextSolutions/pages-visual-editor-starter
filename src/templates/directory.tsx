@@ -33,7 +33,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
 ): HeadConfig => {
   const { document, relativePrefixToRoot } = data;
   const { title, description } = getPageMetadata(document);
-  // const schema = getSchema(data);
+  const schema = getSchema(data);
   const faviconUrl = document?._favicon ?? document?._site?.favicon?.url;
 
   return {
@@ -48,17 +48,17 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
           type: "image/x-icon",
         },
       },
-      // ...(data.document.siteDomain
-      //   ? [
-      //       {
-      //         type: "link" as TagType,
-      //         attributes: {
-      //           rel: "canonical",
-      //           href: getCanonicalUrl(data),
-      //         },
-      //       },
-      //     ]
-      //   : []),
+      ...(data.document.siteDomain
+        ? [
+            {
+              type: "link" as TagType,
+              attributes: {
+                rel: "canonical",
+                href: getCanonicalUrl(data),
+              },
+            },
+          ]
+        : []),
       ...(description
         ? [
             {
@@ -83,12 +83,12 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
           ]
         : []),
     ],
-    // other: [
-    //   applyAnalytics(document),
-    //   applyHeaderScript(document),
-    //   applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
-    //   SchemaWrapper(schema),
-    // ].join("\n"),
+    other: [
+      applyAnalytics(document),
+      applyHeaderScript(document),
+      applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
+      SchemaWrapper(schema),
+    ].join("\n"),
   };
 };
 
@@ -113,13 +113,11 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
     document
   );
 
-  // const resolvedData = await resolveAllData(migratedData, directoryConfig, {
-  //   streamDocument: document,
-  // });
+  const resolvedData = await resolveAllData(migratedData, directoryConfig, {
+    streamDocument: document,
+  });
 
-  // logDataSize("After Data Resolution", resolvedData);
-
-  return { ...props, data: migratedData };
+  return { ...props, data: resolvedData };
 };
 
 const Directory: Template<TemplateRenderProps> = (props) => {
