@@ -30,70 +30,70 @@ import {
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
-  data: TemplateRenderProps
-): HeadConfig => {
-  const { document, relativePrefixToRoot } = data;
-  const { title, description } = getPageMetadata(document);
-  const schema = getSchema(data);
-  const faviconUrl = document?._favicon ?? document?._site?.favicon?.url;
+// export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
+//   data: TemplateRenderProps
+// ): HeadConfig => {
+//   const { document, relativePrefixToRoot } = data;
+//   const { title, description } = getPageMetadata(document);
+//   // const schema = getSchema(data);
+//   const faviconUrl = document?._favicon ?? document?._site?.favicon?.url;
 
-  return {
-    title: title,
-    charset: "UTF-8",
-    viewport: "width=device-width, initial-scale=1",
-    tags: [
-      {
-        type: "link" as TagType,
-        attributes: {
-          rel: "icon",
-          type: "image/x-icon",
-        },
-      },
-      ...(data.document.siteDomain
-        ? [
-            {
-              type: "link" as TagType,
-              attributes: {
-                rel: "canonical",
-                href: getCanonicalUrl(data),
-              },
-            },
-          ]
-        : []),
-      ...(description
-        ? [
-            {
-              type: "meta" as TagType,
-              attributes: {
-                name: "description",
-                content: description,
-              },
-            },
-          ]
-        : []),
-      ...(faviconUrl
-        ? [
-            {
-              type: "link" as TagType,
-              attributes: {
-                rel: "icon",
-                type: "image/x-icon",
-                href: faviconUrl,
-              },
-            },
-          ]
-        : []),
-    ],
-    // other: [
-    //   applyAnalytics(document),
-    //   applyHeaderScript(document),
-    //   applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
-    //   SchemaWrapper(schema),
-    //   applyCertifiedFacts(document),
-    // ].join("\n"),
-  };
-};
+//   return {
+//     title: title,
+//     charset: "UTF-8",
+//     viewport: "width=device-width, initial-scale=1",
+//     tags: [
+//       {
+//         type: "link" as TagType,
+//         attributes: {
+//           rel: "icon",
+//           type: "image/x-icon",
+//         },
+//       },
+//       // ...(data.document.siteDomain
+//       //   ? [
+//       //       {
+//       //         type: "link" as TagType,
+//       //         attributes: {
+//       //           rel: "canonical",
+//       //           href: getCanonicalUrl(data),
+//       //         },
+//       //       },
+//       //     ]
+//       //   : []),
+//       ...(description
+//         ? [
+//             {
+//               type: "meta" as TagType,
+//               attributes: {
+//                 name: "description",
+//                 content: description,
+//               },
+//             },
+//           ]
+//         : []),
+//       ...(faviconUrl
+//         ? [
+//             {
+//               type: "link" as TagType,
+//               attributes: {
+//                 rel: "icon",
+//                 type: "image/x-icon",
+//                 href: faviconUrl,
+//               },
+//             },
+//           ]
+//         : []),
+//     ],
+//     // other: [
+//     //   applyAnalytics(document),
+//     //   applyHeaderScript(document),
+//     //   applyTheme(document, relativePrefixToRoot, defaultThemeConfig),
+//     //   SchemaWrapper(schema),
+//     //   applyCertifiedFacts(document),
+//     // ].join("\n"),
+//   };
+// };
 
 export const getPath: GetPath<TemplateProps> = ({
   document,
@@ -105,13 +105,6 @@ export const getPath: GetPath<TemplateProps> = ({
 export const transformProps: TransformProps<TemplateProps> = async (props) => {
   const { document } = props;
 
-  const logDataSize = (label: string, data: any) => {
-    const size = Buffer.byteLength(JSON.stringify(data)) / 1024 / 1024;
-    console.log(`[Data Size - ${label}] approx ${size.toFixed(2)} MB`);
-  };
-
-  logDataSize("Before Migration", document);
-
   const migratedData = migrate(
     JSON.parse(document.__.layout),
     migrationRegistry,
@@ -119,7 +112,6 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
     document
   );
 
-  logDataSize("After Migration", migratedData);
 
   // const resolvedData = await resolveAllData(migratedData, mainConfig, {
   //   streamDocument: document,

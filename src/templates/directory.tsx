@@ -33,7 +33,7 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
 ): HeadConfig => {
   const { document, relativePrefixToRoot } = data;
   const { title, description } = getPageMetadata(document);
-  const schema = getSchema(data);
+  // const schema = getSchema(data);
   const faviconUrl = document?._favicon ?? document?._site?.favicon?.url;
 
   return {
@@ -48,17 +48,17 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
           type: "image/x-icon",
         },
       },
-      ...(data.document.siteDomain
-        ? [
-            {
-              type: "link",
-              attributes: {
-                rel: "canonical",
-                href: getCanonicalUrl(data),
-              },
-            },
-          ]
-        : []),
+      // ...(data.document.siteDomain
+      //   ? [
+      //       {
+      //         type: "link" as TagType,
+      //         attributes: {
+      //           rel: "canonical",
+      //           href: getCanonicalUrl(data),
+      //         },
+      //       },
+      //     ]
+      //   : []),
       ...(description
         ? [
             {
@@ -106,21 +106,12 @@ export const getPath: GetPath<TemplateProps> = ({ document }) => {
 export const transformProps: TransformProps<TemplateProps> = async (props) => {
   const { document } = props;
 
-  const logDataSize = (label: string, data: any) => {
-    const size = Buffer.byteLength(JSON.stringify(data)) / 1024 / 1024;
-    console.log(`[Data Size - ${label}] approx ${size.toFixed(2)} MB`);
-  };
-
-  logDataSize("Before Migration", document);
-
   const migratedData = migrate(
     JSON.parse(document.__.layout),
     migrationRegistry,
     directoryConfig,
     document
   );
-
-  logDataSize("After Migration", migratedData);
 
   // const resolvedData = await resolveAllData(migratedData, directoryConfig, {
   //   streamDocument: document,
