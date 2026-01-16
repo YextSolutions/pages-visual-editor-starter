@@ -8,7 +8,6 @@ buildConfiguration:
       - .npmrc
 livePreviewConfiguration:
   setupCommand: ":"
-siteStream:
   id: site-stream
   entityId: entity-id
   fields:
