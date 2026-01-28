@@ -12,14 +12,14 @@
     "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add"
   },
   "engines": {
-    "node": "^18.4.0 || >=20.2.0"
+    "node": ">=20.18.2"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.1.5",
     "@mantine/core": "^7.10.1",
     "@mantine/hooks": "^7.10.1",
-    "@measured/puck": "0.20.2",
+    "@puckeditor/core": "0.21.1",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-progress": "^1.0.3",
@@ -28,7 +28,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@types/node": "^20.12.3",
     "@yext/search-headless-react": "^2.6.0",
-    "@yext/search-ui-react": "^1.11.1",
+    "@yext/search-ui-react": "^2.0.2",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.4.0",
     "clsx": "^2.1.1",
@@ -49,9 +49,9 @@
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "@yext/pages": "1.2.7",
+    "@yext/pages": "1.2.9",
     "@yext/pages-components": "^2.0.0",
-    "@yext/visual-editor": "1.0.5",
+    "@yext/visual-editor": "1.0.6",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
