@@ -12,7 +12,7 @@
     "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add"
   },
   "engines": {
-    "node": "^18.4.0 || >=20.18.2"
+    "node": ">=20.18.2"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
