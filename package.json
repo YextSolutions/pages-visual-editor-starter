@@ -51,7 +51,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.2.9",
     "@yext/pages-components": "^2.0.0",
-    "@yext/visual-editor": "1.0.6",
+    "@yext/visual-editor": "1.0.7",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
