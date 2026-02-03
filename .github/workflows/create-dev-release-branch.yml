@@ -31,6 +31,16 @@ jobs:
             git checkout -b "$BRANCH_NAME"
           fi
 
+      - name: 'Remove siteStream from config.yaml for test branch'
+        run: |
+          if [ -f config.yaml ]; then
+            perl -0777 -pe 's/\nsiteStream:\n(?:  .*\n)*//s' config.yaml > config.yaml.tmp
+            mv config.yaml.tmp config.yaml
+            echo "siteStream removed from config.yaml"
+          else
+            echo "config.yaml not found; skipping removal"
+          fi
+
       - name: 'Setup Node.js'
         uses: actions/setup-node@v4
         with:
