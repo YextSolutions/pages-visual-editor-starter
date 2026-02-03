@@ -8,25 +8,6 @@ buildConfiguration:
       - .npmrc
 livePreviewConfiguration:
   setupCommand: ":"
-siteStream:
-  id: site-stream
-  entityId: entity-id
-  fields:
-    - favicon
-    - logo
-    - twitterHandle
-    - facebookPageUrl
-    - instagramHandle
-    - linkedInUrl
-    - pinterestUrl
-    - tikTokUrl
-    - youTubeChannelUrl
-    - copyrightMessage
-    - header
-    - footer
-  localization:
-    locales:
-      - en
 sitemap:
   excludeList:
     - edit
