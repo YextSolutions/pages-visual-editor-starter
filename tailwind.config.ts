@@ -4,7 +4,7 @@ import {
   defaultThemeTailwindExtensions,
   defaultThemeConfig,
   VisualEditorComponentsContentPath,
-} from "@yext/visual-editor";
+} from "@yext/visual-editor/tailwind";
 import { ComponentsContentPath as SearchUIComponentsContentPath } from "@yext/search-ui-react";
 
 export default {

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "strict": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "outDir": "./dist",
