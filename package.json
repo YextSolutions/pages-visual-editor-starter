@@ -50,7 +50,7 @@
     "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.2.9",
-    "@yext/pages-components": "^2.0.0",
+    "@yext/pages-components": "^2.0.1",
     "@yext/visual-editor": "1.1.0-alpha.1",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
