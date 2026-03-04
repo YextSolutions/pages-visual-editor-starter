@@ -1,10 +1,10 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { Project, QuoteKind, SyntaxKind } from "ts-morph";
 
 const ROOT_DIR = process.cwd();
 const OUTPUT_DIR = path.join(ROOT_DIR, "output");
-const LEGACY_OUTPUT_DIR = path.join(ROOT_DIR, "output", "configs");
 const OUTPUT_CONFIG_PATH = path.join(OUTPUT_DIR, "Config.tsx");
 const MAIN_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "main.tsx");
 const EDIT_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "edit.tsx");
@@ -25,6 +25,12 @@ const SOURCE_GROUPS = [
   },
 ];
 
+const AST_PROJECT = new Project({
+  manipulationSettings: {
+    quoteKind: QuoteKind.Double,
+  },
+});
+
 /**
  * Writes a file only when content changes.
  * @param {string} filePath
@@ -36,7 +42,9 @@ const writeFileIfChanged = async (filePath, content) => {
   if (await fileExists(filePath)) {
     current = await fs.readFile(filePath, "utf8");
   }
-  if (current === content) return false;
+  if (current === content) {
+    return false;
+  }
   await fs.writeFile(filePath, content, "utf8");
   return true;
 };
@@ -81,14 +89,20 @@ const fileExists = async (filePath) => {
  * @returns {Promise<string[]>}
  */
 const walkDirectory = async (directory) => {
-  if (!(await fileExists(directory))) return [];
+  if (!(await fileExists(directory))) {
+    return [];
+  }
 
   const entries = await fs.readdir(directory, { withFileTypes: true });
   const nested = await Promise.all(
     entries.map(async (entry) => {
       const absolutePath = path.join(directory, entry.name);
-      if (entry.isDirectory()) return walkDirectory(absolutePath);
-      if (!entry.isFile()) return [];
+      if (entry.isDirectory()) {
+        return walkDirectory(absolutePath);
+      }
+      if (!entry.isFile()) {
+        return [];
+      }
 
       const extension = path.extname(entry.name);
       return VALID_EXTENSIONS.has(extension) ? [absolutePath] : [];
@@ -205,13 +219,219 @@ const buildConfigSource = (groups, outputFilePath) => {
 };
 
 /**
- * Updates src/templates/main.tsx to import the most recently generated config.
- * If main.tsx does not exist, this is a no-op.
+ * Gets a source file for manipulation.
+ * @param {string} filePath
+ * @returns {import("ts-morph").SourceFile}
+ */
+const getAstSourceFile = (filePath) => {
+  const existing = AST_PROJECT.getSourceFile(filePath);
+  if (existing) {
+    return existing;
+  }
+  return AST_PROJECT.addSourceFileAtPath(filePath);
+};
+
+/**
+ * Removes named imports from a specific module import declaration.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {string} moduleSpecifier
+ * @param {string[]} namesToRemove
+ */
+const removeNamedImports = (sourceFile, moduleSpecifier, namesToRemove) => {
+  const declaration = sourceFile
+    .getImportDeclarations()
+    .find((item) => item.getModuleSpecifierValue() === moduleSpecifier);
+  if (!declaration) {
+    return;
+  }
+  for (const namedImport of declaration.getNamedImports()) {
+    if (namesToRemove.includes(namedImport.getName())) {
+      namedImport.remove();
+    }
+  }
+  if (
+    declaration.getNamedImports().length === 0 &&
+    !declaration.getDefaultImport() &&
+    !declaration.getNamespaceImport()
+  ) {
+    declaration.remove();
+  }
+};
+
+/**
+ * Ensures `mainConfig` import points to generated config path and removes other `mainConfig` imports.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {string} moduleSpecifier
+ */
+const upsertMainConfigImport = (sourceFile, moduleSpecifier) => {
+  for (const declaration of sourceFile.getImportDeclarations()) {
+    const hadNamedImports = declaration.getNamedImports().length > 0;
+    const namedImports = declaration.getNamedImports();
+    for (const namedImport of namedImports) {
+      if (namedImport.getName() === "mainConfig") {
+        namedImport.remove();
+      }
+    }
+    if (
+      hadNamedImports &&
+      declaration.getNamedImports().length === 0 &&
+      !declaration.getDefaultImport() &&
+      !declaration.getNamespaceImport()
+    ) {
+      declaration.remove();
+    }
+  }
+
+  const pagesComponentsImport = sourceFile
+    .getImportDeclarations()
+    .find(
+      (item) => item.getModuleSpecifierValue() === "@yext/pages-components"
+    );
+
+  if (pagesComponentsImport) {
+    sourceFile.insertImportDeclaration(
+      pagesComponentsImport.getChildIndex() + 1,
+      {
+        namedImports: ["mainConfig"],
+        moduleSpecifier,
+      }
+    );
+  } else {
+    sourceFile.addImportDeclaration({
+      namedImports: ["mainConfig"],
+      moduleSpecifier,
+    });
+  }
+};
+
+/**
+ * Ensures a side-effect import is present.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {string} moduleSpecifier
+ */
+const ensureSideEffectImport = (sourceFile, moduleSpecifier) => {
+  const exists = sourceFile
+    .getImportDeclarations()
+    .some((item) => item.getModuleSpecifierValue() === moduleSpecifier);
+  if (!exists) {
+    sourceFile.insertImportDeclaration(0, {
+      moduleSpecifier,
+    });
+  }
+};
+
+/**
+ * Replaces transformProps implementation with a minimal version.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ */
+const setMinimalTransformProps = (sourceFile) => {
+  const declaration = sourceFile.getVariableDeclaration("transformProps");
+  if (!declaration) {
+    return;
+  }
+  declaration.setInitializer(`async (props) => {
+  const { document } = props;
+
+  const translations = await injectTranslations(document);
+
+  return { ...props, document, translations };
+}`);
+};
+
+/**
+ * Removes filtered config declaration and rewrites usage to mainConfig.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ */
+const removeFilteredConfigUsage = (sourceFile) => {
+  const declarations = sourceFile.getVariableDeclarations();
+  for (const declaration of declarations) {
+    const initializerText = declaration.getInitializer()?.getText() ?? "";
+    if (initializerText.includes("filterComponentsFromConfig(")) {
+      const statement = declaration.getFirstAncestorByKind(
+        SyntaxKind.VariableStatement
+      );
+      if (statement) {
+        statement.remove();
+      }
+    }
+  }
+
+  for (const identifier of sourceFile.getDescendantsOfKind(SyntaxKind.Identifier)) {
+    if (identifier.getText() === "filteredConfig") {
+      identifier.replaceWithText("mainConfig");
+    }
+  }
+};
+
+/**
+ * Ensures the main template has a Location component and default export points to it.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ */
+const ensureMainLocationComponent = (sourceFile) => {
+  const locationDeclaration = sourceFile.getVariableDeclaration("Location");
+  if (!locationDeclaration) {
+    sourceFile.addStatements(`
+const Location: Template<TemplateRenderProps> = (props) => {
+  const { document } = props;
+
+  const layoutString = document.__.layout;
+  let data: any = {};
+  try {
+    data = JSON.parse(layoutString);
+  } catch (e) {
+    console.error("Failed to parse layout JSON:", e);
+  }
+
+  let requireAnalyticsOptIn = false;
+  if (document.__?.visualEditorConfig) {
+    try {
+      requireAnalyticsOptIn =
+        JSON.parse(document.__.visualEditorConfig)?.requireAnalyticsOptIn ??
+        false;
+    } catch (e) {
+      console.error("Failed to parse visualEditorConfig JSON:", e);
+    }
+  }
+
+  return (
+    <AnalyticsProvider
+      apiKey={document?._env?.YEXT_PUBLIC_VISUAL_EDITOR_APP_API_KEY}
+      templateData={props}
+      currency="USD"
+      requireOptIn={requireAnalyticsOptIn}
+    >
+      <VisualEditorProvider templateProps={props}>
+        <Render
+          config={mainConfig}
+          data={data}
+          metadata={{ streamDocument: document }}
+        />
+      </VisualEditorProvider>
+    </AnalyticsProvider>
+  );
+};
+`);
+  }
+
+  const exportAssignments = sourceFile.getExportAssignments();
+  for (const assignment of exportAssignments) {
+    assignment.remove();
+  }
+  sourceFile.addExportAssignment({
+    isExportEquals: false,
+    expression: "Location",
+  });
+};
+
+/**
+ * Updates src/templates/main.tsx to import the generated config and remove migration/filtering.
  * @param {string} outputFilePath
  * @returns {Promise<boolean>} true when main.tsx was updated, otherwise false.
  */
 const updateMainTemplateConfig = async (outputFilePath) => {
-  if (!(await fileExists(MAIN_TEMPLATE_PATH))) return false;
+  if (!(await fileExists(MAIN_TEMPLATE_PATH))) {
+    return false;
+  }
 
   const importTarget = toPosixPath(
     path
@@ -222,94 +442,60 @@ const updateMainTemplateConfig = async (outputFilePath) => {
     ? importTarget
     : `./${importTarget}`;
 
-  const templateSource = await fs.readFile(MAIN_TEMPLATE_PATH, "utf8");
+  const originalSource = await fs.readFile(MAIN_TEMPLATE_PATH, "utf8");
+  const sourceFile = getAstSourceFile(MAIN_TEMPLATE_PATH);
 
-  const stripNamedImport = (importList, namesToRemove) =>
-    importList
-      .split(",")
-      .map((name) => name.trim())
-      .filter(Boolean)
-      .filter((name) => !namesToRemove.includes(name));
+  removeNamedImports(sourceFile, "@puckeditor/core", ["resolveAllData"]);
+  removeNamedImports(sourceFile, "@yext/visual-editor", [
+    "mainConfig",
+    "migrate",
+    "migrationRegistry",
+    "filterComponentsFromConfig",
+  ]);
+  ensureSideEffectImport(sourceFile, "@yext/visual-editor/style.css");
+  ensureSideEffectImport(sourceFile, "../index.css");
+  upsertMainConfigImport(sourceFile, normalizedImportTarget);
+  setMinimalTransformProps(sourceFile);
+  removeFilteredConfigUsage(sourceFile);
+  ensureMainLocationComponent(sourceFile);
 
-  let updatedSource = templateSource
-    .replace(
-      /^\s*import\s*\{\s*mainConfig\s*\}\s*from\s*["'][^"']+["'];\n?/gm,
-      ""
-    )
-    .replace(
-      /import\s*\{([^;]*?)\}\s*from\s*["']@puckeditor\/core["'];/,
-      (fullImport, importList) => {
-        const names = stripNamedImport(importList, ["resolveAllData"]);
-        const formattedImports = names.map((name) => `  ${name},`).join("\n");
-        return `import {\n${formattedImports}\n} from "@puckeditor/core";`;
-      }
-    )
-    .replace(
-      /import\s*\{([^;]*?)\}\s*from\s*["']@yext\/visual-editor["'];/,
-      (fullImport, importList) => {
-        const names = stripNamedImport(importList, [
-          "mainConfig",
-          "migrate",
-          "migrationRegistry",
-          "filterComponentsFromConfig",
-        ]);
+  sourceFile.formatText();
+  const updatedSource = sourceFile.getFullText();
+  sourceFile.forget();
 
-        const formattedImports = names.map((name) => `  ${name},`).join("\n");
-        return `import {\n${formattedImports}\n} from "@yext/visual-editor";`;
-      }
-    )
-    .replace(
-      /import\s+\{\s*AnalyticsProvider,\s*SchemaWrapper\s*\}\s+from\s+["']@yext\/pages-components["'];/,
-      `import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";\nimport { mainConfig } from "${normalizedImportTarget}";`
-    )
-    .replace(
-      /export const transformProps: TransformProps<TemplateProps> = async \(props\) => \{[\s\S]*?\n\};/,
-      [
-        "export const transformProps: TransformProps<TemplateProps> = async (props) => {",
-        "  const { document } = props;",
-        "",
-        "  const translations = await injectTranslations(document);",
-        "",
-        "  return { ...props, document, translations };",
-        "};",
-      ].join("\n")
-    )
-    .replace(
-      /const filteredConfig = filterComponentsFromConfig\([\s\S]*?\);\n\n/,
-      ""
-    )
-    .replace(
-      /config=\{filteredConfig\}/g,
-      "config={mainConfig}"
-    )
-    .replace(
-      /,\s*document\?\._additionalLayoutComponents,\s*\n\s*document\?\._additionalLayoutCategories\s*/g,
-      ""
-    )
-    .replace(
-      /^\s{4}let requireAnalyticsOptIn = false;/m,
-      "  let requireAnalyticsOptIn = false;"
-    );
-
-  updatedSource = updatedSource.replace(
-    /\n{3,}/g,
-    "\n\n"
-  );
-
-  if (updatedSource === templateSource) return false;
+  if (updatedSource === originalSource) {
+    return false;
+  }
 
   await fs.writeFile(MAIN_TEMPLATE_PATH, updatedSource, "utf8");
   return true;
 };
 
 /**
- * Updates src/templates/edit.tsx to import the generated config file.
- * If edit.tsx does not exist, this is a no-op.
+ * Replaces componentRegistry declaration in edit.tsx.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ */
+const setEditComponentRegistry = (sourceFile) => {
+  const declaration = sourceFile.getVariableDeclaration("componentRegistry");
+  if (!declaration) {
+    return;
+  }
+  declaration.setInitializer(`{
+  main: mainConfig,
+  directory: mainConfig,
+  locator: mainConfig,
+}`);
+};
+
+/**
+ * Updates src/templates/edit.tsx to import the generated config and pin registry entries.
  * @param {string} outputFilePath
  * @returns {Promise<boolean>} true when edit.tsx was updated, otherwise false.
  */
 const updateEditTemplateConfig = async (outputFilePath) => {
-  if (!(await fileExists(EDIT_TEMPLATE_PATH))) return false;
+  if (!(await fileExists(EDIT_TEMPLATE_PATH))) {
+    return false;
+  }
 
   const importTarget = toPosixPath(
     path
@@ -320,90 +506,29 @@ const updateEditTemplateConfig = async (outputFilePath) => {
     ? importTarget
     : `./${importTarget}`;
 
-  const templateSource = await fs.readFile(EDIT_TEMPLATE_PATH, "utf8");
+  const originalSource = await fs.readFile(EDIT_TEMPLATE_PATH, "utf8");
+  const sourceFile = getAstSourceFile(EDIT_TEMPLATE_PATH);
 
-  const stripNamedImport = (importList, namesToRemove) =>
-    importList
-      .split(",")
-      .map((name) => name.trim())
-      .filter(Boolean)
-      .filter((name) => !namesToRemove.includes(name));
+  removeNamedImports(sourceFile, "@yext/visual-editor", [
+    "mainConfig",
+    "directoryConfig",
+    "locatorConfig",
+  ]);
+  ensureSideEffectImport(sourceFile, "@yext/visual-editor/editor.css");
+  ensureSideEffectImport(sourceFile, "../index.css");
+  upsertMainConfigImport(sourceFile, normalizedImportTarget);
+  setEditComponentRegistry(sourceFile);
 
-  let updatedSource = templateSource
-    .replace(
-      /^\s*import\s*\{\s*mainConfig\s*\}\s*from\s*["'][^"']+["'];\n?/gm,
-      ""
-    )
-    .replace(
-      /import\s*\{([^;]*?)\}\s*from\s*["']@yext\/visual-editor["'];/,
-      (fullImport, importList) => {
-        const names = stripNamedImport(importList, [
-          "mainConfig",
-          "directoryConfig",
-          "locatorConfig",
-        ]);
-        const formattedImports = names.map((name) => `  ${name},`).join("\n");
-        return `import {\n${formattedImports}\n} from "@yext/visual-editor";`;
-      }
-    )
-    .replace(
-      /import\s+\{\s*type\s+Config\s*\}\s+from\s+["']@puckeditor\/core["'];/,
-      `import { type Config } from "@puckeditor/core";\nimport { mainConfig } from "${normalizedImportTarget}";`
-    )
-    .replace(
-      /const componentRegistry: Record<string, Config<any>> = \{[\s\S]*?\};/,
-      [
-        "const componentRegistry: Record<string, Config<any>> = {",
-        "  main: mainConfig,",
-        "  directory: mainConfig,",
-        "  locator: mainConfig,",
-        "};",
-      ].join("\n")
-    );
+  sourceFile.formatText();
+  const updatedSource = sourceFile.getFullText();
+  sourceFile.forget();
 
-  updatedSource = updatedSource.replace(/\n{3,}/g, "\n\n");
-
-  if (updatedSource === templateSource) return false;
+  if (updatedSource === originalSource) {
+    return false;
+  }
 
   await fs.writeFile(EDIT_TEMPLATE_PATH, updatedSource, "utf8");
   return true;
-};
-
-/**
- * Removes old generated config files from legacy and current output locations.
- * @returns {Promise<number>} number of deleted files.
- */
-const removeLegacyConfigs = async () => {
-  const deletedPaths = [];
-
-  if (await fileExists(OUTPUT_DIR)) {
-    const outputFiles = await fs.readdir(OUTPUT_DIR);
-    for (const fileName of outputFiles) {
-      if (/^Config_\d+\.tsx$/.test(fileName)) {
-        const filePath = path.join(OUTPUT_DIR, fileName);
-        await fs.rm(filePath);
-        deletedPaths.push(filePath);
-      }
-    }
-  }
-
-  if (await fileExists(LEGACY_OUTPUT_DIR)) {
-    const legacyFiles = await fs.readdir(LEGACY_OUTPUT_DIR);
-    for (const fileName of legacyFiles) {
-      if (/^Config(?:_\d+)?\.tsx$/.test(fileName)) {
-        const filePath = path.join(LEGACY_OUTPUT_DIR, fileName);
-        await fs.rm(filePath);
-        deletedPaths.push(filePath);
-      }
-    }
-
-    const remainingLegacyFiles = await fs.readdir(LEGACY_OUTPUT_DIR);
-    if (remainingLegacyFiles.length === 0) {
-      await fs.rmdir(LEGACY_OUTPUT_DIR);
-    }
-  }
-
-  return deletedPaths.length;
 };
 
 /**
@@ -413,7 +538,9 @@ const removeLegacyConfigs = async () => {
 export const generateTemplateConfig = async (options = {}) => {
   const { silent = false } = options;
   const log = (...args) => {
-    if (!silent) console.log(...args);
+    if (!silent) {
+      console.log(...args);
+    }
   };
 
   const outputFilePath = OUTPUT_CONFIG_PATH;
@@ -422,7 +549,6 @@ export const generateTemplateConfig = async (options = {}) => {
 
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
   const wroteOutputConfig = await writeFileIfChanged(outputFilePath, source);
-  const removedLegacyCount = await removeLegacyConfigs();
   const updatedTemplate = await updateMainTemplateConfig(outputFilePath);
   const updatedEditTemplate = await updateEditTemplateConfig(outputFilePath);
 
@@ -444,16 +570,12 @@ export const generateTemplateConfig = async (options = {}) => {
       `Updated ${path.relative(ROOT_DIR, EDIT_TEMPLATE_PATH)} config import`
     );
   }
-  if (removedLegacyCount > 0) {
-    log(`Removed ${removedLegacyCount} legacy Config_<n>.tsx files`);
-  }
   log(`Total items: ${totalCount} (${totalsByGroup.join(", ")})`);
 
   return {
     wroteOutputConfig,
     updatedTemplate,
     updatedEditTemplate,
-    removedLegacyCount,
     totalCount,
     totalsByGroup,
   };
