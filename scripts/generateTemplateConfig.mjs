@@ -1,10 +1,10 @@
-#!/usr/bin/env node
-
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 const ROOT_DIR = process.cwd();
-const OUTPUT_DIR = path.join(ROOT_DIR, "output", "configs");
+const OUTPUT_DIR = path.join(ROOT_DIR, "output");
+const LEGACY_OUTPUT_DIR = path.join(ROOT_DIR, "output", "configs");
 const OUTPUT_CONFIG_PATH = path.join(OUTPUT_DIR, "Config.tsx");
 const MAIN_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "main.tsx");
 const EDIT_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "edit.tsx");
@@ -24,6 +24,22 @@ const SOURCE_GROUPS = [
     importPrefix: "Atom",
   },
 ];
+
+/**
+ * Writes a file only when content changes.
+ * @param {string} filePath
+ * @param {string} content
+ * @returns {Promise<boolean>} true when file was written, otherwise false.
+ */
+const writeFileIfChanged = async (filePath, content) => {
+  let current = null;
+  if (await fileExists(filePath)) {
+    current = await fs.readFile(filePath, "utf8");
+  }
+  if (current === content) return false;
+  await fs.writeFile(filePath, content, "utf8");
+  return true;
+};
 
 /**
  * Converts a file or path-like string to PascalCase.
@@ -354,35 +370,59 @@ const updateEditTemplateConfig = async (outputFilePath) => {
 };
 
 /**
- * Removes legacy numbered config files (Config_<n>.tsx) from output/configs.
+ * Removes old generated config files from legacy and current output locations.
  * @returns {Promise<number>} number of deleted files.
  */
-const removeLegacyNumberedConfigs = async () => {
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
-  const outputFiles = await fs.readdir(OUTPUT_DIR);
-  const legacyFiles = outputFiles.filter((fileName) =>
-    /^Config_\d+\.tsx$/.test(fileName)
-  );
+const removeLegacyConfigs = async () => {
+  const deletedPaths = [];
 
-  await Promise.all(
-    legacyFiles.map((fileName) => fs.rm(path.join(OUTPUT_DIR, fileName)))
-  );
+  if (await fileExists(OUTPUT_DIR)) {
+    const outputFiles = await fs.readdir(OUTPUT_DIR);
+    for (const fileName of outputFiles) {
+      if (/^Config_\d+\.tsx$/.test(fileName)) {
+        const filePath = path.join(OUTPUT_DIR, fileName);
+        await fs.rm(filePath);
+        deletedPaths.push(filePath);
+      }
+    }
+  }
 
-  return legacyFiles.length;
+  if (await fileExists(LEGACY_OUTPUT_DIR)) {
+    const legacyFiles = await fs.readdir(LEGACY_OUTPUT_DIR);
+    for (const fileName of legacyFiles) {
+      if (/^Config(?:_\d+)?\.tsx$/.test(fileName)) {
+        const filePath = path.join(LEGACY_OUTPUT_DIR, fileName);
+        await fs.rm(filePath);
+        deletedPaths.push(filePath);
+      }
+    }
+
+    const remainingLegacyFiles = await fs.readdir(LEGACY_OUTPUT_DIR);
+    if (remainingLegacyFiles.length === 0) {
+      await fs.rmdir(LEGACY_OUTPUT_DIR);
+    }
+  }
+
+  return deletedPaths.length;
 };
 
 /**
  * Generates a new config file and prints a summary to stdout.
  * @returns {Promise<void>}
  */
-const main = async () => {
+export const generateTemplateConfig = async (options = {}) => {
+  const { silent = false } = options;
+  const log = (...args) => {
+    if (!silent) console.log(...args);
+  };
+
   const outputFilePath = OUTPUT_CONFIG_PATH;
   const groups = await collectItems();
   const source = buildConfigSource(groups, outputFilePath);
 
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
-  await fs.writeFile(outputFilePath, source, "utf8");
-  const removedLegacyCount = await removeLegacyNumberedConfigs();
+  const wroteOutputConfig = await writeFileIfChanged(outputFilePath, source);
+  const removedLegacyCount = await removeLegacyConfigs();
   const updatedTemplate = await updateMainTemplateConfig(outputFilePath);
   const updatedEditTemplate = await updateEditTemplateConfig(outputFilePath);
 
@@ -391,24 +431,37 @@ const main = async () => {
   );
   const totalCount = groups.reduce((count, group) => count + group.items.length, 0);
 
-  console.log(`Wrote ${path.relative(ROOT_DIR, outputFilePath)}`);
+  if (wroteOutputConfig) {
+    log(`Wrote ${path.relative(ROOT_DIR, outputFilePath)}`);
+  }
   if (updatedTemplate) {
-    console.log(
+    log(
       `Updated ${path.relative(ROOT_DIR, MAIN_TEMPLATE_PATH)} config import`
     );
   }
   if (updatedEditTemplate) {
-    console.log(
+    log(
       `Updated ${path.relative(ROOT_DIR, EDIT_TEMPLATE_PATH)} config import`
     );
   }
   if (removedLegacyCount > 0) {
-    console.log(`Removed ${removedLegacyCount} legacy Config_<n>.tsx files`);
+    log(`Removed ${removedLegacyCount} legacy Config_<n>.tsx files`);
   }
-  console.log(`Total items: ${totalCount} (${totalsByGroup.join(", ")})`);
+  log(`Total items: ${totalCount} (${totalsByGroup.join(", ")})`);
+
+  return {
+    wroteOutputConfig,
+    updatedTemplate,
+    updatedEditTemplate,
+    removedLegacyCount,
+    totalCount,
+    totalsByGroup,
+  };
 };
 
-main().catch((error) => {
-  console.error("Failed to generate template config:", error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  generateTemplateConfig().catch((error) => {
+    console.error("Failed to generate template config:", error);
+    process.exitCode = 1;
+  });
+}
