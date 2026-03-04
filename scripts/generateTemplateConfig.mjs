@@ -472,7 +472,7 @@ const updateMainTemplateConfig = async (outputFilePath) => {
 };
 
 /**
- * Replaces componentRegistry declaration in edit.tsx.
+ * Ensures componentRegistry has `main: mainConfig` while preserving other registry entries.
  * @param {import("ts-morph").SourceFile} sourceFile
  */
 const setEditComponentRegistry = (sourceFile) => {
@@ -480,11 +480,31 @@ const setEditComponentRegistry = (sourceFile) => {
   if (!declaration) {
     return;
   }
-  declaration.setInitializer(`{
+
+  const initializer = declaration.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
+  if (!initializer) {
+    declaration.setInitializer(`{
   main: mainConfig,
-  directory: mainConfig,
-  locator: mainConfig,
 }`);
+    return;
+  }
+
+  const mainProperty = initializer
+    .getProperties()
+    .find(
+      (property) =>
+        property.getKind() === SyntaxKind.PropertyAssignment &&
+        property.getName() === "main"
+    );
+
+  if (mainProperty && mainProperty.getKind() === SyntaxKind.PropertyAssignment) {
+    mainProperty.setInitializer("mainConfig");
+  } else {
+    initializer.addPropertyAssignment({
+      name: "main",
+      initializer: "mainConfig",
+    });
+  }
 };
 
 /**
@@ -511,8 +531,6 @@ const updateEditTemplateConfig = async (outputFilePath) => {
 
   removeNamedImports(sourceFile, "@yext/visual-editor", [
     "mainConfig",
-    "directoryConfig",
-    "locatorConfig",
   ]);
   ensureSideEffectImport(sourceFile, "@yext/visual-editor/editor.css");
   ensureSideEffectImport(sourceFile, "../index.css");
