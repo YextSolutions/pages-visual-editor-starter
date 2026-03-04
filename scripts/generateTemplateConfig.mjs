@@ -1,3 +1,36 @@
+/**
+ * High-level overview:
+ *
+ * 1) Scan source component folders:
+ *    - Recursively read `src/components` and `src/atoms`.
+ *    - Collect supported source files (`.tsx`, `.ts`, `.jsx`, `.js`).
+ *    - Build stable component keys and import aliases from file paths.
+ *
+ * 2) Generate Puck config source:
+ *    - Emit `output/Config.tsx` with:
+ *      - imports for discovered components/atoms
+ *      - `mainConfig.components` map
+ *      - `mainConfig.categories` grouped as Components and Atoms
+ *    - Write only when file content changes to avoid dev-server reload loops.
+ *
+ * 3) Patch template wiring (`main.tsx`):
+ *    - Update imports to use generated `mainConfig` from `output/Config`.
+ *    - Remove migration/filtering dependencies from imports where applicable.
+ *    - Ensure `transformProps` is the simplified translation-injection variant.
+ *    - Remove filtered-config usage and render directly with `mainConfig`.
+ *    - Ensure a valid `Location` component/default export exists.
+ *    - Preserve required side-effect CSS imports.
+ *
+ * 4) Patch editor wiring (`edit.tsx`):
+ *    - Ensure `mainConfig` import points to generated `output/Config`.
+ *    - Keep `directory`/`locator` registry entries intact.
+ *    - Ensure `componentRegistry.main` uses generated `mainConfig`.
+ *    - Preserve required side-effect CSS imports.
+ *
+ * 5) Runtime behavior:
+ *    - Exposes `generateTemplateConfig(options)` for Vite/plugin usage.
+ *    - Supports direct CLI execution (`node scripts/generateTemplateConfig.mjs`).
+ */
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
