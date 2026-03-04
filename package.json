@@ -9,7 +9,8 @@
     "dev": "pages dev",
     "prod": "pages prod",
     "build": "pages build",
-    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add"
+    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add",
+    "generate:template-config": "node scripts/generateTemplateConfig.mjs"
   },
   "engines": {
     "node": ">=20.18.2"
@@ -51,7 +52,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.2.9",
     "@yext/pages-components": "^2.0.1",
-    "@yext/visual-editor": "1.1.0-alpha.5",
+    "@yext/visual-editor": "../visual-editor/packages/visual-editor/yext-visual-editor-1.1.0-alpha.5.tgz",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
