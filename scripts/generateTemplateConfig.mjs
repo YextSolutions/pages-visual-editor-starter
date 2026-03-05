@@ -7,14 +7,14 @@
  *    - Build stable component keys and import aliases from file paths.
  *
  * 2) Generate Puck config source:
- *    - Emit `output/Config.tsx` with:
+ *    - Emit `src/Config.tsx` with:
  *      - imports for discovered components/atoms
  *      - `mainConfig.components` map
  *      - `mainConfig.categories` grouped as Components and Atoms
  *    - Write only when file content changes to avoid dev-server reload loops.
  *
  * 3) Patch template wiring (`main.tsx`):
- *    - Update imports to use generated `mainConfig` from `output/Config`.
+ *    - Update imports to use generated `mainConfig` from `src/Config`.
  *    - Remove migration/filtering dependencies from imports where applicable.
  *    - Ensure `transformProps` is the simplified translation-injection variant.
  *    - Remove filtered-config usage and render directly with `mainConfig`.
@@ -22,7 +22,7 @@
  *    - Preserve required side-effect CSS imports.
  *
  * 4) Patch editor wiring (`edit.tsx`):
- *    - Ensure `mainConfig` import points to generated `output/Config`.
+ *    - Ensure `mainConfig` import points to generated `src/Config`.
  *    - Keep `directory`/`locator` registry entries intact.
  *    - Ensure `componentRegistry.main` uses generated `mainConfig`.
  *    - Preserve required side-effect CSS imports.
@@ -37,8 +37,7 @@ import { pathToFileURL } from "node:url";
 import { Project, QuoteKind, SyntaxKind } from "ts-morph";
 
 const ROOT_DIR = process.cwd();
-const OUTPUT_DIR = path.join(ROOT_DIR, "output");
-const OUTPUT_CONFIG_PATH = path.join(OUTPUT_DIR, "Config.tsx");
+const OUTPUT_CONFIG_PATH = path.join(ROOT_DIR, "src", "Config.tsx");
 const MAIN_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "main.tsx");
 const EDIT_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "edit.tsx");
 const VALID_EXTENSIONS = new Set([".tsx", ".ts", ".jsx", ".js"]);
@@ -598,7 +597,7 @@ export const generateTemplateConfig = async (options = {}) => {
   const groups = await collectItems();
   const source = buildConfigSource(groups, outputFilePath);
 
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  await fs.mkdir(path.dirname(outputFilePath), { recursive: true });
   const wroteOutputConfig = await writeFileIfChanged(outputFilePath, source);
   const updatedTemplate = await updateMainTemplateConfig(outputFilePath);
   const updatedEditTemplate = await updateEditTemplateConfig(outputFilePath);
