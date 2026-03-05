@@ -64,24 +64,6 @@ const AST_PROJECT = new Project({
 });
 
 /**
- * Writes a file only when content changes.
- * @param {string} filePath
- * @param {string} content
- * @returns {Promise<boolean>} true when file was written, otherwise false.
- */
-const writeFileIfChanged = async (filePath, content) => {
-  let current = null;
-  if (await fileExists(filePath)) {
-    current = await fs.readFile(filePath, "utf8");
-  }
-  if (current === content) {
-    return false;
-  }
-  await fs.writeFile(filePath, content, "utf8");
-  return true;
-};
-
-/**
  * Converts a file or path-like string to PascalCase.
  * @param {string} value
  * @returns {string}
@@ -598,7 +580,7 @@ export const generateTemplateConfig = async (options = {}) => {
   const source = buildConfigSource(groups, outputFilePath);
 
   await fs.mkdir(path.dirname(outputFilePath), { recursive: true });
-  const wroteOutputConfig = await writeFileIfChanged(outputFilePath, source);
+  await fs.writeFile(outputFilePath, source, "utf8");
   const updatedTemplate = await updateMainTemplateConfig(outputFilePath);
   const updatedEditTemplate = await updateEditTemplateConfig(outputFilePath);
 
@@ -607,9 +589,7 @@ export const generateTemplateConfig = async (options = {}) => {
   );
   const totalCount = groups.reduce((count, group) => count + group.items.length, 0);
 
-  if (wroteOutputConfig) {
-    log(`Wrote ${path.relative(ROOT_DIR, outputFilePath)}`);
-  }
+  log(`Wrote ${path.relative(ROOT_DIR, outputFilePath)}`);
   if (updatedTemplate) {
     log(
       `Updated ${path.relative(ROOT_DIR, MAIN_TEMPLATE_PATH)} config import`
@@ -623,7 +603,6 @@ export const generateTemplateConfig = async (options = {}) => {
   log(`Total items: ${totalCount} (${totalsByGroup.join(", ")})`);
 
   return {
-    wroteOutputConfig,
     updatedTemplate,
     updatedEditTemplate,
     totalCount,
