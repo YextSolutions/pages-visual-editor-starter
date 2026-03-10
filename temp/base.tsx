@@ -25,7 +25,6 @@ import {
   injectTranslations,
   getCanonicalUrl,
   resolveUrlTemplate,
-  mainConfig,
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
 
