@@ -15,6 +15,7 @@
     "node": ">=20.18.2"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.34.0",
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.1.5",
     "@mantine/core": "^7.10.1",
@@ -51,7 +52,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.2.9",
     "@yext/pages-components": "^2.0.1",
-    "@yext/visual-editor": "1.1.0-alpha.5",
+    "@yext/visual-editor": "https://pkg.pr.new/@yext/visual-editor@1078",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
