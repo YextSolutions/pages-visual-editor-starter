@@ -24,7 +24,7 @@
  *    - Patch `src/templates/edit.tsx`.
  *    - Import each generated config into `componentRegistry`.
  *    - Ensure `componentRegistry` points each template name to its config while
- *      preserving `directory` and `locator` entries.
+ *      preserving existing `directory` and `locator` entries when present.
  *    - Ensure the editor template is wrapped in Chakra 3's provider.
  *
  */
@@ -687,7 +687,8 @@ const getEditConfigIdentifier = (templateName) =>
   `${toCamelCase(templateName) || "template"}Config`;
 
 /**
- * Rewrites `componentRegistry` to preserve `directory` and `locator` while adding template entries.
+ * Rewrites `componentRegistry` to preserve existing `directory` and `locator`
+ * entries while adding registry template entries.
  * @param {import("ts-morph").SourceFile} sourceFile
  * @param {string[]} templateNames
  * @returns {void}
