@@ -3,11 +3,10 @@
  *
  * 1) Discover templates from `src/registry/*`.
  *    - Each subdirectory under `src/registry` is treated as a template name.
- *    - Example: `src/registry/yeti` -> template name `yeti`.
+ *    - Example: `src/registry/main` -> template name `main`.
  *
  * 2) Generate one config per template.
  *    - Scan template-specific components from `src/registry/<template>/components`.
- *    - Scan shared atoms from `src/atoms`.
  *    - Emit `src/registry/<template>/config.tsx`.
  *
  * 3) Use the checked-in base template.
@@ -20,14 +19,17 @@
  *      `src/registry/<template>/config.tsx`.
  *    - Rename the exported template component to match the template name.
  *
- * 5) Update editor wiring.
+ * 5) Update `.template-manifest.json`.
+ *    - Read `src/registry/<template>/defaultLayout.json` when present.
+ *    - Write that JSON into the matching template's `defaultLayoutData`.
+ *
+ * 6) Update editor wiring.
  *    - Patch `src/templates/edit.tsx`.
- *    - Import each generated config as an alias, such as
- *      `mainConfig as yetiConfig`.
+ *    - Import each generated config into `componentRegistry`.
  *    - Ensure `componentRegistry` points each template name to its config while
  *      preserving `directory` and `locator` entries.
  *
- * 6) Runtime behavior.
+ * 7) Runtime behavior.
  *    - Exposes `generateTemplateConfig(options)` for Vite/plugin usage.
  *    - Supports direct CLI execution (`node scripts/generateTemplateConfig.mjs`).
  */
@@ -38,7 +40,7 @@ import { Project, QuoteKind, SyntaxKind } from "ts-morph";
 
 const ROOT_DIR = process.cwd();
 const REGISTRY_DIR = path.join(ROOT_DIR, "src", "registry");
-const SHARED_ATOMS_DIR = path.join(ROOT_DIR, "src", "atoms");
+const TEMPLATE_MANIFEST_PATH = path.join(ROOT_DIR, ".template-manifest.json");
 const EDIT_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "edit.tsx");
 const TEMP_BASE_TEMPLATE_PATH = path.join(ROOT_DIR, "temp", "base.tsx");
 const VALID_EXTENSIONS = new Set([".tsx", ".ts", ".jsx", ".js"]);
@@ -140,6 +142,7 @@ const getTemplateNames = async () => {
  *   templateName: string,
  *   registryDirectory: string,
  *   componentsDirectory: string,
+ *   defaultLayoutPath: string,
  *   configPath: string,
  *   templatePath: string
  * }}
@@ -150,6 +153,7 @@ const getTemplatePaths = (templateName) => {
     templateName,
     registryDirectory,
     componentsDirectory: path.join(registryDirectory, "components"),
+    defaultLayoutPath: path.join(registryDirectory, "defaultLayout.json"),
     configPath: path.join(registryDirectory, "config.tsx"),
     templatePath: path.join(ROOT_DIR, "src", "templates", `${templateName}.tsx`),
   };
@@ -164,7 +168,7 @@ const getTemplatePaths = (templateName) => {
  * }} group
  * @param {Set<string>} usedImportNames
  * @param {Set<string>} usedComponentNames
- * @returns {Promise<Array<{importName: string, componentName: string, fileRelativeToRoot: string}>>}
+ * @returns {Promise<Array<{importName: string, exportName: string, componentName: string, fileRelativeToRoot: string}>>}
  */
 const collectGroupItems = async (group, usedImportNames, usedComponentNames) => {
   const files = await walkDirectory(group.directory);
@@ -177,6 +181,7 @@ const collectGroupItems = async (group, usedImportNames, usedComponentNames) => 
 
     const rawName = toPascalCase(fileRelativeToGroup);
     const baseName = rawName || group.fallbackName;
+    const exportName = baseName;
 
     let componentName = baseName;
     let componentNameSuffix = 2;
@@ -197,6 +202,7 @@ const collectGroupItems = async (group, usedImportNames, usedComponentNames) => 
 
     items.push({
       importName,
+      exportName,
       componentName,
       fileRelativeToRoot,
     });
@@ -206,9 +212,9 @@ const collectGroupItems = async (group, usedImportNames, usedComponentNames) => 
 };
 
 /**
- * Collects template-specific components and shared atoms for a template config.
+ * Collects template-specific component groups for a template config.
  * @param {string} templateName
- * @returns {Promise<Array<{key: string, title: string, items: Array<{importName: string, componentName: string, fileRelativeToRoot: string}>}>>}
+ * @returns {Promise<Array<{key: string, title: string, items: Array<{importName: string, exportName: string, componentName: string, fileRelativeToRoot: string}>}>>}
  */
 const collectTemplateGroups = async (templateName) => {
   const templatePaths = getTemplatePaths(templateName);
@@ -226,33 +232,18 @@ const collectTemplateGroups = async (templateName) => {
     usedComponentNames
   );
 
-  const atomItems = await collectGroupItems(
-    {
-      directory: SHARED_ATOMS_DIR,
-      importPrefix: `${templateKey}Atom`,
-      fallbackName: "Atom",
-    },
-    usedImportNames,
-    usedComponentNames
-  );
-
   return [
     {
       key: "components",
       title: "Components",
       items: componentItems,
     },
-    {
-      key: "atoms",
-      title: "Atoms",
-      items: atomItems,
-    },
   ];
 };
 
 /**
  * Creates the TypeScript source for a generated Puck config.
- * @param {Array<{key: string, title: string, items: Array<{importName: string, componentName: string, fileRelativeToRoot: string}>}>} groups
+ * @param {Array<{key: string, title: string, items: Array<{importName: string, exportName: string, componentName: string, fileRelativeToRoot: string}>}>} groups
  * @param {string} outputFilePath
  * @returns {string}
  */
@@ -267,7 +258,7 @@ const buildConfigSource = (groups, outputFilePath) => {
     const normalizedImportPath = importPath.startsWith(".")
       ? importPath
       : `./${importPath}`;
-    return `import ${item.importName} from "${normalizedImportPath}";`;
+    return `import { ${item.exportName} as ${item.importName} } from "${normalizedImportPath}";`;
   });
 
   const componentEntries = allItems.map(
@@ -292,7 +283,7 @@ const buildConfigSource = (groups, outputFilePath) => {
     "  components: {",
     ...(componentEntries.length > 0
       ? componentEntries
-      : ["    // No components found in this template registry or src/atoms"]),
+      : ["    // No components found in this template registry"]),
     "  },",
     ...(categoryEntries.length > 0 ? ["  categories: {", ...categoryEntries, "  },"] : []),
     "};",
@@ -303,13 +294,14 @@ const buildConfigSource = (groups, outputFilePath) => {
 };
 
 /**
- * Gets a source file for manipulation.
+ * Gets a fresh source file for manipulation.
  * @param {string} filePath
- * @returns {import("ts-morph").SourceFile}
+ * @returns {Promise<import("ts-morph").SourceFile>}
  */
-const getAstSourceFile = (filePath) => {
+const getAstSourceFile = async (filePath) => {
   const existing = AST_PROJECT.getSourceFile(filePath);
   if (existing) {
+    await existing.refreshFromFileSystem();
     return existing;
   }
   return AST_PROJECT.addSourceFileAtPath(filePath);
@@ -442,6 +434,138 @@ const ensureSideEffectImport = (sourceFile, moduleSpecifier) => {
 };
 
 /**
+ * Ensures named imports are present for a module specifier.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {string} moduleSpecifier
+ * @param {string[]} importNames
+ * @returns {void}
+ */
+const ensureNamedImport = (sourceFile, moduleSpecifier, importNames) => {
+  const declaration = sourceFile
+    .getImportDeclarations()
+    .find((item) => item.getModuleSpecifierValue() === moduleSpecifier);
+
+  if (!declaration) {
+    sourceFile.insertImportDeclaration(0, {
+      moduleSpecifier,
+      namedImports: importNames,
+    });
+    return;
+  }
+
+  for (const importName of importNames) {
+    const hasImport = declaration
+      .getNamedImports()
+      .some((item) => item.getName() === importName);
+
+    if (!hasImport) {
+      declaration.addNamedImport(importName);
+    }
+  }
+};
+
+/**
+ * Wraps the `Edit` component body in `ChakraProvider`.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @returns {void}
+ */
+const wrapEditWithChakraProvider = (sourceFile) => {
+  const declaration = sourceFile.getVariableDeclaration("Edit");
+  if (!declaration) {
+    return;
+  }
+
+  const statement = declaration.getFirstAncestorByKind(SyntaxKind.VariableStatement);
+  if (!statement) {
+    return;
+  }
+
+  statement.replaceWithText(`const Edit: () => JSX.Element = () => {
+  const entityDocument = usePlatformBridgeDocument();
+  const entityFields = usePlatformBridgeEntityFields();
+
+  return (
+      <ChakraProvider value={defaultSystem}>
+        <VisualEditorProvider
+          templateProps={{
+            document: entityDocument,
+        }}
+        entityFields={entityFields}
+        tailwindConfig={tailwindConfig}
+      >
+        <Editor
+          document={entityDocument}
+          componentRegistry={componentRegistry}
+          themeConfig={defaultThemeConfig}
+        />
+      </VisualEditorProvider>
+    </ChakraProvider>
+  );
+};`);
+};
+
+/**
+ * Wraps the main template render tree in `ChakraProvider` with Chakra 3's default system.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {string} templateName
+ * @returns {void}
+ */
+const wrapMainWithChakraProvider = (sourceFile, templateName) => {
+  const templateComponentName = toPascalCase(templateName) || "Template";
+  const declaration = sourceFile.getVariableDeclaration(templateComponentName);
+  if (!declaration) {
+    return;
+  }
+
+  const statement = declaration.getFirstAncestorByKind(SyntaxKind.VariableStatement);
+  if (!statement) {
+    return;
+  }
+
+  statement.replaceWithText(`const ${templateComponentName}: Template<TemplateRenderProps> = (props) => {
+  const { document } = props;
+
+  const layoutString = document.__.layout;
+  let data: any = {};
+  try {
+    data = JSON.parse(layoutString);
+  } catch (e) {
+    console.error("Failed to parse layout JSON:", e);
+  }
+
+  let requireAnalyticsOptIn = false;
+  if (document.__?.visualEditorConfig) {
+    try {
+      requireAnalyticsOptIn =
+        JSON.parse(document.__.visualEditorConfig)?.requireAnalyticsOptIn ??
+        false;
+    } catch (e) {
+      console.error("Failed to parse visualEditorConfig JSON:", e);
+    }
+  }
+
+  return (
+    <AnalyticsProvider
+      apiKey={document?._env?.YEXT_PUBLIC_VISUAL_EDITOR_APP_API_KEY}
+      templateData={props}
+      currency="USD"
+      requireOptIn={requireAnalyticsOptIn}
+    >
+      <ChakraProvider value={defaultSystem}>
+        <VisualEditorProvider templateProps={props}>
+          <Render
+            config={mainConfig}
+            data={data}
+            metadata={{ streamDocument: document }}
+          />
+        </VisualEditorProvider>
+      </ChakraProvider>
+    </AnalyticsProvider>
+  );
+};`);
+};
+
+/**
  * Renames the default-exported template component to match the template name.
  * @param {import("ts-morph").SourceFile} sourceFile
  * @param {string} templateName
@@ -503,12 +627,17 @@ const updateGeneratedTemplateConfig = async (
     : `./${importTarget}`;
 
   const originalSource = await fs.readFile(templateFilePath, "utf8");
-  const sourceFile = getAstSourceFile(templateFilePath);
+  const sourceFile = await getAstSourceFile(templateFilePath);
 
   removeNamedImports(sourceFile, "@yext/visual-editor", ["mainConfig"]);
   removeGeneratedConfigImports(sourceFile);
+  ensureNamedImport(sourceFile, "@chakra-ui/react", [
+    "ChakraProvider",
+    "defaultSystem",
+  ]);
   upsertMainConfigImport(sourceFile, normalizedImportTarget);
   renameDefaultExportedTemplate(sourceFile, templateName);
+  wrapMainWithChakraProvider(sourceFile, templateName);
 
   sourceFile.formatText();
   const updatedSource = sourceFile.getFullText();
@@ -523,11 +652,17 @@ const updateGeneratedTemplateConfig = async (
 };
 
 /**
- * Builds the config import alias for a template.
+ * Builds the local config identifier used in `edit.tsx`.
  * @param {string} templateName
  * @returns {string}
  */
-const getEditConfigAlias = (templateName) => `${templateName}Config`;
+const getEditConfigIdentifier = (templateName) => {
+  if (templateName === "main") {
+    return "mainConfig";
+  }
+
+  return `${templateName}Config`;
+};
 
 /**
  * Rewrites `componentRegistry` to preserve `directory` and `locator` while adding template entries.
@@ -544,7 +679,10 @@ const setEditComponentRegistry = (sourceFile, templateNames) => {
   const initializer = declaration.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
   if (!initializer) {
     const registryEntries = templateNames
-      .map((templateName) => `  ${templateName}: ${getEditConfigAlias(templateName)},`)
+      .map(
+        (templateName) =>
+          `  ${templateName}: ${getEditConfigIdentifier(templateName)},`
+      )
       .join("\n");
     declaration.setInitializer(`{
 ${registryEntries}
@@ -568,7 +706,7 @@ ${registryEntries}
   for (const templateName of templateNames) {
     initializer.addPropertyAssignment({
       name: templateName,
-      initializer: getEditConfigAlias(templateName),
+      initializer: getEditConfigIdentifier(templateName),
     });
   }
 };
@@ -584,10 +722,14 @@ const updateEditTemplateConfig = async (templateNames) => {
   }
 
   const originalSource = await fs.readFile(EDIT_TEMPLATE_PATH, "utf8");
-  const sourceFile = getAstSourceFile(EDIT_TEMPLATE_PATH);
+  const sourceFile = await getAstSourceFile(EDIT_TEMPLATE_PATH);
 
   removeNamedImports(sourceFile, "@yext/visual-editor", ["mainConfig"]);
   removeGeneratedConfigImports(sourceFile);
+  ensureNamedImport(sourceFile, "@chakra-ui/react", [
+    "ChakraProvider",
+    "defaultSystem",
+  ]);
   ensureSideEffectImport(sourceFile, "@yext/visual-editor/editor.css");
   ensureSideEffectImport(sourceFile, "../index.css");
 
@@ -602,18 +744,26 @@ const updateEditTemplateConfig = async (templateNames) => {
       ? importTarget
       : `./${importTarget}`;
 
-    insertNamedImport(sourceFile, {
-      moduleSpecifier: normalizedImportTarget,
-      namedImports: [
-        {
-          name: "mainConfig",
-          alias: getEditConfigAlias(templateName),
-        },
-      ],
-    });
+    if (templateName === "main") {
+      insertNamedImport(sourceFile, {
+        moduleSpecifier: normalizedImportTarget,
+        namedImports: ["mainConfig"],
+      });
+    } else {
+      insertNamedImport(sourceFile, {
+        moduleSpecifier: normalizedImportTarget,
+        namedImports: [
+          {
+            name: "mainConfig",
+            alias: getEditConfigIdentifier(templateName),
+          },
+        ],
+      });
+    }
   }
 
   setEditComponentRegistry(sourceFile, templateNames);
+  wrapEditWithChakraProvider(sourceFile);
 
   sourceFile.formatText();
   const updatedSource = sourceFile.getFullText();
@@ -654,6 +804,62 @@ const generateTemplateRegistryConfig = async (templateName) => {
 };
 
 /**
+ * Updates `.template-manifest.json` so matching template entries use
+ * `src/registry/<template>/defaultLayout.json` as `defaultLayoutData`.
+ * @param {string[]} templateNames
+ * @returns {Promise<boolean>}
+ */
+const updateTemplateManifest = async (templateNames) => {
+  if (!(await fileExists(TEMPLATE_MANIFEST_PATH))) {
+    return false;
+  }
+
+  const manifestSource = await fs.readFile(TEMPLATE_MANIFEST_PATH, "utf8");
+  const manifest = JSON.parse(manifestSource);
+  if (!Array.isArray(manifest.templates)) {
+    return false;
+  }
+
+  let updated = false;
+
+  for (const templateName of templateNames) {
+    const templatePaths = getTemplatePaths(templateName);
+    if (!(await fileExists(templatePaths.defaultLayoutPath))) {
+      continue;
+    }
+
+    const templateEntry = manifest.templates.find(
+      (template) => template?.name === templateName
+    );
+    if (!templateEntry) {
+      continue;
+    }
+
+    const defaultLayoutSource = await fs.readFile(
+      templatePaths.defaultLayoutPath,
+      "utf8"
+    );
+    const defaultLayoutData = JSON.stringify(JSON.parse(defaultLayoutSource));
+
+    if (templateEntry.defaultLayoutData !== defaultLayoutData) {
+      templateEntry.defaultLayoutData = defaultLayoutData;
+      updated = true;
+    }
+  }
+
+  if (!updated) {
+    return false;
+  }
+
+  await fs.writeFile(
+    TEMPLATE_MANIFEST_PATH,
+    `${JSON.stringify(manifest, null, 2)}\n`,
+    "utf8"
+  );
+  return true;
+};
+
+/**
  * Copies `temp/base.tsx` to a template file and patches it to use the template config.
  * @param {string} templateName
  * @returns {Promise<boolean>}
@@ -676,10 +882,11 @@ const generateTemplateFile = async (templateName) => {
 
 /**
  * Generates all template configs, copies `temp/base.tsx` to per-template template files,
- * and patches `edit.tsx`.
+ * updates `.template-manifest.json`, and patches `edit.tsx`.
  * @param {{ silent?: boolean }} [options={}]
  * @returns {Promise<{
  *   templateNames: string[],
+ *   updatedTemplateManifest: boolean,
  *   updatedEditTemplate: boolean,
  *   generatedConfigs: Array<{templateName: string, configPath: string, totalCount: number, totalsByGroup: string[]}>
  * }>}
@@ -714,6 +921,11 @@ export const generateTemplateConfig = async (options = {}) => {
     }
   }
 
+  const updatedTemplateManifest = await updateTemplateManifest(templateNames);
+  if (updatedTemplateManifest) {
+    log(`Updated ${path.relative(ROOT_DIR, TEMPLATE_MANIFEST_PATH)}`);
+  }
+
   const updatedEditTemplate = await updateEditTemplateConfig(templateNames);
   if (updatedEditTemplate) {
     log(`Updated ${path.relative(ROOT_DIR, EDIT_TEMPLATE_PATH)}`);
@@ -721,6 +933,7 @@ export const generateTemplateConfig = async (options = {}) => {
 
   return {
     templateNames,
+    updatedTemplateManifest,
     updatedEditTemplate,
     generatedConfigs,
   };
