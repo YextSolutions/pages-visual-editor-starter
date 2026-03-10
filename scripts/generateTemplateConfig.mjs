@@ -1,33 +1,33 @@
 /**
  * High-level overview:
  *
- * 1) Scan source component folders:
- *    - Recursively read `src/components` and `src/atoms`.
- *    - Collect supported source files (`.tsx`, `.ts`, `.jsx`, `.js`).
- *    - Build stable component keys and import aliases from file paths.
+ * 1) Discover templates from `src/registry/*`.
+ *    - Each subdirectory under `src/registry` is treated as a template name.
+ *    - Example: `src/registry/yeti` -> template name `yeti`.
  *
- * 2) Generate Puck config source:
- *    - Emit `src/config.tsx` with:
- *      - imports for discovered components/atoms
- *      - `mainConfig.components` map
- *      - `mainConfig.categories` grouped as Components and Atoms
- *    - Write only when file content changes to avoid dev-server reload loops.
+ * 2) Generate one config per template.
+ *    - Scan template-specific components from `src/registry/<template>/components`.
+ *    - Scan shared atoms from `src/atoms`.
+ *    - Emit `src/registry/<template>/config.tsx`.
  *
- * 3) Patch template wiring (`main.tsx`):
- *    - Update imports to use generated `mainConfig` from `src/config`.
- *    - Remove migration/filtering dependencies from imports where applicable.
- *    - Ensure `transformProps` is the simplified translation-injection variant.
- *    - Remove filtered-config usage and render directly with `mainConfig`.
- *    - Ensure a valid `Location` component/default export exists.
- *    - Preserve required side-effect CSS imports.
+ * 3) Use the checked-in base template.
+ *    - Read `temp/base.tsx`.
+ *    - Leave `temp/base.tsx` unmodified.
  *
- * 4) Patch editor wiring (`edit.tsx`):
- *    - Ensure `mainConfig` import points to generated `src/config`.
- *    - Keep `directory`/`locator` registry entries intact.
- *    - Ensure `componentRegistry.main` uses generated `mainConfig`.
- *    - Preserve required side-effect CSS imports.
+ * 4) Materialize one template file per registry template.
+ *    - Copy `temp/base.tsx` to `src/templates/<template>.tsx`.
+ *    - Patch that copied template to import the matching
+ *      `src/registry/<template>/config.tsx`.
+ *    - Rename the exported template component to match the template name.
  *
- * 5) Runtime behavior:
+ * 5) Update editor wiring.
+ *    - Patch `src/templates/edit.tsx`.
+ *    - Import each generated config as an alias, such as
+ *      `mainConfig as yetiConfig`.
+ *    - Ensure `componentRegistry` points each template name to its config while
+ *      preserving `directory` and `locator` entries.
+ *
+ * 6) Runtime behavior.
  *    - Exposes `generateTemplateConfig(options)` for Vite/plugin usage.
  *    - Supports direct CLI execution (`node scripts/generateTemplateConfig.mjs`).
  */
@@ -37,25 +37,12 @@ import { pathToFileURL } from "node:url";
 import { Project, QuoteKind, SyntaxKind } from "ts-morph";
 
 const ROOT_DIR = process.cwd();
-const OUTPUT_CONFIG_PATH = path.join(ROOT_DIR, "src", "config.tsx");
-const MAIN_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "main.tsx");
+const REGISTRY_DIR = path.join(ROOT_DIR, "src", "registry");
+const SHARED_ATOMS_DIR = path.join(ROOT_DIR, "src", "atoms");
 const EDIT_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "edit.tsx");
+const TEMP_BASE_TEMPLATE_PATH = path.join(ROOT_DIR, "temp", "base.tsx");
 const VALID_EXTENSIONS = new Set([".tsx", ".ts", ".jsx", ".js"]);
-
-const SOURCE_GROUPS = [
-  {
-    key: "components",
-    title: "Components",
-    directory: path.join(ROOT_DIR, "src", "components"),
-    importPrefix: "Component",
-  },
-  {
-    key: "atoms",
-    title: "Atoms",
-    directory: path.join(ROOT_DIR, "src", "atoms"),
-    importPrefix: "Atom",
-  },
-];
+const PRESERVED_EDIT_REGISTRY_KEYS = new Set(["directory", "locator"]);
 
 const AST_PROJECT = new Project({
   manipulationSettings: {
@@ -119,7 +106,11 @@ const walkDirectory = async (directory) => {
       }
 
       const extension = path.extname(entry.name);
-      return VALID_EXTENSIONS.has(extension) ? [absolutePath] : [];
+      if (!VALID_EXTENSIONS.has(extension)) {
+        return [];
+      }
+
+      return [absolutePath];
     })
   );
 
@@ -127,61 +118,140 @@ const walkDirectory = async (directory) => {
 };
 
 /**
- * Collects component and atom entries with unique import/component names.
- * @returns {Promise<Array<{key: string, title: string, directory: string, importPrefix: string, items: Array<{importName: string, componentName: string, fileRelativeToRoot: string}>}>>}
+ * Lists template names from `src/registry`.
+ * @returns {Promise<string[]>}
  */
-const collectItems = async () => {
-  const usedImportNames = new Set();
-  const usedComponentNames = new Set();
-  const groups = [];
-
-  for (const group of SOURCE_GROUPS) {
-    const files = await walkDirectory(group.directory);
-    const sortedFiles = files.sort((a, b) => a.localeCompare(b));
-    const items = [];
-
-    for (const absolutePath of sortedFiles) {
-      const fileRelativeToRoot = toPosixPath(path.relative(ROOT_DIR, absolutePath));
-      const fileRelativeToGroup = toPosixPath(
-        path.relative(group.directory, absolutePath)
-      );
-
-      const rawName = toPascalCase(fileRelativeToGroup);
-      let componentName = rawName || `${group.importPrefix}Item`;
-      let componentNameSuffix = 2;
-      while (usedComponentNames.has(componentName)) {
-        componentName = `${rawName}${componentNameSuffix}`;
-        componentNameSuffix += 1;
-      }
-      usedComponentNames.add(componentName);
-
-      const importBase = `${group.importPrefix}${rawName || "Item"}`;
-      let importName = importBase;
-      let importNameSuffix = 2;
-      while (usedImportNames.has(importName)) {
-        importName = `${importBase}${importNameSuffix}`;
-        importNameSuffix += 1;
-      }
-      usedImportNames.add(importName);
-
-      items.push({
-        importName,
-        componentName,
-        fileRelativeToRoot,
-      });
-    }
-
-    groups.push({
-      ...group,
-      items,
-    });
+const getTemplateNames = async () => {
+  if (!(await fileExists(REGISTRY_DIR))) {
+    return [];
   }
 
-  return groups;
+  const entries = await fs.readdir(REGISTRY_DIR, { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b));
 };
 
 /**
- * Creates the TypeScript source for the generated Puck config.
+ * Builds the filesystem paths for a template registry.
+ * @param {string} templateName
+ * @returns {{
+ *   templateName: string,
+ *   registryDirectory: string,
+ *   componentsDirectory: string,
+ *   configPath: string,
+ *   templatePath: string
+ * }}
+ */
+const getTemplatePaths = (templateName) => {
+  const registryDirectory = path.join(REGISTRY_DIR, templateName);
+  return {
+    templateName,
+    registryDirectory,
+    componentsDirectory: path.join(registryDirectory, "components"),
+    configPath: path.join(registryDirectory, "config.tsx"),
+    templatePath: path.join(ROOT_DIR, "src", "templates", `${templateName}.tsx`),
+  };
+};
+
+/**
+ * Collects items for a single config group while keeping names unique within one config file.
+ * @param {{
+ *   directory: string,
+ *   importPrefix: string,
+ *   fallbackName: string
+ * }} group
+ * @param {Set<string>} usedImportNames
+ * @param {Set<string>} usedComponentNames
+ * @returns {Promise<Array<{importName: string, componentName: string, fileRelativeToRoot: string}>>}
+ */
+const collectGroupItems = async (group, usedImportNames, usedComponentNames) => {
+  const files = await walkDirectory(group.directory);
+  const sortedFiles = files.sort((a, b) => a.localeCompare(b));
+  const items = [];
+
+  for (const absolutePath of sortedFiles) {
+    const fileRelativeToRoot = toPosixPath(path.relative(ROOT_DIR, absolutePath));
+    const fileRelativeToGroup = toPosixPath(path.relative(group.directory, absolutePath));
+
+    const rawName = toPascalCase(fileRelativeToGroup);
+    const baseName = rawName || group.fallbackName;
+
+    let componentName = baseName;
+    let componentNameSuffix = 2;
+    while (usedComponentNames.has(componentName)) {
+      componentName = `${baseName}${componentNameSuffix}`;
+      componentNameSuffix += 1;
+    }
+    usedComponentNames.add(componentName);
+
+    const importBase = `${group.importPrefix}${baseName}`;
+    let importName = importBase;
+    let importNameSuffix = 2;
+    while (usedImportNames.has(importName)) {
+      importName = `${importBase}${importNameSuffix}`;
+      importNameSuffix += 1;
+    }
+    usedImportNames.add(importName);
+
+    items.push({
+      importName,
+      componentName,
+      fileRelativeToRoot,
+    });
+  }
+
+  return items;
+};
+
+/**
+ * Collects template-specific components and shared atoms for a template config.
+ * @param {string} templateName
+ * @returns {Promise<Array<{key: string, title: string, items: Array<{importName: string, componentName: string, fileRelativeToRoot: string}>}>>}
+ */
+const collectTemplateGroups = async (templateName) => {
+  const templatePaths = getTemplatePaths(templateName);
+  const templateKey = toPascalCase(templateName) || "Template";
+  const usedImportNames = new Set();
+  const usedComponentNames = new Set();
+
+  const componentItems = await collectGroupItems(
+    {
+      directory: templatePaths.componentsDirectory,
+      importPrefix: `${templateKey}Component`,
+      fallbackName: "Component",
+    },
+    usedImportNames,
+    usedComponentNames
+  );
+
+  const atomItems = await collectGroupItems(
+    {
+      directory: SHARED_ATOMS_DIR,
+      importPrefix: `${templateKey}Atom`,
+      fallbackName: "Atom",
+    },
+    usedImportNames,
+    usedComponentNames
+  );
+
+  return [
+    {
+      key: "components",
+      title: "Components",
+      items: componentItems,
+    },
+    {
+      key: "atoms",
+      title: "Atoms",
+      items: atomItems,
+    },
+  ];
+};
+
+/**
+ * Creates the TypeScript source for a generated Puck config.
  * @param {Array<{key: string, title: string, items: Array<{importName: string, componentName: string, fileRelativeToRoot: string}>}>} groups
  * @param {string} outputFilePath
  * @returns {string}
@@ -216,15 +286,15 @@ const buildConfigSource = (groups, outputFilePath) => {
   return [
     "/** THIS FILE IS AUTOGENERATED BY scripts/generateTemplateConfig.mjs */",
     'import type { Config } from "@puckeditor/core";',
-    ...(importLines.length ? ["", ...importLines] : []),
+    ...(importLines.length > 0 ? ["", ...importLines] : []),
     "",
     "export const mainConfig: Config = {",
     "  components: {",
-    ...(componentEntries.length ? componentEntries : ["    // No components found in src/components or src/atoms"]),
+    ...(componentEntries.length > 0
+      ? componentEntries
+      : ["    // No components found in this template registry or src/atoms"]),
     "  },",
-    ...(categoryEntries.length
-      ? ["  categories: {", ...categoryEntries, "  },"]
-      : []),
+    ...(categoryEntries.length > 0 ? ["  categories: {", ...categoryEntries, "  },"] : []),
     "};",
     "",
     "export default mainConfig;",
@@ -250,6 +320,7 @@ const getAstSourceFile = (filePath) => {
  * @param {import("ts-morph").SourceFile} sourceFile
  * @param {string} moduleSpecifier
  * @param {string[]} namesToRemove
+ * @returns {void}
  */
 const removeNamedImports = (sourceFile, moduleSpecifier, namesToRemove) => {
   const declaration = sourceFile
@@ -258,11 +329,13 @@ const removeNamedImports = (sourceFile, moduleSpecifier, namesToRemove) => {
   if (!declaration) {
     return;
   }
+
   for (const namedImport of declaration.getNamedImports()) {
     if (namesToRemove.includes(namedImport.getName())) {
       namedImport.remove();
     }
   }
+
   if (
     declaration.getNamedImports().length === 0 &&
     !declaration.getDefaultImport() &&
@@ -273,9 +346,58 @@ const removeNamedImports = (sourceFile, moduleSpecifier, namesToRemove) => {
 };
 
 /**
- * Ensures `mainConfig` import points to generated config path and removes other `mainConfig` imports.
+ * Removes prior generated config imports from a source file.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @returns {void}
+ */
+const removeGeneratedConfigImports = (sourceFile) => {
+  for (const declaration of sourceFile.getImportDeclarations()) {
+    const moduleSpecifier = declaration.getModuleSpecifierValue();
+    if (
+      moduleSpecifier === "../config" ||
+      moduleSpecifier === "./config" ||
+      moduleSpecifier.endsWith("/config")
+    ) {
+      declaration.remove();
+    }
+  }
+};
+
+/**
+ * Inserts a named import after `@yext/pages-components` when present, otherwise appends it.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {{
+ *   moduleSpecifier: string,
+ *   namedImports: Array<string | { name: string, alias?: string }>
+ * }} options
+ * @returns {void}
+ */
+const insertNamedImport = (sourceFile, options) => {
+  const pagesComponentsImport = sourceFile
+    .getImportDeclarations()
+    .find(
+      (item) => item.getModuleSpecifierValue() === "@yext/pages-components"
+    );
+
+  if (pagesComponentsImport) {
+    sourceFile.insertImportDeclaration(pagesComponentsImport.getChildIndex() + 1, {
+      namedImports: options.namedImports,
+      moduleSpecifier: options.moduleSpecifier,
+    });
+    return;
+  }
+
+  sourceFile.addImportDeclaration({
+    namedImports: options.namedImports,
+    moduleSpecifier: options.moduleSpecifier,
+  });
+};
+
+/**
+ * Ensures `mainConfig` import points to the provided config path.
  * @param {import("ts-morph").SourceFile} sourceFile
  * @param {string} moduleSpecifier
+ * @returns {void}
  */
 const upsertMainConfigImport = (sourceFile, moduleSpecifier) => {
   for (const declaration of sourceFile.getImportDeclarations()) {
@@ -296,32 +418,17 @@ const upsertMainConfigImport = (sourceFile, moduleSpecifier) => {
     }
   }
 
-  const pagesComponentsImport = sourceFile
-    .getImportDeclarations()
-    .find(
-      (item) => item.getModuleSpecifierValue() === "@yext/pages-components"
-    );
-
-  if (pagesComponentsImport) {
-    sourceFile.insertImportDeclaration(
-      pagesComponentsImport.getChildIndex() + 1,
-      {
-        namedImports: ["mainConfig"],
-        moduleSpecifier,
-      }
-    );
-  } else {
-    sourceFile.addImportDeclaration({
-      namedImports: ["mainConfig"],
-      moduleSpecifier,
-    });
-  }
+  insertNamedImport(sourceFile, {
+    namedImports: ["mainConfig"],
+    moduleSpecifier,
+  });
 };
 
 /**
  * Ensures a side-effect import is present.
  * @param {import("ts-morph").SourceFile} sourceFile
  * @param {string} moduleSpecifier
+ * @returns {void}
  */
 const ensureSideEffectImport = (sourceFile, moduleSpecifier) => {
   const exists = sourceFile
@@ -335,143 +442,73 @@ const ensureSideEffectImport = (sourceFile, moduleSpecifier) => {
 };
 
 /**
- * Replaces transformProps implementation with a minimal version.
+ * Renames the default-exported template component to match the template name.
  * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {string} templateName
+ * @returns {void}
  */
-const setMinimalTransformProps = (sourceFile) => {
-  const declaration = sourceFile.getVariableDeclaration("transformProps");
-  if (!declaration) {
+const renameDefaultExportedTemplate = (sourceFile, templateName) => {
+  const exportAssignment = sourceFile.getExportAssignments()[0];
+  if (!exportAssignment) {
     return;
   }
-  declaration.setInitializer(`async (props) => {
-  const { document } = props;
 
-  const translations = await injectTranslations(document);
+  const expression = exportAssignment.getExpression();
+  if (!expression || !expression.asKind(SyntaxKind.Identifier)) {
+    return;
+  }
 
-  return { ...props, document, translations };
-}`);
+  const currentName = expression.getText();
+  const nextName = toPascalCase(templateName) || "Template";
+  if (currentName === nextName) {
+    return;
+  }
+
+  const variableDeclaration = sourceFile.getVariableDeclaration(currentName);
+  if (variableDeclaration) {
+    variableDeclaration.rename(nextName);
+  }
+
+  const functionDeclaration = sourceFile.getFunction(currentName);
+  if (functionDeclaration) {
+    functionDeclaration.rename(nextName);
+  }
+
+  exportAssignment.setExpression(nextName);
 };
 
 /**
- * Removes filtered config declaration and rewrites usage to mainConfig.
- * @param {import("ts-morph").SourceFile} sourceFile
- */
-const removeFilteredConfigUsage = (sourceFile) => {
-  const declarations = sourceFile.getVariableDeclarations();
-  for (const declaration of declarations) {
-    const initializerText = declaration.getInitializer()?.getText() ?? "";
-    if (initializerText.includes("filterComponentsFromConfig(")) {
-      const statement = declaration.getFirstAncestorByKind(
-        SyntaxKind.VariableStatement
-      );
-      if (statement) {
-        statement.remove();
-      }
-    }
-  }
-
-  for (const identifier of sourceFile.getDescendantsOfKind(SyntaxKind.Identifier)) {
-    if (identifier.getText() === "filteredConfig") {
-      identifier.replaceWithText("mainConfig");
-    }
-  }
-};
-
-/**
- * Ensures the main template has a Location component and default export points to it.
- * @param {import("ts-morph").SourceFile} sourceFile
- */
-const ensureMainLocationComponent = (sourceFile) => {
-  const locationDeclaration = sourceFile.getVariableDeclaration("Location");
-  if (!locationDeclaration) {
-    sourceFile.addStatements(`
-const Location: Template<TemplateRenderProps> = (props) => {
-  const { document } = props;
-
-  const layoutString = document.__.layout;
-  let data: any = {};
-  try {
-    data = JSON.parse(layoutString);
-  } catch (e) {
-    console.error("Failed to parse layout JSON:", e);
-  }
-
-  let requireAnalyticsOptIn = false;
-  if (document.__?.visualEditorConfig) {
-    try {
-      requireAnalyticsOptIn =
-        JSON.parse(document.__.visualEditorConfig)?.requireAnalyticsOptIn ??
-        false;
-    } catch (e) {
-      console.error("Failed to parse visualEditorConfig JSON:", e);
-    }
-  }
-
-  return (
-    <AnalyticsProvider
-      apiKey={document?._env?.YEXT_PUBLIC_VISUAL_EDITOR_APP_API_KEY}
-      templateData={props}
-      currency="USD"
-      requireOptIn={requireAnalyticsOptIn}
-    >
-      <VisualEditorProvider templateProps={props}>
-        <Render
-          config={mainConfig}
-          data={data}
-          metadata={{ streamDocument: document }}
-        />
-      </VisualEditorProvider>
-    </AnalyticsProvider>
-  );
-};
-`);
-  }
-
-  const exportAssignments = sourceFile.getExportAssignments();
-  for (const assignment of exportAssignments) {
-    assignment.remove();
-  }
-  sourceFile.addExportAssignment({
-    isExportEquals: false,
-    expression: "Location",
-  });
-};
-
-/**
- * Updates src/templates/main.tsx to import the generated config and remove migration/filtering.
+ * Updates a generated template copy to import the matching config and rename the default export.
+ * @param {string} templateFilePath
  * @param {string} outputFilePath
- * @returns {Promise<boolean>} true when main.tsx was updated, otherwise false.
+ * @param {string} templateName
+ * @returns {Promise<boolean>}
  */
-const updateMainTemplateConfig = async (outputFilePath) => {
-  if (!(await fileExists(MAIN_TEMPLATE_PATH))) {
+const updateGeneratedTemplateConfig = async (
+  templateFilePath,
+  outputFilePath,
+  templateName
+) => {
+  if (!(await fileExists(templateFilePath))) {
     return false;
   }
 
   const importTarget = toPosixPath(
     path
-      .relative(path.dirname(MAIN_TEMPLATE_PATH), outputFilePath)
+      .relative(path.dirname(templateFilePath), outputFilePath)
       .replace(/\.[^/.]+$/, "")
   );
   const normalizedImportTarget = importTarget.startsWith(".")
     ? importTarget
     : `./${importTarget}`;
 
-  const originalSource = await fs.readFile(MAIN_TEMPLATE_PATH, "utf8");
-  const sourceFile = getAstSourceFile(MAIN_TEMPLATE_PATH);
+  const originalSource = await fs.readFile(templateFilePath, "utf8");
+  const sourceFile = getAstSourceFile(templateFilePath);
 
-  removeNamedImports(sourceFile, "@puckeditor/core", ["resolveAllData"]);
-  removeNamedImports(sourceFile, "@yext/visual-editor", [
-    "mainConfig",
-    "migrate",
-    "migrationRegistry",
-    "filterComponentsFromConfig",
-  ]);
-  ensureSideEffectImport(sourceFile, "@yext/visual-editor/style.css");
-  ensureSideEffectImport(sourceFile, "../index.css");
+  removeNamedImports(sourceFile, "@yext/visual-editor", ["mainConfig"]);
+  removeGeneratedConfigImports(sourceFile);
   upsertMainConfigImport(sourceFile, normalizedImportTarget);
-  setMinimalTransformProps(sourceFile);
-  removeFilteredConfigUsage(sourceFile);
-  ensureMainLocationComponent(sourceFile);
+  renameDefaultExportedTemplate(sourceFile, templateName);
 
   sourceFile.formatText();
   const updatedSource = sourceFile.getFullText();
@@ -481,15 +518,24 @@ const updateMainTemplateConfig = async (outputFilePath) => {
     return false;
   }
 
-  await fs.writeFile(MAIN_TEMPLATE_PATH, updatedSource, "utf8");
+  await fs.writeFile(templateFilePath, updatedSource, "utf8");
   return true;
 };
 
 /**
- * Ensures componentRegistry has `main: mainConfig` while preserving other registry entries.
- * @param {import("ts-morph").SourceFile} sourceFile
+ * Builds the config import alias for a template.
+ * @param {string} templateName
+ * @returns {string}
  */
-const setEditComponentRegistry = (sourceFile) => {
+const getEditConfigAlias = (templateName) => `${templateName}Config`;
+
+/**
+ * Rewrites `componentRegistry` to preserve `directory` and `locator` while adding template entries.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @param {string[]} templateNames
+ * @returns {void}
+ */
+const setEditComponentRegistry = (sourceFile, templateNames) => {
   const declaration = sourceFile.getVariableDeclaration("componentRegistry");
   if (!declaration) {
     return;
@@ -497,59 +543,77 @@ const setEditComponentRegistry = (sourceFile) => {
 
   const initializer = declaration.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
   if (!initializer) {
+    const registryEntries = templateNames
+      .map((templateName) => `  ${templateName}: ${getEditConfigAlias(templateName)},`)
+      .join("\n");
     declaration.setInitializer(`{
-  main: mainConfig,
+${registryEntries}
 }`);
     return;
   }
 
-  const mainProperty = initializer
-    .getProperties()
-    .find(
-      (property) =>
-        property.getKind() === SyntaxKind.PropertyAssignment &&
-        property.getName() === "main"
-    );
+  for (const property of initializer.getProperties()) {
+    if (property.getKind() !== SyntaxKind.PropertyAssignment) {
+      continue;
+    }
 
-  if (mainProperty && mainProperty.getKind() === SyntaxKind.PropertyAssignment) {
-    mainProperty.setInitializer("mainConfig");
-  } else {
+    const propertyName = property.getName();
+    if (PRESERVED_EDIT_REGISTRY_KEYS.has(propertyName)) {
+      continue;
+    }
+
+    property.remove();
+  }
+
+  for (const templateName of templateNames) {
     initializer.addPropertyAssignment({
-      name: "main",
-      initializer: "mainConfig",
+      name: templateName,
+      initializer: getEditConfigAlias(templateName),
     });
   }
 };
 
 /**
- * Updates src/templates/edit.tsx to import the generated config and pin registry entries.
- * @param {string} outputFilePath
- * @returns {Promise<boolean>} true when edit.tsx was updated, otherwise false.
+ * Updates `src/templates/edit.tsx` to import each generated config and register it.
+ * @param {string[]} templateNames
+ * @returns {Promise<boolean>}
  */
-const updateEditTemplateConfig = async (outputFilePath) => {
+const updateEditTemplateConfig = async (templateNames) => {
   if (!(await fileExists(EDIT_TEMPLATE_PATH))) {
     return false;
   }
 
-  const importTarget = toPosixPath(
-    path
-      .relative(path.dirname(EDIT_TEMPLATE_PATH), outputFilePath)
-      .replace(/\.[^/.]+$/, "")
-  );
-  const normalizedImportTarget = importTarget.startsWith(".")
-    ? importTarget
-    : `./${importTarget}`;
-
   const originalSource = await fs.readFile(EDIT_TEMPLATE_PATH, "utf8");
   const sourceFile = getAstSourceFile(EDIT_TEMPLATE_PATH);
 
-  removeNamedImports(sourceFile, "@yext/visual-editor", [
-    "mainConfig",
-  ]);
+  removeNamedImports(sourceFile, "@yext/visual-editor", ["mainConfig"]);
+  removeGeneratedConfigImports(sourceFile);
   ensureSideEffectImport(sourceFile, "@yext/visual-editor/editor.css");
   ensureSideEffectImport(sourceFile, "../index.css");
-  upsertMainConfigImport(sourceFile, normalizedImportTarget);
-  setEditComponentRegistry(sourceFile);
+
+  for (const templateName of templateNames) {
+    const templatePaths = getTemplatePaths(templateName);
+    const importTarget = toPosixPath(
+      path
+        .relative(path.dirname(EDIT_TEMPLATE_PATH), templatePaths.configPath)
+        .replace(/\.[^/.]+$/, "")
+    );
+    const normalizedImportTarget = importTarget.startsWith(".")
+      ? importTarget
+      : `./${importTarget}`;
+
+    insertNamedImport(sourceFile, {
+      moduleSpecifier: normalizedImportTarget,
+      namedImports: [
+        {
+          name: "mainConfig",
+          alias: getEditConfigAlias(templateName),
+        },
+      ],
+    });
+  }
+
+  setEditComponentRegistry(sourceFile, templateNames);
 
   sourceFile.formatText();
   const updatedSource = sourceFile.getFullText();
@@ -564,8 +628,61 @@ const updateEditTemplateConfig = async (outputFilePath) => {
 };
 
 /**
- * Generates a new config file and prints a summary to stdout.
- * @returns {Promise<void>}
+ * Generates a config file for one template.
+ * @param {string} templateName
+ * @returns {Promise<{templateName: string, configPath: string, totalCount: number, totalsByGroup: string[]}>}
+ */
+const generateTemplateRegistryConfig = async (templateName) => {
+  const templatePaths = getTemplatePaths(templateName);
+  const groups = await collectTemplateGroups(templateName);
+  const source = buildConfigSource(groups, templatePaths.configPath);
+
+  await fs.mkdir(path.dirname(templatePaths.configPath), { recursive: true });
+  await fs.writeFile(templatePaths.configPath, source, "utf8");
+
+  const totalsByGroup = groups.map(
+    (group) => `${group.title}: ${group.items.length}`
+  );
+  const totalCount = groups.reduce((count, group) => count + group.items.length, 0);
+
+  return {
+    templateName,
+    configPath: templatePaths.configPath,
+    totalCount,
+    totalsByGroup,
+  };
+};
+
+/**
+ * Copies `temp/base.tsx` to a template file and patches it to use the template config.
+ * @param {string} templateName
+ * @returns {Promise<boolean>}
+ */
+const generateTemplateFile = async (templateName) => {
+  if (!(await fileExists(TEMP_BASE_TEMPLATE_PATH))) {
+    return false;
+  }
+
+  const templatePaths = getTemplatePaths(templateName);
+  await fs.mkdir(path.dirname(templatePaths.templatePath), { recursive: true });
+  const baseSource = await fs.readFile(TEMP_BASE_TEMPLATE_PATH, "utf8");
+  await fs.writeFile(templatePaths.templatePath, baseSource, "utf8");
+  return updateGeneratedTemplateConfig(
+    templatePaths.templatePath,
+    templatePaths.configPath,
+    templateName
+  );
+};
+
+/**
+ * Generates all template configs, copies `temp/base.tsx` to per-template template files,
+ * and patches `edit.tsx`.
+ * @param {{ silent?: boolean }} [options={}]
+ * @returns {Promise<{
+ *   templateNames: string[],
+ *   updatedEditTemplate: boolean,
+ *   generatedConfigs: Array<{templateName: string, configPath: string, totalCount: number, totalsByGroup: string[]}>
+ * }>}
  */
 export const generateTemplateConfig = async (options = {}) => {
   const { silent = false } = options;
@@ -575,38 +692,37 @@ export const generateTemplateConfig = async (options = {}) => {
     }
   };
 
-  const outputFilePath = OUTPUT_CONFIG_PATH;
-  const groups = await collectItems();
-  const source = buildConfigSource(groups, outputFilePath);
+  const templateNames = await getTemplateNames();
+  const generatedConfigs = [];
 
-  await fs.mkdir(path.dirname(outputFilePath), { recursive: true });
-  await fs.writeFile(outputFilePath, source, "utf8");
-  const updatedTemplate = await updateMainTemplateConfig(outputFilePath);
-  const updatedEditTemplate = await updateEditTemplateConfig(outputFilePath);
-
-  const totalsByGroup = groups.map(
-    (group) => `${group.title}: ${group.items.length}`
-  );
-  const totalCount = groups.reduce((count, group) => count + group.items.length, 0);
-
-  log(`Wrote ${path.relative(ROOT_DIR, outputFilePath)}`);
-  if (updatedTemplate) {
+  for (const templateName of templateNames) {
+    const generatedConfig = await generateTemplateRegistryConfig(templateName);
+    generatedConfigs.push(generatedConfig);
+    log(`Wrote ${path.relative(ROOT_DIR, generatedConfig.configPath)}`);
     log(
-      `Updated ${path.relative(ROOT_DIR, MAIN_TEMPLATE_PATH)} config import`
+      `Template ${templateName}: ${generatedConfig.totalCount} (${generatedConfig.totalsByGroup.join(", ")})`
     );
   }
+
+  for (const templateName of templateNames) {
+    const templatePaths = getTemplatePaths(templateName);
+    const updatedTemplate = await generateTemplateFile(templateName);
+    if (updatedTemplate) {
+      log(`Updated ${path.relative(ROOT_DIR, templatePaths.templatePath)}`);
+    } else if (await fileExists(templatePaths.templatePath)) {
+      log(`Wrote ${path.relative(ROOT_DIR, templatePaths.templatePath)}`);
+    }
+  }
+
+  const updatedEditTemplate = await updateEditTemplateConfig(templateNames);
   if (updatedEditTemplate) {
-    log(
-      `Updated ${path.relative(ROOT_DIR, EDIT_TEMPLATE_PATH)} config import`
-    );
+    log(`Updated ${path.relative(ROOT_DIR, EDIT_TEMPLATE_PATH)}`);
   }
-  log(`Total items: ${totalCount} (${totalsByGroup.join(", ")})`);
 
   return {
-    updatedTemplate,
+    templateNames,
     updatedEditTemplate,
-    totalCount,
-    totalsByGroup,
+    generatedConfigs,
   };
 };
 
