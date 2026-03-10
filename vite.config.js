@@ -9,7 +9,7 @@ const applyGeneratedTemplateConfigPlugin = () => {
 
   return {
     name: "apply-generated-template-config",
-    async configResolved() {
+    async buildStart() {
       if (hasRun) {
         return;
       }
