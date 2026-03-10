@@ -14,7 +14,7 @@ const applyGeneratedTemplateConfigPlugin = () => {
         return;
       }
       hasRun = true;
-      await generateTemplateConfig({ silent: true });
+      await generateTemplateConfig();
     },
   };
 };

@@ -21,7 +21,6 @@ import {
   applyHeaderScript,
   applyCertifiedFacts,
   defaultThemeConfig,
-  mainConfig,
   getSchema,
   injectTranslations,
   getCanonicalUrl,
@@ -106,7 +105,7 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
 
   const resolvedPuckData = await resolveAllData(
     JSON.parse(document.__.layout),
-    mainConfig,
+    baseConfig,
     {
       streamDocument: document,
     }
@@ -150,7 +149,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       <ChakraProvider value={defaultSystem}>
         <VisualEditorProvider templateProps={props}>
           <Render
-            config={mainConfig}
+            config={baseConfig}
             data={data}
             metadata={{ streamDocument: document }}
           />

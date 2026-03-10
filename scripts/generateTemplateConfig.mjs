@@ -48,6 +48,62 @@ const AST_PROJECT = new Project({
 });
 
 /**
+ * @typedef {{
+ *   templateName: string,
+ *   registryDirectory: string,
+ *   componentsDirectory: string,
+ *   defaultLayoutPath: string,
+ *   configPath: string,
+ *   templatePath: string
+ * }} TemplatePaths
+ */
+
+/**
+ * @typedef {{
+ *   importName: string,
+ *   exportName: string,
+ *   componentName: string,
+ *   fileRelativeToRoot: string
+ * }} CollectedItem
+ */
+
+/**
+ * @typedef {{
+ *   key: string,
+ *   title: string,
+ *   items: CollectedItem[]
+ * }} TemplateGroup
+ */
+
+/**
+ * @typedef {{
+ *   name: string,
+ *   description: string,
+ *   exampleSiteUrl: string,
+ *   layoutRequired: boolean,
+ *   defaultLayoutData: string
+ * }} TemplateManifestEntry
+ */
+
+/**
+ * @typedef {{
+ *   templateName: string,
+ *   configPath: string,
+ *   totalCount: number,
+ *   totalsByGroup: string[]
+ * }} GeneratedConfigResult
+ */
+
+/**
+ * @typedef {{
+ *   templateNames: string[],
+ *   updatedTemplateManifest: boolean,
+ *   updatedEditTemplate: boolean,
+ *   generatedConfigs: GeneratedConfigResult[]
+ * }} GenerateTemplateConfigResult
+ */
+
+/**
  * Converts a file or path-like string to PascalCase.
  * @param {string} value
  * @returns {string}
@@ -72,6 +128,20 @@ const toCamelCase = (value) => {
   }
 
   return pascalValue[0].toLowerCase() + pascalValue.slice(1);
+};
+
+/**
+ * Throws when a derived identifier is empty.
+ * @param {string} value
+ * @param {string} errorMessage
+ * @returns {string}
+ */
+const requireNonEmpty = (value, errorMessage) => {
+  if (!value) {
+    throw new Error(errorMessage);
+  }
+
+  return value;
 };
 
 /**
@@ -147,14 +217,7 @@ const getTemplateNames = async () => {
 /**
  * Builds the filesystem paths for a template registry.
  * @param {string} templateName
- * @returns {{
- *   templateName: string,
- *   registryDirectory: string,
- *   componentsDirectory: string,
- *   defaultLayoutPath: string,
- *   configPath: string,
- *   templatePath: string
- * }}
+ * @returns {TemplatePaths}
  */
 const getTemplatePaths = (templateName) => {
   const registryDirectory = path.join(REGISTRY_DIR, templateName);
@@ -172,12 +235,11 @@ const getTemplatePaths = (templateName) => {
  * Collects items for a single config group while keeping names unique within one config file.
  * @param {{
  *   directory: string,
- *   importPrefix: string,
- *   fallbackName: string
+ *   importPrefix: string
  * }} group
  * @param {Set<string>} usedImportNames
  * @param {Set<string>} usedComponentNames
- * @returns {Promise<Array<{importName: string, exportName: string, componentName: string, fileRelativeToRoot: string}>>}
+ * @returns {Promise<CollectedItem[]>}
  */
 const collectGroupItems = async (group, usedImportNames, usedComponentNames) => {
   const files = await walkDirectory(group.directory);
@@ -188,8 +250,10 @@ const collectGroupItems = async (group, usedImportNames, usedComponentNames) => 
     const fileRelativeToRoot = toPosixPath(path.relative(ROOT_DIR, absolutePath));
     const fileRelativeToGroup = toPosixPath(path.relative(group.directory, absolutePath));
 
-    const rawName = toPascalCase(fileRelativeToGroup);
-    const baseName = rawName || group.fallbackName;
+    const baseName = requireNonEmpty(
+      toPascalCase(fileRelativeToGroup),
+      `Could not derive a component name from ${fileRelativeToRoot}`
+    );
     const exportName = baseName;
 
     let componentName = baseName;
@@ -223,11 +287,14 @@ const collectGroupItems = async (group, usedImportNames, usedComponentNames) => 
 /**
  * Collects template-specific component groups for a template config.
  * @param {string} templateName
- * @returns {Promise<Array<{key: string, title: string, items: Array<{importName: string, exportName: string, componentName: string, fileRelativeToRoot: string}>}>>}
+ * @returns {Promise<TemplateGroup[]>}
  */
 const collectTemplateGroups = async (templateName) => {
   const templatePaths = getTemplatePaths(templateName);
-  const templateKey = toPascalCase(templateName) || "Template";
+  const templateKey = requireNonEmpty(
+    toPascalCase(templateName),
+    `Could not derive a template key from ${templateName}`
+  );
   const usedImportNames = new Set();
   const usedComponentNames = new Set();
 
@@ -235,7 +302,6 @@ const collectTemplateGroups = async (templateName) => {
     {
       directory: templatePaths.componentsDirectory,
       importPrefix: `${templateKey}Component`,
-      fallbackName: "Component",
     },
     usedImportNames,
     usedComponentNames
@@ -256,11 +322,14 @@ const collectTemplateGroups = async (templateName) => {
  * @returns {string}
  */
 const getTemplateConfigExportName = (templateName) =>
-  `${toPascalCase(templateName) || "Template"}Config`;
+  `${requireNonEmpty(
+    toPascalCase(templateName),
+    `Could not derive a config export name from ${templateName}`
+  )}Config`;
 
 /**
  * Creates the TypeScript source for a generated Puck config.
- * @param {Array<{key: string, title: string, items: Array<{importName: string, exportName: string, componentName: string, fileRelativeToRoot: string}>}>} groups
+ * @param {TemplateGroup[]} groups
  * @param {string} outputFilePath
  * @param {string} templateName
  * @returns {string}
@@ -537,7 +606,10 @@ const wrapEditWithChakraProvider = (sourceFile) => {
  * @returns {void}
  */
 const wrapMainWithChakraProvider = (sourceFile, templateName) => {
-  const templateComponentName = toPascalCase(templateName) || "Template";
+  const templateComponentName = requireNonEmpty(
+    toPascalCase(templateName),
+    `Could not derive a template component name from ${templateName}`
+  );
   const declaration = sourceFile.getVariableDeclaration(templateComponentName);
   if (!declaration) {
     return;
@@ -609,7 +681,10 @@ const renameDefaultExportedTemplate = (sourceFile, templateName) => {
   }
 
   const currentName = expression.getText();
-  const nextName = toPascalCase(templateName) || "Template";
+  const nextName = requireNonEmpty(
+    toPascalCase(templateName),
+    `Could not derive a template export name from ${templateName}`
+  );
   if (currentName === nextName) {
     return;
   }
@@ -684,7 +759,10 @@ const updateGeneratedTemplateConfig = async (
  * @returns {string}
  */
 const getEditConfigIdentifier = (templateName) =>
-  `${toCamelCase(templateName) || "template"}Config`;
+  `${requireNonEmpty(
+    toCamelCase(templateName),
+    `Could not derive an edit config identifier from ${templateName}`
+  )}Config`;
 
 /**
  * Rewrites `componentRegistry` to preserve existing `directory` and `locator`
@@ -791,7 +869,7 @@ const updateEditTemplateConfig = async (templateNames) => {
 /**
  * Generates a config file for one template.
  * @param {string} templateName
- * @returns {Promise<{templateName: string, configPath: string, totalCount: number, totalsByGroup: string[]}>}
+ * @returns {Promise<GeneratedConfigResult>}
  */
 const generateTemplateRegistryConfig = async (templateName) => {
   const templatePaths = getTemplatePaths(templateName);
@@ -822,13 +900,7 @@ const generateTemplateRegistryConfig = async (templateName) => {
  * Builds a manifest entry for a registry template that is missing from the manifest.
  * @param {string} templateName
  * @param {string} defaultLayoutData
- * @returns {{
- *   name: string,
- *   description: string,
- *   exampleSiteUrl: string,
- *   layoutRequired: boolean,
- *   defaultLayoutData: string
- * }}
+ * @returns {TemplateManifestEntry}
  */
 const buildTemplateManifestEntry = (templateName, defaultLayoutData) => ({
   name: templateName,
@@ -922,53 +994,23 @@ const generateTemplateFile = async (templateName) => {
 /**
  * Generates all template configs, copies `temp/base.tsx` to per-template template files,
  * updates or creates matching `.template-manifest.json` entries, and patches `edit.tsx`.
- * @param {{ silent?: boolean }} [options={}]
- * @returns {Promise<{
- *   templateNames: string[],
- *   updatedTemplateManifest: boolean,
- *   updatedEditTemplate: boolean,
- *   generatedConfigs: Array<{templateName: string, configPath: string, totalCount: number, totalsByGroup: string[]}>
- * }>}
+ * @returns {Promise<GenerateTemplateConfigResult>}
  */
-export const generateTemplateConfig = async (options = {}) => {
-  const { silent = false } = options;
-  const log = (...args) => {
-    if (!silent) {
-      console.log(...args);
-    }
-  };
-
+export const generateTemplateConfig = async () => {
   const templateNames = await getTemplateNames();
   const generatedConfigs = [];
 
   for (const templateName of templateNames) {
     const generatedConfig = await generateTemplateRegistryConfig(templateName);
     generatedConfigs.push(generatedConfig);
-    log(`Wrote ${path.relative(ROOT_DIR, generatedConfig.configPath)}`);
-    log(
-      `Template ${templateName}: ${generatedConfig.totalCount} (${generatedConfig.totalsByGroup.join(", ")})`
-    );
   }
 
   for (const templateName of templateNames) {
-    const templatePaths = getTemplatePaths(templateName);
-    const updatedTemplate = await generateTemplateFile(templateName);
-    if (updatedTemplate) {
-      log(`Updated ${path.relative(ROOT_DIR, templatePaths.templatePath)}`);
-    } else if (await fileExists(templatePaths.templatePath)) {
-      log(`Wrote ${path.relative(ROOT_DIR, templatePaths.templatePath)}`);
-    }
+    await generateTemplateFile(templateName);
   }
 
   const updatedTemplateManifest = await updateTemplateManifest(templateNames);
-  if (updatedTemplateManifest) {
-    log(`Updated ${path.relative(ROOT_DIR, TEMPLATE_MANIFEST_PATH)}`);
-  }
-
   const updatedEditTemplate = await updateEditTemplateConfig(templateNames);
-  if (updatedEditTemplate) {
-    log(`Updated ${path.relative(ROOT_DIR, EDIT_TEMPLATE_PATH)}`);
-  }
 
   return {
     templateNames,
