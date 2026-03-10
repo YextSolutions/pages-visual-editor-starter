@@ -18,12 +18,14 @@
  * 4) Update `.template-manifest.json`.
  *    - Read `src/registry/<template>/defaultLayout.json` when present.
  *    - Write that JSON into the matching template's `defaultLayoutData`.
+ *    - Create a manifest entry when a registry template is missing.
  *
  * 5) Update editor wiring.
  *    - Patch `src/templates/edit.tsx`.
  *    - Import each generated config into `componentRegistry`.
  *    - Ensure `componentRegistry` points each template name to its config while
  *      preserving `directory` and `locator` entries.
+ *    - Ensure the editor template is wrapped in Chakra 3's provider.
  *
  */
 import { promises as fs } from "node:fs";
@@ -808,7 +810,7 @@ const generateTemplateRegistryConfig = async (templateName) => {
 };
 
 /**
- * Builds a manifest entry for a generated registry template.
+ * Builds a manifest entry for a registry template that is missing from the manifest.
  * @param {string} templateName
  * @param {string} defaultLayoutData
  * @returns {{
@@ -910,7 +912,7 @@ const generateTemplateFile = async (templateName) => {
 
 /**
  * Generates all template configs, copies `temp/base.tsx` to per-template template files,
- * updates `.template-manifest.json`, and patches `edit.tsx`.
+ * updates or creates matching `.template-manifest.json` entries, and patches `edit.tsx`.
  * @param {{ silent?: boolean }} [options={}]
  * @returns {Promise<{
  *   templateNames: string[],
