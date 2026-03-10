@@ -9,29 +9,22 @@
  *    - Scan template-specific components from `src/registry/<template>/components`.
  *    - Emit `src/registry/<template>/config.tsx`.
  *
- * 3) Use the checked-in base template.
- *    - Read `temp/base.tsx`.
- *    - Leave `temp/base.tsx` unmodified.
- *
- * 4) Materialize one template file per registry template.
+ * 3) Materialize one template file per registry template.
  *    - Copy `temp/base.tsx` to `src/templates/<template>.tsx`.
  *    - Patch that copied template to import the matching
  *      `src/registry/<template>/config.tsx`.
  *    - Rename the exported template component to match the template name.
  *
- * 5) Update `.template-manifest.json`.
+ * 4) Update `.template-manifest.json`.
  *    - Read `src/registry/<template>/defaultLayout.json` when present.
  *    - Write that JSON into the matching template's `defaultLayoutData`.
  *
- * 6) Update editor wiring.
+ * 5) Update editor wiring.
  *    - Patch `src/templates/edit.tsx`.
  *    - Import each generated config into `componentRegistry`.
  *    - Ensure `componentRegistry` points each template name to its config while
  *      preserving `directory` and `locator` entries.
  *
- * 7) Runtime behavior.
- *    - Exposes `generateTemplateConfig(options)` for Vite/plugin usage.
- *    - Supports direct CLI execution (`node scripts/generateTemplateConfig.mjs`).
  */
 import { promises as fs } from "node:fs";
 import path from "node:path";
