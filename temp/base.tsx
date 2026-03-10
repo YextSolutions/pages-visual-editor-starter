@@ -25,6 +25,7 @@ import {
   injectTranslations,
   getCanonicalUrl,
   resolveUrlTemplate,
+  mainConfig,
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
 
@@ -105,7 +106,7 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
 
   const resolvedPuckData = await resolveAllData(
     JSON.parse(document.__.layout),
-    baseConfig,
+    mainConfig,
     {
       streamDocument: document,
     }
@@ -149,7 +150,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       <ChakraProvider value={defaultSystem}>
         <VisualEditorProvider templateProps={props}>
           <Render
-            config={baseConfig}
+            config={mainConfig}
             data={data}
             metadata={{ streamDocument: document }}
           />
