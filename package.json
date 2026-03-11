@@ -10,7 +10,7 @@
     "prod": "pages prod",
     "build": "pages build",
     "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add",
-    "generate:template-configs": "node scripts/generateTemplateConfig.mjs"
+    "generate:template-configs": "node --import tsx scripts/generateTemplateConfig.ts"
   },
   "engines": {
     "node": ">=20.18.2"

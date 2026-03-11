@@ -29,9 +29,14 @@
  *
  */
 import { promises as fs } from "node:fs";
-import path from "node:path";
+import * as path from "node:path";
 import { pathToFileURL } from "node:url";
-import { Project, QuoteKind, SyntaxKind } from "ts-morph";
+import {
+  Project,
+  QuoteKind,
+  SyntaxKind,
+  type SourceFile,
+} from "ts-morph";
 
 const ROOT_DIR = process.cwd();
 const REGISTRY_DIR = path.join(ROOT_DIR, "src", "registry");
@@ -47,68 +52,67 @@ const AST_PROJECT = new Project({
   },
 });
 
-/**
- * @typedef {{
- *   templateName: string,
- *   registryDirectory: string,
- *   componentsDirectory: string,
- *   defaultLayoutPath: string,
- *   configPath: string,
- *   templatePath: string
- * }} TemplatePaths
- */
+type TemplatePaths = {
+  templateName: string;
+  registryDirectory: string;
+  componentsDirectory: string;
+  defaultLayoutPath: string;
+  configPath: string;
+  templatePath: string;
+};
 
-/**
- * @typedef {{
- *   importName: string,
- *   exportName: string,
- *   componentName: string,
- *   fileRelativeToRoot: string
- * }} CollectedItem
- */
+type CollectedItem = {
+  importName: string;
+  exportName: string;
+  componentName: string;
+  fileRelativeToRoot: string;
+};
 
-/**
- * @typedef {{
- *   key: string,
- *   title: string,
- *   items: CollectedItem[]
- * }} TemplateGroup
- */
+type PuckCategory = {
+  key: string;
+  title: string;
+  items: CollectedItem[];
+};
 
-/**
- * @typedef {{
- *   name: string,
- *   description: string,
- *   exampleSiteUrl: string,
- *   layoutRequired: boolean,
- *   defaultLayoutData: string
- * }} TemplateManifestEntry
- */
+type TemplateManifestEntry = {
+  name: string;
+  description: string;
+  exampleSiteUrl: string;
+  layoutRequired: boolean;
+  defaultLayoutData: string;
+};
 
-/**
- * @typedef {{
- *   templateName: string,
- *   configPath: string,
- *   totalCount: number,
- *   totalsByGroup: string[]
- * }} GeneratedConfigResult
- */
+type GeneratedConfigResult = {
+  templateName: string;
+  configPath: string;
+  totalCount: number;
+  totalsByGroup: string[];
+};
 
-/**
- * @typedef {{
- *   templateNames: string[],
- *   updatedTemplateManifest: boolean,
- *   updatedEditTemplate: boolean,
- *   generatedConfigs: GeneratedConfigResult[]
- * }} GenerateTemplateConfigResult
- */
+type GenerateTemplateConfigResult = {
+  templateNames: string[];
+  updatedTemplateManifest: boolean;
+  updatedEditTemplate: boolean;
+  generatedConfigs: GeneratedConfigResult[];
+};
+
+type ImportDefinition = string | { name: string; alias?: string };
+
+type InsertNamedImportOptions = {
+  moduleSpecifier: string;
+  namedImports: ImportDefinition[];
+};
+
+type ManifestFile = {
+  templates?: TemplateManifestEntry[];
+};
 
 /**
  * Converts a file or path-like string to PascalCase.
  * @param {string} value
  * @returns {string}
  */
-const toPascalCase = (value) =>
+const toPascalCase = (value: string): string =>
   value
     .replace(/\.[^/.]+$/, "")
     .split(/[^a-zA-Z0-9]+/)
@@ -121,7 +125,7 @@ const toPascalCase = (value) =>
  * @param {string} value
  * @returns {string}
  */
-const toCamelCase = (value) => {
+const toCamelCase = (value: string): string => {
   const pascalValue = toPascalCase(value);
   if (!pascalValue) {
     return "";
@@ -136,7 +140,7 @@ const toCamelCase = (value) => {
  * @param {string} errorMessage
  * @returns {string}
  */
-const requireNonEmpty = (value, errorMessage) => {
+const requireNonEmpty = (value: string, errorMessage: string): string => {
   if (!value) {
     throw new Error(errorMessage);
   }
@@ -149,14 +153,15 @@ const requireNonEmpty = (value, errorMessage) => {
  * @param {string} value
  * @returns {string}
  */
-const toPosixPath = (value) => value.split(path.sep).join(path.posix.sep);
+const toPosixPath = (value: string): string =>
+  value.split(path.sep).join(path.posix.sep);
 
 /**
  * Checks whether a path exists.
  * @param {string} filePath
  * @returns {Promise<boolean>}
  */
-const fileExists = async (filePath) => {
+const fileExists = async (filePath: string): Promise<boolean> => {
   try {
     await fs.access(filePath);
     return true;
@@ -170,7 +175,7 @@ const fileExists = async (filePath) => {
  * @param {string} directory
  * @returns {Promise<string[]>}
  */
-const walkDirectory = async (directory) => {
+const walkDirectory = async (directory: string): Promise<string[]> => {
   if (!(await fileExists(directory))) {
     return [];
   }
@@ -202,7 +207,7 @@ const walkDirectory = async (directory) => {
  * Lists template names from `src/registry`.
  * @returns {Promise<string[]>}
  */
-const getTemplateNames = async () => {
+const getTemplateNames = async (): Promise<string[]> => {
   if (!(await fileExists(REGISTRY_DIR))) {
     return [];
   }
@@ -219,7 +224,7 @@ const getTemplateNames = async () => {
  * @param {string} templateName
  * @returns {TemplatePaths}
  */
-const getTemplatePaths = (templateName) => {
+const getTemplatePaths = (templateName: string): TemplatePaths => {
   const registryDirectory = path.join(REGISTRY_DIR, templateName);
   return {
     templateName,
@@ -241,7 +246,11 @@ const getTemplatePaths = (templateName) => {
  * @param {Set<string>} usedComponentNames
  * @returns {Promise<CollectedItem[]>}
  */
-const collectGroupItems = async (group, usedImportNames, usedComponentNames) => {
+const collectGroupItems = async (
+  group: { directory: string; importPrefix: string },
+  usedImportNames: Set<string>,
+  usedComponentNames: Set<string>
+): Promise<CollectedItem[]> => {
   const files = await walkDirectory(group.directory);
   const sortedFiles = files.sort((a, b) => a.localeCompare(b));
   const items = [];
@@ -287,16 +296,18 @@ const collectGroupItems = async (group, usedImportNames, usedComponentNames) => 
 /**
  * Collects template-specific component groups for a template config.
  * @param {string} templateName
- * @returns {Promise<TemplateGroup[]>}
+ * @returns {Promise<PuckCategory[]>}
  */
-const collectTemplateGroups = async (templateName) => {
+const collectPuckComponentGroups = async (
+  templateName: string
+): Promise<PuckCategory[]> => {
   const templatePaths = getTemplatePaths(templateName);
   const templateKey = requireNonEmpty(
     toPascalCase(templateName),
     `Could not derive a template key from ${templateName}`
   );
-  const usedImportNames = new Set();
-  const usedComponentNames = new Set();
+  const usedImportNames = new Set<string>();
+  const usedComponentNames = new Set<string>();
 
   const componentItems = await collectGroupItems(
     {
@@ -321,7 +332,7 @@ const collectTemplateGroups = async (templateName) => {
  * @param {string} templateName
  * @returns {string}
  */
-const getTemplateConfigExportName = (templateName) =>
+const getTemplateConfigExportName = (templateName: string): string =>
   `${requireNonEmpty(
     toPascalCase(templateName),
     `Could not derive a config export name from ${templateName}`
@@ -329,12 +340,16 @@ const getTemplateConfigExportName = (templateName) =>
 
 /**
  * Creates the TypeScript source for a generated Puck config.
- * @param {TemplateGroup[]} groups
+ * @param {PuckCategory[]} groups
  * @param {string} outputFilePath
  * @param {string} templateName
  * @returns {string}
  */
-const buildConfigSource = (groups, outputFilePath, templateName) => {
+const buildConfigSource = (
+  groups: PuckCategory[],
+  outputFilePath: string,
+  templateName: string
+): string => {
   const allItems = groups.flatMap((group) => group.items);
   const configExportName = getTemplateConfigExportName(templateName);
   const importLines = allItems.map((item) => {
@@ -363,7 +378,7 @@ const buildConfigSource = (groups, outputFilePath, templateName) => {
     });
 
   return [
-    "/** THIS FILE IS AUTOGENERATED BY scripts/generateTemplateConfig.mjs */",
+    "/** THIS FILE IS AUTOGENERATED BY scripts/generateTemplateConfig.ts */",
     'import type { Config } from "@puckeditor/core";',
     ...(importLines.length > 0 ? ["", ...importLines] : []),
     "",
@@ -376,8 +391,6 @@ const buildConfigSource = (groups, outputFilePath, templateName) => {
     ...(categoryEntries.length > 0 ? ["  categories: {", ...categoryEntries, "  },"] : []),
     "};",
     "",
-    `export default ${configExportName};`,
-    "",
   ].join("\n");
 };
 
@@ -386,7 +399,7 @@ const buildConfigSource = (groups, outputFilePath, templateName) => {
  * @param {string} filePath
  * @returns {Promise<import("ts-morph").SourceFile>}
  */
-const getAstSourceFile = async (filePath) => {
+const getAstSourceFile = async (filePath: string): Promise<SourceFile> => {
   const existing = AST_PROJECT.getSourceFile(filePath);
   if (existing) {
     await existing.refreshFromFileSystem();
@@ -402,7 +415,11 @@ const getAstSourceFile = async (filePath) => {
  * @param {string[]} namesToRemove
  * @returns {void}
  */
-const removeNamedImports = (sourceFile, moduleSpecifier, namesToRemove) => {
+const removeNamedImports = (
+  sourceFile: SourceFile,
+  moduleSpecifier: string,
+  namesToRemove: string[]
+): void => {
   const declaration = sourceFile
     .getImportDeclarations()
     .find((item) => item.getModuleSpecifierValue() === moduleSpecifier);
@@ -430,7 +447,7 @@ const removeNamedImports = (sourceFile, moduleSpecifier, namesToRemove) => {
  * @param {import("ts-morph").SourceFile} sourceFile
  * @returns {void}
  */
-const removeGeneratedConfigImports = (sourceFile) => {
+const removeGeneratedConfigImports = (sourceFile: SourceFile): void => {
   for (const declaration of sourceFile.getImportDeclarations()) {
     const moduleSpecifier = declaration.getModuleSpecifierValue();
     if (
@@ -452,7 +469,10 @@ const removeGeneratedConfigImports = (sourceFile) => {
  * }} options
  * @returns {void}
  */
-const insertNamedImport = (sourceFile, options) => {
+const insertNamedImport = (
+  sourceFile: SourceFile,
+  options: InsertNamedImportOptions
+): void => {
   const pagesComponentsImport = sourceFile
     .getImportDeclarations()
     .find(
@@ -474,24 +494,27 @@ const insertNamedImport = (sourceFile, options) => {
 };
 
 /**
- * Ensures the generated template imports the template config as local `mainConfig`.
- * The generated config file itself exports a PascalCase default symbol like `Main`
- * or `TacoBell`; the local alias avoids colliding with the template component name.
+ * Ensures the generated template imports the template config by its exported name.
  * @param {import("ts-morph").SourceFile} sourceFile
  * @param {string} moduleSpecifier
+ * @param {string} exportName
  * @returns {void}
  */
-const upsertMainConfigImport = (sourceFile, moduleSpecifier) => {
+const upsertTemplateConfigImport = (
+  sourceFile: SourceFile,
+  moduleSpecifier: string,
+  exportName: string
+): void => {
   for (const declaration of sourceFile.getImportDeclarations()) {
-    if (declaration.getDefaultImport()?.getText() === "mainConfig") {
-      declaration.remove();
-      continue;
-    }
-
     const hadNamedImports = declaration.getNamedImports().length > 0;
     const namedImports = declaration.getNamedImports();
     for (const namedImport of namedImports) {
-      if (namedImport.getName() === "mainConfig") {
+      if (
+        namedImport.getName() === exportName ||
+        namedImport.getName() === "TEMPLATE_CONFIG" ||
+        namedImport.getAliasNode()?.getText() === exportName ||
+        namedImport.getAliasNode()?.getText() === "TEMPLATE_CONFIG"
+      ) {
         namedImport.remove();
       }
     }
@@ -505,8 +528,8 @@ const upsertMainConfigImport = (sourceFile, moduleSpecifier) => {
     }
   }
 
-  sourceFile.addImportDeclaration({
-    defaultImport: "mainConfig",
+  insertNamedImport(sourceFile, {
+    namedImports: [exportName],
     moduleSpecifier,
   });
 };
@@ -517,7 +540,10 @@ const upsertMainConfigImport = (sourceFile, moduleSpecifier) => {
  * @param {string} moduleSpecifier
  * @returns {void}
  */
-const ensureSideEffectImport = (sourceFile, moduleSpecifier) => {
+const ensureSideEffectImport = (
+  sourceFile: SourceFile,
+  moduleSpecifier: string
+): void => {
   const exists = sourceFile
     .getImportDeclarations()
     .some((item) => item.getModuleSpecifierValue() === moduleSpecifier);
@@ -535,7 +561,11 @@ const ensureSideEffectImport = (sourceFile, moduleSpecifier) => {
  * @param {string[]} importNames
  * @returns {void}
  */
-const ensureNamedImport = (sourceFile, moduleSpecifier, importNames) => {
+const ensureNamedImport = (
+  sourceFile: SourceFile,
+  moduleSpecifier: string,
+  importNames: string[]
+): void => {
   const declaration = sourceFile
     .getImportDeclarations()
     .find((item) => item.getModuleSpecifierValue() === moduleSpecifier);
@@ -564,7 +594,7 @@ const ensureNamedImport = (sourceFile, moduleSpecifier, importNames) => {
  * @param {import("ts-morph").SourceFile} sourceFile
  * @returns {void}
  */
-const wrapEditWithChakraProvider = (sourceFile) => {
+const wrapEditWithChakraProvider = (sourceFile: SourceFile): void => {
   const declaration = sourceFile.getVariableDeclaration("Edit");
   if (!declaration) {
     return;
@@ -603,9 +633,14 @@ const wrapEditWithChakraProvider = (sourceFile) => {
  * Wraps the main template render tree in `ChakraProvider` with Chakra 3's default system.
  * @param {import("ts-morph").SourceFile} sourceFile
  * @param {string} templateName
+ * @param {string} configIdentifier
  * @returns {void}
  */
-const wrapMainWithChakraProvider = (sourceFile, templateName) => {
+const wrapMainWithChakraProvider = (
+  sourceFile: SourceFile,
+  templateName: string,
+  configIdentifier: string
+): void => {
   const templateComponentName = requireNonEmpty(
     toPascalCase(templateName),
     `Could not derive a template component name from ${templateName}`
@@ -652,7 +687,7 @@ const wrapMainWithChakraProvider = (sourceFile, templateName) => {
       <ChakraProvider value={defaultSystem}>
         <VisualEditorProvider templateProps={props}>
           <Render
-            config={mainConfig}
+            config={${configIdentifier}}
             data={data}
             metadata={{ streamDocument: document }}
           />
@@ -669,7 +704,10 @@ const wrapMainWithChakraProvider = (sourceFile, templateName) => {
  * @param {string} templateName
  * @returns {void}
  */
-const renameDefaultExportedTemplate = (sourceFile, templateName) => {
+const renameDefaultExportedTemplate = (
+  sourceFile: SourceFile,
+  templateName: string
+): void => {
   const exportAssignment = sourceFile.getExportAssignments()[0];
   if (!exportAssignment) {
     return;
@@ -703,18 +741,18 @@ const renameDefaultExportedTemplate = (sourceFile, templateName) => {
 };
 
 /**
- * Updates a generated template copy to import the matching config, alias it locally,
- * and rename the default export to match the template name.
+ * Updates a generated template copy to import the matching config by its exported
+ * name and rename the default export to match the template name.
  * @param {string} templateFilePath
  * @param {string} outputFilePath
  * @param {string} templateName
  * @returns {Promise<boolean>}
  */
 const updateGeneratedTemplateConfig = async (
-  templateFilePath,
-  outputFilePath,
-  templateName
-) => {
+  templateFilePath: string,
+  outputFilePath: string,
+  templateName: string
+): Promise<boolean> => {
   if (!(await fileExists(templateFilePath))) {
     return false;
   }
@@ -727,6 +765,7 @@ const updateGeneratedTemplateConfig = async (
   const normalizedImportTarget = importTarget.startsWith(".")
     ? importTarget
     : `./${importTarget}`;
+  const configExportName = getTemplateConfigExportName(templateName);
 
   const originalSource = await fs.readFile(templateFilePath, "utf8");
   const sourceFile = await getAstSourceFile(templateFilePath);
@@ -737,12 +776,18 @@ const updateGeneratedTemplateConfig = async (
     "ChakraProvider",
     "defaultSystem",
   ]);
-  upsertMainConfigImport(sourceFile, normalizedImportTarget);
+  upsertTemplateConfigImport(
+    sourceFile,
+    normalizedImportTarget,
+    configExportName
+  );
   renameDefaultExportedTemplate(sourceFile, templateName);
-  wrapMainWithChakraProvider(sourceFile, templateName);
+  wrapMainWithChakraProvider(sourceFile, templateName, configExportName);
 
   sourceFile.formatText();
-  const updatedSource = sourceFile.getFullText();
+  const updatedSource = sourceFile
+    .getFullText()
+    .replace(/\bTEMPLATE_CONFIG\b/g, configExportName);
   sourceFile.forget();
 
   if (updatedSource === originalSource) {
@@ -758,7 +803,7 @@ const updateGeneratedTemplateConfig = async (
  * @param {string} templateName
  * @returns {string}
  */
-const getEditConfigIdentifier = (templateName) =>
+const getEditConfigIdentifier = (templateName: string): string =>
   `${requireNonEmpty(
     toCamelCase(templateName),
     `Could not derive an edit config identifier from ${templateName}`
@@ -771,7 +816,10 @@ const getEditConfigIdentifier = (templateName) =>
  * @param {string[]} templateNames
  * @returns {void}
  */
-const setEditComponentRegistry = (sourceFile, templateNames) => {
+const setEditComponentRegistry = (
+  sourceFile: SourceFile,
+  templateNames: string[]
+): void => {
   const declaration = sourceFile.getVariableDeclaration("componentRegistry");
   if (!declaration) {
     return;
@@ -781,7 +829,7 @@ const setEditComponentRegistry = (sourceFile, templateNames) => {
   if (!initializer) {
     const registryEntries = templateNames
       .map(
-        (templateName) =>
+        (templateName: string) =>
           `  "${templateName}": ${getEditConfigIdentifier(templateName)},`
       )
       .join("\n");
@@ -792,16 +840,17 @@ ${registryEntries}
   }
 
   for (const property of initializer.getProperties()) {
-    if (property.getKind() !== SyntaxKind.PropertyAssignment) {
+    const propertyAssignment = property.asKind(SyntaxKind.PropertyAssignment);
+    if (!propertyAssignment) {
       continue;
     }
 
-    const propertyName = property.getName();
+    const propertyName = propertyAssignment.getName();
     if (PRESERVED_EDIT_REGISTRY_KEYS.has(propertyName)) {
       continue;
     }
 
-    property.remove();
+    propertyAssignment.remove();
   }
 
   for (const templateName of templateNames) {
@@ -817,7 +866,9 @@ ${registryEntries}
  * @param {string[]} templateNames
  * @returns {Promise<boolean>}
  */
-const updateEditTemplateConfig = async (templateNames) => {
+const updateEditTemplateConfig = async (
+  templateNames: string[]
+): Promise<boolean> => {
   if (!(await fileExists(EDIT_TEMPLATE_PATH))) {
     return false;
   }
@@ -845,8 +896,13 @@ const updateEditTemplateConfig = async (templateNames) => {
       ? importTarget
       : `./${importTarget}`;
 
-    sourceFile.addImportDeclaration({
-      defaultImport: getEditConfigIdentifier(templateName),
+    insertNamedImport(sourceFile, {
+      namedImports: [
+        {
+          name: getTemplateConfigExportName(templateName),
+          alias: getEditConfigIdentifier(templateName),
+        },
+      ],
       moduleSpecifier: normalizedImportTarget,
     });
   }
@@ -871,9 +927,11 @@ const updateEditTemplateConfig = async (templateNames) => {
  * @param {string} templateName
  * @returns {Promise<GeneratedConfigResult>}
  */
-const generateTemplateRegistryConfig = async (templateName) => {
+const generateTemplateRegistryConfig = async (
+  templateName: string
+): Promise<GeneratedConfigResult> => {
   const templatePaths = getTemplatePaths(templateName);
-  const groups = await collectTemplateGroups(templateName);
+  const groups = await collectPuckComponentGroups(templateName);
   const source = buildConfigSource(
     groups,
     templatePaths.configPath,
@@ -902,7 +960,10 @@ const generateTemplateRegistryConfig = async (templateName) => {
  * @param {string} defaultLayoutData
  * @returns {TemplateManifestEntry}
  */
-const buildTemplateManifestEntry = (templateName, defaultLayoutData) => ({
+const buildTemplateManifestEntry = (
+  templateName: string,
+  defaultLayoutData: string
+): TemplateManifestEntry => ({
   name: templateName,
   description: `Autogenerated template entry for ${templateName}.`,
   exampleSiteUrl: "",
@@ -917,13 +978,15 @@ const buildTemplateManifestEntry = (templateName, defaultLayoutData) => ({
  * @param {string[]} templateNames
  * @returns {Promise<boolean>}
  */
-const updateTemplateManifest = async (templateNames) => {
+const updateTemplateManifest = async (
+  templateNames: string[]
+): Promise<boolean> => {
   if (!(await fileExists(TEMPLATE_MANIFEST_PATH))) {
     return false;
   }
 
   const manifestSource = await fs.readFile(TEMPLATE_MANIFEST_PATH, "utf8");
-  const manifest = JSON.parse(manifestSource);
+  const manifest = JSON.parse(manifestSource) as ManifestFile;
   if (!Array.isArray(manifest.templates)) {
     return false;
   }
@@ -975,7 +1038,7 @@ const updateTemplateManifest = async (templateNames) => {
  * @param {string} templateName
  * @returns {Promise<boolean>}
  */
-const generateTemplateFile = async (templateName) => {
+const generateTemplateFile = async (templateName: string): Promise<boolean> => {
   if (!(await fileExists(TEMP_BASE_TEMPLATE_PATH))) {
     return false;
   }
@@ -996,9 +1059,9 @@ const generateTemplateFile = async (templateName) => {
  * updates or creates matching `.template-manifest.json` entries, and patches `edit.tsx`.
  * @returns {Promise<GenerateTemplateConfigResult>}
  */
-export const generateTemplateConfig = async () => {
+export const generateTemplateConfig = async (): Promise<GenerateTemplateConfigResult> => {
   const templateNames = await getTemplateNames();
-  const generatedConfigs = [];
+  const generatedConfigs: GeneratedConfigResult[] = [];
 
   for (const templateName of templateNames) {
     const generatedConfig = await generateTemplateRegistryConfig(templateName);

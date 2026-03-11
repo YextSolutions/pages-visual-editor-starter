@@ -105,7 +105,7 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
 
   const resolvedPuckData = await resolveAllData(
     JSON.parse(document.__.layout),
-    mainConfig,
+    TEMPLATE_CONFIG,
     {
       streamDocument: document,
     }
@@ -149,7 +149,7 @@ const Location: Template<TemplateRenderProps> = (props) => {
       <ChakraProvider value={defaultSystem}>
         <VisualEditorProvider templateProps={props}>
           <Render
-            config={mainConfig}
+            config={TEMPLATE_CONFIG}
             data={data}
             metadata={{ streamDocument: document }}
           />
