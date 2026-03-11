@@ -106,13 +106,16 @@ type ManifestFile = {
  * @param {string} value
  * @returns {string}
  */
-const toPascalCase = (value: string): string =>
-  value
+const toPascalCase = (value: string): string => {
+  return value
     .replace(/\.[^/.]+$/, "")
     .split(/[^a-zA-Z0-9]+/)
     .filter(Boolean)
-    .map((segment) => segment[0].toUpperCase() + segment.slice(1))
+    .map((segment) => {
+      return segment[0].toUpperCase() + segment.slice(1);
+    })
     .join("");
+};
 
 /**
  * Converts a file or path-like string to camelCase.
@@ -147,8 +150,9 @@ const requireNonEmpty = (value: string, errorMessage: string): string => {
  * @param {string} value
  * @returns {string}
  */
-const toPosixPath = (value: string): string =>
-  value.split(path.sep).join(path.posix.sep);
+const toPosixPath = (value: string): string => {
+  return value.split(path.sep).join(path.posix.sep);
+};
 
 /**
  * Checks whether a path exists.
@@ -208,9 +212,15 @@ const getTemplateNames = async (): Promise<string[]> => {
 
   const entries = await fs.readdir(REGISTRY_DIR, { withFileTypes: true });
   return entries
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort((a, b) => a.localeCompare(b));
+    .filter((entry) => {
+      return entry.isDirectory();
+    })
+    .map((entry) => {
+      return entry.name;
+    })
+    .sort((a, b) => {
+      return a.localeCompare(b);
+    });
 };
 
 /**
@@ -246,7 +256,9 @@ const collectGroupItems = async (
   usedComponentNames: Set<string>
 ): Promise<CollectedItem[]> => {
   const files = await walkDirectory(group.directory);
-  const sortedFiles = files.sort((a, b) => a.localeCompare(b));
+  const sortedFiles = files.sort((a, b) => {
+    return a.localeCompare(b);
+  });
   const items = [];
 
   for (const absolutePath of sortedFiles) {
@@ -318,11 +330,12 @@ const collectTemplateComponents = async (
  * @param {string} templateName
  * @returns {string}
  */
-const getTemplateConfigExportName = (templateName: string): string =>
-  `${requireNonEmpty(
+const getTemplateConfigExportName = (templateName: string): string => {
+  return `${requireNonEmpty(
     toPascalCase(templateName),
     `Could not derive a config export name from ${templateName}`
   )}Config`;
+};
 
 /**
  * Creates the TypeScript source for a generated Puck config.
@@ -349,16 +362,18 @@ const buildConfigSource = (
     return `import { ${item.exportName} as ${item.importName} } from "${normalizedImportPath}";`;
   });
 
-  const componentEntries = items.map(
-    (item) => `    ${item.componentName}: ${item.importName},`
-  );
+  const componentEntries = items.map((item) => {
+    return `    ${item.componentName}: ${item.importName},`;
+  });
   const categoryEntries =
     items.length > 0
       ? [
           '    components: {',
           '      title: "Components",',
           "      components: [",
-          ...items.map((item) => `        "${item.componentName}",`),
+          ...items.map((item) => {
+            return `        "${item.componentName}",`;
+          }),
           "      ],",
           "    },",
         ]
@@ -453,7 +468,9 @@ const removeNamedImports = (
 ): void => {
   const declaration = sourceFile
     .getImportDeclarations()
-    .find((item) => item.getModuleSpecifierValue() === moduleSpecifier);
+    .find((item) => {
+      return item.getModuleSpecifierValue() === moduleSpecifier;
+    });
   if (!declaration) {
     return;
   }
@@ -506,9 +523,9 @@ const insertNamedImport = (
 ): void => {
   const pagesComponentsImport = sourceFile
     .getImportDeclarations()
-    .find(
-      (item) => item.getModuleSpecifierValue() === "@yext/pages-components"
-    );
+    .find((item) => {
+      return item.getModuleSpecifierValue() === "@yext/pages-components";
+    });
 
   if (pagesComponentsImport) {
     sourceFile.insertImportDeclaration(pagesComponentsImport.getChildIndex() + 1, {
@@ -536,7 +553,9 @@ const ensureSideEffectImport = (
 ): void => {
   const exists = sourceFile
     .getImportDeclarations()
-    .some((item) => item.getModuleSpecifierValue() === moduleSpecifier);
+    .some((item) => {
+      return item.getModuleSpecifierValue() === moduleSpecifier;
+    });
   if (!exists) {
     sourceFile.insertImportDeclaration(0, {
       moduleSpecifier,
@@ -558,7 +577,9 @@ const ensureNamedImport = (
 ): void => {
   const declaration = sourceFile
     .getImportDeclarations()
-    .find((item) => item.getModuleSpecifierValue() === moduleSpecifier);
+    .find((item) => {
+      return item.getModuleSpecifierValue() === moduleSpecifier;
+    });
 
   if (!declaration) {
     sourceFile.insertImportDeclaration(0, {
@@ -571,7 +592,9 @@ const ensureNamedImport = (
   for (const importName of importNames) {
     const hasImport = declaration
       .getNamedImports()
-      .some((item) => item.getName() === importName);
+      .some((item) => {
+        return item.getName() === importName;
+      });
 
     if (!hasImport) {
       declaration.addNamedImport(importName);
@@ -624,11 +647,12 @@ const wrapEditWithChakraProvider = (sourceFile: SourceFile): void => {
  * @param {string} templateName
  * @returns {string}
  */
-const getEditConfigIdentifier = (templateName: string): string =>
-  `${requireNonEmpty(
+const getEditConfigIdentifier = (templateName: string): string => {
+  return `${requireNonEmpty(
     toCamelCase(templateName),
     `Could not derive an edit config identifier from ${templateName}`
   )}Config`;
+};
 
 /**
  * Rewrites `componentRegistry` to preserve existing `directory` and `locator`
@@ -649,10 +673,9 @@ const setEditComponentRegistry = (
   const initializer = declaration.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
   if (!initializer) {
     const registryEntries = templateNames
-      .map(
-        (templateName: string) =>
-          `  "${templateName}": ${getEditConfigIdentifier(templateName)},`
-      )
+      .map((templateName: string) => {
+        return `  "${templateName}": ${getEditConfigIdentifier(templateName)},`;
+      })
       .join("\n");
     declaration.setInitializer(`{
 ${registryEntries}
@@ -778,13 +801,15 @@ const generateTemplateRegistryConfig = async (
 const buildTemplateManifestEntry = (
   templateName: string,
   defaultLayoutData: string
-): TemplateManifestEntry => ({
-  name: templateName,
-  description: `Autogenerated template entry for ${templateName}.`,
-  exampleSiteUrl: "",
-  layoutRequired: true,
-  defaultLayoutData,
-});
+): TemplateManifestEntry => {
+  return {
+    name: templateName,
+    description: `Autogenerated template entry for ${templateName}.`,
+    exampleSiteUrl: "",
+    layoutRequired: true,
+    defaultLayoutData,
+  };
+};
 
 /**
  * Updates `.template-manifest.json` so matching template entries use
@@ -815,7 +840,9 @@ const updateTemplateManifest = async (
     }
 
     let templateEntry = manifest.templates.find(
-      (template) => template?.name === templateName
+      (template) => {
+        return template?.name === templateName;
+      }
     );
     const defaultLayoutSource = await fs.readFile(
       templatePaths.defaultLayoutPath,
