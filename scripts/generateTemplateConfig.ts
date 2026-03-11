@@ -32,6 +32,7 @@
 import { promises as fs } from "node:fs";
 import * as path from "node:path";
 import { pathToFileURL } from "node:url";
+import prettier from "prettier";
 import { Project, QuoteKind, SyntaxKind, type SourceFile } from "ts-morph";
 
 const ROOT_DIR = process.cwd();
@@ -719,9 +720,12 @@ const generateTemplateRegistryConfig = async (
   const templatePaths = getTemplatePaths(templateName);
   const items = await collectTemplateComponents(templateName);
   const source = buildConfigSource(items, templatePaths.configPath, templateName);
+  const formattedSource = await prettier.format(source, {
+    filepath: templatePaths.configPath,
+  });
 
   await fs.mkdir(path.dirname(templatePaths.configPath), { recursive: true });
-  await fs.writeFile(templatePaths.configPath, source, "utf8");
+  await fs.writeFile(templatePaths.configPath, formattedSource, "utf8");
 
   return {
     templateName,
