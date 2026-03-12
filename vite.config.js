@@ -1,20 +1,28 @@
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import yextSSG from "@yext/pages/vite-plugin";
 import { yextVisualEditorPlugin } from "@yext/visual-editor/plugin";
-import { generateTemplateConfig } from "./scripts/generateTemplateConfig.mjs";
+
+const execFileAsync = promisify(execFile);
 
 const applyGeneratedTemplateConfigPlugin = () => {
   let hasRun = false;
 
   return {
     name: "apply-generated-template-config",
-    async configResolved() {
+    async buildStart() {
       if (hasRun) {
         return;
       }
       hasRun = true;
-      await generateTemplateConfig({ silent: true });
+
+      await execFileAsync(process.execPath, [
+        "--import",
+        "tsx",
+        "scripts/generateTemplateConfig.ts",
+      ]);
     },
   };
 };

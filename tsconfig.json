@@ -8,5 +8,10 @@
     "outDir": "./dist",
     "module": "esnext"
   },
-  "include": ["src", "global.d.ts", "theme.config.ts"]
+  "include": [
+    "src",
+    "scripts",
+    "global.d.ts",
+    "theme.config.ts"
+  ]
 }
