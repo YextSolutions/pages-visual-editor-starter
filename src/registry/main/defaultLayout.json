@@ -10,1092 +10,1094 @@
         "field": "description",
         "constantValue": "",
         "constantValueEnabled": false
-      }
-    }
+      },
+      "version": 64
+    },
+    "type": "root"
   },
   "content": [
     {
       "type": "YetiHeaderSection",
       "props": {
         "id": "YetiHeaderSection-9d9b926c-4808-4695-a08c-64233b146b74",
+        "localeLabel": "USA / EN",
         "utilityLinks": [
           {
-            "label": "YETI Rescues Resale",
             "href": "javascript:void(0)",
-            "kind": "modal"
+            "kind": "modal",
+            "label": "YETI Rescues Resale"
           },
           {
-            "label": "Find a Store",
             "href": "https://www.yeti.com/find-a-store",
-            "kind": "link"
+            "kind": "link",
+            "label": "Find a Store"
           },
           {
-            "label": "Customer Support",
             "href": "javascript:void(0)",
-            "kind": "modal"
+            "kind": "modal",
+            "label": "Customer Support"
           },
           {
-            "label": "Corporate Sales",
             "href": "https://www.yeti.com/corporate-sales.html",
-            "kind": "link"
+            "kind": "link",
+            "label": "Corporate Sales"
           }
         ],
-        "localeLabel": "USA / EN",
         "localeOptions": [
           {
-            "label": "USA / ES",
-            "href": "https://www.yeti.com/es"
+            "href": "https://www.yeti.com/es",
+            "label": "USA / ES"
           },
           {
-            "label": "AU / EN",
-            "href": "https://au.yeti.com/"
+            "href": "https://au.yeti.com/",
+            "label": "AU / EN"
           },
           {
-            "label": "CA / EN",
-            "href": "https://www.yeti.ca"
+            "href": "https://www.yeti.ca",
+            "label": "CA / EN"
           },
           {
-            "label": "CA / FR",
-            "href": "https://www.yeti.ca/fr"
+            "href": "https://www.yeti.ca/fr",
+            "label": "CA / FR"
           },
           {
-            "label": "EU / EN",
-            "href": "https://eu.yeti.com/"
+            "href": "https://eu.yeti.com/",
+            "label": "EU / EN"
           },
           {
-            "label": "FR / FR",
-            "href": "https://fr.yeti.com/"
+            "href": "https://fr.yeti.com/",
+            "label": "FR / FR"
           },
           {
-            "label": "IT / IT",
-            "href": "https://it.yeti.com/"
+            "href": "https://it.yeti.com/",
+            "label": "IT / IT"
           },
           {
-            "label": "DE / DE",
-            "href": "https://de.yeti.com/"
+            "href": "https://de.yeti.com/",
+            "label": "DE / DE"
           },
           {
-            "label": "IE / EN",
-            "href": "https://ie.yeti.com/"
+            "href": "https://ie.yeti.com/",
+            "label": "IE / EN"
           },
           {
-            "label": "NL / NL",
-            "href": "https://nl.yeti.com/"
+            "href": "https://nl.yeti.com/",
+            "label": "NL / NL"
           },
           {
-            "label": "NZ / EN",
-            "href": "https://nz.yeti.com/"
+            "href": "https://nz.yeti.com/",
+            "label": "NZ / EN"
           },
           {
-            "label": "GB / EN",
-            "href": "https://uk.yeti.com/"
+            "href": "https://uk.yeti.com/",
+            "label": "GB / EN"
           }
         ],
         "primaryNavigation": [
           {
-            "label": "+ Customize",
             "href": "https://www.yeti.com/customize",
-            "groups": [],
-            "promo": null
+            "label": "+ Customize",
+            "promo": null,
+            "groups": []
           },
           {
+            "href": "",
             "label": "Drinkware",
-            "href": "",
+            "promo": null,
             "groups": [
               {
-                "label": "Shop All",
                 "href": "https://www.yeti.com/drinkware",
+                "label": "Shop All",
                 "children": []
               },
               {
-                "label": "Featured",
                 "href": "",
+                "label": "Featured",
                 "children": [
                   {
-                    "label": "Customize Your Drinkware",
-                    "href": "https://www.yeti.com/customize/by-product/drinkware#product-search-results"
+                    "href": "https://www.yeti.com/customize/by-product/drinkware#product-search-results",
+                    "label": "Customize Your Drinkware"
                   },
                   {
-                    "label": "New Arrivals",
-                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=productRefinementCategory&prefv1=Drinkware"
+                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=productRefinementCategory&prefv1=Drinkware",
+                    "label": "New Arrivals"
                   },
                   {
-                    "label": "Ceramic Collection",
-                    "href": "https://www.yeti.com/collections/featured/durasip-ceramic-collection"
+                    "href": "https://www.yeti.com/collections/featured/durasip-ceramic-collection",
+                    "label": "Ceramic Collection"
                   },
                   {
-                    "label": "Fandom Collection",
-                    "href": "https://www.yeti.com/drinkware/fandom-collection-chug-bottle-26oz.html"
+                    "href": "https://www.yeti.com/drinkware/fandom-collection-chug-bottle-26oz.html",
+                    "label": "Fandom Collection"
                   },
                   {
-                    "label": "Hosting & Entertaining",
-                    "href": "https://www.yeti.com/collections/featured/hosting-and-entertaining"
+                    "href": "https://www.yeti.com/collections/featured/hosting-and-entertaining",
+                    "label": "Hosting & Entertaining"
                   },
                   {
-                    "label": "Commuter Drinkware",
-                    "href": "https://www.yeti.com/collections/featured/commuter-essentials?prefn1=productRefinementCategory&prefv1=Drinkware"
+                    "href": "https://www.yeti.com/collections/featured/commuter-essentials?prefn1=productRefinementCategory&prefv1=Drinkware",
+                    "label": "Commuter Drinkware"
                   },
                   {
-                    "label": "Leakproof Drinkware",
-                    "href": "https://www.yeti.com/drinkware-and-cookware/hydration/leakproof-water-bottles"
+                    "href": "https://www.yeti.com/drinkware-and-cookware/hydration/leakproof-water-bottles",
+                    "label": "Leakproof Drinkware"
                   }
                 ]
               },
               {
-                "label": "Hydration",
                 "href": "https://www.yeti.com/drinkware/hydration",
+                "label": "Hydration",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/drinkware/hydration"
+                    "href": "https://www.yeti.com/drinkware/hydration",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Leakproof Drinkware",
-                    "href": "https://www.yeti.com/drinkware/hydration/leakproof-drinkware"
+                    "href": "https://www.yeti.com/drinkware/hydration/leakproof-drinkware",
+                    "label": "Leakproof Drinkware"
                   },
                   {
-                    "label": "Sports Hydration",
-                    "href": "https://www.yeti.com/drinkware/sports-hydration"
+                    "href": "https://www.yeti.com/drinkware/sports-hydration",
+                    "label": "Sports Hydration"
                   },
                   {
-                    "label": "Straw Drinkware",
-                    "href": "https://www.yeti.com/drinkware/straw-drinkware"
+                    "href": "https://www.yeti.com/drinkware/straw-drinkware",
+                    "label": "Straw Drinkware"
                   },
                   {
-                    "label": "Insulated Water Bottles",
-                    "href": "https://www.yeti.com/drinkware/hydration?prefn1=productType&prefv1=Bottles&prefn2=features&prefv2=Insulated"
+                    "href": "https://www.yeti.com/drinkware/hydration?prefn1=productType&prefv1=Bottles&prefn2=features&prefv2=Insulated",
+                    "label": "Insulated Water Bottles"
                   },
                   {
-                    "label": "Kids Drinkware",
-                    "href": "https://www.yeti.com/collections/featured/kids-collection?prefn1=productRefinementCategory&prefv1=Drinkware"
+                    "href": "https://www.yeti.com/collections/featured/kids-collection?prefn1=productRefinementCategory&prefv1=Drinkware",
+                    "label": "Kids Drinkware"
                   },
                   {
-                    "label": "Plastic Drinkware",
-                    "href": "https://www.yeti.com/drinkware/hydration?prefn1=collection&prefv1=Silo|Yonder"
+                    "href": "https://www.yeti.com/drinkware/hydration?prefn1=collection&prefv1=Silo|Yonder",
+                    "label": "Plastic Drinkware"
                   },
                   {
-                    "label": "Jugs",
-                    "href": "https://www.yeti.com/drinkware?prefn1=productType&prefv1=Jugs"
+                    "href": "https://www.yeti.com/drinkware?prefn1=productType&prefv1=Jugs",
+                    "label": "Jugs"
                   }
                 ]
               },
               {
-                "label": "Coffee & Tea",
                 "href": "https://www.yeti.com/drinkware/mugs",
+                "label": "Coffee & Tea",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/drinkware/mugs"
+                    "href": "https://www.yeti.com/drinkware/mugs",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Ceramic Coffee",
-                    "href": "https://www.yeti.com/collections/featured/durasip-ceramic-collection?cgid=durasip-ceramic-collection&prefn1=productType&prefv1=Espresso%20Sets%7cFrench%20Press%7cMugs&srule=best-matches"
+                    "href": "https://www.yeti.com/collections/featured/durasip-ceramic-collection?cgid=durasip-ceramic-collection&prefn1=productType&prefv1=Espresso%20Sets%7cFrench%20Press%7cMugs&srule=best-matches",
+                    "label": "Ceramic Coffee"
                   },
                   {
-                    "label": "Stackable Cups",
-                    "href": "https://www.yeti.com/drinkware/mugs?prefn1=features&prefv1=Stackable"
+                    "href": "https://www.yeti.com/drinkware/mugs?prefn1=features&prefv1=Stackable",
+                    "label": "Stackable Cups"
                   },
                   {
-                    "label": "Tumblers",
-                    "href": "https://www.yeti.com/drinkware/tumblers"
+                    "href": "https://www.yeti.com/drinkware/tumblers",
+                    "label": "Tumblers"
                   },
                   {
-                    "label": "Mugs",
-                    "href": "https://www.yeti.com/drinkware/mugs?prefn1=productType&prefv1=Mugs"
+                    "href": "https://www.yeti.com/drinkware/mugs?prefn1=productType&prefv1=Mugs",
+                    "label": "Mugs"
                   },
                   {
-                    "label": "Travel Bottles",
-                    "href": "https://www.yeti.com/drinkware/mugs/travel-bottle.html"
+                    "href": "https://www.yeti.com/drinkware/mugs/travel-bottle.html",
+                    "label": "Travel Bottles"
                   },
                   {
-                    "label": "French Press",
-                    "href": "https://www.yeti.com/drinkware/mugs/french-press-34oz.html"
+                    "href": "https://www.yeti.com/drinkware/mugs/french-press-34oz.html",
+                    "label": "French Press"
                   },
                   {
-                    "label": "Espresso Sets",
-                    "href": "https://www.yeti.com/drinkware/mugs/espresso-cup-6oz-2pk.html"
+                    "href": "https://www.yeti.com/drinkware/mugs/espresso-cup-6oz-2pk.html",
+                    "label": "Espresso Sets"
                   },
                   {
-                    "label": "Pour Over",
-                    "href": "https://www.yeti.com/drinkware/mugs/pour-over.html"
+                    "href": "https://www.yeti.com/drinkware/mugs/pour-over.html",
+                    "label": "Pour Over"
                   }
                 ]
               },
               {
-                "label": "Barware",
                 "href": "https://www.yeti.com/drinkware/barware",
+                "label": "Barware",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/drinkware/barware"
+                    "href": "https://www.yeti.com/drinkware/barware",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Ceramic Barware",
-                    "href": "https://www.yeti.com/collections/featured/durasip-ceramic-collection?cgid=durasip-ceramic-collection&prefn1=productType&prefv1=Pitcher%7cTumblers&srule=best-matches"
+                    "href": "https://www.yeti.com/collections/featured/durasip-ceramic-collection?cgid=durasip-ceramic-collection&prefn1=productType&prefv1=Pitcher%7cTumblers&srule=best-matches",
+                    "label": "Ceramic Barware"
                   },
                   {
-                    "label": "Colster Can Coolers",
-                    "href": "https://www.yeti.com/drinkware/can-insulators/colster-12oz.html"
+                    "href": "https://www.yeti.com/drinkware/can-insulators/colster-12oz.html",
+                    "label": "Colster Can Coolers"
                   },
                   {
-                    "label": "Lowball",
-                    "href": "https://www.yeti.com/drinkware/barware/ceramic-lowball-10oz.html"
+                    "href": "https://www.yeti.com/drinkware/barware/ceramic-lowball-10oz.html",
+                    "label": "Lowball"
                   },
                   {
-                    "label": "Wine Tumbler",
-                    "href": "https://www.yeti.com/drinkware/barware/ceramic-wine-tumbler-10oz.html"
+                    "href": "https://www.yeti.com/drinkware/barware/ceramic-wine-tumbler-10oz.html",
+                    "label": "Wine Tumbler"
                   },
                   {
-                    "label": "Flask",
-                    "href": "https://www.yeti.com/drinkware/barware/yeti-flask.html"
+                    "href": "https://www.yeti.com/drinkware/barware/yeti-flask.html",
+                    "label": "Flask"
                   },
                   {
-                    "label": "Shot Glasses",
-                    "href": "https://www.yeti.com/drinkware/barware/yeti-shot-glasses.html"
+                    "href": "https://www.yeti.com/drinkware/barware/yeti-shot-glasses.html",
+                    "label": "Shot Glasses"
                   },
                   {
-                    "label": "Beverage Bucket",
-                    "href": "https://www.yeti.com/drinkware/barware/beverage-bucket.html"
+                    "href": "https://www.yeti.com/drinkware/barware/beverage-bucket.html",
+                    "label": "Beverage Bucket"
                   },
                   {
-                    "label": "Cocktail Shaker",
-                    "href": "https://www.yeti.com/drinkware/barware/cocktail-shaker.html"
+                    "href": "https://www.yeti.com/drinkware/barware/cocktail-shaker.html",
+                    "label": "Cocktail Shaker"
                   },
                   {
-                    "label": "Wine Chiller",
-                    "href": "https://www.yeti.com/drinkware/barware/wine-chiller.html"
+                    "href": "https://www.yeti.com/drinkware/barware/wine-chiller.html",
+                    "label": "Wine Chiller"
                   },
                   {
-                    "label": "Pitcher",
-                    "href": "https://www.yeti.com/drinkware/barware/pitcher.html"
+                    "href": "https://www.yeti.com/drinkware/barware/pitcher.html",
+                    "label": "Pitcher"
                   }
                 ]
               },
               {
-                "label": "Accessories",
                 "href": "https://www.yeti.com/drinkware/accessories",
+                "label": "Accessories",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/drinkware/accessories"
+                    "href": "https://www.yeti.com/drinkware/accessories",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "MagSlider Packs",
-                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/magslider-color-pack.html"
+                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/magslider-color-pack.html",
+                    "label": "MagSlider Packs"
                   },
                   {
-                    "label": "MagSlider Lids",
-                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/rambler-magslider-lid.html"
+                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/rambler-magslider-lid.html",
+                    "label": "MagSlider Lids"
                   },
                   {
-                    "label": "Rambler Bottle Straw Cap",
-                    "href": "https://www.yeti.com/accessories/rambler-bottle-straw-cap/21070160011.html"
+                    "href": "https://www.yeti.com/accessories/rambler-bottle-straw-cap/21070160011.html",
+                    "label": "Rambler Bottle Straw Cap"
                   },
                   {
-                    "label": "Rambler Bottle Chug Cap",
-                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/21070100005.html"
+                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/21070100005.html",
+                    "label": "Rambler Bottle Chug Cap"
                   },
                   {
-                    "label": "Rambler Bottle MagDock Cap",
-                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/21071300216.html"
+                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/21071300216.html",
+                    "label": "Rambler Bottle MagDock Cap"
                   },
                   {
-                    "label": "Rambler Straw Lids",
-                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/rambler-straw-lid.html"
+                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/rambler-straw-lid.html",
+                    "label": "Rambler Straw Lids"
                   },
                   {
-                    "label": "Cocktail Shaker Lid",
-                    "href": "https://www.yeti.com/drinkware/barware/21071501989.html"
+                    "href": "https://www.yeti.com/drinkware/barware/21071501989.html",
+                    "label": "Cocktail Shaker Lid"
                   }
                 ]
               }
-            ],
-            "promo": null
+            ]
           },
           {
+            "href": "",
             "label": "Coolers",
-            "href": "",
-            "groups": [
-              {
-                "label": "Shop All",
-                "href": "https://www.yeti.com/coolers",
-                "children": []
-              },
-              {
-                "label": "Hard Coolers",
-                "href": "https://www.yeti.com/coolers/hard-coolers",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/coolers/hard-coolers"
-                  },
-                  {
-                    "label": "Tundra",
-                    "href": "https://www.yeti.com/coolers/hard-coolers?prefn1=collection&prefv1=Tundra"
-                  },
-                  {
-                    "label": "Roadie",
-                    "href": "https://www.yeti.com/coolers/hard-coolers?prefn1=collection&prefv1=Roadie"
-                  },
-                  {
-                    "label": "V Series",
-                    "href": "https://www.yeti.com/coolers/hard-coolers/v-series/vseries.html"
-                  },
-                  {
-                    "label": "Tank",
-                    "href": "https://www.yeti.com/coolers/hard-coolers?prefn1=collection&prefv1=Tank"
-                  },
-                  {
-                    "label": "Silo",
-                    "href": "https://www.yeti.com/coolers/hard-coolers/silo/silo.html"
-                  },
-                  {
-                    "label": "Licensed Coolers",
-                    "href": "https://www.yeti.com/customize/by-product/hard-coolers"
-                  }
-                ]
-              },
-              {
-                "label": "Soft Coolers",
-                "href": "https://www.yeti.com/coolers/soft-coolers",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/coolers/soft-coolers"
-                  },
-                  {
-                    "label": "Hopper Backpacks",
-                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=productType&prefv1=Backpack%20Coolers"
-                  },
-                  {
-                    "label": "Hopper Totes",
-                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=productType&prefv1=Tote%20Coolers"
-                  },
-                  {
-                    "label": "Hopper Flip",
-                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=productType&prefv1=Cube%20Coolers"
-                  },
-                  {
-                    "label": "Daytrip Soft Coolers",
-                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=collection&prefv1=Daytrip"
-                  }
-                ]
-              },
-              {
-                "label": "Accessories",
-                "href": "https://www.yeti.com/coolers/accessories",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/coolers/accessories"
-                  },
-                  {
-                    "label": "Tundra",
-                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesTundra"
-                  },
-                  {
-                    "label": "Roadie",
-                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesRoadie"
-                  },
-                  {
-                    "label": "Hopper",
-                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesHopper"
-                  },
-                  {
-                    "label": "Tank",
-                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesTank"
-                  },
-                  {
-                    "label": "Daytrip",
-                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesDaytrip"
-                  }
-                ]
-              }
-            ],
             "promo": {
-              "title": "Coolers Buying Guide",
               "copy": "",
-              "label": "explore",
               "href": "https://www.yeti.com/buying-guides/cooler-buyers-guide.html",
-              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/5bb339f904aefb69/original/250083_Nav_BSQ_Global_Spot_Large_Lifestyle_Holiday_2025_Roadie15_Desktop-2x.jpg?auto=format,compress&w=450&h=450)"
-            }
-          },
-          {
-            "label": "Bags",
-            "href": "",
-            "groups": [
-              {
-                "label": "Shop All",
-                "href": "https://www.yeti.com/bags",
-                "children": []
-              },
-              {
-                "label": "Everyday Bags",
-                "href": "https://www.yeti.com/bags/everyday-bags",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/bags/everyday-bags"
-                  },
-                  {
-                    "label": "Tote Bags",
-                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Tote%20Bags"
-                  },
-                  {
-                    "label": "Backpacks",
-                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Backpacks"
-                  },
-                  {
-                    "label": "Lunch Coolers",
-                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Lunch%20Coolers"
-                  },
-                  {
-                    "label": "Dry Gear Case",
-                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Gear%20Case"
-                  }
-                ]
-              },
-              {
-                "label": "Travel Bags",
-                "href": "https://www.yeti.com/bags/travel-bags",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/bags/travel-bags"
-                  },
-                  {
-                    "label": "Luggage",
-                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Luggage"
-                  },
-                  {
-                    "label": "Duffels",
-                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Duffels"
-                  },
-                  {
-                    "label": "Backpacks",
-                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Backpacks"
-                  },
-                  {
-                    "label": "Packing Cubes",
-                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Packing%20Cubes"
-                  }
-                ]
-              },
-              {
-                "label": "Outdoor Bags",
-                "href": "https://www.yeti.com/bags/outdoor-bags",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/bags/outdoor-bags"
-                  },
-                  {
-                    "label": "Hiking Packs",
-                    "href": "https://www.yeti.com/bags/outdoor-bags?prefn1=collection&prefv1=Skala"
-                  },
-                  {
-                    "label": "Dry Bags",
-                    "href": "https://www.yeti.com/bags/outdoor-bags?prefn1=collection&prefv1=Panga"
-                  },
-                  {
-                    "label": "Dry Gear Case",
-                    "href": "https://www.yeti.com/bags/outdoor-bags?prefn1=collection&prefv1=Sidekick%20Dry"
-                  }
-                ]
-              },
-              {
-                "label": "Accessories",
-                "href": "https://www.yeti.com/bags/accessories",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/bags/accessories"
-                  },
-                  {
-                    "label": "Patches",
-                    "href": "https://www.yeti.com/bags/accessories?prefn1=productType&prefv1=Patches"
-                  },
-                  {
-                    "label": "Dry Gear Case",
-                    "href": "https://www.yeti.com/bags/bags-accessories/sidekick-dry.html"
-                  },
-                  {
-                    "label": "Dry Gear Case Straps",
-                    "href": "https://www.yeti.com/bags/bags-accessories/sideclick-strap.html"
-                  },
-                  {
-                    "label": "Bottle Openers",
-                    "href": "https://www.yeti.com/bags/accessories?prefn1=productType&prefv1=Bottle%20Openers"
-                  },
-                  {
-                    "label": "Packing Cubes",
-                    "href": "https://www.yeti.com/bags/packing-cubes/crossroads-packing-cube.html"
-                  },
-                  {
-                    "label": "Bottle Slings",
-                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/bottle-sling.html"
-                  }
-                ]
-              }
-            ],
-            "promo": {
-              "title": "bags buying guide",
-              "copy": "",
               "label": "explore",
-              "href": "https://www.yeti.com/buying-guides/bags-buyers-guide.html",
-              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/4efdc6ad36c15479/original/250158_HP_BSQ_10-0_50_50_Lifestyle_Camino_Restock_CapeTaupe_Mobile-2x.jpg?auto=format,compress&w=450&h=450)"
-            }
-          },
-          {
-            "label": "Kitchen",
-            "href": "",
+              "title": "Coolers Buying Guide",
+              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/5bb339f904aefb69/original/250083_Nav_BSQ_Global_Spot_Large_Lifestyle_Holiday_2025_Roadie15_Desktop-2x.jpg?auto=format,compress&w=450&h=450)"
+            },
             "groups": [
               {
+                "href": "https://www.yeti.com/coolers",
                 "label": "Shop All",
-                "href": "https://www.yeti.com/kitchen",
                 "children": []
               },
               {
-                "label": "Featured",
-                "href": "",
+                "href": "https://www.yeti.com/coolers/hard-coolers",
+                "label": "Hard Coolers",
                 "children": [
                   {
-                    "label": "Hosting & Entertaining",
-                    "href": "https://www.yeti.com/collections/featured/hosting-and-entertaining"
+                    "href": "https://www.yeti.com/coolers/hard-coolers",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "New Arrivals",
-                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=productRefinementCategory&prefv1=Kitchen"
+                    "href": "https://www.yeti.com/coolers/hard-coolers?prefn1=collection&prefv1=Tundra",
+                    "label": "Tundra"
                   },
                   {
-                    "label": "Recipes",
-                    "href": "https://www.yeti.com/stories/all-stories.html?crefn2=page.storePage.pursuit&crefv2=Food%20%26%20Beverage"
+                    "href": "https://www.yeti.com/coolers/hard-coolers?prefn1=collection&prefv1=Roadie",
+                    "label": "Roadie"
+                  },
+                  {
+                    "href": "https://www.yeti.com/coolers/hard-coolers/v-series/vseries.html",
+                    "label": "V Series"
+                  },
+                  {
+                    "href": "https://www.yeti.com/coolers/hard-coolers?prefn1=collection&prefv1=Tank",
+                    "label": "Tank"
+                  },
+                  {
+                    "href": "https://www.yeti.com/coolers/hard-coolers/silo/silo.html",
+                    "label": "Silo"
+                  },
+                  {
+                    "href": "https://www.yeti.com/customize/by-product/hard-coolers",
+                    "label": "Licensed Coolers"
                   }
                 ]
               },
               {
-                "label": "Cookware",
-                "href": "https://www.yeti.com/kitchen/cookware",
+                "href": "https://www.yeti.com/coolers/soft-coolers",
+                "label": "Soft Coolers",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/kitchen/cookware"
+                    "href": "https://www.yeti.com/coolers/soft-coolers",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Carbon Steel Pan",
-                    "href": "https://www.yeti.com/kitchen/cookware/carbon-steel-pan.html"
+                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=productType&prefv1=Backpack%20Coolers",
+                    "label": "Hopper Backpacks"
                   },
                   {
-                    "label": "Cast Iron Ranch Pan",
-                    "href": "https://www.yeti.com/kitchen/cookware/ranch-pan-deep-skillet-6qt.html"
+                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=productType&prefv1=Tote%20Coolers",
+                    "label": "Hopper Totes"
                   },
                   {
-                    "label": "Cast Iron Skillets",
-                    "href": "https://www.yeti.com/kitchen/cookware/cast-iron-skillet.html"
+                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=productType&prefv1=Cube%20Coolers",
+                    "label": "Hopper Flip"
                   },
                   {
-                    "label": "Stainless Steel Lid",
-                    "href": "https://www.yeti.com/kitchen/cookware/stainless-steel-lid-12.html"
+                    "href": "https://www.yeti.com/coolers/soft-coolers?prefn1=collection&prefv1=Daytrip",
+                    "label": "Daytrip Soft Coolers"
                   }
                 ]
               },
               {
-                "label": "Food Containers",
-                "href": "https://www.yeti.com/kitchen/food-containers",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/kitchen/food-containers"
-                  },
-                  {
-                    "label": "Food Jars",
-                    "href": "https://www.yeti.com/kitchen/food-containers/food-jar.html"
-                  },
-                  {
-                    "label": "Food Storage",
-                    "href": "https://www.yeti.com/kitchen/food-containers/food-storage.html"
-                  },
-                  {
-                    "label": "Food Storage Set",
-                    "href": "https://www.yeti.com/kitchen/food-containers?prefn1=productType&prefv1=Sets"
-                  }
-                ]
-              },
-              {
-                "label": "Insulated Bowls",
-                "href": "https://www.yeti.com/kitchen/insulated-bowls",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/kitchen/insulated-bowls"
-                  },
-                  {
-                    "label": "Low Bowls",
-                    "href": "https://www.yeti.com/kitchen/food-bowls/food-bowl-low.html"
-                  },
-                  {
-                    "label": "Standard Bowls",
-                    "href": "https://www.yeti.com/kitchen/food-bowls/food-bowl-standard.html"
-                  },
-                  {
-                    "label": "Sets",
-                    "href": "https://www.yeti.com/kitchen/insulated-bowls?prefn1=productType&prefv1=Sets"
-                  }
-                ]
-              }
-            ],
-            "promo": {
-              "title": "RAMBLER® BEVERAGE BUCKET",
-              "copy": "",
-              "label": "shop now",
-              "href": "https://www.yeti.com/drinkware/barware/21071503821.html",
-              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/31ba23cba3b7f9f7/original/250083_Nav_BSQ_Global_Spot_Large_Lifestyle_NYE_Desktop-2x.jpg?auto=format,compress&w=450&h=450)"
-            }
-          },
-          {
-            "label": "Cases & Storage",
-            "href": "",
-            "groups": [
-              {
-                "label": "Shop All",
-                "href": "https://www.yeti.com/cases-and-storage",
-                "children": []
-              },
-              {
-                "label": "Hard Cases",
-                "href": "https://www.yeti.com/cargo/hard-cases",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/cargo/hard-cases"
-                  },
-                  {
-                    "label": "GoBox 1",
-                    "href": "https://www.yeti.com/cases-storage/gobox-1.html"
-                  },
-                  {
-                    "label": "GoBox 15",
-                    "href": "https://www.yeti.com/cargo/hard-cases/gobox-15.html"
-                  },
-                  {
-                    "label": "GoBox 30",
-                    "href": "https://www.yeti.com/cargo/hard-cases/gobox-30.html"
-                  },
-                  {
-                    "label": "GoBox 60",
-                    "href": "https://www.yeti.com/cargo/hard-cases/gobox-60.html"
-                  }
-                ]
-              },
-              {
-                "label": "Buckets",
-                "href": "https://www.yeti.com/cases-and-storage/buckets",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/cargo/buckets"
-                  },
-                  {
-                    "label": "Loadout Bucket",
-                    "href": "https://www.yeti.com/cargo/buckets/loadout-bucket.html"
-                  },
-                  {
-                    "label": "Fully Loaded Bucket",
-                    "href": "https://www.yeti.com/cases-and-storage/buckets?prefn1=productType&prefv1=Fully%20Loaded%20Bucket"
-                  }
-                ]
-              },
-              {
+                "href": "https://www.yeti.com/coolers/accessories",
                 "label": "Accessories",
-                "href": "https://www.yeti.com/cases-and-storage/accessories",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/cargo/cargo-accessories"
+                    "href": "https://www.yeti.com/coolers/accessories",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Hard Cases",
-                    "href": "https://www.yeti.com/cargo/cargo-accessories?prefn1=collection&prefv1=GoBox"
+                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesTundra",
+                    "label": "Tundra"
                   },
                   {
-                    "label": "Bucket",
-                    "href": "https://www.yeti.com/cargo/cargo-accessories?prefn1=collection&prefv1=Loadout%20Bucket"
+                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesRoadie",
+                    "label": "Roadie"
+                  },
+                  {
+                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesHopper",
+                    "label": "Hopper"
+                  },
+                  {
+                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesTank",
+                    "label": "Tank"
+                  },
+                  {
+                    "href": "https://www.yeti.com/coolers/accessories?tab=coolerAccessoriesDaytrip",
+                    "label": "Daytrip"
                   }
                 ]
               }
-            ],
-            "promo": {
-              "title": "UPGRADE YOUR TACKLE BOX",
-              "copy": "",
-              "label": "Shop GoBox",
-              "href": "https://www.yeti.com/26010000215.html",
-              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/17776cad261232f4/original/240129_Nav_BSQ_Global_Spot_Large_Lifestyle_2025inItsPlace.jpg?auto=format,compress&w=400&h=400)"
-            }
+            ]
           },
           {
-            "label": "Outdoor Living",
             "href": "",
+            "label": "Bags",
+            "promo": {
+              "copy": "",
+              "href": "https://www.yeti.com/buying-guides/bags-buyers-guide.html",
+              "label": "explore",
+              "title": "bags buying guide",
+              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/4efdc6ad36c15479/original/250158_HP_BSQ_10-0_50_50_Lifestyle_Camino_Restock_CapeTaupe_Mobile-2x.jpg?auto=format,compress&w=450&h=450)"
+            },
             "groups": [
               {
+                "href": "https://www.yeti.com/bags",
                 "label": "Shop All",
-                "href": "https://www.yeti.com/outdoor-living",
                 "children": []
               },
               {
-                "label": "Outdoor Living Lifestyle",
-                "href": "https://www.yeti.com/outdoor-living",
+                "href": "https://www.yeti.com/bags/everyday-bags",
+                "label": "Everyday Bags",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/outdoor-living"
+                    "href": "https://www.yeti.com/bags/everyday-bags",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Fire Pit",
-                    "href": "https://www.yeti.com/outdoor-living/22030000054.html"
+                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Tote%20Bags",
+                    "label": "Tote Bags"
                   },
                   {
-                    "label": "Chairs",
-                    "href": "https://www.yeti.com/outdoor-living/outdoor-living-lifestyle/chairs"
+                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Backpacks",
+                    "label": "Backpacks"
                   },
                   {
-                    "label": "Blankets",
-                    "href": "https://www.yeti.com/outdoor-living/lowlands-blanket.html"
+                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Lunch%20Coolers",
+                    "label": "Lunch Coolers"
                   },
                   {
-                    "label": "Cast Iron Skillet",
-                    "href": "https://www.yeti.com/food/cookware/cast-iron-skillet.html"
-                  },
-                  {
-                    "label": "YETI Presents Books",
-                    "href": "https://www.yeti.com/outdoor-living/yeti-presents-books.html"
-                  },
-                  {
-                    "label": "Accessories",
-                    "href": "https://www.yeti.com/outdoor-living/accessories"
+                    "href": "https://www.yeti.com/bags/everyday-bags?prefn1=productType&prefv1=Gear%20Case",
+                    "label": "Dry Gear Case"
                   }
                 ]
               },
               {
-                "label": "Apparel",
-                "href": "https://www.yeti.com/outdoor-living/apparel",
+                "href": "https://www.yeti.com/bags/travel-bags",
+                "label": "Travel Bags",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/outdoor-living/apparel"
+                    "href": "https://www.yeti.com/bags/travel-bags",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Sweatshirts",
-                    "href": "https://www.yeti.com/outdoor-living/apparel/sweatshirts"
+                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Luggage",
+                    "label": "Luggage"
                   },
                   {
-                    "label": "T-Shirts",
-                    "href": "https://www.yeti.com/outdoor-living/apparel/t-shirts"
+                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Duffels",
+                    "label": "Duffels"
                   },
                   {
-                    "label": "Hats & Headgear",
-                    "href": "https://www.yeti.com/outdoor-living/apparel/hats-and-headgear"
+                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Backpacks",
+                    "label": "Backpacks"
                   },
                   {
-                    "label": "Sunshirts",
-                    "href": "https://www.yeti.com/outdoor-living/apparel/sunshirts"
+                    "href": "https://www.yeti.com/bags/travel-bags?prefn1=productType&prefv1=Packing%20Cubes",
+                    "label": "Packing Cubes"
                   }
                 ]
               },
               {
-                "label": "Dogs",
-                "href": "https://www.yeti.com/dogs",
+                "href": "https://www.yeti.com/bags/outdoor-bags",
+                "label": "Outdoor Bags",
                 "children": [
                   {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/dogs"
+                    "href": "https://www.yeti.com/bags/outdoor-bags",
+                    "label": "Shop All"
                   },
                   {
-                    "label": "Dog Bowls",
-                    "href": "https://www.yeti.com/dogs/dog-bowls"
+                    "href": "https://www.yeti.com/bags/outdoor-bags?prefn1=collection&prefv1=Skala",
+                    "label": "Hiking Packs"
+                  },
+                  {
+                    "href": "https://www.yeti.com/bags/outdoor-bags?prefn1=collection&prefv1=Panga",
+                    "label": "Dry Bags"
+                  },
+                  {
+                    "href": "https://www.yeti.com/bags/outdoor-bags?prefn1=collection&prefv1=Sidekick%20Dry",
+                    "label": "Dry Gear Case"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/bags/accessories",
+                "label": "Accessories",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/bags/accessories",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/bags/accessories?prefn1=productType&prefv1=Patches",
+                    "label": "Patches"
+                  },
+                  {
+                    "href": "https://www.yeti.com/bags/bags-accessories/sidekick-dry.html",
+                    "label": "Dry Gear Case"
+                  },
+                  {
+                    "href": "https://www.yeti.com/bags/bags-accessories/sideclick-strap.html",
+                    "label": "Dry Gear Case Straps"
+                  },
+                  {
+                    "href": "https://www.yeti.com/bags/accessories?prefn1=productType&prefv1=Bottle%20Openers",
+                    "label": "Bottle Openers"
+                  },
+                  {
+                    "href": "https://www.yeti.com/bags/packing-cubes/crossroads-packing-cube.html",
+                    "label": "Packing Cubes"
+                  },
+                  {
+                    "href": "https://www.yeti.com/drinkware/drinkware-accessories/bottle-sling.html",
+                    "label": "Bottle Slings"
                   }
                 ]
               }
-            ],
+            ]
+          },
+          {
+            "href": "",
+            "label": "Kitchen",
             "promo": {
-              "title": "IT'S HOODIE SEASON",
               "copy": "",
-              "label": "Shop Now",
-              "href": "https://www.yeti.com/outdoor-living/apparel/sweatshirts",
-              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/7fc8bc2ee97e9fdc/original/240118_HP_BSQ_10-0_50_50_Lifestyle_2H25Apparel_Desktop-2x.jpg?auto=format,compress&w=450&h=450)"
-            }
-          },
-          {
-            "label": "Fan Shop",
-            "href": "",
-            "groups": [
-              {
-                "label": "Shop All",
-                "href": "https://www.yeti.com/fan-shop",
-                "children": []
-              },
-              {
-                "label": "Featured Galleries",
-                "href": "",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/fan-shop"
-                  },
-                  {
-                    "label": "Hall Of Champions",
-                    "href": "https://www.yeti.com/fan-shop/featured-galleries/hall-of-champions"
-                  },
-                  {
-                    "label": "NFL",
-                    "href": "https://www.yeti.com/fan-shop/nfl"
-                  },
-                  {
-                    "label": "Collegiate",
-                    "href": "https://www.yeti.com/fan-shop/collegiate"
-                  },
-                  {
-                    "label": "NBA",
-                    "href": "https://www.yeti.com/fan-shop/nba"
-                  },
-                  {
-                    "label": "MLB",
-                    "href": "https://www.yeti.com/fan-shop/mlb"
-                  },
-                  {
-                    "label": "NHL",
-                    "href": "https://www.yeti.com/fan-shop/nhl"
-                  },
-                  {
-                    "label": "MLS",
-                    "href": "https://www.yeti.com/fan-shop/mls"
-                  },
-                  {
-                    "label": "Oracle Red Bull Racing",
-                    "href": "https://www.yeti.com/fan-shop/oracle-red-bull-racing"
-                  }
-                ]
-              },
-              {
-                "label": "Activity",
-                "href": "",
-                "children": [
-                  {
-                    "label": "Youth Team Sports",
-                    "href": "https://www.yeti.com/collections/trending-activities/youth-sports"
-                  },
-                  {
-                    "label": "Soccer",
-                    "href": "https://www.yeti.com/collections/shop-by-activity/soccer"
-                  },
-                  {
-                    "label": "Golf",
-                    "href": "https://www.yeti.com/collections/shop-by-activity/golf"
-                  },
-                  {
-                    "label": "Tailgating",
-                    "href": "https://www.yeti.com/collections/shop-by-activity/tailgating"
-                  },
-                  {
-                    "label": "Fitness",
-                    "href": "https://www.yeti.com/collections/shop-by-activity/fitness"
-                  },
-                  {
-                    "label": "Equestrian & Rodeo",
-                    "href": "https://www.yeti.com/collections/shop-by-activity/ranch-and-rodeo"
-                  },
-                  {
-                    "label": "Hunting",
-                    "href": "https://www.yeti.com/collections/shop-by-activity/hunting"
-                  },
-                  {
-                    "label": "Fishing",
-                    "href": "https://www.yeti.com/collections/shop-by-activity/fishing"
-                  }
-                ]
-              }
-            ],
-            "promo": null
-          },
-          {
-            "label": "Collections",
-            "href": "",
-            "groups": [
-              {
-                "label": "Featured",
-                "href": "",
-                "children": [
-                  {
-                    "label": "New Arrivals",
-                    "href": "https://www.yeti.com/collections/new-arrivals"
-                  },
-                  {
-                    "label": "Best Sellers",
-                    "href": "https://www.yeti.com/best-sellers"
-                  },
-                  {
-                    "label": "Seasonal Offers",
-                    "href": "https://www.yeti.com/collections/featured/seasonal-offers"
-                  },
-                  {
-                    "label": "Gifts",
-                    "href": "https://www.yeti.com/gifts"
-                  },
-                  {
-                    "label": "New to YETI",
-                    "href": "https://www.yeti.com/new-to-yeti.html"
-                  },
-                  {
-                    "label": "Sports Hydration",
-                    "href": "https://www.yeti.com/drinkware/sports-hydration"
-                  },
-                  {
-                    "label": "Fandom Collection",
-                    "href": "https://www.yeti.com/drinkware/fandom-collection-chug-bottle-26oz.html"
-                  },
-                  {
-                    "label": "Kids Collection",
-                    "href": "https://www.yeti.com/collections/featured/kids-collection"
-                  },
-                  {
-                    "label": "Stories From the Wild",
-                    "href": "https://www.yeti.com/stories/all-stories.html"
-                  }
-                ]
-              },
-              {
-                "label": "Trending Colors",
-                "href": "",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/collections/trending-colors/shop-all"
-                  },
-                  {
-                    "label": "Ridgeline",
-                    "href": "https://www.yeti.com/collections/trending-colors/ridgeline"
-                  },
-                  {
-                    "label": "Venom",
-                    "href": "https://www.yeti.com/collections/trending-colors/venom"
-                  },
-                  {
-                    "label": "Alpenglow",
-                    "href": "https://www.yeti.com/collections/trending-colors/alpenglow"
-                  },
-                  {
-                    "label": "Cherry Blossom",
-                    "href": "https://www.yeti.com/collections/trending-colors/cherry-blossom"
-                  },
-                  {
-                    "label": "Blue Camo",
-                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=color&prefv1=Blue%20Camo#product-search-results"
-                  },
-                  {
-                    "label": "Solar Flare",
-                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=color&prefv1=Solar%20Flare#product-search-results"
-                  },
-                  {
-                    "label": "Moon Dust",
-                    "href": "https://www.yeti.com/collections/trending-colors/moon-dust"
-                  },
-                  {
-                    "label": "Rescue Red",
-                    "href": "https://www.yeti.com/collections/trending-colors/rescue-red"
-                  }
-                ]
-              },
-              {
-                "label": "Trending Activities",
-                "href": "",
-                "children": [
-                  {
-                    "label": "Shop All",
-                    "href": "https://www.yeti.com/collections/trending-activities"
-                  },
-                  {
-                    "label": "Youth Team Sports",
-                    "href": "https://www.yeti.com/collections/trending-activities/youth-team-sports"
-                  },
-                  {
-                    "label": "Fishing",
-                    "href": "https://www.yeti.com/collections/trending-activities/fishing"
-                  },
-                  {
-                    "label": "Fitness",
-                    "href": "https://www.yeti.com/collections/trending-activities/fitness"
-                  },
-                  {
-                    "label": "Travel",
-                    "href": "https://www.yeti.com/collections/trending-activities/travel"
-                  },
-                  {
-                    "label": "Hosting",
-                    "href": "https://www.yeti.com/collections/trending-activities/hosting"
-                  },
-                  {
-                    "label": "Daily Commute",
-                    "href": "https://www.yeti.com/collections/trending-activities/daily-commute"
-                  },
-                  {
-                    "label": "Hunting",
-                    "href": "https://www.yeti.com/collections/trending-activities/hunting"
-                  },
-                  {
-                    "label": "Snow",
-                    "href": "https://www.yeti.com/collections/trending-activities/snow"
-                  }
-                ]
-              },
-              {
-                "label": "Buying Guides",
-                "href": "",
-                "children": [
-                  {
-                    "label": "Coolers",
-                    "href": "https://www.yeti.com/buying-guides/cooler-buyers-guide.html"
-                  },
-                  {
-                    "label": "Hard Coolers",
-                    "href": "https://www.yeti.com/buying-guides/hard-cooler-buying-guide.html"
-                  },
-                  {
-                    "label": "Soft Coolers",
-                    "href": "https://www.yeti.com/buying-guides/soft-cooler-buying-guide.html"
-                  },
-                  {
-                    "label": "Bags",
-                    "href": "https://www.yeti.com/buying-guides/bags-buyers-guide.html"
-                  },
-                  {
-                    "label": "Backpacks",
-                    "href": "https://www.yeti.com/buying-guides/backpack-buying-guide.html"
-                  },
-                  {
-                    "label": "Drinkware",
-                    "href": "https://www.yeti.com/drinkware/all-day-drinkware"
-                  },
-                  {
-                    "label": "Water Bottles",
-                    "href": "https://www.yeti.com/buying-guides/water-bottles-buying-guide.html"
-                  },
-                  {
-                    "label": "Coffee",
-                    "href": "https://www.yeti.com/buying-guides/coffee-buying-guide.html"
-                  },
-                  {
-                    "label": "Expert Advice",
-                    "href": "https://www.yeti.com/stories/expert-advice.html"
-                  }
-                ]
-              }
-            ],
-            "promo": {
-              "title": "Venom",
-              "copy": "For the cold blooded.",
+              "href": "https://www.yeti.com/drinkware/barware/21071503821.html",
               "label": "shop now",
+              "title": "RAMBLER® BEVERAGE BUCKET",
+              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/31ba23cba3b7f9f7/original/250083_Nav_BSQ_Global_Spot_Large_Lifestyle_NYE_Desktop-2x.jpg?auto=format,compress&w=450&h=450)"
+            },
+            "groups": [
+              {
+                "href": "https://www.yeti.com/kitchen",
+                "label": "Shop All",
+                "children": []
+              },
+              {
+                "href": "",
+                "label": "Featured",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/collections/featured/hosting-and-entertaining",
+                    "label": "Hosting & Entertaining"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=productRefinementCategory&prefv1=Kitchen",
+                    "label": "New Arrivals"
+                  },
+                  {
+                    "href": "https://www.yeti.com/stories/all-stories.html?crefn2=page.storePage.pursuit&crefv2=Food%20%26%20Beverage",
+                    "label": "Recipes"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/kitchen/cookware",
+                "label": "Cookware",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/kitchen/cookware",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/cookware/carbon-steel-pan.html",
+                    "label": "Carbon Steel Pan"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/cookware/ranch-pan-deep-skillet-6qt.html",
+                    "label": "Cast Iron Ranch Pan"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/cookware/cast-iron-skillet.html",
+                    "label": "Cast Iron Skillets"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/cookware/stainless-steel-lid-12.html",
+                    "label": "Stainless Steel Lid"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/kitchen/food-containers",
+                "label": "Food Containers",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/kitchen/food-containers",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/food-containers/food-jar.html",
+                    "label": "Food Jars"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/food-containers/food-storage.html",
+                    "label": "Food Storage"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/food-containers?prefn1=productType&prefv1=Sets",
+                    "label": "Food Storage Set"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/kitchen/insulated-bowls",
+                "label": "Insulated Bowls",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/kitchen/insulated-bowls",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/food-bowls/food-bowl-low.html",
+                    "label": "Low Bowls"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/food-bowls/food-bowl-standard.html",
+                    "label": "Standard Bowls"
+                  },
+                  {
+                    "href": "https://www.yeti.com/kitchen/insulated-bowls?prefn1=productType&prefv1=Sets",
+                    "label": "Sets"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "href": "",
+            "label": "Cases & Storage",
+            "promo": {
+              "copy": "",
+              "href": "https://www.yeti.com/26010000215.html",
+              "label": "Shop GoBox",
+              "title": "UPGRADE YOUR TACKLE BOX",
+              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/17776cad261232f4/original/240129_Nav_BSQ_Global_Spot_Large_Lifestyle_2025inItsPlace.jpg?auto=format,compress&w=400&h=400)"
+            },
+            "groups": [
+              {
+                "href": "https://www.yeti.com/cases-and-storage",
+                "label": "Shop All",
+                "children": []
+              },
+              {
+                "href": "https://www.yeti.com/cargo/hard-cases",
+                "label": "Hard Cases",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/cargo/hard-cases",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cases-storage/gobox-1.html",
+                    "label": "GoBox 1"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cargo/hard-cases/gobox-15.html",
+                    "label": "GoBox 15"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cargo/hard-cases/gobox-30.html",
+                    "label": "GoBox 30"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cargo/hard-cases/gobox-60.html",
+                    "label": "GoBox 60"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/cases-and-storage/buckets",
+                "label": "Buckets",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/cargo/buckets",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cargo/buckets/loadout-bucket.html",
+                    "label": "Loadout Bucket"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cases-and-storage/buckets?prefn1=productType&prefv1=Fully%20Loaded%20Bucket",
+                    "label": "Fully Loaded Bucket"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/cases-and-storage/accessories",
+                "label": "Accessories",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/cargo/cargo-accessories",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cargo/cargo-accessories?prefn1=collection&prefv1=GoBox",
+                    "label": "Hard Cases"
+                  },
+                  {
+                    "href": "https://www.yeti.com/cargo/cargo-accessories?prefn1=collection&prefv1=Loadout%20Bucket",
+                    "label": "Bucket"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "href": "",
+            "label": "Outdoor Living",
+            "promo": {
+              "copy": "",
+              "href": "https://www.yeti.com/outdoor-living/apparel/sweatshirts",
+              "label": "Shop Now",
+              "title": "IT'S HOODIE SEASON",
+              "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/7fc8bc2ee97e9fdc/original/240118_HP_BSQ_10-0_50_50_Lifestyle_2H25Apparel_Desktop-2x.jpg?auto=format,compress&w=450&h=450)"
+            },
+            "groups": [
+              {
+                "href": "https://www.yeti.com/outdoor-living",
+                "label": "Shop All",
+                "children": []
+              },
+              {
+                "href": "https://www.yeti.com/outdoor-living",
+                "label": "Outdoor Living Lifestyle",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/outdoor-living",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/22030000054.html",
+                    "label": "Fire Pit"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/outdoor-living-lifestyle/chairs",
+                    "label": "Chairs"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/lowlands-blanket.html",
+                    "label": "Blankets"
+                  },
+                  {
+                    "href": "https://www.yeti.com/food/cookware/cast-iron-skillet.html",
+                    "label": "Cast Iron Skillet"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/yeti-presents-books.html",
+                    "label": "YETI Presents Books"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/accessories",
+                    "label": "Accessories"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/outdoor-living/apparel",
+                "label": "Apparel",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/apparel",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/apparel/sweatshirts",
+                    "label": "Sweatshirts"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/apparel/t-shirts",
+                    "label": "T-Shirts"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/apparel/hats-and-headgear",
+                    "label": "Hats & Headgear"
+                  },
+                  {
+                    "href": "https://www.yeti.com/outdoor-living/apparel/sunshirts",
+                    "label": "Sunshirts"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/dogs",
+                "label": "Dogs",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/dogs",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/dogs/dog-bowls",
+                    "label": "Dog Bowls"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "href": "",
+            "label": "Fan Shop",
+            "promo": null,
+            "groups": [
+              {
+                "href": "https://www.yeti.com/fan-shop",
+                "label": "Shop All",
+                "children": []
+              },
+              {
+                "href": "",
+                "label": "Featured Galleries",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/fan-shop",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/featured-galleries/hall-of-champions",
+                    "label": "Hall Of Champions"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/nfl",
+                    "label": "NFL"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/collegiate",
+                    "label": "Collegiate"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/nba",
+                    "label": "NBA"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/mlb",
+                    "label": "MLB"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/nhl",
+                    "label": "NHL"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/mls",
+                    "label": "MLS"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fan-shop/oracle-red-bull-racing",
+                    "label": "Oracle Red Bull Racing"
+                  }
+                ]
+              },
+              {
+                "href": "",
+                "label": "Activity",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/youth-sports",
+                    "label": "Youth Team Sports"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/shop-by-activity/soccer",
+                    "label": "Soccer"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/shop-by-activity/golf",
+                    "label": "Golf"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/shop-by-activity/tailgating",
+                    "label": "Tailgating"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/shop-by-activity/fitness",
+                    "label": "Fitness"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/shop-by-activity/ranch-and-rodeo",
+                    "label": "Equestrian & Rodeo"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/shop-by-activity/hunting",
+                    "label": "Hunting"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/shop-by-activity/fishing",
+                    "label": "Fishing"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "href": "",
+            "label": "Collections",
+            "promo": {
+              "copy": "For the cold blooded.",
               "href": "https://www.yeti.com/collections/trending-colors/venom",
+              "label": "shop now",
+              "title": "Venom",
               "imageUrl": "background-image: url(https://yeti-webmedia.imgix.net/m/a9a105881761fc7/original/250190_Nav_BSQ_Global_Spot_Large_Lifestyle_Venom_SiloJug-2x.jpg?auto=format,compress&w=450&h=450)"
-            }
+            },
+            "groups": [
+              {
+                "href": "",
+                "label": "Featured",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/collections/new-arrivals",
+                    "label": "New Arrivals"
+                  },
+                  {
+                    "href": "https://www.yeti.com/best-sellers",
+                    "label": "Best Sellers"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/featured/seasonal-offers",
+                    "label": "Seasonal Offers"
+                  },
+                  {
+                    "href": "https://www.yeti.com/gifts",
+                    "label": "Gifts"
+                  },
+                  {
+                    "href": "https://www.yeti.com/new-to-yeti.html",
+                    "label": "New to YETI"
+                  },
+                  {
+                    "href": "https://www.yeti.com/drinkware/sports-hydration",
+                    "label": "Sports Hydration"
+                  },
+                  {
+                    "href": "https://www.yeti.com/drinkware/fandom-collection-chug-bottle-26oz.html",
+                    "label": "Fandom Collection"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/featured/kids-collection",
+                    "label": "Kids Collection"
+                  },
+                  {
+                    "href": "https://www.yeti.com/stories/all-stories.html",
+                    "label": "Stories From the Wild"
+                  }
+                ]
+              },
+              {
+                "href": "",
+                "label": "Trending Colors",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/collections/trending-colors/shop-all",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-colors/ridgeline",
+                    "label": "Ridgeline"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-colors/venom",
+                    "label": "Venom"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-colors/alpenglow",
+                    "label": "Alpenglow"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-colors/cherry-blossom",
+                    "label": "Cherry Blossom"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=color&prefv1=Blue%20Camo#product-search-results",
+                    "label": "Blue Camo"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/new-arrivals?prefn1=color&prefv1=Solar%20Flare#product-search-results",
+                    "label": "Solar Flare"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-colors/moon-dust",
+                    "label": "Moon Dust"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-colors/rescue-red",
+                    "label": "Rescue Red"
+                  }
+                ]
+              },
+              {
+                "href": "",
+                "label": "Trending Activities",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities",
+                    "label": "Shop All"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/youth-team-sports",
+                    "label": "Youth Team Sports"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/fishing",
+                    "label": "Fishing"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/fitness",
+                    "label": "Fitness"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/travel",
+                    "label": "Travel"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/hosting",
+                    "label": "Hosting"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/daily-commute",
+                    "label": "Daily Commute"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/hunting",
+                    "label": "Hunting"
+                  },
+                  {
+                    "href": "https://www.yeti.com/collections/trending-activities/snow",
+                    "label": "Snow"
+                  }
+                ]
+              },
+              {
+                "href": "",
+                "label": "Buying Guides",
+                "children": [
+                  {
+                    "href": "https://www.yeti.com/buying-guides/cooler-buyers-guide.html",
+                    "label": "Coolers"
+                  },
+                  {
+                    "href": "https://www.yeti.com/buying-guides/hard-cooler-buying-guide.html",
+                    "label": "Hard Coolers"
+                  },
+                  {
+                    "href": "https://www.yeti.com/buying-guides/soft-cooler-buying-guide.html",
+                    "label": "Soft Coolers"
+                  },
+                  {
+                    "href": "https://www.yeti.com/buying-guides/bags-buyers-guide.html",
+                    "label": "Bags"
+                  },
+                  {
+                    "href": "https://www.yeti.com/buying-guides/backpack-buying-guide.html",
+                    "label": "Backpacks"
+                  },
+                  {
+                    "href": "https://www.yeti.com/drinkware/all-day-drinkware",
+                    "label": "Drinkware"
+                  },
+                  {
+                    "href": "https://www.yeti.com/buying-guides/water-bottles-buying-guide.html",
+                    "label": "Water Bottles"
+                  },
+                  {
+                    "href": "https://www.yeti.com/buying-guides/coffee-buying-guide.html",
+                    "label": "Coffee"
+                  },
+                  {
+                    "href": "https://www.yeti.com/stories/expert-advice.html",
+                    "label": "Expert Advice"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -1104,14 +1106,9 @@
       "type": "YetiHeroSection",
       "props": {
         "id": "YetiHeroSection-920e4d30-1ee4-440a-93db-88f04a64b3ba",
-        "backgroundImage": {
-          "field": "",
-          "constantValue": {
-            "url": "https://yeti-webmedia.imgix.net/m/3cb9859ceabd08a7/original/240039_PLP_BMD_3-0_Paragraph_NSo_Tyson_Desktop.jpg?auto=format,compress",
-            "width": 1920,
-            "height": 500
-          },
-          "constantValueEnabled": true
+        "cta": {
+          "link": "https://yeti.locally.com/search/search?embed_type=store&store=383985&uri=search&limit=6&host_domain=www.yeti.com",
+          "label": "Shop the shop"
         },
         "heading": {
           "text": {
@@ -1127,68 +1124,96 @@
           "fontWeight": 900,
           "textTransform": "uppercase"
         },
-        "cta": {
-          "label": "Shop the shop",
-          "link": "https://yeti.locally.com/search/search?embed_type=store&store=383985&uri=search&limit=6&host_domain=www.yeti.com"
+        "backgroundImage": {
+          "field": "",
+          "constantValue": {
+            "url": "https://yeti-webmedia.imgix.net/m/3cb9859ceabd08a7/original/240039_PLP_BMD_3-0_Paragraph_NSo_Tyson_Desktop.jpg?auto=format,compress",
+            "width": 1920,
+            "height": 500
+          },
+          "constantValueEnabled": true
         }
       }
     },
     {
-      "type": "YetiExploreStoreSection",
+      "type": "YetiHoursLocationSection",
       "props": {
-        "id": "YetiExploreStoreSection-78df1d2e-a4d8-4a87-930f-f2aca17886ab",
-        "heading": {
+        "title": {
           "text": {
             "field": "",
             "constantValue": {
-              "en": "Explore Our Store",
+              "en": "Hours & Location",
               "hasLocalizedValue": "true"
             },
             "constantValueEnabled": true
           },
-          "fontSize": 32,
+          "fontSize": 36,
+          "fontColor": "#4b4f53",
+          "fontWeight": 900,
+          "textTransform": "uppercase"
+        },
+        "locationTitle": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Location",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 36,
+          "fontColor": "#4b4f53",
+          "fontWeight": 900,
+          "textTransform": "uppercase"
+        },
+        "parkingTitle": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Parking",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 36,
           "fontColor": "#002b45",
           "fontWeight": 900,
           "textTransform": "uppercase"
         },
-        "cards": [
-          {
-            "title": "Gift Wrapping",
-            "description": "We’ll make sure your purchase is gift ready with complimentary wrapping paper and a YETI gift tag.",
-            "imageUrl": "https://yeti-webmedia.imgix.net/m/14c68cf7b51b5c21/original/230107_PLP_TV_Lifestyle_GiftWrap_Desktop-2x.jpg?auto=format,compress&h=750",
-            "link": ""
+        "parkingCopy": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Free parking for YETI can be found at any of Tysons Corner Center parking garages or surface lots.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
           },
-          {
-            "title": "Visit Our Garage",
-            "description": "Personalize your Tundra® Cooler only in stores.",
-            "imageUrl": "https://yeti-webmedia.imgix.net/m/f7e93674cdfe9c6/original/230107_HP_TV_Product_1-4_Spotlight_Studio_GG_Desktop-2x.jpg?auto=format,compress&h=750",
-            "link": ""
-          },
-          {
-            "title": "Get Rewarded for Recycling",
-            "description": "Receive $5 off your $25+ purchase for old, damaged, or unwanted Rambler® products only in store. See more.",
-            "imageUrl": "https://yeti-webmedia.imgix.net/m/2d483e0edf43662d/original/230107_PLP_TV_Lifestyle_Recycle_Desktop-2x.jpg?auto=format,compress&h=750",
-            "link": "https://www.yeti.com/rambler-buy-back.html"
-          },
-          {
-            "title": "Events",
-            "description": "Looking for some local action? Check out our upcoming events, including live music and book tours. See more.",
-            "imageUrl": "https://yeti-webmedia.imgix.net/m/5f18bc18f671f952/original/230107_PLP_TV_Lifestyle_Live_Events_Desktop-2x.jpg?auto=format,compress&h=750",
-            "link": "https://www.facebook.com/Yeti/events"
-          }
-        ]
+          "fontSize": 18,
+          "fontColor": "#565656",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "directionsCta": {
+          "label": "Get Directions",
+          "link": "https://maps.google.com/maps/dir//1961+Chain+Bridge+Rd+Suite+#G7AU,+McLean,+VA+22102,+USA"
+        },
+        "callCta": {
+          "label": "Call Us",
+          "link": "tel:(703) 310-7096"
+        },
+        "id": "YetiHoursLocationSection-f4284a82-d471-4a37-9cde-9d2228ddc4da"
       }
     },
     {
-      "type": "YetiReservationBannerSection",
+      "type": "YetiCustomizeBannerSection",
       "props": {
-        "id": "YetiReservationBannerSection-7cf4eefc-665f-4d3a-8265-f513f0d4c997",
         "backgroundImage": {
           "field": "",
           "constantValue": {
-            "url": "https://yeti-webmedia.imgix.net/m/204eb0035a6bce05/original/240074_PLP_BMD_3-0_Paragraph_Lifestyle_Store_Page_Desktop.jpg?auto=format,compress",
+            "url": "https://yeti-webmedia.imgix.net/m/35d6810f223f9fc3/original/240074_PLP_BMD_3-0_Paragraph_Lifestyle_Store_Page_Customize_Desktop.jpg?auto=format,compress",
             "width": 1920,
-            "height": 500
+            "height": 700
           },
           "constantValueEnabled": true
         },
@@ -1196,15 +1221,40 @@
           "text": {
             "field": "",
             "constantValue": {
-              "en": "PUT IT ON ICE",
+              "en": "CUSTOMIZE IT IN-STORE",
               "hasLocalizedValue": "true"
             },
             "constantValueEnabled": true
           },
-          "fontSize": 45,
+          "fontSize": 50,
           "fontColor": "#ffffff",
           "fontWeight": 900,
           "textTransform": "uppercase"
+        },
+        "body": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Choose from 9 different fonts and 12 design galleries to make your drinkware all your own.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 16,
+          "fontColor": "#ffffff",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "id": "YetiCustomizeBannerSection-b2c868d9-3b54-4bb7-9e62-24533a4fe349"
+      }
+    },
+    {
+      "type": "YetiReservationBannerSection",
+      "props": {
+        "id": "YetiReservationBannerSection-7cf4eefc-665f-4d3a-8265-f513f0d4c997",
+        "cta": {
+          "link": "https://yeti.locally.com/search/search?embed_type=store&store=383985&uri=search&limit=6&host_domain=www.yeti.com",
+          "label": "Shop the shop"
         },
         "body": {
           "text": {
@@ -1220,9 +1270,28 @@
           "fontWeight": 400,
           "textTransform": "normal"
         },
-        "cta": {
-          "label": "Shop the shop",
-          "link": "https://yeti.locally.com/search/search?embed_type=store&store=383985&uri=search&limit=6&host_domain=www.yeti.com"
+        "heading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "PUT IT ON ICE",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 45,
+          "fontColor": "#ffffff",
+          "fontWeight": 900,
+          "textTransform": "uppercase"
+        },
+        "backgroundImage": {
+          "field": "",
+          "constantValue": {
+            "url": "https://yeti-webmedia.imgix.net/m/204eb0035a6bce05/original/240074_PLP_BMD_3-0_Paragraph_Lifestyle_Store_Page_Desktop.jpg?auto=format,compress",
+            "width": 1920,
+            "height": 500
+          },
+          "constantValueEnabled": true
         }
       }
     },
@@ -1230,6 +1299,28 @@
       "type": "YetiFaqSection",
       "props": {
         "id": "YetiFaqSection-b87aaf81-fef1-443e-8bf5-81357ca197a2",
+        "items": [
+          {
+            "answer": "No, with the exception of service animals.",
+            "question": "Are pets allowed in this store?"
+          },
+          {
+            "answer": "▪ Free parking for YETI can be found at any of Tysons Corner Center parking garages or surface lots.\n▪ The closest available parking is located in Parking Garage D at the Northwest corner of Tysons Corner Center, adjacent to Macy’s.",
+            "question": "Where can I park?"
+          },
+          {
+            "answer": "You bet. Each of our store locations has a unique drinkware illustration inspired by the city.",
+            "question": "Do you have any drinkware with city-specific designs?"
+          },
+          {
+            "answer": "Yes. Shop online and our Outfitters will help you load up your new YETI gear into your car.",
+            "question": "Is there curbside pickup?"
+          },
+          {
+            "answer": "If you’re looking for a place to throw a party, we got you covered. Just contact our store for more details.",
+            "question": "Can I throw a private event at this store?"
+          }
+        ],
         "heading": {
           "text": {
             "field": "",
@@ -1243,47 +1334,369 @@
           "fontColor": "#002b45",
           "fontWeight": 900,
           "textTransform": "uppercase"
-        },
-        "items": [
-          {
-            "question": "Are pets allowed in this store?",
-            "answer": "No, with the exception of service animals."
-          },
-          {
-            "question": "Where can I park?",
-            "answer": "▪ Free parking for YETI can be found at any of Tysons Corner Center parking garages or surface lots.\n▪ The closest available parking is located in Parking Garage D at the Northwest corner of Tysons Corner Center, adjacent to Macy’s."
-          },
-          {
-            "question": "Do you have any drinkware with city-specific designs?",
-            "answer": "You bet. Each of our store locations has a unique drinkware illustration inspired by the city."
-          },
-          {
-            "question": "Is there curbside pickup?",
-            "answer": "Yes. Shop online and our Outfitters will help you load up your new YETI gear into your car."
-          },
-          {
-            "question": "Can I throw a private event at this store?",
-            "answer": "If you’re looking for a place to throw a party, we got you covered. Just contact our store for more details."
-          }
-        ]
+        }
       }
     },
     {
       "type": "YetiFooterSection",
       "props": {
         "id": "YetiFooterSection-872cd0cd-f540-4f1d-9c49-ccd2ab89f40b",
-        "signupTitle": {
+        "columns": [
+          {
+            "links": [
+              {
+                "href": "https://www.yeti.com/help-guide.html",
+                "label": "Help"
+              },
+              {
+                "href": "https://www.yeti.com/faq.html",
+                "label": "FAQ"
+              },
+              {
+                "href": "https://www.yeti.com/contact-us.html",
+                "label": "Contact"
+              },
+              {
+                "href": "https://www.yeti.com/id-me.html",
+                "label": "ID.me"
+              },
+              {
+                "href": "https://www.yeti.com/order-track",
+                "label": "Order Status"
+              },
+              {
+                "href": "https://www.yeti.com/shipping-and-returns.html",
+                "label": "Shipping"
+              },
+              {
+                "href": "https://www.yeti.com/returns",
+                "label": "Returns"
+              },
+              {
+                "href": "https://www.yeti.com/register-product.html",
+                "label": "Register Your YETI"
+              },
+              {
+                "href": "https://www.yeti.com/faq.html#product-recalls",
+                "label": "Product Recalls"
+              },
+              {
+                "href": "https://www.yeti.com/accessibility-statement.html",
+                "label": "Accessibility"
+              }
+            ],
+            "title": "Customer Support",
+            "locales": [
+              {
+                "href": "https://www.yeti.com/es",
+                "label": "USA / ES"
+              },
+              {
+                "href": "https://au.yeti.com/",
+                "label": "AU / EN"
+              },
+              {
+                "href": "https://www.yeti.ca",
+                "label": "CA / EN"
+              },
+              {
+                "href": "https://www.yeti.ca/fr",
+                "label": "CA / FR"
+              },
+              {
+                "href": "https://eu.yeti.com/",
+                "label": "EU / EN"
+              },
+              {
+                "href": "https://fr.yeti.com/",
+                "label": "FR / FR"
+              },
+              {
+                "href": "https://it.yeti.com/",
+                "label": "IT / IT"
+              },
+              {
+                "href": "https://de.yeti.com/",
+                "label": "DE / DE"
+              },
+              {
+                "href": "https://ie.yeti.com/",
+                "label": "IE / EN"
+              },
+              {
+                "href": "https://nl.yeti.com/",
+                "label": "NL / NL"
+              },
+              {
+                "href": "https://nz.yeti.com/",
+                "label": "NZ / EN"
+              },
+              {
+                "href": "https://uk.yeti.com/",
+                "label": "GB / EN"
+              }
+            ],
+            "subgroups": [],
+            "localeLabel": "USA / EN"
+          },
+          {
+            "links": [
+              {
+                "href": "https://www.yeti.com/stories/our-story.html",
+                "label": "About Us"
+              },
+              {
+                "href": "https://www.yeti.com/news.html",
+                "label": "News"
+              },
+              {
+                "href": "https://www.yeti.com/wild.html",
+                "label": "#KeepTheWildWild"
+              },
+              {
+                "href": "https://www.yeti.com/rambler-buy-back.html",
+                "label": "Rambler™ Buy Back"
+              },
+              {
+                "href": "https://www.yeti.com/built-for-the-wild.html",
+                "label": "#BuiltForTheWild"
+              },
+              {
+                "href": "https://www.yeti.com/stories/ambassadors.html",
+                "label": "Ambassadors"
+              },
+              {
+                "href": "https://www.yeti.com/yeti-careers.html",
+                "label": "Careers"
+              },
+              {
+                "href": "https://www.yeti.com/recruitment-scam-warning.html",
+                "label": "Recruitment Scam Warning"
+              },
+              {
+                "href": "https://www.yeti.com/corporate-sales.html",
+                "label": "Corporate Sales"
+              },
+              {
+                "href": "https://investors.yeti.com/overview/default.aspx",
+                "label": "Investor Relations"
+              },
+              {
+                "href": "https://www.yeti.com/dealers.html",
+                "label": "Dealer Resources"
+              },
+              {
+                "href": "https://www.yeti.com/affiliate.html",
+                "label": "Affiliate Program"
+              },
+              {
+                "href": "https://www.yeti.com/patents.html",
+                "label": "Patents"
+              }
+            ],
+            "title": "Company",
+            "locales": [],
+            "subgroups": [],
+            "localeLabel": null
+          },
+          {
+            "links": [
+              {
+                "href": "https://www.yeti.com/yeti-store-locations.html",
+                "label": "See All Stores"
+              },
+              {
+                "href": "https://www.yeti.com/find-a-store",
+                "label": "Dealer Locator"
+              }
+            ],
+            "title": "Stores",
+            "locales": [],
+            "subgroups": [
+              {
+                "href": "https://www.yeti.com/mclean-store.html",
+                "label": "US Stores",
+                "links": [
+                  {
+                    "href": "https://www.yeti.com/scottsdale-store.html",
+                    "label": "Scottsdale, AZ"
+                  },
+                  {
+                    "href": "https://www.yeti.com/carlsbad-store.html",
+                    "label": "Carlsbad, CA"
+                  },
+                  {
+                    "href": "https://www.yeti.com/el-segundo-store.html",
+                    "label": "El Segundo, CA"
+                  },
+                  {
+                    "href": "https://www.yeti.com/san-jose-store.html",
+                    "label": "San Jose, CA"
+                  },
+                  {
+                    "href": "https://www.yeti.com/denver-store.html",
+                    "label": "Denver, CO"
+                  },
+                  {
+                    "href": "https://www.yeti.com/fort-lauderdale-store.html",
+                    "label": "Fort Lauderdale, FL"
+                  },
+                  {
+                    "href": "https://www.yeti.com/orlando-store.html",
+                    "label": "Orlando, FL"
+                  },
+                  {
+                    "href": "https://www.yeti.com/palm-beach-store.html",
+                    "label": "Palm Beach, FL"
+                  },
+                  {
+                    "href": "https://www.yeti.com/honolulu-store.html",
+                    "label": "Honolulu, HI"
+                  },
+                  {
+                    "href": "https://www.yeti.com/leawood-store.html",
+                    "label": "Leawood, KS"
+                  },
+                  {
+                    "href": "https://www.yeti.com/edina-store.html",
+                    "label": "Edina, MN"
+                  },
+                  {
+                    "href": "https://www.yeti.com/nebraska-store.html",
+                    "label": "Gretna, NE"
+                  },
+                  {
+                    "href": "https://www.yeti.com/paramus-store.html",
+                    "label": "Paramus, NJ"
+                  },
+                  {
+                    "href": "https://www.yeti.com/short-hills-store.html",
+                    "label": "Short Hills, NJ"
+                  },
+                  {
+                    "href": "https://www.yeti.com/new-york-city-store.html",
+                    "label": "New York City, NY"
+                  },
+                  {
+                    "href": "https://www.yeti.com/portland-store.html",
+                    "label": "Portland, OR"
+                  },
+                  {
+                    "href": "https://www.yeti.com/king-of-prussia-store.html",
+                    "label": "King of Prussia, PA"
+                  },
+                  {
+                    "href": "https://www.yeti.com/charleston-store.html",
+                    "label": "Charleston, SC"
+                  },
+                  {
+                    "href": "https://www.yeti.com/austin-tx-flagship.html",
+                    "label": "Austin, TX - Flagship"
+                  },
+                  {
+                    "href": "https://www.yeti.com/austin-domain-northside.html",
+                    "label": "Austin, TX - Domain Northside"
+                  },
+                  {
+                    "href": "https://www.yeti.com/dallas-knox-store.html",
+                    "label": "Dallas, TX"
+                  },
+                  {
+                    "href": "https://www.yeti.com/houston-store.html",
+                    "label": "Houston, TX"
+                  },
+                  {
+                    "href": "https://www.yeti.com/san-antonio-store.html",
+                    "label": "San Antonio, TX"
+                  },
+                  {
+                    "href": "https://www.yeti.com/southlake-store.html",
+                    "label": "Southlake, TX"
+                  },
+                  {
+                    "href": "https://www.yeti.com/the-woodlands-store.html",
+                    "label": "The Woodlands, TX"
+                  },
+                  {
+                    "href": "https://www.yeti.com/mclean-store.html",
+                    "label": "McLean, VA"
+                  }
+                ]
+              },
+              {
+                "href": "https://www.yeti.com/mclean-store.html",
+                "label": "International Stores",
+                "links": [
+                  {
+                    "href": "https://www.yeti.com/calgary-store.html",
+                    "label": "Calgary, AB"
+                  }
+                ]
+              }
+            ],
+            "localeLabel": null
+          },
+          {
+            "links": [
+              {
+                "href": "https://www.yeti.com/privacy-policy.html",
+                "label": "Privacy Policy"
+              },
+              {
+                "href": "https://www.yeti.com/mclean-store.html#",
+                "label": "Manage Cookies"
+              },
+              {
+                "href": "https://www.yeti.com/terms-conditions.html",
+                "label": "Terms & Conditions"
+              },
+              {
+                "href": "https://privacyportal-uk.onetrust.com/webform/4f182994-8eb0-425e-8b18-28dabe88ca95/b836298d-c182-464c-b233-9e98f4c1f1f2",
+                "label": "Your Privacy Choices"
+              },
+              {
+                "href": "https://www.yeti.com/report-vulnerability.html",
+                "label": "Report a Vulnerability"
+              },
+              {
+                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dw495d4e58/YETI%20Modern%20Slavery%20Statement_062025.docx.pdf",
+                "label": "Modern Slavery Statement"
+              },
+              {
+                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dwa8c41aeb/YETI_Supplier_Code_of_Conduct.pdf",
+                "label": "Supplier Code of Conduct"
+              },
+              {
+                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/pdfs/2024_Human_Rights_Policy.pdf",
+                "label": "Our Human Rights Policy"
+              },
+              {
+                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dwc632160e/Our-Suppliers-2025.pdf",
+                "label": "Our Suppliers"
+              },
+              {
+                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dw4b2428ed/YETI%20RSL%20PROGRAM%20-%20JUNE%202025.pdf",
+                "label": "YETI RSL Program"
+              }
+            ],
+            "title": "Privacy & Compliance",
+            "locales": [],
+            "subgroups": [],
+            "localeLabel": null
+          }
+        ],
+        "copyright": {
           "text": {
             "field": "",
             "constantValue": {
-              "en": "Sign Me Up",
+              "en": "©2026 YETI COOLERS, LLC. ALL RIGHTS RESERVED",
               "hasLocalizedValue": "true"
             },
             "constantValueEnabled": true
           },
-          "fontSize": 36,
+          "fontSize": 14,
           "fontColor": "#ffffff",
-          "fontWeight": 900,
+          "fontWeight": 400,
           "textTransform": "uppercase"
         },
         "signupCopy": {
@@ -1300,380 +1713,36 @@
           "fontWeight": 400,
           "textTransform": "normal"
         },
-        "copyright": {
+        "signupTitle": {
           "text": {
             "field": "",
             "constantValue": {
-              "en": "©2026 YETI COOLERS, LLC. ALL RIGHTS RESERVED",
+              "en": "Sign Me Up",
               "hasLocalizedValue": "true"
             },
             "constantValueEnabled": true
           },
-          "fontSize": 14,
+          "fontSize": 36,
           "fontColor": "#ffffff",
-          "fontWeight": 400,
+          "fontWeight": 900,
           "textTransform": "uppercase"
         },
         "socialLinks": [
           {
-            "label": "Facebook",
-            "href": "https://www.facebook.com/Yeti/"
+            "href": "https://www.facebook.com/Yeti/",
+            "label": "Facebook"
           },
           {
-            "label": "Instagram",
-            "href": "https://www.instagram.com/yeti"
+            "href": "https://www.instagram.com/yeti",
+            "label": "Instagram"
           },
           {
-            "label": "Youtube",
-            "href": "https://www.youtube.com/channel/UCAZ5PoEUL2_clEdDBrFF-aQ"
+            "href": "https://www.youtube.com/channel/UCAZ5PoEUL2_clEdDBrFF-aQ",
+            "label": "Youtube"
           },
           {
-            "label": "TikTok",
-            "href": "https://www.tiktok.com/@yeti"
-          }
-        ],
-        "columns": [
-          {
-            "title": "Customer Support",
-            "links": [
-              {
-                "label": "Help",
-                "href": "https://www.yeti.com/help-guide.html"
-              },
-              {
-                "label": "FAQ",
-                "href": "https://www.yeti.com/faq.html"
-              },
-              {
-                "label": "Contact",
-                "href": "https://www.yeti.com/contact-us.html"
-              },
-              {
-                "label": "ID.me",
-                "href": "https://www.yeti.com/id-me.html"
-              },
-              {
-                "label": "Order Status",
-                "href": "https://www.yeti.com/order-track"
-              },
-              {
-                "label": "Shipping",
-                "href": "https://www.yeti.com/shipping-and-returns.html"
-              },
-              {
-                "label": "Returns",
-                "href": "https://www.yeti.com/returns"
-              },
-              {
-                "label": "Register Your YETI",
-                "href": "https://www.yeti.com/register-product.html"
-              },
-              {
-                "label": "Product Recalls",
-                "href": "https://www.yeti.com/faq.html#product-recalls"
-              },
-              {
-                "label": "Accessibility",
-                "href": "https://www.yeti.com/accessibility-statement.html"
-              }
-            ],
-            "subgroups": [],
-            "localeLabel": "USA / EN",
-            "locales": [
-              {
-                "label": "USA / ES",
-                "href": "https://www.yeti.com/es"
-              },
-              {
-                "label": "AU / EN",
-                "href": "https://au.yeti.com/"
-              },
-              {
-                "label": "CA / EN",
-                "href": "https://www.yeti.ca"
-              },
-              {
-                "label": "CA / FR",
-                "href": "https://www.yeti.ca/fr"
-              },
-              {
-                "label": "EU / EN",
-                "href": "https://eu.yeti.com/"
-              },
-              {
-                "label": "FR / FR",
-                "href": "https://fr.yeti.com/"
-              },
-              {
-                "label": "IT / IT",
-                "href": "https://it.yeti.com/"
-              },
-              {
-                "label": "DE / DE",
-                "href": "https://de.yeti.com/"
-              },
-              {
-                "label": "IE / EN",
-                "href": "https://ie.yeti.com/"
-              },
-              {
-                "label": "NL / NL",
-                "href": "https://nl.yeti.com/"
-              },
-              {
-                "label": "NZ / EN",
-                "href": "https://nz.yeti.com/"
-              },
-              {
-                "label": "GB / EN",
-                "href": "https://uk.yeti.com/"
-              }
-            ]
-          },
-          {
-            "title": "Company",
-            "links": [
-              {
-                "label": "About Us",
-                "href": "https://www.yeti.com/stories/our-story.html"
-              },
-              {
-                "label": "News",
-                "href": "https://www.yeti.com/news.html"
-              },
-              {
-                "label": "#KeepTheWildWild",
-                "href": "https://www.yeti.com/wild.html"
-              },
-              {
-                "label": "Rambler™ Buy Back",
-                "href": "https://www.yeti.com/rambler-buy-back.html"
-              },
-              {
-                "label": "#BuiltForTheWild",
-                "href": "https://www.yeti.com/built-for-the-wild.html"
-              },
-              {
-                "label": "Ambassadors",
-                "href": "https://www.yeti.com/stories/ambassadors.html"
-              },
-              {
-                "label": "Careers",
-                "href": "https://www.yeti.com/yeti-careers.html"
-              },
-              {
-                "label": "Recruitment Scam Warning",
-                "href": "https://www.yeti.com/recruitment-scam-warning.html"
-              },
-              {
-                "label": "Corporate Sales",
-                "href": "https://www.yeti.com/corporate-sales.html"
-              },
-              {
-                "label": "Investor Relations",
-                "href": "https://investors.yeti.com/overview/default.aspx"
-              },
-              {
-                "label": "Dealer Resources",
-                "href": "https://www.yeti.com/dealers.html"
-              },
-              {
-                "label": "Affiliate Program",
-                "href": "https://www.yeti.com/affiliate.html"
-              },
-              {
-                "label": "Patents",
-                "href": "https://www.yeti.com/patents.html"
-              }
-            ],
-            "subgroups": [],
-            "localeLabel": null,
-            "locales": []
-          },
-          {
-            "title": "Stores",
-            "links": [
-              {
-                "label": "See All Stores",
-                "href": "https://www.yeti.com/yeti-store-locations.html"
-              },
-              {
-                "label": "Dealer Locator",
-                "href": "https://www.yeti.com/find-a-store"
-              }
-            ],
-            "subgroups": [
-              {
-                "label": "US Stores",
-                "href": "https://www.yeti.com/mclean-store.html",
-                "links": [
-                  {
-                    "label": "Scottsdale, AZ",
-                    "href": "https://www.yeti.com/scottsdale-store.html"
-                  },
-                  {
-                    "label": "Carlsbad, CA",
-                    "href": "https://www.yeti.com/carlsbad-store.html"
-                  },
-                  {
-                    "label": "El Segundo, CA",
-                    "href": "https://www.yeti.com/el-segundo-store.html"
-                  },
-                  {
-                    "label": "San Jose, CA",
-                    "href": "https://www.yeti.com/san-jose-store.html"
-                  },
-                  {
-                    "label": "Denver, CO",
-                    "href": "https://www.yeti.com/denver-store.html"
-                  },
-                  {
-                    "label": "Fort Lauderdale, FL",
-                    "href": "https://www.yeti.com/fort-lauderdale-store.html"
-                  },
-                  {
-                    "label": "Orlando, FL",
-                    "href": "https://www.yeti.com/orlando-store.html"
-                  },
-                  {
-                    "label": "Palm Beach, FL",
-                    "href": "https://www.yeti.com/palm-beach-store.html"
-                  },
-                  {
-                    "label": "Honolulu, HI",
-                    "href": "https://www.yeti.com/honolulu-store.html"
-                  },
-                  {
-                    "label": "Leawood, KS",
-                    "href": "https://www.yeti.com/leawood-store.html"
-                  },
-                  {
-                    "label": "Edina, MN",
-                    "href": "https://www.yeti.com/edina-store.html"
-                  },
-                  {
-                    "label": "Gretna, NE",
-                    "href": "https://www.yeti.com/nebraska-store.html"
-                  },
-                  {
-                    "label": "Paramus, NJ",
-                    "href": "https://www.yeti.com/paramus-store.html"
-                  },
-                  {
-                    "label": "Short Hills, NJ",
-                    "href": "https://www.yeti.com/short-hills-store.html"
-                  },
-                  {
-                    "label": "New York City, NY",
-                    "href": "https://www.yeti.com/new-york-city-store.html"
-                  },
-                  {
-                    "label": "Portland, OR",
-                    "href": "https://www.yeti.com/portland-store.html"
-                  },
-                  {
-                    "label": "King of Prussia, PA",
-                    "href": "https://www.yeti.com/king-of-prussia-store.html"
-                  },
-                  {
-                    "label": "Charleston, SC",
-                    "href": "https://www.yeti.com/charleston-store.html"
-                  },
-                  {
-                    "label": "Austin, TX - Flagship",
-                    "href": "https://www.yeti.com/austin-tx-flagship.html"
-                  },
-                  {
-                    "label": "Austin, TX - Domain Northside",
-                    "href": "https://www.yeti.com/austin-domain-northside.html"
-                  },
-                  {
-                    "label": "Dallas, TX",
-                    "href": "https://www.yeti.com/dallas-knox-store.html"
-                  },
-                  {
-                    "label": "Houston, TX",
-                    "href": "https://www.yeti.com/houston-store.html"
-                  },
-                  {
-                    "label": "San Antonio, TX",
-                    "href": "https://www.yeti.com/san-antonio-store.html"
-                  },
-                  {
-                    "label": "Southlake, TX",
-                    "href": "https://www.yeti.com/southlake-store.html"
-                  },
-                  {
-                    "label": "The Woodlands, TX",
-                    "href": "https://www.yeti.com/the-woodlands-store.html"
-                  },
-                  {
-                    "label": "McLean, VA",
-                    "href": "https://www.yeti.com/mclean-store.html"
-                  }
-                ]
-              },
-              {
-                "label": "International Stores",
-                "href": "https://www.yeti.com/mclean-store.html",
-                "links": [
-                  {
-                    "label": "Calgary, AB",
-                    "href": "https://www.yeti.com/calgary-store.html"
-                  }
-                ]
-              }
-            ],
-            "localeLabel": null,
-            "locales": []
-          },
-          {
-            "title": "Privacy & Compliance",
-            "links": [
-              {
-                "label": "Privacy Policy",
-                "href": "https://www.yeti.com/privacy-policy.html"
-              },
-              {
-                "label": "Manage Cookies",
-                "href": "https://www.yeti.com/mclean-store.html#"
-              },
-              {
-                "label": "Terms & Conditions",
-                "href": "https://www.yeti.com/terms-conditions.html"
-              },
-              {
-                "label": "Your Privacy Choices",
-                "href": "https://privacyportal-uk.onetrust.com/webform/4f182994-8eb0-425e-8b18-28dabe88ca95/b836298d-c182-464c-b233-9e98f4c1f1f2"
-              },
-              {
-                "label": "Report a Vulnerability",
-                "href": "https://www.yeti.com/report-vulnerability.html"
-              },
-              {
-                "label": "Modern Slavery Statement",
-                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dw495d4e58/YETI%20Modern%20Slavery%20Statement_062025.docx.pdf"
-              },
-              {
-                "label": "Supplier Code of Conduct",
-                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dwa8c41aeb/YETI_Supplier_Code_of_Conduct.pdf"
-              },
-              {
-                "label": "Our Human Rights Policy",
-                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/pdfs/2024_Human_Rights_Policy.pdf"
-              },
-              {
-                "label": "Our Suppliers",
-                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dwc632160e/Our-Suppliers-2025.pdf"
-              },
-              {
-                "label": "YETI RSL Program",
-                "href": "https://www.yeti.com/on/demandware.static/-/Library-Sites-YetiSharedLibrary/default/dw4b2428ed/YETI%20RSL%20PROGRAM%20-%20JUNE%202025.pdf"
-              }
-            ],
-            "subgroups": [],
-            "localeLabel": null,
-            "locales": []
+            "href": "https://www.tiktok.com/@yeti",
+            "label": "TikTok"
           }
         ]
       }
