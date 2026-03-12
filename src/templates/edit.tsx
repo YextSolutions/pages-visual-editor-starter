@@ -22,13 +22,11 @@ import {
 } from "@yext/pages";
 import { type Config } from "@puckeditor/core";
 import tailwindConfig from "../../tailwind.config";
-import { DunkinDonutsConfig as dunkinDonutsConfig } from "../registry/dunkin-donuts/config";
 import { MainConfig as mainConfig } from "../registry/main/config";
 
 const componentRegistry: Record<string, Config<any>> = {
     directory: directoryConfig,
     locator: locatorConfig,
-    "dunkin-donuts": dunkinDonutsConfig,
     "main": mainConfig
 };
 
