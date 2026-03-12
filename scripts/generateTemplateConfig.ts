@@ -363,12 +363,19 @@ const buildConfigSource = (
     return [item.componentName, item.importName];
   })) as Record<string, string>;
   const configObject = {
-    categories: items.length > 0 ? {
-      components: {
-        title: "Components",
-        components: componentNames,
+    categories: {
+      ...(items.length > 0 ? {
+        components: {
+          title: "Components",
+          components: componentNames,
+        },
+      } : {}),
+      other: {
+        title: "Other",
+        visible: false,
+        components: [],
       },
-    } : undefined,
+    },
   };
   const configLines = [`export const ${configExportName}: Config = {`];
 
@@ -378,9 +385,7 @@ const buildConfigSource = (
     configLines.push("components: {},", "// No components found in this template registry");
   }
 
-  if (configObject.categories) {
-    configLines.push(`categories: ${JSON.stringify(configObject.categories)},`);
-  }
+  configLines.push(`categories: ${JSON.stringify(configObject.categories)},`);
 
   configLines.push("};");
 
