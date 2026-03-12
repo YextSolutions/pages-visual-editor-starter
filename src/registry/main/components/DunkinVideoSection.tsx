@@ -1,5 +1,4 @@
 import { ComponentConfig, Fields, PuckComponent } from "@puckeditor/core";
-import { Box, Text } from "@chakra-ui/react";
 import {
   TranslatableString,
   YextEntityField,
@@ -115,28 +114,28 @@ export const DunkinVideoSectionComponent: PuckComponent<
     resolveComponentData(props.brandText.text, locale, streamDocument) || "";
 
   return (
-    <Box
-      bg={OFF_WHITE}
-      borderBottom={`1px solid ${BORDER}`}
-      px={{ base: 4, md: 8 }}
-      py={{ base: 8, md: 14 }}
+    <div
+      className="border-b px-4 py-8 md:px-8 md:py-14"
+      style={{ borderColor: BORDER, backgroundColor: OFF_WHITE }}
     >
-      <Text
-        textAlign="center"
-        fontFamily={PRIMARY_FONT}
-        fontSize={`${props.heading.fontSize}px`}
-        fontWeight={props.heading.fontWeight}
-        lineHeight="1"
-        textTransform={props.heading.textTransform}
+      <p
+        className="text-center"
+        style={{
+          fontFamily: PRIMARY_FONT,
+          fontSize: `${props.heading.fontSize}px`,
+          fontWeight: props.heading.fontWeight,
+          lineHeight: "1",
+          textTransform: props.heading.textTransform,
+        }}
       >
-        <Text as="span" color={ORANGE}>
+        <span style={{ color: ORANGE }}>
           {brandText}
-        </Text>{" "}
-        <Text as="span" color={BROWN}>
+        </span>{" "}
+        <span style={{ color: BROWN }}>
           {heading}
-        </Text>
-      </Text>
-      <Box maxW="1180px" mx="auto" mt={6} bg="#000000">
+        </span>
+      </p>
+      <div className="mx-auto mt-6 max-w-[1180px] bg-black">
         <iframe
           style={{
             width: "100%",
@@ -148,8 +147,8 @@ export const DunkinVideoSectionComponent: PuckComponent<
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

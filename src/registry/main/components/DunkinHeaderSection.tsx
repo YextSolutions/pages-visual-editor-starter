@@ -8,9 +8,8 @@ import {
   resolveComponentData,
   useDocument,
 } from "@yext/visual-editor";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import { ComplexImageType, ImageType, Link } from "@yext/pages-components";
-import React from "react";
+import * as React from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const PRIMARY_FONT = "'Dunkin Sans', 'Open Sans', sans-serif";
@@ -206,10 +205,10 @@ export const DunkinHeaderSectionComponent: PuckComponent<
   );
 
   return (
-    <Box as="header" bg="#ffffff" borderBottom={`1px solid ${BORDER}`}>
-      <Box px={{ base: 4, lg: 8 }} py={{ base: 3, lg: 4 }}>
-        <Flex align="center" justify="space-between" gap={4}>
-          <Flex align="center" display={{ base: "none", lg: "flex" }} gap={8}>
+    <header className="border-b bg-white" style={{ borderColor: BORDER }}>
+      <div className="px-4 py-3 lg:px-8 lg:py-4">
+        <div className="flex items-center justify-between gap-4">
+          <div className="hidden items-center gap-8 lg:flex">
             {props.desktopLinks.slice(0, 3).map((item) => (
               <Link
                 key={`desktop-left-${item.label}`}
@@ -227,7 +226,7 @@ export const DunkinHeaderSectionComponent: PuckComponent<
                 {item.label}
               </Link>
             ))}
-          </Flex>
+          </div>
           <Link
             cta={{
               link: "https://www.dunkindonuts.com/en",
@@ -236,11 +235,11 @@ export const DunkinHeaderSectionComponent: PuckComponent<
             }}
             style={{ display: "inline-flex", alignItems: "center" }}
           >
-            <Box width={{ base: "118px", lg: "154px" }}>
+            <div className="w-[118px] lg:w-[154px]">
               {resolvedLogo ? <Image image={resolvedLogo} /> : null}
-            </Box>
+            </div>
           </Link>
-          <Flex align="center" display={{ base: "none", lg: "flex" }} gap={8}>
+          <div className="hidden items-center gap-8 lg:flex">
             {props.desktopLinks.slice(3).map((item) => (
               <Link
                 key={`desktop-right-${item.label}`}
@@ -258,8 +257,8 @@ export const DunkinHeaderSectionComponent: PuckComponent<
                 {item.label}
               </Link>
             ))}
-          </Flex>
-          <Flex align="center" gap={2} display={{ base: "none", lg: "flex" }}>
+          </div>
+          <div className="hidden items-center gap-2 lg:flex">
             <Link
               cta={{
                 link: props.signUpCta.link,
@@ -290,28 +289,23 @@ export const DunkinHeaderSectionComponent: PuckComponent<
             >
               {props.signInCta.label}
             </Link>
-          </Flex>
-          <Box
-            as="button"
+          </div>
+          <button
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            display={{ base: "inline-flex", lg: "none" }}
-            alignItems="center"
-            justifyContent="center"
-            color={BROWN}
-            fontSize="22px"
+            className="inline-flex items-center justify-center text-[22px] lg:hidden"
+            style={{ color: BROWN }}
             onClick={() => setMobileOpen((current) => !current)}
+            type="button"
           >
             {mobileOpen ? <FaTimes /> : <FaBars />}
-          </Box>
-        </Flex>
+          </button>
+        </div>
         {mobileOpen ? (
-          <Box
-            display={{ base: "block", lg: "none" }}
-            mt={4}
-            borderTop={`1px solid ${BORDER}`}
-            pt={4}
+          <div
+            className="mt-4 block border-t pt-4 lg:hidden"
+            style={{ borderColor: BORDER }}
           >
-            <Flex direction="column" gap={4}>
+            <div className="flex flex-col gap-4">
               {props.mobileLinks.map((item) => (
                 <Link
                   key={`mobile-${item.label}`}
@@ -328,7 +322,7 @@ export const DunkinHeaderSectionComponent: PuckComponent<
                   {item.label}
                 </Link>
               ))}
-              <Flex gap={2} pt={2}>
+              <div className="flex gap-2 pt-2">
                 <Link
                   cta={{
                     link: props.signUpCta.link,
@@ -359,29 +353,23 @@ export const DunkinHeaderSectionComponent: PuckComponent<
                 >
                   {props.signInCta.label}
                 </Link>
-              </Flex>
-            </Flex>
-          </Box>
+              </div>
+            </div>
+          </div>
         ) : null}
-      </Box>
-      <Flex
-        align="center"
-        justify="center"
-        bg={PINK}
-        color="#ffffff"
-        gap={1}
-        minH="31px"
-        px={4}
-        py={2}
-        textAlign="center"
-        wrap="wrap"
+      </div>
+      <div
+        className="flex min-h-[31px] flex-wrap items-center justify-center gap-1 px-4 py-2 text-center text-white"
+        style={{ background: PINK }}
       >
-        <Text
-          fontFamily={SECONDARY_FONT}
-          {...textStyles(props.announcementText)}
+        <span
+          style={{
+            fontFamily: SECONDARY_FONT,
+            ...textStyles(props.announcementText),
+          }}
         >
           {announcementText}
-        </Text>
+        </span>
         <Link
           cta={{
             link: props.announcementLink.link,
@@ -398,8 +386,8 @@ export const DunkinHeaderSectionComponent: PuckComponent<
         >
           {props.announcementLink.label}
         </Link>
-      </Flex>
-    </Box>
+      </div>
+    </header>
   );
 };
 

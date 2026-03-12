@@ -8,7 +8,6 @@ import {
   resolveComponentData,
   useDocument,
 } from "@yext/visual-editor";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import { ComplexImageType, ImageType, Link } from "@yext/pages-components";
 
 const PRIMARY_FONT = "'Dunkin Sans', 'Open Sans', sans-serif";
@@ -131,41 +130,39 @@ export const DunkinMealDealSectionComponent: PuckComponent<
   const description = resolveText(props.description, locale, streamDocument);
 
   return (
-    <Box bg={OFF_WHITE} borderBottom={`1px solid ${BORDER}`}>
-      <Flex direction={{ base: "column", md: "row" }} align="center">
-        <Box width={{ base: "100%", md: "170px" }} flexShrink={0}>
+    <div
+      className="border-b"
+      style={{ borderColor: BORDER, backgroundColor: OFF_WHITE }}
+    >
+      <div className="flex flex-col items-center md:flex-row">
+        <div className="w-full shrink-0 md:w-[170px]">
           {image ? <Image image={image} /> : null}
-        </Box>
-        <Flex
-          flex="1"
-          direction="column"
-          align="center"
-          justify="center"
-          textAlign="center"
-          px={{ base: 6, md: 10 }}
-          py={{ base: 8, md: 10 }}
-        >
-          <Text
-            color={props.title.fontColor}
-            fontFamily={PRIMARY_FONT}
-            fontSize={`${props.title.fontSize}px`}
-            fontWeight={props.title.fontWeight}
-            lineHeight="1"
-            textTransform={props.title.textTransform}
+        </div>
+        <div className="flex flex-1 flex-col items-center justify-center px-6 py-8 text-center md:px-10 md:py-10">
+          <p
+            style={{
+              color: props.title.fontColor,
+              fontFamily: PRIMARY_FONT,
+              fontSize: `${props.title.fontSize}px`,
+              fontWeight: props.title.fontWeight,
+              lineHeight: "1",
+              textTransform: props.title.textTransform,
+            }}
           >
             {title}
-          </Text>
-          <Text
-            mt={3}
-            color={props.description.fontColor}
-            fontFamily={SECONDARY_FONT}
-            fontSize={`${props.description.fontSize}px`}
-            fontWeight={props.description.fontWeight}
-            lineHeight="18px"
-            maxW="640px"
+          </p>
+          <p
+            className="mt-3 max-w-[640px]"
+            style={{
+              color: props.description.fontColor,
+              fontFamily: SECONDARY_FONT,
+              fontSize: `${props.description.fontSize}px`,
+              fontWeight: props.description.fontWeight,
+              lineHeight: "18px",
+            }}
           >
             {description}
-          </Text>
+          </p>
           <Link
             cta={{
               link: props.cta.link,
@@ -192,9 +189,9 @@ export const DunkinMealDealSectionComponent: PuckComponent<
           >
             {props.cta.label}
           </Link>
-        </Flex>
-      </Flex>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

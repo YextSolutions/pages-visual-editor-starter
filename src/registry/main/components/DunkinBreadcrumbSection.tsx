@@ -1,5 +1,4 @@
 import { ComponentConfig, Fields, PuckComponent } from "@puckeditor/core";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import { Link } from "@yext/pages-components";
 import {
   TranslatableString,
@@ -116,20 +115,26 @@ export const DunkinBreadcrumbSectionComponent: PuckComponent<
     resolveComponentData(props.currentLabel.text, locale, streamDocument) || "";
 
   return (
-    <Box borderBottom={`1px solid ${BORDER}`} px={{ base: 4, lg: 6 }} py={3}>
-      <Flex
-        align="center"
-        color={BROWN}
-        fontFamily={SECONDARY_FONT}
-        fontSize="12px"
-        gap={2}
-        wrap="wrap"
+    <div
+      className="border-b px-4 py-3 lg:px-6"
+      style={{ borderColor: BORDER }}
+    >
+      <div
+        className="flex flex-wrap items-center gap-2"
+        style={{
+          color: BROWN,
+          fontFamily: SECONDARY_FONT,
+          fontSize: "12px",
+        }}
       >
-        <Text aria-hidden="true" fontSize="15px" transform="translateY(-1px)">
+        <span
+          aria-hidden="true"
+          style={{ fontSize: "15px", transform: "translateY(-1px)" }}
+        >
           &lsaquo;
-        </Text>
+        </span>
         {props.items.map((item, index) => (
-          <Flex align="center" gap={2} key={`${item.label}-${index}`}>
+          <div className="flex items-center gap-2" key={`${item.label}-${index}`}>
             <Link
               cta={{ link: item.link, label: item.label, linkType: "URL" }}
               style={{
@@ -142,20 +147,22 @@ export const DunkinBreadcrumbSectionComponent: PuckComponent<
             >
               {item.label}
             </Link>
-            <Text>/</Text>
-          </Flex>
+            <span>/</span>
+          </div>
         ))}
-        <Text
-          color={props.currentLabel.fontColor}
-          fontFamily={PRIMARY_FONT}
-          fontSize={`${props.currentLabel.fontSize}px`}
-          fontWeight={props.currentLabel.fontWeight}
-          textTransform={props.currentLabel.textTransform}
+        <span
+          style={{
+            color: props.currentLabel.fontColor,
+            fontFamily: PRIMARY_FONT,
+            fontSize: `${props.currentLabel.fontSize}px`,
+            fontWeight: props.currentLabel.fontWeight,
+            textTransform: props.currentLabel.textTransform,
+          }}
         >
           {currentLabel}
-        </Text>
-      </Flex>
-    </Box>
+        </span>
+      </div>
+    </div>
   );
 };
 

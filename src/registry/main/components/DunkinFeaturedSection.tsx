@@ -8,7 +8,6 @@ import {
   resolveComponentData,
   useDocument,
 } from "@yext/visual-editor";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import { ComplexImageType, ImageType, Link } from "@yext/pages-components";
 
 const PRIMARY_FONT = "'Dunkin Sans', 'Open Sans', sans-serif";
@@ -209,35 +208,28 @@ export const DunkinFeaturedSectionComponent: PuckComponent<
   );
 
   return (
-    <Box bg={OFF_WHITE} borderBottom={`1px solid ${BORDER}`}>
-      <Box
-        display="grid"
-        gridTemplateColumns={{
-          base: "1fr",
-          lg: "34% repeat(3, minmax(0, 1fr))",
-        }}
-      >
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          textAlign="center"
-          px={8}
-          py={{ base: 8, lg: 20 }}
-          borderBottom={`1px solid ${BORDER}`}
-          borderRight={{ base: "none", lg: `1px solid ${BORDER}` }}
+    <div
+      className="border-b"
+      style={{ borderColor: BORDER, backgroundColor: OFF_WHITE }}
+    >
+      <div className="grid lg:grid-cols-[34%_repeat(3,minmax(0,1fr))]">
+        <div
+          className="flex flex-col items-center justify-center border-b px-8 py-8 text-center lg:border-r lg:py-20"
+          style={{ borderColor: BORDER }}
         >
-          <Text
-            color={props.heading.fontColor}
-            fontFamily={PRIMARY_FONT}
-            fontSize={`${props.heading.fontSize}px`}
-            fontWeight={props.heading.fontWeight}
-            lineHeight="1"
-            maxW="280px"
-            textTransform={props.heading.textTransform}
+          <p
+            className="max-w-[280px]"
+            style={{
+              color: props.heading.fontColor,
+              fontFamily: PRIMARY_FONT,
+              fontSize: `${props.heading.fontSize}px`,
+              fontWeight: props.heading.fontWeight,
+              lineHeight: "1",
+              textTransform: props.heading.textTransform,
+            }}
           >
             {heading}
-          </Text>
+          </p>
           <Link
             cta={{
               link: props.menuCta.link,
@@ -264,7 +256,7 @@ export const DunkinFeaturedSectionComponent: PuckComponent<
           >
             {props.menuCta.label}
           </Link>
-        </Flex>
+        </div>
         {props.products.map((item, index) => {
           const image = resolveComponentData(
             item.image,
@@ -272,26 +264,16 @@ export const DunkinFeaturedSectionComponent: PuckComponent<
             streamDocument,
           );
           return (
-            <Flex
+            <div
               key={`${item.label}-${index}`}
-              direction="column"
-              align="center"
-              justify="flex-end"
-              textAlign="center"
-              px={8}
-              py={8}
-              borderBottom={`1px solid ${BORDER}`}
-              borderRight={{
-                base: "none",
-                lg:
-                  index === props.products.length - 1
-                    ? "none"
-                    : `1px solid ${BORDER}`,
-              }}
+              className={`flex flex-col items-center justify-end border-b px-8 py-8 text-center ${
+                index === props.products.length - 1 ? "" : "lg:border-r"
+              }`}
+              style={{ borderColor: BORDER }}
             >
-              <Box width="170px" mb={3}>
+              <div className="mb-3 w-[170px]">
                 {image ? <Image image={image} /> : null}
-              </Box>
+              </div>
               <Link
                 cta={{ link: item.link, label: item.label, linkType: "URL" }}
                 style={{
@@ -327,46 +309,39 @@ export const DunkinFeaturedSectionComponent: PuckComponent<
               >
                 Order Now
               </Link>
-            </Flex>
+            </div>
           );
         })}
-      </Box>
-      <Box
-        display="grid"
-        gridTemplateColumns={{
-          base: "1fr",
-          lg: "34% repeat(3, minmax(0, 1fr))",
-        }}
-      >
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          textAlign="center"
-          px={8}
-          py={{ base: 8, lg: 20 }}
-          borderRight={{ base: "none", lg: `1px solid ${BORDER}` }}
+      </div>
+      <div className="grid lg:grid-cols-[34%_repeat(3,minmax(0,1fr))]">
+        <div
+          className="flex flex-col items-center justify-center px-8 py-8 text-center lg:border-r lg:py-20"
+          style={{ borderColor: BORDER }}
         >
-          <Text
-            color={props.deliveryHeading.fontColor}
-            fontFamily={PRIMARY_FONT}
-            fontSize={`${props.deliveryHeading.fontSize}px`}
-            fontWeight={props.deliveryHeading.fontWeight}
-            lineHeight="1"
-            textTransform={props.deliveryHeading.textTransform}
+          <p
+            style={{
+              color: props.deliveryHeading.fontColor,
+              fontFamily: PRIMARY_FONT,
+              fontSize: `${props.deliveryHeading.fontSize}px`,
+              fontWeight: props.deliveryHeading.fontWeight,
+              lineHeight: "1",
+              textTransform: props.deliveryHeading.textTransform,
+            }}
           >
             {deliveryHeading}
-          </Text>
-          <Text
-            mt={2}
-            color={props.deliverySubheading.fontColor}
-            fontFamily={SECONDARY_FONT}
-            fontSize={`${props.deliverySubheading.fontSize}px`}
-            fontWeight={props.deliverySubheading.fontWeight}
+          </p>
+          <p
+            className="mt-2"
+            style={{
+              color: props.deliverySubheading.fontColor,
+              fontFamily: SECONDARY_FONT,
+              fontSize: `${props.deliverySubheading.fontSize}px`,
+              fontWeight: props.deliverySubheading.fontWeight,
+            }}
           >
             {deliverySubheading}
-          </Text>
-        </Flex>
+          </p>
+        </div>
         {props.deliveries.map((item, index) => {
           const image = resolveComponentData(
             item.image,
@@ -374,25 +349,16 @@ export const DunkinFeaturedSectionComponent: PuckComponent<
             streamDocument,
           );
           return (
-            <Flex
+            <div
               key={`${item.label}-${index}`}
-              direction="column"
-              align="center"
-              justify="center"
-              px={8}
-              py={8}
-              borderTop={{ base: `1px solid ${BORDER}`, lg: "none" }}
-              borderRight={{
-                base: "none",
-                lg:
-                  index === props.deliveries.length - 1
-                    ? "none"
-                    : `1px solid ${BORDER}`,
-              }}
+              className={`flex flex-col items-center justify-center border-t px-8 py-8 lg:border-t-0 ${
+                index === props.deliveries.length - 1 ? "" : "lg:border-r"
+              }`}
+              style={{ borderColor: BORDER }}
             >
-              <Box width={{ base: "150px", lg: "200px" }} mb={3}>
+              <div className="mb-3 w-[150px] lg:w-[200px]">
                 {image ? <Image image={image} /> : null}
-              </Box>
+              </div>
               <Link
                 cta={{ link: item.link, label: item.label, linkType: "URL" }}
                 style={{
@@ -406,11 +372,11 @@ export const DunkinFeaturedSectionComponent: PuckComponent<
               >
                 {item.label}
               </Link>
-            </Flex>
+            </div>
           );
         })}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

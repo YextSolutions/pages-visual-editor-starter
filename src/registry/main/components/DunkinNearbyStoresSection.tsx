@@ -1,5 +1,4 @@
 import { ComponentConfig, Fields, PuckComponent } from "@puckeditor/core";
-import { Box, Text } from "@chakra-ui/react";
 import {
   TranslatableString,
   YextEntityField,
@@ -142,26 +141,26 @@ export const DunkinNearbyStoresSectionComponent: PuckComponent<
     resolveComponentData(props.brandText.text, locale, streamDocument) || "";
 
   return (
-    <Box
-      bg={OFF_WHITE}
-      borderBottom={`1px solid ${BORDER}`}
-      px={{ base: 4, md: 6 }}
-      py={{ base: 8, md: 14 }}
+    <div
+      className="border-b px-4 py-8 md:px-6 md:py-14"
+      style={{ borderColor: BORDER, backgroundColor: OFF_WHITE }}
     >
-      <Box textAlign="center">
-        <Text
-          fontFamily={PRIMARY_FONT}
-          fontSize={`${props.heading.fontSize}px`}
-          fontWeight={props.heading.fontWeight}
-          textTransform={props.heading.textTransform}
+      <div className="text-center">
+        <p
+          style={{
+            fontFamily: PRIMARY_FONT,
+            fontSize: `${props.heading.fontSize}px`,
+            fontWeight: props.heading.fontWeight,
+            textTransform: props.heading.textTransform,
+          }}
         >
-          <Text as="span" color={ORANGE}>
+          <span style={{ color: ORANGE }}>
             {brandText}
-          </Text>{" "}
-          <Text as="span" color={BROWN}>
+          </span>{" "}
+          <span style={{ color: BROWN }}>
             {heading}
-          </Text>
-        </Text>
+          </span>
+        </p>
         <Link
           cta={{
             link: props.cta.link,
@@ -188,55 +187,53 @@ export const DunkinNearbyStoresSectionComponent: PuckComponent<
         >
           {props.cta.label}
         </Link>
-      </Box>
-      <Box
-        mt={8}
-        display="grid"
-        gap={4}
-        gridTemplateColumns={{ base: "1fr", lg: "repeat(3, minmax(0, 1fr))" }}
-      >
+      </div>
+      <div className="mt-8 grid gap-4 lg:grid-cols-3">
         {props.stores.map((store, index) => (
-          <Box
+          <div
             key={`${store.title}-${index}`}
-            bg="#ffffff"
-            border={`1px solid ${BORDER}`}
-            borderRadius="12px"
-            px={6}
-            py={5}
+            className="rounded-[12px] border bg-white px-6 py-5"
+            style={{ borderColor: BORDER }}
           >
-            <Text
-              color={BROWN}
-              fontFamily={PRIMARY_FONT}
-              fontSize="22px"
-              fontWeight={800}
-              lineHeight="1"
+            <p
+              style={{
+                color: BROWN,
+                fontFamily: PRIMARY_FONT,
+                fontSize: "22px",
+                fontWeight: 800,
+                lineHeight: "1",
+              }}
             >
               {store.title}
-            </Text>
-            <Text
-              mt={2}
-              color={BROWN}
-              fontFamily={SECONDARY_FONT}
-              fontSize="12px"
-              fontWeight={700}
+            </p>
+            <p
+              className="mt-2"
+              style={{
+                color: BROWN,
+                fontFamily: SECONDARY_FONT,
+                fontSize: "12px",
+                fontWeight: 700,
+              }}
             >
               {store.status}
-            </Text>
-            <Text
-              mt={4}
-              color={BROWN}
-              fontFamily={SECONDARY_FONT}
-              fontSize="11px"
-              lineHeight="16px"
+            </p>
+            <p
+              className="mt-4"
+              style={{
+                color: BROWN,
+                fontFamily: SECONDARY_FONT,
+                fontSize: "11px",
+                lineHeight: "16px",
+              }}
             >
               {store.addressLine1}
               <br />
               {store.addressLine2}
-            </Text>
-          </Box>
+            </p>
+          </div>
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import { ComponentConfig, Fields, PuckComponent } from "@puckeditor/core";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import { Link } from "@yext/pages-components";
 import { useDocument } from "@yext/visual-editor";
 import {
@@ -109,38 +108,24 @@ export const DunkinFooterSectionComponent: PuckComponent<
   useDocument();
 
   return (
-    <Box
-      as="footer"
-      bg={OFF_WHITE}
-      px={{ base: 4, md: 8 }}
-      py={{ base: 8, md: 10 }}
+    <footer
+      className="px-4 py-8 md:px-8 md:py-10"
+      style={{ backgroundColor: OFF_WHITE }}
     >
-      <Flex
-        direction={{ base: "column", lg: "row" }}
-        gap={{ base: 8, lg: 12 }}
-        maxW="1170px"
-        mx="auto"
-      >
-        <Box flex="2">
-          <Text
-            color={BROWN}
-            fontFamily={SECONDARY_FONT}
-            fontSize="12px"
-            letterSpacing="0.08em"
-            textTransform="uppercase"
+      <div className="mx-auto flex max-w-[1170px] flex-col gap-8 lg:flex-row lg:gap-12">
+        <div className="flex-[2]">
+          <p
+            style={{
+              color: BROWN,
+              fontFamily: SECONDARY_FONT,
+              fontSize: "12px",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
           >
             Quick Links
-          </Text>
-          <Box
-            mt={5}
-            display="grid"
-            gridTemplateColumns={{
-              base: "repeat(2, minmax(0, 1fr))",
-              md: "repeat(4, minmax(0, 1fr))",
-            }}
-            gap={4}
-            maxW="520px"
-          >
+          </p>
+          <div className="mt-5 grid max-w-[520px] grid-cols-2 gap-4 md:grid-cols-4">
             {props.quickLinks.map((item, index) => (
               <Link
                 key={`${item.label}-${index}`}
@@ -156,19 +141,21 @@ export const DunkinFooterSectionComponent: PuckComponent<
                 {item.label}
               </Link>
             ))}
-          </Box>
-        </Box>
-        <Box flex="1">
-          <Text
-            color={BROWN}
-            fontFamily={SECONDARY_FONT}
-            fontSize="12px"
-            letterSpacing="0.08em"
-            textTransform="uppercase"
+          </div>
+        </div>
+        <div className="flex-1">
+          <p
+            style={{
+              color: BROWN,
+              fontFamily: SECONDARY_FONT,
+              fontSize: "12px",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
           >
             Follow Us
-          </Text>
-          <Flex mt={5} gap={3} align="center" wrap="wrap">
+          </p>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
             {props.socialLinks.map((item, index) => (
               <Link
                 key={`${item.label}-${index}`}
@@ -189,20 +176,14 @@ export const DunkinFooterSectionComponent: PuckComponent<
                 {renderSocialIcon(item.icon)}
               </Link>
             ))}
-          </Flex>
-        </Box>
-      </Flex>
-      <Flex
-        mt={{ base: 8, md: 10 }}
-        pt={{ base: 0, md: 6 }}
-        borderTop={{ base: "none", md: `1px solid ${BORDER}` }}
-        maxW="1170px"
-        mx="auto"
-        direction="column"
-        align="center"
-        gap={4}
+          </div>
+        </div>
+      </div>
+      <div
+        className="mx-auto mt-8 flex max-w-[1170px] flex-col items-center gap-4 md:mt-10 md:border-t md:pt-6"
+        style={{ borderColor: BORDER }}
       >
-        <Flex justify="center" wrap="wrap" gap={{ base: 4, md: 8 }}>
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8">
           {props.policyLinks.map((item, index) => (
             <Link
               key={`${item.label}-${index}`}
@@ -218,17 +199,19 @@ export const DunkinFooterSectionComponent: PuckComponent<
               {item.label}
             </Link>
           ))}
-        </Flex>
-        <Text
-          color={BROWN}
-          fontFamily={SECONDARY_FONT}
-          fontSize="11px"
-          letterSpacing="0.08em"
+        </div>
+        <p
+          style={{
+            color: BROWN,
+            fontFamily: SECONDARY_FONT,
+            fontSize: "11px",
+            letterSpacing: "0.08em",
+          }}
         >
           {props.copyrightText}
-        </Text>
-      </Flex>
-    </Box>
+        </p>
+      </div>
+    </footer>
   );
 };
 

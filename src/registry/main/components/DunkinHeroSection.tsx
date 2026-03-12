@@ -8,7 +8,6 @@ import {
   resolveComponentData,
   useDocument,
 } from "@yext/visual-editor";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import {
   Address,
   ComplexImageType,
@@ -217,7 +216,10 @@ export const DunkinHeroSectionComponent: PuckComponent<
   );
 
   return (
-    <Box bg={OFF_WHITE} borderBottom={`1px solid ${BORDER}`} overflow="hidden">
+    <div
+      className="overflow-hidden border-b"
+      style={{ borderColor: BORDER, backgroundColor: OFF_WHITE }}
+    >
       <style>{`
         .dunkin-hero .HoursStatus-current { font-weight: 700; margin-right: 8px; }
         .dunkin-hero .HoursTable-row { padding-left: 12px; font-family: ${SECONDARY_FONT}; font-size: 12px; line-height: 16px; color: ${BROWN}; }
@@ -226,57 +228,39 @@ export const DunkinHeroSectionComponent: PuckComponent<
         .dunkin-hero-side-image { overflow: hidden; }
         .dunkin-hero-side-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
       `}</style>
-      <Box className="dunkin-hero" position="relative">
-        <Box
-          position="relative"
-          overflow="hidden"
-          px={{ base: 5, md: 8, xl: 16 }}
-          pt={{ base: 10, md: 14 }}
-          pb={{ base: 8, md: 10 }}
-          minH={{ base: "auto", md: "190px" }}
-        >
-          <Box
-            className="dunkin-hero-side-image"
-            position="absolute"
-            left={0}
-            top={0}
-            bottom={0}
-            width={{ base: "120px", md: "210px", xl: "250px" }}
-            display={{ base: "none", md: "block" }}
+      <div className="dunkin-hero relative">
+        <div className="relative overflow-hidden px-5 pb-8 pt-10 md:min-h-[190px] md:px-8 md:pb-10 md:pt-14 xl:px-16">
+          <div
+            className="dunkin-hero-side-image absolute hidden md:block md:w-[210px] xl:w-[250px]"
+            style={{ left: 0, top: 0, bottom: 0 }}
           >
             {leftImage ? <Image image={leftImage} /> : null}
-          </Box>
-          <Box
-            className="dunkin-hero-side-image"
-            position="absolute"
-            right={0}
-            top={0}
-            bottom={0}
-            width={{ base: "170px", md: "250px", xl: "320px" }}
-            display={{ base: "none", md: "block" }}
+          </div>
+          <div
+            className="dunkin-hero-side-image absolute hidden md:block md:w-[250px] xl:w-[320px]"
+            style={{ right: 0, top: 0, bottom: 0 }}
           >
             {rightImage ? <Image image={rightImage} /> : null}
-          </Box>
-          <Flex
-            direction="column"
-            align="center"
-            textAlign="center"
-            minH={{ base: "auto", md: "160px" }}
-          >
-            <Text
-              fontFamily={PRIMARY_FONT}
-              letterSpacing="0.01em"
-              {...textStyles(props.heading)}
+          </div>
+          <div className="flex flex-col items-center text-center md:min-h-[160px]">
+            <p
+              style={{
+                fontFamily: PRIMARY_FONT,
+                letterSpacing: "0.01em",
+                ...textStyles(props.heading),
+              }}
             >
               {heading ||
                 (streamDocument.address?.line1 as string)?.toUpperCase()}
-            </Text>
-            <Box
-              mt={3}
-              fontFamily={SECONDARY_FONT}
-              fontSize="12px"
-              lineHeight="16px"
-              color={BROWN}
+            </p>
+            <div
+              className="mt-3"
+              style={{
+                fontFamily: SECONDARY_FONT,
+                fontSize: "12px",
+                lineHeight: "16px",
+                color: BROWN,
+              }}
             >
               {streamDocument.hours ? (
                 <HoursStatus
@@ -284,8 +268,8 @@ export const DunkinHeroSectionComponent: PuckComponent<
                   timezone={streamDocument.timezone}
                 />
               ) : null}
-            </Box>
-            <Flex mt={5} gap={3} wrap="wrap" justify="center">
+            </div>
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
               <Link
                 cta={{
                   link: props.directionsCta.link,
@@ -316,55 +300,46 @@ export const DunkinHeroSectionComponent: PuckComponent<
               >
                 {props.appCta.label}
               </Link>
-            </Flex>
-          </Flex>
-        </Box>
-        <Flex
-          mt={{ base: 8, md: 10 }}
-          borderTop={`1px solid ${BORDER}`}
-          direction={{ base: "column", lg: "row" }}
-        >
-          <Box
-            flex="1"
-            borderBottom={{ base: `1px solid ${BORDER}`, lg: "none" }}
-            px={{ base: 5, md: 8 }}
-            py={{ base: 6, md: 5 }}
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 flex flex-col border-t md:mt-10 lg:flex-row" style={{ borderColor: BORDER }}>
+          <div
+            className="flex-1 border-b px-5 py-6 md:px-8 md:py-5 lg:border-b-0"
+            style={{ borderColor: BORDER }}
           >
-            <Text
-              fontFamily={PRIMARY_FONT}
-              mb={2}
-              {...textStyles(props.storeLabel)}
+            <p
+              className="mb-2"
+              style={{ fontFamily: PRIMARY_FONT, ...textStyles(props.storeLabel) }}
             >
               {storeLabel}
-            </Text>
-            <Box
-              color={BROWN}
-              fontFamily={SECONDARY_FONT}
-              fontSize="12px"
-              lineHeight="18px"
+            </p>
+            <div
+              style={{
+                color: BROWN,
+                fontFamily: SECONDARY_FONT,
+                fontSize: "12px",
+                lineHeight: "18px",
+              }}
             >
               {streamDocument.address ? (
                 <Address address={streamDocument.address} />
               ) : null}
               {streamDocument.mainPhone ? (
-                <Text mt={2}>{streamDocument.mainPhone}</Text>
+                <p className="mt-2">{streamDocument.mainPhone}</p>
               ) : null}
-            </Box>
-          </Box>
-          <Box
-            flex="1"
-            borderBottom={{ base: `1px solid ${BORDER}`, lg: "none" }}
-            borderLeft={{ base: "none", lg: `1px solid ${BORDER}` }}
-            px={{ base: 5, md: 8 }}
-            py={{ base: 6, md: 5 }}
+            </div>
+          </div>
+          <div
+            className="flex-1 border-b px-5 py-6 md:px-8 md:py-5 lg:border-b-0 lg:border-l"
+            style={{ borderColor: BORDER }}
           >
-            <Text
-              fontFamily={PRIMARY_FONT}
-              mb={2}
-              {...textStyles(props.hoursLabel)}
+            <p
+              className="mb-2"
+              style={{ fontFamily: PRIMARY_FONT, ...textStyles(props.hoursLabel) }}
             >
               {hoursLabel}
-            </Text>
+            </p>
             {streamDocument.hours ? (
               <HoursTable
                 hours={streamDocument.hours}
@@ -372,45 +347,44 @@ export const DunkinHeroSectionComponent: PuckComponent<
                 collapseDays={false}
               />
             ) : null}
-          </Box>
-          <Box
-            flex="1"
-            borderLeft={{ base: "none", lg: `1px solid ${BORDER}` }}
-            px={{ base: 5, md: 8 }}
-            py={{ base: 6, md: 5 }}
+          </div>
+          <div
+            className="flex-1 px-5 py-6 md:px-8 md:py-5 lg:border-l"
+            style={{ borderColor: BORDER }}
           >
-            <Text
-              fontFamily={PRIMARY_FONT}
-              mb={2}
-              {...textStyles(props.featuresLabel)}
+            <p
+              className="mb-2"
+              style={{
+                fontFamily: PRIMARY_FONT,
+                ...textStyles(props.featuresLabel),
+              }}
             >
               {featuresLabel}
-            </Text>
-            <Flex direction="column" gap={2}>
+            </p>
+            <div className="flex flex-col gap-2">
               {props.features.map((feature, index) => (
-                <Flex key={`${feature.value}-${index}`} align="center" gap={3}>
-                  <Box
-                    width="7px"
-                    height="7px"
-                    border={`1px solid ${ORANGE}`}
-                    borderRadius="2px"
-                    flexShrink={0}
+                <div className="flex items-center gap-3" key={`${feature.value}-${index}`}>
+                  <div
+                    className="h-[7px] w-[7px] shrink-0 rounded-[2px] border"
+                    style={{ borderColor: ORANGE }}
                   />
-                  <Text
-                    color={BROWN}
-                    fontFamily={SECONDARY_FONT}
-                    fontSize="12px"
-                    lineHeight="16px"
+                  <span
+                    style={{
+                      color: BROWN,
+                      fontFamily: SECONDARY_FONT,
+                      fontSize: "12px",
+                      lineHeight: "16px",
+                    }}
                   >
                     {feature.value}
-                  </Text>
-                </Flex>
+                  </span>
+                </div>
               ))}
-            </Flex>
-          </Box>
-        </Flex>
-      </Box>
-    </Box>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

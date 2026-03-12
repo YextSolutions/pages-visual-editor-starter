@@ -8,7 +8,6 @@ import {
   resolveComponentData,
   useDocument,
 } from "@yext/visual-editor";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import { ComplexImageType, ImageType, Link } from "@yext/pages-components";
 
 const PRIMARY_FONT = "'Dunkin Sans', 'Open Sans', sans-serif";
@@ -135,49 +134,49 @@ export const DunkinRewardsSectionComponent: PuckComponent<
   const description = resolveText(props.description, locale, streamDocument);
 
   return (
-    <Box bg={OFF_WHITE} borderBottom={`1px solid ${BORDER}`}>
-      <Flex
-        direction={{ base: "column", lg: "row" }}
-        align="center"
-        justify="space-between"
-        px={{ base: 6, md: 8, xl: 16 }}
-        py={{ base: 10, md: 8 }}
-        gap={{ base: 8, lg: 10 }}
-      >
-        <Box flex="1" textAlign="center">
-          <Text
-            color={ORANGE}
-            fontFamily={PRIMARY_FONT}
-            fontSize={`${props.title.fontSize}px`}
-            fontWeight={props.title.fontWeight}
-            lineHeight="1"
-            textTransform={props.title.textTransform}
+    <div
+      className="border-b"
+      style={{ borderColor: BORDER, backgroundColor: OFF_WHITE }}
+    >
+      <div className="flex flex-col items-center justify-between gap-8 px-6 py-10 md:px-8 md:py-8 xl:flex-row xl:px-16 xl:gap-10">
+        <div className="flex-1 text-center">
+          <p
+            style={{
+              color: ORANGE,
+              fontFamily: PRIMARY_FONT,
+              fontSize: `${props.title.fontSize}px`,
+              fontWeight: props.title.fontWeight,
+              lineHeight: "1",
+              textTransform: props.title.textTransform,
+            }}
           >
             {title}
-          </Text>
-          <Text
-            color={props.promoMessage.fontColor}
-            fontFamily={PRIMARY_FONT}
-            fontSize={`${props.promoMessage.fontSize}px`}
-            fontWeight={props.promoMessage.fontWeight}
-            lineHeight="1"
-            mt={3}
-            textTransform={props.promoMessage.textTransform}
+          </p>
+          <p
+            className="mt-3"
+            style={{
+              color: props.promoMessage.fontColor,
+              fontFamily: PRIMARY_FONT,
+              fontSize: `${props.promoMessage.fontSize}px`,
+              fontWeight: props.promoMessage.fontWeight,
+              lineHeight: "1",
+              textTransform: props.promoMessage.textTransform,
+            }}
           >
             {promoMessage}
-          </Text>
-          <Text
-            mt={4}
-            maxW="540px"
-            mx="auto"
-            color={props.description.fontColor}
-            fontFamily={SECONDARY_FONT}
-            fontSize={`${props.description.fontSize}px`}
-            fontWeight={props.description.fontWeight}
-            lineHeight="18px"
+          </p>
+          <p
+            className="mx-auto mt-4 max-w-[540px]"
+            style={{
+              color: props.description.fontColor,
+              fontFamily: SECONDARY_FONT,
+              fontSize: `${props.description.fontSize}px`,
+              fontWeight: props.description.fontWeight,
+              lineHeight: "18px",
+            }}
           >
             {description}
-          </Text>
+          </p>
           <Link
             cta={{
               link: props.cta.link,
@@ -204,12 +203,12 @@ export const DunkinRewardsSectionComponent: PuckComponent<
           >
             {props.cta.label}
           </Link>
-        </Box>
-        <Box width={{ base: "210px", md: "300px", xl: "360px" }} flexShrink={0}>
+        </div>
+        <div className="w-[210px] shrink-0 md:w-[300px] xl:w-[360px]">
           {image ? <Image image={image} /> : null}
-        </Box>
-      </Flex>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

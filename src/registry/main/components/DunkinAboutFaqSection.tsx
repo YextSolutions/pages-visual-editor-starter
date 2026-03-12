@@ -1,5 +1,4 @@
 import { ComponentConfig, Fields, PuckComponent } from "@puckeditor/core";
-import { Box, Flex, Text } from "@chakra-ui/react";
 import {
   TranslatableString,
   YextEntityField,
@@ -123,94 +122,93 @@ export const DunkinAboutFaqSectionComponent: PuckComponent<
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
 
   return (
-    <Box
-      bg={OFF_WHITE}
-      borderBottom={`1px solid ${BORDER}`}
-      px={{ base: 6, md: 8, xl: 20 }}
-      py={{ base: 8, md: 18 }}
+    <div
+      className="border-b px-6 py-8 md:px-8 md:py-[72px] xl:px-20"
+      style={{ borderColor: BORDER, backgroundColor: OFF_WHITE }}
     >
       <style>{`.dunkin-faq-answer a { text-decoration: underline; }`}</style>
-      <Flex direction={{ base: "column", lg: "row" }} gap={{ base: 8, lg: 16 }}>
-        <Box flex="1">
-          <Text
-            color={props.heading.fontColor}
-            fontFamily={PRIMARY_FONT}
-            fontSize={`${props.heading.fontSize}px`}
-            fontWeight={props.heading.fontWeight}
-            lineHeight="1"
-            textTransform={props.heading.textTransform}
+      <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
+        <div className="flex-1">
+          <p
+            style={{
+              color: props.heading.fontColor,
+              fontFamily: PRIMARY_FONT,
+              fontSize: `${props.heading.fontSize}px`,
+              fontWeight: props.heading.fontWeight,
+              lineHeight: "1",
+              textTransform: props.heading.textTransform,
+            }}
           >
             {heading.split("Dunkin'")[0]}
-            <Text as="span" color={ORANGE} ml={2}>
+            <span className="ml-2" style={{ color: ORANGE }}>
               {"DUNKIN'"}
-            </Text>
-          </Text>
-          <Text
-            mt={6}
-            color={props.description.fontColor}
-            fontFamily={SECONDARY_FONT}
-            fontSize={`${props.description.fontSize}px`}
-            fontWeight={props.description.fontWeight}
-            lineHeight={{ base: "18px", md: "24px" }}
-            whiteSpace="pre-line"
+            </span>
+          </p>
+          <p
+            className="mt-6 whitespace-pre-line leading-[18px] md:leading-[24px]"
+            style={{
+              color: props.description.fontColor,
+              fontFamily: SECONDARY_FONT,
+              fontSize: `${props.description.fontSize}px`,
+              fontWeight: props.description.fontWeight,
+            }}
           >
             {description}
-          </Text>
-        </Box>
-        <Box flex="1" maxW={{ base: "none", lg: "457px" }} ml="auto">
+          </p>
+        </div>
+        <div className="ml-auto flex-1 lg:max-w-[457px]">
           {props.faqs.map((item, index) => {
             const isOpen = openIndex === index;
             return (
-              <Box
+              <div
                 key={`${item.question}-${index}`}
-                borderBottom={
-                  index === props.faqs.length - 1
-                    ? "none"
-                    : `1px solid ${BORDER}`
-                }
-                py={4}
+                className="py-4"
+                style={{
+                  borderBottom:
+                    index === props.faqs.length - 1 ? "none" : `1px solid ${BORDER}`,
+                }}
               >
-                <Flex
-                  as="button"
-                  width="100%"
-                  align="center"
-                  justify="space-between"
-                  textAlign="left"
+                <button
+                  className="flex w-full items-center justify-between text-left"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
+                  type="button"
                 >
-                  <Text
-                    color={BROWN}
-                    fontFamily={SECONDARY_FONT}
-                    fontSize="16px"
-                    fontWeight={500}
+                  <span
+                    style={{
+                      color: BROWN,
+                      fontFamily: SECONDARY_FONT,
+                      fontSize: "16px",
+                      fontWeight: 500,
+                    }}
                   >
                     {item.question}
-                  </Text>
-                  <Box
-                    color={BROWN}
-                    transform={isOpen ? "rotate(180deg)" : "rotate(0deg)"}
-                    transition="transform 0.3s ease"
+                  </span>
+                  <span
+                    style={{
+                      color: BROWN,
+                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.3s ease",
+                    }}
                   >
                     <FaChevronDown />
-                  </Box>
-                </Flex>
+                  </span>
+                </button>
                 {isOpen ? (
-                  <Box
-                    className="dunkin-faq-answer"
-                    mt={4}
-                    color={BROWN}
-                    fontFamily={SECONDARY_FONT}
-                    fontSize={{ base: "12px", md: "14px" }}
-                    lineHeight={{ base: "16px", md: "18px" }}
+                  <div
+                    className="dunkin-faq-answer mt-4 text-[12px] leading-[16px] md:text-[14px] md:leading-[18px]"
+                    style={{
+                      color: BROWN,
+                      fontFamily: SECONDARY_FONT,
+                    }}
                     dangerouslySetInnerHTML={{ __html: item.answerHtml }}
                   />
                 ) : null}
-              </Box>
+              </div>
             );
           })}
-        </Box>
-      </Flex>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 
