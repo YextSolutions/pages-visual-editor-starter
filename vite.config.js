@@ -16,6 +16,7 @@ const applyGeneratedTemplateConfigPlugin = () => {
       if (hasRun) {
         return;
       }
+      console.info("Generating template configs...");
       hasRun = true;
 
       await execFileAsync(process.execPath, [
@@ -23,6 +24,7 @@ const applyGeneratedTemplateConfigPlugin = () => {
         "tsx",
         "scripts/generateTemplateConfig.ts",
       ]);
+      console.log("Template configs generated successfully!");
     },
   };
 };

@@ -97,6 +97,18 @@ type ManifestFile = {
   templates?: TemplateManifestEntry[];
 };
 
+const log = (...messages: unknown[]): void => {
+  console.log("[generateTemplateConfig]", ...messages);
+};
+
+const warn = (...messages: unknown[]): void => {
+  console.warn("[generateTemplateConfig]", ...messages);
+};
+
+const error = (...messages: unknown[]): void => {
+  console.error("[generateTemplateConfig]", ...messages);
+};
+
 /**
  * Converts a file or path-like string to PascalCase.
  * @param {string} value
@@ -203,11 +215,12 @@ const walkDirectory = async (directory: string): Promise<string[]> => {
  */
 const getTemplateNames = async (): Promise<string[]> => {
   if (!(await fileExists(REGISTRY_DIR))) {
+    warn(`Registry directory not found at ${REGISTRY_DIR}`);
     return [];
   }
 
   const entries = await fs.readdir(REGISTRY_DIR, { withFileTypes: true });
-  return entries
+  const templateNames = entries
     .filter((entry) => {
       return entry.isDirectory();
     })
@@ -217,6 +230,9 @@ const getTemplateNames = async (): Promise<string[]> => {
     .sort((a, b) => {
       return a.localeCompare(b);
     });
+
+  log("Discovered templates:", templateNames);
+  return templateNames;
 };
 
 /**
@@ -308,10 +324,12 @@ const collectTemplateComponents = async (
   const usedImportNames = new Set<string>();
   const usedComponentNames = new Set<string>();
 
-  return collectGroupItems({
+  const items = await collectGroupItems({
     directory: templatePaths.componentsDirectory,
     importPrefix: `${templateKey}Component`
   }, usedImportNames, usedComponentNames);
+  log(`Collected ${items.length} components for ${templateName}`);
+  return items;
 };
 
 /**
@@ -414,6 +432,7 @@ const buildTemplateSource = (
   configImportPath: string,
   configExportName: string
 ): string => {
+  log(`Rendering template source for ${templateName}`);
   const templateComponentName = requireNonEmpty(toPascalCase(templateName), `Could not derive a template component name from ${templateName}`);
   if (!baseSource.includes("TEMPLATE_CONFIG")) {
     throw new Error(`Could not find TEMPLATE_CONFIG placeholder in ${TEMP_BASE_TEMPLATE_PATH}`);
@@ -718,9 +737,11 @@ const updateEditTemplateConfig = async (
   templateNames: string[]
 ): Promise<boolean> => {
   if (!(await fileExists(EDIT_TEMPLATE_PATH))) {
+    warn(`Skipping edit template update because ${EDIT_TEMPLATE_PATH} does not exist`);
     return false;
   }
 
+  log("Updating edit template registry imports");
   const originalSource = await fs.readFile(EDIT_TEMPLATE_PATH, "utf8");
   const sourceFile = await getAstSourceFile(EDIT_TEMPLATE_PATH);
 
@@ -754,10 +775,12 @@ const updateEditTemplateConfig = async (
   sourceFile.forget();
 
   if (updatedSource === originalSource) {
+    log("Edit template did not change");
     return false;
   }
 
   await fs.writeFile(EDIT_TEMPLATE_PATH, updatedSource, "utf8");
+  log(`Wrote updated edit template to ${EDIT_TEMPLATE_PATH}`);
   return true;
 };
 
@@ -769,6 +792,7 @@ const updateEditTemplateConfig = async (
 const generateTemplateRegistryConfig = async (
   templateName: string
 ): Promise<GeneratedConfigResult> => {
+  log(`Generating config for ${templateName}`);
   const templatePaths = getTemplatePaths(templateName);
   const items = await collectTemplateComponents(templateName);
   const source = buildConfigSource(items, templatePaths.configPath, templateName);
@@ -778,6 +802,7 @@ const generateTemplateRegistryConfig = async (
 
   await fs.mkdir(path.dirname(templatePaths.configPath), { recursive: true });
   await fs.writeFile(templatePaths.configPath, formattedSource, "utf8");
+  log(`Wrote config for ${templateName} to ${templatePaths.configPath}`);
 
   return {
     templateName,
@@ -816,12 +841,15 @@ const updateTemplateManifest = async (
   templateNames: string[]
 ): Promise<boolean> => {
   if (!(await fileExists(TEMPLATE_MANIFEST_PATH))) {
+    warn(`Skipping manifest update because ${TEMPLATE_MANIFEST_PATH} does not exist`);
     return false;
   }
 
+  log("Updating template manifest");
   const manifestSource = await fs.readFile(TEMPLATE_MANIFEST_PATH, "utf8");
   const manifest = JSON.parse(manifestSource) as ManifestFile;
   if (!Array.isArray(manifest.templates)) {
+    warn("Skipping manifest update because templates is not an array");
     return false;
   }
 
@@ -830,6 +858,7 @@ const updateTemplateManifest = async (
   for (const templateName of templateNames) {
     const templatePaths = getTemplatePaths(templateName);
     if (!(await fileExists(templatePaths.defaultLayoutPath))) {
+      warn(`Skipping default layout for ${templateName} because ${templatePaths.defaultLayoutPath} does not exist`);
       continue;
     }
 
@@ -843,20 +872,24 @@ const updateTemplateManifest = async (
       templateEntry = buildTemplateManifestEntry(templateName, defaultLayoutData);
       manifest.templates.push(templateEntry);
       updated = true;
+      log(`Added manifest entry for ${templateName}`);
       continue;
     }
 
     if (templateEntry.defaultLayoutData !== defaultLayoutData) {
       templateEntry.defaultLayoutData = defaultLayoutData;
       updated = true;
+      log(`Updated defaultLayoutData for ${templateName}`);
     }
   }
 
   if (!updated) {
+    log("Template manifest did not change");
     return false;
   }
 
   await fs.writeFile(TEMPLATE_MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  log(`Wrote updated manifest to ${TEMPLATE_MANIFEST_PATH}`);
   return true;
 };
 
@@ -868,9 +901,11 @@ const updateTemplateManifest = async (
  */
 const generateTemplateFile = async (templateName: string): Promise<boolean> => {
   if (!(await fileExists(TEMP_BASE_TEMPLATE_PATH))) {
+    warn(`Skipping template generation because ${TEMP_BASE_TEMPLATE_PATH} does not exist`);
     return false;
   }
 
+  log(`Generating template file for ${templateName}`);
   const templatePaths = getTemplatePaths(templateName);
   const configExportName = getTemplateConfigExportName(templateName);
   const configImportPath = toPosixPath(path.relative(path.dirname(templatePaths.templatePath), templatePaths.configPath).replace(/\.[^/.]+$/, ""));
@@ -886,10 +921,12 @@ const generateTemplateFile = async (templateName: string): Promise<boolean> => {
   }
 
   if (previousSource === renderedTemplateSource) {
+    log(`Template file for ${templateName} did not change`);
     return false;
   }
 
   await fs.writeFile(templatePaths.templatePath, renderedTemplateSource, "utf8");
+  log(`Wrote template file for ${templateName} to ${templatePaths.templatePath}`);
   return true;
 };
 
@@ -899,6 +936,7 @@ const generateTemplateFile = async (templateName: string): Promise<boolean> => {
  * @returns {Promise<GenerateTemplateConfigResult>}
  */
 export const generateTemplateConfig = async (): Promise<GenerateTemplateConfigResult> => {
+  log("Starting generation");
   const templateNames = await getTemplateNames();
   const generatedConfigs: GeneratedConfigResult[] = [];
 
@@ -914,6 +952,13 @@ export const generateTemplateConfig = async (): Promise<GenerateTemplateConfigRe
   const updatedTemplateManifest = await updateTemplateManifest(templateNames);
   const updatedEditTemplate = await updateEditTemplateConfig(templateNames);
 
+  log("Finished generation", {
+    templateNames,
+    updatedTemplateManifest,
+    updatedEditTemplate,
+    generatedConfigCount: generatedConfigs.length,
+  });
+
   return {
     templateNames,
     updatedTemplateManifest,
@@ -923,8 +968,8 @@ export const generateTemplateConfig = async (): Promise<GenerateTemplateConfigRe
 };
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  generateTemplateConfig().catch((error) => {
-    console.error("Failed to generate template config:", error);
+  generateTemplateConfig().catch((cause) => {
+    error("Failed to generate template config:", cause);
     process.exitCode = 1;
   });
 }
