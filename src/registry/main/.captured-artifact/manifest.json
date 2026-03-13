@@ -1,0 +1,20 @@
+{
+  "templateName": "sweetgreen",
+  "requestedUrl": "https://www.sweetgreen.com/locations/rosslyn",
+  "finalUrl": "https://www.sweetgreen.com/locations/rosslyn",
+  "title": "Sweetgreen Rosslyn | Order Salads &amp; Bowls in Arlington, VA",
+  "capturedAtIso": "2026-03-13T17:29:14.994Z",
+  "captureMode": "headless",
+  "botChallengeDetected": false,
+  "manualInterventionUsed": false,
+  "viewport": {
+    "width": 1440,
+    "height": 2400
+  },
+  "files": {
+    "html": "page.html",
+    "screenshot": "screenshot.png",
+    "cssCombined": "combined.css"
+  },
+  "skippedStylesheets": []
+}

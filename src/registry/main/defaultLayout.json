@@ -1,0 +1,783 @@
+{
+  "root": {
+    "props": {
+      "title": {
+        "field": "name",
+        "constantValue": "Sweetgreen Pages",
+        "constantValueEnabled": false
+      },
+      "description": {
+        "field": "description",
+        "constantValue": "",
+        "constantValueEnabled": false
+      }
+    }
+  },
+  "content": [
+    {
+      "type": "SweetgreenSiteHeaderSection",
+      "props": {
+        "id": "SweetgreenSiteHeaderSection-1015d038-3d50-4460-8831-8e7d3f6f898a",
+        "leftLinks": [
+          {
+            "label": "Our Menu",
+            "link": "/menu"
+          },
+          {
+            "label": "Our Mission",
+            "link": "/mission"
+          },
+          {
+            "label": "The Market",
+            "link": "http://shop.sweetgreen.com"
+          }
+        ],
+        "rightLinks": [
+          {
+            "label": "Outpost",
+            "link": "https://outpost.sweetgreen.com"
+          },
+          {
+            "label": "Catering",
+            "link": "/catering"
+          },
+          {
+            "label": "Locations",
+            "link": "/locations"
+          },
+          {
+            "label": "Order",
+            "link": "https://order.sweetgreen.com"
+          }
+        ],
+        "mobileLinks": [
+          {
+            "label": "Our Menu",
+            "link": "/menu"
+          },
+          {
+            "label": "Our Mission",
+            "link": "/mission"
+          },
+          {
+            "label": "The Market",
+            "link": "http://shop.sweetgreen.com"
+          },
+          {
+            "label": "Outpost",
+            "link": "http://outpost.sweetgreen.com"
+          },
+          {
+            "label": "Catering",
+            "link": "/catering"
+          },
+          {
+            "label": "Locations",
+            "link": "/locations"
+          }
+        ],
+        "mobileSubLinks": [
+          {
+            "label": "Download the app",
+            "link": "https://itunes.apple.com/us/app/sweetgreen-rewards/id594329490?mt=8"
+          }
+        ],
+        "orderLabel": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Order",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 13,
+          "fontColor": "#E6FF55",
+          "fontWeight": 700,
+          "textTransform": "uppercase"
+        }
+      }
+    },
+    {
+      "type": "SweetgreenLocationHeroSection",
+      "props": {
+        "id": "SweetgreenLocationHeroSection-2b044e8b-8e56-4cf4-8270-6aa9548d5bd2",
+        "eyebrow": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Arlington, VA",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 24,
+          "fontColor": "#00473C",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "title": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Sweetgreen – Rosslyn",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 48,
+          "fontColor": "#000000",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "description": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Whether you're looking for a quick lunch on the go, a satisfying dinner, or a healthy meal option while shopping, Sweetgreen: Rosslyn offers a delicious array of choices that cater to various dietary preferences.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 18,
+          "fontColor": "#484D48",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "primaryCta": {
+          "label": "Order pickup",
+          "link": "https://order.sweetgreen.com/rosslyn/menu"
+        },
+        "secondaryCta": {
+          "label": "Get directions",
+          "link": "https://www.google.com/maps/dir/?api=1&destination=38.896399,-77.071965"
+        },
+        "heroImage": {
+          "field": "",
+          "constantValue": {
+            "url": "https://www.sweetgreen.com/static/img/pages/location/page-location-header-image.jpg"
+          },
+          "constantValueEnabled": true
+        }
+      }
+    },
+    {
+      "type": "SweetgreenFindUsSection",
+      "props": {
+        "id": "SweetgreenFindUsSection-5e4c6b21-2d41-4924-bff2-02fabbda5342",
+        "heading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Find us: Hours & Address",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 40,
+          "fontColor": "#0E150E",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "description": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Sweetgreen Rosslyn serves fresh salads and seasonal bowls in the heart of Arlington’s skyline. Located on N. Lynn Street near Central Place Plaza, we are steps from the metro and offers views of the Potomac; perfect for a city lunch with a view.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 18,
+          "fontColor": "#6B6B6B",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "detailImage": {
+          "field": "",
+          "constantValue": {
+            "url": "https://images.ctfassets.net/eum7w7yri3zr/1hw10ZxR4AxPvoeRJkTP48/30465889e805156a44957cc83bd27f8d/New_Rosslyn_Treehouse-5.jpg?w=1000&q=75",
+            "width": 1000
+          },
+          "constantValueEnabled": true
+        },
+        "details": [
+          {
+            "title": "Contact",
+            "body": "703-372-9009",
+            "linkLabel": "Call now",
+            "link": "tel:+17033729009"
+          },
+          {
+            "title": "Parking",
+            "body": "Parking Garage"
+          },
+          {
+            "title": "Catering?",
+            "body": "This location offers catering",
+            "linkLabel": "More info",
+            "link": "https://www.sweetgreen.com/catering"
+          }
+        ]
+      }
+    },
+    {
+      "type": "SweetgreenMenuSection",
+      "props": {
+        "id": "SweetgreenMenuSection-cf41eae1-6e47-4d56-8d48-0d851eae732f",
+        "heading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Healthy Salads, Bowls & Protein Plates",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 40,
+          "fontColor": "#0E150E",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "description": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Explore our menu crafted with fresh, seasonal ingredients, where you can customize your dish or create your own unique meal!",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 18,
+          "fontColor": "#484D48",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "cta": {
+          "label": "View our full menu",
+          "link": "https://order.sweetgreen.com/rosslyn/menu"
+        },
+        "tabs": [
+          {
+            "label": "Popular",
+            "items": [
+              {
+                "name": "Harvest Bowl",
+                "tag": "Warm bowl",
+                "description": "Shredded kale, wild rice, roasted sweet potatoes, roasted almonds, apples, goat cheese, roasted chicken, balsamic vinaigrette",
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://images.ctfassets.net/eum7w7yri3zr/2fzUiiiZaXmKS3W7Onhed/0a32387828a104e88e8a6e44db71d864/Product_2x.png?w=600&q=75",
+                    "width": 686,
+                    "height": 606
+                  },
+                  "constantValueEnabled": true
+                }
+              },
+              {
+                "name": "Kale Caesar",
+                "tag": "Salad",
+                "description": "Chopped romaine, shredded kale, tomatoes, parmesan crisps, roasted chicken, shaved parmesan, caesar, lime squeeze",
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://images.ctfassets.net/eum7w7yri3zr/3Z9cz58oOFOHzVcJ36Ds4s/4f059ac20c3eaec7109a8ef28eb02170/Product_2x1.png?w=600&q=75",
+                    "width": 686,
+                    "height": 606
+                  },
+                  "constantValueEnabled": true
+                }
+              },
+              {
+                "name": "Hot Honey Chicken",
+                "tag": "Protein plate",
+                "description": "Herbed quinoa, crispy onions, warm roasted sweet potatoes, herb roasted chicken, veg slaw, hot honey mustard sauce",
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://images.ctfassets.net/eum7w7yri3zr/1qxMkaZ1pIyESd1o14hhg5/22012efed3e5a8a35b02a7c443063a52/Product_2x11.png?w=600&q=75",
+                    "width": 686,
+                    "height": 606
+                  },
+                  "constantValueEnabled": true
+                }
+              }
+            ]
+          },
+          {
+            "label": "Salads",
+            "items": [
+              {
+                "name": "Super Green Goddess",
+                "tag": "Online only",
+                "description": "Organic shredded kale, organic baby spinach, roasted sweet potatoes, shredded cabbage, spicy broccoli, roasted almonds, chickpeas, raw carrots, green goddess ranch",
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://images.ctfassets.net/eum7w7yri3zr/3Cd7T1nDVBgY2eqyXJLhUU/e9b6243f508f6fb497e8ff2012e624d9/1221.png?w=600&q=75",
+                    "width": 686,
+                    "height": 606
+                  },
+                  "constantValueEnabled": true
+                }
+              },
+              {
+                "name": "Garden Cobb",
+                "tag": "",
+                "description": "Chopped romaine, organic spring mix, roasted sweet potatoes, roasted almonds, tomatoes, avocado, hard boiled egg, blue cheese",
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://images.ctfassets.net/eum7w7yri3zr/3fVJ1uEll4N4Cey1juT6g4/99099177e3d69255b6ed605fc0ae7559/2222.png?w=600&q=75",
+                    "width": 686,
+                    "height": 606
+                  },
+                  "constantValueEnabled": true
+                }
+              },
+              {
+                "name": "Kale Caesar",
+                "tag": "Salad",
+                "description": "Chopped romaine, shredded kale, tomatoes, parmesan crisps, roasted chicken, shaved parmesan, caesar, lime squeeze",
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://images.ctfassets.net/eum7w7yri3zr/3Z9cz58oOFOHzVcJ36Ds4s/4f059ac20c3eaec7109a8ef28eb02170/Product_2x1.png?w=600&q=75",
+                    "width": 686,
+                    "height": 606
+                  },
+                  "constantValueEnabled": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "SweetgreenPromoCardsSection",
+      "props": {
+        "id": "SweetgreenPromoCardsSection-64a1a4de-4e5c-4e1a-8c14-a4f784b795e8",
+        "cards": [
+          {
+            "eyebrow": "Order your greens ahead and earn points",
+            "title": "Sweetgreen app",
+            "description": "Earn rewards, save your favorites, skip the line with mobile ordering, and get your food even faster.",
+            "ctaLabel": "Download the SG app",
+            "ctaLink": "https://order.sweetgreen.com",
+            "image": {
+              "field": "",
+              "constantValue": {
+                "url": "https://images.ctfassets.net/eum7w7yri3zr/3zDaRJYVrBHrAc772QhQrB/4a3a549439f7ec09d2d30aed155404ec/Upsell.png?w=1200&q=75"
+              },
+              "constantValueEnabled": true
+            }
+          },
+          {
+            "eyebrow": "Love free stuff?",
+            "title": "SG Rewards",
+            "description": "Earn 10 points for every eligible $1 you spend. Redeem your points for rewards at checkout.",
+            "ctaLabel": "Sign up and save",
+            "ctaLink": "https://order.sweetgreen.com/",
+            "image": {
+              "field": "",
+              "constantValue": {
+                "url": "https://images.ctfassets.net/eum7w7yri3zr/6d79XrHQ0f7Z6wr8ucpSrr/77962aef265943424af3f9a84f5b9d17/Upsell__1_.png?w=1200&q=75"
+              },
+              "constantValueEnabled": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "SweetgreenRequestLocationSection",
+      "props": {
+        "id": "SweetgreenRequestLocationSection-4d05a606-79e0-4201-a159-7154cc917ebb",
+        "heading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Want a Sweetgreen near you?",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 40,
+          "fontColor": "#0E150E",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "description": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Don’t have a Sweetgreen near you? Request a location below.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 18,
+          "fontColor": "#0E150E",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "buttonLabel": "Request location"
+      }
+    },
+    {
+      "type": "SweetgreenSustainabilitySection",
+      "props": {
+        "id": "SweetgreenSustainabilitySection-29c10b12-52c8-4337-a448-5a6a995a8c66",
+        "heading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Sustainability at Sweetgreen",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 40,
+          "fontColor": "#0E150E",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "description": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Thoughtful sourcing, compostable packaging, and lower-impact delivery are core to how we serve Rosslyn.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 18,
+          "fontColor": "#484D48",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "cards": [
+          {
+            "title": "Local Sourcing",
+            "description": "We partner with local farms to bring you the freshest ingredients while supporting our community",
+            "icon": {
+              "field": "",
+              "constantValue": {
+                "url": "https://images.ctfassets.net/eum7w7yri3zr/2U1642Smhl8ZBoBvg0BVHQ/32ad9da248ea54e4d474b9e16b2a387d/leaf.png"
+              },
+              "constantValueEnabled": true
+            }
+          },
+          {
+            "title": "Compostable Packaging",
+            "description": "All our bowls, utensils, and packaging are made from compostable materials",
+            "icon": {
+              "field": "",
+              "constantValue": {
+                "url": "https://images.ctfassets.net/eum7w7yri3zr/2RZSAdDrtmJ6tLmxZolHJb/1c0712b31a4567fea1a212ee206ccb0c/Icon_2x-3.png"
+              },
+              "constantValueEnabled": true
+            }
+          },
+          {
+            "title": "Carbon Neutral Delivery",
+            "description": "We offset delivery emissions and prioritize sustainable transportation options",
+            "icon": {
+              "field": "",
+              "constantValue": {
+                "url": "https://images.ctfassets.net/eum7w7yri3zr/2LRoruHe7WAR0yGouAR2UW/04e02cbf59db9be09e4ed16dab073b05/truck.png"
+              },
+              "constantValueEnabled": true
+            }
+          },
+          {
+            "title": "Regenerative Agriculture",
+            "description": "Supporting farming practices that restore soil health and biodiversity",
+            "icon": {
+              "field": "",
+              "constantValue": {
+                "url": "https://images.ctfassets.net/eum7w7yri3zr/6C5cyj4wVanZN993GElL2P/7a1f9abc0a675b242aad43220020c9f2/heart.png"
+              },
+              "constantValueEnabled": true
+            }
+          }
+        ],
+        "cta": {
+          "label": "Learn about Sweetgreen sustainability",
+          "link": "/mission/#sustainability"
+        },
+        "orderHeading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Order delivery or pickup in Rosslyn",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 40,
+          "fontColor": "#0E150E",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "orderDescription": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Order ahead for pickup, get it delivered, or dine in with us.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 18,
+          "fontColor": "#484D48",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "orderChannels": [
+          {
+            "title": "Pickup",
+            "description": "Order ahead and skip the line"
+          },
+          {
+            "title": "Delivery",
+            "description": "Fresh food delivered to you"
+          },
+          {
+            "title": "Dine-in",
+            "description": "Enjoy your meal in our space"
+          },
+          {
+            "title": "Catering",
+            "description": "Perfect for meetings and events"
+          }
+        ],
+        "bannerImage": {
+          "field": "",
+          "constantValue": {
+            "url": "https://images.ctfassets.net/eum7w7yri3zr/EQSc0aKag9Mata2mxF5zs/e2d62326119e1ea5984ef4015fa2b2df/2.jpg?w=2000&q=75"
+          },
+          "constantValueEnabled": true
+        },
+        "bannerHeading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Sweetgreen Catering for offices & events",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 32,
+          "fontColor": "#FFFFFF",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "bannerDescription": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Bring healthy, fresh meals to your next office meeting or special event. Perfect for groups of all sizes.",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 16,
+          "fontColor": "#FFFFFF",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "bannerCta": {
+          "label": "Order Catering",
+          "link": "https://www.ezcater.com/brand/pvt/sweetgreen-catering?shownav=1"
+        }
+      }
+    },
+    {
+      "type": "SweetgreenFaqSection",
+      "props": {
+        "id": "SweetgreenFaqSection-fea94aae-3879-462e-a65b-848c9b111c08",
+        "heading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Frequently asked questions",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 40,
+          "fontColor": "#0E150E",
+          "fontWeight": 700,
+          "textTransform": "normal"
+        },
+        "description": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "en": "Everything you need to know about ordering and visiting",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "fontSize": 18,
+          "fontColor": "#484D48",
+          "fontWeight": 400,
+          "textTransform": "normal"
+        },
+        "items": [
+          {
+            "question": "Can I order Sweetgreen online for pickup or delivery?",
+            "answer": "Use the Sweetgreen app to order ahead for pickup or delivery. You can also order in-store."
+          },
+          {
+            "question": "Does Sweetgreen offer vegetarian, vegan, or gluten-free options?",
+            "answer": "You can order from a variety of vegetarian, vegan and gluten-free options. You can customize a signature bowl or create your own to meet your dietary needs."
+          },
+          {
+            "question": "Does Sweetgreen provide catering for offices and events?",
+            "answer": "Yes, you can order catering for offices and events. Visit www.sweetgreen.com/catering for more information."
+          },
+          {
+            "question": "How do Sweetgreen Rewards work?",
+            "answer": "SG Rewards is a free, points-based loyalty program where members earn 10 points for every eligible $1 spent. Use accumulated points to redeem rewards."
+          }
+        ]
+      }
+    },
+    {
+      "type": "SweetgreenFooterSection",
+      "props": {
+        "id": "SweetgreenFooterSection-40c38ae1-3dbb-4779-b158-7c9e3fbea063",
+        "appImage": {
+          "field": "",
+          "constantValue": {
+            "url": "https://images.ctfassets.net/eum7w7yri3zr/QeC14rNAsPTRIuV4EAafd/f6d5c7574ff3f26a87f23d4f9d1c0b8f/PickUp1.png?w=600&q=75",
+            "width": 1605,
+            "height": 1596
+          },
+          "constantValueEnabled": true
+        },
+        "appLinks": [
+          {
+            "label": "iOS",
+            "link": "https://apps.apple.com/us/app/sweetgreen-rewards/id594329490"
+          },
+          {
+            "label": "Android",
+            "link": "https://play.google.com/store/apps/details?id=com.sweetgreen.android.app&hl=en"
+          }
+        ],
+        "columns": [
+          {
+            "title": "About Us",
+            "links": [
+              {
+                "label": "Careers",
+                "link": "https://careers.sweetgreen.com/"
+              },
+              {
+                "label": "Investor Relations",
+                "link": "https://investor.sweetgreen.com/overview/default.aspx"
+              },
+              {
+                "label": "Locations",
+                "link": "https://www.sweetgreen.com/locations"
+              },
+              {
+                "label": "Press",
+                "link": "/press"
+              },
+              {
+                "label": "sweetgreen app",
+                "link": "https://apps.apple.com/us/app/sweetgreen-rewards/id594329490"
+              },
+              {
+                "label": "The Hex Bowl",
+                "link": "/hex"
+              }
+            ]
+          },
+          {
+            "title": "Social Media",
+            "links": [
+              {
+                "label": "Instagram",
+                "link": "https://www.instagram.com/sweetgreen/"
+              },
+              {
+                "label": "Twitter",
+                "link": "https://twitter.com/sweetgreen"
+              },
+              {
+                "label": "TikTok",
+                "link": "https://www.tiktok.com/@sweetgreen"
+              },
+              {
+                "label": "Spotify",
+                "link": "https://open.spotify.com/user/1224421164"
+              },
+              {
+                "label": "Facebook",
+                "link": "http://facebook.com/sweetgreen"
+              }
+            ]
+          },
+          {
+            "title": "Support + Services",
+            "links": [
+              {
+                "label": "Nutrition + Allergens Guide",
+                "link": "https://drive.google.com/file/d/1AQyfAeWWqiZmTIiOHpWMgHi7-sAprnl1/view"
+              },
+              {
+                "label": "Contact us",
+                "link": "https://sierra.chat/agent/KJs113MBlIwai-wBlIwa-e2MUgqOpYOuqqQlOrg0KNw/chat"
+              },
+              {
+                "label": "Gift Cards",
+                "link": "https://order.sweetgreen.com/gift"
+              },
+              {
+                "label": "Store",
+                "link": "https://shop.sweetgreen.com/"
+              }
+            ]
+          },
+          {
+            "title": "Legal",
+            "links": [
+              {
+                "label": "Privacy Policy",
+                "link": "/privacy-policy"
+              },
+              {
+                "label": "Terms of Use",
+                "link": "/terms"
+              },
+              {
+                "label": "Your Privacy Choices",
+                "link": "privacy-preference-center"
+              },
+              {
+                "label": "California Notice at Collection",
+                "link": "https://www.sweetgreen.com/privacy-policy#additional-information-for-california-residents"
+              },
+              {
+                "label": "Accessibility Statement",
+                "link": "https://www.sweetgreen.com/accessibility-statement"
+              },
+              {
+                "label": "Consumer Health Data Notice",
+                "link": "/consumer-health-data-notice"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "zones": {}
+}
