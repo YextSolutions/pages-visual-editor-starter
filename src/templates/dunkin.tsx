@@ -26,7 +26,7 @@ import {
   resolveUrlTemplate,
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
-import { MainConfig } from "../registry/main/config";
+import { DunkinConfig } from "../registry/dunkin/config";
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
   data: TemplateRenderProps
@@ -105,7 +105,7 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
 
   const resolvedPuckData = await resolveAllData(
     JSON.parse(document.__.layout),
-    MainConfig,
+    DunkinConfig,
     {
       streamDocument: document,
     }
@@ -117,7 +117,7 @@ export const transformProps: TransformProps<TemplateProps> = async (props) => {
   return { ...props, document, translations };
 };
 
-const Main: Template<TemplateRenderProps> = (props) => {
+const Dunkin: Template<TemplateRenderProps> = (props) => {
   const { document } = props;
 
   const layoutString = document.__.layout;
@@ -148,7 +148,7 @@ const Main: Template<TemplateRenderProps> = (props) => {
     >
         <VisualEditorProvider templateProps={props}>
           <Render
-            config={MainConfig}
+            config={DunkinConfig}
             data={data}
             metadata={{ streamDocument: document }}
           />
@@ -157,4 +157,4 @@ const Main: Template<TemplateRenderProps> = (props) => {
   );
 };
 
-export default Main;
+export default Dunkin;

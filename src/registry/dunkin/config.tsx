@@ -12,7 +12,7 @@ import { DunkinNearbyStoresSection as MainComponentDunkinNearbyStoresSection } f
 import { DunkinRewardsSection as MainComponentDunkinRewardsSection } from "./components/DunkinRewardsSection";
 import { DunkinVideoSection as MainComponentDunkinVideoSection } from "./components/DunkinVideoSection";
 
-export const MainConfig: Config = {
+export const DunkinConfig: Config = {
   components: {
     DunkinAboutFaqSection: MainComponentDunkinAboutFaqSection,
     DunkinBreadcrumbSection: MainComponentDunkinBreadcrumbSection,
