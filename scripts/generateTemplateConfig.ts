@@ -13,8 +13,8 @@
  *    - Copy `temp/base.tsx` to `src/templates/<template>.tsx`.
  *    - Render that template by inserting the matching
  *      `src/registry/<template>/config.tsx` import.
- *    - Replace `TEMPLATE_CONFIG` and rename the exported template component to
- *      match the template name.
+ *    - Point `baseConfig` at that generated config and rename the exported
+ *      template component to match the template name.
  *
  * 4) Update `.template-manifest.json`.
  *    - Read `src/registry/<template>/defaultLayout.json` when present.
@@ -418,7 +418,8 @@ const buildConfigSource = (
 
 /**
  * Renders a template file from `temp/base.tsx` by inserting the registry config
- * import, replacing `TEMPLATE_CONFIG`, and renaming the exported component.
+ * import, pointing `baseConfig` at that imported config, and renaming the
+ * exported component.
  * @param {string} baseSource
  * @param {string} templateName
  * @param {string} configImportPath
@@ -433,18 +434,13 @@ const buildTemplateSource = (
 ): string => {
   log(`Rendering template source for ${templateName}`);
   const templateComponentName = requireNonEmpty(toPascalCase(templateName), `Could not derive a template component name from ${templateName}`);
-  if (!baseSource.includes("TEMPLATE_CONFIG")) {
-    throw new Error(`Could not find TEMPLATE_CONFIG placeholder in ${TEMP_BASE_TEMPLATE_PATH}`);
-  }
-
-  const renderedBaseSource = baseSource.replace(/\bTEMPLATE_CONFIG\b/g, configExportName);
   const sourceFilePath = path.join(ROOT_DIR, "__generated_template_source__.tsx");
   const existing = AST_PROJECT.getSourceFile(sourceFilePath);
   if (existing) {
     existing.deleteImmediatelySync();
   }
 
-  const sourceFile = AST_PROJECT.createSourceFile(sourceFilePath, renderedBaseSource, {
+  const sourceFile = AST_PROJECT.createSourceFile(sourceFilePath, baseSource, {
     overwrite: true,
   });
   const pagesComponentsImport = sourceFile.getImportDeclarations().find((item) => {
@@ -460,12 +456,19 @@ const buildTemplateSource = (
     moduleSpecifier: configImportPath,
   });
 
-  const locationDeclaration = sourceFile.getVariableDeclaration("Location");
-  if (!locationDeclaration) {
+  const baseConfigDeclaration = sourceFile.getVariableDeclaration("baseConfig");
+  if (!baseConfigDeclaration) {
     sourceFile.forget();
-    throw new Error(`Could not find Location component placeholder in ${TEMP_BASE_TEMPLATE_PATH}`);
+    throw new Error(`Could not find baseConfig declaration in ${TEMP_BASE_TEMPLATE_PATH}`);
   }
-  locationDeclaration.rename(templateComponentName);
+  baseConfigDeclaration.setInitializer(configExportName);
+
+  const baseComponentDeclaration = sourceFile.getVariableDeclaration("Base");
+  if (!baseComponentDeclaration) {
+    sourceFile.forget();
+    throw new Error(`Could not find Base component placeholder in ${TEMP_BASE_TEMPLATE_PATH}`);
+  }
+  baseComponentDeclaration.rename(templateComponentName);
 
   const exportAssignment = sourceFile.getExportAssignment((assignment) => {
     return !assignment.isExportEquals();
