@@ -26,6 +26,7 @@
  *    - Import each generated config into `componentRegistry`.
  *    - Ensure `componentRegistry` points each template name to its config while
  *      preserving existing `directory` and `locator` entries when present.
+ *    - Ensure the editor template is wrapped in Chakra 3's provider.
  *
  */
 import { promises as fs } from "node:fs";
@@ -630,6 +631,46 @@ const ensureNamedImport = (
 };
 
 /**
+ * Wraps the `Edit` component body in `ChakraProvider`.
+ * @param {import("ts-morph").SourceFile} sourceFile
+ * @returns {void}
+ */
+// const wrapEditWithChakraProvider = (sourceFile: SourceFile): void => {
+//   const declaration = sourceFile.getVariableDeclaration("Edit");
+//   if (!declaration) {
+//     return;
+//   }
+
+//   const statement = declaration.getFirstAncestorByKind(SyntaxKind.VariableStatement);
+//   if (!statement) {
+//     return;
+//   }
+
+//   statement.replaceWithText(`const Edit: () => JSX.Element = () => {
+//   const entityDocument = usePlatformBridgeDocument();
+//   const entityFields = usePlatformBridgeEntityFields();
+
+//   return (
+//       <ChakraProvider value={defaultSystem}>
+//         <VisualEditorProvider
+//           templateProps={{
+//             document: entityDocument,
+//         }}
+//         entityFields={entityFields}
+//         tailwindConfig={tailwindConfig}
+//       >
+//         <Editor
+//           document={entityDocument}
+//           componentRegistry={componentRegistry}
+//           themeConfig={defaultThemeConfig}
+//         />
+//       </VisualEditorProvider>
+//     </ChakraProvider>
+//   );
+// };`);
+// };
+
+/**
  * Builds the local config identifier used in `edit.tsx`.
  * @param {string} templateName
  * @returns {string}
@@ -706,6 +747,7 @@ const updateEditTemplateConfig = async (
 
   removeNamedImports(sourceFile, "@yext/visual-editor", ["mainConfig"]);
   removeGeneratedConfigImports(sourceFile);
+  //ensureNamedImport(sourceFile, "@chakra-ui/react", ["ChakraProvider", "defaultSystem"]);
   ensureSideEffectImport(sourceFile, "@yext/visual-editor/editor.css");
   ensureSideEffectImport(sourceFile, "../index.css");
 
@@ -726,6 +768,7 @@ const updateEditTemplateConfig = async (
   }
 
   setEditComponentRegistry(sourceFile, templateNames);
+  //wrapEditWithChakraProvider(sourceFile);
 
   sourceFile.formatText();
   const updatedSource = sourceFile.getFullText();
