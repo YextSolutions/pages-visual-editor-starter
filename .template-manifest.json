@@ -1,7 +1,7 @@
 {
   "templates": [
     {
-      "name": "main",
+      "name": "dunkin",
       "description": "Use this template to generate pages for each of your Locations.",
       "exampleSiteUrl": "",
       "layoutRequired": true,
