@@ -41,7 +41,11 @@ const TEMPLATE_MANIFEST_PATH = path.join(ROOT_DIR, ".template-manifest.json");
 const EDIT_TEMPLATE_PATH = path.join(ROOT_DIR, "src", "templates", "edit.tsx");
 const TEMP_BASE_TEMPLATE_PATH = path.join(ROOT_DIR, "temp", "base.tsx");
 const VALID_EXTENSIONS = new Set([".tsx", ".ts", ".jsx", ".js"]);
-const PRESERVED_EDIT_REGISTRY_KEYS = new Set(["directory", "locator"]);
+const PRESERVED_EDIT_REGISTRY_KEYS = new Set([
+  "directory",
+  "locator",
+  "repo-based-location",
+]);
 
 const AST_PROJECT = new Project({
   manipulationSettings: {
@@ -712,7 +716,9 @@ ${registryEntries}
       continue;
     }
 
-    const propertyName = propertyAssignment.getName();
+    const propertyName = propertyAssignment
+      .getName()
+      .replace(/^['"]|['"]$/g, "");
     if (PRESERVED_EDIT_REGISTRY_KEYS.has(propertyName)) {
       continue;
     }
@@ -745,7 +751,6 @@ const updateEditTemplateConfig = async (
   const originalSource = await fs.readFile(EDIT_TEMPLATE_PATH, "utf8");
   const sourceFile = await getAstSourceFile(EDIT_TEMPLATE_PATH);
 
-  removeNamedImports(sourceFile, "@yext/visual-editor", ["mainConfig"]);
   removeGeneratedConfigImports(sourceFile);
   //ensureNamedImport(sourceFile, "@chakra-ui/react", ["ChakraProvider", "defaultSystem"]);
   ensureSideEffectImport(sourceFile, "@yext/visual-editor/editor.css");
