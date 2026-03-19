@@ -1,3 +1,4 @@
+import "../nodePolyfills";
 import "@yext/visual-editor/style.css";
 import "../index.css";
 import {

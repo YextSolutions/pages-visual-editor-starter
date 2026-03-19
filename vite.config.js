@@ -1,9 +1,14 @@
+import { webcrypto } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import yextSSG from "@yext/pages/vite-plugin";
 import { yextVisualEditorPlugin } from "@yext/visual-editor/plugin";
+
+if (!globalThis.crypto) {
+  globalThis.crypto = webcrypto;
+}
 
 const execFileAsync = promisify(execFile);
 
