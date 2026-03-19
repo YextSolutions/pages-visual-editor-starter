@@ -9,8 +9,7 @@
     "dev": "pages dev",
     "prod": "pages prod",
     "build": "pages build",
-    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add",
-    "generate:template-configs": "node --import tsx scripts/generateTemplateConfig.ts"
+    "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add"
   },
   "engines": {
     "node": ">=20.18.2"
@@ -34,7 +33,7 @@
     "classnames": "^2.4.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.378.0",
-    "mapbox-gl": "^2.9.2",
+    "mapbox-gl": "^3.20.0",
     "next-themes": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -52,7 +51,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.2.9",
     "@yext/pages-components": "^2.0.1",
-    "@yext/visual-editor": "1.1.0-alpha.5",
+    "@yext/visual-editor": "file:../visual-editor/packages/visual-editor/yext-visual-editor-1.1.0-alpha.5.tgz",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
@@ -60,7 +59,6 @@
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "0.4.1",
     "tailwindcss": "^3.3.0",
-    "ts-morph": "^23.0.0",
     "typescript": "^5.3.3",
     "vite": "^5.1.6"
   },
