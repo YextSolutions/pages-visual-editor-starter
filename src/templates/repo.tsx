@@ -11,7 +11,7 @@ import {
   TemplateConfig,
   TransformProps,
 } from "@yext/pages";
-import { Data, Render, resolveAllData } from "@measured/puck";
+import { Data, Render, resolveAllData } from "@puckeditor/core";
 import {
   applyTheme,
   VisualEditorProvider,
