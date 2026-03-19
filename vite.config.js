@@ -31,6 +31,7 @@ export default defineConfig({
   plugins: [
     react(),
     yextVisualEditorPlugin(),
+    applyGeneratedTemplateConfigPlugin(),
     yextSSG(),
   ],
 });
