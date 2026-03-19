@@ -10,6 +10,7 @@ import {
   HeadConfig,
   TagType,
   TransformProps,
+  TemplateConfig,
 } from "@yext/pages";
 import { Render, resolveAllData } from "@puckeditor/core";
 import {
@@ -27,6 +28,35 @@ import {
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
 import { DunkinConfig } from "../registry/dunkin/config";
+
+export const config = {
+  name: "repo-dunkin",
+  stream: {
+    $id: "repo-dunkin-stream",
+    filter: {
+      entityTypes: ["location"],
+    },
+    fields: [
+      "id",
+      "uid",
+      "meta",
+      "slug",
+      "name",
+      "hours",
+      "address",
+      "additionalHoursText",
+      "mainPhone",
+      "emails",
+    ],
+    localization: {
+      locales: ["en"],
+    },
+    includeCertifiedFacts: true,
+  },
+  additionalProperties: {
+    isVETemplate: true,
+  },
+} as const satisfies TemplateConfig;
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
   data: TemplateRenderProps
@@ -93,11 +123,12 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
   };
 };
 
-export const getPath: GetPath<TemplateProps> = ({
-  document,
-  relativePrefixToRoot,
-}) => {
-  return resolveUrlTemplate(document, relativePrefixToRoot);
+export const getPath: GetPath<
+  TemplateProps & { relativePrefixToRoot: string }
+> = ({ document, relativePrefixToRoot }) => {
+  return (
+    "dunkin/" + resolveUrlTemplate(document, relativePrefixToRoot)
+  );
 };
 
 export const transformProps: TransformProps<TemplateProps> = async (props) => {
