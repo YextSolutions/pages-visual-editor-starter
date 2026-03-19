@@ -6,6 +6,7 @@
   "license": "BSD-3-Clause",
   "type": "module",
   "scripts": {
+    "prebuild": "pages generate features",
     "dev": "pages dev",
     "prod": "pages prod",
     "build": "pages build",
