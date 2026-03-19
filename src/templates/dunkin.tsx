@@ -26,7 +26,7 @@ import {
   resolveUrlTemplate,
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
-import { DunkinConfig } from "../registry/dunkin/config";
+import { DunkinConfig } from "../components/dunkin/DunkinConfig";
 
 export const config = {
   name: "repo-dunkin",
