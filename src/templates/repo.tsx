@@ -67,9 +67,14 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
   const { title, description } = getPageMetadata(document);
   const schema = getSchema(data);
   const faviconUrl = document?._favicon ?? document?._site?.favicon?.url;
+  const fallbackTitle =
+    title ??
+    document?.name ??
+    document?.meta?.entityType?.name ??
+    "Location";
 
   return {
-    title: title,
+    title: fallbackTitle,
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
     tags: [
