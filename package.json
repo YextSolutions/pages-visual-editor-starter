@@ -50,7 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "@yext/pages": "https://raw.githubusercontent.com/jwartofsky-yext/publicAssets/main/packs/pages_3_20_26.tgz",
+    "@yext/pages": "https://raw.githubusercontent.com/jwartofsky-yext/publicAssets/main/packs/yext-pages-custom-edit.tgz",
     "@yext/pages-components": "2.0.2",
     "@yext/visual-editor": "https://pkg.pr.new/@yext/visual-editor@1115",
     "autoprefixer": "^10.4.8",
