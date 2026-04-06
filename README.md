@@ -32,6 +32,29 @@ This command will start a Vite-powered dev server that will enable hot-reloading
 
 NOTE: Whenever you make changes to your stream definitions, you must re-run `npm run dev` for the system to update the `features.json` and the required entities to power your site.
 
+### Local Editor Testing Flow
+
+This starter uses the Visual Editor Vite plugin's fake `/local-editor` shell for local testing.
+
+The shell reads template-specific stream definitions from the root `stream.config.ts` file. Each template can point at a different stream, which allows the local editor to switch between templates without forcing every template to share the same entity pool.
+
+When local editor support is enabled, the plugin generates one hidden local-editor data template per configured template. Those generated templates are what power `yext pages generate-test-data` for the fake editor shell.
+
+Recommended loop:
+
+1. Update `stream.config.ts` so each template points at the entity data it needs.
+1. Run `npm run dev`.
+1. Run `yext pages generate-test-data` whenever your local-editor stream config changes.
+1. Open `/local-editor` and switch between templates, entities, and locales.
+
+Draft behavior in the fake shell:
+
+- Switching entities inside the same template and locale keeps your local draft.
+- Switching locale starts a different draft for that template.
+- Switching template starts a different draft.
+
+The scaffolded `stream.config.ts` keeps directory parent and child fields commented out by default so you can opt into them only when the stream supports them.
+
 _Before committing_ your code, we recommend running the following command:
 
 ```
@@ -46,7 +69,7 @@ In practice, development builds (via `npm run dev`) and production builds compil
 
 `yext init` - Authenticates the Yext CLI with your Yext account
 
-`yext pages generate-test-data` - pull an example set of `localData` from your account. This command is packaged within `npm run dev'.
+`yext pages generate-test-data` - pull an example set of `localData` from your account. Re-run this after changing `stream.config.ts`.
 
 ### Setting up Authentication Policies 
 
