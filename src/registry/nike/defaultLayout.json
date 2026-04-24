@@ -1,0 +1,587 @@
+{
+  "root": {
+    "props": {
+      "title": {
+        "field": "name",
+        "constantValue": "Nike Pages",
+        "constantValueEnabled": false
+      },
+      "description": {
+        "field": "description",
+        "constantValue": "",
+        "constantValueEnabled": false
+      }
+    }
+  },
+  "content": [
+    {
+      "type": "NikeStoreHeader",
+      "props": {
+        "id": "NikeStoreHeader-38ea527f-5ba2-410f-8d89-f6e3a60c44da",
+        "greeting": "Hi, Jamie",
+        "links": [
+          {
+            "label": "New & Featured",
+            "link": "#"
+          },
+          {
+            "label": "Men",
+            "link": "#"
+          },
+          {
+            "label": "Store",
+            "link": "#"
+          },
+          {
+            "label": "Kids",
+            "link": "#"
+          },
+          {
+            "label": "Sale",
+            "link": "#"
+          }
+        ],
+        "section": {
+          "backgroundColor": "#ffffff",
+          "visibleOnLivePage": true
+        },
+        "accountBar": {
+          "backgroundColor": "#f5f5f5",
+          "brandMarkColor": "#111111",
+          "avatarBackgroundColor": "#cccccc"
+        },
+        "nav": {
+          "logoColor": "#111111",
+          "searchBackgroundColor": "#f5f5f5",
+          "activeUnderlineColor": "#111111"
+        }
+      }
+    },
+    {
+      "type": "NikeHouseOfInnovationTier",
+      "props": {
+        "id": "NikeHouseOfInnovationTier-89b0e20e-3dce-4436-919f-4a0c2cc5c3e2",
+        "breadcrumb": {
+          "label": "Store Locator",
+          "link": "#"
+        },
+        "store": {
+          "eyebrow": "Nike House of Innovation",
+          "name": "House of Innovation Paris",
+          "schedule": [
+            {
+              "line": "Mon–Fri: 10am – 8pm"
+            },
+            {
+              "line": "Sat: 10am – 9pm"
+            },
+            {
+              "line": "Sun: 11am – 7pm"
+            }
+          ],
+          "address": [
+            {
+              "line": "4 Rue de Rivoli"
+            },
+            {
+              "line": "75001 Paris, France"
+            }
+          ],
+          "mediaAlt": "House of Innovation Paris exterior"
+        },
+        "cta": {
+          "label": "Get Directions",
+          "link": "#",
+          "backgroundColor": "#111111"
+        },
+        "whatsNewTitle": "What's New",
+        "whatsNewProducts": [
+          {
+            "name": "Nike Product Name",
+            "meta": "Category / Colorway",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category / Colorway",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category / Colorway",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category / Colorway",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category / Colorway",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category / Colorway",
+            "price": "$120",
+            "link": "#"
+          }
+        ],
+        "experienceCaption": "Experience the innovation floor - visit us in store.",
+        "floorTitle": "Explore the Store",
+        "floorCards": [
+          {
+            "title": "Floor 1 - Running",
+            "subtitle": ""
+          },
+          {
+            "title": "Floor 2 - Training",
+            "subtitle": ""
+          },
+          {
+            "title": "Floor 3 - Jordan",
+            "subtitle": ""
+          }
+        ],
+        "shopTitle": "Shop Nike",
+        "shopAllLabel": "Shop All",
+        "shopAllLink": "#",
+        "shopCards": [
+          {
+            "eyebrow": "Men's",
+            "title": "Best of Men's Running",
+            "ctaLabel": "Shop Men's Running",
+            "ctaBackgroundColor": "#ffffff",
+            "link": "#"
+          },
+          {
+            "eyebrow": "Women's",
+            "title": "New Arrivals",
+            "ctaLabel": "Shop",
+            "ctaBackgroundColor": "#ffffff",
+            "link": "#"
+          }
+        ],
+        "trendingTitle": "Trending Now",
+        "trendingProducts": [
+          {
+            "name": "Nike Air Max 90",
+            "meta": "Men's Shoe\n1 Colour",
+            "price": "From $110",
+            "link": "#"
+          },
+          {
+            "name": "Nike Pegasus 41",
+            "meta": "Men's Road Running Shoes\n2 Colours",
+            "price": "$130",
+            "link": "#"
+          },
+          {
+            "name": "Nike Dunk Low",
+            "meta": "Men's Shoe\n1 Colour",
+            "price": "From $110",
+            "link": "#"
+          }
+        ],
+        "socialTitle": "@NikeParis",
+        "socialAllLabel": "See All",
+        "socialAllLink": "#",
+        "socialPosts": [
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          }
+        ],
+        "media": {
+          "heroBackgroundColor": "#f5f5f5",
+          "productBackgroundColor": "#5d626a",
+          "shopCardBackgroundColor": "#5d626a",
+          "shopCardOverlayColor": "#24272c",
+          "socialBackgroundColor": "#f5f5f5"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "visibleOnLivePage": true
+        }
+      }
+    },
+    {
+      "type": "NikeDirectTier",
+      "props": {
+        "id": "NikeDirectTier-a149822a-6b9c-4eae-8b92-48a3d1cb3bce",
+        "store": {
+          "eyebrow": "Nike Direct",
+          "name": "Nike Santa Monica",
+          "schedule": [
+            {
+              "line": "Mon–Sat: 10am – 9pm"
+            },
+            {
+              "line": "Sun: 11am – 7pm"
+            }
+          ],
+          "address": [
+            {
+              "line": "1231 3rd Street Promenade"
+            },
+            {
+              "line": "Santa Monica, CA 90401"
+            }
+          ],
+          "status": "Open • Closes at 9pm",
+          "mediaAlt": "Nike Santa Monica"
+        },
+        "cta": {
+          "label": "Get Directions",
+          "link": "#",
+          "backgroundColor": "#111111"
+        },
+        "whatsNewProducts": [
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          }
+        ],
+        "shopCards": [
+          {
+            "eyebrow": "Men's",
+            "title": "Shop Men's",
+            "ctaLabel": "Shop",
+            "link": "#",
+            "ctaBackgroundColor": "#ffffff"
+          },
+          {
+            "eyebrow": "Women's",
+            "title": "Shop Women's",
+            "ctaLabel": "Shop Women's",
+            "link": "#",
+            "ctaBackgroundColor": "#ffffff"
+          }
+        ],
+        "trendingProducts": [
+          {
+            "name": "Nike Air Max 270",
+            "meta": "Men's Shoe\n1 Colour",
+            "price": "$150",
+            "link": "#"
+          },
+          {
+            "name": "Nike React Infinity",
+            "meta": "Women's Road Running Shoes",
+            "price": "$160",
+            "link": "#"
+          },
+          {
+            "name": "Jordan 1 Retro High",
+            "meta": "Men's Shoe\n3 Colours",
+            "price": "From $180",
+            "link": "#"
+          }
+        ],
+        "socialPosts": [
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          },
+          {
+            "handle": "@dorionpentard"
+          }
+        ],
+        "media": {
+          "heroBackgroundColor": "#f5f5f5",
+          "productBackgroundColor": "#5d626a",
+          "shopCardBackgroundColor": "#5d626a",
+          "shopCardOverlayColor": "#24272c",
+          "socialBackgroundColor": "#f5f5f5"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "visibleOnLivePage": true
+        }
+      }
+    },
+    {
+      "type": "NikePilotTier",
+      "props": {
+        "id": "NikePilotTier-ba65e47e-5896-43ca-b56e-2b6aa7b35591",
+        "eyebrow": "Pilot",
+        "title": "The Grove — Coming Soon",
+        "description": "A new kind of Nike store. Personalized service,\ncurated local product, and community-first experiences.",
+        "cta": {
+          "label": "Notify Me",
+          "link": "#",
+          "backgroundColor": "#111111"
+        },
+        "launchCard": {
+          "headline": "OPENS 11.1.26",
+          "address": "189 THE GROVE DRIVE - LOS ANGELES",
+          "backgroundColor": "#f53100",
+          "markColor": "#111111"
+        },
+        "expectationCards": [
+          {
+            "title": "Immersive Experiences",
+            "subtitle": "Try before you buy"
+          },
+          {
+            "title": "Local Curation",
+            "subtitle": "Products selected for LA"
+          },
+          {
+            "title": "Community Space",
+            "subtitle": "Events & workshops"
+          }
+        ],
+        "shopCards": [
+          {
+            "title": "Shop Men's",
+            "subtitle": "Men's",
+            "ctaLabel": "Shop",
+            "link": "#",
+            "ctaBackgroundColor": "#ffffff"
+          },
+          {
+            "title": "Shop Women's",
+            "subtitle": "Women's",
+            "ctaLabel": "Shop Women's",
+            "link": "#",
+            "ctaBackgroundColor": "#ffffff"
+          }
+        ],
+        "trendingProducts": [
+          {
+            "name": "Nike Vomero 18",
+            "meta": "Men's Shoe",
+            "price": "$160",
+            "link": "#"
+          },
+          {
+            "name": "Nike Free Metcon 6",
+            "meta": "Training Shoe",
+            "price": "$130",
+            "link": "#"
+          },
+          {
+            "name": "Nike SB Dunk Low Pro",
+            "meta": "Skateboarding",
+            "price": "$110",
+            "link": "#"
+          }
+        ],
+        "media": {
+          "productBackgroundColor": "#5d626a",
+          "shopCardBackgroundColor": "#5d626a",
+          "shopCardOverlayColor": "#24272c"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "visibleOnLivePage": true
+        }
+      }
+    },
+    {
+      "type": "NikeUniteTier",
+      "props": {
+        "id": "NikeUniteTier-c01ab44c-ac2b-4508-a076-37695c8db98b",
+        "store": {
+          "eyebrow": "Nike Unite",
+          "name": "Nike Unite Salem",
+          "schedule": [
+            {
+              "line": "Mon–Sat: 10am – 8pm"
+            },
+            {
+              "line": "Sun: 11am – 6pm"
+            }
+          ],
+          "address": [
+            {
+              "line": "1250 Commercial St SE"
+            },
+            {
+              "line": "Salem, OR 97302"
+            }
+          ],
+          "mediaAlt": "Nike Unite Salem"
+        },
+        "cta": {
+          "label": "Get Directions",
+          "link": "#",
+          "backgroundColor": "#111111"
+        },
+        "whatsNewProducts": [
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          },
+          {
+            "name": "Nike Product Name",
+            "meta": "Category",
+            "price": "$120",
+            "link": "#"
+          }
+        ],
+        "trendingProducts": [
+          {
+            "name": "Nike Air Force 1",
+            "meta": "Men's Shoe",
+            "price": "$110",
+            "link": "#"
+          },
+          {
+            "name": "Nike Revolution 7",
+            "meta": "Running Shoe",
+            "price": "$70",
+            "link": "#"
+          },
+          {
+            "name": "Nike Flex Experience",
+            "meta": "Training Shoe",
+            "price": "$65",
+            "link": "#"
+          }
+        ],
+        "media": {
+          "heroBackgroundColor": "#f5f5f5",
+          "productBackgroundColor": "#5d626a"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "visibleOnLivePage": true
+        }
+      }
+    },
+    {
+      "type": "NikePartnerTier",
+      "props": {
+        "id": "NikePartnerTier-a19bc23a-9847-4440-b11e-d080fe849d4a",
+        "store": {
+          "eyebrow": "Nike Unite",
+          "name": "Nike Unite - Partner Store",
+          "schedule": [
+            {
+              "line": "Mon–Fri: 10am – 7pm"
+            },
+            {
+              "line": "Sat–Sun: 10am – 6pm"
+            }
+          ],
+          "address": [
+            {
+              "line": "Partner location address"
+            }
+          ]
+        },
+        "cta": {
+          "label": "Get Directions",
+          "link": "#",
+          "backgroundColor": "#111111"
+        },
+        "trendingProducts": [
+          {
+            "name": "Nike Air Max 90",
+            "meta": "Men's Shoe",
+            "price": "$130",
+            "link": "#"
+          },
+          {
+            "name": "Nike Blazer Mid",
+            "meta": "Lifestyle Shoe",
+            "price": "$100",
+            "link": "#"
+          },
+          {
+            "name": "Nike Court Vision",
+            "meta": "Lifestyle Shoe",
+            "price": "$85",
+            "link": "#"
+          }
+        ],
+        "media": {
+          "productBackgroundColor": "#5d626a"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "visibleOnLivePage": true
+        }
+      }
+    },
+    {
+      "type": "NikeFooterPlaceholder",
+      "props": {
+        "id": "NikeFooterPlaceholder-1b2a2206-b090-4824-80c6-6ef887c8ad4f",
+        "text": "← Footer component goes here →",
+        "section": {
+          "backgroundColor": "#f5f5f5",
+          "visibleOnLivePage": true
+        }
+      }
+    }
+  ],
+  "zones": {}
+}

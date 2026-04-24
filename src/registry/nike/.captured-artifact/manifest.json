@@ -1,0 +1,86 @@
+{
+  "artifactSchemaVersion": "2.3.0",
+  "botChallengeDetected": false,
+  "captureMode": "headless",
+  "capturedAtIso": "2026-04-24T20:30:36.370Z",
+  "files": {
+    "combinedCss": "combined.css",
+    "captureOutput": "capture-output.md",
+    "intermediateJsx": "intermediate-jsx.jsx",
+    "pageHtml": "page.html",
+    "screenshots": {
+      "desktop": "screenshot-desktop.png",
+      "tablet": "screenshot-tablet.png",
+      "mobile": "screenshot-mobile.png"
+    }
+  },
+  "finalUrl": "file:///tmp/nike-figma-source/index.html",
+  "manualInterventionUsed": false,
+  "popupObstructionDetected": false,
+  "popupObstructionReasons": [],
+  "requestedUrl": "file:///tmp/nike-figma-source/index.html",
+  "skippedStylesheets": [],
+  "stats": {
+    "artifactSchemaVersion": "2.3.0",
+    "declaredStylePropertyCount": 3916,
+    "embeddedPayloadCount": 0,
+    "interactiveNodeCount": 38,
+    "nodeCounts": {
+      "retained": 725,
+      "retainedByKind": {
+        "element": 469,
+        "text": 190,
+        "image": 58,
+        "svg": 8
+      },
+      "total": 725,
+      "totalByKind": {
+        "element": 469,
+        "text": 190,
+        "image": 58,
+        "svg": 8
+      }
+    },
+    "popupObstructionDetected": false,
+    "prunedWrapperCounts": {
+      "byReason": {
+        "insignificantWrapper": 0
+      },
+      "total": 0
+    },
+    "resolvedStylePropertyCount": 46234,
+    "responsiveDeltaCounts": {
+      "content": 0,
+      "layout": 21,
+      "presence": 0,
+      "style": 409,
+      "visibility": 1
+    },
+    "retainedNodeCount": 725,
+    "retainedWrapperCountsByReason": {
+      "document-root": 1,
+      "style-owner": 288,
+      "style-delta": 234,
+      "layout-delta": 20
+    },
+    "sharedStyleFragmentCount": 204,
+    "skippedStylesheetCount": 0,
+    "truncatedEmbeddedPayloadCount": 0
+  },
+  "templateName": "nike",
+  "title": "Nike Store — Localized Experience",
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 2400
+    },
+    "tablet": {
+      "width": 1024,
+      "height": 1366
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
+  }
+}

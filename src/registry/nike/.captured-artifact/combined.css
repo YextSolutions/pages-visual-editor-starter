@@ -1,0 +1,585 @@
+/* Source: inline-style-1 */
+/* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  button { cursor: pointer; border: none; background: none; font: inherit; }
+
+  /* ── Design Tokens ── */
+  :root {
+    --color-black:      #111111;
+    --color-white:      #FFFFFF;
+    --color-grey-light: #F5F5F5;
+    --color-grey-mid:   #CCCCCC;
+    --color-grey-muted: #8D8D8D;
+    --color-accent:     #FF5000;
+    --color-card-bg:    #575B62;
+    --color-coming-soon: #FD3700;
+    --nav-height:       64px;
+    --account-bar-height: 36px;
+    --content-max-width: 1280px;
+    --content-padding: 16px;
+    --section-gap: 32px;
+    --card-gap: 8px;
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-display: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --radius-btn: 20px;
+    --radius-search: 20px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-black);
+    background: var(--color-white);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── Utility ── */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .visually-hidden { visibility: hidden; }
+
+  /* ============================================================
+     GLOBAL NAV — Account Bar (top strip)
+  ============================================================ */
+  .account-bar {
+    background: var(--color-grey-light);
+    height: var(--account-bar-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--content-padding);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .account-bar__brands {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .account-bar__brand-logo {
+    width: 20px;
+    height: 20px;
+    background: var(--color-black);
+    /* Replace with actual SVG logos */
+    border-radius: 2px;
+  }
+  .account-bar__promo {
+    /* Hidden by default per Figma spec — show when promo is active */
+    display: none;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .account-bar__user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .account-bar__greeting { font-size: 12px; font-weight: 500; }
+  .account-bar__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: var(--color-grey-mid);
+    overflow: hidden;
+  }
+  .account-bar__avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================================
+     GLOBAL NAV — Main Nav Bar
+  ============================================================ */
+  .nav-bar {
+    background: var(--color-white);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--content-padding);
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid transparent; /* becomes visible on scroll — add JS */
+  }
+  .nav-bar__swoosh {
+    /* Replace with actual Nike Swoosh SVG */
+    width: 48px;
+    height: 18px;
+    background: var(--color-black);
+    clip-path: polygon(0 100%, 100% 0, 100% 40%, 10% 100%);
+    flex-shrink: 0;
+  }
+  .nav-bar__tabs {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+    justify-content: center;
+  }
+  .nav-tab {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black);
+    white-space: nowrap;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .nav-tab:hover,
+  .nav-tab--active { border-bottom-color: var(--color-black); }
+  .nav-bar__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-search {
+    display: flex;
+    align-items: center;
+    background: var(--color-grey-light);
+    border-radius: var(--radius-search);
+    padding: 6px 14px;
+    gap: 8px;
+    width: 200px;
+  }
+  .nav-search__icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .nav-search__input {
+    border: none;
+    background: none;
+    font-size: 13px;
+    color: var(--color-grey-mid);
+    outline: none;
+    width: 100%;
+    font-family: var(--font-body);
+  }
+  .nav-icon-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-black);
+  }
+  .nav-icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+  /* ============================================================
+     PAGE LAYOUT
+  ============================================================ */
+  .page-content {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
+
+  /* ============================================================
+     BREADCRUMB
+  ============================================================ */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .breadcrumb__icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .breadcrumb__link {
+    text-decoration: underline;
+    color: var(--color-black);
+  }
+
+  /* ============================================================
+     STORE HEADER — title + subtext + CTA block
+  ============================================================ */
+  .store-header {
+    padding: 8px 0 16px;
+  }
+  .store-header__eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: 4px;
+  }
+  .store-header__title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .store-header__body { font-size: 13px; }
+
+  /* ============================================================
+     STORE INFO ROW — hours, address, CTA side-by-side
+  ============================================================ */
+  .store-info-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 0;
+    flex-wrap: wrap;
+  }
+  .store-info-row__text { font-size: 12px; font-weight: 500; line-height: 1.6; }
+  .store-info-row__image {
+    width: 320px;
+    height: 212px;
+    background: var(--color-grey-light);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .store-info-row__image img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================================
+     HERO IMAGE — full-width editorial banner
+  ============================================================ */
+  .hero {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--color-grey-light);
+    overflow: hidden;
+    margin-bottom: var(--section-gap);
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================================
+     SECTION HEADER
+  ============================================================ */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+  }
+  .section-header__title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .section-header__link {
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: underline;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     PRODUCT CARD — priced product (3-up grid)
+  ============================================================ */
+  .product-rail {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-grey-mid) var(--color-grey-light);
+  }
+  .product-rail::-webkit-scrollbar { height: 4px; }
+  .product-rail::-webkit-scrollbar-track { background: var(--color-grey-light); border-radius: 2px; }
+  .product-rail::-webkit-scrollbar-thumb { background: var(--color-grey-mid); border-radius: 2px; }
+  .product-grid {
+    display: grid;
+    gap: var(--card-gap);
+    /* Default 3-up; override inline for different counts */
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    min-width: 0;
+  }
+  .product-grid--4up { grid-template-columns: repeat(4, minmax(160px, 1fr)); }
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .product-card__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--color-card-bg);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .product-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .product-card__details { padding: 0 2px; }
+  .product-card__name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black);
+    margin-bottom: 2px;
+  }
+  .product-card__meta {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-black);
+    line-height: 1.4;
+  }
+  .product-card__meta--muted { color: var(--color-grey-muted); }
+
+  /* ============================================================
+     GENERAL / EDITORIAL CARDS (tall, no price)
+  ============================================================ */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--card-gap);
+  }
+  .editorial-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .editorial-card__image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--color-card-bg);
+    overflow: hidden;
+  }
+  .editorial-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .editorial-card__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black);
+  }
+
+  /* ============================================================
+     2-UP FEATURE CARDS — with overlaid text and CTA
+  ============================================================ */
+  .two-up-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--card-gap);
+    margin-bottom: var(--section-gap);
+  }
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1.05;
+    background: var(--color-card-bg);
+  }
+  .feature-card__image {
+    position: absolute;
+    inset: 0;
+  }
+  .feature-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .feature-card__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 44%,
+      rgba(0,0,0,0.11) 67%,
+      rgba(0,0,0,0.40) 100%
+    );
+  }
+  .feature-card__text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .feature-card__eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-white);
+  }
+  .feature-card__headline {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-white);
+    line-height: 1.2;
+  }
+
+  /* ============================================================
+     UGC / INSTAGRAM CARD RAIL
+  ============================================================ */
+  .ugc-rail { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .ugc-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(140px, 1fr));
+    gap: var(--card-gap);
+    min-width: 0;
+  }
+  .ugc-card { display: flex; flex-direction: column; gap: 6px; }
+  .ugc-card__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--color-grey-light);
+    overflow: hidden;
+  }
+  .ugc-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .ugc-card__handle { font-size: 12px; color: var(--color-grey-muted); }
+
+  /* ============================================================
+     COMING SOON HERO — red/orange editorial panel
+  ============================================================ */
+  .coming-soon-card {
+    position: relative;
+    background: var(--color-coming-soon);
+    overflow: hidden;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 8;
+  }
+  .coming-soon-card__swoosh-bg {
+    /* Large decorative swoosh shape — replace with SVG asset */
+    position: absolute;
+    inset: 0;
+    background: var(--color-black);
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+    opacity: 0.12;
+  }
+  .coming-soon-card__text-top {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 0.84;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    white-space: nowrap;
+  }
+  .coming-soon-card__text-bottom {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 0.84;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    white-space: nowrap;
+  }
+  .coming-soon-card__vector {
+    /* Central graphic — replace with the actual Nike vector SVG */
+    width: 55%;
+    height: 60%;
+    background: var(--color-black);
+    clip-path: polygon(0 100%, 100% 0, 100% 40%, 10% 100%);
+  }
+
+  /* ============================================================
+     BUTTONS
+  ============================================================ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: var(--radius-btn);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn--primary {
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+  }
+  .btn--secondary-dark {
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+  .btn--pill-white {
+    background: var(--color-white);
+    color: var(--color-black);
+    border: none;
+  }
+
+  /* ============================================================
+     SPACER UTILITY
+  ============================================================ */
+  .spacer { display: block; }
+
+  /* ============================================================
+     FOOTER PLACEHOLDER
+  ============================================================ */
+  .footer-placeholder {
+    width: 100%;
+    height: 220px;
+    background: var(--color-grey-light);
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-grey-muted);
+    font-size: 13px;
+  }
+
+  /* ============================================================
+     STORE TIER SECTIONS — separated by horizontal rule
+  ============================================================ */
+  .store-tier {
+    border-top: 1px solid var(--color-grey-light);
+    padding-top: var(--section-gap);
+    margin-top: var(--section-gap);
+  }
+
+  /* ============================================================
+     SCROLLBAR INDICATOR (below carousels)
+  ============================================================ */
+  .scrollbar-indicator {
+    width: 100%;
+    height: 2px;
+    background: var(--color-grey-light);
+    border-radius: 1px;
+    margin-top: 10px;
+    position: relative;
+  }
+  .scrollbar-indicator__thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33%;
+    height: 100%;
+    background: var(--color-grey-mid);
+    border-radius: 1px;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 768px) {
+    .nav-bar__tabs { display: none; }
+    .nav-search { width: 140px; }
+    .store-info-row { flex-direction: column; }
+    .store-info-row__image { width: 100%; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .editorial-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-up-grid { grid-template-columns: 1fr; }
+    .ugc-grid { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
+    .store-header__title { font-size: 20px; }
+    .section-header__title { font-size: 16px; }
+  }
+  @media (max-width: 480px) {
+    .product-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+    .ugc-grid { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
+  }

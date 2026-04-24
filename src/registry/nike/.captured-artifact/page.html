@@ -1,0 +1,1500 @@
+<!DOCTYPE html><html lang="en" data-vle-capture-id="n1" data-vle-capture-next-id="549"><head data-vle-capture-id="n2">
+<meta charset="UTF-8" data-vle-capture-id="n3">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-vle-capture-id="n4">
+<title data-vle-capture-id="n5">Nike Store — Localized Experience</title>
+
+<!-- ============================================================
+  NIKE STORE PAGE — DEV EXPORT
+  Converted from Figma CSS export.
+
+  DESIGN TOKENS
+  - Primary black:   #111111
+  - White:           #FFFFFF
+  - Light grey bg:   #F5F5F5
+  - Mid grey:        #CCCCCC
+  - Subtle grey:     #8D8D8D
+  - Accent (Nike):   #FF5000
+  - Slate card bg:   #575B62
+  - Red (coming soon): #FD3700
+
+  NOTES FOR DEV TEAM
+  - Original Figma file was at ~0.25× scale; all values have been
+    normalized to standard screen dimensions.
+  - Images use url(image) placeholders — swap with real asset paths.
+  - Horizontal scroll sections (product carousels) use overflow-x: auto.
+  - The "Coming Soon" hero card (#FD3700) uses a custom display font;
+    swap `'Helvetica Now Display'` for your licensed font or a web font.
+  - Store tiers shown side-by-side in Figma. This export renders them
+    as stacked sections — implement your tab/routing logic on top.
+============================================================ -->
+
+<style data-vle-capture-id="n6" data-vle-inline-style-id="inline-style-n6">
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  button { cursor: pointer; border: none; background: none; font: inherit; }
+
+  /* ── Design Tokens ── */
+  :root {
+    --color-black:      #111111;
+    --color-white:      #FFFFFF;
+    --color-grey-light: #F5F5F5;
+    --color-grey-mid:   #CCCCCC;
+    --color-grey-muted: #8D8D8D;
+    --color-accent:     #FF5000;
+    --color-card-bg:    #575B62;
+    --color-coming-soon: #FD3700;
+    --nav-height:       64px;
+    --account-bar-height: 36px;
+    --content-max-width: 1280px;
+    --content-padding: 16px;
+    --section-gap: 32px;
+    --card-gap: 8px;
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-display: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --radius-btn: 20px;
+    --radius-search: 20px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-black);
+    background: var(--color-white);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── Utility ── */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .visually-hidden { visibility: hidden; }
+
+  /* ============================================================
+     GLOBAL NAV — Account Bar (top strip)
+  ============================================================ */
+  .account-bar {
+    background: var(--color-grey-light);
+    height: var(--account-bar-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--content-padding);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .account-bar__brands {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .account-bar__brand-logo {
+    width: 20px;
+    height: 20px;
+    background: var(--color-black);
+    /* Replace with actual SVG logos */
+    border-radius: 2px;
+  }
+  .account-bar__promo {
+    /* Hidden by default per Figma spec — show when promo is active */
+    display: none;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .account-bar__user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .account-bar__greeting { font-size: 12px; font-weight: 500; }
+  .account-bar__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: var(--color-grey-mid);
+    overflow: hidden;
+  }
+  .account-bar__avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================================
+     GLOBAL NAV — Main Nav Bar
+  ============================================================ */
+  .nav-bar {
+    background: var(--color-white);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--content-padding);
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid transparent; /* becomes visible on scroll — add JS */
+  }
+  .nav-bar__swoosh {
+    /* Replace with actual Nike Swoosh SVG */
+    width: 48px;
+    height: 18px;
+    background: var(--color-black);
+    clip-path: polygon(0 100%, 100% 0, 100% 40%, 10% 100%);
+    flex-shrink: 0;
+  }
+  .nav-bar__tabs {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+    justify-content: center;
+  }
+  .nav-tab {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black);
+    white-space: nowrap;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .nav-tab:hover,
+  .nav-tab--active { border-bottom-color: var(--color-black); }
+  .nav-bar__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-search {
+    display: flex;
+    align-items: center;
+    background: var(--color-grey-light);
+    border-radius: var(--radius-search);
+    padding: 6px 14px;
+    gap: 8px;
+    width: 200px;
+  }
+  .nav-search__icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .nav-search__input {
+    border: none;
+    background: none;
+    font-size: 13px;
+    color: var(--color-grey-mid);
+    outline: none;
+    width: 100%;
+    font-family: var(--font-body);
+  }
+  .nav-icon-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-black);
+  }
+  .nav-icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+  /* ============================================================
+     PAGE LAYOUT
+  ============================================================ */
+  .page-content {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
+
+  /* ============================================================
+     BREADCRUMB
+  ============================================================ */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .breadcrumb__icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .breadcrumb__link {
+    text-decoration: underline;
+    color: var(--color-black);
+  }
+
+  /* ============================================================
+     STORE HEADER — title + subtext + CTA block
+  ============================================================ */
+  .store-header {
+    padding: 8px 0 16px;
+  }
+  .store-header__eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: 4px;
+  }
+  .store-header__title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .store-header__body { font-size: 13px; }
+
+  /* ============================================================
+     STORE INFO ROW — hours, address, CTA side-by-side
+  ============================================================ */
+  .store-info-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 0;
+    flex-wrap: wrap;
+  }
+  .store-info-row__text { font-size: 12px; font-weight: 500; line-height: 1.6; }
+  .store-info-row__image {
+    width: 320px;
+    height: 212px;
+    background: var(--color-grey-light);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .store-info-row__image img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================================
+     HERO IMAGE — full-width editorial banner
+  ============================================================ */
+  .hero {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--color-grey-light);
+    overflow: hidden;
+    margin-bottom: var(--section-gap);
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================================
+     SECTION HEADER
+  ============================================================ */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+  }
+  .section-header__title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .section-header__link {
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: underline;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     PRODUCT CARD — priced product (3-up grid)
+  ============================================================ */
+  .product-rail {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-grey-mid) var(--color-grey-light);
+  }
+  .product-rail::-webkit-scrollbar { height: 4px; }
+  .product-rail::-webkit-scrollbar-track { background: var(--color-grey-light); border-radius: 2px; }
+  .product-rail::-webkit-scrollbar-thumb { background: var(--color-grey-mid); border-radius: 2px; }
+  .product-grid {
+    display: grid;
+    gap: var(--card-gap);
+    /* Default 3-up; override inline for different counts */
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    min-width: 0;
+  }
+  .product-grid--4up { grid-template-columns: repeat(4, minmax(160px, 1fr)); }
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .product-card__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--color-card-bg);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .product-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .product-card__details { padding: 0 2px; }
+  .product-card__name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black);
+    margin-bottom: 2px;
+  }
+  .product-card__meta {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-black);
+    line-height: 1.4;
+  }
+  .product-card__meta--muted { color: var(--color-grey-muted); }
+
+  /* ============================================================
+     GENERAL / EDITORIAL CARDS (tall, no price)
+  ============================================================ */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--card-gap);
+  }
+  .editorial-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .editorial-card__image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--color-card-bg);
+    overflow: hidden;
+  }
+  .editorial-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .editorial-card__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-black);
+  }
+
+  /* ============================================================
+     2-UP FEATURE CARDS — with overlaid text and CTA
+  ============================================================ */
+  .two-up-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--card-gap);
+    margin-bottom: var(--section-gap);
+  }
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1.05;
+    background: var(--color-card-bg);
+  }
+  .feature-card__image {
+    position: absolute;
+    inset: 0;
+  }
+  .feature-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .feature-card__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 44%,
+      rgba(0,0,0,0.11) 67%,
+      rgba(0,0,0,0.40) 100%
+    );
+  }
+  .feature-card__text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .feature-card__eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-white);
+  }
+  .feature-card__headline {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-white);
+    line-height: 1.2;
+  }
+
+  /* ============================================================
+     UGC / INSTAGRAM CARD RAIL
+  ============================================================ */
+  .ugc-rail { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .ugc-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(140px, 1fr));
+    gap: var(--card-gap);
+    min-width: 0;
+  }
+  .ugc-card { display: flex; flex-direction: column; gap: 6px; }
+  .ugc-card__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--color-grey-light);
+    overflow: hidden;
+  }
+  .ugc-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .ugc-card__handle { font-size: 12px; color: var(--color-grey-muted); }
+
+  /* ============================================================
+     COMING SOON HERO — red/orange editorial panel
+  ============================================================ */
+  .coming-soon-card {
+    position: relative;
+    background: var(--color-coming-soon);
+    overflow: hidden;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 8;
+  }
+  .coming-soon-card__swoosh-bg {
+    /* Large decorative swoosh shape — replace with SVG asset */
+    position: absolute;
+    inset: 0;
+    background: var(--color-black);
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+    opacity: 0.12;
+  }
+  .coming-soon-card__text-top {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 0.84;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    white-space: nowrap;
+  }
+  .coming-soon-card__text-bottom {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 0.84;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    white-space: nowrap;
+  }
+  .coming-soon-card__vector {
+    /* Central graphic — replace with the actual Nike vector SVG */
+    width: 55%;
+    height: 60%;
+    background: var(--color-black);
+    clip-path: polygon(0 100%, 100% 0, 100% 40%, 10% 100%);
+  }
+
+  /* ============================================================
+     BUTTONS
+  ============================================================ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: var(--radius-btn);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn--primary {
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+  }
+  .btn--secondary-dark {
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+  .btn--pill-white {
+    background: var(--color-white);
+    color: var(--color-black);
+    border: none;
+  }
+
+  /* ============================================================
+     SPACER UTILITY
+  ============================================================ */
+  .spacer { display: block; }
+
+  /* ============================================================
+     FOOTER PLACEHOLDER
+  ============================================================ */
+  .footer-placeholder {
+    width: 100%;
+    height: 220px;
+    background: var(--color-grey-light);
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-grey-muted);
+    font-size: 13px;
+  }
+
+  /* ============================================================
+     STORE TIER SECTIONS — separated by horizontal rule
+  ============================================================ */
+  .store-tier {
+    border-top: 1px solid var(--color-grey-light);
+    padding-top: var(--section-gap);
+    margin-top: var(--section-gap);
+  }
+
+  /* ============================================================
+     SCROLLBAR INDICATOR (below carousels)
+  ============================================================ */
+  .scrollbar-indicator {
+    width: 100%;
+    height: 2px;
+    background: var(--color-grey-light);
+    border-radius: 1px;
+    margin-top: 10px;
+    position: relative;
+  }
+  .scrollbar-indicator__thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33%;
+    height: 100%;
+    background: var(--color-grey-mid);
+    border-radius: 1px;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 768px) {
+    .nav-bar__tabs { display: none; }
+    .nav-search { width: 140px; }
+    .store-info-row { flex-direction: column; }
+    .store-info-row__image { width: 100%; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .editorial-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-up-grid { grid-template-columns: 1fr; }
+    .ugc-grid { grid-template-columns: repeat(3, minmax(120px, 1fr)); }
+    .store-header__title { font-size: 20px; }
+    .section-header__title { font-size: 16px; }
+  }
+  @media (max-width: 480px) {
+    .product-grid { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+    .ugc-grid { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
+  }
+</style>
+</head>
+<body data-vle-capture-id="n7">
+
+<!-- ============================================================
+  GLOBAL NAV
+============================================================ -->
+<header data-vle-capture-id="n8">
+  <!-- Account Bar -->
+  <div class="account-bar" role="banner" data-vle-capture-id="n9">
+    <div class="account-bar__brands" aria-label="Brands" data-vle-capture-id="n10">
+      <!-- Replace .brand-logo divs with actual Jordan / Converse SVG logos -->
+      <div class="account-bar__brand-logo" title="Jordan" aria-label="Jordan" data-vle-capture-id="n11"></div>
+      <div class="account-bar__brand-logo" title="Converse" aria-label="Converse" data-vle-capture-id="n12"></div>
+    </div>
+
+    <div class="account-bar__promo" aria-hidden="true" data-vle-capture-id="n13">
+      Get 3% back on all purchases
+    </div>
+
+    <div class="account-bar__user" data-vle-capture-id="n14">
+      <span class="account-bar__greeting" data-vle-capture-id="n15">Hi, Jamie</span>
+      <div class="account-bar__avatar" data-vle-capture-id="n16">
+        <img src="[ASSET: user-avatar]" alt="Jamie's avatar" data-vle-capture-id="n17">
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Nav Bar -->
+  <nav class="nav-bar" aria-label="Main navigation" data-vle-capture-id="n18">
+    <!-- Nike Swoosh -->
+    <a href="/" aria-label="Nike home" data-vle-capture-id="n19">
+      <div class="nav-bar__swoosh" aria-hidden="true" data-vle-capture-id="n20"></div>
+      <!-- TODO: Replace with: <img src="[ASSET: nike-swoosh.svg]" alt="Nike" width="48" height="18" /> -->
+    </a>
+
+    <!-- Nav Tabs -->
+    <ul class="nav-bar__tabs" role="list" data-vle-capture-id="n21">
+      <li data-vle-capture-id="n22"><a href="#" class="nav-tab" data-vle-capture-id="n23">New &amp; Featured</a></li>
+      <li data-vle-capture-id="n24"><a href="#" class="nav-tab" data-vle-capture-id="n25">Men</a></li>
+      <li data-vle-capture-id="n26"><a href="#" class="nav-tab nav-tab--active" data-vle-capture-id="n27">Store</a></li>
+      <li data-vle-capture-id="n28"><a href="#" class="nav-tab" data-vle-capture-id="n29">Kids</a></li>
+      <li data-vle-capture-id="n30"><a href="#" class="nav-tab" data-vle-capture-id="n31">Sale</a></li>
+    </ul>
+
+    <!-- Right Icons: Search, Favorite, Bag -->
+    <div class="nav-bar__right" data-vle-capture-id="n32">
+      <div class="nav-search" role="search" data-vle-capture-id="n33">
+        <!-- Search icon -->
+        <svg class="nav-search__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true" data-vle-capture-id="n34">
+          <circle cx="9" cy="9" r="6" stroke="#111" stroke-width="1.5" data-vle-capture-id="n35"></circle>
+          <path d="M13.5 13.5 17 17" stroke="#111" stroke-width="1.5" stroke-linecap="round" data-vle-capture-id="n36"></path>
+        </svg>
+        <input class="nav-search__input" type="search" placeholder="Search" aria-label="Search" data-vle-capture-id="n37">
+      </div>
+
+      <button class="nav-icon-btn" aria-label="Favorites" data-vle-capture-id="n38">
+        <svg viewBox="0 0 20 20" aria-hidden="true" data-vle-capture-id="n39">
+          <path d="M10 17s-7-4.5-7-9a4 4 0 0 1 7-2.65A4 4 0 0 1 17 8c0 4.5-7 9-7 9z" stroke="#111" stroke-width="1.5" fill="none" data-vle-capture-id="n40"></path>
+        </svg>
+      </button>
+
+      <button class="nav-icon-btn" aria-label="Shopping bag" data-vle-capture-id="n41">
+        <svg viewBox="0 0 20 20" aria-hidden="true" data-vle-capture-id="n42">
+          <path d="M6 8V6a4 4 0 0 1 8 0v2" stroke="#111" stroke-width="1.5" fill="none" data-vle-capture-id="n43"></path>
+          <rect x="3" y="8" width="14" height="11" rx="1" stroke="#111" stroke-width="1.5" fill="none" data-vle-capture-id="n44"></rect>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+
+<!-- ============================================================
+  MAIN CONTENT
+============================================================ -->
+<main data-vle-capture-id="n45">
+
+  <!-- ==========================================
+    TIER 0 — House of Innovation Paris (flagship)
+  ========================================== -->
+  <section class="store-tier" aria-labelledby="tier0-heading" data-vle-capture-id="n46">
+    <div class="page-content" data-vle-capture-id="n47">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb" data-vle-capture-id="n48">
+        <svg class="breadcrumb__icon" viewBox="0 0 14 14" fill="none" aria-hidden="true" data-vle-capture-id="n49">
+          <path d="M9 12 4 7l5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" data-vle-capture-id="n50"></path>
+        </svg>
+        <a href="#" class="breadcrumb__link" data-vle-capture-id="n51">Store Locator</a>
+      </nav>
+
+      <!-- Store Header -->
+      <div class="store-header" data-vle-capture-id="n52">
+        <div class="store-header__eyebrow" data-vle-capture-id="n53">Nike House of Innovation</div>
+        <h1 class="store-header__title" id="tier0-heading" data-vle-capture-id="n54">House of Innovation Paris</h1>
+      </div>
+
+      <!-- Store Info Row -->
+      <div class="store-info-row" data-vle-capture-id="n55">
+        <div class="store-info-row__text" data-vle-capture-id="n56">
+          <p data-vle-capture-id="n57">Mon–Fri: 10am – 8pm<br data-vle-capture-id="n58">
+          Sat: 10am – 9pm<br data-vle-capture-id="n59">
+          Sun: 11am – 7pm</p>
+          <br data-vle-capture-id="n60">
+          <p data-vle-capture-id="n61">4 Rue de Rivoli<br data-vle-capture-id="n62">75001 Paris, France</p>
+          <br data-vle-capture-id="n63">
+          <button class="btn btn--primary" style="margin-top:8px;" data-vle-capture-id="n64">Get Directions</button>
+        </div>
+        <div class="store-info-row__image" data-vle-capture-id="n65">
+          <img src="[ASSET: store-hero-paris]" alt="House of Innovation Paris exterior" data-vle-capture-id="n66">
+          <!-- Original ref: Screen Recording 2025-11-24 at 8.01.00 PM.png -->
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n67"></div>
+
+      <!-- Section: What's New -->
+      <div class="section-header" data-vle-capture-id="n68">
+        <h2 class="section-header__title" data-vle-capture-id="n69">What's New</h2>
+      </div>
+
+      <div class="product-rail" role="region" aria-label="What's new products" data-vle-capture-id="n70">
+        <div class="product-grid product-grid--4up" style="grid-template-columns: repeat(6, minmax(180px, 1fr));" data-vle-capture-id="n71">
+
+          <!-- Product card × 6 — duplicate pattern, fill with real data -->
+          <article class="product-card" data-vle-capture-id="n72">
+            <div class="product-card__image" data-vle-capture-id="n73">
+              <img src="[ASSET: product-1]" alt="[Product name]" loading="lazy" data-vle-capture-id="n74">
+            </div>
+            <div class="product-card__details" data-vle-capture-id="n75">
+              <p class="product-card__name" data-vle-capture-id="n76">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n77">Category / Colorway<br data-vle-capture-id="n78">$120</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-vle-capture-id="n79">
+            <div class="product-card__image" data-vle-capture-id="n80">
+              <img src="[ASSET: product-2]" alt="[Product name]" loading="lazy" data-vle-capture-id="n81">
+              <!-- Original ref: 008_nikenyc-houseofinnovation-hetrick-... -->
+            </div>
+            <div class="product-card__details" data-vle-capture-id="n82">
+              <p class="product-card__name" data-vle-capture-id="n83">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n84">Category / Colorway<br data-vle-capture-id="n85">$120</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-vle-capture-id="n86">
+            <div class="product-card__image" data-vle-capture-id="n87">
+              <img src="[ASSET: product-3]" alt="[Product name]" loading="lazy" data-vle-capture-id="n88">
+            </div>
+            <div class="product-card__details" data-vle-capture-id="n89">
+              <p class="product-card__name" data-vle-capture-id="n90">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n91">Category / Colorway<br data-vle-capture-id="n92">$120</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-vle-capture-id="n93">
+            <div class="product-card__image" data-vle-capture-id="n94">
+              <img src="[ASSET: product-4]" alt="[Product name]" loading="lazy" data-vle-capture-id="n95">
+            </div>
+            <div class="product-card__details" data-vle-capture-id="n96">
+              <p class="product-card__name" data-vle-capture-id="n97">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n98">Category / Colorway<br data-vle-capture-id="n99">$120</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-vle-capture-id="n100">
+            <div class="product-card__image" data-vle-capture-id="n101">
+              <img src="[ASSET: product-5]" alt="[Product name]" loading="lazy" data-vle-capture-id="n102">
+            </div>
+            <div class="product-card__details" data-vle-capture-id="n103">
+              <p class="product-card__name" data-vle-capture-id="n104">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n105">Category / Colorway<br data-vle-capture-id="n106">$120</p>
+            </div>
+          </article>
+
+          <article class="product-card" data-vle-capture-id="n107">
+            <div class="product-card__image" data-vle-capture-id="n108">
+              <img src="[ASSET: product-6]" alt="[Product name]" loading="lazy" data-vle-capture-id="n109">
+              <!-- Original ref: gettyimages-1231764603-594x594 -->
+            </div>
+            <div class="product-card__details" data-vle-capture-id="n110">
+              <p class="product-card__name" data-vle-capture-id="n111">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n112">Category / Colorway<br data-vle-capture-id="n113">$120</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n114"></div>
+
+      <!-- Secondary Hero (empty/video placeholder) -->
+      <div class="hero" style="aspect-ratio: 16/7;" data-vle-capture-id="n115">
+        <img src="[ASSET: secondary-hero]" alt="Store experience" data-vle-capture-id="n116">
+      </div>
+      <p style="text-align:center; font-size:13px; padding: 8px 0 var(--section-gap);" data-vle-capture-id="n117">
+        Experience the innovation floor — visit us in store.
+      </p>
+
+      <!-- Section: Explore the Store (3-up editorial) -->
+      <div class="section-header" data-vle-capture-id="n118">
+        <h2 class="section-header__title" data-vle-capture-id="n119">Explore the Store</h2>
+      </div>
+
+      <div class="editorial-grid" data-vle-capture-id="n120">
+        <article class="editorial-card" data-vle-capture-id="n121">
+          <div class="editorial-card__image" data-vle-capture-id="n122">
+            <img src="[ASSET: editorial-1]" alt="Floor 1" loading="lazy" data-vle-capture-id="n123">
+          </div>
+          <p class="editorial-card__label" data-vle-capture-id="n124">Floor 1 — Running</p>
+        </article>
+        <article class="editorial-card" data-vle-capture-id="n125">
+          <div class="editorial-card__image" data-vle-capture-id="n126">
+            <img src="[ASSET: editorial-2]" alt="Floor 2" loading="lazy" data-vle-capture-id="n127">
+          </div>
+          <p class="editorial-card__label" data-vle-capture-id="n128">Floor 2 — Training</p>
+        </article>
+        <article class="editorial-card" data-vle-capture-id="n129">
+          <div class="editorial-card__image" data-vle-capture-id="n130">
+            <img src="[ASSET: editorial-3]" alt="Floor 3" loading="lazy" data-vle-capture-id="n131">
+          </div>
+          <p class="editorial-card__label" data-vle-capture-id="n132">Floor 3 — Jordan</p>
+        </article>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n133"></div>
+
+      <!-- Section: Shop Nike (2-up feature) -->
+      <div class="section-header" data-vle-capture-id="n134">
+        <h2 class="section-header__title" data-vle-capture-id="n135">Shop Nike</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n136">Shop All</a>
+      </div>
+
+      <div class="two-up-grid" data-vle-capture-id="n137">
+        <div class="feature-card" data-vle-capture-id="n138">
+          <div class="feature-card__image" data-vle-capture-id="n139">
+            <img src="[ASSET: feature-left]" alt="Men's collection" data-vle-capture-id="n140">
+            <!-- Original ref: Screenshot 2025-11-24 at 8.23.23 PM -->
+          </div>
+          <div class="feature-card__gradient" aria-hidden="true" data-vle-capture-id="n141"></div>
+          <div class="feature-card__text" data-vle-capture-id="n142">
+            <div data-vle-capture-id="n143">
+              <p class="feature-card__eyebrow" data-vle-capture-id="n144">Men's</p>
+              <h3 class="feature-card__headline" data-vle-capture-id="n145">Best of Men's Running</h3>
+            </div>
+            <button class="btn btn--pill-white" data-vle-capture-id="n146">Shop Men's Running</button>
+          </div>
+        </div>
+
+        <div class="feature-card" data-vle-capture-id="n147">
+          <div class="feature-card__image" data-vle-capture-id="n148">
+            <img src="[ASSET: feature-right]" alt="Women's collection" data-vle-capture-id="n149">
+            <!-- Original ref: Screenshot 2025-11-24 at 8.23.39 PM.png -->
+          </div>
+          <div class="feature-card__gradient" aria-hidden="true" data-vle-capture-id="n150"></div>
+          <div class="feature-card__text" data-vle-capture-id="n151">
+            <div data-vle-capture-id="n152">
+              <p class="feature-card__eyebrow" data-vle-capture-id="n153">Women's</p>
+              <h3 class="feature-card__headline" data-vle-capture-id="n154">New Arrivals</h3>
+            </div>
+            <button class="btn btn--pill-white" data-vle-capture-id="n155">Shop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Trending -->
+      <div class="section-header" data-vle-capture-id="n156">
+        <h2 class="section-header__title" data-vle-capture-id="n157">Trending Now</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n158">Shop All</a>
+      </div>
+
+      <div class="product-rail" data-vle-capture-id="n159">
+        <div class="product-grid" data-vle-capture-id="n160">
+          <article class="product-card" data-vle-capture-id="n161">
+            <div class="product-card__image" data-vle-capture-id="n162"><img src="[ASSET: trending-1]" alt="" loading="lazy" data-vle-capture-id="n163"></div>
+            <div class="product-card__details" data-vle-capture-id="n164">
+              <p class="product-card__name" data-vle-capture-id="n165">Nike Air Max 90</p>
+              <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n166">Men's Shoe<br data-vle-capture-id="n167">1 Colour<br data-vle-capture-id="n168">$130</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n169">
+            <div class="product-card__image" data-vle-capture-id="n170"><img src="[ASSET: trending-2]" alt="" loading="lazy" data-vle-capture-id="n171"></div>
+            <div class="product-card__details" data-vle-capture-id="n172">
+              <p class="product-card__name" data-vle-capture-id="n173">Nike Pegasus 41</p>
+              <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n174">Men's Road Running Shoes<br data-vle-capture-id="n175">2 Colours<br data-vle-capture-id="n176">$130</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n177">
+            <div class="product-card__image" data-vle-capture-id="n178"><img src="[ASSET: trending-3]" alt="" loading="lazy" data-vle-capture-id="n179"></div>
+            <div class="product-card__details" data-vle-capture-id="n180">
+              <p class="product-card__name" data-vle-capture-id="n181">Nike Dunk Low</p>
+              <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n182">Men's Shoe<br data-vle-capture-id="n183">1 Colour<br data-vle-capture-id="n184">From $110</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n185"></div>
+
+      <!-- Section: @NikeParis / UGC -->
+      <div class="section-header" data-vle-capture-id="n186">
+        <h2 class="section-header__title" data-vle-capture-id="n187">@NikeParis</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n188">See All</a>
+      </div>
+
+      <div class="ugc-rail" role="region" aria-label="Instagram content" data-vle-capture-id="n189">
+        <div class="ugc-grid" data-vle-capture-id="n190">
+          <!-- UGC card × 6 -->
+          <div class="ugc-card" data-vle-capture-id="n191">
+            <div class="ugc-card__image" data-vle-capture-id="n192"><img src="[ASSET: ugc-1]" alt="Community photo" loading="lazy" data-vle-capture-id="n193"></div>
+            <p class="ugc-card__handle" data-vle-capture-id="n194">@dorionpentard</p>
+          </div>
+          <div class="ugc-card" data-vle-capture-id="n195">
+            <div class="ugc-card__image" data-vle-capture-id="n196"><img src="[ASSET: ugc-2]" alt="Community photo" loading="lazy" data-vle-capture-id="n197"></div>
+            <p class="ugc-card__handle" data-vle-capture-id="n198">@dorionpentard</p>
+          </div>
+          <div class="ugc-card" data-vle-capture-id="n199">
+            <div class="ugc-card__image" data-vle-capture-id="n200"><img src="[ASSET: ugc-3]" alt="Community photo" loading="lazy" data-vle-capture-id="n201"></div>
+            <p class="ugc-card__handle" data-vle-capture-id="n202">@dorionpentard</p>
+          </div>
+          <div class="ugc-card" data-vle-capture-id="n203">
+            <div class="ugc-card__image" data-vle-capture-id="n204"><img src="[ASSET: ugc-4]" alt="Community photo" loading="lazy" data-vle-capture-id="n205"></div>
+            <p class="ugc-card__handle" data-vle-capture-id="n206">@dorionpentard</p>
+          </div>
+          <div class="ugc-card" data-vle-capture-id="n207">
+            <div class="ugc-card__image" data-vle-capture-id="n208"><img src="[ASSET: ugc-5]" alt="Community photo" loading="lazy" data-vle-capture-id="n209"></div>
+            <p class="ugc-card__handle" data-vle-capture-id="n210">@dorionpentard</p>
+          </div>
+          <div class="ugc-card" data-vle-capture-id="n211">
+            <div class="ugc-card__image" data-vle-capture-id="n212"><img src="[ASSET: ugc-6]" alt="Community photo" loading="lazy" data-vle-capture-id="n213"></div>
+            <p class="ugc-card__handle" data-vle-capture-id="n214">@dorionpentard</p>
+          </div>
+        </div>
+        <div class="scrollbar-indicator" aria-hidden="true" data-vle-capture-id="n215">
+          <div class="scrollbar-indicator__thumb" data-vle-capture-id="n216"></div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </section><!-- /tier 0 -->
+
+
+  <!-- ==========================================
+    TIER 1 — Nike Santa Monica
+  ========================================== -->
+  <section class="store-tier" aria-labelledby="tier1-heading" data-vle-capture-id="n217">
+    <div class="page-content" data-vle-capture-id="n218">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb" data-vle-capture-id="n219">
+        <svg class="breadcrumb__icon" viewBox="0 0 14 14" fill="none" aria-hidden="true" data-vle-capture-id="n220">
+          <path d="M9 12 4 7l5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" data-vle-capture-id="n221"></path>
+        </svg>
+        <a href="#" class="breadcrumb__link" data-vle-capture-id="n222">Store Locator</a>
+      </nav>
+
+      <div class="store-header" data-vle-capture-id="n223">
+        <div class="store-header__eyebrow" data-vle-capture-id="n224">Nike Direct</div>
+        <h2 class="store-header__title" id="tier1-heading" data-vle-capture-id="n225">Nike Santa Monica</h2>
+      </div>
+
+      <div class="store-info-row" data-vle-capture-id="n226">
+        <div class="store-info-row__text" data-vle-capture-id="n227">
+          <p data-vle-capture-id="n228">Mon–Sat: 10am – 9pm<br data-vle-capture-id="n229">
+          Sun: 11am – 7pm</p>
+          <br data-vle-capture-id="n230">
+          <p data-vle-capture-id="n231">1231 3rd Street Promenade<br data-vle-capture-id="n232">Santa Monica, CA 90401</p>
+          <br data-vle-capture-id="n233">
+          <button class="btn btn--primary" style="margin-top:8px;" data-vle-capture-id="n234">Get Directions</button>
+          <p style="margin-top: 12px; font-size: 12px;" data-vle-capture-id="n235">Open • Closes at 9pm</p>
+        </div>
+        <div class="store-info-row__image" data-vle-capture-id="n236">
+          <img src="[ASSET: store-hero-santamonica]" alt="Nike Santa Monica" data-vle-capture-id="n237">
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n238"></div>
+
+      <!-- What's New -->
+      <div class="section-header" data-vle-capture-id="n239">
+        <h2 class="section-header__title" data-vle-capture-id="n240">What's New</h2>
+      </div>
+
+      <div class="product-rail" data-vle-capture-id="n241">
+        <div class="product-grid" style="grid-template-columns: repeat(4, minmax(180px, 1fr));" data-vle-capture-id="n242">
+          <article class="product-card" data-vle-capture-id="n243">
+            <div class="product-card__image" data-vle-capture-id="n244"><img src="[ASSET: product-sm-1]" alt="" loading="lazy" data-vle-capture-id="n245"></div>
+            <div class="product-card__details" data-vle-capture-id="n246">
+              <p class="product-card__name" data-vle-capture-id="n247">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n248">Category · $120</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n249">
+            <div class="product-card__image" data-vle-capture-id="n250"><img src="[ASSET: product-sm-2]" alt="" loading="lazy" data-vle-capture-id="n251"></div>
+            <div class="product-card__details" data-vle-capture-id="n252">
+              <p class="product-card__name" data-vle-capture-id="n253">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n254">Category · $120</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n255">
+            <div class="product-card__image" data-vle-capture-id="n256"><img src="[ASSET: product-sm-3]" alt="" loading="lazy" data-vle-capture-id="n257"></div>
+            <div class="product-card__details" data-vle-capture-id="n258">
+              <p class="product-card__name" data-vle-capture-id="n259">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n260">Category · $120</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n261">
+            <div class="product-card__image" data-vle-capture-id="n262"><img src="[ASSET: product-sm-4]" alt="" loading="lazy" data-vle-capture-id="n263"></div>
+            <div class="product-card__details" data-vle-capture-id="n264">
+              <p class="product-card__name" data-vle-capture-id="n265">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n266">Category · $120</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n267"></div>
+
+      <!-- Shop Nike (2-up) -->
+      <div class="section-header" data-vle-capture-id="n268">
+        <h2 class="section-header__title" data-vle-capture-id="n269">Shop Nike</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n270">Shop All</a>
+      </div>
+
+      <div class="two-up-grid" data-vle-capture-id="n271">
+        <div class="feature-card" data-vle-capture-id="n272">
+          <div class="feature-card__image" data-vle-capture-id="n273"><img src="[ASSET: feature-sm-left]" alt="Men's" data-vle-capture-id="n274"></div>
+          <div class="feature-card__gradient" aria-hidden="true" data-vle-capture-id="n275"></div>
+          <div class="feature-card__text" data-vle-capture-id="n276">
+            <div data-vle-capture-id="n277">
+              <p class="feature-card__eyebrow" data-vle-capture-id="n278">Men's</p>
+              <h3 class="feature-card__headline" data-vle-capture-id="n279">Shop Men's</h3>
+            </div>
+            <button class="btn btn--pill-white" data-vle-capture-id="n280">Shop</button>
+          </div>
+        </div>
+        <div class="feature-card" data-vle-capture-id="n281">
+          <div class="feature-card__image" data-vle-capture-id="n282"><img src="[ASSET: feature-sm-right]" alt="Women's" data-vle-capture-id="n283"></div>
+          <div class="feature-card__gradient" aria-hidden="true" data-vle-capture-id="n284"></div>
+          <div class="feature-card__text" data-vle-capture-id="n285">
+            <div data-vle-capture-id="n286">
+              <p class="feature-card__eyebrow" data-vle-capture-id="n287">Women's</p>
+              <h3 class="feature-card__headline" data-vle-capture-id="n288">Shop Women's</h3>
+            </div>
+            <button class="btn btn--pill-white" data-vle-capture-id="n289">Shop Women's</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending -->
+      <div class="section-header" data-vle-capture-id="n290">
+        <h2 class="section-header__title" data-vle-capture-id="n291">Trending Now</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n292">Shop All</a>
+      </div>
+
+      <div class="product-grid" data-vle-capture-id="n293">
+        <article class="product-card" data-vle-capture-id="n294">
+          <div class="product-card__image" data-vle-capture-id="n295"><img src="[ASSET: trending-sm-1]" alt="" loading="lazy" data-vle-capture-id="n296"></div>
+          <div class="product-card__details" data-vle-capture-id="n297">
+            <p class="product-card__name" data-vle-capture-id="n298">Nike Air Max 270</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n299">Men's Shoe<br data-vle-capture-id="n300">1 Colour<br data-vle-capture-id="n301">$150</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n302">
+          <div class="product-card__image" data-vle-capture-id="n303"><img src="[ASSET: trending-sm-2]" alt="" loading="lazy" data-vle-capture-id="n304"></div>
+          <div class="product-card__details" data-vle-capture-id="n305">
+            <p class="product-card__name" data-vle-capture-id="n306">Nike React Infinity</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n307">Women's Road Running Shoes<br data-vle-capture-id="n308">$160</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n309">
+          <div class="product-card__image" data-vle-capture-id="n310"><img src="[ASSET: trending-sm-3]" alt="" loading="lazy" data-vle-capture-id="n311"></div>
+          <div class="product-card__details" data-vle-capture-id="n312">
+            <p class="product-card__name" data-vle-capture-id="n313">Jordan 1 Retro High</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n314">Men's Shoe<br data-vle-capture-id="n315">3 Colours<br data-vle-capture-id="n316">From $180</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n317"></div>
+
+      <!-- UGC -->
+      <div class="section-header" data-vle-capture-id="n318">
+        <h2 class="section-header__title" data-vle-capture-id="n319">@NikeSantaMonica</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n320">See All</a>
+      </div>
+
+      <div class="ugc-rail" data-vle-capture-id="n321">
+        <div class="ugc-grid" data-vle-capture-id="n322">
+          <div class="ugc-card" data-vle-capture-id="n323">
+            <div class="ugc-card__image" data-vle-capture-id="n324">
+              <!-- Original ref: Screenshot 2025-11-23 at 2.19.44 PM -->
+              <img src="[ASSET: ugc-sm-1]" alt="Community photo" loading="lazy" data-vle-capture-id="n325">
+            </div>
+            <p class="ugc-card__handle" data-vle-capture-id="n326">@dorionpentard</p>
+          </div>
+          <div class="ugc-card" data-vle-capture-id="n327"><div class="ugc-card__image" data-vle-capture-id="n328"><img src="[ASSET: ugc-sm-2]" alt="" loading="lazy" data-vle-capture-id="n329"></div><p class="ugc-card__handle" data-vle-capture-id="n330">@dorionpentard</p></div>
+          <div class="ugc-card" data-vle-capture-id="n331"><div class="ugc-card__image" data-vle-capture-id="n332"><img src="[ASSET: ugc-sm-3]" alt="" loading="lazy" data-vle-capture-id="n333"></div><p class="ugc-card__handle" data-vle-capture-id="n334">@dorionpentard</p></div>
+          <div class="ugc-card" data-vle-capture-id="n335"><div class="ugc-card__image" data-vle-capture-id="n336"><img src="[ASSET: ugc-sm-4]" alt="" loading="lazy" data-vle-capture-id="n337"></div><p class="ugc-card__handle" data-vle-capture-id="n338">@dorionpentard</p></div>
+          <div class="ugc-card" data-vle-capture-id="n339"><div class="ugc-card__image" data-vle-capture-id="n340"><img src="[ASSET: ugc-sm-5]" alt="" loading="lazy" data-vle-capture-id="n341"></div><p class="ugc-card__handle" data-vle-capture-id="n342">@dorionpentard</p></div>
+          <div class="ugc-card" data-vle-capture-id="n343"><div class="ugc-card__image" data-vle-capture-id="n344"><img src="[ASSET: ugc-sm-6]" alt="" loading="lazy" data-vle-capture-id="n345"></div><p class="ugc-card__handle" data-vle-capture-id="n346">@dorionpentard</p></div>
+        </div>
+        <div class="scrollbar-indicator" aria-hidden="true" data-vle-capture-id="n347">
+          <div class="scrollbar-indicator__thumb" data-vle-capture-id="n348"></div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- /tier 1 -->
+
+
+  <!-- ==========================================
+    PILOT 2 — The Grove (Coming Soon)
+  ========================================== -->
+  <section class="store-tier" aria-labelledby="tier-grove-heading" data-vle-capture-id="n349">
+    <div class="page-content" data-vle-capture-id="n350">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb" data-vle-capture-id="n351">
+        <svg class="breadcrumb__icon" viewBox="0 0 14 14" fill="none" aria-hidden="true" data-vle-capture-id="n352">
+          <path d="M9 12 4 7l5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" data-vle-capture-id="n353"></path>
+        </svg>
+        <a href="#" class="breadcrumb__link" data-vle-capture-id="n354">Store Locator</a>
+      </nav>
+
+      <div class="store-header" data-vle-capture-id="n355">
+        <div class="store-header__eyebrow" data-vle-capture-id="n356">Pilot</div>
+        <h2 class="store-header__title" id="tier-grove-heading" data-vle-capture-id="n357">The Grove — Coming Soon</h2>
+      </div>
+
+      <div class="store-info-row" data-vle-capture-id="n358">
+        <div data-vle-capture-id="n359">
+          <p class="store-header__body" style="margin-bottom: 12px;" data-vle-capture-id="n360">
+            A new kind of Nike store. Personalized service,<br data-vle-capture-id="n361">
+            curated local product, and community-first experiences.
+          </p>
+          <button class="btn btn--primary" data-vle-capture-id="n362">Notify Me</button>
+        </div>
+
+        <!-- Coming Soon Card -->
+        <div class="coming-soon-card" style="width: 320px; height: 212px; flex-shrink: 0;" aria-label="Opens 11.1.26 — 189 The Grove Drive, Los Angeles" data-vle-capture-id="n363">
+          <div class="coming-soon-card__swoosh-bg" aria-hidden="true" data-vle-capture-id="n364"></div>
+          <p class="coming-soon-card__text-top" aria-hidden="true" data-vle-capture-id="n365">Opens 11.1.26</p>
+          <div class="coming-soon-card__vector" aria-hidden="true" data-vle-capture-id="n366"></div>
+          <!-- TODO: Replace vector div with actual Nike SVG artwork from Figma -->
+          <p class="coming-soon-card__text-bottom" aria-hidden="true" data-vle-capture-id="n367">189 The Grove Drive · Los Angeles</p>
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n368"></div>
+
+      <!-- What to Expect (3-up cards) -->
+      <div class="section-header" data-vle-capture-id="n369">
+        <h2 class="section-header__title" data-vle-capture-id="n370">What to Expect</h2>
+      </div>
+
+      <div class="product-grid" data-vle-capture-id="n371">
+        <article class="product-card" data-vle-capture-id="n372">
+          <div class="product-card__image" data-vle-capture-id="n373">
+            <!-- Original ref: 176_immersive-takeover-of-nike-s-house-of-innovatio... -->
+            <img src="[ASSET: grove-preview-1]" alt="Immersive experience preview" loading="lazy" data-vle-capture-id="n374">
+          </div>
+          <div class="product-card__details" data-vle-capture-id="n375">
+            <p class="product-card__name" data-vle-capture-id="n376">Immersive Experiences</p>
+            <p class="product-card__meta" data-vle-capture-id="n377">Try before you buy</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n378">
+          <div class="product-card__image" data-vle-capture-id="n379">
+            <!-- Original ref: Screenshot 2025-12-08 at 5.07.13 PM -->
+            <img src="[ASSET: grove-preview-2]" alt="Local curation preview" loading="lazy" data-vle-capture-id="n380">
+          </div>
+          <div class="product-card__details" data-vle-capture-id="n381">
+            <p class="product-card__name" data-vle-capture-id="n382">Local Curation</p>
+            <p class="product-card__meta" data-vle-capture-id="n383">Products selected for LA</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n384">
+          <div class="product-card__image" data-vle-capture-id="n385">
+            <!-- Original ref: nike-new-york-flagship-store-designboom-007 -->
+            <img src="[ASSET: grove-preview-3]" alt="Community space preview" loading="lazy" data-vle-capture-id="n386">
+          </div>
+          <div class="product-card__details" data-vle-capture-id="n387">
+            <p class="product-card__name" data-vle-capture-id="n388">Community Space</p>
+            <p class="product-card__meta" data-vle-capture-id="n389">Events &amp; workshops</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n390"></div>
+
+      <!-- Shop Nike (2-up) -->
+      <div class="section-header" data-vle-capture-id="n391">
+        <h2 class="section-header__title" data-vle-capture-id="n392">Shop Nike</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n393">Shop All</a>
+      </div>
+
+      <div class="two-up-grid" data-vle-capture-id="n394">
+        <div class="feature-card" data-vle-capture-id="n395">
+          <div class="feature-card__image" data-vle-capture-id="n396"><img src="[ASSET: feature-grove-left]" alt="" data-vle-capture-id="n397"></div>
+          <div class="feature-card__gradient" aria-hidden="true" data-vle-capture-id="n398"></div>
+          <div class="feature-card__text" data-vle-capture-id="n399">
+            <div data-vle-capture-id="n400">
+              <p class="feature-card__eyebrow" data-vle-capture-id="n401">Men's</p>
+              <h3 class="feature-card__headline" data-vle-capture-id="n402">Shop Men's</h3>
+            </div>
+            <button class="btn btn--pill-white" data-vle-capture-id="n403">Shop</button>
+          </div>
+        </div>
+        <div class="feature-card" data-vle-capture-id="n404">
+          <div class="feature-card__image" data-vle-capture-id="n405"><img src="[ASSET: feature-grove-right]" alt="" data-vle-capture-id="n406"></div>
+          <div class="feature-card__gradient" aria-hidden="true" data-vle-capture-id="n407"></div>
+          <div class="feature-card__text" data-vle-capture-id="n408">
+            <div data-vle-capture-id="n409">
+              <p class="feature-card__eyebrow" data-vle-capture-id="n410">Women's</p>
+              <h3 class="feature-card__headline" data-vle-capture-id="n411">Shop Women's</h3>
+            </div>
+            <button class="btn btn--pill-white" data-vle-capture-id="n412">Shop Women's</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending -->
+      <div class="section-header" data-vle-capture-id="n413">
+        <h2 class="section-header__title" data-vle-capture-id="n414">Trending Now</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n415">Shop All</a>
+      </div>
+
+      <div class="product-grid" data-vle-capture-id="n416">
+        <article class="product-card" data-vle-capture-id="n417">
+          <div class="product-card__image" data-vle-capture-id="n418"><img src="[ASSET: trending-grove-1]" alt="" loading="lazy" data-vle-capture-id="n419"></div>
+          <div class="product-card__details" data-vle-capture-id="n420">
+            <p class="product-card__name" data-vle-capture-id="n421">Nike Vomero 18</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n422">Men's Shoe · $160</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n423">
+          <div class="product-card__image" data-vle-capture-id="n424"><img src="[ASSET: trending-grove-2]" alt="" loading="lazy" data-vle-capture-id="n425"></div>
+          <div class="product-card__details" data-vle-capture-id="n426">
+            <p class="product-card__name" data-vle-capture-id="n427">Nike Free Metcon 6</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n428">Training Shoe · $130</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n429">
+          <div class="product-card__image" data-vle-capture-id="n430"><img src="[ASSET: trending-grove-3]" alt="" loading="lazy" data-vle-capture-id="n431"></div>
+          <div class="product-card__details" data-vle-capture-id="n432">
+            <p class="product-card__name" data-vle-capture-id="n433">Nike SB Dunk Low Pro</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n434">Skateboarding · $110</p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section><!-- /The Grove -->
+
+
+  <!-- ==========================================
+    TIER 3 — Nike Unite Salem
+  ========================================== -->
+  <section class="store-tier" aria-labelledby="tier3-heading" data-vle-capture-id="n435">
+    <div class="page-content" data-vle-capture-id="n436">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb" data-vle-capture-id="n437">
+        <svg class="breadcrumb__icon" viewBox="0 0 14 14" fill="none" aria-hidden="true" data-vle-capture-id="n438">
+          <path d="M9 12 4 7l5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" data-vle-capture-id="n439"></path>
+        </svg>
+        <a href="#" class="breadcrumb__link" data-vle-capture-id="n440">Store Locator</a>
+      </nav>
+
+      <div class="store-header" data-vle-capture-id="n441">
+        <div class="store-header__eyebrow" data-vle-capture-id="n442">Nike Unite</div>
+        <h2 class="store-header__title" id="tier3-heading" data-vle-capture-id="n443">Nike Unite Salem</h2>
+      </div>
+
+      <div class="store-info-row" data-vle-capture-id="n444">
+        <div class="store-info-row__text" data-vle-capture-id="n445">
+          <p data-vle-capture-id="n446">Mon–Sat: 10am – 8pm<br data-vle-capture-id="n447">Sun: 11am – 6pm</p>
+          <br data-vle-capture-id="n448">
+          <p data-vle-capture-id="n449">1250 Commercial St SE<br data-vle-capture-id="n450">Salem, OR 97302</p>
+          <br data-vle-capture-id="n451">
+          <button class="btn btn--primary" style="margin-top: 8px;" data-vle-capture-id="n452">Get Directions</button>
+        </div>
+        <div class="store-info-row__image" data-vle-capture-id="n453">
+          <!-- Original: image.png (store exterior) -->
+          <img src="[ASSET: store-hero-salem]" alt="Nike Unite Salem" data-vle-capture-id="n454">
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n455"></div>
+
+      <!-- What's New -->
+      <div class="section-header" data-vle-capture-id="n456">
+        <h2 class="section-header__title" data-vle-capture-id="n457">What's New</h2>
+      </div>
+
+      <div class="product-rail" data-vle-capture-id="n458">
+        <div class="product-grid" style="grid-template-columns: repeat(4, minmax(180px, 1fr));" data-vle-capture-id="n459">
+          <article class="product-card" data-vle-capture-id="n460">
+            <div class="product-card__image" data-vle-capture-id="n461"><img src="[ASSET: product-salem-1]" alt="" loading="lazy" data-vle-capture-id="n462"></div>
+            <div class="product-card__details" data-vle-capture-id="n463">
+              <p class="product-card__name" data-vle-capture-id="n464">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n465">Category · $120</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n466">
+            <div class="product-card__image" data-vle-capture-id="n467"><img src="[ASSET: product-salem-2]" alt="" loading="lazy" data-vle-capture-id="n468"></div>
+            <div class="product-card__details" data-vle-capture-id="n469">
+              <p class="product-card__name" data-vle-capture-id="n470">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n471">Category · $120</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n472">
+            <div class="product-card__image" data-vle-capture-id="n473"><img src="[ASSET: product-salem-3]" alt="" loading="lazy" data-vle-capture-id="n474"></div>
+            <div class="product-card__details" data-vle-capture-id="n475">
+              <p class="product-card__name" data-vle-capture-id="n476">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n477">Category · $120</p>
+            </div>
+          </article>
+          <article class="product-card" data-vle-capture-id="n478">
+            <div class="product-card__image" data-vle-capture-id="n479"><img src="[ASSET: product-salem-4]" alt="" loading="lazy" data-vle-capture-id="n480"></div>
+            <div class="product-card__details" data-vle-capture-id="n481">
+              <p class="product-card__name" data-vle-capture-id="n482">Nike Product Name</p>
+              <p class="product-card__meta" data-vle-capture-id="n483">Category · $120</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n484"></div>
+
+      <!-- Trending -->
+      <div class="section-header" data-vle-capture-id="n485">
+        <h2 class="section-header__title" data-vle-capture-id="n486">Trending Now</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n487">Shop All</a>
+      </div>
+
+      <div class="product-grid" data-vle-capture-id="n488">
+        <article class="product-card" data-vle-capture-id="n489">
+          <div class="product-card__image" data-vle-capture-id="n490">
+            <!-- Original ref: o (5).jpg -->
+            <img src="[ASSET: trending-salem-1]" alt="" loading="lazy" data-vle-capture-id="n491">
+          </div>
+          <div class="product-card__details" data-vle-capture-id="n492">
+            <p class="product-card__name" data-vle-capture-id="n493">Nike Air Force 1</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n494">Men's Shoe · $110</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n495">
+          <div class="product-card__image" data-vle-capture-id="n496"><img src="[ASSET: trending-salem-2]" alt="" loading="lazy" data-vle-capture-id="n497"></div>
+          <div class="product-card__details" data-vle-capture-id="n498">
+            <p class="product-card__name" data-vle-capture-id="n499">Nike Revolution 7</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n500">Running Shoe · $70</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n501">
+          <div class="product-card__image" data-vle-capture-id="n502"><img src="[ASSET: trending-salem-3]" alt="" loading="lazy" data-vle-capture-id="n503"></div>
+          <div class="product-card__details" data-vle-capture-id="n504">
+            <p class="product-card__name" data-vle-capture-id="n505">Nike Flex Experience</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n506">Training Shoe · $65</p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section><!-- /tier 3 -->
+
+
+  <!-- ==========================================
+    NIKE UNITE — Partner Store
+  ========================================== -->
+  <section class="store-tier" aria-labelledby="tier-partner-heading" data-vle-capture-id="n507">
+    <div class="page-content" data-vle-capture-id="n508">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb" data-vle-capture-id="n509">
+        <svg class="breadcrumb__icon" viewBox="0 0 14 14" fill="none" aria-hidden="true" data-vle-capture-id="n510">
+          <path d="M9 12 4 7l5-5" stroke="#111" stroke-width="1.5" stroke-linecap="round" data-vle-capture-id="n511"></path>
+        </svg>
+        <a href="#" class="breadcrumb__link" data-vle-capture-id="n512">Store Locator</a>
+      </nav>
+
+      <div class="store-header" data-vle-capture-id="n513">
+        <div class="store-header__eyebrow" data-vle-capture-id="n514">Nike Unite</div>
+        <h2 class="store-header__title" id="tier-partner-heading" data-vle-capture-id="n515">Nike Unite — Partner Store</h2>
+      </div>
+
+      <div class="store-info-row" data-vle-capture-id="n516">
+        <div class="store-info-row__text" data-vle-capture-id="n517">
+          <p data-vle-capture-id="n518">Mon–Fri: 10am – 7pm<br data-vle-capture-id="n519">
+          Sat–Sun: 10am – 6pm</p>
+          <br data-vle-capture-id="n520">
+          <p data-vle-capture-id="n521">Partner location address</p>
+          <br data-vle-capture-id="n522">
+          <button class="btn btn--primary" style="margin-top: 8px;" data-vle-capture-id="n523">Get Directions</button>
+        </div>
+        <!-- No image in this tier per Figma spec — image node is display: none -->
+      </div>
+
+      <div class="spacer" style="height: var(--section-gap);" data-vle-capture-id="n524"></div>
+
+      <!-- Trending -->
+      <div class="section-header" data-vle-capture-id="n525">
+        <h2 class="section-header__title" data-vle-capture-id="n526">Trending Now</h2>
+        <a href="#" class="section-header__link" data-vle-capture-id="n527">Shop All</a>
+      </div>
+
+      <div class="product-grid" data-vle-capture-id="n528">
+        <article class="product-card" data-vle-capture-id="n529">
+          <div class="product-card__image" data-vle-capture-id="n530">
+            <img src="[ASSET: partner-product-1]" alt="" loading="lazy" data-vle-capture-id="n531">
+          </div>
+          <div class="product-card__details" data-vle-capture-id="n532">
+            <p class="product-card__name" data-vle-capture-id="n533">Nike Air Max 90</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n534">Men's Shoe · $130</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n535">
+          <div class="product-card__image" data-vle-capture-id="n536"><img src="[ASSET: partner-product-2]" alt="" loading="lazy" data-vle-capture-id="n537"></div>
+          <div class="product-card__details" data-vle-capture-id="n538">
+            <p class="product-card__name" data-vle-capture-id="n539">Nike Blazer Mid</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n540">Lifestyle Shoe · $100</p>
+          </div>
+        </article>
+        <article class="product-card" data-vle-capture-id="n541">
+          <div class="product-card__image" data-vle-capture-id="n542"><img src="[ASSET: partner-product-3]" alt="" loading="lazy" data-vle-capture-id="n543"></div>
+          <div class="product-card__details" data-vle-capture-id="n544">
+            <p class="product-card__name" data-vle-capture-id="n545">Nike Court Vision</p>
+            <p class="product-card__meta product-card__meta--muted" data-vle-capture-id="n546">Lifestyle Shoe · $85</p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section><!-- /partner store -->
+
+
+  <!-- ============================================================
+    FOOTER PLACEHOLDER
+    Replace with actual Footer component
+  ============================================================ -->
+  <footer class="footer-placeholder" role="contentinfo" data-vle-capture-id="n547">
+    <p data-vle-capture-id="n548">← Footer component goes here →</p>
+    <!-- Original ref: image.png (footer screenshot) -->
+  </footer>
+
+</main>
+
+<!--
+  ============================================================
+  NOTES FOR DEV TEAM
+  ============================================================
+
+  ASSETS TO REPLACE (search "[ASSET:"):
+  All image src values use bracketed placeholders e.g. [ASSET: product-1].
+  Map these to your CDN/media paths.
+
+  Figma original filename references are left in HTML comments near
+  each placeholder so you can match them to the source files.
+
+  COMPONENTS TO IMPLEMENT:
+  - Nav tabs active state / routing
+  - Horizontal scroll position → scrollbar-indicator thumb position (JS)
+  - "Get Directions" → open maps link
+  - "Notify Me" → email capture modal
+  - Product cards → link to PDP
+
+  FONTS:
+  - Body: 'Helvetica Neue' (system)
+  - Coming Soon card: 'Helvetica Now Display' (licensed — add via @font-face or CDN)
+
+  STORE TIER ARCHITECTURE:
+  In the Figma file, tiers are laid out side-by-side at ~0.25x scale.
+  This export stacks them vertically. Your routing layer should show
+  only the relevant tier for a given store page URL.
+
+  ACCESSIBILITY:
+  - All interactive elements have aria-labels
+  - Product images should have real alt text from CMS
+  - Add skip-nav link before <header> if this is a standalone page
+
+  ============================================================
+-->
+
+
+
+</body></html>

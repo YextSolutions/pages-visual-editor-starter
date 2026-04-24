@@ -1,0 +1,602 @@
+{
+  "templates": [
+    {
+      "name": "directory",
+      "description": "Use this template to generate pages for each of your Directory entities.",
+      "exampleSiteUrl": "",
+      "layoutRequired": true,
+      "defaultLayoutData": "{\"root\":{\"props\":{\"version\":72,\"title\":{\"field\":\"\",\"constantValue\":{\"defaultValue\":\"PLACEHOLDER\"},\"constantValueEnabled\":true},\"description\":{\"field\":\"\",\"constantValue\":{\"defaultValue\":\"PLACEHOLDER\"},\"constantValueEnabled\":true}},\"type\":\"root\"},\"content\":[{\"type\":\"ExpandedHeader\",\"props\":{\"styles\":{\"maxWidth\":\"theme\",\"headerPosition\":\"scrollsWithPage\"},\"slots\":{\"PrimaryHeaderSlot\":[{\"type\":\"PrimaryHeaderSlot\",\"props\":{\"id\":\"PrimaryHeaderSlot-326efc21-4048-437b-844c-9fad6adf6b10\",\"styles\":{\"backgroundColor\":{\"selectedColor\":\"white\",\"contrastingColor\":\"black\"}},\"slots\":{\"LogoSlot\":[{\"type\":\"ImageSlot\",\"props\":{\"id\":\"ImageSlot-f061015b-962c-47c9-a3f0-d558a0afb18c\",\"data\":{\"image\":{\"field\":\"\",\"constantValue\":{\"defaultValue\":{\"url\":\"https://a.mktgcdn.com/p/wa83C1O1lvtxHI9cGqEdP2HILyUzbD0jvtzwWpOAJfE/196x196.jpg\",\"height\":100,\"width\":100}},\"constantValueEnabled\":true}},\"styles\":{\"aspectRatio\":1,\"width\":100}}}],\"LinksSlot\":[{\"type\":\"HeaderLinks\",\"props\":{\"id\":\"HeaderLinks-5d0fa0df-2333-4fd2-b155-be9bc58894a0\",\"data\":{\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}],\"collapsedLinks\":[]},\"styles\":{\"align\":\"right\",\"variant\":\"sm\",\"weight\":\"normal\"},\"parentData\":{\"type\":\"Primary\"}}}],\"PrimaryCTASlot\":[{\"type\":\"CTASlot\",\"props\":{\"id\":\"CTASlot-fec02241-6b92-4df4-ac15-5c8cc87d02ab\",\"data\":{\"show\":true,\"actionType\":\"link\",\"normalizeLink\":true,\"buttonText\":{\"defaultValue\":\"Button\"},\"entityField\":{\"field\":\"\",\"constantValue\":{\"label\":{\"defaultValue\":\"Call to Action\"},\"link\":{\"defaultValue\":\"#\"},\"linkType\":\"URL\",\"ctaType\":\"textAndLink\"},\"constantValueEnabled\":true}},\"styles\":{\"variant\":\"primary\",\"presetImage\":\"app-store\"},\"eventName\":\"primaryCta\"}}],\"SecondaryCTASlot\":[{\"type\":\"CTASlot\",\"props\":{\"id\":\"CTASlot-c1702f04-47ee-400a-abe3-ebcfefc0fc1a\",\"data\":{\"show\":true,\"actionType\":\"link\",\"normalizeLink\":true,\"buttonText\":{\"defaultValue\":\"Button\"},\"entityField\":{\"field\":\"\",\"constantValue\":{\"label\":{\"defaultValue\":\"Call to Action\"},\"link\":{\"defaultValue\":\"#\"},\"linkType\":\"URL\",\"ctaType\":\"textAndLink\"},\"constantValueEnabled\":true}},\"styles\":{\"variant\":\"secondary\",\"presetImage\":\"app-store\"},\"eventName\":\"secondaryCta\"}}]},\"parentValues\":{\"maxWidth\":\"theme\",\"SecondaryHeaderSlot\":[{\"type\":\"SecondaryHeaderSlot\",\"props\":{\"id\":\"SecondaryHeaderSlot-8c8e4511-4f48-4fab-a1ac-bb0e94ba6761\",\"data\":{\"show\":true,\"showLanguageDropdown\":false},\"styles\":{\"backgroundColor\":{\"selectedColor\":\"palette-primary-light\",\"contrastingColor\":\"black\"}},\"slots\":{\"LinksSlot\":[{\"type\":\"HeaderLinks\",\"props\":{\"id\":\"HeaderLinks-b6a70e27-ca02-47b0-b115-8915020bc7a7\",\"data\":{\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}],\"collapsedLinks\":[]},\"styles\":{\"align\":\"right\",\"variant\":\"xs\",\"weight\":\"normal\"},\"parentData\":{\"type\":\"Secondary\"}}}]},\"parentStyles\":{\"maxWidth\":\"theme\"}}}]},\"conditionalRender\":{\"navContent\":true,\"CTAs\":true,\"hasLogoImage\":true}}}],\"SecondaryHeaderSlot\":[{\"type\":\"SecondaryHeaderSlot\",\"props\":{\"id\":\"SecondaryHeaderSlot-8c8e4511-4f48-4fab-a1ac-bb0e94ba6761\",\"data\":{\"show\":true,\"showLanguageDropdown\":false},\"styles\":{\"backgroundColor\":{\"selectedColor\":\"palette-primary-light\",\"contrastingColor\":\"black\"}},\"slots\":{\"LinksSlot\":[{\"type\":\"HeaderLinks\",\"props\":{\"id\":\"HeaderLinks-b6a70e27-ca02-47b0-b115-8915020bc7a7\",\"data\":{\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Header Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}],\"collapsedLinks\":[]},\"styles\":{\"align\":\"right\",\"variant\":\"xs\",\"weight\":\"normal\"},\"parentData\":{\"type\":\"Secondary\"}}}]},\"parentStyles\":{\"maxWidth\":\"theme\"}}}]},\"analytics\":{\"scope\":\"expandedHeader\"},\"id\":\"ExpandedHeader-b31ee6d4-4c61-4f07-832c-421ba5c4e797\",\"ignoreLocaleWarning\":[]}},{\"type\":\"Directory\",\"props\":{\"styles\":{\"backgroundColor\":{\"selectedColor\":\"white\",\"contrastingColor\":\"black\"},\"listBackgroundColor\":{\"selectedColor\":\"white\",\"contrastingColor\":\"black\"}},\"slots\":{\"TitleSlot\":[{\"type\":\"HeadingTextSlot\",\"props\":{\"id\":\"HeadingTextSlot-1a871989-a34d-426c-b24a-a1888c1a46ea\",\"data\":{\"text\":{\"constantValue\":{\"defaultValue\":\"\"},\"constantValueEnabled\":false,\"field\":\"name\"}},\"styles\":{\"level\":2,\"align\":\"center\"}}}],\"SiteNameSlot\":[{\"type\":\"HeadingTextSlot\",\"props\":{\"id\":\"HeadingTextSlot-9a120ff6-d494-4ec8-9ab8-e43017d77c03\",\"data\":{\"text\":{\"constantValue\":{\"defaultValue\":\"\"},\"constantValueEnabled\":true,\"field\":\"name\"}},\"styles\":{\"level\":4,\"align\":\"center\"}}}],\"BreadcrumbsSlot\":[{\"type\":\"BreadcrumbsSlot\",\"props\":{\"id\":\"BreadcrumbsSlot-13dba298-abd1-4f75-a7e9-b19779a4fc5b\",\"data\":{\"directoryRoot\":{\"defaultValue\":\"Directory Root\"},\"currentPage\":{\"constantValue\":{\"defaultValue\":\"[[name]]\"},\"field\":\"name\",\"constantValueEnabled\":false}},\"styles\":{\"backgroundColor\":{\"selectedColor\":\"white\",\"contrastingColor\":\"black\"},\"showCurrentPage\":true},\"analytics\":{\"scope\":\"directory\"},\"liveVisibility\":true}}],\"DirectoryGrid\":[{\"type\":\"DirectoryGrid\",\"props\":{\"id\":\"DirectoryGrid-dab8e202-600a-47da-b5c7-971df3f504fb\",\"styles\":{\"backgroundColor\":{\"selectedColor\":\"white\",\"contrastingColor\":\"black\"}},\"slots\":{\"CardSlot\":[]}}}]},\"analytics\":{\"scope\":\"directory\"},\"id\":\"Directory-d21d6943-0a81-4a8e-b76b-cecb5b157c14\"}},{\"type\":\"ExpandedFooter\",\"props\":{\"data\":{\"primaryFooter\":{\"expandedFooter\":false,\"showLogo\":true,\"showSocialLinks\":true,\"showUtilityImages\":true},\"secondaryFooter\":{\"show\":true}},\"slots\":{\"LogoSlot\":[{\"type\":\"FooterLogoSlot\",\"props\":{\"id\":\"FooterLogoSlot-ec076737-32fc-40db-aa64-8044d47a6de3\",\"data\":{\"image\":{\"field\":\"\",\"constantValue\":{\"url\":\"https://a.mktgcdn.com/p/wa83C1O1lvtxHI9cGqEdP2HILyUzbD0jvtzwWpOAJfE/196x196.jpg\",\"height\":100,\"width\":100,\"alternateText\":{\"defaultValue\":\"Logo\"}},\"constantValueEnabled\":true}},\"styles\":{\"width\":100,\"aspectRatio\":1}}}],\"SocialLinksSlot\":[{\"type\":\"FooterSocialLinksSlot\",\"props\":{\"id\":\"FooterSocialLinksSlot-e3ff3e64-107e-4163-b13c-bd033bd43a15\",\"data\":{\"xLink\":\"\",\"facebookLink\":\"\",\"instagramLink\":\"\",\"linkedInLink\":\"\",\"pinterestLink\":\"\",\"tiktokLink\":\"\",\"youtubeLink\":\"\"}}}],\"UtilityImagesSlot\":[{\"type\":\"FooterUtilityImagesSlot\",\"props\":{\"id\":\"FooterUtilityImagesSlot-d122386b-f2a9-4c12-8a56-1249566d7298\",\"data\":{\"utilityImages\":[]},\"styles\":{\"width\":0,\"aspectRatio\":1}}}],\"PrimaryLinksWrapperSlot\":[{\"type\":\"FooterLinksSlot\",\"props\":{\"id\":\"FooterLinksSlot-6ee433f9-3df5-4729-91f0-351437201ae6\",\"data\":{\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}]},\"variant\":\"primary\",\"eventNamePrefix\":\"primary\"}}],\"ExpandedLinksWrapperSlot\":[{\"type\":\"FooterExpandedLinksWrapper\",\"props\":{\"id\":\"FooterExpandedLinksWrapper-98ade069-167f-4e61-b5bc-5ec6778b8c91\",\"data\":{\"sections\":[{\"label\":{\"defaultValue\":\"Footer Label\"},\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}]},{\"label\":{\"defaultValue\":\"Footer Label\"},\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}]},{\"label\":{\"defaultValue\":\"Footer Label\"},\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}]},{\"label\":{\"defaultValue\":\"Footer Label\"},\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}]}]}}}],\"SecondaryFooterSlot\":[{\"type\":\"SecondaryFooterSlot\",\"props\":{\"id\":\"SecondaryFooterSlot-337d3a64-afe3-4f12-9026-e416d2c5d83c\",\"styles\":{\"backgroundColor\":{\"selectedColor\":\"palette-primary-light\",\"contrastingColor\":\"black\"},\"desktopContentAlignment\":\"left\",\"mobileContentAlignment\":\"left\",\"showLinks\":true},\"maxWidth\":\"theme\",\"slots\":{\"SecondaryLinksWrapperSlot\":[{\"type\":\"FooterLinksSlot\",\"props\":{\"id\":\"FooterLinksSlot-b26b9c7f-1a1d-440e-a6f3-69a3ec47ac69\",\"data\":{\"links\":[{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false},{\"linkType\":\"URL\",\"label\":{\"defaultValue\":\"Footer Link\"},\"link\":\"#\",\"normalizeLink\":true,\"openInNewTab\":false}]},\"variant\":\"secondary\",\"eventNamePrefix\":\"secondary\",\"desktopContentAlignment\":\"left\",\"mobileContentAlignment\":\"left\"}}],\"CopyrightSlot\":[{\"type\":\"CopyrightMessageSlot\",\"props\":{\"id\":\"CopyrightMessageSlot-65eda140-da7c-4ad5-9bb7-f017a433277b\",\"data\":{\"text\":{\"defaultValue\":\"\"}},\"desktopContentAlignment\":\"left\",\"mobileContentAlignment\":\"left\"}}]},\"ignoreLocaleWarning\":[]}}]},\"styles\":{\"primaryFooter\":{\"backgroundColor\":{\"selectedColor\":\"palette-primary-dark\",\"contrastingColor\":\"white\"},\"linksPosition\":\"right\",\"desktopContentAlignment\":\"left\",\"mobileContentAlignment\":\"left\"},\"maxWidth\":\"theme\"},\"analytics\":{\"scope\":\"expandedFooter\"},\"id\":\"ExpandedFooter-ece16c93-758a-418d-a157-c8465918818d\",\"ignoreLocaleWarning\":[\"slots.ExpandedLinksWrapperSlot\"]}}],\"zones\":{}}"
+    },
+    {
+      "name": "locator",
+      "description": "Use this template to generate pages for your Locators.",
+      "exampleSiteUrl": "",
+      "layoutRequired": true,
+      "defaultLayoutData": "{\"root\":{\"props\":{\"version\":66,\"title\":{\"field\":\"\",\"constantValue\":{\"defaultValue\":\"Find Locations\"},\"constantValueEnabled\":true},\"description\":{\"field\":\"\",\"constantValue\":{\"defaultValue\":\"Find the right location for you.\"},\"constantValueEnabled\":true}}},\"content\":[{\"type\":\"Locator\",\"props\":{\"pageHeading\":{\"title\":{\"defaultValue\":\"Find a Location\"}},\"id\":\"Locator-2ae506f4-a3ee-46ea-b5f9-e4c3236243a7\",\"mapStyle\":\"mapbox://styles/mapbox/streets-v12\",\"locationStyles\":[],\"filters\":{\"openNowButton\":false,\"showDistanceOptions\":false},\"resultCard\":[],\"distanceDisplay\":\"distanceFromUser\"}}],\"zones\":{}}"
+    },
+    {
+      "name": "nike",
+      "description": "Autogenerated template entry for nike.",
+      "exampleSiteUrl": "",
+      "layoutRequired": true,
+      "defaultLayoutData": {
+        "root": {
+          "props": {
+            "title": {
+              "field": "name",
+              "constantValue": "Nike Pages",
+              "constantValueEnabled": false
+            },
+            "description": {
+              "field": "description",
+              "constantValue": "",
+              "constantValueEnabled": false
+            }
+          }
+        },
+        "content": [
+          {
+            "type": "NikeStoreHeader",
+            "props": {
+              "id": "NikeStoreHeader-d49d73e2-1df1-48ed-84dd-2257a4b1d946",
+              "greeting": "Hi, Jamie",
+              "links": [
+                {
+                  "label": "New & Featured",
+                  "link": "#"
+                },
+                {
+                  "label": "Men",
+                  "link": "#"
+                },
+                {
+                  "label": "Store",
+                  "link": "#"
+                },
+                {
+                  "label": "Kids",
+                  "link": "#"
+                },
+                {
+                  "label": "Sale",
+                  "link": "#"
+                }
+              ],
+              "section": {
+                "backgroundColor": "#ffffff",
+                "visibleOnLivePage": true
+              },
+              "accountBar": {
+                "backgroundColor": "#f5f5f5",
+                "brandMarkColor": "#111111"
+              },
+              "nav": {
+                "logoColor": "#111111",
+                "searchBackgroundColor": "#f5f5f5",
+                "activeUnderlineColor": "#111111"
+              }
+            }
+          },
+          {
+            "type": "NikeHouseOfInnovationTier",
+            "props": {
+              "id": "NikeHouseOfInnovationTier-a885139c-df7e-4813-bde3-497909a2abe5",
+              "breadcrumb": {
+                "label": "Store Locator",
+                "link": "#"
+              },
+              "store": {
+                "eyebrow": "Nike House of Innovation",
+                "name": "House of Innovation Paris",
+                "schedule": [
+                  {
+                    "line": "Mon-Fri: 10am - 8pm"
+                  },
+                  {
+                    "line": "Sat: 10am - 9pm"
+                  },
+                  {
+                    "line": "Sun: 11am - 7pm"
+                  }
+                ],
+                "address": [
+                  {
+                    "line": "4 Rue de Rivoli"
+                  },
+                  {
+                    "line": "75001 Paris, France"
+                  }
+                ],
+                "mediaAlt": "House of Innovation Paris exterior"
+              },
+              "cta": {
+                "label": "Get Directions",
+                "link": "#",
+                "backgroundColor": "#111111"
+              },
+              "whatsNewTitle": "What's New",
+              "whatsNewProducts": [
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category / Colorway",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category / Colorway",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category / Colorway",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category / Colorway",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category / Colorway",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category / Colorway",
+                  "price": "$120",
+                  "link": "#"
+                }
+              ],
+              "experienceCaption": "Experience the innovation floor - visit us in store.",
+              "floorTitle": "Explore the Store",
+              "floorCards": [
+                {
+                  "title": "Floor 1 - Running",
+                  "subtitle": ""
+                },
+                {
+                  "title": "Floor 2 - Training",
+                  "subtitle": ""
+                },
+                {
+                  "title": "Floor 3 - Jordan",
+                  "subtitle": ""
+                }
+              ],
+              "shopTitle": "Shop Nike",
+              "shopAllLabel": "Shop All",
+              "shopAllLink": "#",
+              "shopCards": [
+                {
+                  "eyebrow": "Men's",
+                  "title": "Best of Men's Running",
+                  "ctaLabel": "Shop Men's Running",
+                  "link": "#"
+                },
+                {
+                  "eyebrow": "Women's",
+                  "title": "New Arrivals",
+                  "ctaLabel": "Shop",
+                  "link": "#"
+                }
+              ],
+              "trendingTitle": "Trending Now",
+              "trendingProducts": [
+                {
+                  "name": "Nike Air Max 90",
+                  "meta": "Men's Shoe\n1 Colour",
+                  "price": "From $110",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Pegasus 41",
+                  "meta": "Men's Road Running Shoes\n2 Colours",
+                  "price": "$130",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Dunk Low",
+                  "meta": "Men's Shoe\n1 Colour",
+                  "price": "From $110",
+                  "link": "#"
+                }
+              ],
+              "socialTitle": "@NikeParis",
+              "socialAllLabel": "See All",
+              "socialAllLink": "#",
+              "socialPosts": [
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                }
+              ],
+              "media": {
+                "heroBackgroundColor": "#f5f5f5",
+                "productBackgroundColor": "#5d626a",
+                "shopCardBackgroundColor": "#5d626a",
+                "shopCardOverlayColor": "#24272c",
+                "socialBackgroundColor": "#f5f5f5",
+                "categoryCtaBackgroundColor": "#ffffff"
+              },
+              "section": {
+                "backgroundColor": "#ffffff",
+                "visibleOnLivePage": true
+              }
+            }
+          },
+          {
+            "type": "NikeDirectTier",
+            "props": {
+              "id": "NikeDirectTier-393ae1a3-14bf-4df0-9c8f-a900433edd4e",
+              "store": {
+                "eyebrow": "Nike Direct",
+                "name": "Nike Santa Monica",
+                "schedule": [
+                  {
+                    "line": "Mon-Sat: 10am - 8pm"
+                  },
+                  {
+                    "line": "Sun: 11am - 7pm"
+                  }
+                ],
+                "address": [
+                  {
+                    "line": "1231 3rd Street Promenade"
+                  },
+                  {
+                    "line": "Santa Monica, CA 90401"
+                  }
+                ],
+                "status": "Open - Closes at 8pm",
+                "mediaAlt": "Nike Santa Monica"
+              },
+              "cta": {
+                "label": "Get Directions",
+                "link": "#",
+                "backgroundColor": "#111111"
+              },
+              "whatsNewProducts": [
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                }
+              ],
+              "shopCards": [
+                {
+                  "eyebrow": "Men's",
+                  "title": "Shop Men's",
+                  "ctaLabel": "Shop",
+                  "link": "#"
+                },
+                {
+                  "eyebrow": "Women's",
+                  "title": "Shop Women's",
+                  "ctaLabel": "Shop Women's",
+                  "link": "#"
+                }
+              ],
+              "trendingProducts": [
+                {
+                  "name": "Nike Air Max 270",
+                  "meta": "Men's Shoe\n1 Colour",
+                  "price": "$150",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike React Infinity",
+                  "meta": "Women's Road Running Shoes",
+                  "price": "$160",
+                  "link": "#"
+                },
+                {
+                  "name": "Jordan 1 Retro High",
+                  "meta": "Men's Shoe\n3 Colours",
+                  "price": "From $180",
+                  "link": "#"
+                }
+              ],
+              "socialPosts": [
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                },
+                {
+                  "handle": "@dorionpentard"
+                }
+              ],
+              "media": {
+                "heroBackgroundColor": "#f5f5f5",
+                "productBackgroundColor": "#5d626a",
+                "shopCardBackgroundColor": "#5d626a",
+                "shopCardOverlayColor": "#24272c",
+                "socialBackgroundColor": "#f5f5f5",
+                "categoryCtaBackgroundColor": "#ffffff"
+              },
+              "section": {
+                "backgroundColor": "#ffffff",
+                "visibleOnLivePage": true
+              }
+            }
+          },
+          {
+            "type": "NikePilotTier",
+            "props": {
+              "id": "NikePilotTier-7deccd63-48b2-4ce6-a9d4-609498b95cbf",
+              "eyebrow": "Pilot",
+              "title": "The Grove - Coming Soon",
+              "description": "A new kind of Nike store. Personalized service,\ncurated local product, and community-first experiences.",
+              "cta": {
+                "label": "Notify Me",
+                "link": "#",
+                "backgroundColor": "#111111"
+              },
+              "launchCard": {
+                "headline": "OPENS 11.1.26",
+                "address": "189 THE GROVE DRIVE - LOS ANGELES",
+                "backgroundColor": "#f53100"
+              },
+              "expectationCards": [
+                {
+                  "title": "Immersive Experiences",
+                  "subtitle": "Try before you buy"
+                },
+                {
+                  "title": "Local Curation",
+                  "subtitle": "Products selected for LA"
+                },
+                {
+                  "title": "Community Space",
+                  "subtitle": "Events & workshops"
+                }
+              ],
+              "shopCards": [
+                {
+                  "title": "Shop Men's",
+                  "subtitle": "Men's"
+                },
+                {
+                  "title": "Shop Women's",
+                  "subtitle": "Women's"
+                }
+              ],
+              "trendingProducts": [
+                {
+                  "name": "Nike Vomero 18",
+                  "meta": "Men's Shoe",
+                  "price": "$160",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Free Metcon 6",
+                  "meta": "Training Shoe",
+                  "price": "$130",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike SB Dunk Low Pro",
+                  "meta": "Skateboarding",
+                  "price": "$110",
+                  "link": "#"
+                }
+              ],
+              "media": {
+                "productBackgroundColor": "#5d626a",
+                "shopCardBackgroundColor": "#5d626a",
+                "shopCardOverlayColor": "#24272c",
+                "categoryCtaBackgroundColor": "#ffffff"
+              },
+              "section": {
+                "backgroundColor": "#ffffff",
+                "visibleOnLivePage": true
+              }
+            }
+          },
+          {
+            "type": "NikeUniteTier",
+            "props": {
+              "id": "NikeUniteTier-5ad0a91a-1269-4656-bff4-ed74cb22424b",
+              "store": {
+                "eyebrow": "Nike Unite",
+                "name": "Nike Unite Salem",
+                "schedule": [
+                  {
+                    "line": "Mon-Sat: 10am - 8pm"
+                  },
+                  {
+                    "line": "Sun: 11am - 6pm"
+                  }
+                ],
+                "address": [
+                  {
+                    "line": "1250 Commercial St SE"
+                  },
+                  {
+                    "line": "Salem, OR 97302"
+                  }
+                ],
+                "mediaAlt": "Nike Unite Salem"
+              },
+              "cta": {
+                "label": "Get Directions",
+                "link": "#",
+                "backgroundColor": "#111111"
+              },
+              "whatsNewProducts": [
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Product Name",
+                  "meta": "Category",
+                  "price": "$120",
+                  "link": "#"
+                }
+              ],
+              "trendingProducts": [
+                {
+                  "name": "Nike Air Force 1",
+                  "meta": "Men's Shoe",
+                  "price": "$110",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Revolution 7",
+                  "meta": "Running Shoe",
+                  "price": "$70",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Flex Experience",
+                  "meta": "Training Shoe",
+                  "price": "$65",
+                  "link": "#"
+                }
+              ],
+              "media": {
+                "heroBackgroundColor": "#f5f5f5",
+                "productBackgroundColor": "#5d626a"
+              },
+              "section": {
+                "backgroundColor": "#ffffff",
+                "visibleOnLivePage": true
+              }
+            }
+          },
+          {
+            "type": "NikePartnerTier",
+            "props": {
+              "id": "NikePartnerTier-d417c8c6-116d-4451-b6e2-1aefeb0fdcb3",
+              "store": {
+                "eyebrow": "Nike Unite",
+                "name": "Nike Unite - Partner Store",
+                "schedule": [
+                  {
+                    "line": "Mon-Fri: 10am - 7pm"
+                  },
+                  {
+                    "line": "Sat-Sun: 10am - 6pm"
+                  }
+                ],
+                "address": [
+                  {
+                    "line": "Partner location address"
+                  }
+                ]
+              },
+              "cta": {
+                "label": "Get Directions",
+                "link": "#",
+                "backgroundColor": "#111111"
+              },
+              "trendingProducts": [
+                {
+                  "name": "Nike Air Max 90",
+                  "meta": "Men's Shoe",
+                  "price": "$130",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Blazer Mid",
+                  "meta": "Lifestyle Shoe",
+                  "price": "$100",
+                  "link": "#"
+                },
+                {
+                  "name": "Nike Court Vision",
+                  "meta": "Lifestyle Shoe",
+                  "price": "$85",
+                  "link": "#"
+                }
+              ],
+              "media": {
+                "productBackgroundColor": "#5d626a"
+              },
+              "section": {
+                "backgroundColor": "#ffffff",
+                "visibleOnLivePage": true
+              }
+            }
+          },
+          {
+            "type": "NikeFooterPlaceholder",
+            "props": {
+              "id": "NikeFooterPlaceholder-c1e93f27-ad57-4d9c-9add-527861f9ffd9",
+              "text": "<- Footer component goes here ->",
+              "section": {
+                "backgroundColor": "#f5f5f5",
+                "visibleOnLivePage": true
+              }
+            }
+          }
+        ],
+        "zones": {}
+      }
+    }
+  ]
+}
