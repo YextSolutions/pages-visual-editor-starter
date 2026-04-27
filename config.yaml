@@ -1,3 +1,9 @@
+serving:
+  reverseProxyPrefix: www.yext-cdntest.com/rptest
+dynamicRoutes:
+  - from: /assets/*
+    to: /rptest/assets/:splat
+    status: 200
 buildConfiguration:
   buildCommand: npm run build
   installDependenciesStep:

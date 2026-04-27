@@ -5,4 +5,7 @@ import { yextVisualEditorPlugin } from "@yext/visual-editor/plugin"
 
 export default defineConfig({
   plugins: [react(), yextVisualEditorPlugin(), yextSSG()],
+  build: {
+    assetsDir: "rptest/assets"
+  }
 });
