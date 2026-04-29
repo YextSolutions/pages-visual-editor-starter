@@ -1,3 +1,9 @@
+serving:
+  reverseProxyPrefix: www.ediblearrangements.com/stores
+dynamicRoutes:
+  - from: /assets/*
+    to: /stores/assets/:splat
+    status: 200
 buildConfiguration:
   buildCommand: npm run build
   installDependenciesStep:
