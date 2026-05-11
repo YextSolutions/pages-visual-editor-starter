@@ -1,53 +1,73 @@
-# PAGES-VISUAL-EDITOR-STARTER
+# PAGES-VISUAL-EDITOR-STARTER (bespoke templates branch)
 
-### Prerequisites
+For use with the [pages-template-generation](https://github.com/yext/pages-template-generation-skill) Codex skill
 
-1. Have the Yext CLI installed: https://hitchhikers.yext.com/guides/cli-getting-started-resources/01-install-cli/
-1. Have Deno installed, version 1.21.0 or later: https://deno.land/manual/getting_started/installation
-1. Have node installed, version 18.4.0 or later: https://nodejs.org/en/download/
+## Setup
 
-   - It's recommend to use nvm: https://github.com/nvm-sh/nvm#installing-and-updating or via brew `brew install nvm`
+1. Follow the skill's README installation instructions
 
-1. Have a Yext account. This is necessary for production builds, deploying on Yext Pages, and pulling local stream document data via `yext pages generate-test-data`.
+2. In this repo, run `npm i` to install dependencies.
 
-### Clone this repo and install dependencies
+## Generate Components
 
-```shell
-git clone https://github.com/YextSolutions/pages-visual-editor-starter
-cd pages-visual-editor-starter
-npm install
+Open this project in Codex and run the skill with the following prompts:
+
+To copy an existing site:
+
+> Use $vle-generate-template for `<Name of Template>` using `<url>`. You may use subagents if directed.
+
+To use local html/css files:
+
+> Use $vle-generate-template for `<Name of Template>` using `<path to local html/css files>`. You may use subagents if directed.
+
+To make updates to previously-generated components:
+
+> Use $vle-revise-template for `<Name of Template>`. Make these changes: …
+
+To generated additional components that match the template's look and feel:
+
+> Use $vle-extend-template for `<Name of Template>`
+
+### Expected Output
+
+- A directory will be created in `src/registry/<Name of Template>`. This directory will contain
+  - a subdirectory `components` containing a single TSX file for each component
+  - `defaultLayout.json` - the layout data that will be preloaded into the platform editor
+  - a subdirectory `.captured-artifact` - the data captured from the source material. Only used for debugging; unused in the final template
+  - a subdirectory `.workflow-artifact` - the metadata of a skill run results. Only used for debugging; unused in the final template
+
+#### Current Limitations
+
+- Components may only use the dependencies pre-installed in this branch of the repo
+- Components may not use local/relative imports (each component must be self-contained in this)
+- Local assets are not supported
+  - Images must be URL references or inline SVGs
+  - Font Family names must be Google Font family names or the exact font family name uploaded to the Yext system
+
+## Test Components Locally
+
+1. Run `npm run dev`
+2. If needed, authenticate with your Yext account
+3. When the index page opens, click the `local-editor` link at the bottom of the page
+4. To modify the entity data available in the local editor, modify the auto-generated `stream.config.ts`
+
+## Uploading Templates to the Platform
+
+### Add Template Metadata
+
+1. Add `src/registry/<Name of Template>/template.json`
+
+Fill in the fields using the following shape
+
+```json
+{
+   // Name of the template to be used in the platform
+   "displayName": string,
+   // Description of the template to be used in the template gallery
+   "description": string,
+}
 ```
 
-Add a YEXT_PUBLIC_API_KEY into the .env.local file. This can be generated via the Developer Console.
+### Upload Templates
 
-### Recommended Development Flow
-
-While _developing locally_, run the following command:
-
-```
-npm run dev
-```
-
-This command will start a Vite-powered dev server that will enable hot-reloading. Additionally, the command will generate a `localData` directory that contains a subset of your Knowledge Graph data. This command is automatically in "dynamic" mode, which means it will pull data updates automatically from your Knowledge graph, so real-time data changes in your Yext account will be reflected in your local dev site.
-
-NOTE: Whenever you make changes to your stream definitions, you must re-run `npm run dev` for the system to update the `features.json` and the required entities to power your site.
-
-_Before committing_ your code, we recommend running the following command:
-
-```
-npm run prod
-```
-
-This command will generate a production build of your site, so you can ensure there are no build errors or unexpected behavior. This build step replicates the production build environment used in the Yext system, and serves your data at `localhost:8000`.
-
-In practice, development builds (via `npm run dev`) and production builds compile and bundle assets differently. For local development, ES Modules are loaded directly by the browser, allowing fast iteration during local development and also allows for hot module replacement (HMR). Other things like CSS are also loaded directly by the browser, including linking to sourcemaps. During a production build all of the different files are compiled (via ESBuild for jsx/tsx) and minified, creating assets as small as possible so that the final html files load quickly when served to a user. Tree-shaking also occurs during the build step, in which any unused dependencies are removed from your final build.
-
-### Other Useful commands
-
-`yext init` - Authenticates the Yext CLI with your Yext account
-
-`yext pages generate-test-data` - pull an example set of `localData` from your account. This command is packaged within `npm run dev'.
-
-### Setting up Authentication Policies 
-
-We recommend adding a Page-Level Authentication for the /edit page. Detailed instructions here: https://hitchhikers.yext.com/guides/set-up-yext-auth-protected-site/
+API information coming soon.
