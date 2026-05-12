@@ -13,7 +13,7 @@
     "generate:template-configs": "node --import tsx scripts/generateTemplateConfig.ts"
   },
   "engines": {
-    "node": "^20.18.2 || ^22.0.0"
+    "node": ">=20.18.2"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
@@ -28,7 +28,6 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@types/node": "^20.12.3",
-    "@types/luxon": "^3.4.2",
     "@yext/search-headless-react": "^2.7.1",
     "@yext/search-ui-react": "^3.0.1",
     "awesome-phonenumber": "^7.8.0",

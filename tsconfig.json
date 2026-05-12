@@ -2,12 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "strict": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "outDir": "./dist",
-    "module": "esnext",
-    "allowSyntheticDefaultImports": true
+    "module": "esnext"
   },
   "include": [
     "src",
