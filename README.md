@@ -1,11 +1,16 @@
 # PAGES-VISUAL-EDITOR-STARTER
 
+## Bespoke Templates
+
+To develop bespoke-templates, checkout the `platform-templates-mission` git branch.
+
+## Hybrid Development
+
 ### Prerequisites
 
 1. Have the Yext CLI installed: https://hitchhikers.yext.com/guides/cli-getting-started-resources/01-install-cli/
 1. Have Deno installed, version 1.21.0 or later: https://deno.land/manual/getting_started/installation
 1. Have node installed, version 18.4.0 or later: https://nodejs.org/en/download/
-
    - It's recommend to use nvm: https://github.com/nvm-sh/nvm#installing-and-updating or via brew `brew install nvm`
 
 1. Have a Yext account. This is necessary for production builds, deploying on Yext Pages, and pulling local stream document data via `yext pages generate-test-data`.
@@ -48,6 +53,6 @@ In practice, development builds (via `npm run dev`) and production builds compil
 
 `yext pages generate-test-data` - pull an example set of `localData` from your account. This command is packaged within `npm run dev'.
 
-### Setting up Authentication Policies 
+### Setting up Authentication Policies
 
 We recommend adding a Page-Level Authentication for the /edit page. Detailed instructions here: https://hitchhikers.yext.com/guides/set-up-yext-auth-protected-site/
