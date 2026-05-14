@@ -1,4 +1,4 @@
-# PAGES-VISUAL-EDITOR-STARTER (bespoke templates branch)
+# PAGES-VISUAL-EDITOR-STARTER (registry templates branch)
 
 ## Setup
 
