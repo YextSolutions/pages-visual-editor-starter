@@ -1,0 +1,89 @@
+{
+  "artifactSchemaVersion": "2.3.0",
+  "botChallengeDetected": false,
+  "captureMode": "headless",
+  "capturedAtIso": "2026-05-11T19:31:25.059Z",
+  "files": {
+    "combinedCss": "combined.css",
+    "captureOutput": "capture-output.md",
+    "intermediateJsx": "intermediate-jsx.jsx",
+    "pageHtml": "page.html",
+    "screenshots": {
+      "desktop": "screenshot-desktop.png",
+      "tablet": "screenshot-tablet.png",
+      "mobile": "screenshot-mobile.png"
+    }
+  },
+  "finalUrl": "file:///Users/bstephan/pages-visual-editor-starter/YextElevatedWoodfire/index.html",
+  "manualInterventionUsed": false,
+  "popupObstructionDetected": false,
+  "popupObstructionReasons": [],
+  "requestedUrl": "file:///Users/bstephan/pages-visual-editor-starter/YextElevatedWoodfire/index.html",
+  "skippedStylesheets": [],
+  "stats": {
+    "artifactSchemaVersion": "2.3.0",
+    "declaredStylePropertyCount": 2223,
+    "embeddedPayloadCount": 0,
+    "interactiveNodeCount": 71,
+    "nodeCounts": {
+      "retained": 503,
+      "retainedByKind": {
+        "element": 310,
+        "text": 167,
+        "image": 20,
+        "svg": 4,
+        "background-image": 2
+      },
+      "total": 503,
+      "totalByKind": {
+        "element": 310,
+        "text": 167,
+        "image": 20,
+        "svg": 4,
+        "background-image": 2
+      }
+    },
+    "popupObstructionDetected": false,
+    "prunedWrapperCounts": {
+      "byReason": {
+        "insignificantWrapper": 0
+      },
+      "total": 0
+    },
+    "resolvedStylePropertyCount": 31202,
+    "responsiveDeltaCounts": {
+      "content": 0,
+      "layout": 30,
+      "presence": 0,
+      "style": 225,
+      "visibility": 15
+    },
+    "retainedNodeCount": 503,
+    "retainedWrapperCountsByReason": {
+      "document-root": 1,
+      "style-owner": 103,
+      "style-delta": 84,
+      "visibility-delta": 3,
+      "layout-delta": 15
+    },
+    "sharedStyleFragmentCount": 155,
+    "skippedStylesheetCount": 0,
+    "truncatedEmbeddedPayloadCount": 0
+  },
+  "templateName": "yext-elevated-woodfire",
+  "title": "Redwood Burger Co. - South Lamar",
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 2400
+    },
+    "tablet": {
+      "width": 1024,
+      "height": 1366
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
+  }
+}
