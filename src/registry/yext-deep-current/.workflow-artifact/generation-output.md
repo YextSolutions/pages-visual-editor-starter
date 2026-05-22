@@ -1,0 +1,328 @@
+# Generation Output
+
+## Contract Metadata
+
+- Artifact Name: generation-output.md
+- Stage: vle-generate-components
+- Template Name: deep-current
+- Template Kind: built-in
+- Based On Plan Artifact: src/registry/deep-current/.workflow-artifact/plan.md
+- Based On Intermediate JSX: src/registry/deep-current/.captured-artifact/intermediate-jsx.jsx
+- Generation Completed At: 2026-05-15T02:17:31Z
+
+## File Changes
+
+- Created Files:
+  - src/registry/deep-current/components/DeepCurrentHeader.tsx
+  - src/registry/deep-current/components/DeepCurrentHero.tsx
+  - src/registry/deep-current/components/DeepCurrentDetails.tsx
+  - src/registry/deep-current/components/DeepCurrentStory.tsx
+  - src/registry/deep-current/components/DeepCurrentAdvisors.tsx
+  - src/registry/deep-current/components/DeepCurrentResources.tsx
+  - src/registry/deep-current/components/DeepCurrentFooter.tsx
+  - src/registry/deep-current/.workflow-artifact/generation-output.md
+- Updated Files:
+  - none
+- Unchanged Files:
+  - src/registry/deep-current/.captured-artifact/capture-output.md
+  - src/registry/deep-current/.captured-artifact/intermediate-jsx.jsx
+  - src/registry/deep-current/.captured-artifact/manifest.json
+
+## Section To Component Mapping
+
+- Section ID: header
+  - Component Name: DeepCurrentHeader
+  - Component File: src/registry/deep-current/components/DeepCurrentHeader.tsx
+  - Status: created
+- Section ID: hero
+  - Component Name: DeepCurrentHero
+  - Component File: src/registry/deep-current/components/DeepCurrentHero.tsx
+  - Status: created
+- Section ID: details-and-services
+  - Component Name: DeepCurrentDetails
+  - Component File: src/registry/deep-current/components/DeepCurrentDetails.tsx
+  - Status: created
+- Section ID: story-and-testimonials
+  - Component Name: DeepCurrentStory
+  - Component File: src/registry/deep-current/components/DeepCurrentStory.tsx
+  - Status: created
+- Section ID: advisors-and-faq
+  - Component Name: DeepCurrentAdvisors
+  - Component File: src/registry/deep-current/components/DeepCurrentAdvisors.tsx
+  - Status: created
+- Section ID: resources-and-nearby
+  - Component Name: DeepCurrentResources
+  - Component File: src/registry/deep-current/components/DeepCurrentResources.tsx
+  - Status: created
+- Section ID: footer
+  - Component Name: DeepCurrentFooter
+  - Component File: src/registry/deep-current/components/DeepCurrentFooter.tsx
+  - Status: created
+
+## Emitted Analytics Mapping
+
+- Section ID: header
+  - Interaction ID: mobileMenuToggle
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: mobileMenuToggle
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: synthesized
+- Section ID: header
+  - Interaction ID: navLink0
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: headerLink0
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: header
+  - Interaction ID: navLink1
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: headerLink1
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: header
+  - Interaction ID: navLink2
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: headerLink2
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: header
+  - Interaction ID: navLink3
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: headerLink3
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: header
+  - Interaction ID: navLink4
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: headerLink4
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: header
+  - Interaction ID: searchLink
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: searchLink
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: header
+  - Interaction ID: loginLink
+  - Scope: `DeepCurrentHeader + analytics hash suffix`
+  - Event Name: loginLink
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: hero
+  - Interaction ID: primaryCta
+  - Scope: `DeepCurrentHero + analytics hash suffix`
+  - Event Name: primaryCta
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: hero
+  - Interaction ID: secondaryCta
+  - Scope: `DeepCurrentHero + analytics hash suffix`
+  - Event Name: secondaryCta
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: details-and-services
+  - Interaction ID: locationWebsite
+  - Scope: `DeepCurrentDetails + analytics hash suffix`
+  - Event Name: locationWebsite
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: details-and-services
+  - Interaction ID: locationAppointment
+  - Scope: `DeepCurrentDetails + analytics hash suffix`
+  - Event Name: locationAppointment
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: details-and-services
+  - Interaction ID: servicesCta0
+  - Scope: `DeepCurrentDetails + analytics hash suffix`
+  - Event Name: servicesCta0
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: details-and-services
+  - Interaction ID: servicesCta1
+  - Scope: `DeepCurrentDetails + analytics hash suffix`
+  - Event Name: servicesCta1
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: details-and-services
+  - Interaction ID: servicesCta2
+  - Scope: `DeepCurrentDetails + analytics hash suffix`
+  - Event Name: servicesCta2
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: details-and-services
+  - Interaction ID: servicesCta3
+  - Scope: `DeepCurrentDetails + analytics hash suffix`
+  - Event Name: servicesCta3
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: details-and-services
+  - Interaction ID: exploreServices
+  - Scope: `DeepCurrentDetails + analytics hash suffix`
+  - Event Name: exploreServices
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: story-and-testimonials
+  - Interaction ID: bookAppointment
+  - Scope: `DeepCurrentStory + analytics hash suffix`
+  - Event Name: bookAppointment
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: story-and-testimonials
+  - Interaction ID: testimonialPrev
+  - Scope: `DeepCurrentStory + analytics hash suffix`
+  - Event Name: testimonialPrev
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: synthesized
+- Section ID: story-and-testimonials
+  - Interaction ID: testimonialNext
+  - Scope: `DeepCurrentStory + analytics hash suffix`
+  - Event Name: testimonialNext
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: synthesized
+- Section ID: advisors-and-faq
+  - Interaction ID: advisorPage0
+  - Scope: `DeepCurrentAdvisors + analytics hash suffix`
+  - Event Name: advisorPage0
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: advisors-and-faq
+  - Interaction ID: advisorPage1
+  - Scope: `DeepCurrentAdvisors + analytics hash suffix`
+  - Event Name: advisorPage1
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: advisors-and-faq
+  - Interaction ID: faqToggle0
+  - Scope: `DeepCurrentAdvisors + analytics hash suffix`
+  - Event Name: faqToggle0
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: indexed
+- Section ID: advisors-and-faq
+  - Interaction ID: faqToggle1
+  - Scope: `DeepCurrentAdvisors + analytics hash suffix`
+  - Event Name: faqToggle1
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: indexed
+- Section ID: advisors-and-faq
+  - Interaction ID: faqToggle2
+  - Scope: `DeepCurrentAdvisors + analytics hash suffix`
+  - Event Name: faqToggle2
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: indexed
+- Section ID: advisors-and-faq
+  - Interaction ID: faqToggle3
+  - Scope: `DeepCurrentAdvisors + analytics hash suffix`
+  - Event Name: faqToggle3
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: indexed
+- Section ID: advisors-and-faq
+  - Interaction ID: faqToggle4
+  - Scope: `DeepCurrentAdvisors + analytics hash suffix`
+  - Event Name: faqToggle4
+  - Runtime Primitive: local button state toggle
+  - Mapping Kind: indexed
+- Section ID: resources-and-nearby
+  - Interaction ID: disclosureLink0
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: disclosureLink0
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: resources-and-nearby
+  - Interaction ID: disclosureLink1
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: disclosureLink1
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: resources-and-nearby
+  - Interaction ID: disclosureLink2
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: disclosureLink2
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: resources-and-nearby
+  - Interaction ID: disclosureLink3
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: disclosureLink3
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: resources-and-nearby
+  - Interaction ID: eventCalendar
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: eventCalendar
+  - Runtime Primitive: `Link`
+  - Mapping Kind: synthesized
+- Section ID: resources-and-nearby
+  - Interaction ID: nearbyDirections0
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: nearbyDirections0
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: resources-and-nearby
+  - Interaction ID: nearbyDirections1
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: nearbyDirections1
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: resources-and-nearby
+  - Interaction ID: nearbyDirections2
+  - Scope: `DeepCurrentResources + analytics hash suffix`
+  - Event Name: nearbyDirections2
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: footer
+  - Interaction ID: footerLink0
+  - Scope: `DeepCurrentFooter + analytics hash suffix`
+  - Event Name: footerLink0
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: footer
+  - Interaction ID: footerLink1
+  - Scope: `DeepCurrentFooter + analytics hash suffix`
+  - Event Name: footerLink1
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: footer
+  - Interaction ID: footerLink2
+  - Scope: `DeepCurrentFooter + analytics hash suffix`
+  - Event Name: footerLink2
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: footer
+  - Interaction ID: footerLink3
+  - Scope: `DeepCurrentFooter + analytics hash suffix`
+  - Event Name: footerLink3
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+- Section ID: footer
+  - Interaction ID: footerLink4
+  - Scope: `DeepCurrentFooter + analytics hash suffix`
+  - Event Name: footerLink4
+  - Runtime Primitive: `Link`
+  - Mapping Kind: indexed
+
+## Component Order
+
+- Component Order Used For Layout Data:
+  - DeepCurrentHeader
+  - DeepCurrentHero
+  - DeepCurrentDetails
+  - DeepCurrentStory
+  - DeepCurrentAdvisors
+  - DeepCurrentResources
+  - DeepCurrentFooter
+
+## Default Layout
+
+- Default Layout Command: `VISUAL_EDITOR_STARTER_ROOT=/Users/rcameron/Documents/Codex Projects/Codex Local VLE/pages-visual-editor-starter pnpm --dir /Users/rcameron/Documents/Codex Projects/Codex Local VLE/pages-template-generation-skill run generate-default-layout-data -- deep-current DeepCurrentHeader DeepCurrentHero DeepCurrentDetails DeepCurrentStory DeepCurrentAdvisors DeepCurrentResources DeepCurrentFooter`
+
+## Generation Notes
+
+- Implementation Notes:
+  - Generated seven components to preserve the captured band order while keeping header/footer root-owned for default layout generation.
+  - Copied the local source imagery into `src/registry/deep-current/.captured-artifact/assets/` so the generated components can reference stable repo-local assets from within the current template flow.
+  - Used built-in palette-oriented defaults for the major shell backgrounds and left typography/theme behavior tied to shared CSS variables in render styling.
+- Assumptions Applied:
+  - Selected Repo Font Family was set to the literal `none` because `src/fonts/fonts.json` does not exist in this starter.
+  - The first-pass built-in output preserves the captured content and interaction structure with section-level editability rather than attempting broader entity/data rebinding in an otherwise empty starter repo.

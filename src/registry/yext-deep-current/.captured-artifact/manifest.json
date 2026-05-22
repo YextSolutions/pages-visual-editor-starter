@@ -1,0 +1,87 @@
+{
+  "artifactSchemaVersion": "2.3.0",
+  "botChallengeDetected": false,
+  "captureMode": "headless",
+  "capturedAtIso": "2026-05-15T02:05:18.975Z",
+  "files": {
+    "combinedCss": "combined.css",
+    "captureOutput": "capture-output.md",
+    "intermediateJsx": "intermediate-jsx.jsx",
+    "pageHtml": "page.html",
+    "screenshots": {
+      "desktop": "screenshot-desktop.png",
+      "tablet": "screenshot-tablet.png",
+      "mobile": "screenshot-mobile.png"
+    }
+  },
+  "finalUrl": "file:///Users/rcameron/Downloads/deep_current/index.html",
+  "manualInterventionUsed": false,
+  "popupObstructionDetected": false,
+  "popupObstructionReasons": [],
+  "requestedUrl": "file:///Users/rcameron/Downloads/deep_current/index.html",
+  "skippedStylesheets": [],
+  "stats": {
+    "artifactSchemaVersion": "2.3.0",
+    "declaredStylePropertyCount": 4054,
+    "embeddedPayloadCount": 0,
+    "interactiveNodeCount": 70,
+    "nodeCounts": {
+      "retained": 545,
+      "retainedByKind": {
+        "element": 358,
+        "text": 174,
+        "svg": 4,
+        "image": 9
+      },
+      "total": 545,
+      "totalByKind": {
+        "element": 358,
+        "text": 174,
+        "svg": 4,
+        "image": 9
+      }
+    },
+    "popupObstructionDetected": false,
+    "prunedWrapperCounts": {
+      "byReason": {
+        "insignificantWrapper": 0
+      },
+      "total": 0
+    },
+    "resolvedStylePropertyCount": 29714,
+    "responsiveDeltaCounts": {
+      "content": 0,
+      "layout": 74,
+      "presence": 0,
+      "style": 309,
+      "visibility": 35
+    },
+    "retainedNodeCount": 545,
+    "retainedWrapperCountsByReason": {
+      "document-root": 1,
+      "style-owner": 157,
+      "style-delta": 151,
+      "layout-delta": 35,
+      "visibility-delta": 3
+    },
+    "sharedStyleFragmentCount": 233,
+    "skippedStylesheetCount": 0,
+    "truncatedEmbeddedPayloadCount": 0
+  },
+  "templateName": "deep-current",
+  "title": "Northstar Wealth Partners - Uptown Charlotte",
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 2400
+    },
+    "tablet": {
+      "width": 1024,
+      "height": 1366
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
+  }
+}
