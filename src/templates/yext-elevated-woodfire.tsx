@@ -27,7 +27,7 @@ import {
     resolveUrlTemplate,
 } from "@yext/visual-editor";
 import { AnalyticsProvider, SchemaWrapper } from "@yext/pages-components";
-import { YextElevatedWoodfireConfig } from "../registry/yext-elevated-woodfire/config";
+import { YextElevatedWoodfireConfig } from "../registry/yext-elevated-woodfire-2/config";
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = (
     data: TemplateRenderProps
 ): HeadConfig => {

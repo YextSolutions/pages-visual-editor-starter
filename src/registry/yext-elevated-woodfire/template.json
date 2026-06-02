@@ -1,5 +1,12 @@
 {
   "displayName": "Elevated Woodfire",
   "description": "For premium brands that value sensory appeal, material heritage, and professional curation.",
-  "isBuiltIn": true
-} 
+  "previewImageUrl": "https://a.mktgcdn.com/p/R453ObCI6RRr6e9_TBUv3RDiTFVD1RkkZSq0RZ1N22U/1478x1254.png",
+  "isBuiltIn": true,
+  "verticals": [
+    "FOOD_AND_DINING"
+  ],
+  "purposes": [
+    "LOCATION"
+  ]
+}
