@@ -4,5 +4,8 @@ import yextSSG from "@yext/pages/vite-plugin";
 import { yextVisualEditorPlugin } from "@yext/visual-editor/plugin"
 
 export default defineConfig({
-  plugins: [react(), yextVisualEditorPlugin(), yextSSG()],
+    plugins: [react(), yextVisualEditorPlugin(), yextSSG()],
+    build: {
+        assetsDir: "locations/assets"
+    }
 });

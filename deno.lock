@@ -1,0 +1,63 @@
+{
+  "version": "5",
+  "remote": {
+    "https://deno.land/std@0.125.0/async/deadline.ts": "edbdf6cd7a5e3337c4c24c9b616491f8f1d61d36fc415d5d5b4af33557de0d23",
+    "https://deno.land/std@0.125.0/async/debounce.ts": "3cf9306b4e9038ee3238111e338f412ecf3541b1a97ba9fc1f960be8af5a5f39",
+    "https://deno.land/std@0.125.0/async/deferred.ts": "677692a2399d4cabbc45e06abe4f585afd6196c59e24a98edb866598af9f0eef",
+    "https://deno.land/std@0.125.0/async/delay.ts": "f38013c800f5129b14fdbf41fb4f4fbaf9525f69f4266946e14d0cf57c830b0c",
+    "https://deno.land/std@0.125.0/async/mod.ts": "a28709190a1966cb50e5815ef269bb588ee192373cde73b1096641820dc52a36",
+    "https://deno.land/std@0.125.0/async/mux_async_iterator.ts": "35561f258d32c77170f9d1faf3d650890fb6502d5fe12f505c050b4ea1aee899",
+    "https://deno.land/std@0.125.0/async/pool.ts": "97b0dd27c69544e374df857a40902e74e39532f226005543eabacb551e277082",
+    "https://deno.land/std@0.125.0/async/tee.ts": "518c7bfd5184c8cd92b47115026a6a2243e81d83e2c3e71c2aa5cdb5988998b1",
+    "https://deno.land/std@0.125.0/http/server.ts": "10c3a7814666cdbabd6f9c18acdcc4593e222275a628280a4868881445fbb5bc"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@headlessui/react@^1.7.19",
+        "npm:@heroicons/react@^2.1.5",
+        "npm:@mantine/core@^7.10.1",
+        "npm:@mantine/hooks@^7.10.1",
+        "npm:@puckeditor/core@0.21.2",
+        "npm:@radix-ui/react-accordion@^1.2.0",
+        "npm:@radix-ui/react-alert-dialog@^1.0.5",
+        "npm:@radix-ui/react-progress@^1.0.3",
+        "npm:@radix-ui/react-slot@^1.0.2",
+        "npm:@radix-ui/react-toast@^1.1.5",
+        "npm:@radix-ui/react-tooltip@^1.1.2",
+        "npm:@tailwindcss/typography@~0.5.13",
+        "npm:@types/node@^20.12.3",
+        "npm:@types/react-dom@^18.2.25",
+        "npm:@types/react@^18.2.77",
+        "npm:@typescript-eslint/eslint-plugin@^6.16.0",
+        "npm:@typescript-eslint/parser@^6.16.0",
+        "npm:@vitejs/plugin-react@^4.2.1",
+        "npm:@yext/pages-components@2.2.0",
+        "npm:@yext/search-headless-react@^2.7.1",
+        "npm:@yext/search-ui-react@^3.0.1",
+        "npm:@yext/visual-editor@1.3.2",
+        "npm:autoprefixer@^10.4.8",
+        "npm:class-variance-authority@0.7",
+        "npm:classnames@^2.4.0",
+        "npm:clsx@^2.1.1",
+        "npm:eslint-config-prettier@^8.5.0",
+        "npm:eslint-plugin-react@^7.31.7",
+        "npm:lucide-react@0.378",
+        "npm:mapbox-gl@^3.20.0",
+        "npm:next-themes@0.3",
+        "npm:postcss@^8.4.32",
+        "npm:prettier-plugin-tailwindcss@0.4.1",
+        "npm:prettier@^3.3.2",
+        "npm:react-dom@^18.2.0",
+        "npm:react-icons@^5.2.1",
+        "npm:react@^18.2.0",
+        "npm:sonner@^1.4.41",
+        "npm:tailwind-merge@^2.3.0",
+        "npm:tailwindcss-animate@^1.0.7",
+        "npm:tailwindcss@^3.3.0",
+        "npm:typescript@^5.3.3",
+        "npm:vite@^5.4.21"
+      ]
+    }
+  }
+}

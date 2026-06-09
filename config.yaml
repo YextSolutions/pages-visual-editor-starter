@@ -1,5 +1,5 @@
 buildConfiguration:
-  buildCommand: npm run build
+  buildCommand: npm run build -- --reverse-proxy-prefix www.brand.com/locations
   installDependenciesStep:
     command: npm install
     requiredFiles:
@@ -11,3 +11,9 @@ livePreviewConfiguration:
 sitemap:
   excludeList:
     - edit
+serving:
+  reverseProxyPrefix: www.brand.com/locations
+dynamicRoutes:
+  - from: /assets/*
+    to: /locations/assets/:splat
+    status: 200

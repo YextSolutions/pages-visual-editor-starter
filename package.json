@@ -49,7 +49,7 @@
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "@yext/pages": "1.2.9",
+    "@yext/pages": "file:/Users/jwartofsky/pages/pages/packages/pages/pages-pack-20260609164558.tgz",
     "@yext/pages-components": "2.2.0",
     "@yext/visual-editor": "1.3.2",
     "autoprefixer": "^10.4.8",
