@@ -1,5 +1,5 @@
 buildConfiguration:
-  buildCommand: npm run build
+  buildCommand: npm run build && printenv
   installDependenciesStep:
     command: npm install
     requiredFiles:
