@@ -1,5 +1,5 @@
 buildConfiguration:
-  buildCommand: npm run build -- --reverse-proxy-prefix=$YEXT_REVERSE_PROXY_PREFIX
+  buildCommand: npm run build -- --reverse-proxy-prefix=$YEXT_BRANCH_REVERSE_PROXY_PREFIX
   installDependenciesStep:
     command: npm install
     requiredFiles:
