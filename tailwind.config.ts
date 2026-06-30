@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 import {
   themeResolver,
   defaultThemeTailwindExtensions,
@@ -16,5 +17,5 @@ export default {
   theme: {
     extend: themeResolver(defaultThemeTailwindExtensions, defaultThemeConfig),
   },
-  plugins: [],
+  plugins: [animate],
 } satisfies Config;
