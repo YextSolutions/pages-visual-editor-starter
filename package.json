@@ -34,7 +34,7 @@
     "@yext/pages-components": "2.2.0",
     "@yext/search-headless-react": "^2.7.1",
     "@yext/search-ui-react": "^3.0.1",
-    "@yext/visual-editor": "https://raw.githubusercontent.com/jwartofsky-yext/publicAssets/main/packs/yext-visual-editor-1.3.3_July_08_26.tgz",
+    "@yext/visual-editor": "https://raw.githubusercontent.com/jwartofsky-yext/publicAssets/refs/heads/main/packs/yext-visual-editor-1.3.3-Jul-15-26.tgz",
     "awesome-phonenumber": "^7.8.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
