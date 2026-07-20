@@ -52,7 +52,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.3.0",
     "@yext/pages-components": "2.2.0",
-    "@yext/visual-editor": "https://raw.githubusercontent.com/jwartofsky-yext/publicAssets/main/packs/yext-visual-editor-1.4.1-gsb-Jul-17-26.tgz",
+    "@yext/visual-editor": "https://raw.githubusercontent.com/jwartofsky-yext/publicAssets/main/packs/yext-visual-editor-gsb-1.4.1-Jul-20-26.tgz",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
