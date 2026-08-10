@@ -26,6 +26,40 @@ const config = {
         localization: { locales: ["en"] },
       },
     },
+    "yext-bar-social-dining-directory": {
+      stream: {
+        $id: "local-editor-yext-bar-social-dining-directory-stream",
+        filter: { entityTypes: ["location"] },
+        fields: [
+          "id",
+          "name",
+          "slug",
+          "address",
+          "hours",
+          "mainPhone",
+          "dm_directoryChildren",
+          "dm_directoryParents_defaultdirectory",
+        ],
+        localization: { locales: ["en"] },
+      },
+    },
+    "yext-bar-social-dining-locator": {
+      stream: {
+        $id: "local-editor-yext-bar-social-dining-locator-stream",
+        filter: { entityTypes: ["location"] },
+        fields: [
+          "id",
+          "name",
+          "slug",
+          "address",
+          "hours",
+          "mainPhone",
+          "yextDisplayCoordinate",
+          "ref_listings",
+        ],
+        localization: { locales: ["en"] },
+      },
+    },
   },
 } satisfies LocalEditorConfig;
 

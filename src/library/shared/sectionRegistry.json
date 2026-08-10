@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "components": [
+    {
+      "id": "AboutSectionDetailsColumn",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "AddressSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "BannerSection",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "BodyTextSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "BreadcrumbsSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "CopyrightMessageSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "CTASlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "DirectoryCard",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "DirectoryFooter",
+      "pageSetTypes": ["DIRECTORY"]
+    },
+    {
+      "id": "DirectoryGrid",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "DirectoryHeader",
+      "pageSetTypes": ["DIRECTORY"]
+    },
+    {
+      "id": "DirectoryLegacyFooter",
+      "pageSetTypes": ["DIRECTORY"]
+    },
+    {
+      "id": "DirectoryLegacyHeader",
+      "pageSetTypes": ["DIRECTORY"]
+    },
+    {
+      "id": "EmailsSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "EventCard",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "EventCardsWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "FAQCard",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "FooterExpandedLinkSectionSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "FooterExpandedLinksWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "FooterLinksSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "FooterLogoSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "FooterSocialLinksSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "FooterUtilityImagesSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "HeaderLinks",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "HeadingTextSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "HeroImageSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "HoursStatusSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "HoursTableSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "ImageSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "InsightCard",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "InsightCardsWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "LocatorFooter",
+      "pageSetTypes": ["LOCATOR"]
+    },
+    {
+      "id": "LocatorHeader",
+      "pageSetTypes": ["LOCATOR"]
+    },
+    {
+      "id": "LocatorLegacyFooter",
+      "pageSetTypes": ["LOCATOR"]
+    },
+    {
+      "id": "LocatorLegacyHeader",
+      "pageSetTypes": ["LOCATOR"]
+    },
+    {
+      "id": "NearbyLocationCardsWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "PhoneNumbersSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "PhoneSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "PhotoGalleryWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "PrimaryHeaderSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "ProductCard",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "ProductCardsWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "SecondaryFooterSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "SecondaryHeaderSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "TeamCard",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "TeamCardsWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "TestimonialCard",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "TestimonialCardsWrapper",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "TextListSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "TextSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "Timestamp",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    },
+    {
+      "id": "VideoSlot",
+      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+    }
+  ]
+}

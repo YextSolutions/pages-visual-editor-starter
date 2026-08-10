@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "source": "@yext/visual-editor generic Directory and Locator",
+  "visualEditorVersion": "1.4.3",
+  "files": [
+    "src/components/categories/DirectoryCategory.tsx",
+    "src/components/categories/LocatorCategory.tsx",
+    "src/components/categories/SlotsCategory.tsx",
+    "src/components/categories/OtherCategory.tsx",
+    "src/components/categories/DeprecatedCategory.tsx",
+    "src/vite-plugin/defaultLayoutData.ts"
+  ],
+  "copiedComponentFiles": 107
+}

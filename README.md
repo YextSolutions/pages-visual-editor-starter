@@ -71,7 +71,13 @@ Each layout directory has `defaultLayout.json` and `metadata.json`.
 
 The plug-in creates one Pages template and one editor route at
 `/edit/<layoutId>` for each layout. It adds only sections that support the
-layout page set type. It does not add the Visual Editor built-in sections.
+layout page set type. Shared components stay registered for existing layout
+data but do not appear in the component menu.
+
+This starter has one Entity, Directory, and Locator layout. `Directory.tsx`
+and `Locator.tsx` are visible sections. Their editable implementation closure
+is in `src/library/shared/components`. The shared registry keeps the locked
+slots, headers, footers, and supporting components out of the gallery.
 
 ## Local editor
 
@@ -86,14 +92,20 @@ data. The editor stores drafts by layout and locale in local browser storage.
 
 Restart `npm run dev` after you add or remove a layout or section file. The
 plug-in creates one local data Pages template for each layout. It creates
-`stream.config.ts` only when the file is missing. It adds a location stream for
-ENTITY layouts. You must add streams for DIRECTORY and LOCATOR layouts.
+`stream.config.ts` only when the file is missing. This starter has explicit
+streams for its Directory and Locator layouts. Generate local snapshots for
+all three layouts before you open them in `/local-editor`.
 
 ## Build output
 
 `npm run build` writes `assets/section-library-manifest.json` to the Pages
 artifact. The file contains library metadata, layout metadata, each template
 ID, each editor path, and each default layout. It contains no section source.
+
+For current Platform compatibility, the plug-in also generates temporary
+`main`, `directory`, and `locator` Pages aliases and `.template-manifest.json`.
+The aliases map to this library's Entity, Directory, and Locator layouts. New
+Platform code should use the Section Library artifact manifest and layout IDs.
 
 Run these commands during development:
 
