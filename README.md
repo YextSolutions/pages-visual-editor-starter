@@ -1,58 +1,111 @@
-# PAGES-VISUAL-EDITOR-STARTER
+# Pages Visual Editor Section Library Starter
 
-## Bespoke Templates
+This repository is the base for one Section Library. Add one library under
+`src/library`. The Visual Editor plug-in finds the library during a Pages build.
 
-To develop bespoke-templates, checkout the `platform-templates-mission` git branch.
+## Library structure
 
-## Hybrid Development
+```
+src/library/
+  library.json
+  sections/
+    Header.tsx
+    Hero.tsx
+  shared/
+    components/
+    utils/
+  layouts/
+    restaurant-location/
+      defaultLayout.json
+      metadata.json
+```
 
-### Prerequisites
+`shared` is a convention. A section can import shared code, styles, and assets
+from any path in this repository.
 
-1. Have the Yext CLI installed: https://hitchhikers.yext.com/guides/cli-getting-started-resources/01-install-cli/
-1. Have Deno installed, version 1.21.0 or later: https://deno.land/manual/getting_started/installation
-1. Have node installed, version 18.4.0 or later: https://nodejs.org/en/download/
-   - It's recommend to use nvm: https://github.com/nvm-sh/nvm#installing-and-updating or via brew `brew install nvm`
+## Metadata
 
-1. Have a Yext account. This is necessary for production builds, deploying on Yext Pages, and pulling local stream document data via `yext pages generate-test-data`.
+`library.json` is required when the library is ready to build.
 
-### Clone this repo and install dependencies
+```json
+{
+  "schemaVersion": 1,
+  "id": "bar-social-dining",
+  "displayName": "Bar & Social Dining",
+  "description": "Sections and layouts for restaurant pages."
+}
+```
+
+Each section is one `.tsx` file directly in `src/library/sections`. Its file
+name is its stable section ID. The file must named-export a Puck component
+config with the same name and named-export Section Library metadata.
+
+```tsx
+import type { ComponentConfig } from "@puckeditor/core";
+import type { SectionConfig } from "@yext/visual-editor";
+
+export const Hero: ComponentConfig = {
+  render: () => <section>Hero</section>,
+};
+
+export const config: SectionConfig = {
+  displayName: "Hero",
+  description: "Shows a page hero.",
+  pageSetTypes: ["ENTITY"],
+  category: "Content",
+};
+```
+
+Each layout directory has `defaultLayout.json` and `metadata.json`.
+
+```json
+{
+  "id": "restaurant-location",
+  "displayName": "Restaurant Location",
+  "previewImageUrl": "https://example.com/restaurant-location.jpg",
+  "vertical": "FOOD_AND_DINING",
+  "purpose": "LOCATION",
+  "pageSetType": "ENTITY"
+}
+```
+
+The plug-in creates one Pages template and one editor route at
+`/edit/<layoutId>` for each layout. It adds only sections that support the
+layout page set type. It does not add the Visual Editor built-in sections.
+
+## Local editor
+
+`npm run dev` also creates `/local-editor`. It uses `layoutId`, `entityId`,
+and `locale` URL parameters. The local editor reads the Section Library source
+and `stream.config.ts` directly. It does not use a template manifest.
+
+The included `starter-location` layout and `Hero` section are a working
+example. Run your Pages local data generation flow to add snapshots in
+`localData`. Then open `/local-editor` to edit the layout with local snapshot
+data. The editor stores drafts by layout and locale in local browser storage.
+
+Restart `npm run dev` after you add or remove a layout or section file. The
+plug-in creates one local data Pages template for each layout. It creates
+`stream.config.ts` only when the file is missing. It adds a location stream for
+ENTITY layouts. You must add streams for DIRECTORY and LOCATOR layouts.
+
+## Build output
+
+`npm run build` writes `assets/section-library-manifest.json` to the Pages
+artifact. The file contains library metadata, layout metadata, each template
+ID, each editor path, and each default layout. It contains no section source.
+
+Run these commands during development:
 
 ```shell
-git clone https://github.com/YextSolutions/pages-visual-editor-starter
-cd pages-visual-editor-starter
 npm install
-```
-
-Add a YEXT_PUBLIC_API_KEY into the .env.local file. This can be generated via the Developer Console.
-
-### Recommended Development Flow
-
-While _developing locally_, run the following command:
-
-```
+npm run typecheck
 npm run dev
+npm run build
 ```
 
-This command will start a Vite-powered dev server that will enable hot-reloading. Additionally, the command will generate a `localData` directory that contains a subset of your Knowledge Graph data. This command is automatically in "dynamic" mode, which means it will pull data updates automatically from your Knowledge graph, so real-time data changes in your Yext account will be reflected in your local dev site.
-
-NOTE: Whenever you make changes to your stream definitions, you must re-run `npm run dev` for the system to update the `features.json` and the required entities to power your site.
-
-_Before committing_ your code, we recommend running the following command:
-
-```
-npm run prod
-```
-
-This command will generate a production build of your site, so you can ensure there are no build errors or unexpected behavior. This build step replicates the production build environment used in the Yext system, and serves your data at `localhost:8000`.
-
-In practice, development builds (via `npm run dev`) and production builds compile and bundle assets differently. For local development, ES Modules are loaded directly by the browser, allowing fast iteration during local development and also allows for hot module replacement (HMR). Other things like CSS are also loaded directly by the browser, including linking to sourcemaps. During a production build all of the different files are compiled (via ESBuild for jsx/tsx) and minified, creating assets as small as possible so that the final html files load quickly when served to a user. Tree-shaking also occurs during the build step, in which any unused dependencies are removed from your final build.
-
-### Other Useful commands
-
-`yext init` - Authenticates the Yext CLI with your Yext account
-
-`yext pages generate-test-data` - pull an example set of `localData` from your account. This command is packaged within `npm run dev'.
-
-### Setting up Authentication Policies
-
-We recommend adding a Page-Level Authentication for the /edit page. Detailed instructions here: https://hitchhikers.yext.com/guides/set-up-yext-auth-protected-site/
+This development branch uses a local Visual Editor package path. Replace
+`file:../visual-editor/packages/visual-editor` with a released package version
+before you publish this repository as a standalone Section Library repository.
+The local package install builds runnable bundles but does not run the full
+Visual Editor type build.

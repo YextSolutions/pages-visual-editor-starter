@@ -5,6 +5,9 @@ dist/
 .yext
 .yextrc
 .artifact-output
+src/library/.generated
+src/templates/*.tsx
+!src/templates/robots.tsx
 .env
 !.env.local
 sites-config/features.json

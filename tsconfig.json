@@ -2,11 +2,31 @@
   "compilerOptions": {
     "target": "ESNext",
     "strict": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@yext/pages": ["node_modules/@yext/pages/dist/types/src/index.d.ts"]
+    },
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
+    "rootDir": ".",
     "outDir": "./dist",
-    "module": "esnext"
+    "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["src", "global.d.ts", "theme.config.ts"]
+  "include": [
+    "src",
+    "scripts",
+    "global.d.ts",
+    "theme.config.ts",
+    "stream.config.ts"
+  ],
+  "exclude": [
+    "src/library/.generated",
+    "src/templates/edit-*.tsx",
+    "src/templates/local-editor*.tsx",
+    "src/templates/starter-location.tsx"
+  ]
 }
