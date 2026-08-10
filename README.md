@@ -57,6 +57,8 @@ export const config: SectionConfig = {
 ```
 
 Each layout directory has `defaultLayout.json` and `metadata.json`.
+`previewImageUrl` is required, but it can be an empty string until you add a
+gallery image.
 
 ```json
 {
