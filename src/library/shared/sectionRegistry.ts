@@ -14,101 +14,31 @@ type SharedComponent = {
 };
 
 export const sharedComponents: Record<string, SharedComponent> = {
-  ...Object.fromEntries(
-    Object.entries(DirectoryCategoryComponents)
-      .filter(([id]) => id !== "Directory")
-      .map(([id, component]) => [
-        id,
-        { component, pageSetTypes: ["DIRECTORY"] },
-      ]),
-  ),
-  ...Object.fromEntries(
-    Object.entries(LocatorCategoryComponents)
-      .filter(([id]) => id !== "Locator")
-      .map(([id, component]) => [id, { component, pageSetTypes: ["LOCATOR"] }]),
-  ),
-  ...Object.fromEntries(
-    Object.entries(SlotsCategoryComponents).map(([id, component]) => [
-      id,
-      { component, pageSetTypes: ["DIRECTORY", "LOCATOR"] },
-    ]),
-  ),
-  ...Object.fromEntries(
-    Object.entries(OtherCategoryComponents)
-      .filter(
-        ([id]) =>
-          !["CustomCodeSection", "ExpandedHeader", "ExpandedFooter"].includes(
-            id,
-          ),
-      )
-      .map(([id, component]) => [
-        id,
-        { component, pageSetTypes: ["DIRECTORY", "LOCATOR"] },
-      ]),
-  ),
-  DirectoryHeader: {
-    component: OtherCategoryComponents.ExpandedHeader,
-    pageSetTypes: ["DIRECTORY"],
-  },
-  DirectoryFooter: {
-    component: OtherCategoryComponents.ExpandedFooter,
-    pageSetTypes: ["DIRECTORY"],
-  },
-  LocatorHeader: {
-    component: OtherCategoryComponents.ExpandedHeader,
-    pageSetTypes: ["LOCATOR"],
-  },
-  LocatorFooter: {
-    component: OtherCategoryComponents.ExpandedFooter,
-    pageSetTypes: ["LOCATOR"],
-  },
-  DirectoryLegacyHeader: {
-    component: DeprecatedCategoryComponents.Header,
-    pageSetTypes: ["DIRECTORY"],
-  },
-  DirectoryLegacyFooter: {
-    component: DeprecatedCategoryComponents.Footer,
-    pageSetTypes: ["DIRECTORY"],
-  },
-  LocatorLegacyHeader: {
-    component: DeprecatedCategoryComponents.Header,
-    pageSetTypes: ["LOCATOR"],
-  },
-  LocatorLegacyFooter: {
-    component: DeprecatedCategoryComponents.Footer,
-    pageSetTypes: ["LOCATOR"],
-  },
-  BannerSection: {
-    component: BannerSection,
-    pageSetTypes: ["DIRECTORY", "LOCATOR"],
-  },
+  ...Object.fromEntries(Object.entries(DirectoryCategoryComponents).filter(([id]) => id !== "Directory").map(([id, component]) => [id, { component, pageSetTypes: ["DIRECTORY"] }])),
+  ...Object.fromEntries(Object.entries(LocatorCategoryComponents).filter(([id]) => id !== "Locator").map(([id, component]) => [id, { component, pageSetTypes: ["LOCATOR"] }])),
+  ...Object.fromEntries(Object.entries(SlotsCategoryComponents).map(([id, component]) => [id, { component, pageSetTypes: ["DIRECTORY", "LOCATOR"] }])),
+  ...Object.fromEntries(Object.entries(OtherCategoryComponents).filter(([id]) => !["CustomCodeSection", "ExpandedHeader", "ExpandedFooter"].includes(id)).map(([id, component]) => [id, { component, pageSetTypes: ["DIRECTORY", "LOCATOR"] }])),
+  DirectoryHeader: { component: OtherCategoryComponents.ExpandedHeader, pageSetTypes: ["DIRECTORY"] },
+  DirectoryFooter: { component: OtherCategoryComponents.ExpandedFooter, pageSetTypes: ["DIRECTORY"] },
+  LocatorHeader: { component: OtherCategoryComponents.ExpandedHeader, pageSetTypes: ["LOCATOR"] },
+  LocatorFooter: { component: OtherCategoryComponents.ExpandedFooter, pageSetTypes: ["LOCATOR"] },
+  DirectoryLegacyHeader: { component: DeprecatedCategoryComponents.Header, pageSetTypes: ["DIRECTORY"] },
+  DirectoryLegacyFooter: { component: DeprecatedCategoryComponents.Footer, pageSetTypes: ["DIRECTORY"] },
+  LocatorLegacyHeader: { component: DeprecatedCategoryComponents.Header, pageSetTypes: ["LOCATOR"] },
+  LocatorLegacyFooter: { component: DeprecatedCategoryComponents.Footer, pageSetTypes: ["LOCATOR"] },
+  BannerSection: { component: BannerSection, pageSetTypes: ["DIRECTORY", "LOCATOR"] },
 };
 
 export const sharedRootConfigs: Record<string, NonNullable<Config["root"]>> = {
   DIRECTORY: {
     resolveData: (data, params) => ({
       ...data,
-      props: resolveDirectoryRootProps(
-        data.props ?? {},
-        params.metadata?.streamDocument ?? {},
-      ),
+      props: resolveDirectoryRootProps(data.props ?? {}, params.metadata?.streamDocument ?? {}),
     }),
   },
 };
 
 export const sharedRootAllowedComponents: Record<string, string[]> = {
-  DIRECTORY: [
-    "DirectoryHeader",
-    "DirectoryFooter",
-    "DirectoryLegacyHeader",
-    "DirectoryLegacyFooter",
-    "MainContent",
-  ],
-  LOCATOR: [
-    "LocatorHeader",
-    "LocatorFooter",
-    "LocatorLegacyHeader",
-    "LocatorLegacyFooter",
-    "MainContent",
-  ],
+  DIRECTORY: ["DirectoryHeader", "DirectoryFooter", "DirectoryLegacyHeader", "DirectoryLegacyFooter", "MainContent"],
+  LOCATOR: ["LocatorHeader", "LocatorFooter", "LocatorLegacyHeader", "LocatorLegacyFooter", "MainContent"],
 };

@@ -1,0 +1,106 @@
+@import "@puckeditor/core/no-external.css";
+@import "@yext/visual-editor/style.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --puck-font-family:
+    Inter, "SF Pro", "Helvetica Neue", Helvetica, sans-serif !important;
+}
+
+.entity-field-tooltip-label {
+  font-family: var(--puck-font-family) !important;
+  font-size: 0.75rem !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: 1rem !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+}
+
+/* Custom styling for entity field selection in the Puck sidebar. */
+.entityField {
+  margin-top: 5px;
+  width: 100%;
+  border: 1px solid var(--puck-color-grey-09);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: var(--puck-color-grey-12);
+  color: var(--puck-color-grey-05);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  position: relative;
+  transition:
+    background-color 50ms ease-in,
+    color 50ms ease-in;
+  margin-left: -1px;
+}
+
+.entityField-constantValue {
+  margin-top: 10px;
+  display: block;
+}
+
+.ObjectField {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--puck-color-white);
+  border: 1px solid var(--puck-color-grey-09);
+  border-radius: 4px;
+}
+
+.ObjectField-fieldset {
+  border: none;
+  margin: 0;
+  min-width: 0;
+  padding: 16px 15px;
+}
+
+.ObjectField + .ObjectField {
+  margin-top: 12px;
+}
+
+.RichTextField {
+  border: 1px solid var(--puck-color-grey-09);
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 12px 15px;
+  width: 100%;
+  height: calc(3lh + 24px);
+  text-align: left;
+  display: inline-flex;
+}
+
+.RichTextField:focus {
+  outline: 2px solid var(--puck-color-azure-05);
+}
+
+.RichTextField:hover {
+  border-color: var(--puck-color-grey-05);
+}
+
+/* Temporary styling for CodeFields until we add CodeBlock component from CodeMirror */
+.CodeField {
+  border: 1px solid var(--puck-color-grey-09);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: ui-monospace, monospace;
+  padding: 12px 15px;
+  width: 100%;
+  height: calc(3lh + 24px);
+  text-align: left;
+  display: inline-flex;
+}
+
+.CodeField:focus {
+  outline: 2px solid var(--puck-color-azure-05);
+}
+
+.CodeField:hover {
+  border-color: var(--puck-color-grey-05);
+}

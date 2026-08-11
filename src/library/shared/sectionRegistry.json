@@ -3,211 +3,359 @@
   "components": [
     {
       "id": "AboutSectionDetailsColumn",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "AddressSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "BannerSection",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "BodyTextSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "BreadcrumbsSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "CopyrightMessageSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "CTASlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "DirectoryCard",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "DirectoryFooter",
-      "pageSetTypes": ["DIRECTORY"]
+      "pageSetTypes": [
+        "DIRECTORY"
+      ]
     },
     {
       "id": "DirectoryGrid",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "DirectoryHeader",
-      "pageSetTypes": ["DIRECTORY"]
+      "pageSetTypes": [
+        "DIRECTORY"
+      ]
     },
     {
       "id": "DirectoryLegacyFooter",
-      "pageSetTypes": ["DIRECTORY"]
+      "pageSetTypes": [
+        "DIRECTORY"
+      ]
     },
     {
       "id": "DirectoryLegacyHeader",
-      "pageSetTypes": ["DIRECTORY"]
+      "pageSetTypes": [
+        "DIRECTORY"
+      ]
     },
     {
       "id": "EmailsSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "EventCard",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "EventCardsWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "FAQCard",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "FooterExpandedLinkSectionSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "FooterExpandedLinksWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "FooterLinksSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "FooterLogoSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "FooterSocialLinksSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "FooterUtilityImagesSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "HeaderLinks",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "HeadingTextSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "HeroImageSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "HoursStatusSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "HoursTableSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "ImageSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "InsightCard",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "InsightCardsWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "LocatorFooter",
-      "pageSetTypes": ["LOCATOR"]
+      "pageSetTypes": [
+        "LOCATOR"
+      ]
     },
     {
       "id": "LocatorHeader",
-      "pageSetTypes": ["LOCATOR"]
+      "pageSetTypes": [
+        "LOCATOR"
+      ]
     },
     {
       "id": "LocatorLegacyFooter",
-      "pageSetTypes": ["LOCATOR"]
+      "pageSetTypes": [
+        "LOCATOR"
+      ]
     },
     {
       "id": "LocatorLegacyHeader",
-      "pageSetTypes": ["LOCATOR"]
+      "pageSetTypes": [
+        "LOCATOR"
+      ]
     },
     {
       "id": "NearbyLocationCardsWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "PhoneNumbersSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "PhoneSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "PhotoGalleryWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "PrimaryHeaderSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "ProductCard",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "ProductCardsWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "SecondaryFooterSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "SecondaryHeaderSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "TeamCard",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "TeamCardsWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "TestimonialCard",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "TestimonialCardsWrapper",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "TextListSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "TextSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "Timestamp",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     },
     {
       "id": "VideoSlot",
-      "pageSetTypes": ["DIRECTORY", "LOCATOR"]
+      "pageSetTypes": [
+        "DIRECTORY",
+        "LOCATOR"
+      ]
     }
   ]
 }

@@ -930,7 +930,9 @@
           "scope": "expandedFooter"
         },
         "id": "ExpandedFooter-ece16c93-758a-418d-a157-c8465918818d",
-        "ignoreLocaleWarning": ["slots.ExpandedLinksWrapperSlot"]
+        "ignoreLocaleWarning": [
+          "slots.ExpandedLinksWrapperSlot"
+        ]
       }
     }
   ],
