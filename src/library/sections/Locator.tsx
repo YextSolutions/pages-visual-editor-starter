@@ -1,5 +1,4 @@
-import type { SectionConfig } from "@yext/visual-editor";
-import { LocatorComponent } from "../shared/components/locator/Locator";
+import { LocatorComponent, type SectionConfig } from "@yext/visual-editor";
 
 export const Locator = LocatorComponent;
 
