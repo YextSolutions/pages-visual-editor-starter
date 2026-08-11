@@ -6,7 +6,10 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "outDir": "./dist",
-    "module": "esnext"
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
-  "include": ["src", "global.d.ts", "theme.config.ts"]
+  "include": ["src", "global.d.ts", "theme.config.ts"],
+  "exclude": ["src/library/.generated", "src/templates/edit-*.tsx"]
 }
