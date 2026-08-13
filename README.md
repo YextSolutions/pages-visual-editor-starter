@@ -20,7 +20,8 @@ src/library/
 and a description. This starter is valid without a library. Add `library.json`
 and one Entity layout before you build a Section Library site.
 
-Each flat section file must named-export its component and a `config` value.
+Each flat section file must named-export a component with the same name as its
+file stem and a `config` value.
 
 ```tsx
 import type { SectionConfig } from "@yext/visual-editor";
@@ -28,12 +29,17 @@ import type { SectionConfig } from "@yext/visual-editor";
 export const Hero = () => <section>Hero</section>;
 
 export const config: SectionConfig = {
+  id: "hero",
   displayName: "Hero",
   description: "Shows a page hero.",
   pageSetTypes: ["ENTITY"],
   category: "Content",
 };
 ```
+
+`config.id` is the stable ID stored in layout data. Do not change it after a
+layout uses the section. You can rename a section file and its component export
+without breaking existing layouts if `config.id` does not change.
 
 Each layout metadata file must set `pageSetType` to `ENTITY`. Its
 `defaultLayout.json` must reference only Section Library section IDs, apart
