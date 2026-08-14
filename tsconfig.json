@@ -10,6 +10,5 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
-  "include": ["src", "global.d.ts", "theme.config.ts"],
-  "exclude": ["src/library/.generated", "src/templates/edit-*.tsx"]
+  "include": ["src", "global.d.ts", "theme.config.ts"]
 }

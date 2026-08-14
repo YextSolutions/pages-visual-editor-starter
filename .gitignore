@@ -7,8 +7,6 @@ dist/
 .artifact-output
 .template-manifest.json
 src/library/.generated
-src/templates/*.tsx
-!src/templates/robots.tsx
 .env
 !.env.local
 sites-config/features.json
