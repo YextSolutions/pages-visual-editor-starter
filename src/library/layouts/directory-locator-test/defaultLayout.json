@@ -1,0 +1,35 @@
+{
+  "root": {
+    "props": {
+      "version": 73,
+      "title": {
+        "field": "name",
+        "constantValue": {
+          "defaultValue": ""
+        },
+        "constantValueEnabled": false
+      },
+      "description": {
+        "field": "description",
+        "constantValue": {
+          "defaultValue": ""
+        },
+        "constantValueEnabled": false
+      }
+    }
+  },
+  "content": [
+    {
+      "type": "MainContent",
+      "props": {
+        "content": [
+          {
+            "type": "hero",
+            "props": {}
+          }
+        ]
+      }
+    }
+  ],
+  "zones": {}
+}
