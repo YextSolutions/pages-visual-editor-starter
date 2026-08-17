@@ -22,10 +22,13 @@
     {
       "type": "MainContent",
       "props": {
+        "id": "main-content-default",
         "content": [
           {
             "type": "hero",
-            "props": {}
+            "props": {
+              "id": "hero-default"
+            }
           }
         ]
       }
