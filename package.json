@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "pages dev",
     "prod": "pages prod",
-    "build": "pages build -- --pluginTotalFilesizeLimit 15",
+    "build": "pages build",
     "typecheck": "tsc --noEmit",
     "generate:template-configs": "node --import tsx scripts/generateTemplateConfig.ts"
   },
