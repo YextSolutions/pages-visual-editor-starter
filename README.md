@@ -1,58 +1,78 @@
-# PAGES-VISUAL-EDITOR-STARTER
+# Pages Visual Editor Starter
 
-## Bespoke Templates
+This branch supports an Entity-only Section Library. A Section Library is the
+source that users fork and edit.
 
-To develop bespoke-templates, checkout the `platform-templates-mission` git branch.
+## Section Library structure
 
-## Hybrid Development
+```text
+src/library/
+  library.json
+  sections/
+    Hero.tsx
+  layouts/
+    location/
+      metadata.json
+      defaultLayout.json
+```
 
-### Prerequisites
+`library.json` defines `schemaVersion: 1`, a stable library ID, a display name,
+and a description. This starter is valid without a library. Add `library.json`
+and one Entity layout before you build a Section Library site.
 
-1. Have the Yext CLI installed: https://hitchhikers.yext.com/guides/cli-getting-started-resources/01-install-cli/
-1. Have Deno installed, version 1.21.0 or later: https://deno.land/manual/getting_started/installation
-1. Have node installed, version 18.4.0 or later: https://nodejs.org/en/download/
-   - It's recommend to use nvm: https://github.com/nvm-sh/nvm#installing-and-updating or via brew `brew install nvm`
+Each flat section file must named-export a component with the same name as its
+file stem and a `config` value.
 
-1. Have a Yext account. This is necessary for production builds, deploying on Yext Pages, and pulling local stream document data via `yext pages generate-test-data`.
+```tsx
+import type { SectionConfig } from "@yext/visual-editor";
 
-### Clone this repo and install dependencies
+export const Hero = () => <section>Hero</section>;
 
-```shell
-git clone https://github.com/YextSolutions/pages-visual-editor-starter
-cd pages-visual-editor-starter
+export const config: SectionConfig = {
+  id: "hero",
+  displayName: "Hero",
+  description: "Shows a page hero.",
+  pageSetTypes: ["ENTITY"],
+  category: "Content",
+};
+```
+
+`config.id` is the stable ID stored in layout data. Do not change it after a
+layout uses the section. You can rename a section file and its component export
+without breaking existing layouts if `config.id` does not change.
+
+Each layout metadata file must set `pageSetType` to `ENTITY`. Its
+`defaultLayout.json` must reference only Section Library section IDs, apart
+from the built-in `MainContent` wrapper.
+
+## Build output
+
+The Visual Editor plug-in generates Pages templates while it builds. It writes
+`assets/section-library-manifest.json` into the Pages artifact. The artifact
+contains library and layout metadata, render and editor paths, and default
+layout data. It contains no section source.
+
+For current Platform support, the plug-in also generates a legacy
+`.template-manifest.json` with `main` and the real layout ID. Platform uses
+these entries to find the default code template and default layout.
+
+## Local package
+
+This branch uses a GitHub-hosted Visual Editor test tarball for Platform
+testing. During cross-repository development, you can temporarily replace it
+with the sibling `../visual-editor/packages/visual-editor` path and update the
+lockfile. Restore a reviewed GitHub-hosted tarball before Platform testing.
+Replace the test tarball with a released package before this starter becomes a
+standalone public repository.
+
+## Development
+
+```sh
 npm install
-```
-
-Add a YEXT_PUBLIC_API_KEY into the .env.local file. This can be generated via the Developer Console.
-
-### Recommended Development Flow
-
-While _developing locally_, run the following command:
-
-```
 npm run dev
+npm run build
+npm run typecheck
 ```
 
-This command will start a Vite-powered dev server that will enable hot-reloading. Additionally, the command will generate a `localData` directory that contains a subset of your Knowledge Graph data. This command is automatically in "dynamic" mode, which means it will pull data updates automatically from your Knowledge graph, so real-time data changes in your Yext account will be reflected in your local dev site.
-
-NOTE: Whenever you make changes to your stream definitions, you must re-run `npm run dev` for the system to update the `features.json` and the required entities to power your site.
-
-_Before committing_ your code, we recommend running the following command:
-
-```
-npm run prod
-```
-
-This command will generate a production build of your site, so you can ensure there are no build errors or unexpected behavior. This build step replicates the production build environment used in the Yext system, and serves your data at `localhost:8000`.
-
-In practice, development builds (via `npm run dev`) and production builds compile and bundle assets differently. For local development, ES Modules are loaded directly by the browser, allowing fast iteration during local development and also allows for hot module replacement (HMR). Other things like CSS are also loaded directly by the browser, including linking to sourcemaps. During a production build all of the different files are compiled (via ESBuild for jsx/tsx) and minified, creating assets as small as possible so that the final html files load quickly when served to a user. Tree-shaking also occurs during the build step, in which any unused dependencies are removed from your final build.
-
-### Other Useful commands
-
-`yext init` - Authenticates the Yext CLI with your Yext account
-
-`yext pages generate-test-data` - pull an example set of `localData` from your account. This command is packaged within `npm run dev'.
-
-### Setting up Authentication Policies
-
-We recommend adding a Page-Level Authentication for the /edit page. Detailed instructions here: https://hitchhikers.yext.com/guides/set-up-yext-auth-protected-site/
+Use `npm run build` before deployment. It produces the same Pages artifact
+shape that Platform uses.

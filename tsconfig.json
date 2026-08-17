@@ -6,7 +6,9 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "outDir": "./dist",
-    "module": "esnext"
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
   "include": ["src", "global.d.ts", "theme.config.ts"]
 }

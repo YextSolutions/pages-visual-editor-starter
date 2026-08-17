@@ -9,6 +9,7 @@
     "dev": "pages dev",
     "prod": "pages prod",
     "build": "pages build",
+    "typecheck": "tsc --noEmit",
     "components": "REGISTRY_URL=https://reliably-numerous-kit.pgsdemo.com/components npx shadcn@2.3.0 add"
   },
   "engines": {
@@ -52,7 +53,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.3.2",
     "@yext/pages-components": "2.2.0",
-    "@yext/visual-editor": "1.4.4",
+    "@yext/visual-editor": "https://raw.githubusercontent.com/jwartofsky-yext/publicAssets/main/packs/yext-visual-editor-1.4.4-section-library-test-build.tgz",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
