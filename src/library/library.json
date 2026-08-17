@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "id": "section-library-test",
+  "displayName": "Section Library Test",
+  "description": "A temporary Entity-only Section Library for Platform tests."
+}

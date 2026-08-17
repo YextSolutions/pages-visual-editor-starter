@@ -1,0 +1,29 @@
+{
+  "root": {
+    "props": {
+      "version": 73,
+      "title": {
+        "field": "name",
+        "constantValue": "",
+        "constantValueEnabled": false
+      },
+      "description": {
+        "field": "",
+        "constantValue": {
+          "defaultValue": "A temporary Section Library test page."
+        },
+        "constantValueEnabled": true
+      }
+    }
+  },
+  "content": [
+    {
+      "type": "hero",
+      "props": {
+        "id": "hero-default",
+        "text": "Welcome"
+      }
+    }
+  ],
+  "zones": {}
+}
