@@ -1,7 +1,7 @@
 {
   "root": {
     "props": {
-      "version": 82,
+      "version": 73,
       "title": {
         "field": "name",
         "constantValue": {
