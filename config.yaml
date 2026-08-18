@@ -1,5 +1,6 @@
 buildConfiguration:
-  buildCommand: npm run build -- ${YEXT_REVERSE_PROXY_PREFIX:+--reverse-proxy-prefix="$YEXT_REVERSE_PROXY_PREFIX"} -- pluginTotalFilesizeLimit 15
+  buildCommand: npm run build --
+    ${YEXT_REVERSE_PROXY_PREFIX:+--reverse-proxy-prefix="$YEXT_REVERSE_PROXY_PREFIX"} --plugin-total-filesize-limit 15
   installDependenciesStep:
     command: npm install
     requiredFiles:
@@ -11,3 +12,9 @@ livePreviewConfiguration:
 sitemap:
   excludeList:
     - edit
+serving:
+  reverseProxyPrefix: anyrpp.com/subpath
+dynamicRoutes:
+  - from: /assets/*
+    to: /subpath/assets/:splat
+    status: 200
