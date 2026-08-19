@@ -1,6 +1,4 @@
 import type { Config } from "@puckeditor/core";
-import { ExpandedFooter } from "./components/footer/ExpandedFooter";
-import { ExpandedHeader } from "./components/header/ExpandedHeader";
 import { PrimaryHeaderSlot as SharedComponent0 } from "./components/header/PrimaryHeaderSlot";
 import { ImageWrapper as SharedComponent1 } from "./components/contentBlocks/image/Image";
 import { HeaderLinks as SharedComponent2 } from "./components/header/HeaderLinks";
@@ -19,7 +17,6 @@ import { CopyrightMessageSlot as SharedComponent14 } from "./components/footer/C
 import { directoryRootConfig, locatorRootConfig } from "./roots";
 
 export const sharedSections = [
-  { id: "directory-header", pageSetTypes: ["DIRECTORY"] },
   { id: "PrimaryHeaderSlot", pageSetTypes: ["DIRECTORY"] },
   { id: "ImageSlot", pageSetTypes: ["DIRECTORY"] },
   { id: "HeaderLinks", pageSetTypes: ["DIRECTORY"] },
@@ -28,7 +25,6 @@ export const sharedSections = [
   { id: "HeadingTextSlot", pageSetTypes: ["DIRECTORY"] },
   { id: "BreadcrumbsSlot", pageSetTypes: ["DIRECTORY"] },
   { id: "DirectoryGrid", pageSetTypes: ["DIRECTORY"] },
-  { id: "directory-footer", pageSetTypes: ["DIRECTORY"] },
   { id: "FooterLogoSlot", pageSetTypes: ["DIRECTORY"] },
   { id: "FooterSocialLinksSlot", pageSetTypes: ["DIRECTORY"] },
   { id: "FooterUtilityImagesSlot", pageSetTypes: ["DIRECTORY"] },
@@ -36,12 +32,9 @@ export const sharedSections = [
   { id: "FooterExpandedLinksWrapper", pageSetTypes: ["DIRECTORY"] },
   { id: "SecondaryFooterSlot", pageSetTypes: ["DIRECTORY"] },
   { id: "CopyrightMessageSlot", pageSetTypes: ["DIRECTORY"] },
-  { id: "locator-header", pageSetTypes: ["LOCATOR"] },
-  { id: "locator-footer", pageSetTypes: ["LOCATOR"] },
 ] as const;
 
 export const sharedComponents: Record<string, Config["components"][string]> = {
-  "directory-header": ExpandedHeader,
   "PrimaryHeaderSlot": SharedComponent0,
   "ImageSlot": SharedComponent1,
   "HeaderLinks": SharedComponent2,
@@ -50,7 +43,6 @@ export const sharedComponents: Record<string, Config["components"][string]> = {
   "HeadingTextSlot": SharedComponent5,
   "BreadcrumbsSlot": SharedComponent6,
   "DirectoryGrid": SharedComponent7,
-  "directory-footer": ExpandedFooter,
   "FooterLogoSlot": SharedComponent8,
   "FooterSocialLinksSlot": SharedComponent9,
   "FooterUtilityImagesSlot": SharedComponent10,
@@ -58,8 +50,6 @@ export const sharedComponents: Record<string, Config["components"][string]> = {
   "FooterExpandedLinksWrapper": SharedComponent12,
   "SecondaryFooterSlot": SharedComponent13,
   "CopyrightMessageSlot": SharedComponent14,
-  "locator-header": ExpandedHeader,
-  "locator-footer": ExpandedFooter,
 };
 
 export const sharedRootConfigs: Partial<Record<string, NonNullable<Config["root"]>>> = {
@@ -67,7 +57,9 @@ export const sharedRootConfigs: Partial<Record<string, NonNullable<Config["root"
   LOCATOR: locatorRootConfig,
 };
 
+export const sharedRootPageSetTypes = ["DIRECTORY", "LOCATOR"] as const;
+
 export const sharedRootAllowedComponentIds: Partial<Record<string, string[]>> = {
-  DIRECTORY: ["MainContent", "directory-header", "directory-footer"],
-  LOCATOR: ["MainContent", "locator-header", "locator-footer"],
+  DIRECTORY: ["MainContent", "ExpandedHeader", "ExpandedFooter", "CustomCodeSection"],
+  LOCATOR: ["MainContent", "ExpandedHeader", "ExpandedFooter", "CustomCodeSection"],
 };
