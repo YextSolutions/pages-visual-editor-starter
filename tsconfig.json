@@ -7,6 +7,7 @@
     "jsx": "react-jsx",
     "outDir": "./dist",
     "module": "esnext",
+    "types": ["vite/client"],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
