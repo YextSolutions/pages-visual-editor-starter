@@ -4,5 +4,11 @@ import yextSSG from "@yext/pages/vite-plugin";
 import { yextVisualEditorPlugin } from "@yext/visual-editor/plugin";
 
 export default defineConfig({
-  plugins: [react(), yextVisualEditorPlugin({ sectionLibrary: true }), yextSSG()],
+  plugins: [
+    react(),
+    yextVisualEditorPlugin({
+      sectionLibrary: true,
+    }),
+    yextSSG(),
+  ],
 });
