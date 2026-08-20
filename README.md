@@ -14,7 +14,7 @@ src/library/
     Directory.tsx
     Locator.tsx
   shared/
-    sectionRegistry.ts
+    componentRegistry.ts
   layouts/
     location/
       metadata.json
@@ -62,7 +62,7 @@ component IDs, apart from the built-in `MainContent` wrapper. A visible section
 config sets its supported page set types. The editor shows only visible sections
 that support the selected layout type.
 
-`shared/sectionRegistry.ts` registers copied Directory and Locator components.
+`shared/componentRegistry.ts` registers copied Directory and Locator components.
 It exports `sharedSections`, `sharedComponents`, `sharedRootConfigs`, and
 `sharedRootAllowedComponentIds`. Shared components render and stay editable in
 stored layout data, but do not show in the add-component menu. Directory and
