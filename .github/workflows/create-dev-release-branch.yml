@@ -45,6 +45,14 @@ jobs:
           npm install --force "$PACKAGE_URL"
           echo "Package installed successfully"
 
+      - name: 'Sync shared package versions'
+        env:
+          SHARED_PACKAGE_VERSIONS: ${{ toJson(github.event.client_payload.shared_package_versions) }}
+        run: node ./scripts/updateSharedPackageVersions.mjs ./package.json "$SHARED_PACKAGE_VERSIONS"
+
+      - name: 'Refresh package lock'
+        run: npm install --package-lock-only --force
+
       - name: 'Commit and push the new branch'
         env:
           PR_NUMBER: ${{ github.event.client_payload.pr_number }}
@@ -60,4 +68,4 @@ jobs:
           else
             git commit -m "feat: update visual-editor for PR #$PR_NUMBER - $PR_TITLE"
             git push origin "$BRANCH_NAME"
-          fi 
+          fi
