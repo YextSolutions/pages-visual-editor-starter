@@ -5,6 +5,7 @@
     "moduleResolution": "Bundler",
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
+    "rootDir": "./src",
     "outDir": "./dist",
     "module": "esnext",
     "types": ["vite/client"],
