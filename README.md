@@ -1,43 +1,82 @@
-# Pages Visual Editor Starter
+# Pages Section Library Starter
 
-This branch supports a Section Library with one Entity layout, one Directory
+This branch supports a Section Library with at lease one Entity layout, one Directory
 layout, and one Locator layout. A Section Library is the source that users fork
 and edit.
+
+## Development commands
+
+- `npm run dev`: Runs a local development server using example data from the account. See the Local Editor details below.
+- `npm run build`: Generates the same files that will be built in-platform. Outputs to `dist`.
+- `npm run validate`: Verifies the section library repo structure is valid. Must pass for upload to succeed.
+- `npm run deploy`: Uploads the latest commit to the platform.
+- `npm run convert-template`: Converts a legacy templates to section library format.
+- `npm run add-directory-locator`: Adds the necessary files for a directory and locator to the repo.
 
 ## Section Library structure
 
 ```text
-src/library/
-  library.json
-  sections/
-    Hero.tsx
-    Directory.tsx
-    Locator.tsx
-  shared/
-    componentRegistry.ts
-  layouts/
-    location/
-      metadata.json
-      defaultLayout.json
-    directory/
-      metadata.json
-      defaultLayout.json
-    locator/
-      metadata.json
-      defaultLayout.json
+src/
+  library/
+    library.json
+    sections/
+      Hero.tsx
+      Directory.tsx
+      Locator.tsx
+    shared/
+      componentRegistry.ts
+    layouts/
+      location/
+        metadata.json
+        defaultLayout.json
+      citation/
+        metadata.json
+        defaultLayout.json
+      directory/
+        metadata.json
+        defaultLayout.json
+      locator/
+        metadata.json
+        defaultLayout.json
+  templates/
+  assets/
+config.yaml
 ```
 
-`library.json` defines `schemaVersion: 1`, a stable library ID, a display name,
-and a description. This starter is valid without a library. Add `library.json`
-and one layout for each page set type before you build a Section Library site.
+### src/library/library.json
 
-Each flat section file must named-export a component with the same name as its
-file stem and a `config` value.
+```ts
+/**
+ * Metadata describing a Library.
+ * A library is a collection of Sections and Layouts.
+ */
+export type LibraryMetadata = {
+  /** The version of the library.json metadata schema used in this repo. */
+  schemaVersion: 1;
+  /** The internal id of the library. */
+  id: string;
+  /** The user-facing display name of the library. */
+  displayName: string;
+  /** The user-facing description of the library. */
+  description: string;
+};
+```
+
+### src/library/sections
+
+Each tsx file in `src/library/sections` defines a single section that will be available in the editor.
+
+Each file must contain a named export with the same name as its file stem with the type `YextComponentConfig`
+and an exported object `config` of the type `SectionConfig`.
 
 ```tsx
-import type { SectionConfig } from "@yext/visual-editor";
+import type { SectionConfig, YextComponentConfig } from "@yext/visual-editor";
 
-export const Hero = () => <section>Hero</section>;
+type HeroProps = {};
+
+export const Hero: YextComponentConfig<HeroProps> = () => (
+  <section>Hero</section>
+);
 
 export const config: SectionConfig = {
   id: "hero",
@@ -52,56 +91,187 @@ export const config: SectionConfig = {
 layout uses the section. You can rename a section file and its component export
 without breaking existing layouts if `config.id` does not change.
 
-The library must contain exactly one layout with each `pageSetType`: `ENTITY`,
-`DIRECTORY`, and `LOCATOR`. Entity metadata also sets `previewImageUrl` and can
-set verticals and purposes. Directory and Locator metadata sets only the layout
-ID, display name, and page set type.
+### src/library/shared
+
+The shared directory can contain arbitrary files that can be used in any the sections.
+`shared/componentRegistry.ts` registers Directory and Locator internals.
+It exports `sharedSections`, `sharedComponents`, `sharedRootConfigs`, and
+`sharedRootAllowedComponentIds`. Shared Puck components render and stay editable in
+stored layout data, but do not show in the editor sidebar. Directory and
+Locator source can import stable runtime APIs only from
+`@yext/visual-editor/section-library-support`. It must not import Visual Editor
+internal or `dist` paths.
+
+### `src/library/layouts`
+
+A layout is a starting point for the editor.
+
+The library must contain at least one layout with `pageSetType`: `ENTITY` and
+exactly one layout with each of `DIRECTORY` and `LOCATOR`.
+Entity metadata also sets `previewImageUrl` and can set verticals and purposes.
+Directory and Locator metadata sets only the layout ID, display name, and page set type.
 
 `defaultLayout.json` can reference visible section IDs and compatible shared
 component IDs, apart from the built-in `MainContent` wrapper. A visible section
 config sets its supported page set types. The editor shows only visible sections
 that support the selected layout type.
 
-`shared/componentRegistry.ts` registers copied Directory and Locator components.
-It exports `sharedSections`, `sharedComponents`, `sharedRootConfigs`, and
-`sharedRootAllowedComponentIds`. Shared components render and stay editable in
-stored layout data, but do not show in the add-component menu. Directory and
-Locator source can import stable runtime APIs only from
-`@yext/visual-editor/section-library-support`. It must not import Visual Editor
-internal or `dist` paths.
+### `src/templates`
+
+Holds the autogenerated PagesJS templates. You should not need to add/edit/commit files in this directory.
+
+### `src/assets`
+
+Files in `src/assets` will be made public on the live site. It is recommended to host images
+and fonts through the platform for the best optimization and configurability. However,
+you may want to use this directory for small SVGs or other icons.
+
+### config.yaml
+
+For section libraries, the only supported config.yaml property is `buildConfiguration`.
+`buildConfiguration.buildCommand` defines the build command run when the library is uploaded.
+The reverse proxy prefix flag must be kept for the in-platform reverse proxy feature to work.
+`buildConfiguration.installDependenciesStep.command` defines how to install npm dependencies.
+`buildConfiguration.installDependenciesStep.requiredFiles` defines the files essential for the dependency installation process.
+
+All other config.yaml properties will be dropped/overwritten when uploaded to the platform.
 
 ## Build output
 
 The Visual Editor plug-in generates Pages templates while it builds. It writes
 `assets/section-library-manifest.json` into the Pages artifact. The artifact
 contains library and layout metadata, render and editor paths, and default
-layout data. It contains no section source.
+layout data. It contains no section source. It is not expected that
+these files should require any editing.
 
-For current Platform support, the plug-in also generates temporary `main`,
-`directory`, `locator`, and `edit` aliases. The legacy `.template-manifest.json`
-contains only `main`, `directory`, and `locator`. Platform uses these entries to
-find the default code templates and default layouts. Real layout IDs stay only
-in the Section Library artifact manifest.
+## Local Editor
 
-The Locator default has no header or footer. The Directory default includes its
-editable, namespaced header and footer.
+Local Editor lets you edit Section Library layouts in development using
+example data from the account's Knowledge Graph.
 
-## Local package
+### Enable Local Editor
 
-Use a reviewed GitHub-hosted Visual Editor test tarball for Platform testing.
-During cross-repository development, you can temporarily use the sibling
-`../visual-editor/packages/visual-editor` path and update the lockfile. Restore
-the GitHub-hosted tarball before Platform testing. Replace the test tarball with
-a released package before this starter becomes a standalone public repository.
-
-## Development
-
-```sh
-npm install
-npm run dev
-npm run build
-npm run typecheck
+```ts
+yextVisualEditorPlugin({
+  sectionLibrary: true,
+  localEditor: { enabled: true },
+});
 ```
 
-Use `npm run build` before deployment. It produces the same Pages artifact
-shape that Platform uses.
+Start Pages development, then open `/local-editor`. The selector uses real
+Section Library layout IDs.
+
+The plug-in creates a temporary `local-editor-data-<layout-id>.tsx` template
+for each Entity and Directory layout. Pages uses these templates to create
+local snapshots. The plug-in removes them when development stops and before
+production builds. If these files are not removed automatically, you
+should delete them manually.
+
+### Test Data
+
+#### ENTITY Page Sets
+
+By default, a basic location entity stream is used to pull data for ENTITY page set types.
+This can be configured in the `stream.config.ts` to use other entity types and to include other fields (including custom fields).
+
+##### Alternative layouts
+
+A layout in `layouts` can override its type's stream and defaults. This allows testing a section library with multiple
+layouts and page sets configurations.
+
+#### DIRECTORY Page Sets
+
+By default, fake data is used for directory page sets. The number of directory children can be configured in the local-editor UI.
+To use real data, add a `DIRECTORY` entry `stream.config.ts` and configure the filter and fields to match the directory (see example below).
+
+#### LOCATOR Page Sets
+
+By default, fake data is used for locator page sets. A mapbox api key can be provided in the local-editor UI for the locator map.
+To use real data, fill out the env variables in the `stream.config.ts` based on the real locator. Additionally, provide
+the nearby locations key and mapbox key in the local-editor UI.
+
+### Configure Streams
+
+Create `stream.config.ts` at the starter root.
+
+```ts
+import type { LocalEditorConfig } from "@yext/visual-editor/plugin";
+
+const config = {
+  defaults: {
+    locale: "en",
+  },
+  env: {
+    YEXT_CLOUD_REGION: "US",
+    YEXT_CLOUD_CHOICE: "GLOBAL-MULTI",
+    YEXT_ENVIRONMENT: "PROD",
+    YEXT_SEARCH_API_KEY: "",
+    YEXT_SEARCH_EXPERIENCE_KEY: "",
+  },
+  pageSetTypes: {
+    ENTITY: {
+      stream: {
+        $id: "local-editor-restaurant-stream",
+        filter: { entityTypes: ["restaurant"] },
+        fields: ["id", "name", "slug", "c_order_now"],
+        localization: { locales: ["en"] },
+      },
+    },
+    DIRECTORY: {
+      stream: {
+        $id: "local-editor-directory-stream",
+        // select the correct directory entities:
+        // set the correct directory level by entity type id in entityTypes
+        // set the correct directory scope by using savedFilterIds (in platform, go to KG -> Configuration -> Saved Filters)
+        filter: {
+          entityTypes: ["dm_city"],
+          savedFilterIds: ["dm_x-y_address_city"],
+        },
+        // select the fields to include in the stream (will vary by directory level)
+        fields: [
+          "id",
+          "name",
+          "slug",
+          "dm_directoryChildren.address",
+          "dm_directoryChildren.geomodifier",
+          "dm_directoryChildren.hours",
+          "dm_directoryChildren.id",
+          "dm_directoryChildren.mainPhone",
+          "dm_directoryChildren.name",
+          "dm_directoryChildren.slug",
+          "dm_directoryChildren.timezone",
+          "dm_addressCountryDisplayName",
+          "dm_addressRegionDisplayName",
+          // The directory parents field name varies based on site/branch/page group
+          "dm_directoryParents_x_y_z.dm_addressCountryDisplayName",
+          "dm_directoryParents_x_y_z.dm_addressRegionDisplayName",
+          "dm_directoryParents_x_y_z.id",
+          "dm_directoryParents_x_y_z.name",
+          "dm_directoryParents_x_y_z.slug",
+          "dm_directoryParents_x_y_z.meta.entityType.id",
+        ],
+        localization: { locales: ["en"] },
+      },
+    },
+  },
+  layouts: {
+    "special-location-layout": {
+      stream: {
+        $id: "local-editor-special-location-stream",
+        filter: { entityTypes: ["location"] },
+        fields: ["id", "name", "description"],
+        localization: { locales: ["en"] },
+      },
+    },
+  },
+} satisfies LocalEditorConfig;
+
+export default config;
+```
+
+For each layout, Local Editor starts with `defaults`, then applies the matching
+`pageSetTypes` value, then applies `layouts[layoutId]`. A later value replaces
+an earlier value.
+
+You must run `yext pages generate-test-data` or restart your development server after
+updating `stream.config.ts`.

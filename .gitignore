@@ -6,12 +6,11 @@ dist/
 .yextrc
 .artifact-output
 .template-manifest.json
-src/library/.generated
+src/library/.generated/
 .env
 !.env.local
 sites-config/features.json
 functions/functionMetadata.json
 *.local
 .idea/*
-
 .DS_Store

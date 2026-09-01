@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [
     react(),
     yextVisualEditorPlugin({
+      localEditor: {
+        enabled: true,
+      },
       sectionLibrary: true,
     }),
     yextSSG(),
