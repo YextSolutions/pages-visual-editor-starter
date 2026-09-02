@@ -1,0 +1,2682 @@
+{
+  "root": {
+    "type": "root",
+    "props": {
+      "title": {
+        "field": "name",
+        "constantValue": "Yext Bar & Social Dining Menu Pages",
+        "constantValueEnabled": false
+      },
+      "version": 78,
+      "description": {
+        "field": "description",
+        "constantValue": "",
+        "constantValueEnabled": false
+      }
+    }
+  },
+  "zones": {},
+  "content": [
+    {
+      "type": "YextBarSocialDiningHeaderSection",
+      "props": {
+        "id": "YextBarSocialDiningHeaderSection-af6938bf-1e65-4e02-ac4e-16b1d4f3ccdb",
+        "cta": {
+          "show": true,
+          "items": [
+            {
+              "cta": {
+                "data": {
+                  "cta": {
+                    "field": "",
+                    "selectedType": "textAndLink",
+                    "constantValue": {
+                      "link": {
+                        "defaultValue": "#"
+                      },
+                      "label": {
+                        "defaultValue": "About us"
+                      },
+                      "ctaType": "textAndLink",
+                      "linkType": "URL"
+                    },
+                    "constantValueEnabled": true
+                  },
+                  "customId": "",
+                  "ariaLabel": {
+                    "defaultValue": "About us"
+                  },
+                  "actionType": "link",
+                  "buttonText": {
+                    "defaultValue": "About us"
+                  },
+                  "customClass": "",
+                  "openInNewTab": false,
+                  "dataAttributes": []
+                },
+                "styles": {
+                  "link": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "includeCaret": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "color": {
+                    "selectedColor": "palette-primary",
+                    "contrastingColor": "palette-primary-contrast"
+                  },
+                  "button": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "borderRadius": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "variant": "primary"
+                }
+              }
+            }
+          ]
+        },
+        "section": {
+          "backgroundColor": {
+            "selectedColor": "white",
+            "contrastingColor": "black"
+          },
+          "visibleOnLivePage": true
+        },
+        "variant": "centerLogoSplitNav",
+        "logoImage": {
+          "url": {
+            "field": "",
+            "constantValue": {
+              "defaultValue": ""
+            },
+            "constantValueEnabled": true
+          },
+          "show": true,
+          "image": {
+            "field": "",
+            "constantValue": {
+              "url": "https://a.mktgcdn.com/p/OLT2KExDEKhKlCmIobyRRHN6MFUS77fVs5gIt_FTnBI/450x450.jpg",
+              "width": 450,
+              "height": 450
+            },
+            "constantValueEnabled": true
+          },
+          "styles": {
+            "borderRadius": "default"
+          },
+          "aspectRatio": 1,
+          "imageConstrain": "fixed"
+        },
+        "utilities": {
+          "show": true,
+          "items": [
+            {
+              "link": "#",
+              "label": "Item 1",
+              "linkType": "URL",
+              "iconImage": {
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "",
+                    "width": 0,
+                    "height": 0
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "borderRadius": "default"
+                },
+                "aspectRatio": 1,
+                "imageConstrain": "fixed"
+              },
+              "openInNewTab": false,
+              "normalizeLink": false
+            },
+            {
+              "link": "#",
+              "label": "Item 2",
+              "linkType": "URL",
+              "iconImage": {
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "",
+                    "width": 0,
+                    "height": 0
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "borderRadius": "default"
+                },
+                "aspectRatio": 1,
+                "imageConstrain": "fixed"
+              },
+              "openInNewTab": false,
+              "normalizeLink": false
+            },
+            {
+              "link": "#",
+              "label": "Item 3",
+              "linkType": "URL",
+              "iconImage": {
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "",
+                    "width": 0,
+                    "height": 0
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "borderRadius": "default"
+                },
+                "aspectRatio": 1,
+                "imageConstrain": "fixed"
+              },
+              "openInNewTab": false,
+              "normalizeLink": false
+            }
+          ]
+        },
+        "navigation": {
+          "show": true,
+          "links": [
+            {
+              "link": "#menu",
+              "label": "Menu",
+              "linkType": "URL",
+              "openInNewTab": false,
+              "normalizeLink": false
+            },
+            {
+              "link": "#event",
+              "label": "Catering",
+              "linkType": "URL",
+              "openInNewTab": false,
+              "normalizeLink": false
+            },
+            {
+              "link": "#footer",
+              "label": "Contact",
+              "linkType": "URL",
+              "openInNewTab": false,
+              "normalizeLink": false
+            }
+          ],
+          "styles": {
+            "fontSize": "default",
+            "fontStyle": "default",
+            "fontFamily": "default",
+            "fontWeight": "default",
+            "includeCaret": "default",
+            "letterSpacing": "default",
+            "textTransform": "default"
+          }
+        }
+      }
+    },
+    {
+      "type": "MainContent",
+      "props": {
+        "id": "MainContent-default",
+        "content": [
+          {
+            "type": "YextBarSocialDiningBreadcrumbsSection",
+            "props": {
+              "id": "YextBarSocialDiningBreadcrumbsSection-cfff5af1-ca25-459d-90ef-0d8e5a56e500",
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "rootLabel": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "All Locations",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "uppercase"
+                }
+              },
+              "includeCurrentLocation": true
+            }
+          },
+          {
+            "type": "YextBarSocialDiningHeroSection",
+            "props": {
+              "id": "YextBarSocialDiningHeroSection-e311dab5-f07d-4d9e-9126-13aefea28378",
+              "body": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": {
+                      "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Our [[geomodifier]] menu features our signature wood-fired burgers, regional craft beer selections, and seasonal dishes unique to [[address.city]]. All ingredients are locally sourced, and menu items and pricing are updated in real-time to reflect current kitchen and seasonal availability.</span></p>",
+                      "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Our [[geomodifier]] menu features our signature wood-fired burgers, regional craft beer selections, and seasonal dishes unique to [[address.city]]. All ingredients are locally sourced, and menu items and pricing are updated in real-time to reflect current kitchen and seasonal availability.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                    },
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "eyebrow": {
+                "text": {
+                  "field": "name",
+                  "constantValue": {
+                    "defaultValue": "",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": false
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "heading": {
+                "text": {
+                  "field": "name",
+                  "constantValue": {
+                    "defaultValue": "Featured Menu at [[name]] [[geomodifier]]",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "palette-primary",
+                  "contrastingColor": "palette-primary-contrast"
+                },
+                "visibleOnLivePage": true
+              },
+              "heroImage": {
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://a.mktgcdn.com/p/vQqhmnexQfZueJGyh5M_j5W4EcTkTyZlW93eIoqjjvQ/1900x1267.jpg",
+                    "width": 1900,
+                    "height": 1267
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "borderRadius": "default"
+                },
+                "aspectRatio": 1.5,
+                "imageConstrain": "filled"
+              },
+              "primaryCta": {
+                "data": {
+                  "cta": {
+                    "field": "",
+                    "selectedType": "textAndLink",
+                    "constantValue": {
+                      "link": {
+                        "defaultValue": "#",
+                        "hasLocalizedValue": "true"
+                      },
+                      "label": {
+                        "defaultValue": "Order Online",
+                        "hasLocalizedValue": "true"
+                      },
+                      "ctaType": "textAndLink",
+                      "linkType": "URL"
+                    },
+                    "constantValueEnabled": true
+                  },
+                  "customId": "",
+                  "ariaLabel": {
+                    "defaultValue": "Call Ahead",
+                    "hasLocalizedValue": "true"
+                  },
+                  "actionType": "link",
+                  "buttonText": {
+                    "defaultValue": "Call Ahead",
+                    "hasLocalizedValue": "true"
+                  },
+                  "customClass": "",
+                  "openInNewTab": false,
+                  "dataAttributes": []
+                },
+                "styles": {
+                  "link": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "includeCaret": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "color": {
+                    "selectedColor": "palette-secondary",
+                    "contrastingColor": "palette-secondary-contrast"
+                  },
+                  "button": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "borderRadius": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "variant": "primary",
+                  "presetImage": "app-store"
+                }
+              },
+              "tertiaryCta": {
+                "data": {
+                  "cta": {
+                    "field": "",
+                    "selectedType": "textAndLink",
+                    "constantValue": {
+                      "link": {
+                        "defaultValue": "#",
+                        "hasLocalizedValue": "true"
+                      },
+                      "label": {
+                        "defaultValue": "View Catering Options",
+                        "hasLocalizedValue": "true"
+                      },
+                      "ctaType": "textAndLink",
+                      "linkType": "URL"
+                    },
+                    "constantValueEnabled": true
+                  },
+                  "customId": "",
+                  "ariaLabel": {
+                    "defaultValue": "View Menu",
+                    "hasLocalizedValue": "true"
+                  },
+                  "actionType": "link",
+                  "buttonText": {
+                    "defaultValue": "View Menu",
+                    "hasLocalizedValue": "true"
+                  },
+                  "customClass": "",
+                  "openInNewTab": false,
+                  "dataAttributes": []
+                },
+                "styles": {
+                  "link": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "includeCaret": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "color": {
+                    "selectedColor": "[#FFFFFF]",
+                    "contrastingColor": "[#171219]"
+                  },
+                  "button": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "borderRadius": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "variant": "secondary",
+                  "presetImage": "app-store"
+                }
+              },
+              "secondaryCta": {
+                "data": {
+                  "cta": {
+                    "field": "",
+                    "selectedType": "textAndLink",
+                    "constantValue": {
+                      "link": {
+                        "defaultValue": "#",
+                        "hasLocalizedValue": "true"
+                      },
+                      "label": {
+                        "defaultValue": "Call Ahead",
+                        "hasLocalizedValue": "true"
+                      },
+                      "ctaType": "textAndLink",
+                      "linkType": "URL"
+                    },
+                    "constantValueEnabled": true
+                  },
+                  "customId": "",
+                  "ariaLabel": {
+                    "defaultValue": "Order Takeout",
+                    "hasLocalizedValue": "true"
+                  },
+                  "actionType": "link",
+                  "buttonText": {
+                    "defaultValue": "Order Takeout",
+                    "hasLocalizedValue": "true"
+                  },
+                  "customClass": "",
+                  "openInNewTab": false,
+                  "dataAttributes": []
+                },
+                "styles": {
+                  "link": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "includeCaret": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "color": {
+                    "selectedColor": "palette-secondary",
+                    "contrastingColor": "palette-secondary-contrast"
+                  },
+                  "button": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "borderRadius": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "variant": "primary",
+                  "presetImage": "app-store"
+                }
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningStatusStripSection",
+            "props": {
+              "id": "YextBarSocialDiningStatusStripSection-3cbe8899-4937-4418-b6e8-bc90b36e1c44",
+              "hours": {
+                "field": "hours",
+                "constantValue": {},
+                "constantValueEnabled": false
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "palette-secondary",
+                  "contrastingColor": "palette-secondary-contrast"
+                },
+                "visibleOnLivePage": true
+              },
+              "statusText": {
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "hoursStyles": {
+                "timeFormat": "12h",
+                "showDayNames": false,
+                "dayOfWeekFormat": "short",
+                "showCurrentStatus": true
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningDetailsSection",
+            "props": {
+              "id": "YextBarSocialDiningDetailsSection-57c0cc2e-8521-4f93-90ad-763331a9f059",
+              "hours": {
+                "field": "hours",
+                "constantValue": {},
+                "constantValueEnabled": false
+              },
+              "phones": {
+                "items": [
+                  {
+                    "label": "",
+                    "number": {
+                      "field": "mainPhone",
+                      "constantValue": "",
+                      "constantValueEnabled": false
+                    }
+                  }
+                ],
+                "phoneFormat": "domestic",
+                "includeHyperlink": true
+              },
+              "address": {
+                "field": "address",
+                "constantValue": {
+                  "city": "",
+                  "line1": "",
+                  "region": "",
+                  "postalCode": "",
+                  "countryCode": ""
+                },
+                "constantValueEnabled": false
+              },
+              "heading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "Restaurant Details",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "offerings": {
+                "text": {
+                  "field": "services",
+                  "constantValue": [
+                    {
+                      "defaultValue": "Dine-in",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "Takeout",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "Delivery",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "Curbside pickup",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "Call-Ahead",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "Reservations available through OpenTable",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "Handicap access",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "No Wi-Fi available to guests",
+                      "hasLocalizedValue": "true"
+                    },
+                    {
+                      "defaultValue": "Safe handling is supported",
+                      "hasLocalizedValue": "true"
+                    }
+                  ],
+                  "constantValueEnabled": false
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "showRegion": true,
+              "websiteCta": {
+                "data": {
+                  "cta": {
+                    "field": "",
+                    "selectedType": "textAndLink",
+                    "constantValue": {
+                      "link": {
+                        "defaultValue": "#",
+                        "hasLocalizedValue": "true"
+                      },
+                      "label": {
+                        "defaultValue": "Visit Us Online",
+                        "hasLocalizedValue": "true"
+                      },
+                      "ctaType": "textAndLink",
+                      "linkType": "URL"
+                    },
+                    "constantValueEnabled": true
+                  },
+                  "customId": "",
+                  "ariaLabel": {
+                    "defaultValue": "Visit Us Online",
+                    "hasLocalizedValue": "true"
+                  },
+                  "actionType": "link",
+                  "buttonText": {
+                    "defaultValue": "Visit Us Online",
+                    "hasLocalizedValue": "true"
+                  },
+                  "customClass": "",
+                  "openInNewTab": false,
+                  "dataAttributes": []
+                },
+                "styles": {
+                  "link": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "includeCaret": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "color": {
+                    "selectedColor": "[#171219]",
+                    "contrastingColor": "white"
+                  },
+                  "button": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "borderRadius": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "variant": "secondary"
+                }
+              },
+              "hoursStyles": {
+                "alignment": "items-start",
+                "startOfWeek": "monday",
+                "collapseDays": false,
+                "showAdditionalHoursText": false
+              },
+              "showCountry": false,
+              "hoursHeading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "Hours",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "directionsCta": {
+                "data": {
+                  "cta": {
+                    "field": "",
+                    "selectedType": "textAndLink",
+                    "constantValue": {
+                      "link": {
+                        "defaultValue": "#",
+                        "hasLocalizedValue": "true"
+                      },
+                      "label": {
+                        "defaultValue": "Get Directions",
+                        "hasLocalizedValue": "true"
+                      },
+                      "ctaType": "textAndLink",
+                      "linkType": "URL"
+                    },
+                    "constantValueEnabled": true
+                  },
+                  "customId": "",
+                  "ariaLabel": {
+                    "defaultValue": "Get Directions",
+                    "hasLocalizedValue": "true"
+                  },
+                  "actionType": "link",
+                  "buttonText": {
+                    "defaultValue": "Get Directions",
+                    "hasLocalizedValue": "true"
+                  },
+                  "customClass": "",
+                  "openInNewTab": false,
+                  "dataAttributes": []
+                },
+                "styles": {
+                  "link": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "includeCaret": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "color": {
+                    "selectedColor": "[#171219]",
+                    "contrastingColor": "white"
+                  },
+                  "button": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "borderRadius": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "variant": "secondary"
+                }
+              },
+              "findUsHeading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "Find Us",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "offeringsHeading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "Offerings",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningAboutSection",
+            "props": {
+              "id": "YextBarSocialDiningAboutSection-206924d3-eba2-4175-b407-0eae5e97f9c5",
+              "items": {
+                "field": "",
+                "mappings": {
+                  "image": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  },
+                  "title": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  },
+                  "description": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  }
+                },
+                "constantValue": [
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/hlcJpcdE-_vHprzl5MOnrTwEFmdYZRE9WaT_drjPWis/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Gluten-Free Options",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Any signature burger can be prepared on a gluten-free bun or wrapped in crisp leaf lettuce upon request.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Any signature burger can be prepared on a gluten-free bun or wrapped in crisp leaf lettuce upon request.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/0V-U0Tk9g5iHSg5ONJZW00L2_BGDVymefN7fqI051qE/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Vegetarian Choices",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Substitute our plant-based smash patty on any burger style at no additional charge.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Substitute our plant-based smash patty on any burger style at no additional charge.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/IBzkFIQfMJfgyQi-wxH0LQqlhxZD687Qelcs5dAr1U4/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Nutritional Info",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Estimated calorie counts are explicitly listed next to each item category below to guide your dining choices.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Estimated calorie counts are explicitly listed next to each item category below to guide your dining choices.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/DISnwT6ynj9aRp251BNxmQQnIWzutq6gxszZISN49C0/980x980.png",
+                        "width": 980,
+                        "height": 980
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Substitutions",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>We gladly accommodate side substitutions (e.g., swapping hand-cut fries for a side salad or truffle fries).</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"We gladly accommodate side substitutions (e.g., swapping hand-cut fries for a side salad or truffle fries).\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  }
+                ],
+                "constantValueEnabled": true
+              },
+              "heading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "Dietary Accommodations ",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "itemStyles": {
+                "image": {
+                  "styles": {
+                    "borderRadius": "default"
+                  },
+                  "aspectRatio": 1,
+                  "imageConstrain": "fixed"
+                },
+                "title": {
+                  "styles": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "textTransform": "default"
+                  }
+                },
+                "description": {
+                  "styles": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "textTransform": "default"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningMenuSection",
+            "props": {
+              "id": "YextBarSocialDiningMenuSection-ede0b765-fe1a-40df-a7a5-0f62dd830b23",
+              "items": {
+                "field": "",
+                "mappings": {
+                  "image": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  },
+                  "title": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  },
+                  "category": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  },
+                  "description": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  }
+                },
+                "constantValue": [
+                  {
+                    "cta": {
+                      "field": "",
+                      "selectedType": "textAndLink",
+                      "constantValue": {
+                        "link": {
+                          "defaultValue": "#",
+                          "hasLocalizedValue": "true"
+                        },
+                        "label": {
+                          "defaultValue": "More Details",
+                          "hasLocalizedValue": "true"
+                        },
+                        "ctaType": "textAndLink",
+                        "linkType": "URL"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/Qdlacb36DqN5Lt3q6V9jw-qSMmbPyl_AeMEI_CyDkHc/1267x1900.jpg",
+                        "width": 1267,
+                        "height": 1900
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Redwood Smokehouse Burger",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "category": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Burgers",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>A wood-fired double smash burger topped with smoked cheddar, crispy onions, bourbon bacon jam, wild arugula, and house redwood sauce on a toasted brioche bun.</span></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><i><em style=\"font-style: italic;\">980 cal</em></i></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"A wood-fired double smash burger topped with smoked cheddar, crispy onions, bourbon bacon jam, wild arugula, and house redwood sauce on a toasted brioche bun.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[{\"detail\":0,\"format\":2,\"mode\":\"normal\",\"style\":\"\",\"text\":\"980 cal\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "cta": {
+                      "field": "",
+                      "selectedType": "textAndLink",
+                      "constantValue": {
+                        "link": {
+                          "defaultValue": "#",
+                          "hasLocalizedValue": "true"
+                        },
+                        "label": {
+                          "defaultValue": "More Details",
+                          "hasLocalizedValue": "true"
+                        },
+                        "ctaType": "textAndLink",
+                        "linkType": "URL"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/fbSbItkZpsHpkc8qHH7GxvQkWzxsfm6mGc0k4Lmfl-A/1267x1900.jpg",
+                        "width": 1267,
+                        "height": 1900
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "[[geomodifier]] Chicken Sandwich",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "category": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Sandwiches",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Crispy buttermilk fried chicken breast layered with a sweet hot honey glaze, crunchy dill pickles, shredded lettuce, and chipotle aioli on a buttered potato bun. A local favorite during happy hour and weekend brunch.</span></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><i><em style=\"font-style: italic;\">790 cal</em></i></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Crispy buttermilk fried chicken breast layered with a sweet hot honey glaze, crunchy dill pickles, shredded lettuce, and chipotle aioli on a buttered potato bun. A local favorite during happy hour and weekend brunch.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[{\"detail\":0,\"format\":2,\"mode\":\"normal\",\"style\":\"\",\"text\":\"790 cal\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "cta": {
+                      "field": "",
+                      "selectedType": "textAndLink",
+                      "constantValue": {
+                        "link": {
+                          "defaultValue": "#",
+                          "hasLocalizedValue": "true"
+                        },
+                        "label": {
+                          "defaultValue": "More Details",
+                          "hasLocalizedValue": "true"
+                        },
+                        "ctaType": "textAndLink",
+                        "linkType": "URL"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/Qdlacb36DqN5Lt3q6V9jw-qSMmbPyl_AeMEI_CyDkHc/1267x1900.jpg",
+                        "width": 1267,
+                        "height": 1900
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Black Truffle Mac & Cheese",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "category": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Shareables",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Creamy cavatappi pasta tossed in a rich, velvety smoked gouda and sharp white cheddar cheese blend, finished with black truffle oil, toasted panko breadcrumbs, and fresh garden herbs.</span></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><i><em style=\"font-style: italic;\">1120 cal</em></i></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Creamy cavatappi pasta tossed in a rich, velvety smoked gouda and sharp white cheddar cheese blend, finished with black truffle oil, toasted panko breadcrumbs, and fresh garden herbs.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[{\"detail\":0,\"format\":2,\"mode\":\"normal\",\"style\":\"\",\"text\":\"1120 cal\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "cta": {
+                      "field": "",
+                      "selectedType": "textAndLink",
+                      "constantValue": {
+                        "link": {
+                          "defaultValue": "#",
+                          "hasLocalizedValue": "true"
+                        },
+                        "label": {
+                          "defaultValue": "More Details",
+                          "hasLocalizedValue": "true"
+                        },
+                        "ctaType": "textAndLink",
+                        "linkType": "URL"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/UHR6VTEvcR-yDMqPSOS7LyK87Qt56EOrmfNbhLQxI08/1267x1900.jpg",
+                        "width": 1267,
+                        "height": 1900
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "title": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Hill Country Steak Salad",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "category": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Salads",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "description": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Fire-grilled skirt steak served over a bed of crisp mixed greens with fire-roasted corn, diced avocado, pickled red onions, cotija cheese, crispy tortilla strips, and a house cilantro-lime vinaigrette. Fresh, hearty, and distinctly Texas-inspired.</span></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"></p><p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><i><em style=\"font-style: italic;\">640 cal</em></i></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Fire-grilled skirt steak served over a bed of crisp mixed greens with fire-roasted corn, diced avocado, pickled red onions, cotija cheese, crispy tortilla strips, and a house cilantro-lime vinaigrette. Fresh, hearty, and distinctly Texas-inspired.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1},{\"children\":[{\"detail\":0,\"format\":2,\"mode\":\"normal\",\"style\":\"\",\"text\":\"640 cal\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  }
+                ],
+                "constantValueEnabled": true
+              },
+              "heading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "[[geomodifier]] Menu Favorites",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "cardStyles": {
+                "image": {
+                  "styles": {
+                    "borderRadius": "default"
+                  },
+                  "aspectRatio": 0.8,
+                  "imageConstrain": "filled"
+                },
+                "title": {
+                  "styles": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "textTransform": "default"
+                  }
+                },
+                "category": {
+                  "styles": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "textTransform": "default"
+                  }
+                },
+                "description": {
+                  "styles": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "textTransform": "default"
+                  }
+                }
+              },
+              "cardBackgroundColor": {
+                "selectedColor": "white",
+                "contrastingColor": "black"
+              },
+              "mediaFrameBackgroundColor": {
+                "selectedColor": "[#d9c4a0]",
+                "contrastingColor": "[#171219]"
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningReviewsSection",
+            "props": {
+              "id": "YextBarSocialDiningReviewsSection-28e2c4a2-46f1-4d7c-a512-86a4277964ee",
+              "heading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "What Guests Say About the Food",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "starColor": {
+                "selectedColor": "[#171219]",
+                "contrastingColor": "white"
+              },
+              "cardBackgroundColor": {
+                "selectedColor": "palette-primary-light",
+                "contrastingColor": "black"
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningEventSection",
+            "props": {
+              "id": "YextBarSocialDiningEventSection-c3bb86e0-8c71-4a50-8c3b-7adb59210cf6",
+              "cta": {
+                "data": {
+                  "cta": {
+                    "field": "",
+                    "selectedType": "textAndLink",
+                    "constantValue": {
+                      "link": {
+                        "defaultValue": "#",
+                        "hasLocalizedValue": "true"
+                      },
+                      "label": {
+                        "defaultValue": "View Catering Packages ",
+                        "hasLocalizedValue": "true"
+                      },
+                      "ctaType": "textAndLink",
+                      "linkType": "URL"
+                    },
+                    "constantValueEnabled": true
+                  },
+                  "customId": "",
+                  "ariaLabel": {
+                    "defaultValue": "Plan Your Event",
+                    "hasLocalizedValue": "true"
+                  },
+                  "actionType": "link",
+                  "buttonText": {
+                    "defaultValue": "Plan Your Event",
+                    "hasLocalizedValue": "true"
+                  },
+                  "customClass": "",
+                  "openInNewTab": false,
+                  "dataAttributes": []
+                },
+                "styles": {
+                  "link": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "includeCaret": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "color": {
+                    "selectedColor": "palette-tertiary",
+                    "contrastingColor": "palette-tertiary-contrast"
+                  },
+                  "button": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "borderRadius": "default",
+                    "letterSpacing": "default",
+                    "textTransform": "default"
+                  },
+                  "variant": "primary",
+                  "presetImage": "app-store"
+                }
+              },
+              "body": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": {
+                      "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Planning an office lunch, neighborhood party, or corporate event in [[address.city]], [[address.region]]? Bring [[name]]&#39;s wood-fired flavor straight to your guests. We offer fully customizable food and cocktail catering packages, including boxed burger meals, slider platters, and full-service onsite grilling for groups of 10 to 150+.</span></p>",
+                      "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Planning an office lunch, neighborhood party, or corporate event in [[address.city]], [[address.region]]? Bring [[name]]'s wood-fired flavor straight to your guests. We offer fully customizable food and cocktail catering packages, including boxed burger meals, slider platters, and full-service onsite grilling for groups of 10 to 150+.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                    },
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "heading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "Full-Service Catering from [[geomodifier]]",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "bannerImage": {
+                "image": {
+                  "field": "",
+                  "constantValue": {
+                    "url": "https://a.mktgcdn.com/p/UHR6VTEvcR-yDMqPSOS7LyK87Qt56EOrmfNbhLQxI08/1267x1900.jpg",
+                    "width": 1267,
+                    "height": 1900
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "borderRadius": "default"
+                },
+                "aspectRatio": 4,
+                "imageConstrain": "filled"
+              },
+              "overlayColor": {
+                "isDarkColor": true,
+                "selectedColor": "[#000000]",
+                "contrastingColor": "white"
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningFaqSection",
+            "props": {
+              "id": "YextBarSocialDiningFaqSection-c727671b-3654-4444-9333-7130ef87d6bb",
+              "items": {
+                "field": "",
+                "mappings": {
+                  "image": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  },
+                  "answer": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  },
+                  "question": {
+                    "field": "",
+                    "constantValueEnabled": false
+                  }
+                },
+                "constantValue": [
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/hlcJpcdE-_vHprzl5MOnrTwEFmdYZRE9WaT_drjPWis/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "answer": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Not always. Our takeout and delivery service may remain available slightly later than dine-in seating, especially on weekends. For the most accurate hours, we recommend checking our online ordering page or giving our South Lamar location a quick call before placing your order.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Not always. Our takeout and delivery service may remain available slightly later than dine-in seating, especially on weekends. For the most accurate hours, we recommend checking our online ordering page or giving our South Lamar location a quick call before placing your order.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "question": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Are your dining hours the same as your take-out hours?",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/0V-U0Tk9g5iHSg5ONJZW00L2_BGDVymefN7fqI051qE/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "answer": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Yes. Redwood Burger Co. offers online ordering for takeout, curbside pickup, and delivery throughout South Austin and surrounding neighborhoods. Delivery is available through select third-party partners including DoorDash, Uber Eats, and Postmates.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Yes. Redwood Burger Co. offers online ordering for takeout, curbside pickup, and delivery throughout South Austin and surrounding neighborhoods. Delivery is available through select third-party partners including DoorDash, Uber Eats, and Postmates.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "question": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Can I order online?",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/IBzkFIQfMJfgyQi-wxH0LQqlhxZD687Qelcs5dAr1U4/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "answer": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Yes. We accept reservations for parties of up to 6 guests based on availability. Larger groups, birthday dinners, and private dining inquiries can be arranged by contacting our group events coordinator directly. Weekend brunch reservations are highly recommended.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Yes. We accept reservations for parties of up to 6 guests based on availability. Larger groups, birthday dinners, and private dining inquiries can be arranged by contacting our group events coordinator directly. Weekend brunch reservations are highly recommended.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "question": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Does this location take reservations?",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/hlcJpcdE-_vHprzl5MOnrTwEFmdYZRE9WaT_drjPWis/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "answer": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Absolutely. Our kids menu includes favorites like cheeseburgers, grilled chicken tenders, mac &amp; cheese, and buttered pasta, all served with your choice of fries or fresh fruit and a fountain drink. We also offer kid-friendly dessert options during brunch and dinner service.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Absolutely. Our kids menu includes favorites like cheeseburgers, grilled chicken tenders, mac & cheese, and buttered pasta, all served with your choice of fries or fresh fruit and a fountain drink. We also offer kid-friendly dessert options during brunch and dinner service.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "question": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Do you have a kids menu?",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/0V-U0Tk9g5iHSg5ONJZW00L2_BGDVymefN7fqI051qE/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "answer": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Yes. Redwood Burger Co. offers several vegetarian-friendly menu items, including plant-based burgers, salads, and shareable appetizers. Gluten-free buns are available upon request, and our team is happy to help accommodate dietary preferences whenever possible.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Yes. Redwood Burger Co. offers several vegetarian-friendly menu items, including plant-based burgers, salads, and shareable appetizers. Gluten-free buns are available upon request, and our team is happy to help accommodate dietary preferences whenever possible.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "question": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Do you offer vegetarian or gluten-free options?",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  },
+                  {
+                    "image": {
+                      "field": "",
+                      "constantValue": {
+                        "url": "https://a.mktgcdn.com/p/IBzkFIQfMJfgyQi-wxH0LQqlhxZD687Qelcs5dAr1U4/1000x568.png",
+                        "width": 1000,
+                        "height": 568
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "answer": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": {
+                          "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; color: rgb(0, 0, 0); margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Yes. While our core signature burgers and favorites stay year-round, we update our menu seasonally to highlight fresh, local Texas ingredients and introduce limited-time craft cocktails and draft beers.</span></p>",
+                          "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Yes. While our core signature burgers and favorites stay year-round, we update our menu seasonally to highlight fresh, local Texas ingredients and introduce limited-time craft cocktails and draft beers.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+                        },
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    },
+                    "question": {
+                      "field": "",
+                      "constantValue": {
+                        "defaultValue": "Does the menu change seasonally?",
+                        "hasLocalizedValue": "true"
+                      },
+                      "constantValueEnabled": true
+                    }
+                  }
+                ],
+                "constantValueEnabled": true
+              },
+              "heading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "FAQs",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "itemStyles": {
+                "image": {
+                  "styles": {
+                    "borderRadius": "default"
+                  },
+                  "aspectRatio": 1,
+                  "imageConstrain": "fixed"
+                },
+                "answer": {
+                  "styles": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "textTransform": "default"
+                  }
+                },
+                "question": {
+                  "styles": {
+                    "fontSize": "default",
+                    "fontStyle": "default",
+                    "fontFamily": "default",
+                    "fontWeight": "default",
+                    "textTransform": "default"
+                  }
+                }
+              },
+              "answerBackgroundColor": {
+                "selectedColor": "[#f6eee7]",
+                "contrastingColor": "[#171219]"
+              },
+              "questionBackgroundColor": {
+                "selectedColor": "palette-secondary",
+                "contrastingColor": "palette-secondary-contrast"
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningNearbyLocationsSection",
+            "props": {
+              "id": "YextBarSocialDiningNearbyLocationsSection-02c08e70-dc75-4140-b8e0-84bc730e5b98",
+              "limit": 3,
+              "radius": 10,
+              "heading": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": "Where to Find Us",
+                    "hasLocalizedValue": "true"
+                  },
+                  "constantValueEnabled": true
+                },
+                "styles": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "textTransform": "default"
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              },
+              "cardBackgroundColor": {
+                "selectedColor": "palette-quaternary",
+                "contrastingColor": "palette-quaternary-contrast"
+              }
+            }
+          },
+          {
+            "type": "YextBarSocialDiningMapSection",
+            "props": {
+              "id": "YextBarSocialDiningMapSection-e1a54a2c-7ba5-4702-a0d2-b6af812fd389",
+              "map": {
+                "zoom": 10,
+                "height": "100%",
+                "mapStyle": "streets-v12",
+                "coordinate": {
+                  "field": "yextDisplayCoordinate",
+                  "constantValue": {
+                    "latitude": 0,
+                    "longitude": 0
+                  },
+                  "constantValueEnabled": false
+                }
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "visibleOnLivePage": true
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "YextBarSocialDiningFooterSection",
+      "props": {
+        "id": "YextBarSocialDiningFooterSection-b09ba063-1863-4f28-a1e4-24395cbac6da",
+        "emails": {
+          "list": {
+            "field": "emails",
+            "constantValue": [
+              "support@redwood.co"
+            ],
+            "constantValueEnabled": false
+          }
+        },
+        "phones": {
+          "items": [
+            {
+              "label": "",
+              "number": {
+                "field": "",
+                "constantValue": "+1 (416) 555-5555",
+                "constantValueEnabled": true
+              }
+            }
+          ],
+          "phoneFormat": "domestic",
+          "includeHyperlink": true
+        },
+        "section": {
+          "backgroundColor": {
+            "selectedColor": "palette-primary",
+            "contrastingColor": "palette-primary-contrast"
+          },
+          "visibleOnLivePage": true
+        },
+        "logoImage": {
+          "image": {
+            "field": "",
+            "constantValue": {
+              "url": "https://a.mktgcdn.com/p/OLT2KExDEKhKlCmIobyRRHN6MFUS77fVs5gIt_FTnBI/450x450.jpg",
+              "width": 450,
+              "height": 450
+            },
+            "constantValueEnabled": true
+          },
+          "styles": {
+            "borderRadius": "default"
+          },
+          "aspectRatio": 1,
+          "imageConstrain": "fixed"
+        },
+        "contactBody": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "defaultValue": {
+                "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>Questions? We’re here for you Monday - Friday 10am-6pm ET.</span></p>",
+                "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Questions? We’re here for you Monday - Friday 10am-6pm ET.\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+              },
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "styles": {
+            "fontSize": "default",
+            "fontStyle": "default",
+            "fontFamily": "default",
+            "fontWeight": "default",
+            "textTransform": "default"
+          }
+        },
+        "socialLinks": [
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Facebook",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Facebook",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Facebook",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Instagram",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Instagram",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Instagram",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Yelp",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Yelp",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Yelp",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          }
+        ],
+        "copyrightText": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "defaultValue": {
+                "html": "<p dir=\"ltr\" style=\"font-size: 14.67px; font-weight: 400; line-height: 18.67px; margin: 0; padding: 3px 2px 3px 2px; position: relative;\"><span>© 2026 Redwood Burger Co. — All Rights Reserved</span></p>",
+                "json": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"© 2026 Redwood Burger Co. — All Rights Reserved\",\"type\":\"text\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1}],\"direction\":\"ltr\",\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}"
+              },
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "styles": {
+            "fontSize": "default",
+            "fontStyle": "default",
+            "fontFamily": "default",
+            "fontWeight": "default",
+            "textTransform": "default"
+          }
+        },
+        "resourceLinks": [
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Menu",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Menu",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Menu",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Order online",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Order online",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Order online",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Reservations",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Reservations",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Reservations",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Group events",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Group events",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Group events",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Catering",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Catering",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Catering",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Careers",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Careers",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Careers",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Gift cards",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Gift cards",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Gift cards",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          },
+          {
+            "cta": {
+              "data": {
+                "cta": {
+                  "field": "",
+                  "selectedType": "textAndLink",
+                  "constantValue": {
+                    "link": {
+                      "defaultValue": "#",
+                      "hasLocalizedValue": "true"
+                    },
+                    "label": {
+                      "defaultValue": "Contact",
+                      "hasLocalizedValue": "true"
+                    },
+                    "ctaType": "textAndLink",
+                    "linkType": "URL"
+                  },
+                  "constantValueEnabled": true
+                },
+                "customId": "",
+                "ariaLabel": {
+                  "defaultValue": "Contact",
+                  "hasLocalizedValue": "true"
+                },
+                "actionType": "link",
+                "buttonText": {
+                  "defaultValue": "Contact",
+                  "hasLocalizedValue": "true"
+                },
+                "customClass": "",
+                "openInNewTab": false,
+                "dataAttributes": []
+              },
+              "styles": {
+                "link": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "includeCaret": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "color": {
+                  "selectedColor": "[#FFFFFF]",
+                  "contrastingColor": "[#171219]"
+                },
+                "button": {
+                  "fontSize": "default",
+                  "fontStyle": "default",
+                  "fontFamily": "default",
+                  "fontWeight": "default",
+                  "borderRadius": "default",
+                  "letterSpacing": "default",
+                  "textTransform": "default"
+                },
+                "variant": "link"
+              }
+            }
+          }
+        ],
+        "contactHeading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "defaultValue": "Contact us",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "styles": {
+            "fontSize": "default",
+            "fontStyle": "default",
+            "fontFamily": "default",
+            "fontWeight": "default",
+            "textTransform": "default"
+          }
+        },
+        "followUsHeading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "defaultValue": "Follow us",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "styles": {
+            "fontSize": "default",
+            "fontStyle": "default",
+            "fontFamily": "default",
+            "fontWeight": "default",
+            "textTransform": "default"
+          }
+        },
+        "resourcesHeading": {
+          "text": {
+            "field": "",
+            "constantValue": {
+              "defaultValue": "Resources",
+              "hasLocalizedValue": "true"
+            },
+            "constantValueEnabled": true
+          },
+          "styles": {
+            "fontSize": "default",
+            "fontStyle": "default",
+            "fontFamily": "default",
+            "fontWeight": "default",
+            "textTransform": "default"
+          }
+        }
+      }
+    }
+  ]
+}

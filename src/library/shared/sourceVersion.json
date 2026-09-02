@@ -1,0 +1,15 @@
+{
+  "visualEditorVersion": "1.4.4",
+  "sourceRoots": [
+    "components/directory/Directory.tsx",
+    "components/locator/Locator.tsx",
+    "components/contentBlocks/Address.tsx",
+    "components/pageSections/Breadcrumbs.tsx",
+    "components/directory/DirectoryWrapper.tsx",
+    "components/directory/DirectoryCard.tsx",
+    "components/contentBlocks/HeadingText.tsx",
+    "components/contentBlocks/HoursStatus.tsx",
+    "components/contentBlocks/image/Image.tsx",
+    "components/contentBlocks/Phone.tsx"
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "root": {
+    "props": {
+      "version": 76,
+      "title": {
+        "field": "",
+        "constantValue": {
+          "defaultValue": "PLACEHOLDER"
+        },
+        "constantValueEnabled": true
+      },
+      "description": {
+        "field": "",
+        "constantValue": {
+          "defaultValue": "PLACEHOLDER"
+        },
+        "constantValueEnabled": true
+      }
+    },
+    "type": "root"
+  },
+  "content": [
+    {
+      "type": "EdwardJonesPagesHeader",
+      "props": {
+        "id": "EdwardJonesPagesHeader-b79f4528-bba3-4b28-be0c-8b13cb822861",
+        "brandName": "Edward Jones",
+        "navigation": [
+          {
+            "label": "Why Edward Jones",
+            "link": "#why"
+          },
+          {
+            "label": "Our Approach",
+            "link": "#approach"
+          },
+          {
+            "label": "Resources",
+            "link": "#resources"
+          }
+        ],
+        "primaryCta": {
+          "label": "Find an Advisor",
+          "link": "#contact"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "visibleOnLivePage": true
+        }
+      }
+    },
+    {
+      "type": "MainContent",
+      "props": {
+        "id": "MainContent-76dbbc2c-0ca1-479c-ac6b-5e6b4bd82be7",
+        "content": [
+          {
+            "type": "Directory",
+            "props": {
+              "styles": {
+                "backgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                },
+                "listBackgroundColor": {
+                  "selectedColor": "white",
+                  "contrastingColor": "black"
+                }
+              },
+              "slots": {
+                "TitleSlot": [
+                  {
+                    "type": "HeadingTextSlot",
+                    "props": {
+                      "id": "HeadingTextSlot-1a871989-a34d-426c-b24a-a1888c1a46ea",
+                      "data": {
+                        "text": {
+                          "constantValue": {
+                            "defaultValue": ""
+                          },
+                          "constantValueEnabled": false,
+                          "field": "name"
+                        }
+                      },
+                      "styles": {
+                        "level": 2,
+                        "align": "center"
+                      }
+                    }
+                  }
+                ],
+                "SiteNameSlot": [
+                  {
+                    "type": "HeadingTextSlot",
+                    "props": {
+                      "id": "HeadingTextSlot-9a120ff6-d494-4ec8-9ab8-e43017d77c03",
+                      "data": {
+                        "text": {
+                          "constantValue": {
+                            "defaultValue": ""
+                          },
+                          "constantValueEnabled": true,
+                          "field": "name"
+                        }
+                      },
+                      "styles": {
+                        "level": 4,
+                        "align": "center"
+                      }
+                    }
+                  }
+                ],
+                "BreadcrumbsSlot": [
+                  {
+                    "type": "BreadcrumbsSlot",
+                    "props": {
+                      "id": "BreadcrumbsSlot-13dba298-abd1-4f75-a7e9-b19779a4fc5b",
+                      "data": {
+                        "directoryRoot": {
+                          "defaultValue": "Directory Root"
+                        },
+                        "currentPage": {
+                          "constantValue": {
+                            "defaultValue": "[[name]]"
+                          },
+                          "field": "name",
+                          "constantValueEnabled": false
+                        }
+                      },
+                      "styles": {
+                        "backgroundColor": {
+                          "selectedColor": "white",
+                          "contrastingColor": "black"
+                        },
+                        "showCurrentPage": true
+                      },
+                      "analytics": {
+                        "scope": "directory"
+                      },
+                      "liveVisibility": true
+                    }
+                  }
+                ],
+                "DirectoryGrid": [
+                  {
+                    "type": "DirectoryGrid",
+                    "props": {
+                      "id": "DirectoryGrid-dab8e202-600a-47da-b5c7-971df3f504fb",
+                      "styles": {
+                        "backgroundColor": {
+                          "selectedColor": "white",
+                          "contrastingColor": "black"
+                        }
+                      },
+                      "slots": {
+                        "CardSlot": []
+                      }
+                    }
+                  }
+                ]
+              },
+              "analytics": {
+                "scope": "directory"
+              },
+              "id": "Directory-d21d6943-0a81-4a8e-b76b-cecb5b157c14"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "EdwardJonesPagesFooter",
+      "props": {
+        "id": "EdwardJonesPagesFooter-8728ec73-241b-4320-a2ad-0572f3868da0",
+        "brandName": "Edward Jones",
+        "legalText": "This sample template is designed for editorial customization. Replace this copy with your approved disclosures and legal language.",
+        "links": [
+          {
+            "label": "Privacy",
+            "link": "#"
+          },
+          {
+            "label": "Accessibility",
+            "link": "#"
+          },
+          {
+            "label": "Disclosures",
+            "link": "#"
+          }
+        ],
+        "section": {
+          "backgroundColor": "#10261e",
+          "visibleOnLivePage": true
+        }
+      }
+    }
+  ],
+  "zones": {}
+}
