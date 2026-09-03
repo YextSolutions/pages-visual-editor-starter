@@ -1,0 +1,76 @@
+{
+  "root": {
+    "props": {
+      "title": {
+        "field": "name",
+        "constantValue": "Jwartofsky Bar Social Dining Pages",
+        "constantValueEnabled": false
+      },
+      "version": 81,
+      "description": {
+        "field": "description",
+        "constantValue": "",
+        "constantValueEnabled": false
+      }
+    }
+  },
+  "zones": {},
+  "content": [
+    {
+      "type": "MainContent",
+      "props": {
+        "id": "MainContent-default",
+        "content": [
+          {
+            "type": "YextBarSocialDiningBanner",
+            "props": {
+              "id": "YextBarSocialDiningBanner-default",
+              "data": {
+                "text": {
+                  "field": "",
+                  "constantValue": {
+                    "defaultValue": {
+                      "json": {
+                        "type": "root",
+                        "children": [
+                          {
+                            "type": "paragraph",
+                            "children": [
+                              {
+                                "type": "text",
+                                "text": "Banner Text"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "html": "<p>Banner Text</p>"
+                    },
+                    "constantValueEnabled": true
+                  }
+                },
+                "styles": {
+                  "fontFamily": "default",
+                  "fontSize": "default",
+                  "fontWeight": "default",
+                  "fontStyle": "default",
+                  "textTransform": "default"
+                }
+              },
+              "styles": {
+                "textAlignment": "center"
+              },
+              "section": {
+                "backgroundColor": {
+                  "selectedColor": "palette-primary",
+                  "contrastingColor": "palette-primary-contrast"
+                },
+                "visibleOnLivePage": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,54 +1,25 @@
 {
   "root": {
+    "type": "root",
     "props": {
       "version": 76,
       "title": {
         "field": "",
         "constantValue": {
-          "defaultValue": "PLACEHOLDER"
+          "defaultValue": "Directory"
         },
         "constantValueEnabled": true
       },
       "description": {
         "field": "",
         "constantValue": {
-          "defaultValue": "PLACEHOLDER"
+          "defaultValue": "Browse all locations."
         },
         "constantValueEnabled": true
       }
-    },
-    "type": "root"
+    }
   },
   "content": [
-    {
-      "type": "EdwardJonesPagesHeader",
-      "props": {
-        "id": "EdwardJonesPagesHeader-b79f4528-bba3-4b28-be0c-8b13cb822861",
-        "brandName": "Edward Jones",
-        "navigation": [
-          {
-            "label": "Why Edward Jones",
-            "link": "#why"
-          },
-          {
-            "label": "Our Approach",
-            "link": "#approach"
-          },
-          {
-            "label": "Resources",
-            "link": "#resources"
-          }
-        ],
-        "primaryCta": {
-          "label": "Find an Advisor",
-          "link": "#contact"
-        },
-        "section": {
-          "backgroundColor": "#ffffff",
-          "visibleOnLivePage": true
-        }
-      }
-    },
     {
       "type": "MainContent",
       "props": {
@@ -57,6 +28,7 @@
           {
             "type": "Directory",
             "props": {
+              "id": "Directory-d21d6943-0a81-4a8e-b76b-cecb5b157c14",
               "styles": {
                 "backgroundColor": {
                   "selectedColor": "white",
@@ -75,11 +47,11 @@
                       "id": "HeadingTextSlot-1a871989-a34d-426c-b24a-a1888c1a46ea",
                       "data": {
                         "text": {
+                          "field": "name",
                           "constantValue": {
                             "defaultValue": ""
                           },
-                          "constantValueEnabled": false,
-                          "field": "name"
+                          "constantValueEnabled": false
                         }
                       },
                       "styles": {
@@ -96,11 +68,11 @@
                       "id": "HeadingTextSlot-9a120ff6-d494-4ec8-9ab8-e43017d77c03",
                       "data": {
                         "text": {
+                          "field": "name",
                           "constantValue": {
                             "defaultValue": ""
                           },
-                          "constantValueEnabled": true,
-                          "field": "name"
+                          "constantValueEnabled": true
                         }
                       },
                       "styles": {
@@ -120,10 +92,10 @@
                           "defaultValue": "Directory Root"
                         },
                         "currentPage": {
+                          "field": "name",
                           "constantValue": {
                             "defaultValue": "[[name]]"
                           },
-                          "field": "name",
                           "constantValueEnabled": false
                         }
                       },
@@ -161,37 +133,10 @@
               },
               "analytics": {
                 "scope": "directory"
-              },
-              "id": "Directory-d21d6943-0a81-4a8e-b76b-cecb5b157c14"
+              }
             }
           }
         ]
-      }
-    },
-    {
-      "type": "EdwardJonesPagesFooter",
-      "props": {
-        "id": "EdwardJonesPagesFooter-8728ec73-241b-4320-a2ad-0572f3868da0",
-        "brandName": "Edward Jones",
-        "legalText": "This sample template is designed for editorial customization. Replace this copy with your approved disclosures and legal language.",
-        "links": [
-          {
-            "label": "Privacy",
-            "link": "#"
-          },
-          {
-            "label": "Accessibility",
-            "link": "#"
-          },
-          {
-            "label": "Disclosures",
-            "link": "#"
-          }
-        ],
-        "section": {
-          "backgroundColor": "#10261e",
-          "visibleOnLivePage": true
-        }
       }
     }
   ],
