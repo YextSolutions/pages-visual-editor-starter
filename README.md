@@ -27,15 +27,19 @@ src/
       componentRegistry.ts
     layouts/
       location/
+        preview.[png, jpg, jpeg, webp]
         metadata.json
         defaultLayout.json
       citation/
+        preview.[png, jpg, jpeg, webp]
         metadata.json
         defaultLayout.json
       directory/
+        preview.[png, jpg, jpeg, webp]
         metadata.json
         defaultLayout.json
       locator/
+        preview.[png, jpg, jpeg, webp]
         metadata.json
         defaultLayout.json
   templates/
@@ -108,8 +112,15 @@ A layout is a starting point for the editor.
 
 The library must contain at least one layout with `pageSetType`: `ENTITY`, exactly one
 layout with `pageSetType`: `DIRECTORY`, and exactly one layout with `pageSetType`: `LOCATOR`.
-Entity metadata also sets `previewImageUrl` and can set verticals and purposes.
+Entity metadata also can set verticals and purposes.
 Directory and Locator metadata sets only the layout ID, display name, and page set type.
+
+To provide the preview shown for a layout in the Visual Editor, add one image
+named exactly `preview.png`, `preview.jpg`, `preview.jpeg`, or `preview.webp` to
+that layout's directory, alongside `metadata.json` and `defaultLayout.json`.
+The image is optional, but a layout may not contain more than one of the supported
+preview files, and the file must be no larger than 20 MiB. Run `npm run validate`
+to check these requirements.
 
 `defaultLayout.json` can reference visible section IDs and compatible shared
 component IDs, apart from the built-in `MainContent` wrapper. A visible section
