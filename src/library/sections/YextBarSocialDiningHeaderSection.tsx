@@ -1335,5 +1335,5 @@ export const config: SectionConfig = {
   id: "YextBarSocialDiningHeaderSection",
   displayName: "Shared Header",
   description: "Shared Header",
-  pageSetTypes: ["ENTITY"],
+  pageSetTypes: ["ENTITY", "DIRECTORY", "LOCATOR"],
 };

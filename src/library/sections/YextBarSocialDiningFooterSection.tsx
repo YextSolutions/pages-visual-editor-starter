@@ -1295,5 +1295,5 @@ export const config: SectionConfig = {
   id: "YextBarSocialDiningFooterSection",
   displayName: "Footer Section",
   description: "Footer Section",
-  pageSetTypes: ["ENTITY"],
+  pageSetTypes: ["ENTITY", "DIRECTORY", "LOCATOR"],
 };
