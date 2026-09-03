@@ -10,8 +10,8 @@ and edit.
 - `npm run build`: Generates the same files that will be built in-platform. Outputs to `dist`.
 - `npm run validate`: Verifies the section library repo structure is valid. Must pass for upload to succeed.
 - `npm run deploy`: Uploads the latest commit to the platform.
-- `npm run convert-template`: Converts a legacy template to section library format.
 - `npm run add-directory-locator`: Adds the necessary files for a directory and locator to the repo.
+- `npm run convert-template`: Converts a legacy template to section library format.
 
 ## Section Library structure
 
