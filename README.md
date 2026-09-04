@@ -1,8 +1,7 @@
 # Pages Section Library Starter
 
 This branch supports a Section Library with at lease one Entity layout, one Directory
-layout, and one Locator layout. A Section Library is the source that users fork
-and edit.
+layout, and one Locator layout. 
 
 ## Development commands
 
