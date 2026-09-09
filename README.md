@@ -1,12 +1,14 @@
 # Pages Section Library Starter
 
 This branch supports a Section Library with at lease one Entity layout, one Directory
-layout, and one Locator layout. 
+layout, and one Locator layout.
 
 ## Development commands
 
 - `npm run dev`: Runs a local development server using example data from the account. See the Local Editor details below.
 - `npm run build`: Generates the same files that will be built in-platform. Outputs to `dist`.
+- `npm run i18n:prepare`: Extracts keys and reports missing platform translations. See Internationalization below.
+- `npm run i18n:finalize`: Validates and propagates completed translations, then lints them. See Internationalization below.
 - `npm run validate`: Verifies the section library repo structure is valid. Must pass for upload to succeed.
 - `npm run deploy`: Uploads the latest commit to the platform.
 - `npm run add-directory-locator`: Adds the necessary files for a directory and locator to the repo.
@@ -287,3 +289,51 @@ an earlier value.
 
 You must run `yext pages generate-test-data` or restart your development server after
 updating `stream.config.ts`.
+
+## Internationalization
+
+Section libraries supports translations across the following languages:
+
+```text
+cs, da, de, en, en-GB, es, et, fi, fr, hr, hu, it, ja, lt, lv,
+nb, nl, pl, pt, ro, sk, sv, tr, zh, zh-TW
+```
+
+There are two types of translations: Page and Platform.
+
+### Page translations
+
+Page translations are used on the live site. The locale of the page determines which translation is loaded.
+If there are any hardcoded strings in the render method of a section,
+it should have a translation entry in `src/library/i18n/page/{locale}.json`.
+Page translations can be resolved using the `t` function of `useTranslation` from `react-i18next`.
+
+### Platform translations
+
+Platform translations are used in the editor. The locale of Storm user determines which translation is loaded.
+Field labels and other editor-only text should have a translation entry in `src/library/i18n/platform/{locale}.json`.
+Platform translations are resolved using the `pt` function from `@yext/visual-editor` in React render contexts and
+are marked for translation using the deferred translation `msg` function for non-React contexts.
+
+### Built-in translations
+
+The `@yext/visual-editor` library has a set of translations already built-in.
+See https://github.com/yext/visual-editor/tree/main/packages/visual-editor/locales.
+If a key is present in `@yext/visual-editor` but missing from this repo, the visual-editor translation will be available.
+If a key is present in both `@yext/visual-editor` and this repo, this repo's value will be used.
+
+### Updating translations
+
+To update translations, ask Codex to use the `$update-translations` skill.
+
+Translation has two phases:
+
+```bash
+npm run i18n:prepare
+# Codex translates the missing values
+npm run i18n:finalize
+```
+
+Preparation runs the distinct platform and page extractors. The platform files contain the complete key superset from `t`, `pt`, and `msg`, while the page files contain only page-facing `t` keys. It then prints every missing or empty platform value beside its English source without failing or changing authored translations.
+
+Finalization requires complete platform translations, repairs only unambiguous interpolation-name mismatches, and reports ambiguous mismatches for manual review. It also runs both i18next linters.

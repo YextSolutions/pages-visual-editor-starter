@@ -9,6 +9,8 @@
     "dev": "SECTION_LIBRARY_REVISION_ID=local pages dev",
     "prod": "pages prod",
     "build": "pages build",
+    "i18n:prepare": "i18next-cli extract --config i18next-cli.platform.config.ts --quiet && i18next-cli extract --config i18next-cli.page.config.ts --quiet && tsx scripts/i18n/reportMissingTranslations.ts",
+    "i18n:finalize": "tsx scripts/i18n/finalizeTranslations.ts && i18next-cli lint --config i18next-cli.platform.config.ts --quiet && i18next-cli lint --config i18next-cli.page.config.ts --quiet",
     "lint": "oxlint --react-plugin --deny-warnings .",
     "typecheck": "tsc --noEmit",
     "validate": "yextve validate",
@@ -17,7 +19,7 @@
     "add-directory-locator": "yextve add-directory-locator"
   },
   "engines": {
-    "node": ">=20.18.2"
+    "node": "22.x"
   },
   "dependencies": {
     "@puckeditor/core": "0.22.2",
@@ -30,7 +32,7 @@
     "react": "^18.2.0",
     "react-collapsed": "^4.1.2",
     "react-dom": "^18.2.0",
-    "react-i18next": "^15.5.2",
+    "react-i18next": "^17.0.13",
     "react-icons": "^5.2.1",
     "uuid": "^11.0.3"
   },
@@ -40,11 +42,14 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.3.2",
     "@yext/pages-components": "2.2.0",
-    "@yext/visual-editor": "https://github.com/asanehisa/public-assets/raw/main/yext-visual-editor-1.4.8.tgz",
+    "@yext/visual-editor": "https://github.com/benlife5/prod-expiremental-ve/raw/main/yext-visual-editor-1.4.8-b96742.tgz",
     "autoprefixer": "^10.4.8",
+    "i18next": "^26.4.2",
+    "i18next-cli": "^1.73.2",
     "oxlint": "1.2.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.0",
+    "tsx": "^4.22.4",
     "typescript": "^5.3.3",
     "vite": "^5.4.21"
   },
