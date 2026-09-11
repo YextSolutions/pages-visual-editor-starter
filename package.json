@@ -12,7 +12,7 @@
     "i18n:prepare": "i18next-cli extract --config i18next-cli.platform.config.ts --quiet && i18next-cli extract --config i18next-cli.page.config.ts --quiet && tsx scripts/i18n/reportMissingTranslations.ts",
     "i18n:finalize": "tsx scripts/i18n/finalizeTranslations.ts && i18next-cli lint --config i18next-cli.platform.config.ts --quiet && i18next-cli lint --config i18next-cli.page.config.ts --quiet",
     "lint": "oxlint --react-plugin --deny-warnings .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc -p tsconfig.json && tsc -p scripts/tsconfig.json",
     "validate": "yextve validate",
     "deploy": "yextve deploy",
     "convert-template": "yextve convert-template --apply --delete-source",
@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@puckeditor/core": "0.22.2",
-    "@types/node": "^20.12.3",
     "@yext/search-headless-react": "^2.7.1",
     "@yext/search-ui-react": "^3.0.1",
     "awesome-phonenumber": "^7.8.0",
@@ -37,6 +36,7 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@types/node": "^22.20.2",
     "@types/react": "^18.2.77",
     "@types/react-dom": "^18.2.25",
     "@vitejs/plugin-react": "^4.2.1",
