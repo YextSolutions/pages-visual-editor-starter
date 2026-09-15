@@ -4,11 +4,11 @@
     "strict": true,
     "moduleResolution": "Bundler",
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "noEmit": true,
     "jsx": "react-jsx",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "module": "esnext",
     "types": ["vite/client"],
     "paths": {
       "@yext/pages": ["./node_modules/@yext/pages/dist/types/src/index.d.ts"]
