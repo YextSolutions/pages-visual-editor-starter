@@ -1,12 +1,14 @@
 # Pages Section Library Starter
 
 This branch supports a Section Library with at lease one Entity layout, one Directory
-layout, and one Locator layout. 
+layout, and one Locator layout.
 
 ## Development commands
 
 - `npm run dev`: Runs a local development server using example data from the account. See the Local Editor details below.
 - `npm run build`: Generates the same files that will be built in-platform. Outputs to `dist`.
+- `npm run i18n:prepare`: Extracts keys and reports missing platform translations. See Internationalization below.
+- `npm run i18n:finalize`: Validates and propagates completed translations, then lints them. See Internationalization below.
 - `npm run validate`: Verifies the section library repo structure is valid. Must pass for upload to succeed.
 - `npm run deploy`: Uploads the latest commit to the platform.
 - `npm run add-directory-locator`: Adds the necessary files for a directory and locator to the repo.
@@ -125,6 +127,10 @@ to check these requirements.
 component IDs, apart from the built-in `MainContent` wrapper. A visible section
 config sets its supported page set types. The editor shows only visible sections
 that support the selected layout type.
+
+### `src/library/migrations`
+
+Defines section library migrations. See "Migrations" below.
 
 ### `src/templates`
 
@@ -287,3 +293,105 @@ an earlier value.
 
 You must run `yext pages generate-test-data` or restart your development server after
 updating `stream.config.ts`.
+
+## Internationalization
+
+Section libraries supports translations across the following languages:
+
+```text
+cs, da, de, en, en-GB, es, et, fi, fr, hr, hu, it, ja, lt, lv,
+nb, nl, pl, pt, ro, sk, sv, tr, zh, zh-TW
+```
+
+There are two types of translations: Page and Platform.
+
+### Page translations
+
+Page translations are used on the live site. The locale of the page determines which translation is loaded.
+If there are any hardcoded strings in the render method of a section,
+it should have a translation entry in `src/library/i18n/page/{locale}.json`.
+Page translations can be resolved using the `t` function of `useTranslation` from `react-i18next`.
+
+### Platform translations
+
+Platform translations are used in the editor. The locale of Storm user determines which translation is loaded.
+Field labels and other editor-only text should have a translation entry in `src/library/i18n/platform/{locale}.json`.
+Platform translations are resolved using the `pt` function from `@yext/visual-editor` in React render contexts and
+are marked for translation using the deferred translation `msg` function for non-React contexts.
+
+### Built-in translations
+
+The `@yext/visual-editor` library has a set of translations already built-in.
+See https://github.com/yext/visual-editor/tree/main/packages/visual-editor/locales.
+If a key is present in `@yext/visual-editor` but missing from this repo, the visual-editor translation will be available.
+If a key is present in both `@yext/visual-editor` and this repo, this repo's value will be used.
+
+### Updating translations
+
+To update translations, ask Codex to use the `$update-translations` skill.
+
+Translation has two phases:
+
+```bash
+npm run i18n:prepare
+# Codex translates the missing values
+npm run i18n:finalize
+```
+
+Preparation runs the distinct platform and page extractors. The platform files contain the complete key superset from `t`, `pt`, and `msg`, while the page files contain only page-facing `t` keys. It then prints every missing or empty platform value beside its English source without failing or changing authored translations.
+
+Finalization requires complete platform translations, repairs only unambiguous interpolation-name mismatches, and reports ambiguous mismatches for manual review. It also runs both i18next linters.
+
+## Migrations
+
+When updating in-use section libraries, migrations may be needed to ensure a seamless upgrade process.
+When a new section library revision is selected in the platform, the editor and live site begin using
+the new revision's code with the existing layout data. If section props have changed, this can cause
+a mismatch. Migrations are applied before rendering, allowing the props to be updated to match the new shape.
+
+There are two MigrationActions:
+
+### Removed
+
+Removes a section from all layouts.
+
+```ts
+{
+  action: "removed";
+}
+```
+
+### Updated
+
+Transforms the existing props to the new set of props.
+See https://puckeditor.com/docs/api-reference/functions/transform-props
+
+Use `"*"` as the section name to apply an updated migration to every
+section, including sections nested in slots. Wildcard migrations cannot
+use the `removed` action.
+
+```ts
+{
+  action: "updated";
+  propTransformation: (oldProps: Record<string, any>) => Record<string, any>;
+}
+
+// Example
+// Renames a prop from "heading" to "title" while keeping all other props
+{
+  action: "updated";
+  propTransformation: ({ heading, ...props }) => ({ title: heading, ...props });
+}
+```
+
+### Adding a migration
+
+To add a migration, create `src/library/migrations/registry.ts` with an exported `migrationRegistry`.
+
+```tsx
+export const migrationRegistry: MigrationRegistry = [];
+```
+
+Each item in the registry will be applied in order. The index of the last applied migration
+is stored in the layout data at `root.props.sectionLibraryMigrationVersion`. Default layout
+files must be updated to the latest migration defined in the repo.

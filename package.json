@@ -9,19 +9,20 @@
     "dev": "SECTION_LIBRARY_REVISION_ID=local pages dev",
     "prod": "pages prod",
     "build": "pages build",
+    "i18n:prepare": "yextve i18n prepare",
+    "i18n:finalize": "yextve i18n finalize",
     "lint": "oxlint --react-plugin --deny-warnings .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc -p tsconfig.json",
     "validate": "yextve validate",
     "deploy": "yextve deploy",
     "convert-template": "yextve convert-template --apply --delete-source",
     "add-directory-locator": "yextve add-directory-locator"
   },
   "engines": {
-    "node": ">=20.18.2"
+    "node": "^22.18.0"
   },
   "dependencies": {
     "@puckeditor/core": "0.22.2",
-    "@types/node": "^20.12.3",
     "@yext/search-headless-react": "^2.7.1",
     "@yext/search-ui-react": "^3.0.1",
     "awesome-phonenumber": "^7.8.0",
@@ -30,18 +31,20 @@
     "react": "^18.2.0",
     "react-collapsed": "^4.1.2",
     "react-dom": "^18.2.0",
-    "react-i18next": "^15.5.2",
+    "react-i18next": "^17.0.13",
     "react-icons": "^5.2.1",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@types/node": "^22.20.2",
     "@types/react": "^18.2.77",
     "@types/react-dom": "^18.2.25",
     "@vitejs/plugin-react": "^4.2.1",
     "@yext/pages": "1.3.2",
     "@yext/pages-components": "2.2.0",
-    "@yext/visual-editor": "https://github.com/asanehisa/public-assets/raw/main/yext-visual-editor-1.4.8.tgz",
+    "@yext/visual-editor": "https://github.com/benlife5/prod-expiremental-ve/raw/refs/heads/main/yext-visual-editor-2.x-fe09d5e.tgz",
     "autoprefixer": "^10.4.8",
+    "i18next": "^26.4.2",
     "oxlint": "1.2.0",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.0",

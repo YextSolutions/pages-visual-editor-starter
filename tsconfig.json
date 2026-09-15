@@ -7,10 +7,12 @@
     "jsx": "react-jsx",
     "rootDir": "./src",
     "outDir": "./dist",
+    "skipLibCheck": true,
     "module": "esnext",
     "types": ["vite/client"],
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "paths": {
+      "@yext/pages": ["./node_modules/@yext/pages/dist/types/src/index.d.ts"]
+    }
   },
   "include": ["src", "global.d.ts", "theme.config.ts"]
 }
