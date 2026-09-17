@@ -120,7 +120,7 @@ To provide the preview shown for a layout in the Visual Editor, add one image
 named exactly `preview.png`, `preview.jpg`, `preview.jpeg`, or `preview.webp` to
 that layout's directory, alongside `metadata.json` and `defaultLayout.json`.
 The image is optional, but a layout may not contain more than one of the supported
-preview files, and the file must be no larger than 20 MiB. Run `npm run validate`
+preview files, and the file must be no larger than 1 MiB. Run `npm run validate`
 to check these requirements.
 
 `defaultLayout.json` can reference visible section IDs and compatible shared
