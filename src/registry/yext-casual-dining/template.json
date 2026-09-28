@@ -1,0 +1,13 @@
+{
+  "displayName": "Casual Dining",
+  "description": "",
+  "previewImageUrl": "",
+  "previewSiteUrl": "",
+  "verticals": [
+    "FOOD_AND_DINING"
+  ],
+  "purposes": [
+    "LOCATION"
+  ],
+  "isBuiltIn": true
+}
