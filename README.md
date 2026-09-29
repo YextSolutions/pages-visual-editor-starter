@@ -1,5 +1,9 @@
 # PAGES-VISUAL-EDITOR-STARTER
 
+# Section Libraries
+
+To develop section libraries, checkout the `section-library` git branch.
+
 ## Bespoke Templates
 
 To develop bespoke-templates, checkout the `platform-templates-mission` git branch.
